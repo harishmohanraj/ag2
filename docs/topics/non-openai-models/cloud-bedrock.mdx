@@ -11,7 +11,7 @@ title: Amazon Bedrock
 
 
 
-AutoGen allows you to use Amazon’s generative AI Bedrock service to run
+AG2 allows you to use Amazon’s generative AI Bedrock service to run
 inference with a number of open-weight models and as well as their own
 models.
 
@@ -19,18 +19,18 @@ Amazon Bedrock supports models from providers such as Meta, Anthropic,
 Cohere, and Mistral.
 
 In this notebook, we demonstrate how to use Anthropic’s Sonnet model for
-AgentChat in AutoGen.
+AgentChat in AG2.
 
 ## Model features / support 
 
 Amazon Bedrock supports a wide range of models, not only for text
 generation but also for image classification and generation. Not all
-features are supported by AutoGen or by the Converse API used. Please
-see [Amazon’s
+features are supported by AG2 or by the Converse API used. Please see
+[Amazon’s
 documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features)
 on the features supported by the Converse API.
 
-At this point in time AutoGen supports text generation and image
+At this point in time AG2 supports text generation and image
 classification (passing images to the LLM).
 
 It does not, yet, support image generation
@@ -38,15 +38,15 @@ It does not, yet, support image generation
 
 ## Requirements
 
-To use Amazon Bedrock with AutoGen, first you need to install the
-`pyautogen[bedrock]` package.
+To use Amazon Bedrock with AG2, first you need to install the
+`ag2[bedrock]` package.
 
 ## Pricing
 
 When we combine the number of models supported and costs being on a
 per-region basis, it’s not feasible to maintain the costs for each
-model+region combination within the AutoGen implementation. Therefore,
-it’s recommended that you add the following to your config with cost per
+model+region combination within the AG2 implementation. Therefore, it’s
+recommended that you add the following to your config with cost per
 1,000 input and output tokens, respectively:
 
 ``` text
@@ -147,6 +147,12 @@ Example:
     }
 ]
 ```
+
+## Using within an AWS Lambda function
+
+If you are using your AG2 code within an AWS Lambda function, you can
+utilise the attached role to access the Bedrock service and do not need
+to provide access, token, or profile values.
 
 ## Two-agent Coding Example
 
