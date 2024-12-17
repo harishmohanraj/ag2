@@ -11,7 +11,7 @@ title: Usage tracking with AutoGen
 
 
 
-## 1. Use AutoGen’s OpenAIWrapper for cost estimation {#use-autogens-openaiwrapper-for-cost-estimation}
+## 1. Use AutoGen’s OpenAIWrapper for cost estimation 
 
 The `OpenAIWrapper` from `autogen` tracks token counts and costs of your
 API calls. Use the `create()` method to initiate requests and
@@ -26,7 +26,7 @@ total cost and token usage for both cached and actual requests.
 Reset your session’s usage data with `clear_usage_summary()` when
 needed.
 
-## 2. Track cost and token count for agents {#track-cost-and-token-count-for-agents}
+## 2. Track cost and token count for agents 
 
 We also support cost estimation for agents. Use
 `Agent.print_usage_summary()` to print the cost summary for the agent.
@@ -38,7 +38,7 @@ To gather usage data for a list of agents, we provide an utility
 function `autogen.gather_usage_summary(agents)` where you pass in a list
 of agents and gather the usage summary.
 
-## 3. Custom token price for up-to-date cost estimation {#custom-token-price-for-up-to-date-cost-estimation}
+## 3. Custom token price for up-to-date cost estimation 
 
 AutoGen tries to keep the token prices up-to-date. However, you can pass
 in a `price` field in `config_list` if the token price is not listed or

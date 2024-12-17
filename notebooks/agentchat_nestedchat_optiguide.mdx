@@ -67,7 +67,7 @@ Intended agent orchestration in OptiGuide.
 
 ![](optiGuide_new_design.png)
 
-## Step 0. Prepare Helper Functions {#step-0.-prepare-helper-functions}
+## Step 0. Prepare Helper Functions 
 
 The code cell below includes several helper functions to be used by
 agents. The helper functions are adopted directly from
@@ -206,7 +206,7 @@ def run_with_exec(src_code: str) -> Union[str, Exception]:
     return ans
 ```
 
-## Step 1. Agent Construction {#step-1.-agent-construction}
+## Step 1. Agent Construction 
 
 This cell introduces the Writer and OptiGuide agent classes and their
 instances to manage the interaction between the user, the chatbot, and
@@ -418,7 +418,7 @@ else:
     print("Not solved to optimality. Optimization status:", m.status)
 ```
 
-## Step 2. Orchestrate Nested Chats {#step-2.-orchestrate-nested-chats}
+## Step 2. Orchestrate Nested Chats 
 
 These three agent instances are orchestrated in the following way with
 the `writer` and `safeguard` nested into the `commander` agent as the
