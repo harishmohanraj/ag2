@@ -3,9 +3,6 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/topics/code
 source_notebook: /website/docs/topics/code-execution/custom-executor.ipynb
 title: Custom Code Executor
 ---
-# Custom Code Executor
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/code-execution/custom-executor.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/topics/code-execution/custom-executor.ipynb)
 
 
 
@@ -41,6 +38,8 @@ class NotebookExecutor(CodeExecutor):
     @property
     def code_extractor(self) -> CodeExtractor:
         # Extact code from markdown blocks.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/code-execution/custom-executor.ipynb)
+[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/topics/code-execution/custom-executor.ipynb)
         return MarkdownCodeExtractor()
 
     def __init__(self) -> None:

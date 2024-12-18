@@ -3,9 +3,6 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_websc
 source_notebook: /notebook/agentchat_webscraping_with_apify.ipynb
 title: Web Scraping using Apify Tools
 ---
-# Web Scraping using Apify Tools
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_webscraping_with_apify.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_webscraping_with_apify.ipynb)
 
 
 
@@ -43,6 +40,8 @@ from typing_extensions import Annotated
 
 def scrape_page(url: Annotated[str, "The URL of the web page to scrape"]) -> Annotated[str, "Scraped content"]:
     # Initialize the ApifyClient with your API token
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_webscraping_with_apify.ipynb)
+[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_webscraping_with_apify.ipynb)
     client = ApifyClient(token=apify_api_key)
 
     # Prepare the Actor input

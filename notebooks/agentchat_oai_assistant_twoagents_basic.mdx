@@ -3,9 +3,6 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_oai_a
 source_notebook: /notebook/agentchat_oai_assistant_twoagents_basic.ipynb
 title: OpenAI Assistants in AutoGen
 ---
-# OpenAI Assistants in AutoGen
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_oai_assistant_twoagents_basic.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_oai_assistant_twoagents_basic.ipynb)
 
 
 
@@ -47,6 +44,8 @@ user_proxy = UserProxyAgent(
         "work_dir": "coding",
         "use_docker": False,
     },  # Please set use_docker=True if docker is available to run the generated code. Using docker is safer than running the generated code directly.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_oai_assistant_twoagents_basic.ipynb)
+[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_oai_assistant_twoagents_basic.ipynb)
     is_termination_msg=lambda msg: "TERMINATE" in msg["content"],
     human_input_mode="NEVER",
     max_consecutive_auto_reply=1,
