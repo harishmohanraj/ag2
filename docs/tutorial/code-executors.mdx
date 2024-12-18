@@ -87,9 +87,7 @@ Executing LLM-generated code poses a security risk to your host environment.
 :::
 ```
 
-````mdx-code-block
-![Code Executor No Docker](./assets/code-executor-no-docker.png)
-````
+![Code Executor No Docker](/docs/tutorial/assets/code-executor-no-docker.png)
 
 Upon receiving a message with a code block, the local command line code
 executor first writes the code block to a code file, then starts a new
@@ -202,9 +200,7 @@ only access resources that are explicitly given to it.
 
 The figure below illustrates how docker execution works.
 
-````mdx-code-block
-![Code Executor Docker](./assets/code-executor-docker.png)
-````
+![Code Executor Docker](/docs/tutorial/assets/code-executor-docker.png)
 
 Similar to the local command line code executor, the docker executor
 extracts code blocks from input messages, writes them to code files. For
@@ -254,9 +250,7 @@ coding can be a conversation between a code writer agent and a code
 executor agent, mirroring the interaction between a programmer and a
 code interpreter.
 
-````mdx-code-block
-![Code Writer and Code Executor](./assets/code-execution-in-conversation.png)
-````
+![Code Writer and Code Executor](/docs/tutorial/assets/code-execution-in-conversation.png)
 
 The code writer agent can be powered by an LLM such as GPT-4 with
 code-writing capability. And the code executor agent is powered by a
