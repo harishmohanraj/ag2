@@ -1,0 +1,165 @@
+---
+sidebarTitle: reasoning_agent
+title: agentchat.contrib.reasoning_agent
+---
+
+## ThinkNode
+
+```python
+class ThinkNode()
+```
+
+### \_\_init\_\_
+
+```python
+def __init__(content: str, parent: Optional["ThinkNode"] = None) -> None
+```
+
+A node in a tree structure representing a step in the reasoning process.
+
+This class implements a tree node that stores content (text describing a reasoning step),
+maintains parent-child relationships, tracks node statistics, and provides utilities
+for traversing/visualizing the reasoning path.
+
+**Arguments**:
+
+- `content` _str_ - The text content/description for this reasoning step
+- `parent` _Optional[ThinkNode]_ - The parent node in the tree, if any
+  
+
+**Attributes**:
+
+- `content` _str_ - The text content/description for this reasoning step
+- `value` _Optional[float]_ - A numeric score/value assigned to this node
+- `parent` _Optional[ThinkNode]_ - Reference to parent node
+- `depth` _int_ - The depth of this node in the tree (root = 0)
+- `children` _List[ThinkNode]_ - List of child nodes
+- `visits` _int_ - Number of times this node has been visited during search
+  
+  The node automatically maintains the tree structure by:
+  - Setting its depth based on parent's depth + 1
+  - Adding itself to parent's children list if parent exists
+  - Providing trajectory utilities to get the full path from root to this node
+
+### trajectory
+
+```python
+@property
+def trajectory() -> str
+```
+
+Get a formatted string representation of the path from root to this node.
+
+**Returns**:
+
+- `str` - A formatted string showing the question and each step in the reasoning process
+
+### to\_dict
+
+```python
+def to_dict() -> Dict
+```
+
+Convert ThinkNode to dictionary representation.
+
+**Returns**:
+
+- `Dict` - Dictionary containing all node attributes and recursive children
+
+### from\_dict
+
+```python
+@classmethod
+def from_dict(cls,
+              data: Dict,
+              parent: Optional["ThinkNode"] = None) -> "ThinkNode"
+```
+
+Create ThinkNode from dictionary representation.
+
+**Arguments**:
+
+- `data` _Dict_ - Dictionary containing node data
+- `parent` _Optional[ThinkNode]_ - Parent node to attach to
+  
+
+**Returns**:
+
+- `ThinkNode` - Reconstructed node with all children
+
+### visualize\_tree
+
+```python
+def visualize_tree(root: ThinkNode) -> None
+```
+
+Visualize the tree of thoughts using graphviz.
+
+## ReasoningAgent
+
+```python
+class ReasoningAgent(AssistantAgent)
+```
+
+### \_\_init\_\_
+
+```python
+def __init__(name,
+             llm_config,
+             max_depth=4,
+             beam_size=3,
+             answer_approach="pool",
+             verbose=True,
+             **kwargs) -> None
+```
+
+Initialize a ReasoningAgent that uses tree-of-thought reasoning.,
+
+**Arguments**:
+
+- `name` - Name of the agent
+- `llm_config` - Configuration for the language model
+- `max_depth` _int_ - Maximum depth of the reasoning tree
+- `beam_size` _int_ - Number of parallel reasoning paths to maintain
+- `answer_approach` _str_ - Either "pool" or "best" - how to generate final answer
+- `verbose` _bool_ - Whether to show intermediate steps
+
+### rate\_node
+
+```python
+def rate_node(node: ThinkNode) -> float
+```
+
+Rate the quality of a reasoning path using the grader agent.
+
+**Arguments**:
+
+- `node` _ThinkNode_ - Node containing the reasoning trajectory to evaluate
+  
+
+**Returns**:
+
+- `float` - Normalized score between 0 and 1 indicating trajectory quality
+
+### generate\_response
+
+```python
+def generate_response(messages, sender, config=None)
+```
+
+Generate a response using tree-of-thought reasoning.
+
+Implements beam search through a tree of reasoning steps, using the thinker
+agent to generate possible next steps and the grader agent to evaluate paths.
+
+**Arguments**:
+
+- `messages` - Input messages to respond to
+- `sender` - Agent sending the messages
+- `config` - Optional configuration
+  
+
+**Returns**:
+
+  Tuple[bool, str]: Success flag and generated response
+
