@@ -50,7 +50,7 @@ class is used by specifying the `api_type` as `cerebras`.
         "api_type": "cerebras"
     },
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": "your Cerebras API Key goes here",
         "api_type": "cerebras"
     }
@@ -84,7 +84,7 @@ Example:
 ```python
 [
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": "your Cerebras API Key goes here",
         "api_type": "cerebras"
         "max_tokens": 10000,
@@ -109,7 +109,7 @@ import os
 
 from autogen.oai.cerebras import CerebrasClient, calculate_cerebras_cost
 
-config_list = [{"model": "llama3.1-70b", "api_key": os.environ.get("CEREBRAS_API_KEY"), "api_type": "cerebras"}]
+config_list = [{"model": "llama-3.3-70b", "api_key": os.environ.get("CEREBRAS_API_KEY"), "api_type": "cerebras"}]
 ```
 
 Importantly, we have tweaked the system message so that the model
@@ -225,7 +225,7 @@ import autogen
 
 config_list = [
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": os.environ.get("CEREBRAS_API_KEY"),
         "api_type": "cerebras",
     }
