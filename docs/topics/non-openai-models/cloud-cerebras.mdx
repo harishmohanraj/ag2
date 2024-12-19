@@ -3,10 +3,9 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/topics/non-
 source_notebook: /website/docs/topics/non-openai-models/cloud-cerebras.ipynb
 title: Cerebras
 ---
-# Cerebras
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/non-openai-models/cloud-cerebras.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/topics/non-openai-models/cloud-cerebras.ipynb)
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/non-openai-models/cloud-cerebras.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/website/docs/topics/non-openai-models/cloud-cerebras.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -51,7 +50,7 @@ class is used by specifying the `api_type` as `cerebras`.
         "api_type": "cerebras"
     },
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": "your Cerebras API Key goes here",
         "api_type": "cerebras"
     }
@@ -85,7 +84,7 @@ Example:
 ```python
 [
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": "your Cerebras API Key goes here",
         "api_type": "cerebras"
         "max_tokens": 10000,
@@ -110,7 +109,7 @@ import os
 
 from autogen.oai.cerebras import CerebrasClient, calculate_cerebras_cost
 
-config_list = [{"model": "llama3.1-70b", "api_key": os.environ.get("CEREBRAS_API_KEY"), "api_type": "cerebras"}]
+config_list = [{"model": "llama-3.3-70b", "api_key": os.environ.get("CEREBRAS_API_KEY"), "api_type": "cerebras"}]
 ```
 
 Importantly, we have tweaked the system message so that the model
@@ -226,7 +225,7 @@ import autogen
 
 config_list = [
     {
-        "model": "llama3.1-70b",
+        "model": "llama-3.3-70b",
         "api_key": os.environ.get("CEREBRAS_API_KEY"),
         "api_type": "cerebras",
     }

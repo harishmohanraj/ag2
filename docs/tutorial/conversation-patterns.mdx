@@ -3,10 +3,9 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/tutorial/co
 source_notebook: /website/docs/tutorial/conversation-patterns.ipynb
 title: Conversation Patterns
 ---
-# Conversation Patterns
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/tutorial/conversation-patterns.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/tutorial/conversation-patterns.ipynb)
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/tutorial/conversation-patterns.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/website/docs/tutorial/conversation-patterns.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -53,9 +52,7 @@ two-agent chats in previous chapters but we haven’t covered the details.
 
 The following figure illustrates how two-agent chat works.
 
-````mdx-code-block
-![Two-agent chat](./assets/two-agent-chat.png)
-````
+![Two-agent chat](/docs/tutorial/assets/two-agent-chat.png)
 
 A two-agent chats takes two inputs: a message, which is a string
 provided by the caller; a context, which specifies various parameters of
@@ -255,9 +252,7 @@ This pattern is useful for complex task that can be broken down into
 interdependent sub-tasks. The figure below illustrate how this pattern
 works.
 
-````mdx-code-block
-![initiate_chats](./assets/sequential-two-agent-chat.png)
-````
+![initiate_chats](/docs/tutorial/assets/sequential-two-agent-chat.png)
 
 In this pattern, the a pair of agents first start a two-agent chat, then
 the summary of the conversation becomes a *carryover* for the next
@@ -560,9 +555,7 @@ for tasks that require collaboration among multiple agents.
 
 The figure below illustrates how group chat works.
 
-````mdx-code-block
-![group_chat](./assets/group-chat.png)
-````
+![group_chat](/docs/tutorial/assets/group-chat.png)
 
 A group chat is orchestrated by a special agent type `GroupChatManager`.
 In the first step of the group chat, the Group Chat Manager selects an
@@ -1002,9 +995,7 @@ pluggable component of `ConversableAgent`. The figure below illustrates
 how the nested chats handler triggers a sequence of nested chats when a
 message is received.
 
-````mdx-code-block
-![nested_chat](./assets/nested-chats.png)
-````
+![nested_chat](/docs/tutorial/assets/nested-chats.png)
 
 When a message comes in and passes the [human-in-the-loop
 component](./human-in-the-loop), the nested chats handler checks if the

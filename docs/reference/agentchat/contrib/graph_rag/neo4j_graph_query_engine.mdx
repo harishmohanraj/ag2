@@ -1,0 +1,103 @@
+---
+sidebarTitle: neo4j_graph_query_engine
+title: agentchat.contrib.graph_rag.neo4j_graph_query_engine
+---
+
+## Neo4jGraphQueryEngine
+
+```python
+class Neo4jGraphQueryEngine(GraphQueryEngine)
+```
+
+This class serves as a wrapper for a Neo4j database-backed PropertyGraphIndex query engine,
+facilitating the creation, updating, and querying of graphs.
+
+It builds a PropertyGraph Index from input documents,
+storing and retrieving data from a property graph in the Neo4j database.
+
+Using SchemaLLMPathExtractor, it defines schemas with entities, relationships, and other properties based on the input,
+which are added into the preprty graph.
+
+For usage, please refer to example notebook/agentchat_graph_rag_neo4j.ipynb
+
+### \_\_init\_\_
+
+```python
+def __init__(host: str = "bolt://localhost",
+             port: int = 7687,
+             database: str = "neo4j",
+             username: str = "neo4j",
+             password: str = "neo4j",
+             llm: LLM = OpenAI(model="gpt-4o", temperature=0.0),
+             embedding: BaseEmbedding = OpenAIEmbedding(
+                 model_name="text-embedding-3-small"),
+             entities: Optional[TypeAlias] = None,
+             relations: Optional[TypeAlias] = None,
+             validation_schema: Optional[Union[Dict[str, str],
+                                               List[Triple]]] = None,
+             strict: Optional[bool] = True)
+```
+
+Initialize a Neo4j Property graph.
+Please also refer to https://docs.llamaindex.ai/en/stable/examples/property_graph/graph_store/
+
+**Arguments**:
+
+- `name` _str_ - Property graph name.
+- `host` _str_ - Neo4j hostname.
+- `port` _int_ - Neo4j port number.
+- `database` _str_ - Neo4j database name.
+- `username` _str_ - Neo4j username.
+- `password` _str_ - Neo4j password.
+- `llm` _LLM_ - Language model to use for extracting tripletss.
+- `embedding` _BaseEmbedding_ - Embedding model to use constructing index and query
+- `entities` _Optional[TypeAlias]_ - Custom possible entities to include in the graph.
+- `relations` _Optional[TypeAlias]_ - Custom poissble relations to include in the graph.
+- `validation_schema` _Optional[Union[Dict[str, str], List[Triple]]_ - Custom schema to validate the extracted triplets
+- `strict` _Optional[bool]_ - If false, allows for values outside of the schema, useful for using the schema as a suggestion.
+
+### init\_db
+
+```python
+def init_db(input_doc: List[Document] | None = None)
+```
+
+Build the knowledge graph with input documents.
+
+### add\_records
+
+```python
+def add_records(new_records: List) -> bool
+```
+
+Add new records to the knowledge graph. Must be local files.
+
+**Arguments**:
+
+- `new_records` _List[Document]_ - List of new documents to add.
+  
+
+**Returns**:
+
+- `bool` - True if successful, False otherwise.
+
+### query
+
+```python
+def query(question: str,
+          n_results: int = 1,
+          **kwargs) -> GraphStoreQueryResult
+```
+
+Query the knowledge graph with a question.
+
+**Arguments**:
+
+- `question` - a human input question.
+- `n_results` - number of results to return.
+  
+
+**Returns**:
+
+  A GrapStoreQueryResult object containing the answer and related triplets.
+

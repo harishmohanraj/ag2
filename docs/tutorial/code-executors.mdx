@@ -3,10 +3,9 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/tutorial/co
 source_notebook: /website/docs/tutorial/code-executors.ipynb
 title: Code Executors
 ---
-# Code Executors
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/tutorial/code-executors.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/tutorial/code-executors.ipynb)
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/tutorial/code-executors.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/website/docs/tutorial/code-executors.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -88,9 +87,7 @@ Executing LLM-generated code poses a security risk to your host environment.
 :::
 ```
 
-````mdx-code-block
-![Code Executor No Docker](./assets/code-executor-no-docker.png)
-````
+![Code Executor No Docker](/docs/tutorial/assets/code-executor-no-docker.png)
 
 Upon receiving a message with a code block, the local command line code
 executor first writes the code block to a code file, then starts a new
@@ -203,9 +200,7 @@ only access resources that are explicitly given to it.
 
 The figure below illustrates how docker execution works.
 
-````mdx-code-block
-![Code Executor Docker](./assets/code-executor-docker.png)
-````
+![Code Executor Docker](/docs/tutorial/assets/code-executor-docker.png)
 
 Similar to the local command line code executor, the docker executor
 extracts code blocks from input messages, writes them to code files. For
@@ -255,9 +250,7 @@ coding can be a conversation between a code writer agent and a code
 executor agent, mirroring the interaction between a programmer and a
 code interpreter.
 
-````mdx-code-block
-![Code Writer and Code Executor](./assets/code-execution-in-conversation.png)
-````
+![Code Writer and Code Executor](/docs/tutorial/assets/code-execution-in-conversation.png)
 
 The code writer agent can be powered by an LLM such as GPT-4 with
 code-writing capability. And the code executor agent is powered by a

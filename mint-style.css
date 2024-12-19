@@ -68,6 +68,16 @@ h4 {
   }
 }
 
+a.colab-badge, a.github-badge {
+  display: inline-block;
+  border:none;
+}
+
+a.colab-badge > img, a.github-badge  > img {
+  margin: 0;
+  padding: 0;
+}
+
 /* Home page hero section starts */
 .homepage-hero-section {
   display: flex;
@@ -395,7 +405,7 @@ table {
       background-color: rgb(var(--gray-900));
     }
 
-    a[href="/docs/Getting-Started"] {
+    /* a[href="/docs/Getting-Started"] {
       font-weight: 600;
       padding-left: 1rem !important;
 
@@ -433,7 +443,7 @@ table {
         content: "";
         mask: var(--migration-icon);
       }
-    }
+    } */
 
     h5[data-text="Installation"]:before {
       content: "";

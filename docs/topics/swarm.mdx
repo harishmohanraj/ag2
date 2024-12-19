@@ -3,10 +3,9 @@ custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/topics/swar
 source_notebook: /website/docs/topics/swarm.ipynb
 title: Swarm Orchestration
 ---
-# Swarm Orchestration
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/swarm.ipynb)
-[![Open on GitHub](https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github)](https://github.com/ag2ai/ag2/blob/main/website/docs/topics/swarm.ipynb)
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/swarm.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/website/docs/topics/swarm.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -198,54 +197,69 @@ nested chat’s response.
 
 ### AFTER_WORK
 
-When the last active agent’s response doesn’t suggest a tool call or
-handoff, the chat will terminate by default. However, you can register
-an `AFTER_WORK` handoff to define a fallback agent if you don’t want the
-chat to end at this agent. At the swarm chat level, you also pass in an
-`AFTER_WORK` handoff to define the fallback mechanism for the entire
-chat. If this parameter is set for the agent and the chat, we will
-prioritize the agent’s setting. There should only be one `AFTER_WORK`.
-If multiple `AFTER_WORK` handoffs are passed, only the last one will be
-used.
+When the active agent’s response doesn’t suggest a tool call or handoff,
+the chat will terminate by default. However, you can register an
+`AFTER_WORK` handoff to control what to do next. You can register these
+`AFTER_WORK` handoffs at the agent level and also the swarm level
+(through the `after_work` parameter on `initiate_swarm_chat`). The agent
+level takes precedence over the swarm level.
 
-Besides fallback to an agent, we provide 3 `AfterWorkOption`:  
-- `TERMINATE`: Terminate the chat  
+The AFTER_WORK takes a single parameter and this can be an agent, an
+agent’s name, an `AfterWorkOption`, or a callable function.
+
+The `AfterWorkOption` options are: - `TERMINATE`: Terminate the chat  
 - `STAY`: Stay at the current agent  
 - `REVERT_TO_USER`: Revert to the user agent. Only if a user agent is
 passed in when initializing. (See below for more details)
 
-```python
-agent_1 = SwarmAgent(...)
+The callable function signature is:
+`def my_after_work_func(last_speaker: SwarmAgent, messages: List[Dict[str, Any]], groupchat: GroupChat) -> Union[AfterWorkOption, SwarmAgent, str]:`
 
-# Register the handoff
+Note: there should only be one `AFTER_WORK`, if your requirement is more
+complex, use the callable function parameter.
+
+Here are examples of registering AFTER_WORKS
+
+```python
+# Register the handoff to an agent
 agent_1.handoff(hand_to=[
  ON_CONDITION(...), 
  ON_CONDITION(...),
- AFTER_WORK(agent_4) # Fallback to agent_4 if no handoff is suggested
+ AFTER_WORK(agent_4) # Fallback to agent_4 if no ON_CONDITION handoff is suggested
 ])
 
+# Register the handoff to an AfterWorkOption
 agent_2.handoff(hand_to=[AFTER_WORK(AfterWorkOption.TERMINATE)]) # Terminate the chat if no handoff is suggested
+
+def my_after_work_func(last_speaker: SwarmAgent, messages: List[Dict[str, Any]], groupchat: GroupChat) -> Union[AfterWorkOption, SwarmAgent, str]:
+    if last_speaker.get_context("agent_1_done"):
+        return agent_2
+    else:
+        return AfterWorkOption.TERMINATE
+
+# Register the handoff to a function that will return an agent or AfterWorkOption
+agent_3.handoff(hand_to=[AFTER_WORK(my_after_work_func)])
+
+# Register the swarm level AFTER_WORK that becomes the default for agents that don't have one specified
+chat_history, context_variables, last_active_agent = initiate_swarm_chat(
+    ...
+    after_work=AfterWorkOption.TERMINATE # Or an agent or Callable
+)
+
 ```
+
+``` text
 
 ### Update Agent state before replying
 
-It can be useful to update a swarm agent’s state before they reply. For
-example, using an agent’s context variables you could change their
-system message based on the state of the workflow.
+It can be useful to update a swarm agent's state before they reply. For example, using an agent's context variables you could change their system message based on the state of the workflow.
 
-When initialising a swarm agent use the
-`update_agent_state_before_reply` parameter to register updates that run
-after the agent is selected, but before they reply.
+When initialising a swarm agent use the `update_agent_state_before_reply` parameter to register updates that run after the agent is selected, but before they reply.
 
-`update_agent_state_before_reply` takes a list of any combination of the
-following (executing them in the provided order):
+`update_agent_state_before_reply` takes a list of any combination of the following (executing them in the provided order):
 
--   `UPDATE_SYSTEM_MESSAGE` provides a simple way to update the agent’s
-    system message via an f-string that substitutes the values of
-    context variables, or a Callable that returns a string
--   Callable with two parameters of type `ConversableAgent` for the
-    agent and `List[Dict[str Any]]` for the messages, and does not
-    return a value
+- `UPDATE_SYSTEM_MESSAGE` provides a simple way to update the agent's system message via an f-string that substitutes the values of context variables, or a Callable that returns a string
+- Callable with two parameters of type `ConversableAgent` for the agent and `List[Dict[str Any]]` for the messages, and does not return a value
 
 Below is an example of setting these up when creating a Swarm agent.
 
