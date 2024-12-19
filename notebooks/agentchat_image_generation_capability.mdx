@@ -4,6 +4,8 @@ source_notebook: /notebook/agentchat_image_generation_capability.ipynb
 title: Generate Dalle Images With Conversable Agents
 ---
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_image_generation_capability.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_image_generation_capability.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -88,8 +90,6 @@ If you have no critique or a prompt, just say TERMINATE
 ```python
 def _is_termination_message(msg) -> bool:
     # Detects if we should terminate the conversation
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_image_generation_capability.ipynb)
-<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_image_generation_capability.ipynb" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
     if isinstance(msg.get("content"), str):
         return msg["content"].rstrip().endswith("TERMINATE")
     elif isinstance(msg.get("content"), list):

@@ -4,6 +4,8 @@ source_notebook: /notebook/agentchat_logging.ipynb
 title: Runtime Logging with AutoGen
 ---
 
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_logging.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_logging.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
@@ -109,8 +111,6 @@ import autogen
 from autogen import AssistantAgent, UserProxyAgent
 
 # Setup API key. Add your own API key to config file or environment variable
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_logging.ipynb)
-<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_logging.ipynb" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 llm_config = {
     "config_list": autogen.config_list_from_json(
         env_or_file="OAI_CONFIG_LIST",
