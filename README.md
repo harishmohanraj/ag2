@@ -4,7 +4,7 @@ This website is built using [Mintlify](https://mintlify.com/docs/quickstart), a 
 
 ## Prerequisites
 
-To build and test documentation locally, begin by downloading and installing [Node.js](https://nodejs.org/en/download/) and [Mintlify CLI](https://www.npmjs.com/package/mintlify)
+To build and test documentation locally, begin by downloading and installing [Node.js](https://nodejs.org/en/download/) and [Mintlify CLI](https://www.npmjs.com/package/mintlify).
 
 ## Installation
 
