@@ -7,7 +7,7 @@ title: code_utils
 
 ```python
 def content_str(
-    content: Union[str, List[Union[UserMessageTextContentPart,
+    content: Union[str, list[Union[UserMessageTextContentPart,
                                    UserMessageImageContentPart]], None]
 ) -> str
 ```
@@ -49,9 +49,9 @@ TODO: make it robust.
 
 ```python
 def extract_code(
-        text: Union[str, List],
+        text: Union[str, list],
         pattern: str = CODE_BLOCK_PATTERN,
-        detect_single_line_code: bool = False) -> List[Tuple[str, str]]
+        detect_single_line_code: bool = False) -> list[tuple[str, str]]
 ```
 
 Extract code from a text.
@@ -76,7 +76,7 @@ Extract code from a text.
 
 ```python
 def generate_code(pattern: str = CODE_BLOCK_PATTERN,
-                  **config) -> Tuple[str, float]
+                  **config) -> tuple[str, float]
 ```
 
 (openai\<1) Generate code.
@@ -154,8 +154,8 @@ def execute_code(
         timeout: Optional[int] = None,
         filename: Optional[str] = None,
         work_dir: Optional[str] = None,
-        use_docker: Union[List[str], str, bool] = SENTINEL,
-        lang: Optional[str] = "python") -> Tuple[int, str, Optional[str]]
+        use_docker: Union[list[str], str, bool] = SENTINEL,
+        lang: Optional[str] = "python") -> tuple[int, str, Optional[str]]
 ```
 
 Execute code in a docker container.
@@ -199,7 +199,7 @@ This function is not tested on MacOS.
 ### generate\_assertions
 
 ```python
-def generate_assertions(definition: str, **config) -> Tuple[str, float]
+def generate_assertions(definition: str, **config) -> tuple[str, float]
 ```
 
 (openai\<1) Generate assertions for a function.
@@ -218,14 +218,14 @@ def generate_assertions(definition: str, **config) -> Tuple[str, float]
 ### eval\_function\_completions
 
 ```python
-def eval_function_completions(responses: List[str],
+def eval_function_completions(responses: list[str],
                               definition: str,
                               test: Optional[str] = None,
                               entry_point: Optional[str] = None,
                               assertions: Optional[Union[str, Callable[
-                                  [str], Tuple[str, float]]]] = None,
+                                  [str], tuple[str, float]]]] = None,
                               timeout: Optional[float] = 3,
-                              use_docker: Optional[bool] = True) -> Dict
+                              use_docker: Optional[bool] = True) -> dict
 ```
 
 (openai\<1) Select a response from a list of responses for the function completion task (using generated assertions), and/or evaluate if the task is successful using a gold test.
@@ -264,12 +264,12 @@ def pass_assertions(context, response, **_)
 ```python
 def implement(
     definition: str,
-    configs: Optional[List[Dict]] = None,
+    configs: Optional[list[dict]] = None,
     assertions: Optional[Union[str,
                                Callable[[str],
-                                        Tuple[str,
+                                        tuple[str,
                                               float]]]] = generate_assertions
-) -> Tuple[str, float]
+) -> tuple[str, float]
 ```
 
 (openai\<1) Implement a function from a definition.

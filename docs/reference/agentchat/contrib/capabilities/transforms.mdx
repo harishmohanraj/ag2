@@ -17,7 +17,7 @@ that takes a list of messages and returns the transformed list.
 ### apply\_transform
 
 ```python
-def apply_transform(messages: List[Dict]) -> List[Dict]
+def apply_transform(messages: list[dict]) -> list[dict]
 ```
 
 Applies a transformation to a list of messages.
@@ -34,8 +34,8 @@ Applies a transformation to a list of messages.
 ### get\_logs
 
 ```python
-def get_logs(pre_transform_messages: List[Dict],
-             post_transform_messages: List[Dict]) -> Tuple[str, bool]
+def get_logs(pre_transform_messages: list[dict],
+             post_transform_messages: list[dict]) -> tuple[str, bool]
 ```
 
 Creates the string including the logs of the transformation
@@ -79,7 +79,7 @@ def __init__(max_messages: Optional[int] = None,
 ### apply\_transform
 
 ```python
-def apply_transform(messages: List[Dict]) -> List[Dict]
+def apply_transform(messages: list[dict]) -> list[dict]
 ```
 
 Truncates the conversation history to the specified maximum number of messages.
@@ -136,7 +136,7 @@ def __init__(max_tokens_per_message: Optional[int] = None,
              max_tokens: Optional[int] = None,
              min_tokens: Optional[int] = None,
              model: str = "gpt-3.5-turbo-0613",
-             filter_dict: Optional[Dict] = None,
+             filter_dict: Optional[dict] = None,
              exclude_filter: bool = True)
 ```
 
@@ -157,7 +157,7 @@ def __init__(max_tokens_per_message: Optional[int] = None,
 ### apply\_transform
 
 ```python
-def apply_transform(messages: List[Dict]) -> List[Dict]
+def apply_transform(messages: list[dict]) -> list[dict]
 ```
 
 Applies token truncation to the conversation history.
@@ -187,9 +187,9 @@ processing and response generation by downstream models.
 ```python
 def __init__(text_compressor: Optional[TextCompressor] = None,
              min_tokens: Optional[int] = None,
-             compression_params: Dict = dict(),
+             compression_params: dict = dict(),
              cache: Optional[AbstractCache] = None,
-             filter_dict: Optional[Dict] = None,
+             filter_dict: Optional[dict] = None,
              exclude_filter: bool = True)
 ```
 
@@ -211,7 +211,7 @@ def __init__(text_compressor: Optional[TextCompressor] = None,
 ### apply\_transform
 
 ```python
-def apply_transform(messages: List[Dict]) -> List[Dict]
+def apply_transform(messages: list[dict]) -> list[dict]
 ```
 
 Applies compression to messages in a conversation history based on the specified configuration.
@@ -262,7 +262,7 @@ context_handling.add_to_agent(my_agent)
 def __init__(position: str = "start",
              format_string: str = "\{name}:\n",
              deduplicate: bool = True,
-             filter_dict: Optional[Dict] = None,
+             filter_dict: Optional[dict] = None,
              exclude_filter: bool = True)
 ```
 
@@ -280,7 +280,7 @@ def __init__(position: str = "start",
 ### apply\_transform
 
 ```python
-def apply_transform(messages: List[Dict]) -> List[Dict]
+def apply_transform(messages: list[dict]) -> list[dict]
 ```
 
 Applies the name change to the message based on the position and format string.

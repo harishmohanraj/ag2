@@ -29,7 +29,7 @@ b. _append_oai_message
 ### \_\_init\_\_
 
 ```python
-def __init__(lmm_config: Dict,
+def __init__(lmm_config: dict,
              description_prompt: Optional[str] = DEFAULT_DESCRIPTION_PROMPT,
              custom_caption_func: Callable = None) -> None
 ```
@@ -68,7 +68,7 @@ description and captioning.
 ### process\_last\_received\_message
 
 ```python
-def process_last_received_message(content: Union[str, List[dict]]) -> str
+def process_last_received_message(content: Union[str, list[dict]]) -> str
 ```
 
 Processes the last received message content by normalizing and augmenting it

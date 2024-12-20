@@ -7,7 +7,7 @@ title: agentchat.utils
 
 ```python
 def gather_usage_summary(
-        agents: List[Agent]) -> Dict[Dict[str, Dict], Dict[str, Dict]]
+        agents: list[Agent]) -> dict[dict[str, dict], dict[str, dict]]
 ```
 
 Gather usage summary from all agents.
@@ -62,8 +62,8 @@ Gather usage summary from all agents.
 ```python
 def parse_tags_from_content(
     tag: str,
-    content: Union[str, List[Dict[str,
-                                  Any]]]) -> List[Dict[str, Dict[str, str]]]
+    content: Union[str, list[dict[str,
+                                  Any]]]) -> list[dict[str, dict[str, str]]]
 ```
 
 Parses HTML style tags from message contents.

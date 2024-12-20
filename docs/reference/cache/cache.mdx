@@ -24,8 +24,8 @@ cache implementation details, providing methods for cache operations.
 
 ```python
 @staticmethod
-def redis(cache_seed: Union[str, int] = 42,
-          redis_url: str = "redis://localhost:6379/0") -> "Cache"
+def redis(cache_seed: str | int = 42,
+          redis_url: str = "redis://localhost:6379/0") -> Cache
 ```
 
 Create a Redis cache instance.
@@ -44,8 +44,7 @@ Create a Redis cache instance.
 
 ```python
 @staticmethod
-def disk(cache_seed: Union[str, int] = 42,
-         cache_path_root: str = ".cache") -> "Cache"
+def disk(cache_seed: str | int = 42, cache_path_root: str = ".cache") -> Cache
 ```
 
 Create a Disk cache instance.
@@ -64,10 +63,10 @@ Create a Disk cache instance.
 
 ```python
 @staticmethod
-def cosmos_db(connection_string: Optional[str] = None,
-              container_id: Optional[str] = None,
-              cache_seed: Union[str, int] = 42,
-              client: Optional[any] = None) -> "Cache"
+def cosmos_db(connection_string: str | None = None,
+              container_id: str | None = None,
+              cache_seed: str | int = 42,
+              client: any | None = None) -> Cache
 ```
 
 Create a Cosmos DB cache instance with 'autogen_cache' as database ID.
@@ -86,7 +85,7 @@ Create a Cosmos DB cache instance with 'autogen_cache' as database ID.
 ### \_\_init\_\_
 
 ```python
-def __init__(config: Dict[str, Any])
+def __init__(config: dict[str, Any])
 ```
 
 Initialize the Cache with the given configuration.
@@ -105,7 +104,7 @@ Validates the configuration keys and creates the cache instance.
 ### \_\_enter\_\_
 
 ```python
-def __enter__() -> "Cache"
+def __enter__() -> Cache
 ```
 
 Enter the runtime context related to the cache object.
@@ -117,9 +116,9 @@ Enter the runtime context related to the cache object.
 ### \_\_exit\_\_
 
 ```python
-def __exit__(exc_type: Optional[Type[BaseException]],
-             exc_value: Optional[BaseException],
-             traceback: Optional[TracebackType]) -> None
+def __exit__(exc_type: type[BaseException] | None,
+             exc_value: BaseException | None,
+             traceback: TracebackType | None) -> None
 ```
 
 Exit the runtime context related to the cache object.
@@ -136,7 +135,7 @@ within the context.
 ### get
 
 ```python
-def get(key: str, default: Optional[Any] = None) -> Optional[Any]
+def get(key: str, default: Any | None = None) -> Any | None
 ```
 
 Retrieve an item from the cache.

@@ -18,8 +18,8 @@ similarity, and sends them along with the question to the Retrieval-Augmented As
 def __init__(name="RetrieveChatAgent",
              human_input_mode: Literal["ALWAYS", "NEVER",
                                        "TERMINATE"] = "ALWAYS",
-             is_termination_msg: Optional[Callable[[Dict], bool]] = None,
-             retrieve_config: Optional[Dict] = None,
+             is_termination_msg: Optional[Callable[[dict], bool]] = None,
+             retrieve_config: Optional[dict] = None,
              **kwargs)
 ```
 

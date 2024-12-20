@@ -13,13 +13,13 @@ class DockerCommandLineCodeExecutor(CodeExecutor)
 
 ```python
 def __init__(image: str = "python:3-slim",
-             container_name: Optional[str] = None,
+             container_name: str | None = None,
              timeout: int = 60,
-             work_dir: Union[Path, str] = Path("."),
-             bind_dir: Optional[Union[Path, str]] = None,
+             work_dir: Path | str = Path("."),
+             bind_dir: Path | str | None = None,
              auto_remove: bool = True,
              stop_container: bool = True,
-             execution_policies: Optional[Dict[str, bool]] = None)
+             execution_policies: dict[str, bool] | None = None)
 ```
 
 (Experimental) A code executor class that executes code through
@@ -95,7 +95,7 @@ def code_extractor() -> CodeExtractor
 ### execute\_code\_blocks
 
 ```python
-def execute_code_blocks(code_blocks: List[CodeBlock]) -> CommandLineCodeResult
+def execute_code_blocks(code_blocks: list[CodeBlock]) -> CommandLineCodeResult
 ```
 
 (Experimental) Execute the code blocks and return the result.

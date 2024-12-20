@@ -28,8 +28,8 @@ The message_retrieval method must be implemented to return a list of str or a li
 ```python
 def message_retrieval(
     response: ModelClientResponseProtocol
-) -> Union[List[str],
-           List[ModelClient.ModelClientResponseProtocol.Choice.Message]]
+) -> Union[list[str],
+           list[ModelClient.ModelClientResponseProtocol.Choice.Message]]
 ```
 
 Retrieve and return a list of strings or a list of Choice.Message from the response.
@@ -41,7 +41,7 @@ since that is expected for function or tool calling in the rest of the codebase 
 
 ```python
 @staticmethod
-def get_usage(response: ModelClientResponseProtocol) -> Dict
+def get_usage(response: ModelClientResponseProtocol) -> dict
 ```
 
 Return usage summary of the response using RESPONSE_USAGE_KEYS.
@@ -59,7 +59,7 @@ Follows the Client protocol and wraps the OpenAI client.
 ```python
 def message_retrieval(
     response: Union[ChatCompletion, Completion]
-) -> Union[List[str], List[ChatCompletionMessage]]
+) -> Union[list[str], list[ChatCompletionMessage]]
 ```
 
 Retrieve the messages from the response.
@@ -67,7 +67,7 @@ Retrieve the messages from the response.
 ### create
 
 ```python
-def create(params: Dict[str, Any]) -> ChatCompletion
+def create(params: dict[str, Any]) -> ChatCompletion
 ```
 
 Create a completion for a given config using openai's client.
@@ -102,7 +102,7 @@ A wrapper class for openai client.
 
 ```python
 def __init__(*,
-             config_list: Optional[List[Dict[str, Any]]] = None,
+             config_list: Optional[list[dict[str, Any]]] = None,
              **base_config: Any)
 ```
 
@@ -199,7 +199,7 @@ def yes_or_no_filter(context, response):
 
 ```python
 def print_usage_summary(
-        mode: Union[str, List[str]] = ["actual", "total"]) -> None
+        mode: Union[str, list[str]] = ["actual", "total"]) -> None
 ```
 
 Print the usage summary.
@@ -218,8 +218,8 @@ Clear the usage summary.
 @classmethod
 def extract_text_or_completion_object(
     cls, response: ModelClient.ModelClientResponseProtocol
-) -> Union[List[str],
-           List[ModelClient.ModelClientResponseProtocol.Choice.Message]]
+) -> Union[list[str],
+           list[ModelClient.ModelClientResponseProtocol.Choice.Message]]
 ```
 
 Extract the text or ChatCompletion objects from a completion or chat response.

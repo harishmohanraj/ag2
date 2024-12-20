@@ -20,10 +20,10 @@ maximum number of consecutive auto replies (subject to future change)
 ```python
 def __init__(name: Optional[str] = "MathChatAgent",
              is_termination_msg: Optional[Callable[
-                 [Dict], bool]] = _is_termination_msg_mathchat,
+                 [dict], bool]] = _is_termination_msg_mathchat,
              human_input_mode: Literal["ALWAYS", "NEVER",
                                        "TERMINATE"] = "NEVER",
-             default_auto_reply: Optional[Union[str, Dict,
+             default_auto_reply: Optional[Union[str, dict,
                                                 None]] = DEFAULT_REPLY,
              max_invalid_q_per_step=3,
              **kwargs)
@@ -112,7 +112,7 @@ Run one wolfram query and return the output.
 ### get\_from\_dict\_or\_env
 
 ```python
-def get_from_dict_or_env(data: Dict[str, Any],
+def get_from_dict_or_env(data: dict[str, Any],
                          key: str,
                          env_key: str,
                          default: Optional[str] = None) -> str
@@ -151,7 +151,7 @@ Configuration for this pydantic object.
 
 ```python
 @root_validator(skip_on_failure=True)
-def validate_environment(cls, values: Dict) -> Dict
+def validate_environment(cls, values: dict) -> dict
 ```
 
 Validate that api key and python package exists in environment.
@@ -159,7 +159,7 @@ Validate that api key and python package exists in environment.
 ### run
 
 ```python
-def run(query: str) -> Tuple[str, bool]
+def run(query: str) -> tuple[str, bool]
 ```
 
 Run query through WolframAlpha and parse result.

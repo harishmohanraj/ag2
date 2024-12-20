@@ -34,19 +34,19 @@ maximum number of consecutive auto replies (subject to future change)
 ```python
 def __init__(name: str,
              system_message: Optional[Union[
-                 str, List]] = "You are a helpful AI Assistant.",
-             is_termination_msg: Optional[Callable[[Dict], bool]] = None,
+                 str, list]] = "You are a helpful AI Assistant.",
+             is_termination_msg: Optional[Callable[[dict], bool]] = None,
              max_consecutive_auto_reply: Optional[int] = None,
              human_input_mode: Literal["ALWAYS", "NEVER",
                                        "TERMINATE"] = "TERMINATE",
-             function_map: Optional[Dict[str, Callable]] = None,
-             code_execution_config: Union[Dict, Literal[False]] = False,
-             llm_config: Optional[Union[Dict, Literal[False]]] = None,
-             default_auto_reply: Union[str, Dict] = "",
+             function_map: Optional[dict[str, Callable]] = None,
+             code_execution_config: Union[dict, Literal[False]] = False,
+             llm_config: Optional[Union[dict, Literal[False]]] = None,
+             default_auto_reply: Union[str, dict] = "",
              description: Optional[str] = None,
-             chat_messages: Optional[Dict[Agent, List[Dict]]] = None,
+             chat_messages: Optional[dict[Agent, list[dict]]] = None,
              silent: Optional[bool] = None,
-             context_variables: Optional[Dict[str, Any]] = None)
+             context_variables: Optional[dict[str, Any]] = None)
 ```
 
 **Arguments**:
@@ -142,8 +142,8 @@ The code executor used by this agent. Returns None if code execution is disabled
 ### register\_reply
 
 ```python
-def register_reply(trigger: Union[Type[Agent], str, Agent,
-                                  Callable[[Agent], bool], List],
+def register_reply(trigger: Union[type[Agent], str, Agent,
+                                  Callable[[Agent], bool], list],
                    reply_func: Callable,
                    position: int = 0,
                    config: Optional[Any] = None,
@@ -215,9 +215,9 @@ Replace a registered reply function with a new one.
 ### register\_nested\_chats
 
 ```python
-def register_nested_chats(chat_queue: List[Dict[str, Any]],
-                          trigger: Union[Type[Agent], str, Agent,
-                                         Callable[[Agent], bool], List],
+def register_nested_chats(chat_queue: list[dict[str, Any]],
+                          trigger: Union[type[Agent], str, Agent,
+                                         Callable[[Agent], bool], list],
                           reply_func_from_nested_chats: Union[
                               str, Callable] = "summary_from_nested_chats",
                           position: int = 2,
@@ -280,7 +280,7 @@ Set a context variable.
 ### update\_context
 
 ```python
-def update_context(context_variables: Dict[str, Any]) -> None
+def update_context(context_variables: dict[str, Any]) -> None
 ```
 
 Update multiple context variables at once.
@@ -353,7 +353,7 @@ The maximum number of consecutive auto replies.
 
 ```python
 @property
-def chat_messages() -> Dict[Agent, List[Dict]]
+def chat_messages() -> dict[Agent, list[dict]]
 ```
 
 A dictionary of conversations from agent to list of messages.
@@ -361,7 +361,7 @@ A dictionary of conversations from agent to list of messages.
 ### chat\_messages\_for\_summary
 
 ```python
-def chat_messages_for_summary(agent: Agent) -> List[Dict]
+def chat_messages_for_summary(agent: Agent) -> list[dict]
 ```
 
 A list of messages as a conversation to summarize.
@@ -369,7 +369,7 @@ A list of messages as a conversation to summarize.
 ### last\_message
 
 ```python
-def last_message(agent: Optional[Agent] = None) -> Optional[Dict]
+def last_message(agent: Optional[Agent] = None) -> Optional[dict]
 ```
 
 The last message exchanged with the agent.
@@ -398,7 +398,7 @@ or str value of the docker image name to use, or None when code execution is dis
 ### send
 
 ```python
-def send(message: Union[Dict, str],
+def send(message: Union[dict, str],
          recipient: Agent,
          request_reply: Optional[bool] = None,
          silent: Optional[bool] = False)
@@ -442,7 +442,7 @@ Send a message to another agent.
 ### a\_send
 
 ```python
-async def a_send(message: Union[Dict, str],
+async def a_send(message: Union[dict, str],
                  recipient: Agent,
                  request_reply: Optional[bool] = None,
                  silent: Optional[bool] = False)
@@ -486,7 +486,7 @@ async def a_send(message: Union[Dict, str],
 ### receive
 
 ```python
-def receive(message: Union[Dict, str],
+def receive(message: Union[dict, str],
             sender: Agent,
             request_reply: Optional[bool] = None,
             silent: Optional[bool] = False)
@@ -521,7 +521,7 @@ The reply can be generated automatically or entered manually by a human.
 ### a\_receive
 
 ```python
-async def a_receive(message: Union[Dict, str],
+async def a_receive(message: Union[dict, str],
                     sender: Agent,
                     request_reply: Optional[bool] = None,
                     silent: Optional[bool] = False)
@@ -564,7 +564,7 @@ def initiate_chat(recipient: "ConversableAgent",
                   summary_method: Optional[Union[
                       str, Callable]] = DEFAULT_SUMMARY_METHOD,
                   summary_args: Optional[dict] = \{},
-                  message: Optional[Union[Dict, str, Callable]] = None,
+                  message: Optional[Union[dict, str, Callable]] = None,
                   **kwargs) -> ChatResult
 ```
 
@@ -690,7 +690,7 @@ Args: Please refer to `initiate_chat`.
 ### initiate\_chats
 
 ```python
-def initiate_chats(chat_queue: List[Dict[str, Any]]) -> List[ChatResult]
+def initiate_chats(chat_queue: list[dict[str, Any]]) -> list[ChatResult]
 ```
 
 (Experimental) Initiate chats with multiple agents.
@@ -707,7 +707,7 @@ def initiate_chats(chat_queue: List[Dict[str, Any]]) -> List[ChatResult]
 ```python
 def get_chat_results(
         chat_index: Optional[int] = None
-) -> Union[List[ChatResult], ChatResult]
+) -> Union[list[ChatResult], ChatResult]
 ```
 
 A summary from the finished chats of particular agents.
@@ -754,10 +754,10 @@ Clear the chat history of the agent.
 
 ```python
 def generate_oai_reply(
-    messages: Optional[List[Dict]] = None,
+    messages: Optional[list[dict]] = None,
     sender: Optional[Agent] = None,
     config: Optional[OpenAIWrapper] = None
-) -> Tuple[bool, Union[str, Dict, None]]
+) -> tuple[bool, Union[str, dict, None]]
 ```
 
 Generate a reply using autogen.oai.
@@ -766,9 +766,9 @@ Generate a reply using autogen.oai.
 
 ```python
 async def a_generate_oai_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[str, Dict, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[str, dict, None]]
 ```
 
 Generate a reply using autogen.oai asynchronously.
@@ -777,9 +777,9 @@ Generate a reply using autogen.oai asynchronously.
 
 ```python
 def generate_code_execution_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Union[Dict, Literal[False]]] = None)
+        config: Optional[Union[dict, Literal[False]]] = None)
 ```
 
 Generate a reply using code execution.
@@ -788,9 +788,9 @@ Generate a reply using code execution.
 
 ```python
 def generate_function_call_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[Dict, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[dict, None]]
 ```
 
 Generate a reply using function call.
@@ -802,9 +802,9 @@ See https://platform.openai.com/docs/api-reference/chat/create#chat-create-funct
 
 ```python
 async def a_generate_function_call_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[Dict, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[dict, None]]
 ```
 
 Generate a reply using async function call.
@@ -816,9 +816,9 @@ See https://platform.openai.com/docs/api-reference/chat/create#chat-create-funct
 
 ```python
 def generate_tool_calls_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[Dict, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[dict, None]]
 ```
 
 Generate a reply using tool call.
@@ -827,9 +827,9 @@ Generate a reply using tool call.
 
 ```python
 async def a_generate_tool_calls_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[Dict, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[dict, None]]
 ```
 
 Generate a reply using async function call.
@@ -838,9 +838,9 @@ Generate a reply using async function call.
 
 ```python
 def check_termination_and_human_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[str, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[str, None]]
 ```
 
 Check if the conversation should be terminated, and if human reply is provided.
@@ -867,9 +867,9 @@ for the conversation and prints relevant messages based on the human input recei
 
 ```python
 async def a_check_termination_and_human_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[Any] = None) -> Tuple[bool, Union[str, None]]
+        config: Optional[Any] = None) -> tuple[bool, Union[str, None]]
 ```
 
 (async) Check if the conversation should be terminated, and if human reply is provided.
@@ -895,9 +895,9 @@ for the conversation and prints relevant messages based on the human input recei
 ### generate\_reply
 
 ```python
-def generate_reply(messages: Optional[List[Dict[str, Any]]] = None,
+def generate_reply(messages: Optional[list[dict[str, Any]]] = None,
                    sender: Optional["Agent"] = None,
-                   **kwargs: Any) -> Union[str, Dict, None]
+                   **kwargs: Any) -> Union[str, dict, None]
 ```
 
 Reply based on the conversation history and the sender.
@@ -933,9 +933,9 @@ AI replies are generated only when no code execution is performed.
 ### a\_generate\_reply
 
 ```python
-async def a_generate_reply(messages: Optional[List[Dict[str, Any]]] = None,
+async def a_generate_reply(messages: Optional[list[dict[str, Any]]] = None,
                            sender: Optional["Agent"] = None,
-                           **kwargs: Any) -> Union[str, Dict[str, Any], None]
+                           **kwargs: Any) -> Union[str, dict[str, Any], None]
 ```
 
 (async) Reply based on the conversation history and the sender.
@@ -1041,7 +1041,7 @@ Execute the code blocks and return the result.
 
 ```python
 def execute_function(func_call,
-                     verbose: bool = False) -> Tuple[bool, Dict[str, Any]]
+                     verbose: bool = False) -> tuple[bool, dict[str, Any]]
 ```
 
 Execute a function call and return the result.
@@ -1089,8 +1089,8 @@ Override this function to modify the way async functions and tools are executed.
 ### generate\_init\_message
 
 ```python
-def generate_init_message(message: Union[Dict, str, None],
-                          **kwargs) -> Union[str, Dict]
+def generate_init_message(message: Union[dict, str, None],
+                          **kwargs) -> Union[str, dict]
 ```
 
 Generate the initial message for the agent.
@@ -1111,8 +1111,8 @@ If message is None, input() will be called to get the initial message.
 ### a\_generate\_init\_message
 
 ```python
-async def a_generate_init_message(message: Union[Dict, str, None],
-                                  **kwargs) -> Union[str, Dict]
+async def a_generate_init_message(message: Union[dict, str, None],
+                                  **kwargs) -> Union[str, dict]
 ```
 
 Generate the initial message for the agent.
@@ -1130,7 +1130,7 @@ If message is None, input() will be called to get the initial message.
 ### register\_function
 
 ```python
-def register_function(function_map: Dict[str, Union[Callable, None]])
+def register_function(function_map: dict[str, Union[Callable, None]])
 ```
 
 Register functions to the agent.
@@ -1142,7 +1142,7 @@ Register functions to the agent.
 ### update\_function\_signature
 
 ```python
-def update_function_signature(func_sig: Union[str, Dict], is_remove: None)
+def update_function_signature(func_sig: Union[str, dict], is_remove: None)
 ```
 
 update a function_signature in the LLM configuration for function_call.
@@ -1158,7 +1158,7 @@ update a function_signature in the LLM configuration for function_call.
 ### update\_tool\_signature
 
 ```python
-def update_tool_signature(tool_sig: Union[str, Dict], is_remove: bool)
+def update_tool_signature(tool_sig: Union[str, dict], is_remove: bool)
 ```
 
 update a tool_signature in the LLM configuration for tool_call.
@@ -1171,7 +1171,7 @@ update a tool_signature in the LLM configuration for tool_call.
 ### can\_execute\_function
 
 ```python
-def can_execute_function(name: Union[List[str], str]) -> bool
+def can_execute_function(name: Union[list[str], str]) -> bool
 ```
 
 Whether the agent can execute the function.
@@ -1180,7 +1180,7 @@ Whether the agent can execute the function.
 
 ```python
 @property
-def function_map() -> Dict[str, Callable]
+def function_map() -> dict[str, Callable]
 ```
 
 Return the function map.
@@ -1297,7 +1297,7 @@ Registered hooks are kept in lists (one per hookable method), and are called in 
 ### update\_agent\_state\_before\_reply
 
 ```python
-def update_agent_state_before_reply(messages: List[Dict]) -> None
+def update_agent_state_before_reply(messages: list[dict]) -> None
 ```
 
 Calls any registered capability hooks to update the agent's state.
@@ -1307,7 +1307,7 @@ Will, potentially, modify the messages.
 ### process\_all\_messages\_before\_reply
 
 ```python
-def process_all_messages_before_reply(messages: List[Dict]) -> List[Dict]
+def process_all_messages_before_reply(messages: list[dict]) -> list[dict]
 ```
 
 Calls any registered capability hooks to process all messages, potentially modifying the messages.
@@ -1315,7 +1315,7 @@ Calls any registered capability hooks to process all messages, potentially modif
 ### process\_last\_received\_message
 
 ```python
-def process_last_received_message(messages: List[Dict]) -> List[Dict]
+def process_last_received_message(messages: list[dict]) -> list[dict]
 ```
 
 Calls any registered capability hooks to use and potentially modify the text of the last message,
@@ -1325,7 +1325,7 @@ as long as the last message is not a function call or exit command.
 
 ```python
 def print_usage_summary(
-        mode: Union[str, List[str]] = ["actual", "total"]) -> None
+        mode: Union[str, list[str]] = ["actual", "total"]) -> None
 ```
 
 Print the usage summary.
@@ -1333,7 +1333,7 @@ Print the usage summary.
 ### get\_actual\_usage
 
 ```python
-def get_actual_usage() -> Union[None, Dict[str, int]]
+def get_actual_usage() -> Union[None, dict[str, int]]
 ```
 
 Get the actual usage summary.
@@ -1341,7 +1341,7 @@ Get the actual usage summary.
 ### get\_total\_usage
 
 ```python
-def get_total_usage() -> Union[None, Dict[str, int]]
+def get_total_usage() -> Union[None, dict[str, int]]
 ```
 
 Get the total usage summary.

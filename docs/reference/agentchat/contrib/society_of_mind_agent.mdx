@@ -53,10 +53,10 @@ Update the chat manager.
 
 ```python
 def generate_inner_monologue_reply(
-    messages: Optional[List[Dict]] = None,
+    messages: Optional[list[dict]] = None,
     sender: Optional[Agent] = None,
     config: Optional[OpenAIWrapper] = None
-) -> Tuple[bool, Union[str, Dict, None]]
+) -> tuple[bool, Union[str, dict, None]]
 ```
 
 Generate a reply by running the group chat

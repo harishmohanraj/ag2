@@ -6,9 +6,9 @@ title: runtime_logging
 ### start
 
 ```python
-def start(logger: Optional[BaseLogger] = None,
+def start(logger: BaseLogger | None = None,
           logger_type: Literal["sqlite", "file"] = "sqlite",
-          config: Optional[Dict[str, Any]] = None) -> str
+          config: dict[str, Any] | None = None) -> str
 ```
 
 Start logging for the runtime.

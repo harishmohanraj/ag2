@@ -31,9 +31,10 @@ class CodeExtractor(Protocol)
 
 ```python
 def extract_code_blocks(
-    message: Union[str, List[Union[UserMessageTextContentPart,
-                                   UserMessageImageContentPart]], None]
-) -> List[CodeBlock]
+    message: str
+    | list[Union[UserMessageTextContentPart, UserMessageImageContentPart]]
+    | None
+) -> list[CodeBlock]
 ```
 
 (Experimental) Extract code blocks from a message.
@@ -68,7 +69,7 @@ def code_extractor() -> CodeExtractor
 ### execute\_code\_blocks
 
 ```python
-def execute_code_blocks(code_blocks: List[CodeBlock]) -> CodeResult
+def execute_code_blocks(code_blocks: list[CodeBlock]) -> CodeResult
 ```
 
 (Experimental) Execute code blocks and return the result.

@@ -49,7 +49,7 @@ Requires api_key or environment variable to be set
 ```python
 def message_retrieval(
         response: ChatCompletion
-) -> Union[List[str], List[ChatCompletionMessage]]
+) -> Union[list[str], list[ChatCompletionMessage]]
 ```
 
 Retrieve the messages from the response.
@@ -57,7 +57,7 @@ Retrieve the messages from the response.
 ### parse\_params
 
 ```python
-def parse_params(params: Dict[str, Any]) -> Dict[str, Any]
+def parse_params(params: dict[str, Any]) -> dict[str, Any]
 ```
 
 Loads the parameters for Mistral.AI API from the passed in parameters and returns a validated set. Checks types, ranges, and sets defaults
@@ -66,7 +66,7 @@ Loads the parameters for Mistral.AI API from the passed in parameters and return
 
 ```python
 def tool_def_to_mistral(
-        tool_definitions: List[Dict[str, Any]]) -> List[Dict[str, Any]]
+        tool_definitions: list[dict[str, Any]]) -> list[dict[str, Any]]
 ```
 
 Converts AutoGen tool definition to a mistral tool format

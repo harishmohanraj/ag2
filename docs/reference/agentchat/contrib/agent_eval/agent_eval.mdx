@@ -6,7 +6,7 @@ title: agentchat.contrib.agent_eval.agent_eval
 ### generate\_criteria
 
 ```python
-def generate_criteria(llm_config: Optional[Union[Dict, Literal[False]]] = None,
+def generate_criteria(llm_config: Optional[Union[dict, Literal[False]]] = None,
                       task: Task = None,
                       additional_instructions: str = "",
                       max_round=2,
@@ -30,8 +30,8 @@ Creates a list of criteria for evaluating the utility of a given task.
 ### quantify\_criteria
 
 ```python
-def quantify_criteria(llm_config: Optional[Union[Dict, Literal[False]]] = None,
-                      criteria: List[Criterion] = None,
+def quantify_criteria(llm_config: Optional[Union[dict, Literal[False]]] = None,
+                      criteria: list[Criterion] = None,
                       task: Task = None,
                       test_case: str = "",
                       ground_truth: str = "")

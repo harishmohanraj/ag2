@@ -6,7 +6,7 @@ title: function_utils
 ### get\_typed\_annotation
 
 ```python
-def get_typed_annotation(annotation: Any, globalns: Dict[str, Any]) -> Any
+def get_typed_annotation(annotation: Any, globalns: dict[str, Any]) -> Any
 ```
 
 Get the type annotation of a parameter.
@@ -60,7 +60,7 @@ Get the return annotation of a function.
 ```python
 def get_param_annotations(
     typed_signature: inspect.Signature
-) -> Dict[str, Union[Annotated[Type[Any], str], Type[Any]]]
+) -> dict[str, Union[Annotated[type[Any], str], type[Any]]]
 ```
 
 Get the type annotations of the parameters of a function
@@ -102,7 +102,7 @@ A function under tool as defined by the OpenAI API.
 
 ```python
 def get_parameter_json_schema(
-        k: str, v: Any, default_values: Dict[str, Any]) -> JsonSchemaValue
+        k: str, v: Any, default_values: dict[str, Any]) -> JsonSchemaValue
 ```
 
 Get a JSON schema for a parameter as defined by the OpenAI API
@@ -121,7 +121,7 @@ Get a JSON schema for a parameter as defined by the OpenAI API
 ### get\_required\_params
 
 ```python
-def get_required_params(typed_signature: inspect.Signature) -> List[str]
+def get_required_params(typed_signature: inspect.Signature) -> list[str]
 ```
 
 Get the required parameters of a function
@@ -138,7 +138,7 @@ Get the required parameters of a function
 ### get\_default\_values
 
 ```python
-def get_default_values(typed_signature: inspect.Signature) -> Dict[str, Any]
+def get_default_values(typed_signature: inspect.Signature) -> dict[str, Any]
 ```
 
 Get default values of parameters of a function
@@ -155,11 +155,11 @@ Get default values of parameters of a function
 ### get\_parameters
 
 ```python
-def get_parameters(required: List[str],
-                   param_annotations: Dict[str, Union[Annotated[Type[Any],
+def get_parameters(required: list[str],
+                   param_annotations: dict[str, Union[Annotated[type[Any],
                                                                 str],
-                                                      Type[Any]]],
-                   default_values: Dict[str, Any]) -> Parameters
+                                                      type[Any]]],
+                   default_values: dict[str, Any]) -> Parameters
 ```
 
 Get the parameters of a function as defined by the OpenAI API
@@ -178,7 +178,7 @@ Get the parameters of a function as defined by the OpenAI API
 
 ```python
 def get_missing_annotations(typed_signature: inspect.Signature,
-                            required: List[str]) -> Tuple[Set[str], Set[str]]
+                            required: list[str]) -> tuple[set[str], set[str]]
 ```
 
 Get the missing annotations of a function
@@ -201,7 +201,7 @@ Ignores the parameters with default values as they are not required to be annota
 def get_function_schema(f: Callable[..., Any],
                         *,
                         name: Optional[str] = None,
-                        description: str) -> Dict[str, Any]
+                        description: str) -> dict[str, Any]
 ```
 
 Get a JSON schema for a function as defined by the OpenAI API
@@ -247,7 +247,7 @@ get_function_schema(f, description="function f")
 ```python
 def get_load_param_if_needed_function(
     t: Any
-) -> Optional[Callable[[Dict[str, Any], Type[BaseModel]], BaseModel]]
+) -> Optional[Callable[[dict[str, Any], type[BaseModel]], BaseModel]]
 ```
 
 Get a function to load a parameter if it is a Pydantic model

@@ -57,14 +57,14 @@ Update the agent's system message before they reply
 ```python
 def initiate_swarm_chat(
     initial_agent: "SwarmAgent",
-    messages: Union[List[Dict[str, Any]], str],
-    agents: List["SwarmAgent"],
+    messages: Union[list[dict[str, Any]], str],
+    agents: list["SwarmAgent"],
     user_agent: Optional[UserProxyAgent] = None,
     max_rounds: int = 20,
-    context_variables: Optional[Dict[str, Any]] = None,
+    context_variables: Optional[dict[str, Any]] = None,
     after_work: Optional[Union[AFTER_WORK, Callable]] = AFTER_WORK(
         AfterWorkOption.TERMINATE)
-) -> Tuple[ChatResult, Dict[str, Any], "SwarmAgent"]
+) -> tuple[ChatResult, dict[str, Any], "SwarmAgent"]
 ```
 
 Initialize and run a swarm chat
@@ -127,7 +127,7 @@ update_agent_state_before_reply (List[Callable]): A list of functions, including
 
 ```python
 def register_update_agent_state_before_reply(
-        functions: Optional[Union[List[Callable], Callable]])
+        functions: Optional[Union[list[Callable], Callable]])
 ```
 
 Register functions that will be called when the agent is selected and before it speaks.
@@ -141,7 +141,7 @@ You can add your own validation or precondition functions here.
 ### register\_hand\_off
 
 ```python
-def register_hand_off(hand_to: Union[List[Union[ON_CONDITION, AFTER_WORK]],
+def register_hand_off(hand_to: Union[list[Union[ON_CONDITION, AFTER_WORK]],
                                      ON_CONDITION, AFTER_WORK])
 ```
 
@@ -161,9 +161,9 @@ Register a function to hand off to another agent.
 
 ```python
 def generate_swarm_tool_reply(
-        messages: Optional[List[Dict]] = None,
+        messages: Optional[list[dict]] = None,
         sender: Optional[Agent] = None,
-        config: Optional[OpenAIWrapper] = None) -> Tuple[bool, dict]
+        config: Optional[OpenAIWrapper] = None) -> tuple[bool, dict]
 ```
 
 Pre-processes and generates tool call replies.
@@ -185,9 +185,9 @@ Add a single function to the agent, removing context variables for LLM use
 
 ```python
 @staticmethod
-def process_nested_chat_carryover(chat: Dict[str, Any],
+def process_nested_chat_carryover(chat: dict[str, Any],
                                   recipient: ConversableAgent,
-                                  messages: List[Dict[str, Any]],
+                                  messages: list[dict[str, Any]],
                                   sender: ConversableAgent,
                                   config: Any,
                                   trim_n_messages: int = 0) -> None

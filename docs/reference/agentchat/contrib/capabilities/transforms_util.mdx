@@ -20,7 +20,7 @@ Calculates the cache key for the given message content and any other hashable ar
 
 ```python
 def cache_content_get(cache: Optional[AbstractCache],
-                      key: str) -> Optional[Tuple[MessageContentType, ...]]
+                      key: str) -> Optional[tuple[MessageContentType, ...]]
 ```
 
 Retrieves cachedd content from the cache.
@@ -49,7 +49,7 @@ Sets content into the cache.
 ### min\_tokens\_reached
 
 ```python
-def min_tokens_reached(messages: List[Dict],
+def min_tokens_reached(messages: list[dict],
                        min_tokens: Optional[int]) -> bool
 ```
 
@@ -94,8 +94,8 @@ Checks if the content of the message does not contain any text.
 ### should\_transform\_message
 
 ```python
-def should_transform_message(message: Dict[str, Any],
-                             filter_dict: Optional[Dict[str, Any]],
+def should_transform_message(message: dict[str, Any],
+                             filter_dict: Optional[dict[str, Any]],
                              exclude: bool) -> bool
 ```
 

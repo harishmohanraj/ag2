@@ -8,9 +8,9 @@ Utilities for client classes
 ### validate\_parameter
 
 ```python
-def validate_parameter(params: Dict[str, Any], param_name: str,
-                       allowed_types: Tuple, allow_None: bool,
-                       default_value: Any, numerical_bound: Tuple,
+def validate_parameter(params: dict[str, Any], param_name: str,
+                       allowed_types: tuple, allow_None: bool,
+                       default_value: Any, numerical_bound: tuple,
                        allowed_values: list) -> Any
 ```
 
@@ -56,7 +56,7 @@ Validates a given config parameter, checking its type, values, and setting defau
 ### should\_hide\_tools
 
 ```python
-def should_hide_tools(messages: List[Dict[str, Any]], tools: List[Dict[str,
+def should_hide_tools(messages: list[dict[str, Any]], tools: list[dict[str,
                                                                        Any]],
                       hide_tools_param: str) -> bool
 ```

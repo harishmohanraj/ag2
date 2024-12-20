@@ -49,10 +49,10 @@ Initialize the Collection object.
 ### add
 
 ```python
-def add(ids: List[ItemID],
-        documents: List,
-        embeddings: List = None,
-        metadatas: List = None) -> None
+def add(ids: list[ItemID],
+        documents: list,
+        embeddings: list = None,
+        metadatas: list = None) -> None
 ```
 
 Add documents to the collection.
@@ -72,10 +72,10 @@ Add documents to the collection.
 ### upsert
 
 ```python
-def upsert(ids: List[ItemID],
-           documents: List,
-           embeddings: List = None,
-           metadatas: List = None) -> None
+def upsert(ids: list[ItemID],
+           documents: list,
+           embeddings: list = None,
+           metadatas: list = None) -> None
 ```
 
 Upsert documents into the collection.
@@ -128,7 +128,7 @@ def get(ids: Optional[str] = None,
         include: Optional[str] = None,
         where: Optional[str] = None,
         limit: Optional[Union[int, str]] = None,
-        offset: Optional[Union[int, str]] = None) -> List[Document]
+        offset: Optional[Union[int, str]] = None) -> list[Document]
 ```
 
 Retrieve documents from the collection.
@@ -149,8 +149,8 @@ Retrieve documents from the collection.
 ### update
 
 ```python
-def update(ids: List, embeddings: List, metadatas: List,
-           documents: List) -> None
+def update(ids: list, embeddings: list, metadatas: list,
+           documents: list) -> None
 ```
 
 Update documents in the collection.
@@ -171,7 +171,7 @@ Update documents in the collection.
 
 ```python
 @staticmethod
-def euclidean_distance(arr1: List[float], arr2: List[float]) -> float
+def euclidean_distance(arr1: list[float], arr2: list[float]) -> float
 ```
 
 Calculate the Euclidean distance between two vectors.
@@ -190,7 +190,7 @@ Calculate the Euclidean distance between two vectors.
 
 ```python
 @staticmethod
-def cosine_distance(arr1: List[float], arr2: List[float]) -> float
+def cosine_distance(arr1: list[float], arr2: list[float]) -> float
 ```
 
 Calculate the cosine distance between two vectors.
@@ -209,7 +209,7 @@ Calculate the cosine distance between two vectors.
 
 ```python
 @staticmethod
-def inner_product_distance(arr1: List[float], arr2: List[float]) -> float
+def inner_product_distance(arr1: list[float], arr2: list[float]) -> float
 ```
 
 Calculate the Euclidean distance between two vectors.
@@ -227,7 +227,7 @@ Calculate the Euclidean distance between two vectors.
 ### query
 
 ```python
-def query(query_texts: List[str],
+def query(query_texts: list[str],
           collection_name: Optional[str] = None,
           n_results: Optional[int] = 10,
           distance_type: Optional[str] = "euclidean",
@@ -254,7 +254,7 @@ Query documents in the collection.
 
 ```python
 @staticmethod
-def convert_string_to_array(array_string: str) -> List[float]
+def convert_string_to_array(array_string: str) -> list[float]
 ```
 
 Convert a string representation of an array to a list of floats.
@@ -290,7 +290,7 @@ Modify metadata for the collection.
 ### delete
 
 ```python
-def delete(ids: List[ItemID], collection_name: Optional[str] = None) -> None
+def delete(ids: list[ItemID], collection_name: Optional[str] = None) -> None
 ```
 
 Delete documents from the collection.
@@ -495,7 +495,7 @@ Delete the collection from the vector database.
 ### insert\_docs
 
 ```python
-def insert_docs(docs: List[Document],
+def insert_docs(docs: list[Document],
                 collection_name: str = None,
                 upsert: bool = False) -> None
 ```
@@ -517,7 +517,7 @@ Insert documents into the collection of the vector database.
 ### update\_docs
 
 ```python
-def update_docs(docs: List[Document], collection_name: str = None) -> None
+def update_docs(docs: list[Document], collection_name: str = None) -> None
 ```
 
 Update documents in the collection of the vector database.
@@ -535,7 +535,7 @@ Update documents in the collection of the vector database.
 ### delete\_docs
 
 ```python
-def delete_docs(ids: List[ItemID], collection_name: str = None) -> None
+def delete_docs(ids: list[ItemID], collection_name: str = None) -> None
 ```
 
 Delete documents from the collection of the vector database.
@@ -554,7 +554,7 @@ Delete documents from the collection of the vector database.
 ### retrieve\_docs
 
 ```python
-def retrieve_docs(queries: List[str],
+def retrieve_docs(queries: list[str],
                   collection_name: str = None,
                   n_results: int = 10,
                   distance_threshold: float = -1) -> QueryResults
@@ -580,10 +580,10 @@ Retrieve documents from the collection of the vector database based on the queri
 ### get\_docs\_by\_ids
 
 ```python
-def get_docs_by_ids(ids: List[ItemID] = None,
+def get_docs_by_ids(ids: list[ItemID] = None,
                     collection_name: str = None,
                     include=None,
-                    **kwargs) -> List[Document]
+                    **kwargs) -> list[Document]
 ```
 
 Retrieve documents from the collection of the vector database based on the ids.

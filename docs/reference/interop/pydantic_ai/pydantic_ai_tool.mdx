@@ -25,7 +25,7 @@ specific to Pydantic AI tools, such as parameters and function signatures.
 
 ```python
 def __init__(name: str, description: str, func: Callable[..., Any],
-             parameters_json_schema: Dict[str, Any]) -> None
+             parameters_json_schema: dict[str, Any]) -> None
 ```
 
 Initializes a PydanticAITool object with the provided name, description,

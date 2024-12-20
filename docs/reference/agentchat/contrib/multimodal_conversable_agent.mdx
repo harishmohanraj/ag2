@@ -13,7 +13,7 @@ class MultimodalConversableAgent(ConversableAgent)
 
 ```python
 def __init__(name: str,
-             system_message: Optional[Union[str, List]] = DEFAULT_LMM_SYS_MSG,
+             system_message: Optional[Union[str, list]] = DEFAULT_LMM_SYS_MSG,
              is_termination_msg: str = None,
              *args,
              **kwargs)
@@ -30,7 +30,7 @@ def __init__(name: str,
 ### update\_system\_message
 
 ```python
-def update_system_message(system_message: Union[Dict, List, str])
+def update_system_message(system_message: Union[dict, list, str])
 ```
 
 Update the system message.
@@ -43,10 +43,10 @@ Update the system message.
 
 ```python
 def generate_oai_reply(
-    messages: Optional[List[Dict]] = None,
+    messages: Optional[list[dict]] = None,
     sender: Optional[Agent] = None,
     config: Optional[OpenAIWrapper] = None
-) -> Tuple[bool, Union[str, Dict, None]]
+) -> tuple[bool, Union[str, dict, None]]
 ```
 
 Generate a reply using autogen.oai.

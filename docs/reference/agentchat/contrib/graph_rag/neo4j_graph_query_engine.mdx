@@ -40,7 +40,7 @@ def __init__(host: str = "bolt://localhost",
                  model_name="text-embedding-3-small"),
              entities: Optional[TypeAlias] = None,
              relations: Optional[TypeAlias] = None,
-             schema: Optional[Union[Dict[str, str], List[Triple]]] = None,
+             schema: Optional[Union[dict[str, str], list[Triple]]] = None,
              strict: Optional[bool] = False)
 ```
 
@@ -65,7 +65,7 @@ Please also refer to https://docs.llamaindex.ai/en/stable/examples/property_grap
 ### init\_db
 
 ```python
-def init_db(input_doc: List[Document] | None = None)
+def init_db(input_doc: list[Document] | None = None)
 ```
 
 Build the knowledge graph with input documents.
@@ -81,7 +81,7 @@ Connect to an existing knowledge graph database.
 ### add\_records
 
 ```python
-def add_records(new_records: List) -> bool
+def add_records(new_records: list) -> bool
 ```
 
 Add new records to the knowledge graph. Must be local files.

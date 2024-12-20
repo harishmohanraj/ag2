@@ -53,7 +53,7 @@ Retrieve the messages from the response.
 ### parse\_custom\_params
 
 ```python
-def parse_custom_params(params: Dict[str, Any])
+def parse_custom_params(params: dict[str, Any])
 ```
 
 Parses custom parameters for logic in this client class
@@ -62,7 +62,7 @@ Parses custom parameters for logic in this client class
 
 ```python
 def parse_params(
-        params: Dict[str, Any]) -> tuple[Dict[str, Any], Dict[str, Any]]
+        params: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]
 ```
 
 Loads the valid parameters required to invoke Bedrock Converse
@@ -88,7 +88,7 @@ Calculate the cost of the response.
 
 ```python
 @staticmethod
-def get_usage(response) -> Dict
+def get_usage(response) -> dict
 ```
 
 Get the usage of tokens and their cost information.
@@ -96,7 +96,7 @@ Get the usage of tokens and their cost information.
 ### extract\_system\_messages
 
 ```python
-def extract_system_messages(messages: List[dict]) -> List
+def extract_system_messages(messages: list[dict]) -> list
 ```
 
 Extract the system messages from the list of messages.
@@ -114,8 +114,8 @@ Extract the system messages from the list of messages.
 
 ```python
 def oai_messages_to_bedrock_messages(
-        messages: List[Dict[str, Any]], has_tools: bool,
-        supports_system_prompts: bool) -> List[Dict]
+        messages: list[dict[str, Any]], has_tools: bool,
+        supports_system_prompts: bool) -> list[dict]
 ```
 
 Convert messages from OAI format to Bedrock format.
@@ -127,7 +127,7 @@ This is the same method as the one in the Autogen Anthropic client
 ### parse\_image
 
 ```python
-def parse_image(image_url: str) -> Tuple[bytes, str]
+def parse_image(image_url: str) -> tuple[bytes, str]
 ```
 
 Try to get the raw data from an image url.

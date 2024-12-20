@@ -50,7 +50,7 @@ either returned directly or as a base64-encoded string.
 
 ```python
 def llava_formatter(prompt: str,
-                    order_image_tokens: bool = False) -> Tuple[str, List[str]]
+                    order_image_tokens: bool = False) -> tuple[str, list[str]]
 ```
 
 Formats the input prompt by replacing image tags and returns the new prompt along with image locations.
@@ -87,7 +87,7 @@ Converts a PIL Image object to a data URI.
 
 ```python
 def gpt4v_formatter(prompt: str,
-                    img_format: str = "uri") -> List[Union[str, dict]]
+                    img_format: str = "uri") -> list[Union[str, dict]]
 ```
 
 Formats the input prompt by replacing image tags and returns a list of text and images.
@@ -122,7 +122,7 @@ Extract image paths (URLs or local paths) from a text paragraph.
 ### message\_formatter\_pil\_to\_b64
 
 ```python
-def message_formatter_pil_to_b64(messages: List[Dict]) -> List[Dict]
+def message_formatter_pil_to_b64(messages: list[dict]) -> list[dict]
 ```
 
 Converts the PIL image URLs in the messages to base64 encoded data URIs.

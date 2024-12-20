@@ -13,8 +13,8 @@ class LocalJupyterServer(JupyterConnectable)
 
 ```python
 def __init__(ip: str = "127.0.0.1",
-             port: Optional[int] = None,
-             token: Union[str, GenerateToken] = GenerateToken(),
+             port: int | None = None,
+             token: str | GenerateToken = GenerateToken(),
              log_file: str = "jupyter_gateway.log",
              log_level: str = "INFO",
              log_max_bytes: int = 1048576,

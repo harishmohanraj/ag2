@@ -6,7 +6,7 @@ title: agentchat.contrib.vectordb.mongodb
 ### with\_id\_rename
 
 ```python
-def with_id_rename(docs: Iterable) -> List[Dict[str, Any]]
+def with_id_rename(docs: Iterable) -> list[dict[str, Any]]
 ```
 
 Utility changes _id field from Collection into id for Document.
@@ -148,7 +148,7 @@ Create a vector search index in the collection.
 ### insert\_docs
 
 ```python
-def insert_docs(docs: List[Document],
+def insert_docs(docs: list[Document],
                 collection_name: str = None,
                 upsert: bool = False,
                 batch_size=DEFAULT_INSERT_BATCH_SIZE,
@@ -169,7 +169,7 @@ For large numbers of Documents, insertion is performed in batches.
 ### update\_docs
 
 ```python
-def update_docs(docs: List[Document],
+def update_docs(docs: list[Document],
                 collection_name: str = None,
                 **kwargs: Any) -> None
 ```
@@ -189,7 +189,7 @@ Uses deepcopy to avoid changing docs.
 ### delete\_docs
 
 ```python
-def delete_docs(ids: List[ItemID], collection_name: str = None, **kwargs)
+def delete_docs(ids: list[ItemID], collection_name: str = None, **kwargs)
 ```
 
 Delete documents from the collection of the vector database.
@@ -202,10 +202,10 @@ Delete documents from the collection of the vector database.
 ### get\_docs\_by\_ids
 
 ```python
-def get_docs_by_ids(ids: List[ItemID] = None,
+def get_docs_by_ids(ids: list[ItemID] = None,
                     collection_name: str = None,
-                    include: List[str] = None,
-                    **kwargs) -> List[Document]
+                    include: list[str] = None,
+                    **kwargs) -> list[Document]
 ```
 
 Retrieve documents from the collection of the vector database based on the ids.
@@ -227,7 +227,7 @@ Retrieve documents from the collection of the vector database based on the ids.
 ### retrieve\_docs
 
 ```python
-def retrieve_docs(queries: List[str],
+def retrieve_docs(queries: list[str],
                   collection_name: str = None,
                   n_results: int = 10,
                   distance_threshold: float = -1,

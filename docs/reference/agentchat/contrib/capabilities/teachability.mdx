@@ -31,7 +31,7 @@ def __init__(verbosity: Optional[int] = 0,
              path_to_db_dir: Optional[str] = "./tmp/teachable_agent_db",
              recall_threshold: Optional[float] = 1.5,
              max_num_retrievals: Optional[int] = 10,
-             llm_config: Optional[Union[Dict, bool]] = None)
+             llm_config: Optional[Union[dict, bool]] = None)
 ```
 
 **Arguments**:
@@ -63,7 +63,7 @@ Adds a few arbitrary memos to the DB.
 ### process\_last\_received\_message
 
 ```python
-def process_last_received_message(text: Union[Dict, str])
+def process_last_received_message(text: Union[dict, str])
 ```
 
 Appends any relevant memos to the message text, and stores any apparent teachings in new memos.

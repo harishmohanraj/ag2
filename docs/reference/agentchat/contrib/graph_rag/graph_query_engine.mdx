@@ -28,7 +28,7 @@ This interface defines the basic methods for graph-based RAG.
 ### init\_db
 
 ```python
-def init_db(input_doc: List[Document] | None = None)
+def init_db(input_doc: list[Document] | None = None)
 ```
 
 This method initializes graph database with the input documents or records.
@@ -44,7 +44,7 @@ Usually, it takes the following steps,
 ### add\_records
 
 ```python
-def add_records(new_records: List) -> bool
+def add_records(new_records: list) -> bool
 ```
 
 Add new records to the underlying database and add to the graph if required.

@@ -15,9 +15,9 @@ class MarkdownCodeExtractor(CodeExtractor)
 
 ```python
 def extract_code_blocks(
-    message: Union[str, List[Union[UserMessageTextContentPart,
+    message: Union[str, list[Union[UserMessageTextContentPart,
                                    UserMessageImageContentPart]], None]
-) -> List[CodeBlock]
+) -> list[CodeBlock]
 ```
 
 (Experimental) Extract code blocks from a message. If no code blocks are found,

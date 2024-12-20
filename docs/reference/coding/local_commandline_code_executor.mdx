@@ -15,11 +15,11 @@ class LocalCommandLineCodeExecutor(CodeExecutor)
 def __init__(timeout: int = 60,
              virtual_env_context: Optional[SimpleNamespace] = None,
              work_dir: Union[Path, str] = Path("."),
-             functions: List[Union[FunctionWithRequirements[Any, A],
+             functions: list[Union[FunctionWithRequirements[Any, A],
                                    Callable[..., Any],
                                    FunctionWithRequirementsStr]] = [],
              functions_module: str = "functions",
-             execution_policies: Optional[Dict[str, bool]] = None)
+             execution_policies: Optional[dict[str, bool]] = None)
 ```
 
 (Experimental) A code executor class that executes or saves LLM generated code a local command line
@@ -93,7 +93,7 @@ def functions_module() -> str
 
 ```python
 @property
-def functions() -> List[Union[FunctionWithRequirements[Any, A], Callable[
+def functions() -> list[Union[FunctionWithRequirements[Any, A], Callable[
     ..., Any], FunctionWithRequirementsStr]]
 ```
 
@@ -143,7 +143,7 @@ either out of choice or necessity, run code outside of a sandboxed environment.
 ### execute\_code\_blocks
 
 ```python
-def execute_code_blocks(code_blocks: List[CodeBlock]) -> CommandLineCodeResult
+def execute_code_blocks(code_blocks: list[CodeBlock]) -> CommandLineCodeResult
 ```
 
 (Experimental) Execute the code blocks and return the result.

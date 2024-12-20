@@ -38,7 +38,7 @@ A list of human input solicited during the chat.
 ### initiate\_chats
 
 ```python
-def initiate_chats(chat_queue: List[Dict[str, Any]]) -> List[ChatResult]
+def initiate_chats(chat_queue: list[dict[str, Any]]) -> list[ChatResult]
 ```
 
 Initiate a list of chats.
@@ -82,7 +82,7 @@ Initiate a list of chats.
 
 ```python
 async def a_initiate_chats(
-        chat_queue: List[Dict[str, Any]]) -> Dict[int, ChatResult]
+        chat_queue: list[dict[str, Any]]) -> dict[int, ChatResult]
 ```
 
 (async) Initiate a list of chats.

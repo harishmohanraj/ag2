@@ -43,7 +43,7 @@ Converts a given tool to an instance of a specified interoperability type.
 
 ```python
 @classmethod
-def get_interoperability_class(cls, type: str) -> Type[Interoperable]
+def get_interoperability_class(cls, type: str) -> type[Interoperable]
 ```
 
 Retrieves the interoperability class corresponding to the specified type.
@@ -66,7 +66,7 @@ Retrieves the interoperability class corresponding to the specified type.
 
 ```python
 @classmethod
-def get_supported_types(cls) -> List[str]
+def get_supported_types(cls) -> list[str]
 ```
 
 Returns a sorted list of all supported interoperability types.

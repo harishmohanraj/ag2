@@ -67,7 +67,7 @@ Update the score of this node and its parents using moving average.
 ### to\_dict
 
 ```python
-def to_dict() -> Dict
+def to_dict() -> dict
 ```
 
 Convert ThinkNode to dictionary representation.
@@ -81,7 +81,7 @@ Convert ThinkNode to dictionary representation.
 ```python
 @classmethod
 def from_dict(cls,
-              data: Dict,
+              data: dict,
               parent: Optional["ThinkNode"] = None) -> "ThinkNode"
 ```
 

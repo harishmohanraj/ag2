@@ -106,7 +106,7 @@ Delete the collection from the vector database.
 ### insert\_docs
 
 ```python
-def insert_docs(docs: List[Document],
+def insert_docs(docs: list[Document],
                 collection_name: str = None,
                 upsert: bool = False) -> None
 ```
@@ -128,7 +128,7 @@ Insert documents into the collection of the vector database.
 ### update\_docs
 
 ```python
-def update_docs(docs: List[Document], collection_name: str = None) -> None
+def update_docs(docs: list[Document], collection_name: str = None) -> None
 ```
 
 Update documents in the collection of the vector database.
@@ -146,7 +146,7 @@ Update documents in the collection of the vector database.
 ### delete\_docs
 
 ```python
-def delete_docs(ids: List[ItemID],
+def delete_docs(ids: list[ItemID],
                 collection_name: str = None,
                 **kwargs) -> None
 ```
@@ -167,7 +167,7 @@ Delete documents from the collection of the vector database.
 ### retrieve\_docs
 
 ```python
-def retrieve_docs(queries: List[str],
+def retrieve_docs(queries: list[str],
                   collection_name: str = None,
                   n_results: int = 10,
                   distance_threshold: float = -1,
@@ -194,10 +194,10 @@ Retrieve documents from the collection of the vector database based on the queri
 ### get\_docs\_by\_ids
 
 ```python
-def get_docs_by_ids(ids: List[ItemID] = None,
+def get_docs_by_ids(ids: list[ItemID] = None,
                     collection_name: str = None,
                     include=None,
-                    **kwargs) -> List[Document]
+                    **kwargs) -> list[Document]
 ```
 
 Retrieve documents from the collection of the vector database based on the ids.

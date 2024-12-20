@@ -17,8 +17,8 @@ This agent is unique in its reliance on the OpenAI Assistant for state managemen
 ```python
 def __init__(name="GPT Assistant",
              instructions: Optional[str] = None,
-             llm_config: Optional[Union[Dict, bool]] = None,
-             assistant_config: Optional[Dict] = None,
+             llm_config: Optional[Union[dict, bool]] = None,
+             assistant_config: Optional[dict] = None,
              overwrite_instructions: bool = False,
              overwrite_tools: bool = False,
              **kwargs)
@@ -89,7 +89,7 @@ Pretty print the thread.
 
 ```python
 @property
-def oai_threads() -> Dict[Agent, Any]
+def oai_threads() -> dict[Agent, Any]
 ```
 
 Return the threads of the agent.
