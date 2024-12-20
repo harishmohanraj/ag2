@@ -27,7 +27,7 @@ In this notebook, we implement OpenAI’s [airline customer service
 example](https://github.com/openai/swarm/tree/main/examples/airline) in
 AG2 using the RealtimeAgent for enhanced interaction.
 
-## Install AG2 with `twilio`
+## Install AG2 with twilio dependencies
 
 To use the realtime agent we will connect it to twilio service, this
 tutorial was inspired by [twilio
@@ -315,6 +315,26 @@ for agent in [flight_modification, flight_cancel, flight_change, lost_baggage]:
     agent.register_hand_off(ON_CONDITION(triage_agent, transfer_to_triage_description))
 ```
 
+### Before you start the server
+
+To run uviconrn server inside the notebook, you will need to use
+nest_asyncio. This is because Jupyter uses the asyncio event loop, and
+uvicorn uses its own event loop. nest_asyncio will allow uvicorn to run
+in Jupyter.
+
+Please install nest_asyncio by running the following cell.
+
+```python
+!pip install nest_asyncio
+```
+
+
+```python
+import nest_asyncio
+
+nest_asyncio.apply()
+```
+
 # Running the Code
 
 **Note**: You may need to expose your machine to the internet through a
@@ -355,12 +375,7 @@ Once the server is running, you can connect a Twilio phone call to the
 AI assistant and test the RealtimeAgent’s capabilities!
 
 ```python
-from datetime import datetime
-from time import time
-
-import nest_asyncio
 import uvicorn
-from asyncer import asyncify, create_task_group, syncify
 from fastapi import FastAPI, Request, WebSocket
 from fastapi.responses import HTMLResponse, JSONResponse
 from twilio.twiml.voice_response import Connect, VoiceResponse
@@ -409,6 +424,5 @@ async def handle_media_stream(websocket: WebSocket):
     await realtime_agent.run()
 
 
-nest_asyncio.apply()
 uvicorn.run(app, host="0.0.0.0", port=5050)
 ```
