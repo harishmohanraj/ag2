@@ -140,6 +140,18 @@
           "label": "agentchat.contrib",
           "type": "category"
         },
+        {
+          "items": [
+            "reference/agentchat/realtime_agent/client",
+            "reference/agentchat/realtime_agent/function_observer",
+            "reference/agentchat/realtime_agent/realtime_agent",
+            "reference/agentchat/realtime_agent/realtime_observer",
+            "reference/agentchat/realtime_agent/twilio_observer",
+            "reference/agentchat/realtime_agent/websocket_observer"
+          ],
+          "label": "agentchat.realtime_agent",
+          "type": "category"
+        },
         "reference/agentchat/agent",
         "reference/agentchat/assistant_agent",
         "reference/agentchat/chat",
@@ -191,6 +203,37 @@
     },
     {
       "items": [
+        {
+          "items": [
+            "reference/interop/crewai/crewai"
+          ],
+          "label": "interop.crewai",
+          "type": "category"
+        },
+        {
+          "items": [
+            "reference/interop/langchain/langchain"
+          ],
+          "label": "interop.langchain",
+          "type": "category"
+        },
+        {
+          "items": [
+            "reference/interop/pydantic_ai/pydantic_ai",
+            "reference/interop/pydantic_ai/pydantic_ai_tool"
+          ],
+          "label": "interop.pydantic_ai",
+          "type": "category"
+        },
+        "reference/interop/interoperability",
+        "reference/interop/interoperable",
+        "reference/interop/registry"
+      ],
+      "label": "interop",
+      "type": "category"
+    },
+    {
+      "items": [
         "reference/io/base",
         "reference/io/console",
         "reference/io/websockets"
@@ -223,6 +266,13 @@
         "reference/oai/together"
       ],
       "label": "oai",
+      "type": "category"
+    },
+    {
+      "items": [
+        "reference/tools/tool"
+      ],
+      "label": "tools",
       "type": "category"
     },
     "reference/browser_utils",
