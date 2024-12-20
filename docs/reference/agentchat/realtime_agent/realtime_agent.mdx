@@ -18,8 +18,9 @@ def __init__(*,
              name: str,
              audio_adapter: RealtimeObserver,
              system_message: Optional[Union[
-                 str, list]] = "You are a helpful AI Assistant.",
-             llm_config: Optional[Union[dict, Literal[False]]] = None,
+                 str, list[str]]] = "You are a helpful AI Assistant.",
+             llm_config: Optional[Union[dict[str, Any],
+                                        Literal[False]]] = None,
              voice: str = "alloy")
 ```
 
@@ -61,7 +62,7 @@ Register a swarm of agents with the Realtime Agent.
 ### run
 
 ```python
-async def run()
+async def run() -> None
 ```
 
 Run the agent.
@@ -93,7 +94,7 @@ Get the answer to the question.
 ### ask\_question
 
 ```python
-async def ask_question(question: str, question_timeout: int) -> str
+async def ask_question(question: str, question_timeout: int) -> None
 ```
 
 Send a question for the user to the agent and wait for the answer.
@@ -108,7 +109,7 @@ If the answer is not received within the timeout, the question is repeated.
 
 ```python
 def check_termination_and_human_reply(
-        messages: Optional[list[dict]] = None,
+        messages: Optional[list[dict[str, Any]]] = None,
         sender: Optional[Agent] = None,
         config: Optional[Any] = None) -> tuple[bool, Union[str, None]]
 ```

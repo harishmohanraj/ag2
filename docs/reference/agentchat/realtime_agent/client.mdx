@@ -14,23 +14,31 @@ class OpenAIRealtimeClient()
 ### \_\_init\_\_
 
 ```python
-def __init__(agent, audio_adapter, function_observer: FunctionObserver)
+def __init__(agent: "RealtimeAgent", audio_adapter: "RealtimeObserver",
+             function_observer: "FunctionObserver") -> None
 ```
 
 (Experimental) Client for OpenAI Realtime API.
 
-args:
-agent: Agent instance
-the agent to be used for the conversation
-audio_adapter: RealtimeObserver
-adapter for streaming the audio from the client
-function_observer: FunctionObserver
-observer for handling function calls
+**Arguments**:
+
+- `agent` _RealtimeAgent_ - The agent that the client is associated with.
+- `audio_adapter` _RealtimeObserver_ - The audio adapter for the client.
+- `function_observer` _FunctionObserver_ - The function observer for the client.
+
+### openai\_ws
+
+```python
+@property
+def openai_ws() -> ClientConnection
+```
+
+Get the OpenAI WebSocket connection.
 
 ### register
 
 ```python
-def register(observer)
+def register(observer: "RealtimeObserver") -> None
 ```
 
 Register an observer to the client.
@@ -38,31 +46,45 @@ Register an observer to the client.
 ### notify\_observers
 
 ```python
-async def notify_observers(message)
+async def notify_observers(message: dict[str, Any]) -> None
 ```
 
 Notify all observers of a message from the OpenAI Realtime API.
 
+**Arguments**:
+
+- `message` _dict[str, Any]_ - The message from the OpenAI Realtime API.
+
 ### function\_result
 
 ```python
-async def function_result(call_id, result)
+async def function_result(call_id: str, result: str) -> None
 ```
 
 Send the result of a function call to the OpenAI Realtime API.
 
+**Arguments**:
+
+- `call_id` _str_ - The ID of the function call.
+- `result` _str_ - The result of the function call.
+
 ### send\_text
 
 ```python
-async def send_text(*, role: str, text: str)
+async def send_text(*, role: str, text: str) -> None
 ```
 
 Send a text message to the OpenAI Realtime API.
 
+**Arguments**:
+
+- `role` _str_ - The role of the message.
+- `text` _str_ - The text of the message.
+
 ### initialize\_session
 
 ```python
-async def initialize_session()
+async def initialize_session() -> None
 ```
 
 Control initial session with OpenAI.
@@ -70,15 +92,19 @@ Control initial session with OpenAI.
 ### session\_update
 
 ```python
-async def session_update(session_options)
+async def session_update(session_options: dict[str, Any]) -> None
 ```
 
 Send a session update to the OpenAI Realtime API.
 
+**Arguments**:
+
+- `session_options` _dict[str, Any]_ - The session options to update.
+
 ### run
 
 ```python
-async def run()
+async def run() -> None
 ```
 
 Run the client.
