@@ -167,24 +167,6 @@ function. We can check the JSON schema generated as follows:
 chatbot.llm_config["tools"]
 ```
 
-``` text
-[{'type': 'function',
-  'function': {'description': 'Currency exchange calculator.',
-   'name': 'currency_calculator',
-   'parameters': {'type': 'object',
-    'properties': {'base_amount': {'type': 'number',
-      'description': 'Amount of currency in base_currency'},
-     'base_currency': {'enum': ['USD', 'EUR'],
-      'type': 'string',
-      'default': 'USD',
-      'description': 'Base currency'},
-     'quote_currency': {'enum': ['USD', 'EUR'],
-      'type': 'string',
-      'default': 'EUR',
-      'description': 'Quote currency'}},
-    'required': ['base_amount']}}}]
-```
-
 The decorator `@user_proxy.register_for_execution()` maps the name of
 the function to be proposed by OpenAI API to the actual implementation.
 The function mapped is wrapped since we also automatically handle
@@ -198,7 +180,7 @@ We can check the correctness of function map by using `._origin`
 property of the wrapped function as follows:
 
 ```python
-assert user_proxy.function_map["currency_calculator"]._origin == currency_calculator
+assert user_proxy.function_map["currency_calculator"]._origin == currency_calculator.func
 ```
 
 Finally, we can use this function to accurately calculate exchange
@@ -212,58 +194,9 @@ with Cache.disk() as cache:
     )
 ```
 
-``` text
-user_proxy (to chatbot):
-
-How much is 123.45 USD in EUR?
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-***** Suggested tool call (call_9ogJS4d40BT1rXfMn7YJb151): currency_calculator *****
-Arguments: 
-{
-  "base_amount": 123.45,
-  "base_currency": "USD",
-  "quote_currency": "EUR"
-}
-************************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION currency_calculator...
-user_proxy (to chatbot):
-
-user_proxy (to chatbot):
-
-***** Response from calling tool (call_9ogJS4d40BT1rXfMn7YJb151) *****
-112.22727272727272 EUR
-**********************************************************************
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-123.45 USD is equivalent to 112.23 EUR.
-
---------------------------------------------------------------------------------
-user_proxy (to chatbot):
-
-
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-TERMINATE
-
---------------------------------------------------------------------------------
-```
 
 ```python
 print("Chat summary:", res.summary)
-```
-
-``` text
-Chat summary: 123.45 USD is equivalent to 112.23 EUR.
 ```
 
 ### Pydantic models
@@ -318,30 +251,6 @@ autogen.agentchat.register_function(
 chatbot.llm_config["tools"]
 ```
 
-``` text
-[{'type': 'function',
-  'function': {'description': 'Currency exchange calculator.',
-   'name': 'currency_calculator',
-   'parameters': {'type': 'object',
-    'properties': {'base': {'properties': {'currency': {'description': 'Currency symbol',
-        'enum': ['USD', 'EUR'],
-        'title': 'Currency',
-        'type': 'string'},
-       'amount': {'default': 0,
-        'description': 'Amount of currency',
-        'minimum': 0.0,
-        'title': 'Amount',
-        'type': 'number'}},
-      'required': ['currency'],
-      'title': 'Currency',
-      'type': 'object',
-      'description': 'Base currency: amount and currency symbol'},
-     'quote_currency': {'enum': ['USD', 'EUR'],
-      'type': 'string',
-      'default': 'USD',
-      'description': 'Quote currency symbol'}},
-    'required': ['base']}}}]
-```
 
 ```python
 with Cache.disk() as cache:
@@ -351,52 +260,11 @@ with Cache.disk() as cache:
     )
 ```
 
-``` text
-user_proxy (to chatbot):
-
-How much is 112.23 Euros in US Dollars?
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-***** Suggested tool call (call_BQkSmdFHsrKvmtDWCk0mY5sF): currency_calculator *****
-Arguments: 
-{
-  "base": {
-    "currency": "EUR",
-    "amount": 112.23
-  },
-  "quote_currency": "USD"
-}
-************************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION currency_calculator...
-user_proxy (to chatbot):
-
-user_proxy (to chatbot):
-
-***** Response from calling tool (call_BQkSmdFHsrKvmtDWCk0mY5sF) *****
-{"currency":"USD","amount":123.45300000000002}
-**********************************************************************
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-112.23 Euros is equivalent to 123.45 US Dollars.
-TERMINATE
-
---------------------------------------------------------------------------------
-```
 
 ```python
 print("Chat summary:", res.summary)
 ```
 
-``` text
-Chat summary: 112.23 Euros is equivalent to 123.45 US Dollars.
-```
 
 ```python
 with Cache.disk() as cache:
@@ -408,58 +276,7 @@ with Cache.disk() as cache:
     )
 ```
 
-``` text
-user_proxy (to chatbot):
-
-How much is 123.45 US Dollars in Euros?
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-***** Suggested tool call (call_Xxol42xTswZHGX60OjvIQRG1): currency_calculator *****
-Arguments: 
-{
-  "base": {
-    "currency": "USD",
-    "amount": 123.45
-  },
-  "quote_currency": "EUR"
-}
-************************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION currency_calculator...
-user_proxy (to chatbot):
-
-user_proxy (to chatbot):
-
-***** Response from calling tool (call_Xxol42xTswZHGX60OjvIQRG1) *****
-{"currency":"EUR","amount":112.22727272727272}
-**********************************************************************
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-123.45 US Dollars is equivalent to 112.23 Euros.
-
---------------------------------------------------------------------------------
-user_proxy (to chatbot):
-
-
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-TERMINATE
-
---------------------------------------------------------------------------------
-```
 
 ```python
 print("Chat history:", res.chat_history)
-```
-
-``` text
-Chat history: [{'content': 'How much is 123.45 US Dollars in Euros?', 'role': 'assistant'}, {'tool_calls': [{'id': 'call_Xxol42xTswZHGX60OjvIQRG1', 'function': {'arguments': '{\n  "base": {\n    "currency": "USD",\n    "amount": 123.45\n  },\n  "quote_currency": "EUR"\n}', 'name': 'currency_calculator'}, 'type': 'function'}], 'content': None, 'role': 'assistant'}, {'content': '{"currency":"EUR","amount":112.22727272727272}', 'tool_responses': [{'tool_call_id': 'call_Xxol42xTswZHGX60OjvIQRG1', 'role': 'tool', 'content': '{"currency":"EUR","amount":112.22727272727272}'}], 'role': 'tool'}, {'content': '123.45 US Dollars is equivalent to 112.23 Euros.', 'role': 'user'}, {'content': '', 'role': 'assistant'}, {'content': 'TERMINATE', 'role': 'user'}]
 ```

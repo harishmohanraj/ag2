@@ -1189,10 +1189,11 @@ Return the function map.
 
 ```python
 def register_for_llm(
-        *,
-        name: Optional[str] = None,
-        description: Optional[str] = None,
-        api_style: Literal["function", "tool"] = "tool") -> Callable[[F], F]
+    *,
+    name: Optional[str] = None,
+    description: Optional[str] = None,
+    api_style: Literal["function", "tool"] = "tool"
+) -> Callable[[Union[F, Tool]], Tool]
 ```
 
 Decorator factory for registering a function to be used by an agent.
@@ -1240,7 +1241,8 @@ agent's configuration.
 ### register\_for\_execution
 
 ```python
-def register_for_execution(name: Optional[str] = None) -> Callable[[F], F]
+def register_for_execution(
+        name: Optional[str] = None) -> Callable[[Union[Tool, F]], Tool]
 ```
 
 Decorator factory for registering a function to be executed by an agent.
