@@ -40,13 +40,13 @@ Most changes are reflected live without having to restart the server.
 To build and test documentation within a docker container, run the following commands from your project root directory:
 
 ```bash
-docker build -f .devcontainer/dev/Dockerfile -t ag2ai_dev_img https://github.com/ag2ai/ag2.git#main
+docker build -f .devcontainer/dev/Dockerfile -t ag2_dev_img https://github.com/ag2ai/ag2.git#main
 ```
 
 Then start the container like so, this will log you in and ensure that Docker port 3000 is mapped to port 8081 on your local machine:
 
 ```bash
-docker run -it -p 8081:3000 -v $(pwd):/home/autogen/ag2 ag2ai_dev_img bash
+docker run -it -p 8081:3000 -v $(pwd):/home/autogen/ag2 ag2_dev_img bash
 ```
 
 Once at the CLI in Docker run the following commands:

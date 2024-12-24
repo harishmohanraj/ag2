@@ -38,10 +38,10 @@ For developers contributing to the AG2 project, we offer a specialized Docker en
 Once you have built the `ag2_dev_img`, you can run it using the standard Docker commands. This will place you inside the containerized development environment where you can run tests, develop code, and ensure everything is functioning as expected before submitting your contributions.
 
 ```bash
-docker run -it -p 8081:3000 -v `pwd`/autogen-newcode:newstuff/ ag2_dev_img bash
+docker run -it -p 8081:3000 -v $(pwd):/home/autogen/ag2 ag2_dev_img bash
 ```
 
-- Note that the `pwd` is shorthand for present working directory. Thus, any path after the pwd is relative to that. If you want a more verbose method you could remove the "`pwd`/autogen-newcode" and replace it with the full path to your directory
+- Note that the `pwd` is shorthand for present working directory. Thus, any path after the pwd is relative to that. If you want a more verbose method you could remove the "$(pwd)" and replace it with the full path to your directory
 
 ```bash
 docker run -it -p 8081:3000 -v /home/AutoGenDeveloper/autogen-newcode:newstuff/ ag2_dev_img bash
