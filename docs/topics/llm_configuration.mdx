@@ -151,9 +151,10 @@ the agent. This is useful for a few reasons:
 
 -   If one model times out or fails, the agent can try another model.
 -   Having a single global list of models and [filtering
-    it](#config-list-filtering) based on certain keys (e.g. name, tag)
-    in order to pass select models into a certain agent (e.g. use
-    cheaper GPT 3.5 for agents solving easier tasks)
+    it](../../docs/topics/llm_configuration#config-list-filtering) based
+    on certain keys (e.g. name, tag) in order to pass select models into
+    a certain agent (e.g. use cheaper GPT 3.5 for agents solving easier
+    tasks)
 -   While the core agents, (e.g. conversable or assistant) do not have
     special logic around selecting configs, some of the specialized
     agents *may* have logic to select the best model based on the task
@@ -416,7 +417,7 @@ used by Autogen and those passed into the model client.
     Otherwise, by default or if an int is passed the
     [DiskCache](../../docs/reference/cache/disk_cache) will be used. For
     the new way of using caching, pass a
-    [Cache](../../docs/reference/cache/) object into
+    [Cache](../../docs/reference/cache/cache) object into
     [`initiate_chat`](../../docs/reference/agentchat/conversable_agent#initiate_chat).
 
 ### Extra model client parameters
