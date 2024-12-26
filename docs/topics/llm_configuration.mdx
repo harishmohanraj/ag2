@@ -23,11 +23,11 @@ llm_config = {
 }
 ```
 
-````mdx-code-block
-:::warning
-It is important to never commit secrets into your code, therefore we read the OpenAI API key from an environment variable.
-:::
-````
+<div class="warning">
+        <Warning>
+        It is important to never commit secrets into your code, therefore we read the OpenAI API key from an environment variable.
+        </Warning>
+        </div>
 
 This `llm_config` can then be passed to an agent’s constructor to enable
 it to use the LLM.
@@ -108,11 +108,11 @@ import TabItem from '@theme/TabItem';
 
 ------------------------------------------------------------------------
 
-````mdx-code-block
-:::tip
-By default this will create a model client which assumes an OpenAI API (or compatible) endpoint. To use custom model clients, see [here](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_custom_model.ipynb).
-:::
-````
+<div class="tip">
+        <Tip>
+        By default this will create a model client which assumes an OpenAI API (or compatible) endpoint. To use custom model clients, see [here](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_custom_model.ipynb).
+        </Tip>
+        </div>
 
 ### `OAI_CONFIG_LIST` pattern
 
