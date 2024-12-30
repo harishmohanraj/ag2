@@ -159,7 +159,7 @@ def __init__(name,
              beam_size=3,
              answer_approach="pool",
              verbose=True,
-             reason_config: dict = \{},
+             reason_config: dict = {},
              **kwargs) -> None
 ```
 
@@ -196,9 +196,9 @@ Initialize a ReasoningAgent that uses tree-of-thought reasoning.
 - `exploration_constant` _float_ - UCT exploration parameter (default: 1.41)
   
   Example configs:
-- `\{"method"` - "beam_search", "beam_size": 5, "max_depth": 4}
-- `\{"method"` - "mcts", "nsim": 10, "exploration_constant": 2.0}
-- `\{"method"` - "lats", "nsim": 5, "forest_size": 3}
+- `{"method"` - "beam_search", "beam_size": 5, "max_depth": 4}
+- `{"method"` - "mcts", "nsim": 10, "exploration_constant": 2.0}
+- `{"method"` - "lats", "nsim": 5, "forest_size": 3}
 
 ### generate\_forest\_response
 

@@ -419,9 +419,9 @@ Send a message to another agent.
   [OpenAIWrapper.create](../oai/client#create).
   For example, one agent can send a message A as:
 ```python
-\{
+{
     "content": lambda context: context["use_tool_msg"],
-    "context": \{
+    "context": {
         "use_tool_msg": "Use tool X if they are relevant."
     }
 }
@@ -463,9 +463,9 @@ async def a_send(message: Union[dict, str],
   [OpenAIWrapper.create](../oai/client#create).
   For example, one agent can send a message A as:
 ```python
-\{
+{
     "content": lambda context: context["use_tool_msg"],
-    "context": \{
+    "context": {
         "use_tool_msg": "Use tool X if they are relevant."
     }
 }
@@ -563,7 +563,7 @@ def initiate_chat(recipient: "ConversableAgent",
                   max_turns: Optional[int] = None,
                   summary_method: Optional[Union[
                       str, Callable]] = DEFAULT_SUMMARY_METHOD,
-                  summary_args: Optional[dict] = \{},
+                  summary_args: Optional[dict] = {},
                   message: Optional[Union[dict, str, Callable]] = None,
                   **kwargs) -> ChatResult
 ```
@@ -636,12 +636,12 @@ If `clear_history` is True, the chat history with the recipient agent will be cl
   
     ```python
     def my_message(sender: ConversableAgent, recipient: ConversableAgent, context: dict) -> Union[str, Dict]:
-        final_msg = \{}
+        final_msg = {}
         carryover = context.get("carryover", "")
         if isinstance(message, list):
             carryover = carryover[-1]
         final_msg["content"] = "Write a blogpost." + "\nContext: \n" + carryover
-        final_msg["context"] = \{"prefix": "Today I feel"}
+        final_msg["context"] = {"prefix": "Today I feel"}
         return final_msg
     ```
 - `**kwargs` - any additional information. It has the following reserved fields:
@@ -670,7 +670,7 @@ async def a_initiate_chat(recipient: "ConversableAgent",
                           max_turns: Optional[int] = None,
                           summary_method: Optional[Union[
                               str, Callable]] = DEFAULT_SUMMARY_METHOD,
-                          summary_args: Optional[dict] = \{},
+                          summary_args: Optional[dict] = {},
                           message: Optional[Union[str, Callable]] = None,
                           **kwargs) -> ChatResult
 ```

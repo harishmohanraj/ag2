@@ -19,30 +19,30 @@ Install the `anthropic` package by running `pip install --upgrade anthropic`.
 import autogen
 
 config_list = [
-    \{
+    {
         "model": "claude-3-sonnet-20240229",
         "api_key": os.getenv("ANTHROPIC_API_KEY"),
         "api_type": "anthropic",
     }
 ]
 
-assistant = autogen.AssistantAgent("assistant", llm_config=\{"config_list": config_list})
+assistant = autogen.AssistantAgent("assistant", llm_config={"config_list": config_list})
 ```
 ```python
 import autogen
 
 config_list = [
-    \{
+    {
         "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
-        "aws_access_key":\<accessKey>,
-        "aws_secret_key":\<secretKey>,
-        "aws_session_token":\<sessionTok>,
+        "aws_access_key":<accessKey>,
+        "aws_secret_key":<secretKey>,
+        "aws_session_token":<sessionTok>,
         "aws_region":"us-east-1",
         "api_type": "anthropic",
     }
 ]
 
-assistant = autogen.AssistantAgent("assistant", llm_config=\{"config_list": config_list})
+assistant = autogen.AssistantAgent("assistant", llm_config={"config_list": config_list})
 ```
 
 ## AnthropicClient

@@ -51,7 +51,7 @@ ag2_tool = interop.convert_tool(tool=langchain_tool, type="langchain")
 local_executor = LocalExecutorWithTools(tools=[ag2_tool], work_dir='./')
 
 code = '''
-result = wikipedia(tool_input=\{"query":"Christmas"})
+result = wikipedia(tool_input={"query":"Christmas"})
 print(result)
 '''
 print(

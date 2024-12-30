@@ -232,13 +232,13 @@ def f(a: Annotated[str, "Parameter a"], b: int = 2, c: Annotated[float, "Paramet
 
 get_function_schema(f, description="function f")
 
-#   \{'type': 'function',
-#    'function': \{'description': 'function f',
+#   {'type': 'function',
+#    'function': {'description': 'function f',
 #        'name': 'f',
-#        'parameters': \{'type': 'object',
-#           'properties': \{'a': \{'type': 'str', 'description': 'Parameter a'},
-#               'b': \{'type': 'int', 'description': 'b'},
-#               'c': \{'type': 'float', 'description': 'Parameter c'}},
+#        'parameters': {'type': 'object',
+#           'properties': {'a': {'type': 'str', 'description': 'Parameter a'},
+#               'b': {'type': 'int', 'description': 'b'},
+#               'c': {'type': 'float', 'description': 'Parameter c'}},
 #           'required': ['a']}}}
 ```
 
