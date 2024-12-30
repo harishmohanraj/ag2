@@ -39,17 +39,19 @@ and question answering:
 -   [Example 2: Answer a question based off docstrings w/o human
     feedback](#example-2)
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install autogen[retrievechat-pgvector] flaml[automl]
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 Ensure you have a PGVector instance.
 
@@ -116,11 +118,13 @@ print("models to use: ", [config_list[i]["model"] for i in range(len(config_list
 models to use:  ['gpt4-1106-preview', 'gpt-4o', 'gpt-35-turbo', 'gpt-35-turbo-0613']
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 ## Construct agents for RetrieveChat
 

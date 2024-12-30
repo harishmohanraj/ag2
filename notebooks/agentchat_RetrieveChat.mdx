@@ -46,17 +46,19 @@ and question answering:
 -   [Example 6: Solve comprehensive QA problems with customized prompt
     and few-shot learning](#example-6)
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install autogen[retrievechat] flaml[automl]
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 ## Set your API Endpoint
 
@@ -89,11 +91,13 @@ print("models to use: ", [config_list[i]["model"] for i in range(len(config_list
 models to use:  ['gpt-35-turbo', 'gpt4-1106-preview', 'gpt-4o']
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 ## Construct agents for RetrieveChat
 

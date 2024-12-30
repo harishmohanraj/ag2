@@ -134,29 +134,35 @@ EXPOSE 8888
 WORKDIR "${HOME}"
 ```
 
+
 <div class="tip">
-        <Tip>
-        To learn about how to combine AutoGen in a Docker image while also executing code in a separate image go [here](/docs/topics/code-execution/cli-code-executor#combining-autogen-in-docker-with-a-docker-based-executor).
-        </Tip>
-        </div>
+<Tip>
+To learn about how to combine AutoGen in a Docker image while also executing code in a separate image go [here](/docs/topics/code-execution/cli-code-executor#combining-autogen-in-docker-with-a-docker-based-executor).
+</Tip>
+</div>
+
 
 ### Local
 
-```mdx-code-block
-:::danger
+
+<div class="danger">
+<Warning>
 The local version will run code on your local system. Use it with caution.
-:::
-```
+</Warning>
+</div>
+
 
 To run a local Jupyter server, the
 [`LocalJupyterServer`](../../../docs/reference/coding/jupyter/local_jupyter_server#localjupyterserver)
 can be used.
 
+
 <div class="warning">
-        <Warning>
-        The [`LocalJupyterServer`](/docs/reference/coding/jupyter/local_jupyter_server#localjupyterserver) does not function on Windows due to a bug. In this case, you can use the [`DockerJupyterServer`](/docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver) instead or use the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor). Do note that the intention is to remove the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor) when the bug is fixed.
-        </Warning>
-        </div>
+<Warning>
+The [`LocalJupyterServer`](/docs/reference/coding/jupyter/local_jupyter_server#localjupyterserver) does not function on Windows due to a bug. In this case, you can use the [`DockerJupyterServer`](/docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver) instead or use the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor). Do note that the intention is to remove the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor) when the bug is fixed.
+</Warning>
+</div>
+
 
 ```python
 from autogen.coding import CodeBlock

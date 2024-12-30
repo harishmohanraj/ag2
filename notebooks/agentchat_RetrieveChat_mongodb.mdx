@@ -37,17 +37,19 @@ and question answering:
 -   [Example 1: Generate code based off docstrings w/o human
     feedback](#example-1)
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install autogen[retrievechat-mongodb] flaml[automl]
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 Ensure you have a MongoDB Atlas instance with Cluster Tier \>= M10. Read
 more on Cluster support
@@ -76,11 +78,13 @@ print("models to use: ", [config_list[i]["model"] for i in range(len(config_list
 models to use:  ['gpt-3.5-turbo-0125']
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 ## Construct agents for RetrieveChat
 

@@ -20,17 +20,19 @@ code execution with a timeout, and the gurobipy package is a
 mathematical optimization software library for solving mixed-integer
 linear and quadratic optimization problems.
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install pyautogen eventlet gurobipy
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 ```python
 import re
@@ -56,11 +58,13 @@ config_list_gpt4 = autogen.config_list_from_json(
 llm_config = {"config_list": config_list_gpt4}
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 Intended agent orchestration in OptiGuide.
 

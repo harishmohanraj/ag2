@@ -42,11 +42,13 @@ pip install 'litellm[proxy]'
 Note: If using Windows, run LiteLLM and Ollama within a
 [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
 
-```mdx-code-block
-:::tip
+
+<div class="tip">
+<Tip>
 For custom LiteLLM installation instructions, see their [GitHub repository](https://github.com/BerriAI/litellm).
-:::
-```
+</Tip>
+</div>
+
 
 ## Installing Ollama
 
@@ -77,12 +79,14 @@ ollama list
 ```
 
 
-```mdx-code-block
-:::tip
+
+<div class="tip">
+<Tip>
 Ollama enables the use of GGUF model files, available readily on Hugging Face. See Ollama`s [GitHub repository](https://github.com/ollama/ollama)
 for examples.
-:::
-```
+</Tip>
+</div>
+
 
 ## Running LiteLLM proxy server
 
@@ -363,8 +367,10 @@ Arguments:
 We can see that the currency conversion function was called with the
 correct values and a result was generated.
 
-```mdx-code-block
-:::tip
+
+<div class="tip">
+<Tip>
 Once functions are included in the conversation it is possible, using LiteLLM and Ollama, that the model may continue to recommend tool calls (as shown above). This is an area of active development and a native Ollama client for AutoGen is planned for a future release.
-:::
-```
+</Tip>
+</div>
+

@@ -13,17 +13,19 @@ title: Generate Dalle Images With Conversable Agents
 This notebook illustrates how to add the image generation capability to
 a conversable agent.
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install pyautogen[lmm]
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 First, let’s import all the required modules to run this example.
 
@@ -62,11 +64,13 @@ dalle_config = {
 }
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 Our system will consist of 2 main agents: 1. Image generator agent. 2.
 Critic agent.

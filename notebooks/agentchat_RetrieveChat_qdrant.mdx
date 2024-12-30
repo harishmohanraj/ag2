@@ -30,17 +30,19 @@ Debugging](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_auto_feedba
 We’ll demonstrate usage of RetrieveChat with Qdrant for code generation
 and question answering w/ human feedback.
 
+
 <div class="info Requirements">
-        <Info>
-        Some extra dependencies are needed for this notebook, which can be installed via pip:
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
 pip install "autogen[retrievechat-qdrant]" "flaml[automl]"
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
-        </Info>
-        </div>
+</Info>
+</div>
+
 
 ```python
 %pip install "autogen[retrievechat-qdrant]" "flaml[automl]" -q
@@ -79,11 +81,13 @@ print("models to use: ", [config_list[i]["model"] for i in range(len(config_list
 models to use:  ['gpt4-1106-preview', 'gpt-4o', 'gpt-35-turbo', 'gpt-35-turbo-0613']
 ```
 
+
 <div class="tip">
-        <Tip>
-        Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
-        </Tip>
-        </div>
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
 
 ```python
 print("Accepted file formats for `docs_path`:")
