@@ -142,12 +142,13 @@
         },
         {
           "items": [
-            "reference/agentchat/realtime_agent/client",
             "reference/agentchat/realtime_agent/function_observer",
+            "reference/agentchat/realtime_agent/oai_realtime_client",
             "reference/agentchat/realtime_agent/realtime_agent",
+            "reference/agentchat/realtime_agent/realtime_client",
             "reference/agentchat/realtime_agent/realtime_observer",
-            "reference/agentchat/realtime_agent/twilio_observer",
-            "reference/agentchat/realtime_agent/websocket_observer"
+            "reference/agentchat/realtime_agent/twilio_audio_adapter",
+            "reference/agentchat/realtime_agent/websocket_audio_adapter"
           ],
           "label": "agentchat.realtime_agent",
           "type": "category"
