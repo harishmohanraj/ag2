@@ -624,7 +624,8 @@
             "notebooks/agentchat_realtime_swarm",
             "notebooks/agentchat_realtime_websocket",
             "notebooks/agentchat_reasoning_agent",
-            "notebooks/agentchat_captainagent_crosstool"
+            "notebooks/agentchat_captainagent_crosstool",
+            "notebooks/agentchat_realtime_websocket"
           ]
         },
         "notebooks/Gallery"
