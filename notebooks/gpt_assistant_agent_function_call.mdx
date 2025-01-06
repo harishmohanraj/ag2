@@ -50,7 +50,7 @@ import requests
 import autogen
 from autogen import UserProxyAgent
 from autogen.agentchat.contrib.gpt_assistant_agent import GPTAssistantAgent
-from autogen.function_utils import get_function_schema
+from autogen.tools import get_function_schema
 
 config_list = autogen.config_list_from_json(
     env_or_file="OAI_CONFIG_LIST",

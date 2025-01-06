@@ -162,6 +162,7 @@ PORT = 5050
 
 app = FastAPI()
 
+
 @app.get("/", response_class=JSONResponse)
 async def index_page():
     return {"message": "Websocket Audio Stream Server is running!"}
@@ -194,6 +195,7 @@ app.mount(
 # Templates for HTML responses
 
 templates = Jinja2Templates(directory=Path(notebook_path) / "agentchat_realtime_websocket" / "templates")
+
 
 @app.get("/start-chat/", response_class=HTMLResponse)
 async def start_chat(request: Request):

@@ -252,6 +252,13 @@
     },
     {
       "items": [
+        "reference/messages/agent_messages"
+      ],
+      "label": "messages",
+      "type": "category"
+    },
+    {
+      "items": [
         "reference/oai/anthropic",
         "reference/oai/bedrock",
         "reference/oai/cerebras",
@@ -271,6 +278,7 @@
     },
     {
       "items": [
+        "reference/tools/function_utils",
         "reference/tools/tool"
       ],
       "label": "tools",
@@ -279,7 +287,6 @@
     "reference/browser_utils",
     "reference/code_utils",
     "reference/exception_utils",
-    "reference/function_utils",
     "reference/graph_utils",
     "reference/math_utils",
     "reference/retrieve_utils",

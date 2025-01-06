@@ -51,6 +51,15 @@ def realtime_client() -> OpenAIRealtimeClient
 
 Get the OpenAI Realtime Client.
 
+### registred\_realtime\_tools
+
+```python
+@property
+def registred_realtime_tools() -> dict[str, Tool]
+```
+
+Get the registered realtime tools.
+
 ### register\_observer
 
 ```python
@@ -87,6 +96,27 @@ async def run() -> None
 ```
 
 Run the agent.
+
+### register\_realtime\_function
+
+```python
+def register_realtime_function(
+        *,
+        name: Optional[str] = None,
+        description: Optional[str] = None) -> Callable[[Union[F, Tool]], Tool]
+```
+
+Decorator for registering a function to be used by an agent.
+
+**Arguments**:
+
+- `name` _str_ - The name of the function.
+- `description` _str_ - The description of the function.
+  
+
+**Returns**:
+
+  Callable[[Union[F, Tool]], Tool]: The decorator for registering a function.
 
 ### reset\_answer
 
