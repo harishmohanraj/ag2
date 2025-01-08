@@ -63,7 +63,7 @@ For more information, please refer to the [installation guide](/docs/installatio
 
 
 ```python
-!pip install "ag2" "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1"
+!pip install "ag2" "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1" "jinja2"
 ```
 
 ### Import the dependencies
@@ -152,7 +152,7 @@ real-time agent interactions.
     `app`, which serves as the main application.
 3.  **Define Root Endpoint**: Adds a `GET` endpoint at the root URL
     (`/`). When accessed, it returns a JSON response with the message
-    `"Websocket Audio Stream Server is running!"`.
+    `"WebSocket Audio Stream Server is running!"`.
 
 This sets up a basic FastAPI server and provides a simple health-check
 endpoint to confirm that the server is operational.
@@ -165,7 +165,7 @@ app = FastAPI()
 
 @app.get("/", response_class=JSONResponse)
 async def index_page():
-    return {"message": "Websocket Audio Stream Server is running!"}
+    return {"message": "WebSocket Audio Stream Server is running!"}
 ```
 
 ### Prepare `start-chat` endpoint
