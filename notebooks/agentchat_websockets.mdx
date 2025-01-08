@@ -99,7 +99,7 @@ from autogen.io.websockets import IOWebsockets
 config_list = autogen.config_list_from_json(
     env_or_file="OAI_CONFIG_LIST",
     filter_dict={
-        "model": ["gpt-4", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"],
+        "model": ["gpt-4o", "gpt-4o-mini"],
     },
 )
 ```
@@ -142,49 +142,49 @@ def on_connect(iostream: IOWebsockets) -> None:
 
     # 1. Receive Initial Message
     initial_msg = iostream.input()
+    print(f"{initial_msg=}")
 
-    # 2. Instantiate ConversableAgent
-    agent = autogen.ConversableAgent(
-        name="chatbot",
-        system_message="Complete a task given to you and reply TERMINATE when the task is done. If asked about the weather, use tool 'weather_forecast(city)' to get the weather forecast for a city.",
-        llm_config={
-            "config_list": autogen.config_list_from_json(
-                env_or_file="OAI_CONFIG_LIST",
-                filter_dict={
-                    "model": ["gpt-4", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"],
-                },
-            ),
-            "stream": True,
-        },
-    )
+    try:
+        # 2. Instantiate ConversableAgent
+        agent = autogen.ConversableAgent(
+            name="chatbot",
+            system_message="Complete a task given to you and reply TERMINATE when the task is done. If asked about the weather, use tool 'weather_forecast(city)' to get the weather forecast for a city.",
+            llm_config={
+                "config_list": config_list,
+                "stream": True,
+            },
+        )
 
-    # 3. Define UserProxyAgent
-    user_proxy = autogen.UserProxyAgent(
-        name="user_proxy",
-        system_message="A proxy for the user.",
-        is_termination_msg=lambda x: x.get("content", "") and x.get("content", "").rstrip().endswith("TERMINATE"),
-        human_input_mode="NEVER",
-        max_consecutive_auto_reply=10,
-        code_execution_config=False,
-    )
+        # 3. Define UserProxyAgent
+        user_proxy = autogen.UserProxyAgent(
+            name="user_proxy",
+            system_message="A proxy for the user.",
+            is_termination_msg=lambda x: x.get("content", "") and x.get("content", "").rstrip().endswith("TERMINATE"),
+            human_input_mode="NEVER",
+            max_consecutive_auto_reply=10,
+            code_execution_config=False,
+        )
 
-    # 4. Define Agent-specific Functions
-    def weather_forecast(city: str) -> str:
-        return f"The weather forecast for {city} at {datetime.now()} is sunny."
+        # 4. Define Agent-specific Functions
+        def weather_forecast(city: str) -> str:
+            return f"The weather forecast for {city} at {datetime.now()} is sunny."
 
-    autogen.register_function(
-        weather_forecast, caller=agent, executor=user_proxy, description="Weather forecast for a city"
-    )
+        autogen.register_function(
+            weather_forecast, caller=agent, executor=user_proxy, description="Weather forecast for a city"
+        )
 
-    # 5. Initiate conversation
-    print(
-        f" - on_connect(): Initiating chat with agent {agent} using message '{initial_msg}'",
-        flush=True,
-    )
-    user_proxy.initiate_chat(  # noqa: F704
-        agent,
-        message=initial_msg,
-    )
+        # 5. Initiate conversation
+        print(
+            f" - on_connect(): Initiating chat with agent {agent} using message '{initial_msg}'",
+            flush=True,
+        )
+        user_proxy.initiate_chat(  # noqa: F704
+            agent,
+            message=initial_msg,
+        )
+    except Exception as e:
+        print(f" - on_connect(): Exception: {e}", flush=True)
+        raise e
 ```
 
 Here’s an explanation on how a typical `on_connect` function such as the
@@ -261,92 +261,19 @@ with IOWebsockets.run_server_in_thread(on_connect=on_connect, port=8765) as uri:
         websocket.send("Check out the weather in Paris and write a poem about it.")
 
         while True:
-            message = websocket.recv()
-            message = message.decode("utf-8") if isinstance(message, bytes) else message
+            try:
+                message = websocket.recv()
+                message = message.decode("utf-8") if isinstance(message, bytes) else message
 
-            print(message, end="", flush=True)
+                print(message)
 
-            if "TERMINATE" in message:
-                print()
-                print(" - Received TERMINATE message. Exiting.", flush=True)
+                # if "TERMINATE" in message:
+                #     print()
+                #     print(" - Received TERMINATE message. Exiting.", flush=True)
+                #     break
+            except Exception as e:
+                print("Connection closed:", e, flush=True)
                 break
-```
-
-``` text
- - test_setup() with websocket server running on ws://127.0.0.1:8765.
- - on_connect(): Connected to client using IOWebsockets <autogen.io.websockets.IOWebsockets object at 0x7b8fd65b3c10>
- - on_connect(): Receiving message from client.
- - Connected to server on ws://127.0.0.1:8765
- - Sending message to server.
- - on_connect(): Initiating chat with agent <autogen.agentchat.conversable_agent.ConversableAgent object at 0x7b909c086290> using message 'Check out the weather in Paris and write a poem about it.'
-user_proxy (to chatbot):
-
-Check out the weather in Paris and write a poem about it.
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-chatbot (to user_proxy):
-
-
-***** Suggested tool call (call_xFFWe52vwdpgZ8xTRV6adBdy): weather_forecast *****
-Arguments: 
-{
-  "city": "Paris"
-}
-*********************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION weather_forecast...
-user_proxy (to chatbot):
-
-user_proxy (to chatbot):
-
-***** Response from calling tool (call_xFFWe52vwdpgZ8xTRV6adBdy) *****
-The weather forecast for Paris at 2024-04-05 12:00:06.206125 is sunny.
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-In the heart of France, beneath the sun's warm glow,
-Lies the city of Paris, where the Seine waters flow.
-Bathed in sunlight, every street and spire,
-Illuminated each detail, just like a docile fire.
-
-Once monochromatic cityscape, kissed by the sun's bright light,
-Now a kaleidoscope of colors, from morning till the night.
-This sun-swept city sparkles, under the azure dome,
-Her inhabitants find comfort, for they call this city home.
-
-One can wander in her sunshine, on this perfect weather day,
-And feel the warmth it brings, to chase your blues away.
-For the weather in Paris, is more than just a forecast,
-It is a stage setting for dwellers and tourists amassed.
-
-TERMINATE
-
-chatbot (to user_proxy):
-
-In the heart of France, beneath the sun's warm glow,
-Lies the city of Paris, where the Seine waters flow.
-Bathed in sunlight, every street and spire,
-Illuminated each detail, just like a docile fire.
-
-Once monochromatic cityscape, kissed by the sun's bright light,
-Now a kaleidoscope of colors, from morning till the night.
-This sun-swept city sparkles, under the azure dome,
-Her inhabitants find comfort, for they call this city home.
-
-One can wander in her sunshine, on this perfect weather day,
-And feel the warmth it brings, to chase your blues away.
-For the weather in Paris, is more than just a forecast,
-It is a stage setting for dwellers and tourists amassed.
-
-TERMINATE
-
- - Received TERMINATE message. Exiting.
 ```
 
 ## Testing websockets server running inside FastAPI server with HTML/JS client
@@ -461,35 +388,6 @@ import uvicorn  # noqa: E402
 config = uvicorn.Config(app)
 server = uvicorn.Server(config)
 await server.serve()  # noqa: F704
-```
-
-``` text
-INFO:     Started server process [5227]
-INFO:     Waiting for application startup.
-```
-
-``` text
-Websocket server started at ws://127.0.0.1:8080.
-```
-
-``` text
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-```
-
-``` text
-INFO:     127.0.0.1:42548 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:42548 - "GET /favicon.ico HTTP/1.1" 404 Not Found
- - on_connect(): Connected to client using IOWebsockets <autogen.io.websockets.IOWebsockets object at 0x7b8fc6991420>
- - on_connect(): Receiving message from client.
- - on_connect(): Initiating chat with agent <autogen.agentchat.conversable_agent.ConversableAgent object at 0x7b909c0cab00> using message 'write a poem about lundon'
-```
-
-``` text
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [5227]
 ```
 
 The testing setup described above, leveraging FastAPI and websockets,
@@ -638,31 +536,4 @@ with TemporaryDirectory() as temp_dir:
                 httpd.serve_forever()
             except KeyboardInterrupt:
                 print(" - HTTP server stopped.", flush=True)
-```
-
-``` text
-Websocket server started at ws://127.0.0.1:8080.
-HTTP server started at http://localhost:8000
- - on_connect(): Connected to client using IOWebsockets <autogen.io.websockets.IOWebsockets object at 0x7b8fc69937f0>
- - on_connect(): Receiving message from client.
-```
-
-``` text
-127.0.0.1 - - [05/Apr/2024 12:01:51] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [05/Apr/2024 12:01:51] "GET / HTTP/1.1" 200 -
-```
-
-``` text
- - on_connect(): Initiating chat with agent <autogen.agentchat.conversable_agent.ConversableAgent object at 0x7b8fc6990310> using message 'write a poem about new york'
- - on_connect(): Connected to client using IOWebsockets <autogen.io.websockets.IOWebsockets object at 0x7b8fc68bdc90>
- - on_connect(): Receiving message from client.
-```
-
-``` text
-127.0.0.1 - - [05/Apr/2024 12:02:27] "GET / HTTP/1.1" 304 -
-```
-
-``` text
- - on_connect(): Initiating chat with agent <autogen.agentchat.conversable_agent.ConversableAgent object at 0x7b8fc68be170> using message 'check the weather in london and write a poem about it'
- - HTTP server stopped.
 ```

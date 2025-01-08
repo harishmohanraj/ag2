@@ -6,6 +6,7 @@ title: messages.agent_messages
 ## FunctionCallMessage
 
 ```python
+@wrap_message
 class FunctionCallMessage(BasePrintReceivedMessage)
 ```
 
@@ -16,6 +17,7 @@ type: ignore [assignment]
 ## ToolCallMessage
 
 ```python
+@wrap_message
 class ToolCallMessage(BasePrintReceivedMessage)
 ```
 
@@ -23,10 +25,11 @@ class ToolCallMessage(BasePrintReceivedMessage)
 
 type: ignore [assignment]
 
-## ContentMessage
+## TextMessage
 
 ```python
-class ContentMessage(BasePrintReceivedMessage)
+@wrap_message
+class TextMessage(BasePrintReceivedMessage)
 ```
 
 #### content

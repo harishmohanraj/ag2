@@ -252,7 +252,8 @@
     },
     {
       "items": [
-        "reference/messages/agent_messages"
+        "reference/messages/agent_messages",
+        "reference/messages/base_message"
       ],
       "label": "messages",
       "type": "category"

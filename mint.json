@@ -401,7 +401,8 @@
         {
           "group": "messages",
           "pages": [
-            "docs/reference/messages/agent_messages"
+            "docs/reference/messages/agent_messages",
+            "docs/reference/messages/base_message"
           ]
         },
         {
