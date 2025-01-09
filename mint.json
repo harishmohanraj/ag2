@@ -426,6 +426,7 @@
         {
           "group": "tools",
           "pages": [
+            "docs/reference/tools/dependency_injection",
             "docs/reference/tools/function_utils",
             "docs/reference/tools/tool"
           ]
@@ -505,6 +506,7 @@
           "group": "Recent posts",
           "pages": [
             "blog/2025-01-08-RealtimeAgent-over-websocket/index",
+            "blog/2025-01-07-Tools-Dependency-Injection/index",
             "blog/2024-12-20-RealtimeAgent/index",
             "blog/2024-12-20-Tools-interoperability/index",
             "blog/2024-12-20-Reasoning-Update/index",
@@ -636,7 +638,10 @@
             "notebooks/config_loader_utility_functions",
             "notebooks/gpt_assistant_agent_function_call",
             "notebooks/lats_search",
-            "notebooks/tools_interoperability"
+            "notebooks/tools_interoperability",
+            "notebooks/agentchat_tabular_data_rag_workflow",
+            "notebooks/agentchat_realtime_webrtc",
+            "notebooks/tools_dependency_injection"
           ]
         },
         "notebooks/Gallery"

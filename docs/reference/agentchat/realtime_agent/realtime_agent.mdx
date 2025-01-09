@@ -16,11 +16,12 @@ class RealtimeAgent(ConversableAgent)
 ```python
 def __init__(*,
              name: str,
-             audio_adapter: RealtimeObserver,
+             audio_adapter: Optional[RealtimeObserver] = None,
              system_message: str = "You are a helpful AI Assistant.",
              llm_config: dict[str, Any],
              voice: str = "alloy",
-             logger: Optional[Logger] = None)
+             logger: Optional[Logger] = None,
+             websocket: Optional[WebSocket] = None)
 ```
 
 (Experimental) Agent for interacting with the Realtime Clients.
@@ -28,10 +29,11 @@ def __init__(*,
 **Arguments**:
 
 - `name` _str_ - The name of the agent.
-- `audio_adapter` _RealtimeObserver_ - The audio adapter for the agent.
+- `audio_adapter` _Optional[RealtimeObserver] = None_ - The audio adapter for the agent.
 - `system_message` _str_ - The system message for the agent.
 - `llm_config` _dict[str, Any], bool_ - The config for the agent.
 - `voice` _str_ - The voice for the agent.
+- `websocket` _Optional[WebSocket] = None_ - WebSocket from WebRTC javascript client
 
 ### logger
 
@@ -46,7 +48,7 @@ Get the logger for the agent.
 
 ```python
 @property
-def realtime_client() -> OpenAIRealtimeClient
+def realtime_client() -> RealtimeClientProtocol
 ```
 
 Get the OpenAI Realtime Client.
