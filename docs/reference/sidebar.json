@@ -88,7 +88,8 @@
                   ],
                   "label": "agentchat.contrib.captainagent.tools",
                   "type": "category"
-                }
+                },
+                "reference/agentchat/contrib/captainagent/captainagent"
               ],
               "label": "agentchat.contrib.captainagent",
               "type": "category"

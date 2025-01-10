@@ -72,7 +72,7 @@ and interactivity.
 Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
-pip install autogen[websockets] fastapi uvicorn
+pip install ag2[websockets] fastapi uvicorn
 ```
 
 For more information, please refer to the [installation guide](/docs/installation/Installation).
@@ -99,7 +99,7 @@ from autogen.io.websockets import IOWebsockets
 config_list = autogen.config_list_from_json(
     env_or_file="OAI_CONFIG_LIST",
     filter_dict={
-        "model": ["gpt-4o", "gpt-4o-mini"],
+        "model": ["gpt-4o-mini"],
     },
 )
 ```
@@ -123,7 +123,7 @@ the groundwork for the interactive session that follows, configuring how
 the server and the client will communicate and what initial actions are
 to be taken once a connection is made. Now, let’s delve into the details
 of how to define this function, especially in the context of using the
-AutoGen framework with websockets.
+AG2 framework with websockets.
 
 Upon a client’s connection to the websocket server, the server
 automatically initiates a new instance of the
@@ -282,7 +282,7 @@ The code snippets below outlines an approach for testing an `on_connect`
 function in a web environment using
 [FastAPI](https://fastapi.tiangolo.com/) to serve a simple interactive
 HTML page. This method allows users to send messages through a web
-interface, which are then processed by the server running the AutoGen
+interface, which are then processed by the server running the AG2
 framework via websockets. Here’s a step-by-step explanation:
 
 1.  **FastAPI Application Setup**: The code initiates by importing
@@ -318,7 +318,7 @@ user and the server, providing a practical way to demonstrate and
 evaluate the behavior of the on_connect function in real-time. Users can
 send messages through the webpage, and the server processes these
 messages as per the logic defined in the on_connect function, showcasing
-the capabilities and responsiveness of the AutoGen framework’s websocket
+the capabilities and responsiveness of the AG2 framework’s websocket
 handling in a user-friendly manner.
 
 ```python
@@ -334,7 +334,7 @@ html = """
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Autogen websocket test</title>
+        <title>AG2 websocket test</title>
     </head>
     <body>
         <h1>WebSocket Chat</h1>
@@ -471,18 +471,104 @@ testing setup make it an excellent starting point for developing a wide
 range of interactive web applications.
 
 ```python
-from http.server import HTTPServer, SimpleHTTPRequestHandler  # noqa: E402
+import json
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+from IPython.display import HTML, clear_output, display
 
 PORT = 8000
 
-html = """
+# Format JSON-based messages for display
+js_formatters = """
+function formatMessageContent(content) {
+    if (content && typeof content === 'object') {
+        // Create a copy without uuid
+        const formatted = {};
+        for (const [key, value] of Object.entries(content)) {
+            if (key !== 'uuid') {
+                formatted[key] = value;
+            }
+        }
+        return JSON.stringify(formatted, null, 2);
+    }
+    return String(content);
+}
+
+function format_message(data) {
+    try {
+        let msg = typeof data === 'string' ? JSON.parse(data) : data;
+        let formatted = {
+            type: msg.type || '',
+            content: formatMessageContent(msg.content)
+        };
+
+        // Add any additional fields
+        for (const [key, value] of Object.entries(msg)) {
+            if (key !== 'type' && key !== 'content') {
+                formatted[key] = value;
+            }
+        }
+
+        return JSON.stringify(formatted, null, 2);
+    } catch (e) {
+        return String(data);
+    }
+}
+"""
+
+html = f"""
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Autogen websocket test</title>
+        <title>AG2 websocket</title>
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            body {{
+                font-family: 'JetBrains Mono', monospace;
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+            }}
+            h1 {{
+                text-align: center;
+            }}
+            form {{
+                margin: 20px 0;
+                text-align: center;
+            }}
+            input {{
+                width: 80%;
+                padding: 8px;
+                margin-right: 10px;
+                font-family: inherit;
+            }}
+            button {{
+                padding: 8px 20px;
+                background: #4285f4;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+            }}
+            #messages {{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }}
+            #messages li {{
+                padding: 8px;
+                margin: 4px 0;
+                background: #f1f3f4;
+                border-radius: 4px;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                font-family: monospace;
+            }}
+        </style>
     </head>
     <body>
-        <h1>WebSocket Chat</h1>
+        <h1>AG2 Structured Messages w/ websockets</h1>
         <form action="" onsubmit="sendMessage(event)">
             <input type="text" id="messageText" autocomplete="off"/>
             <button>Send</button>
@@ -490,32 +576,35 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://localhost:8080/ws");
-            ws.onmessage = function(event) {
+            {js_formatters}
+
+            var ws = new WebSocket("ws://localhost:8082");
+            ws.onmessage = function(event) {{
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
+                var formattedContent = format_message(event.data)
+                var content = document.createTextNode(formattedContent)
                 message.appendChild(content)
                 messages.appendChild(message)
-            };
-            function sendMessage(event) {
+            }};
+
+            function sendMessage(event) {{
                 var input = document.getElementById("messageText")
                 ws.send(input.value)
                 input.value = ''
                 event.preventDefault()
-            }
+            }}
         </script>
     </body>
 </html>
 """
 
+# The rest of the server setup code remains the same
 with TemporaryDirectory() as temp_dir:
-    # create a simple HTTP webpage
     path = Path(temp_dir) / "chat.html"
     with open(path, "w") as f:
         f.write(html)
 
-    #
     class MyRequestHandler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=temp_dir, **kwargs)
@@ -527,7 +616,7 @@ with TemporaryDirectory() as temp_dir:
 
     handler = MyRequestHandler
 
-    with IOWebsockets.run_server_in_thread(on_connect=on_connect, port=8080) as uri:
+    with IOWebsockets.run_server_in_thread(on_connect=on_connect, port=8082) as uri:
         print(f"Websocket server started at {uri}.", flush=True)
 
         with HTTPServer(("", PORT), handler) as httpd:
