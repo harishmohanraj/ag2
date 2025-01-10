@@ -48,7 +48,7 @@ interop = Interoperability()
 ag2_tool = interop.convert_tool(tool=langchain_tool, type="langchain")
 
 # `ag2_tool.name` is wikipedia
-local_executor = LocalExecutorWithTools(tools=[ag2_tool], work_dir='./')
+local_executor = LocalExecutorWithTools(tools=[ag2_tool], work_dir="./")
 
 code = '''
 result = wikipedia(tool_input={"query":"Christmas"})
@@ -80,7 +80,7 @@ def code_extractor() -> CodeExtractor
 ### execute\_code\_blocks
 
 ```python
-def execute_code_blocks(code_blocks: List[CodeBlock]) -> CodeResult
+def execute_code_blocks(code_blocks: list[CodeBlock]) -> CodeResult
 ```
 
 Execute code blocks and return the result.

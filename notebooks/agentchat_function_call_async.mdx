@@ -46,6 +46,7 @@ For more information, please refer to the [installation guide](/docs/installatio
 
 
 ```python
+import asyncio
 import time
 
 from typing_extensions import Annotated
@@ -105,7 +106,7 @@ user_proxy = autogen.UserProxyAgent(
 @coder.register_for_llm(description="create a timer for N seconds")
 async def timer(num_seconds: Annotated[str, "Number of seconds in the timer."]) -> str:
     for i in range(int(num_seconds)):
-        time.sleep(1)
+        asyncio.sleep(1)
         # should print to stdout
     return "Timer is done!"
 

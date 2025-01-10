@@ -8,12 +8,7 @@ Create an OpenAI-compatible client using Ollama's API.
 **Example**:
 
     ```python
-    llm_config={
-        "config_list": [{
-            "api_type": "ollama",
-            "model": "mistral:7b-instruct-v0.3-q6_K"
-            }
-    ]}
+    llm_config = {"config_list": [{"api_type": "ollama", "model": "mistral:7b-instruct-v0.3-q6_K"}]}
 
     agent = autogen.AssistantAgent("my_agent", llm_config=llm_config)
     ```

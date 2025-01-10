@@ -239,7 +239,6 @@ Problem:
         sender: Optional[autogen.Agent] = None,
         config: Optional[Any] = None,
     ):
-
         messages = messages[-1]
         if isinstance(messages, dict):
             messages = messages.get("content")

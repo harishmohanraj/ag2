@@ -230,6 +230,7 @@ Get a JSON schema for a function as defined by the OpenAI API
 def f(a: Annotated[str, "Parameter a"], b: int = 2, c: Annotated[float, "Parameter c"] = 0.1) -> None:
     pass
 
+
 get_function_schema(f, description="function f")
 
 #   {'type': 'function',

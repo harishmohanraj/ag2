@@ -421,9 +421,7 @@ Send a message to another agent.
 ```python
 {
     "content": lambda context: context["use_tool_msg"],
-    "context": {
-        "use_tool_msg": "Use tool X if they are relevant."
-    }
+    "context": {"use_tool_msg": "Use tool X if they are relevant."},
 }
 ```
   Next time, one agent can send a message B with a different "use_tool_msg".
@@ -465,9 +463,7 @@ async def a_send(message: Union[dict, str],
 ```python
 {
     "content": lambda context: context["use_tool_msg"],
-    "context": {
-        "use_tool_msg": "Use tool X if they are relevant."
-    }
+    "context": {"use_tool_msg": "Use tool X if they are relevant."},
 }
 ```
   Next time, one agent can send a message B with a different "use_tool_msg".

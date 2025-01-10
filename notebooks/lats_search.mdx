@@ -649,7 +649,6 @@ def run_lats(input_query: str, max_iterations: int = 10):
     logger = logging.getLogger(__name__)
 
     try:
-
         state = {"input": input_query, "root": None}
         try:
             state = generate_initial_response(state)

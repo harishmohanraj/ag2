@@ -520,7 +520,7 @@ with TemporaryDirectory() as temp_dir:
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=temp_dir, **kwargs)
 
-        def do_GET(self):
+        def do_GET(self):  # noqa: N802
             if self.path == "/":
                 self.path = "/chat.html"
             return SimpleHTTPRequestHandler.do_GET(self)
