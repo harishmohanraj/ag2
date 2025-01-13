@@ -43,8 +43,6 @@ AutoGen requires Python 3.9 or newer. For this notebook, please install
 Import Dependencies
 
 ```python
-from typing import Annotated, Literal
-
 import requests
 
 import autogen
@@ -66,8 +64,7 @@ creates and returns a list of dad jokes.
 
 ```python
 def get_dad_jokes(search_term: str, page: int = 1, limit: int = 10) -> str:
-    """
-    Fetches a list of dad jokes based on a search term.
+    """Fetches a list of dad jokes based on a search term.
 
     Parameters:
     - search_term: The search term to find jokes about.
@@ -106,8 +103,7 @@ This function allows the Agents to write to a txt file.
 
 ```python
 def write_to_txt(content: str, filename: str = "dad_jokes.txt"):
-    """
-    Writes a formatted string to a text file.
+    """Writes a formatted string to a text file.
     Parameters:
 
     - content: The formatted string to write.

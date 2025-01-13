@@ -126,7 +126,7 @@ user = autogen.UserProxyAgent(
     },  # Please set use_docker=True if docker is available to run the generated code. Using docker is safer than running the generated code directly.
 )
 
-chat_results = await user.a_initiate_chats(  # noqa: F704
+chat_results = await user.a_initiate_chats(
     [
         {
             "chat_id": 1,
@@ -631,7 +631,7 @@ user = autogen.UserProxyAgent(
     },  # Please set use_docker=True if docker is available to run the generated code. Using docker is safer than running the generated code directly.
 )
 
-chat_results = await user.a_initiate_chats(  # noqa: F704
+chat_results = await user.a_initiate_chats(
     [
         {
             "chat_id": 1,
@@ -1197,7 +1197,7 @@ user = autogen.UserProxyAgent(
         "use_docker": False,
     },  # Please set use_docker=True if docker is available to run the generated code. Using docker is safer than running the generated code directly.
 )
-await user.a_initiate_chats(  # noqa: F704
+await user.a_initiate_chats(
     [
         {"chat_id": 1, "recipient": research_assistant, "message": financial_tasks[0], "summary_method": "last_msg"},
         {

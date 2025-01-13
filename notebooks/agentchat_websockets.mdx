@@ -178,7 +178,7 @@ def on_connect(iostream: IOWebsockets) -> None:
             f" - on_connect(): Initiating chat with agent {agent} using message '{initial_msg}'",
             flush=True,
         )
-        user_proxy.initiate_chat(  # noqa: F704
+        user_proxy.initiate_chat(
             agent,
             message=initial_msg,
         )
@@ -322,11 +322,11 @@ the capabilities and responsiveness of the AG2 framework’s websocket
 handling in a user-friendly manner.
 
 ```python
-from contextlib import asynccontextmanager  # noqa: E402
-from pathlib import Path  # noqa: E402
+from contextlib import asynccontextmanager
+from pathlib import Path
 
-from fastapi import FastAPI  # noqa: E402
-from fastapi.responses import HTMLResponse  # noqa: E402
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 PORT = 8000
 
@@ -383,11 +383,11 @@ async def get():
 
 
 ```python
-import uvicorn  # noqa: E402
+import uvicorn
 
 config = uvicorn.Config(app)
 server = uvicorn.Server(config)
-await server.serve()  # noqa: F704
+await server.serve()
 ```
 
 The testing setup described above, leveraging FastAPI and websockets,
@@ -471,10 +471,7 @@ testing setup make it an excellent starting point for developing a wide
 range of interactive web applications.
 
 ```python
-import json
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-
-from IPython.display import HTML, clear_output, display
 
 PORT = 8000
 

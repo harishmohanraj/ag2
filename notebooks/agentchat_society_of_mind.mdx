@@ -50,7 +50,7 @@ For more information, please refer to the [installation guide](/docs/installatio
 
 
 ```python
-import autogen  # noqa: E402
+import autogen
 
 llm_config = {
     "timeout": 600,
@@ -126,7 +126,7 @@ We now wrap the inner group-chat with the SocietyOfMind Agent, and
 create a UserProxy to talk to it.
 
 ```python
-from autogen.agentchat.contrib.society_of_mind_agent import SocietyOfMindAgent  # noqa: E402
+from autogen.agentchat.contrib.society_of_mind_agent import SocietyOfMindAgent
 
 task = "On which days in 2024 was Microsoft Stock higher than $370?"
 

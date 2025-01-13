@@ -134,7 +134,7 @@ paused until the awaited function returns a result.
 
 ```python
 with Cache.disk() as cache:
-    await user_proxy.a_initiate_chat(  # noqa: F704
+    await user_proxy.a_initiate_chat(
         coder,
         message="Create a timer for 5 seconds and then a stopwatch for 5 seconds.",
         cache=cache,
@@ -238,7 +238,7 @@ message = """
 """
 
 with Cache.disk() as cache:
-    await user_proxy.a_initiate_chat(  # noqa: F704
+    await user_proxy.a_initiate_chat(
         manager,
         message=message,
         cache=cache,

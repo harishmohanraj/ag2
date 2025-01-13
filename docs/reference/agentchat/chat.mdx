@@ -73,6 +73,7 @@ Initiate a list of chats.
   - `"finished_chat_indexes_to_exclude_from_carryover"` - It can be used by specifying a list of indexes of the finished_chats list,
   from which to exclude the summaries for carryover. If 'finished_chat_indexes_to_exclude_from_carryover' is not provided or an empty list,
   then summary from all the finished chats will be taken.
+  
 
 **Returns**:
 
@@ -87,10 +88,13 @@ async def a_initiate_chats(
 
 (async) Initiate a list of chats.
 
-args:
-- Please refer to `initiate_chats`.
+**Arguments**:
 
+  - Please refer to `initiate_chats`.
+  
+  
 
-returns:
-- (Dict): a dict of ChatId: ChatResult corresponding to the finished chats in the chat_queue.
+**Returns**:
+
+- `-` _Dict_ - a dict of ChatId: ChatResult corresponding to the finished chats in the chat_queue.
 

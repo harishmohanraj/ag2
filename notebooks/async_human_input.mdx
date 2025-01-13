@@ -22,12 +22,11 @@ title: Agent Chat with Async Human Inputs
 
 ```python
 import asyncio
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Dict, Optional, Union
 
 import nest_asyncio
 
 from autogen import AssistantAgent
-from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 from autogen.agentchat.user_proxy_agent import UserProxyAgent
 ```
 
@@ -132,7 +131,7 @@ async def main():
     )
 
 
-await main()  # noqa: F704
+await main()
 ```
 
 ``` text

@@ -104,12 +104,10 @@ board = chess.Board()
 made_move = False
 
 
-def get_legal_moves() -> (
-    Annotated[
-        str,
-        "Call this tool to list of all legal chess moves on the board, output is a list in UCI format, e.g. e2e4,e7e5,e7e8q.",
-    ]
-):
+def get_legal_moves() -> Annotated[
+    str,
+    "Call this tool to list of all legal chess moves on the board, output is a list in UCI format, e.g. e2e4,e7e5,e7e8q.",
+]:
     return "Possible moves are: " + ",".join([str(move) for move in board.legal_moves])
 
 

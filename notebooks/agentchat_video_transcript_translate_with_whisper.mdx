@@ -201,7 +201,7 @@ def recognize_transcript_from_video(filepath: Annotated[str, "path of the video 
     except FileNotFoundError:
         return "The specified audio file could not be found."
     except Exception as e:
-        return f"An unexpected error occurred: {str(e)}"
+        return f"An unexpected error occurred: {e!s}"
 ```
 
 Now, start the chat:

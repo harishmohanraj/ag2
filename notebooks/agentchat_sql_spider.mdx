@@ -115,7 +115,7 @@ def check_termination(msg: Dict):
         return False
     json_str = msg["tool_responses"][0]["content"]
     obj = json.loads(json_str)
-    return "error" not in obj or obj["error"] is None and obj["reward"] == 1
+    return "error" not in obj or (obj["error"] is None and obj["reward"] == 1)
 
 
 sql_writer = ConversableAgent(

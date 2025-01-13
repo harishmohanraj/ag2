@@ -443,8 +443,6 @@ class DatabricksAutoGenLogger:
     def __init__(self):
         from pyspark.sql import SparkSession
 
-        import autogen
-
         self.spark = SparkSession.builder.getOrCreate()
         self.logger_config = {"dbname": "logs.db"}
 

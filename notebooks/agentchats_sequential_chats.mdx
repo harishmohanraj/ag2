@@ -719,9 +719,9 @@ for i, chat_res in enumerate(chat_results):
     print("Human input in the middle:", chat_res.human_input)
     print("Conversation cost: ", chat_res.cost)
     if i == 1:
-        assert (
-            len(chat_res.chat_history) == 4
-        ), f"The chat history should contain at most 4 messages because max_turns is set to 2 in the {i}-th chat."
+        assert len(chat_res.chat_history) == 4, (
+            f"The chat history should contain at most 4 messages because max_turns is set to 2 in the {i}-th chat."
+        )
     print("\n\n")
 ```
 

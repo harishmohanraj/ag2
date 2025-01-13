@@ -45,7 +45,6 @@ function loads a list of configurations from an environment variable or
 a json file.
 
 ```python
-import chromadb
 from typing_extensions import Annotated
 
 import autogen
@@ -73,7 +72,7 @@ Learn more about configuring LLMs for agents [here](/docs/topics/llm_configurati
 
 ```python
 def termination_msg(x):
-    return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
+    return isinstance(x, dict) and str(x.get("content", ""))[-9:].upper() == "TERMINATE"
 
 
 llm_config = {"config_list": config_list, "timeout": 60, "temperature": 0.8, "seed": 1234}

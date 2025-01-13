@@ -387,11 +387,14 @@ def messages_from_string(message_string: str) -> list[dict]
 
 Reads the saved state of messages in Json format for resume and returns as a messages list
 
-args:
-- message_string: Json string, the saved state
+**Arguments**:
 
-returns:
-- List[Dict]: List of messages
+  - message_string: Json string, the saved state
+  
+
+**Returns**:
+
+  - List[Dict]: List of messages
 
 ### messages\_to\_string
 
@@ -402,11 +405,14 @@ def messages_to_string(messages: list[dict]) -> str
 Converts the provided messages into a Json string that can be used for resuming the chat.
 The state is made up of a list of messages
 
-args:
-- messages (List[Dict]): set of messages to convert to a string
+**Arguments**:
 
-returns:
-- str: Json representation of the messages which can be persisted for resuming later
+  - messages (List[Dict]): set of messages to convert to a string
+  
+
+**Returns**:
+
+  - str: Json representation of the messages which can be persisted for resuming later
 
 ### clear\_agents\_history
 

@@ -1105,6 +1105,7 @@ If message is None, input() will be called to get the initial message.
 - `"carryover"` - a string or a list of string to specify the carryover information to be passed to this chat. It can be a string or a list of string.
   If provided, we will combine this carryover with the "message" content when generating the initial chat
   message.
+  
 
 **Returns**:
 
@@ -1147,7 +1148,7 @@ Register functions to the agent.
 def update_function_signature(func_sig: Union[str, dict], is_remove: None)
 ```
 
-update a function_signature in the LLM configuration for function_call.
+Update a function_signature in the LLM configuration for function_call.
 
 **Arguments**:
 
@@ -1163,7 +1164,7 @@ update a function_signature in the LLM configuration for function_call.
 def update_tool_signature(tool_sig: Union[str, dict], is_remove: bool)
 ```
 
-update a tool_signature in the LLM configuration for tool_call.
+Update a tool_signature in the LLM configuration for tool_call.
 
 **Arguments**:
 
