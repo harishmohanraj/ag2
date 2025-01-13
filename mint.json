@@ -255,7 +255,9 @@
                         }
                       ]
                     },
-                    "docs/reference/agentchat/contrib/captainagent/captainagent"
+                    "docs/reference/agentchat/contrib/captainagent/agent_builder",
+                    "docs/reference/agentchat/contrib/captainagent/captainagent",
+                    "docs/reference/agentchat/contrib/captainagent/tool_retriever"
                   ]
                 },
                 {
@@ -267,7 +269,9 @@
                     "docs/reference/agentchat/contrib/graph_rag/graph_query_engine",
                     "docs/reference/agentchat/contrib/graph_rag/graph_rag_capability",
                     "docs/reference/agentchat/contrib/graph_rag/neo4j_graph_query_engine",
-                    "docs/reference/agentchat/contrib/graph_rag/neo4j_graph_rag_capability"
+                    "docs/reference/agentchat/contrib/graph_rag/neo4j_graph_rag_capability",
+                    "docs/reference/agentchat/contrib/graph_rag/neo4j_native_graph_query_engine",
+                    "docs/reference/agentchat/contrib/graph_rag/neo4j_native_graph_rag_capability"
                   ]
                 },
                 {
@@ -281,9 +285,7 @@
                     "docs/reference/agentchat/contrib/vectordb/utils"
                   ]
                 },
-                "docs/reference/agentchat/contrib/agent_builder",
                 "docs/reference/agentchat/contrib/agent_optimizer",
-                "docs/reference/agentchat/contrib/captainagent",
                 "docs/reference/agentchat/contrib/gpt_assistant_agent",
                 "docs/reference/agentchat/contrib/img_utils",
                 "docs/reference/agentchat/contrib/llamaindex_conversable_agent",
@@ -297,7 +299,6 @@
                 "docs/reference/agentchat/contrib/society_of_mind_agent",
                 "docs/reference/agentchat/contrib/swarm_agent",
                 "docs/reference/agentchat/contrib/text_analyzer_agent",
-                "docs/reference/agentchat/contrib/tool_retriever",
                 "docs/reference/agentchat/contrib/web_surfer"
               ]
             },
@@ -343,6 +344,7 @@
                 "docs/reference/coding/jupyter/base",
                 "docs/reference/coding/jupyter/docker_jupyter_server",
                 "docs/reference/coding/jupyter/embedded_ipython_code_executor",
+                "docs/reference/coding/jupyter/helpers",
                 "docs/reference/coding/jupyter/jupyter_client",
                 "docs/reference/coding/jupyter/jupyter_code_executor",
                 "docs/reference/coding/jupyter/local_jupyter_server"
@@ -396,14 +398,19 @@
           "group": "logger",
           "pages": [
             "docs/reference/logger/base_logger",
-            "docs/reference/logger/file_logger"
+            "docs/reference/logger/file_logger",
+            "docs/reference/logger/logger_factory",
+            "docs/reference/logger/logger_utils",
+            "docs/reference/logger/sqlite_logger"
           ]
         },
         {
           "group": "messages",
           "pages": [
             "docs/reference/messages/agent_messages",
-            "docs/reference/messages/base_message"
+            "docs/reference/messages/base_message",
+            "docs/reference/messages/client_messages",
+            "docs/reference/messages/print_message"
           ]
         },
         {
@@ -439,7 +446,8 @@
         "docs/reference/math_utils",
         "docs/reference/retrieve_utils",
         "docs/reference/runtime_logging",
-        "docs/reference/token_count_utils"
+        "docs/reference/token_count_utils",
+        "docs/reference/types"
       ]
     },
     {
@@ -485,6 +493,7 @@
       "group": "Talks",
       "pages": [
         "talks/future_talks/index",
+        "talks/2024-12-19-special_talk/index",
         "talks/2024-12-19/index",
         "talks/2024-12-12/index",
         "talks/2024-11-28/index",
@@ -506,6 +515,7 @@
         {
           "group": "Recent posts",
           "pages": [
+            "generated_blog/2025-01-10-WebSockets/index",
             "generated_blog/2025-01-09-RealtimeAgent-over-WebRTC/index",
             "generated_blog/2025-01-08-RealtimeAgent-over-websocket/index",
             "generated_blog/2025-01-07-Tools-Dependency-Injection/index",
