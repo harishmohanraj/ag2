@@ -25,6 +25,44 @@ ChatContext class that extends BaseContext.
 This class is used to represent a chat context that holds a list of messages.
 It inherits from `BaseContext` and adds the `messages` attribute.
 
+### \_\_init\_\_
+
+```python
+def __init__(agent: "ConversableAgent") -> None
+```
+
+Initializes the ChatContext with an agent.
+
+**Arguments**:
+
+- `agent` - The agent to use for retrieving chat messages.
+
+### chat\_messages
+
+```python
+@property
+def chat_messages() -> dict[Agent, list[dict[Any, Any]]]
+```
+
+The messages in the chat.
+
+**Returns**:
+
+  A dictionary of agents and their messages.
+
+### last\_message
+
+```python
+@property
+def last_message() -> Optional[dict[str, Any]]
+```
+
+The last message in the chat.
+
+**Returns**:
+
+  The last message in the chat.
+
 ### Depends
 
 ```python
@@ -41,6 +79,26 @@ Creates a dependency for injection based on the provided context or type.
 **Returns**:
 
   A FastDepends object that will resolve the dependency for injection.
+
+### get\_context\_params
+
+```python
+def get_context_params(
+        func: Callable[..., Any],
+        subclass: Union[type[BaseContext], type[ChatContext]]) -> list[str]
+```
+
+Gets the names of the context parameters in a function signature.
+
+**Arguments**:
+
+- `func` - The function to inspect for context parameters.
+- `subclass` - The subclass to search for.
+  
+
+**Returns**:
+
+  A list of parameter names that are instances of the specified subclass.
 
 ## Field
 

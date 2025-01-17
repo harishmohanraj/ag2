@@ -100,7 +100,7 @@ Here is an example of using the code executor to run a Python code block
 that prints a random number. First we create an agent with the code
 executor that uses a temporary directory to store the code files. We
 specify `human_input_mode="ALWAYS"` to manually validate the safety of
-the the code being executed.
+the code being executed.
 
 ```python
 import tempfile
@@ -361,8 +361,8 @@ the code executor agent responded to ensure that the code was safe to
 execute.
 
 Now we can try a more complex example that involves querying the web.
-Let’s say we want to get the the stock price gains year-to-date for
-Tesla and Meta (formerly Facebook). We can also use the two agents with
+Let’s say we want to get the stock price gains year-to-date for Tesla
+and Meta (formerly Facebook). We can also use the two agents with
 several iterations of conversation.
 
 ```python

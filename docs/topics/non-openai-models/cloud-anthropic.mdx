@@ -13,8 +13,6 @@ title: Anthropic Claude
 
 
 
-In the v0.2.30 release of AutoGen we support Anthropic Client.
-
 Claude is a family of large language models developed by Anthropic and
 designed to revolutionize the way you interact with AI. Claude excels at
 a wide variety of tasks involving language, reasoning, analysis, coding,
@@ -22,24 +20,26 @@ and more. The models are highly capable, easy to use, and can be
 customized to suit your needs.
 
 In this notebook, we demonstrate how to use Anthropic Claude model for
-AgentChat in AutoGen.
+AgentChat in AG2.
 
 ## Features
 
-Additionally, this client class provides support for function/tool
-calling and will track token usage and cost correctly as per Anthropic’s
-API costs (as of June 2024).
+-   Function/tool calling
+-   Structured Outputs ([Notebook
+    example](https://docs.ag2.ai/notebooks/agentchat_structured_outputs))
+-   Token usage and cost correctly as per Anthropic’s API costs (as of
+    December 2024)
 
 ## Requirements
 
-To use Anthropic Claude with AutoGen, first you need to install the
-`pyautogen[anthropic]` package.
+To use Anthropic Claude with AG2, first you need to install the
+`ag2[anthropic]` package.
 
 To try out the function call feature of Claude model, you need to
 install `anthropic>=0.23.1`.
 
 ```python
-!pip install pyautogen["anthropic"]
+!pip install ag2["anthropic"]
 ```
 
 ## Set the config for the Anthropic API

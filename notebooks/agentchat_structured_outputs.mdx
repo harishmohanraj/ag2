@@ -36,6 +36,12 @@ For more information, please refer to the [installation guide](/docs/installatio
 </div>
 
 
+### Supported clients
+
+AG2 has structured output support for following client providers: -
+OpenAI (`openai`) - Anthropic (`anthropic`) - Google Gemini (`google`) -
+Ollama (`ollama`)
+
 ## Set your API Endpoint
 
 The
@@ -146,13 +152,13 @@ how can I solve 8x + 7 = -23
 --------------------------------------------------------------------------------
 Math_solver (to User_proxy):
 
-{"steps":[{"explanation":"To isolate the term with x, we first subtract 7 from both sides of the equation.","output":"8x + 7 - 7 = -23 - 7 -> 8x = -30."},{"explanation":"Now that we have 8x = -30, we divide both sides by 8 to solve for x.","output":"x = -30 / 8 -> x = -3.75."}],"final_answer":"x = -3.75"}
+{"steps":[{"explanation":"First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for 'x' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}
 
 --------------------------------------------------------------------------------
 ```
 
 ``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': '{"steps":[{"explanation":"To isolate the term with x, we first subtract 7 from both sides of the equation.","output":"8x + 7 - 7 = -23 - 7 -> 8x = -30."},{"explanation":"Now that we have 8x = -30, we divide both sides by 8 to solve for x.","output":"x = -30 / 8 -> x = -3.75."}],"final_answer":"x = -3.75"}', 'role': 'user', 'name': 'Math_solver'}], summary='{"steps":[{"explanation":"To isolate the term with x, we first subtract 7 from both sides of the equation.","output":"8x + 7 - 7 = -23 - 7 -> 8x = -30."},{"explanation":"Now that we have 8x = -30, we divide both sides by 8 to solve for x.","output":"x = -30 / 8 -> x = -3.75."}],"final_answer":"x = -3.75"}', cost={'usage_including_cached_inference': {'total_cost': 0.00015089999999999998, 'gpt-4o-mini-2024-07-18': {'cost': 0.00015089999999999998, 'prompt_tokens': 582, 'completion_tokens': 106, 'total_tokens': 688}}, 'usage_excluding_cached_inference': {'total_cost': 0}}, human_input=[])
+ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': '{"steps":[{"explanation":"First, isolate the term with \'x\' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for \'x\'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for \'x\' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}', 'role': 'user', 'name': 'Math_solver'}], summary='{"steps":[{"explanation":"First, isolate the term with \'x\' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for \'x\'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for \'x\' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}', cost={'usage_including_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}, 'usage_excluding_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}}, human_input=[])
 ```
 
 ## Formatting a response
@@ -225,18 +231,20 @@ how can I solve 8x + 7 = -23
 --------------------------------------------------------------------------------
 Math_solver (to User_proxy):
 
-Step 1: To isolate the term with x, we first subtract 7 from both sides of the equation.
-  Output: 8x + 7 - 7 = -23 - 7 -> 8x = -30.
-Step 2: Now that we have 8x = -30, we divide both sides by 8 to solve for x.
-  Output: x = -30 / 8 -> x = -3.75.
+Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.
+  Output: 8x = -30
+Step 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.
+  Output: x = -3.75
+Step 3: The final solution for 'x' is obtained, which is -3.75.
+  Output: x = -3.75
 
-Final Answer: x = -3.75
+Final Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.
 
 --------------------------------------------------------------------------------
 ```
 
 ``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': 'Step 1: To isolate the term with x, we first subtract 7 from both sides of the equation.\n  Output: 8x + 7 - 7 = -23 - 7 -> 8x = -30.\nStep 2: Now that we have 8x = -30, we divide both sides by 8 to solve for x.\n  Output: x = -30 / 8 -> x = -3.75.\n\nFinal Answer: x = -3.75', 'role': 'user', 'name': 'Math_solver'}], summary='Step 1: To isolate the term with x, we first subtract 7 from both sides of the equation.\n  Output: 8x + 7 - 7 = -23 - 7 -> 8x = -30.\nStep 2: Now that we have 8x = -30, we divide both sides by 8 to solve for x.\n  Output: x = -30 / 8 -> x = -3.75.\n\nFinal Answer: x = -3.75', cost={'usage_including_cached_inference': {'total_cost': 0.00015089999999999998, 'gpt-4o-mini-2024-07-18': {'cost': 0.00015089999999999998, 'prompt_tokens': 582, 'completion_tokens': 106, 'total_tokens': 688}}, 'usage_excluding_cached_inference': {'total_cost': 0}}, human_input=[])
+ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': "Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.\n  Output: 8x = -30\nStep 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.\n  Output: x = -3.75\nStep 3: The final solution for 'x' is obtained, which is -3.75.\n  Output: x = -3.75\n\nFinal Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.", 'role': 'user', 'name': 'Math_solver'}], summary="Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.\n  Output: 8x = -30\nStep 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.\n  Output: x = -3.75\nStep 3: The final solution for 'x' is obtained, which is -3.75.\n  Output: x = -3.75\n\nFinal Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.", cost={'usage_including_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}, 'usage_excluding_cached_inference': {'total_cost': 0}}, human_input=[])
 ```
 
 Normal function calling still works alongside structured output, so your
@@ -262,7 +270,7 @@ solve 3 + 4 by calling appropriate function
 --------------------------------------------------------------------------------
 Math_solver (to User_proxy):
 
-***** Suggested tool call (call_oTp96rVzs2kAOwGhBM5rJDcW): add *****
+***** Suggested tool call (call_nZWqMjHZBiMPE0Wq6ERMaXv1): add *****
 Arguments: 
 {"x":3,"y":4}
 ********************************************************************
@@ -271,5 +279,5 @@ Arguments:
 ```
 
 ``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'solve 3 + 4 by calling appropriate function', 'role': 'assistant', 'name': 'User_proxy'}, {'tool_calls': [{'id': 'call_oTp96rVzs2kAOwGhBM5rJDcW', 'function': {'arguments': '{"x":3,"y":4}', 'name': 'add'}, 'type': 'function'}], 'content': None, 'role': 'assistant'}], summary='', cost={'usage_including_cached_inference': {'total_cost': 0.0001029, 'gpt-4o-mini-2024-07-18': {'cost': 0.0001029, 'prompt_tokens': 618, 'completion_tokens': 17, 'total_tokens': 635}}, 'usage_excluding_cached_inference': {'total_cost': 0}}, human_input=[])
+ChatResult(chat_id=None, chat_history=[{'content': 'solve 3 + 4 by calling appropriate function', 'role': 'assistant', 'name': 'User_proxy'}, {'tool_calls': [{'id': 'call_nZWqMjHZBiMPE0Wq6ERMaXv1', 'function': {'arguments': '{"x":3,"y":4}', 'name': 'add'}, 'type': 'function'}], 'content': None, 'role': 'assistant'}], summary='', cost={'usage_including_cached_inference': {'total_cost': 0.0001035, 'gpt-4o-mini-2024-07-18': {'cost': 0.0001035, 'prompt_tokens': 618, 'completion_tokens': 18, 'total_tokens': 636}}, 'usage_excluding_cached_inference': {'total_cost': 0.0001035, 'gpt-4o-mini-2024-07-18': {'cost': 0.0001035, 'prompt_tokens': 618, 'completion_tokens': 18, 'total_tokens': 636}}}, human_input=[])
 ```

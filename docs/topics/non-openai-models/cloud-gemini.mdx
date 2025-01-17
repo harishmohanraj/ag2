@@ -4,7 +4,7 @@ description: Using Gemini with AutoGen
 source_notebook: /website/docs/topics/non-openai-models/cloud-gemini.ipynb
 tags:
 - gemini
-title: Using Gemini in AutoGen with Other LLMs
+title: Using Gemini in AG2 with Other LLMs
 ---
 
 <a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/topics/non-openai-models/cloud-gemini.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
@@ -15,28 +15,34 @@ title: Using Gemini in AutoGen with Other LLMs
 
 ## Installation
 
-Install AutoGen with Gemini features:
+Install AG2 with Gemini features:
 
 ```bash
-pip install pyautogen[gemini]
+pip install ag2[gemini]
 ```
 
 ## Dependencies of This Notebook
 
-In this notebook, we will explore how to use Gemini in AutoGen alongside
+In this notebook, we will explore how to use Gemini in AG2 alongside
 other tools. Install the necessary dependencies with the following
 command:
 
 ```bash
-pip install pyautogen[gemini,retrievechat,lmm]
+pip install ag2[gemini,retrievechat,lmm]
 ```
 
 ## Features
 
 There’s no need to handle OpenAI or Google’s GenAI packages separately;
-AutoGen manages all of these for you. You can easily create different
-agents with various backend LLMs using the assistant agent. All models
-and agents are readily accessible at your fingertips.
+AG2 manages all of these for you. You can easily create different agents
+with various backend LLMs using the assistant agent. All models and
+agents are readily accessible at your fingertips.
+
+Support features: - Function/tool calling - Structured Outputs
+([Notebook
+example](https://docs.ag2.ai/notebooks/agentchat_structured_outputs)) -
+Token usage and cost correctly as per Google’s API costs (as of December
+2024)
 
 ## Main Distinctions
 
@@ -116,14 +122,14 @@ config_list_gpt4 = autogen.config_list_from_json(
 config_list_gemini = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
-        "model": ["gemini-pro", "gemini-1.5-pro", "gemini-1.5-pro-001"],
+        "model": ["gemini-1.5-pro", "gemini-1.5-flash"],
     },
 )
 
 config_list_gemini_vision = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
-        "model": ["gemini-pro-vision"],
+        "model": ["gemini-1.5-flash"],
     },
 )
 
@@ -367,10 +373,6 @@ ChatResult(chat_id=None, chat_history=[{'content': 'Should Spider Man invest in 
 
 You can create multimodal agent for Gemini the same way as the GPT-4V
 and LLaVA.
-
-Note that the Gemini-pro-vision does not support chat yet. So, we only
-use the last message in the prompt for multi-turn chat. The behavior
-might be strange compared to GPT-4V and LLaVA models.
 
 Here, we ask a question about
 ![](https://github.com/microsoft/autogen/blob/main/website/static/img/chat_example.png?raw=true)
