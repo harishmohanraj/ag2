@@ -61,11 +61,6 @@ config_list = autogen.config_list_from_json(
 )
 ```
 
-``` text
-/usr/local/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-```
-
 
 <div class="tip">
 <Tip>
@@ -144,23 +139,6 @@ equation using a step-by-step `MathReasoning` model.
 user_proxy.initiate_chat(assistant, message="how can I solve 8x + 7 = -23", max_turns=1, summary_method="last_msg")
 ```
 
-``` text
-User_proxy (to Math_solver):
-
-how can I solve 8x + 7 = -23
-
---------------------------------------------------------------------------------
-Math_solver (to User_proxy):
-
-{"steps":[{"explanation":"First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for 'x' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}
-
---------------------------------------------------------------------------------
-```
-
-``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': '{"steps":[{"explanation":"First, isolate the term with \'x\' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for \'x\'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for \'x\' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}', 'role': 'user', 'name': 'Math_solver'}], summary='{"steps":[{"explanation":"First, isolate the term with \'x\' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.","output":"8x = -30"},{"explanation":"Next, divide both sides of the equation by 8 to solve for \'x\'. This results in: x = -30 / 8.","output":"x = -3.75"},{"explanation":"The final solution for \'x\' is obtained, which is -3.75.","output":"x = -3.75"}],"final_answer":"The solution to the equation 8x + 7 = -23 is x = -3.75."}', cost={'usage_including_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}, 'usage_excluding_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}}, human_input=[])
-```
-
 ## Formatting a response
 
 When defining a `response_format`, you have the flexibility to customize
@@ -223,61 +201,17 @@ assistant = autogen.AssistantAgent(
 user_proxy.initiate_chat(assistant, message="how can I solve 8x + 7 = -23", max_turns=1, summary_method="last_msg")
 ```
 
-``` text
-User_proxy (to Math_solver):
-
-how can I solve 8x + 7 = -23
-
---------------------------------------------------------------------------------
-Math_solver (to User_proxy):
-
-Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.
-  Output: 8x = -30
-Step 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.
-  Output: x = -3.75
-Step 3: The final solution for 'x' is obtained, which is -3.75.
-  Output: x = -3.75
-
-Final Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.
-
---------------------------------------------------------------------------------
-```
-
-``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'how can I solve 8x + 7 = -23', 'role': 'assistant', 'name': 'User_proxy'}, {'content': "Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.\n  Output: 8x = -30\nStep 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.\n  Output: x = -3.75\nStep 3: The final solution for 'x' is obtained, which is -3.75.\n  Output: x = -3.75\n\nFinal Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.", 'role': 'user', 'name': 'Math_solver'}], summary="Step 1: First, isolate the term with 'x' by subtracting 7 from both sides of the equation, which gives us: 8x = -23 - 7.\n  Output: 8x = -30\nStep 2: Next, divide both sides of the equation by 8 to solve for 'x'. This results in: x = -30 / 8.\n  Output: x = -3.75\nStep 3: The final solution for 'x' is obtained, which is -3.75.\n  Output: x = -3.75\n\nFinal Answer: The solution to the equation 8x + 7 = -23 is x = -3.75.", cost={'usage_including_cached_inference': {'total_cost': 0.00017609999999999997, 'gpt-4o-mini-2024-07-18': {'cost': 0.00017609999999999997, 'prompt_tokens': 582, 'completion_tokens': 148, 'total_tokens': 730}}, 'usage_excluding_cached_inference': {'total_cost': 0}}, human_input=[])
-```
-
 Normal function calling still works alongside structured output, so your
 agent can have a response format while still calling tools.
 
 ```python
-@assistant.register_for_execution()
+@user_proxy.register_for_execution()
 @assistant.register_for_llm(description="You can use this function call to solve addition")
 def add(x: int, y: int) -> int:
     return x + y
 
 
 user_proxy.initiate_chat(
-    assistant, message="solve 3 + 4 by calling appropriate function", max_turns=1, summary_method="last_msg"
+    assistant, message="solve 3 + 4 by calling appropriate function", max_turns=2, summary_method="last_msg"
 )
-```
-
-``` text
-User_proxy (to Math_solver):
-
-solve 3 + 4 by calling appropriate function
-
---------------------------------------------------------------------------------
-Math_solver (to User_proxy):
-
-***** Suggested tool call (call_nZWqMjHZBiMPE0Wq6ERMaXv1): add *****
-Arguments: 
-{"x":3,"y":4}
-********************************************************************
-
---------------------------------------------------------------------------------
-```
-
-``` text
-ChatResult(chat_id=None, chat_history=[{'content': 'solve 3 + 4 by calling appropriate function', 'role': 'assistant', 'name': 'User_proxy'}, {'tool_calls': [{'id': 'call_nZWqMjHZBiMPE0Wq6ERMaXv1', 'function': {'arguments': '{"x":3,"y":4}', 'name': 'add'}, 'type': 'function'}], 'content': None, 'role': 'assistant'}], summary='', cost={'usage_including_cached_inference': {'total_cost': 0.0001035, 'gpt-4o-mini-2024-07-18': {'cost': 0.0001035, 'prompt_tokens': 618, 'completion_tokens': 18, 'total_tokens': 636}}, 'usage_excluding_cached_inference': {'total_cost': 0.0001035, 'gpt-4o-mini-2024-07-18': {'cost': 0.0001035, 'prompt_tokens': 618, 'completion_tokens': 18, 'total_tokens': 636}}}, human_input=[])
 ```
