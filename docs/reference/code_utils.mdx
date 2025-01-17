@@ -1,307 +1,443 @@
 ---
 sidebarTitle: code_utils
-title: code_utils
+title: autogen.code_utils
 ---
 
-### content\_str
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### check_can_use_docker_or_throw
+<a href="#autogen.code_utils..check_can_use_docker_or_throw" class="headerlink" title="Permanent link"></a>
 
 ```python
-def content_str(
-    content: Union[str, list[Union[UserMessageTextContentPart,
-                                   UserMessageImageContentPart]], None]
-) -> str
+check_can_use_docker_or_throw(use_docker) -> None
 ```
 
-Converts the `content` field of an OpenAI message into a string format.
+    
 
-This function processes content that may be a string, a list of mixed text and image URLs, or None,
-and converts it into a string. Text is directly appended to the result string, while image URLs are
-represented by a placeholder image token. If the content is None, an empty string is returned.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `use_docker` |  |
 
-**Arguments**:
+<br />
 
-  - content (Union[str, List, None]): The content to be processed. Can be a string, a list of dictionaries
-  representing text and image URLs, or None.
-  
-
-**Returns**:
-
-- `str` - A string representation of the input content. Image URLs are replaced with an image token.
-  
-
-**Notes**:
-
-  - The function expects each dictionary in the list to have a "type" key that is either "text" or "image_url".
-  For "text" type, the "text" key's value is appended to the result. For "image_url", an image token is appended.
-  - This function is useful for handling content that may include both text and image references, especially
-  in contexts where images need to be represented as placeholders.
-
-### infer\_lang
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### content_str
+<a href="#autogen.code_utils..content_str" class="headerlink" title="Permanent link"></a>
 
 ```python
-def infer_lang(code: str) -> str
+content_str(content: str | list[autogen.types.UserMessageTextContentPart | autogen.types.UserMessageImageContentPart] | None) -> str
 ```
 
-Infer the language for the code.
-TODO: make it robust.
+    Converts the `content` field of an OpenAI message into a string format.
+    
+    This function processes content that may be a string, a list of mixed text and image URLs, or None,
+    and converts it into a string. Text is directly appended to the result string, while image URLs are
+    represented by a placeholder image token. If the content is None, an empty string is returned.
 
-### extract\_code
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `content` | **Type:** `str \| list[autogen.types.UserMessageTextContentPart \| autogen.types.UserMessageImageContentPart] \| None` |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `str` | str: A string representation of the input content. Image URLs are replaced with an image token. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### create_virtual_env
+<a href="#autogen.code_utils..create_virtual_env" class="headerlink" title="Permanent link"></a>
 
 ```python
-def extract_code(
-        text: Union[str, list],
-        pattern: str = CODE_BLOCK_PATTERN,
-        detect_single_line_code: bool = False) -> list[tuple[str, str]]
+create_virtual_env(dir_path: str, **env_args) -> types.SimpleNamespace
 ```
 
-Extract code from a text.
+    Creates a python virtual environment and returns the context.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `dir_path` | Directory path where the env will be created.<br/><br/>**Type:** `str` |
+| `**env_args` | Any extra args to pass to the `EnvBuilder`<br/><br/> |
 
-- `text` _str or List_ - The content to extract code from. The content can be
-  a string or a list, as returned by standard GPT or multimodal GPT.
-- `pattern` _str, optional_ - The regular expression pattern for finding the
-  code block. Defaults to CODE_BLOCK_PATTERN.
-- `detect_single_line_code` _bool, optional_ - Enable the new feature for
-  extracting single line code. Defaults to False.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `types.SimpleNamespace` | SimpleNamespace: the virtual env context object. |
 
-**Returns**:
+<br />
 
-- `list` - A list of tuples, each containing the language and the code.
-  If there is no code block in the input text, the language would be "unknown".
-  If there is code block but the language is not specified, the language would be "".
-
-### generate\_code
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### decide_use_docker
+<a href="#autogen.code_utils..decide_use_docker" class="headerlink" title="Permanent link"></a>
 
 ```python
-def generate_code(pattern: str = CODE_BLOCK_PATTERN,
-                  **config) -> tuple[str, float]
+decide_use_docker(use_docker: bool | None) -> bool | None
 ```
 
-`(openai<1)` Generate code.
+    
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `use_docker` | **Type:** `bool \| None` |
 
-- `pattern` _Optional, str_ - The regular expression pattern for finding the code block.
-  The default pattern is for finding a code block in a markdown file.
-- `config` _Optional, dict_ - The configuration for the API call.
-  
+<br />
 
-**Returns**:
-
-- `str` - The generated code.
-- `float` - The cost of the generation.
-
-### improve\_function
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### eval_function_completions
+<a href="#autogen.code_utils..eval_function_completions" class="headerlink" title="Permanent link"></a>
 
 ```python
-def improve_function(file_name, func_name, objective, **config)
+eval_function_completions(
+    responses: list[str],
+    definition: str,
+    test: str | None = None,
+    entry_point: str | None = None,
+    assertions: str | Callable[[str], tuple[str, float]] | None = None,
+    timeout: float | None = 3,
+    use_docker: bool | None = True
+) -> dict
 ```
 
-`(openai<1)` Improve the function to achieve the objective.
+    `(openai&lt;1)` Select a response from a list of responses for the function completion task (using generated assertions), and/or evaluate if the task is successful using a gold test.
 
-### improve\_code
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `responses` | The list of responses.<br/><br/>**Type:** `list[str]` |
+| `definition` | The input definition.<br/><br/>**Type:** `str` |
+| `test` | The test code.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `entry_point` | The name of the function.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `assertions` | The assertion code which serves as a filter of the responses, or an assertion generator.<br/><br/>When provided, only the responses that pass the assertions will be considered for the actual test (if provided).<br/><br/>**Type:** `str \| Callable[[str], tuple[str, float]] \| None`<br/><br/>**Default:** None |
+| `timeout` | The timeout for executing the code.<br/><br/>**Type:** `float \| None`<br/><br/>**Default:** 3 |
+| `use_docker` | **Type:** `bool \| None`<br/><br/>**Default:** True |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `dict` | dict: The success metrics. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### execute_code
+<a href="#autogen.code_utils..execute_code" class="headerlink" title="Permanent link"></a>
 
 ```python
-def improve_code(files, objective, suggest_only=True, **config)
+execute_code(
+    code: str | None = None,
+    timeout: int | None = None,
+    filename: str | None = None,
+    work_dir: str | None = None,
+    use_docker: list[str] | str | bool = &lt;object object>,
+    lang: str | None = 'python'
+) -> tuple[int, str, str | None]
 ```
 
-`(openai<1)` Improve the code to achieve a given objective.
+    Execute code in a docker container.
+    This function is not tested on MacOS.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code` | The code to execute.<br/><br/>If None, the code from the file specified by filename will be executed.<br/><br/>Either code or filename must be provided.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `timeout` | The maximum execution time in seconds.<br/><br/>If None, a default timeout will be used.<br/><br/>The default timeout is 600 seconds.<br/><br/>On Windows, the timeout is not enforced when use_docker=False.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** None |
+| `filename` | The file name to save the code or where the code is stored when `code` is None.<br/><br/>If None, a file with a randomly generated name will be created.<br/><br/>The randomly generated file will be deleted after execution.<br/><br/>The file name must be a relative path.<br/><br/>Relative paths are relative to the working directory.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `work_dir` | The working directory for the code execution.<br/><br/>If None, a default working directory will be used.<br/><br/>The default working directory is the "extensions" directory under "path_to_autogen".<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `use_docker` | The docker image to use for code execution.<br/><br/>Default is True, which means the code will be executed in a docker container.<br/><br/>A default list of images will be used.<br/><br/>If a list or a str of image name(s) is provided, the code will be executed in a docker container with the first image successfully pulled.<br/><br/>If False, the code will be executed in the current environment.<br/><br/>Expected behaviour: - If `use_docker` is not set (i.e.<br/><br/>left default to True) or is explicitly set to True and the docker package is available, the code will run in a Docker container.<br/><br/>- If `use_docker` is not set (i.e.<br/><br/>left default to True) or is explicitly set to True but the Docker package is missing or docker isn't running, an error will be raised.<br/><br/>- If `use_docker` is explicitly set to False, the code will run natively.<br/><br/>If the code is executed in the current environment, the code must be trusted.<br/><br/>**Type:** `list[str] \| str \| bool`<br/><br/>**Default:** &lt;object object> |
+| `lang` | The language of the code.<br/><br/>Default is "python".<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** 'python' |
 
-- `files` _list_ - A list of file names containing the source code.
-- `objective` _str_ - The objective to achieve.
-- `suggest_only` _bool_ - Whether to return only the suggestions or the improved code.
-- `config` _Optional, dict_ - The configuration for the API call.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `tuple[int, str, str \| None]` | int: 0 if the code executes successfully. str: The error message if the code fails to execute; the stdout otherwise. image: The docker image name after container run when docker is used. |
 
-**Returns**:
+<br />
 
-- `str` - The improved code if suggest_only=False; a list of suggestions if suggest_only=True (default).
-- `float` - The cost of the generation.
-
-### is\_docker\_running
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### extract_code
+<a href="#autogen.code_utils..extract_code" class="headerlink" title="Permanent link"></a>
 
 ```python
-def is_docker_running() -> bool
+extract_code(
+    text: str | list,
+    pattern: str = '```[ \\t]*(\\w+)?[ \\t]*\\r?\\n(.*?)\\r?\\n[ \\t]*```',
+    detect_single_line_code: bool = False
+) -> list[tuple[str, str]]
 ```
 
-Check if docker is running.
+    Extract code from a text.
 
-**Returns**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `text` | The content to extract code from.<br/><br/>The content can be a string or a list, as returned by standard GPT or multimodal GPT.<br/><br/>**Type:** `str \| list` |
+| `pattern` | The regular expression pattern for finding the code block.<br/><br/>Defaults to CODE_BLOCK_PATTERN.<br/><br/>**Type:** `str`<br/><br/>**Default:** '```[ \\t]*(\\w+)?[ \\t]*\\r?\\n(.*?)\\r?\\n[ \\t]*```' |
+| `detect_single_line_code` | Enable the new feature for extracting single line code.<br/><br/>Defaults to False.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
 
-- `bool` - True if docker is running; False otherwise.
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[tuple[str, str]]` | list: A list of tuples, each containing the language and the code. If there is no code block in the input text, the language would be "unknown". If there is code block but the language is not specified, the language would be "". |
 
-### in\_docker\_container
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### generate_assertions
+<a href="#autogen.code_utils..generate_assertions" class="headerlink" title="Permanent link"></a>
 
 ```python
-def in_docker_container() -> bool
+generate_assertions(definition: str, **config) -> tuple[str, float]
 ```
 
-Check if the code is running in a docker container.
+    `(openai&lt;1)` Generate assertions for a function.
 
-**Returns**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `definition` | The function definition, including the signature and docstr.<br/><br/>**Type:** `str` |
+| `**config` |  |
 
-- `bool` - True if the code is running in a docker container; False otherwise.
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `tuple[str, float]` | str: The generated assertions. float: The cost of the generation. |
 
-### execute\_code
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### generate_code
+<a href="#autogen.code_utils..generate_code" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_code(
-        code: Optional[str] = None,
-        timeout: Optional[int] = None,
-        filename: Optional[str] = None,
-        work_dir: Optional[str] = None,
-        use_docker: Union[list[str], str, bool] = SENTINEL,
-        lang: Optional[str] = "python") -> tuple[int, str, Optional[str]]
+generate_code(pattern: str = '```[ \\t]*(\\w+)?[ \\t]*\\r?\\n(.*?)\\r?\\n[ \\t]*```', **config) -> tuple[str, float]
 ```
 
-Execute code in a docker container.
-This function is not tested on MacOS.
+    `(openai&lt;1)` Generate code.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `pattern` | The regular expression pattern for finding the code block.<br/><br/>The default pattern is for finding a code block in a markdown file.<br/><br/>**Type:** `str`<br/><br/>**Default:** '```[ \\t]*(\\w+)?[ \\t]*\\r?\\n(.*?)\\r?\\n[ \\t]*```' |
+| `**config` |  |
 
-- `code` _Optional, str_ - The code to execute.
-  If None, the code from the file specified by filename will be executed.
-  Either code or filename must be provided.
-- `timeout` _Optional, int_ - The maximum execution time in seconds.
-  If None, a default timeout will be used. The default timeout is 600 seconds. On Windows, the timeout is not enforced when use_docker=False.
-- `filename` _Optional, str_ - The file name to save the code or where the code is stored when `code` is None.
-  If None, a file with a randomly generated name will be created.
-  The randomly generated file will be deleted after execution.
-  The file name must be a relative path. Relative paths are relative to the working directory.
-- `work_dir` _Optional, str_ - The working directory for the code execution.
-  If None, a default working directory will be used.
-  The default working directory is the "extensions" directory under
-  "path_to_autogen".
-- `use_docker` _list, str or bool_ - The docker image to use for code execution.
-  Default is True, which means the code will be executed in a docker container. A default list of images will be used.
-  If a list or a str of image name(s) is provided, the code will be executed in a docker container
-  with the first image successfully pulled.
-  If False, the code will be executed in the current environment.
-  Expected behaviour:
-  - If `use_docker` is not set (i.e. left default to True) or is explicitly set to True and the docker package is available, the code will run in a Docker container.
-  - If `use_docker` is not set (i.e. left default to True) or is explicitly set to True but the Docker package is missing or docker isn't running, an error will be raised.
-  - If `use_docker` is explicitly set to False, the code will run natively.
-  If the code is executed in the current environment,
-  the code must be trusted.
-- `lang` _Optional, str_ - The language of the code. Default is "python".
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `tuple[str, float]` | str: The generated code. float: The cost of the generation. |
 
-**Returns**:
+<br />
 
-- `int` - 0 if the code executes successfully.
-- `str` - The error message if the code fails to execute; the stdout otherwise.
-- `image` - The docker image name after container run when docker is used.
-
-### generate\_assertions
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### get_powershell_command
+<a href="#autogen.code_utils..get_powershell_command" class="headerlink" title="Permanent link"></a>
 
 ```python
-def generate_assertions(definition: str, **config) -> tuple[str, float]
+get_powershell_command() -> 
 ```
 
-`(openai<1)` Generate assertions for a function.
+    
 
-**Arguments**:
+<br />
 
-- `definition` _str_ - The function definition, including the signature and docstr.
-- `config` _Optional, dict_ - The configuration for the API call.
-  
-
-**Returns**:
-
-- `str` - The generated assertions.
-- `float` - The cost of the generation.
-
-### eval\_function\_completions
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### implement
+<a href="#autogen.code_utils..implement" class="headerlink" title="Permanent link"></a>
 
 ```python
-def eval_function_completions(responses: list[str],
-                              definition: str,
-                              test: Optional[str] = None,
-                              entry_point: Optional[str] = None,
-                              assertions: Optional[Union[str, Callable[
-                                  [str], tuple[str, float]]]] = None,
-                              timeout: Optional[float] = 3,
-                              use_docker: Optional[bool] = True) -> dict
+implement(
+    definition: str,
+    configs: list[dict] | None = None,
+    assertions: str | Callable[[str], tuple[str, float]] | None = &lt;function generate_assertions>
+) -> tuple[str, float]
 ```
 
-`(openai<1)` Select a response from a list of responses for the function completion task (using generated assertions), and/or evaluate if the task is successful using a gold test.
+    `(openai&lt;1)` Implement a function from a definition.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `definition` | The function definition, including the signature and docstr.<br/><br/>**Type:** `str` |
+| `configs` | The list of configurations for completion.<br/><br/>**Type:** `list[dict] \| None`<br/><br/>**Default:** None |
+| `assertions` | The assertion code which serves as a filter of the responses, or an assertion generator.<br/><br/>**Type:** `str \| Callable[[str], tuple[str, float]] \| None`<br/><br/>**Default:** &lt;function generate_assertions> |
 
-- `responses` _list_ - The list of responses.
-- `definition` _str_ - The input definition.
-- `test` _Optional, str_ - The test code.
-- `entry_point` _Optional, str_ - The name of the function.
-- `assertions` _Optional, str or Callable_ - The assertion code which serves as a filter of the responses, or an assertion generator.
-  When provided, only the responses that pass the assertions will be considered for the actual test (if provided).
-- `timeout` _Optional, float_ - The timeout for executing the code.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `tuple[str, float]` | str: The implementation. float: The cost of the implementation. int: The index of the configuration which generates the implementation. |
 
-**Returns**:
+<br />
 
-- `dict` - The success metrics.
-
-## PassAssertionFilter
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### improve_code
+<a href="#autogen.code_utils..improve_code" class="headerlink" title="Permanent link"></a>
 
 ```python
-class PassAssertionFilter()
+improve_code(
+    files,
+    objective,
+    suggest_only=True,
+    **config
+) -> 
 ```
 
-### pass\_assertions
+    `(openai&lt;1)` Improve the code to achieve a given objective.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `files` | A list of file names containing the source code.<br/><br/> |
+| `objective` | The objective to achieve.<br/><br/> |
+| `suggest_only=True` |  |
+| `**config` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### improve_function
+<a href="#autogen.code_utils..improve_function" class="headerlink" title="Permanent link"></a>
 
 ```python
-def pass_assertions(context, response, **_)
+improve_function(
+    file_name,
+    func_name,
+    objective,
+    **config
+) -> 
 ```
 
-`(openai<1)` Check if the response passes the assertions.
+    `(openai&lt;1)` Improve the function to achieve the objective.
 
-### implement
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `file_name` |  |
+| `func_name` |  |
+| `objective` |  |
+| `**config` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### in_docker_container
+<a href="#autogen.code_utils..in_docker_container" class="headerlink" title="Permanent link"></a>
 
 ```python
-def implement(
-    definition: str,
-    configs: Optional[list[dict]] = None,
-    assertions: Optional[Union[str,
-                               Callable[[str],
-                                        tuple[str,
-                                              float]]]] = generate_assertions
-) -> tuple[str, float]
+in_docker_container() -> bool
 ```
 
-`(openai<1)` Implement a function from a definition.
+    Check if the code is running in a docker container.
+    
+    Returns:
+        bool: True if the code is running in a docker container; False otherwise.
 
-**Arguments**:
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `bool` | bool: True if the code is running in a docker container; False otherwise. |
 
-- `definition` _str_ - The function definition, including the signature and docstr.
-- `configs` _list_ - The list of configurations for completion.
-- `assertions` _Optional, str or Callable_ - The assertion code which serves as a filter of the responses, or an assertion generator.
-  
+<br />
 
-**Returns**:
-
-- `str` - The implementation.
-- `float` - The cost of the implementation.
-- `int` - The index of the configuration which generates the implementation.
-
-### create\_virtual\_env
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### infer_lang
+<a href="#autogen.code_utils..infer_lang" class="headerlink" title="Permanent link"></a>
 
 ```python
-def create_virtual_env(dir_path: str, **env_args) -> SimpleNamespace
+infer_lang(code: str) -> str
 ```
 
-Creates a python virtual environment and returns the context.
+    Infer the language for the code.
+    TODO: make it robust.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code` | **Type:** `str` |
 
-- `dir_path` _str_ - Directory path where the env will be created.
-- `**env_args` - Any extra args to pass to the `EnvBuilder`
-  
+<br />
 
-**Returns**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### is_docker_running
+<a href="#autogen.code_utils..is_docker_running" class="headerlink" title="Permanent link"></a>
 
-- `SimpleNamespace` - the virtual env context object.
+```python
+is_docker_running() -> bool
+```
 
+    Check if docker is running.
+    
+    Returns:
+        bool: True if docker is running; False otherwise.
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `bool` | bool: True if docker is running; False otherwise. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### timeout_handler
+<a href="#autogen.code_utils..timeout_handler" class="headerlink" title="Permanent link"></a>
+
+```python
+timeout_handler(signum, frame) -> 
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `signum` |  |
+| `frame` |  |
+
+<br />
+
+    <h2 id="autogen.code_utils.PassAssertionFilter" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">PassAssertionFilter</span>
+        <a href="#autogen.code_utils.PassAssertionFilter" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+PassAssertionFilter(assertions)
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `assertions` |  |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### pass_assertions
+<a href="#autogen.code_utils.PassAssertionFilter.pass_assertions" class="headerlink" title="Permanent link"></a>
+
+```python
+pass_assertions(
+    self,
+    context,
+    response,
+    **_
+) -> 
+```
+
+    `(openai&lt;1)` Check if the response passes the assertions.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context` |  |
+| `response` |  |
+| `**_` |  |
+
+<br />

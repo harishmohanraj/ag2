@@ -1,103 +1,214 @@
 ---
 sidebarTitle: file_logger
-title: logger.file_logger
+title: autogen.logger.file_logger
 ---
 
-## FileLogger
+    <h2 id="autogen.logger.file_logger.FileLogger" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">FileLogger</span>
+        <a href="#autogen.logger.file_logger.FileLogger" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class FileLogger(BaseLogger)
+FileLogger(config: dict[str, Any])
 ```
 
-### start
+    Helper class that provides a standard way to create an ABC using
+    inheritance.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `config` | **Type:** `dict[str, Any]` |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_connection
+<a href="#autogen.logger.file_logger.FileLogger.get_connection" class="headerlink" title="Permanent link"></a>
 
 ```python
-def start() -> str
+get_connection(self) -> None
 ```
 
-Start the logger and return the session_id.
+    Method is intentionally left blank because there is no specific connection needed for the FileLogger.
 
-### log\_chat\_completion
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_chat_completion
+<a href="#autogen.logger.file_logger.FileLogger.log_chat_completion" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_chat_completion(invocation_id: uuid.UUID, client_id: int,
-                        wrapper_id: int, source: str | Agent,
-                        request: dict[str, float | str | list[dict[str, str]]],
-                        response: str | ChatCompletion, is_cached: int,
-                        cost: float, start_time: str) -> None
+log_chat_completion(
+    self,
+    invocation_id: uuid.UUID,
+    client_id: int,
+    wrapper_id: int,
+    source: str | Agent,
+    request: dict[str, float | str | list[dict[str, str]]],
+    response: str | ChatCompletion,
+    is_cached: int,
+    cost: float,
+    start_time: str
+) -> None
 ```
 
-Log a chat completion.
+    Log a chat completion.
 
-### log\_new\_agent
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `invocation_id` | **Type:** `uuid.UUID` |
+| `client_id` | **Type:** `int` |
+| `wrapper_id` | **Type:** `int` |
+| `source` | **Type:** `str \| Agent` |
+| `request` | **Type:** `dict[str, float \| str \| list[dict[str, str]]]` |
+| `response` | **Type:** `str \| ChatCompletion` |
+| `is_cached` | **Type:** `int` |
+| `cost` | **Type:** `float` |
+| `start_time` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_event
+<a href="#autogen.logger.file_logger.FileLogger.log_event" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_agent(agent: ConversableAgent,
-                  init_args: dict[str, Any] = {}) -> None
+log_event(
+    self,
+    source: str | Agent,
+    name: str,
+    **kwargs: dict[str, Any]
+) -> None
 ```
 
-Log a new agent instance.
+    Log an event from an agent or a string source.
 
-### log\_event
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `source` | **Type:** `str \| Agent` |
+| `name` | **Type:** `str` |
+| `**kwargs` | **Type:** `dict[str, Any]` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_function_use
+<a href="#autogen.logger.file_logger.FileLogger.log_function_use" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_event(source: str | Agent, name: str, **kwargs: dict[str,
-                                                             Any]) -> None
+log_function_use(
+    self,
+    source: str | Agent,
+    function: F,
+    args: dict[str, Any],
+    returns: Any
+) -> None
 ```
 
-Log an event from an agent or a string source.
+    Log a registered function(can be a tool) use from an agent or a string source.
 
-### log\_new\_wrapper
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `source` | **Type:** `str \| Agent` |
+| `function` | **Type:** `F` |
+| `args` | **Type:** `dict[str, Any]` |
+| `returns` | **Type:** `Any` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_agent
+<a href="#autogen.logger.file_logger.FileLogger.log_new_agent" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_wrapper(
-        wrapper: OpenAIWrapper,
-        init_args: dict[str, LLMConfig | list[LLMConfig]] = {}) -> None
+log_new_agent(
+    self,
+    agent: ConversableAgent,
+    init_args: dict[str, Any] = \{}
+) -> None
 ```
 
-Log a new wrapper instance.
+    Log a new agent instance.
 
-### log\_new\_client
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | **Type:** `ConversableAgent` |
+| `init_args` | **Type:** `dict[str, Any]`<br/><br/>**Default:** \{} |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_client
+<a href="#autogen.logger.file_logger.FileLogger.log_new_client" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_client(client: (AzureOpenAI
-                            | OpenAI
-                            | CerebrasClient
-                            | GeminiClient
-                            | AnthropicClient
-                            | MistralAIClient
-                            | TogetherClient
-                            | GroqClient
-                            | CohereClient
-                            | OllamaClient
-                            | BedrockClient), wrapper: OpenAIWrapper,
-                   init_args: dict[str, Any]) -> None
+log_new_client(
+    self,
+    client: AzureOpenAI | OpenAI | CerebrasClient | GeminiClient | AnthropicClient | MistralAIClient | TogetherClient | GroqClient | CohereClient | OllamaClient | BedrockClient,
+    wrapper: OpenAIWrapper,
+    init_args: dict[str, Any]
+) -> None
 ```
 
-Log a new client instance.
+    Log a new client instance.
 
-### log\_function\_use
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `client` | **Type:** `AzureOpenAI \| OpenAI \| CerebrasClient \| GeminiClient \| AnthropicClient \| MistralAIClient \| TogetherClient \| GroqClient \| CohereClient \| OllamaClient \| BedrockClient` |
+| `wrapper` | **Type:** `OpenAIWrapper` |
+| `init_args` | **Type:** `dict[str, Any]` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_wrapper
+<a href="#autogen.logger.file_logger.FileLogger.log_new_wrapper" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_function_use(source: str | Agent, function: F, args: dict[str, Any],
-                     returns: Any) -> None
+log_new_wrapper(
+    self,
+    wrapper: OpenAIWrapper,
+    init_args: dict[str, LLMConfig | list[LLMConfig]] = \{}
+) -> None
 ```
 
-Log a registered function(can be a tool) use from an agent or a string source.
+    Log a new wrapper instance.
 
-### get\_connection
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `wrapper` | **Type:** `OpenAIWrapper` |
+| `init_args` | **Type:** `dict[str, LLMConfig \| list[LLMConfig]]`<br/><br/>**Default:** \{} |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### start
+<a href="#autogen.logger.file_logger.FileLogger.start" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get_connection() -> None
+start(self) -> str
 ```
 
-Method is intentionally left blank because there is no specific connection needed for the FileLogger.
+    Start the logger and return the session_id.
 
-### stop
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### stop
+<a href="#autogen.logger.file_logger.FileLogger.stop" class="headerlink" title="Permanent link"></a>
 
 ```python
-def stop() -> None
+stop(self) -> None
 ```
 
-Close the file handler and remove it from the logger.
+    Close the file handler and remove it from the logger.
 
+<br />

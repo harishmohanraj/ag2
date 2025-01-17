@@ -1,20 +1,29 @@
 ---
 sidebarTitle: extract_pdf_image
-title: agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_image
+title: autogen.agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_image
 ---
 
-### extract\_pdf\_image
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### extract_pdf_image
+<a href="#autogen.agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_image..extract_pdf_image" class="headerlink" title="Permanent link"></a>
 
 ```python
-@with_requirements(["PyMuPDF"], ["os"])
-def extract_pdf_image(pdf_path: str, output_dir: str, page_number=None)
+extract_pdf_image(
+    pdf_path: str,
+    output_dir: str,
+    page_number=None
+) -> 
 ```
 
-Extracts images from a PDF file and saves them to the specified output directory.
+    Extracts images from a PDF file and saves them to the specified output directory.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `pdf_path` | The path to the PDF file.<br/><br/>**Type:** `str` |
+| `output_dir` | The directory to save the extracted images.<br/><br/>**Type:** `str` |
+| `page_number=None` |  |
 
-- `pdf_path` _str_ - The path to the PDF file.
-- `output_dir` _str_ - The directory to save the extracted images.
-- `page_number` _int, optional_ - The page number to extract images from. If not provided, extract images from all pages.
-
+<br />

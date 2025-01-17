@@ -1,116 +1,244 @@
 ---
 sidebarTitle: cosmos_db_cache
-title: cache.cosmos_db_cache
+title: autogen.cache.cosmos_db_cache
 ---
 
-## CosmosDBCache
+    <h2 id="autogen.cache.cosmos_db_cache.CosmosDBCache" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CosmosDBCache</span>
+        <a href="#autogen.cache.cosmos_db_cache.CosmosDBCache" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class CosmosDBCache(AbstractCache)
+CosmosDBCache(seed: str | int, cosmosdb_config: autogen.cache.cosmos_db_cache.CosmosDBConfig)
 ```
 
-Synchronous implementation of AbstractCache using Azure Cosmos DB NoSQL API.
+    Synchronous implementation of AbstractCache using Azure Cosmos DB NoSQL API.
+    
+    This class provides a concrete implementation of the AbstractCache
+    interface using Azure Cosmos DB for caching data, with synchronous operations.
+    
+    Attributes:
+        seed (Union[str, int]): A seed or namespace used as a partition key.
+        client (CosmosClient): The Cosmos DB client used for caching.
+        container: The container instance used for caching.
+    
+    Initialize the CosmosDBCache instance.
 
-This class provides a concrete implementation of the AbstractCache
-interface using Azure Cosmos DB for caching data, with synchronous operations.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | A seed or namespace for the cache, used as a partition key.<br/><br/>**Type:** `str \| int` |
+| `cosmosdb_config` | **Type:** `autogen.cache.cosmos_db_cache.CosmosDBConfig` |
 
-**Attributes**:
+### Static Methods
 
-- `seed` _Union[str, int]_ - A seed or namespace used as a partition key.
-- `client` _CosmosClient_ - The Cosmos DB client used for caching.
-- `container` - The container instance used for caching.
-
-### \_\_init\_\_
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create_cache
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.create_cache" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(seed: Union[str, int], cosmosdb_config: CosmosDBConfig)
+create_cache(seed: str | int, cosmosdb_config: autogen.cache.cosmos_db_cache.CosmosDBConfig) -> 
 ```
 
-Initialize the CosmosDBCache instance.
+    Factory method to create a CosmosDBCache instance based on the provided configuration.
+    This method decides whether to use an existing CosmosClient or create a new one.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | **Type:** `str \| int` |
+| `cosmosdb_config` | **Type:** `autogen.cache.cosmos_db_cache.CosmosDBConfig` |
 
-- `seed` _Union[str, int]_ - A seed or namespace for the cache, used as a partition key.
-- `connection_string` _str_ - The connection string for the Cosmos DB account.
-- `container_id` _str_ - The container ID to be used for caching.
-- `client` _Optional[CosmosClient]_ - An existing CosmosClient instance to be used for caching.
+<br />
 
-### create\_cache
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### from_config
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.from_config" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def create_cache(cls, seed: Union[str, int], cosmosdb_config: CosmosDBConfig)
+from_config(seed: str | int, cosmosdb_config: autogen.cache.cosmos_db_cache.CosmosDBConfig) -> 
 ```
 
-Factory method to create a CosmosDBCache instance based on the provided configuration.
-This method decides whether to use an existing CosmosClient or create a new one.
+    
 
-### get
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | **Type:** `str \| int` |
+| `cosmosdb_config` | **Type:** `autogen.cache.cosmos_db_cache.CosmosDBConfig` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### from_connection_string
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.from_connection_string" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get(key: str, default: Optional[Any] = None) -> Optional[Any]
+from_connection_string(
+    seed: str | int,
+    connection_string: str,
+    database_id: str,
+    container_id: str
+) -> 
 ```
 
-Retrieve an item from the Cosmos DB cache.
+    
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | **Type:** `str \| int` |
+| `connection_string` | **Type:** `str` |
+| `database_id` | **Type:** `str` |
+| `container_id` | **Type:** `str` |
 
-- `key` _str_ - The key identifying the item in the cache.
-- `default` _optional_ - The default value to return if the key is not found.
-  
+<br />
 
-**Returns**:
-
-  The deserialized value associated with the key if found, else the default value.
-
-### set
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### from_existing_client
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.from_existing_client" class="headerlink" title="Permanent link"></a>
 
 ```python
-def set(key: str, value: Any) -> None
+from_existing_client(
+    seed: str | int,
+    client: azure.cosmos.cosmos_client.CosmosClient,
+    database_id: str,
+    container_id: str
+) -> 
 ```
 
-Set an item in the Cosmos DB cache.
+    
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | **Type:** `str \| int` |
+| `client` | **Type:** `azure.cosmos.cosmos_client.CosmosClient` |
+| `database_id` | **Type:** `str` |
+| `container_id` | **Type:** `str` |
 
-- `key` _str_ - The key under which the item is to be stored.
-- `value` - The value to be stored in the cache.
-  
+<br />
 
-**Notes**:
+### Instance Methods
 
-  The value is serialized using pickle before being stored.
-
-### close
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### close
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.close" class="headerlink" title="Permanent link"></a>
 
 ```python
-def close() -> None
+close(self) -> None
 ```
 
-Close the Cosmos DB client.
+    Close the Cosmos DB client.
+    
+    Perform any necessary cleanup, such as closing network connections.
 
-Perform any necessary cleanup, such as closing network connections.
+<br />
 
-### \_\_enter\_\_
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.get" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __enter__()
+get(
+    self,
+    key: str,
+    default: Any | None = None
+) -> Any | None
 ```
 
-Context management entry.
+    Retrieve an item from the Cosmos DB cache.
 
-**Returns**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key identifying the item in the cache.<br/><br/>**Type:** `str` |
+| `default` | The default value to return if the key is not found.<br/><br/>**Type:** `Any \| None`<br/><br/>**Default:** None |
 
-- `self` - The instance itself.
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `Any \| None` | The deserialized value associated with the key if found, else the default value. |
 
-### \_\_exit\_\_
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBCache.set" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __exit__(exc_type: Optional[type], exc_value: Optional[Exception],
-             traceback: Optional[Any]) -> None
+set(
+    self,
+    key: str,
+    value: Any
+) -> None
 ```
 
-Context management exit.
+    Set an item in the Cosmos DB cache.
 
-Perform cleanup actions such as closing the Cosmos DB client.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key under which the item is to be stored.<br/><br/>**Type:** `str` |
+| `value` | The value to be stored in the cache.<br/><br/>**Type:** `Any` |
 
+<br />
+
+    <h2 id="autogen.cache.cosmos_db_cache.CosmosDBConfig" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CosmosDBConfig</span>
+        <a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+CosmosDBConfig(*args, **kwargs)
+```
+
+    dict() -> new empty dictionary
+    dict(mapping) -> new dictionary initialized from a mapping object's
+        (key, value) pairs
+    dict(iterable) -> new dictionary initialized as if via:
+        d = \{}
+        for k, v in iterable:
+            d[k] = v
+    dict(**kwargs) -> new dictionary initialized with the name=value pairs
+        in the keyword argument list.  For example:  dict(one=1, two=2)
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### cache_seed
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig.cache_seed" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### client
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig.client" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### connection_string
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig.connection_string" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### container_id
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig.container_id" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### database_id
+<a href="#autogen.cache.cosmos_db_cache.CosmosDBConfig.database_id" class="headerlink" title="Permanent link"></a>
+
+    <br />

@@ -1,40 +1,40 @@
 ---
 sidebarTitle: factory
-title: coding.factory
+title: autogen.coding.factory
 ---
 
-## CodeExecutorFactory
+    <h2 id="autogen.coding.factory.CodeExecutorFactory" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeExecutorFactory</span>
+        <a href="#autogen.coding.factory.CodeExecutorFactory" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class CodeExecutorFactory()
+CodeExecutorFactory()
 ```
 
-(Experimental) A factory class for creating code executors.
+    (Experimental) A factory class for creating code executors.
 
-### create
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create
+<a href="#autogen.coding.factory.CodeExecutorFactory.create" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def create(code_execution_config: CodeExecutionConfig) -> CodeExecutor
+create(code_execution_config: autogen.coding.base.CodeExecutionConfig) -> autogen.coding.base.CodeExecutor
 ```
 
-(Experimental) Get a code executor based on the code execution config.
+    (Experimental) Get a code executor based on the code execution config.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code_execution_config` | The code execution config, which is a dictionary that must contain the key "executor".<br/><br/>The value of the key "executor" can be either a string or an instance of CodeExecutor, in which case the code executor is returned directly.<br/><br/>**Type:** `autogen.coding.base.CodeExecutionConfig` |
 
-- `code_execution_config` _Dict_ - The code execution config,
-  which is a dictionary that must contain the key "executor".
-  The value of the key "executor" can be either a string
-  or an instance of CodeExecutor, in which case the code
-  executor is returned directly.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.coding.base.CodeExecutor` | CodeExecutor: The code executor. |
 
-**Returns**:
-
-- `CodeExecutor` - The code executor.
-  
-
-**Raises**:
-
-- `ValueError` - If the code executor is unknown or not specified.
-
+<br />

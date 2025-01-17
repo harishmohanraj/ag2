@@ -1,46 +1,60 @@
 ---
 sidebarTitle: crewai
-title: interop.crewai.crewai
+title: autogen.interop.crewai.crewai
 ---
 
-## CrewAIInteroperability
+    <h2 id="autogen.interop.crewai.crewai.CrewAIInteroperability" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CrewAIInteroperability</span>
+        <a href="#autogen.interop.crewai.crewai.CrewAIInteroperability" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@register_interoperable_class("crewai")
-class CrewAIInteroperability()
+CrewAIInteroperability()
 ```
 
-A class implementing the `Interoperable` protocol for converting CrewAI tools
-to a general `Tool` format.
+    A class implementing the `Interoperable` protocol for converting CrewAI tools
+    to a general `Tool` format.
+    
+    This class takes a `CrewAITool` and converts it into a standard `Tool` object.
 
-This class takes a `CrewAITool` and converts it into a standard `Tool` object.
+### Static Methods
 
-### convert\_tool
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### convert_tool
+<a href="#autogen.interop.crewai.crewai.CrewAIInteroperability.convert_tool" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def convert_tool(cls, tool: Any, **kwargs: Any) -> Tool
+convert_tool(tool: Any, **kwargs: Any) -> autogen.tools.tool.Tool
 ```
 
-Converts a given CrewAI tool into a general `Tool` format.
+    Converts a given CrewAI tool into a general `Tool` format.
+    
+    This method ensures that the provided tool is a valid `CrewAITool`, sanitizes
+    the tool's name, processes its description, and prepares a function to interact
+    with the tool's arguments. It then returns a standardized `Tool` object.
 
-This method ensures that the provided tool is a valid `CrewAITool`, sanitizes
-the tool's name, processes its description, and prepares a function to interact
-with the tool's arguments. It then returns a standardized `Tool` object.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool` | The tool to convert, expected to be an instance of `CrewAITool`.<br/><br/>**Type:** `Any` |
+| `**kwargs` | Additional arguments, which are not supported by this method.<br/><br/>**Type:** `Any` |
 
-**Arguments**:
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.tools.tool.Tool` | Tool: A standardized `Tool` object converted from the CrewAI tool. |
 
-- `tool` _Any_ - The tool to convert, expected to be an instance of `CrewAITool`.
-- `**kwargs` _Any_ - Additional arguments, which are not supported by this method.
-  
+<br />
 
-**Returns**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_unsupported_reason
+<a href="#autogen.interop.crewai.crewai.CrewAIInteroperability.get_unsupported_reason" class="headerlink" title="Permanent link"></a>
 
-- `Tool` - A standardized `Tool` object converted from the CrewAI tool.
-  
+```python
+get_unsupported_reason() -> str | None
+```
 
-**Raises**:
+    
 
-- `ValueError` - If the provided tool is not an instance of `CrewAITool`, or if
-  any additional arguments are passed.
-
+<br />

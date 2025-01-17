@@ -1,23 +1,23 @@
 ---
 sidebarTitle: evaluate_expression
-title: agentchat.contrib.captainagent.tools.math.evaluate_expression
+title: autogen.agentchat.contrib.captainagent.tools.math.evaluate_expression
 ---
 
-### evaluate\_expression
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### evaluate_expression
+<a href="#autogen.agentchat.contrib.captainagent.tools.math.evaluate_expression..evaluate_expression" class="headerlink" title="Permanent link"></a>
 
 ```python
-def evaluate_expression(expression)
+evaluate_expression(expression) -> 
 ```
 
-Evaluates a mathematical expression with support for floor function notation and power notation.
+    Evaluates a mathematical expression with support for floor function notation and power notation.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `expression` | The mathematical expression to evaluate.<br/><br/>It can only contain one symbol 'x'.<br/><br/> |
 
-- `expression` _str_ - The mathematical expression to evaluate. It can only contain one symbol 'x'.
-  
-
-**Returns**:
-
-  Union[sympy.Expr, str]: The evaluated result as a sympy expression if successful,
-  otherwise an error message as a string.
-
+<br />

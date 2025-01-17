@@ -1,56 +1,63 @@
 ---
 sidebarTitle: pydantic_ai_tool
-title: interop.pydantic_ai.pydantic_ai_tool
+title: autogen.interop.pydantic_ai.pydantic_ai_tool
 ---
 
-## PydanticAITool
+    <h2 id="autogen.interop.pydantic_ai.pydantic_ai_tool.PydanticAITool" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">PydanticAITool</span>
+        <a href="#autogen.interop.pydantic_ai.pydantic_ai_tool.PydanticAITool" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class PydanticAITool(Tool)
+PydanticAITool(
+    name: str,
+    description: str,
+    func: Callable[..., Any],
+    parameters_json_schema: dict[str, typing.Any]
+)
 ```
 
-A class representing a Pydantic AI Tool that extends the general Tool functionality
-with additional functionality specific to Pydantic AI tools.
+    A class representing a Pydantic AI Tool that extends the general Tool functionality
+    with additional functionality specific to Pydantic AI tools.
+    
+    This class inherits from the Tool class and adds functionality for registering
+    tools with a ConversableAgent, along with providing additional schema information
+    specific to Pydantic AI tools, such as parameters and function signatures.
+    
+    Attributes:
+        parameters_json_schema (Dict[str, Any]): A schema describing the parameters
+                                                 that the tool's function expects.
+    
+    Initializes a PydanticAITool object with the provided name, description,
+    function, and parameter schema.
 
-This class inherits from the Tool class and adds functionality for registering
-tools with a ConversableAgent, along with providing additional schema information
-specific to Pydantic AI tools, such as parameters and function signatures.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `name` | The name of the tool.<br/><br/>**Type:** `str` |
+| `description` | A description of what the tool does.<br/><br/>**Type:** `str` |
+| `func` | The function that is executed when the tool is called.<br/><br/>**Type:** `Callable[..., Any]` |
+| `parameters_json_schema` | A schema describing the parameters that the function accepts.<br/><br/>**Type:** `dict[str, typing.Any]` |
 
-**Attributes**:
+### Instance Methods
 
-- `parameters_json_schema` _Dict[str, Any]_ - A schema describing the parameters
-  that the tool's function expects.
-
-### \_\_init\_\_
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_for_llm
+<a href="#autogen.interop.pydantic_ai.pydantic_ai_tool.PydanticAITool.register_for_llm" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(name: str, description: str, func: Callable[..., Any],
-             parameters_json_schema: dict[str, Any]) -> None
+register_for_llm(self, agent: autogen.agentchat.conversable_agent.ConversableAgent) -> None
 ```
 
-Initializes a PydanticAITool object with the provided name, description,
-function, and parameter schema.
+    Registers the tool with the ConversableAgent for use with a language model (LLM).
+    
+    This method updates the agent's tool signature to include the function schema,
+    allowing the agent to invoke the tool correctly during interactions with the LLM.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent with which the tool will be registered.<br/><br/>**Type:** `autogen.agentchat.conversable_agent.ConversableAgent` |
 
-- `name` _str_ - The name of the tool.
-- `description` _str_ - A description of what the tool does.
-- `func` _Callable[..., Any]_ - The function that is executed when the tool is called.
-- `parameters_json_schema` _Dict[str, Any]_ - A schema describing the parameters
-  that the function accepts.
-
-### register\_for\_llm
-
-```python
-def register_for_llm(agent: ConversableAgent) -> None
-```
-
-Registers the tool with the ConversableAgent for use with a language model (LLM).
-
-This method updates the agent's tool signature to include the function schema,
-allowing the agent to invoke the tool correctly during interactions with the LLM.
-
-**Arguments**:
-
-- `agent` _ConversableAgent_ - The agent with which the tool will be registered.
-
+<br />

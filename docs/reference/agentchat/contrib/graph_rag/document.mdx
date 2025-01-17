@@ -1,22 +1,103 @@
 ---
 sidebarTitle: document
-title: agentchat.contrib.graph_rag.document
+title: autogen.agentchat.contrib.graph_rag.document
 ---
 
-## DocumentType
+    <h2 id="autogen.agentchat.contrib.graph_rag.document.Document" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">Document</span>
+        <a href="#autogen.agentchat.contrib.graph_rag.document.Document" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class DocumentType(Enum)
+Document(
+    doctype: autogen.agentchat.contrib.graph_rag.document.DocumentType,
+    data: object | None = None,
+    path_or_url: str | None = ''
+)
 ```
 
-Enum for supporting document type.
+    A wrapper of graph store query results.
 
-## Document
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `doctype` | **Type:** `autogen.agentchat.contrib.graph_rag.document.DocumentType` |
+| `data` | **Type:** `object \| None`<br/><br/>**Default:** None |
+| `path_or_url` | **Type:** `str \| None`<br/><br/>**Default:** '' |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### data
+<a href="#autogen.agentchat.contrib.graph_rag.document.Document.data" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### doctype
+<a href="#autogen.agentchat.contrib.graph_rag.document.Document.doctype" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### path_or_url
+<a href="#autogen.agentchat.contrib.graph_rag.document.Document.path_or_url" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.agentchat.contrib.graph_rag.document.DocumentType" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">DocumentType</span>
+        <a href="#autogen.agentchat.contrib.graph_rag.document.DocumentType" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@dataclass
-class Document()
+DocumentType(
+    value,
+    names=None,
+    *,
+    module=None,
+    qualname=None,
+    type=None,
+    start=1
+)
 ```
 
-A wrapper of graph store query results.
+    Enum for supporting document type.
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `value` |  |
+| `names=None` |  |
+| `module=None` |  |
+| `qualname=None` |  |
+| `type=None` |  |
+| `start=1` |  |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### HTML
+<a href="#autogen.agentchat.contrib.graph_rag.document.DocumentType.HTML" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### JSON
+<a href="#autogen.agentchat.contrib.graph_rag.document.DocumentType.JSON" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### PDF
+<a href="#autogen.agentchat.contrib.graph_rag.document.DocumentType.PDF" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### TEXT
+<a href="#autogen.agentchat.contrib.graph_rag.document.DocumentType.TEXT" class="headerlink" title="Permanent link"></a>
+
+    <br />

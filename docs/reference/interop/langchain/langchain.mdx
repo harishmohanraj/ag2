@@ -1,48 +1,62 @@
 ---
 sidebarTitle: langchain
-title: interop.langchain.langchain
+title: autogen.interop.langchain.langchain
 ---
 
-## LangChainInteroperability
+    <h2 id="autogen.interop.langchain.langchain.LangChainInteroperability" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">LangChainInteroperability</span>
+        <a href="#autogen.interop.langchain.langchain.LangChainInteroperability" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@register_interoperable_class("langchain")
-class LangChainInteroperability()
+LangChainInteroperability()
 ```
 
-A class implementing the `Interoperable` protocol for converting Langchain tools
-into a general `Tool` format.
+    A class implementing the `Interoperable` protocol for converting Langchain tools
+    into a general `Tool` format.
+    
+    This class takes a `LangchainTool` and converts it into a standard `Tool` object,
+    ensuring compatibility between Langchain tools and other systems that expect
+    the `Tool` format.
 
-This class takes a `LangchainTool` and converts it into a standard `Tool` object,
-ensuring compatibility between Langchain tools and other systems that expect
-the `Tool` format.
+### Static Methods
 
-### convert\_tool
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### convert_tool
+<a href="#autogen.interop.langchain.langchain.LangChainInteroperability.convert_tool" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def convert_tool(cls, tool: Any, **kwargs: Any) -> Tool
+convert_tool(tool: Any, **kwargs: Any) -> autogen.tools.tool.Tool
 ```
 
-Converts a given Langchain tool into a general `Tool` format.
+    Converts a given Langchain tool into a general `Tool` format.
+    
+    This method verifies that the provided tool is a valid `LangchainTool`,
+    processes the tool's input and description, and returns a standardized
+    `Tool` object.
 
-This method verifies that the provided tool is a valid `LangchainTool`,
-processes the tool's input and description, and returns a standardized
-`Tool` object.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool` | The tool to convert, expected to be an instance of `LangchainTool`.<br/><br/>**Type:** `Any` |
+| `**kwargs` | Additional arguments, which are not supported by this method.<br/><br/>**Type:** `Any` |
 
-**Arguments**:
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.tools.tool.Tool` | Tool: A standardized `Tool` object converted from the Langchain tool. |
 
-- `tool` _Any_ - The tool to convert, expected to be an instance of `LangchainTool`.
-- `**kwargs` _Any_ - Additional arguments, which are not supported by this method.
-  
+<br />
 
-**Returns**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_unsupported_reason
+<a href="#autogen.interop.langchain.langchain.LangChainInteroperability.get_unsupported_reason" class="headerlink" title="Permanent link"></a>
 
-- `Tool` - A standardized `Tool` object converted from the Langchain tool.
-  
+```python
+get_unsupported_reason() -> str | None
+```
 
-**Raises**:
+    
 
-- `ValueError` - If the provided tool is not an instance of `LangchainTool`, or if
-  any additional arguments are passed.
-
+<br />

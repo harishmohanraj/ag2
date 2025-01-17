@@ -1,167 +1,233 @@
 ---
 sidebarTitle: math_user_proxy_agent
-title: agentchat.contrib.math_user_proxy_agent
+title: autogen.agentchat.contrib.math_user_proxy_agent
 ---
 
-## MathUserProxyAgent
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### get_from_dict_or_env
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent..get_from_dict_or_env" class="headerlink" title="Permanent link"></a>
 
 ```python
-class MathUserProxyAgent(UserProxyAgent)
+get_from_dict_or_env(
+    data: dict[str, typing.Any],
+    key: str,
+    env_key: str,
+    default: str | None = None
+) -> str
 ```
 
-(Experimental) A MathChat agent that can handle math problems.
+    Get a value from a dictionary or an environment variable.
 
-#### MAX\_CONSECUTIVE\_AUTO\_REPLY
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `data` | **Type:** `dict[str, typing.Any]` |
+| `key` | **Type:** `str` |
+| `env_key` | **Type:** `str` |
+| `default` | **Type:** `str \| None`<br/><br/>**Default:** None |
 
-maximum number of consecutive auto replies (subject to future change)
+<br />
 
-### \_\_init\_\_
+    <h2 id="autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">MathUserProxyAgent</span>
+        <a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def __init__(name: Optional[str] = "MathChatAgent",
-             is_termination_msg: Optional[Callable[
-                 [dict], bool]] = _is_termination_msg_mathchat,
-             human_input_mode: Literal["ALWAYS", "NEVER",
-                                       "TERMINATE"] = "NEVER",
-             default_auto_reply: Optional[Union[str, dict,
-                                                None]] = DEFAULT_REPLY,
-             max_invalid_q_per_step=3,
-             **kwargs)
+MathUserProxyAgent(
+    name: str | None = 'MathChatAgent',
+    is_termination_msg: Callable[[dict], bool] | None = &lt;function _is_termination_msg_mathchat>,
+    human_input_mode: Literal['ALWAYS', 'NEVER', 'TERMINATE'] = 'NEVER',
+    default_auto_reply: dict | str | None = 'Continue. Please keep solving the problem until you need to query. (If you get to the answer, put it in \\boxed\{}.)',
+    max_invalid_q_per_step=3,
+    **kwargs
+)
 ```
 
-**Arguments**:
+    (Experimental) A MathChat agent that can handle math problems.
 
-- `name` _str_ - name of the agent
-- `is_termination_msg` _function_ - a function that takes a message in the form of a dictionary and returns a boolean value indicating if this received message is a termination message.
-  The dict can contain the following keys: "content", "role", "name", "function_call".
-- `human_input_mode` _str_ - whether to ask for human inputs every time a message is received.
-  Possible values are "ALWAYS", "TERMINATE", "NEVER".
-  (1) When "ALWAYS", the agent prompts for human input every time a message is received.
-  Under this mode, the conversation stops when the human input is "exit",
-  or when is_termination_msg is True and there is no human input.
-  (2) When "TERMINATE", the agent only prompts for human input only when a termination message is received or
-  the number of auto reply reaches the max_consecutive_auto_reply.
-  (3) (Default) When "NEVER", the agent will never prompt for human input. Under this mode, the conversation stops
-  when the number of auto reply reaches the max_consecutive_auto_reply or when is_termination_msg is True.
-- `default_auto_reply` _str or dict or None_ - the default auto reply message when no code execution or llm based reply is generated.
-- `max_invalid_q_per_step` _int_ - (ADDED) the maximum number of invalid queries per step.
-- `**kwargs` _dict_ - other kwargs in [UserProxyAgent](../user_proxy_agent#init).
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `name` | name of the agent<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** 'MathChatAgent' |
+| `is_termination_msg` | a function that takes a message in the form of a dictionary and returns a boolean value indicating if this received message is a termination message.<br/><br/>The dict can contain the following keys: "content", "role", "name", "function_call".<br/><br/>**Type:** `Callable[[dict], bool] \| None`<br/><br/>**Default:** &lt;function _is_termination_msg_mathchat> |
+| `human_input_mode` | whether to ask for human inputs every time a message is received.<br/><br/>Possible values are "ALWAYS", "TERMINATE", "NEVER".<br/><br/>(1) When "ALWAYS", the agent prompts for human input every time a message is received.<br/><br/>Under this mode, the conversation stops when the human input is "exit", or when is_termination_msg is True and there is no human input.<br/><br/>(2) When "TERMINATE", the agent only prompts for human input only when a termination message is received or the number of auto reply reaches the max_consecutive_auto_reply.<br/><br/>(3) (Default) When "NEVER", the agent will never prompt for human input.<br/><br/>Under this mode, the conversation stops when the number of auto reply reaches the max_consecutive_auto_reply or when is_termination_msg is True.<br/><br/>**Type:** `Literal['ALWAYS', 'NEVER', 'TERMINATE']`<br/><br/>**Default:** 'NEVER' |
+| `default_auto_reply` | the default auto reply message when no code execution or llm based reply is generated.<br/><br/>**Type:** `dict \| str \| None`<br/><br/>**Default:** 'Continue. Please keep solving the problem until you need to query. (If you get to the answer, put it in \\boxed\{}.)' |
+| `max_invalid_q_per_step=3` |  |
+| `**kwargs` | other kwargs in [UserProxyAgent](../user_proxy_agent#init).<br/><br/> |
 
-### message\_generator
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_REPLY
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent.DEFAULT_REPLY" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### MAX_CONSECUTIVE_AUTO_REPLY
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent.MAX_CONSECUTIVE_AUTO_REPLY" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### message_generator
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent.message_generator" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def message_generator(sender, recipient, context)
+message_generator(
+    sender,
+    recipient,
+    context
+) -> 
 ```
 
-Generate a prompt for the assistant agent with the given problem and prompt.
+    Generate a prompt for the assistant agent with the given problem and prompt.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `sender` | the sender of the message.<br/><br/> |
+| `recipient` | the recipient of the message.<br/><br/> |
+| `context` | a dictionary with the following fields: problem (str): the problem to be solved.<br/><br/>prompt_type (str, Optional): the type of the prompt.<br/><br/>Possible values are "default", "python", "wolfram".<br/><br/>(1) "default": the prompt that allows the agent to choose between 3 ways to solve a problem: 1. write a python program to solve it directly.<br/><br/>2. solve it directly without python.<br/><br/>3. solve it step by step with python.<br/><br/>(2) "python": a simplified prompt from the third way of the "default" prompt, that asks the assistant to solve the problem step by step with python.<br/><br/>(3) "two_tools": a simplified prompt similar to the "python" prompt, but allows the model to choose between Python and Wolfram Alpha to solve the problem.<br/><br/>customized_prompt (str, Optional): a customized prompt to be used.<br/><br/>If it is not None, the prompt_type will be ignored.<br/><br/> |
 
-- `sender` _Agent_ - the sender of the message.
-- `recipient` _Agent_ - the recipient of the message.
-- `context` _dict_ - a dictionary with the following fields:
-- `problem` _str_ - the problem to be solved.
-- `prompt_type` _str, Optional_ - the type of the prompt. Possible values are "default", "python", "wolfram".
-  (1) "default": the prompt that allows the agent to choose between 3 ways to solve a problem:
-  1. write a python program to solve it directly.
-  2. solve it directly without python.
-  3. solve it step by step with python.
-  (2) "python":
-  a simplified prompt from the third way of the "default" prompt, that asks the assistant
-  to solve the problem step by step with python.
-  (3) "two_tools":
-  a simplified prompt similar to the "python" prompt, but allows the model to choose between
-  Python and Wolfram Alpha to solve the problem.
-- `customized_prompt` _str, Optional_ - a customized prompt to be used. If it is not None, the prompt_type will be ignored.
-  
+<br />
 
-**Returns**:
+### Instance Methods
 
-- `str` - the generated prompt ready to be sent to the assistant agent.
-
-### execute\_one\_python\_code
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### execute_one_python_code
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent.execute_one_python_code" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_one_python_code(pycode)
+execute_one_python_code(self, pycode) -> 
 ```
 
-Execute python code blocks.
+    Execute python code blocks.
+    
+    Previous python code will be saved and executed together with the new code.
+    the "print" function will also be added to the last line of the code if needed
 
-Previous python code will be saved and executed together with the new code.
-the "print" function will also be added to the last line of the code if needed
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `pycode` |  |
 
-### execute\_one\_wolfram\_query
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### execute_one_wolfram_query
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.MathUserProxyAgent.execute_one_wolfram_query" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_one_wolfram_query(query: str)
+execute_one_wolfram_query(self, query: str) -> 
 ```
 
-Run one wolfram query and return the output.
+    Run one wolfram query and return the output.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | string of the query.<br/><br/>**Type:** `str` |
 
-- `query` - string of the query.
-  
+<br />
 
-**Returns**:
-
-- `output` - string with the output of the query.
-- `is_success` - boolean indicating whether the query was successful.
-
-### get\_from\_dict\_or\_env
+    <h2 id="autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">WolframAlphaAPIWrapper</span>
+        <a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def get_from_dict_or_env(data: dict[str, Any],
-                         key: str,
-                         env_key: str,
-                         default: Optional[str] = None) -> str
+WolframAlphaAPIWrapper(**data: Any)
 ```
 
-Get a value from a dictionary or an environment variable.
+    Wrapper for Wolfram Alpha.
+    
+    Docs for using:
+    
+    1. Go to wolfram alpha and sign up for a developer account
+    2. Create an app and get your APP ID
+    3. Save your APP ID into WOLFRAM_ALPHA_APPID env variable
+    4. pip install wolframalpha
+    
+    Create a new model by parsing and validating input data from keyword arguments.
+    
+    Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.
+    
+    `self` is explicitly positional-only to allow `self` as a field name.
 
-## WolframAlphaAPIWrapper
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### Config
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.Config" class="headerlink" title="Permanent link"></a>
+
+    Configuration for this pydantic object.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### wolfram_alpha_appid
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.wolfram_alpha_appid" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### wolfram_client
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.wolfram_client" class="headerlink" title="Permanent link"></a>
+
+    :meta private:
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### validate_environment
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.validate_environment" class="headerlink" title="Permanent link"></a>
 
 ```python
-class WolframAlphaAPIWrapper(BaseModel)
+validate_environment(values: dict) -> dict
 ```
 
-Wrapper for Wolfram Alpha.
+    Validate that api key and python package exists in environment.
 
-Docs for using:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `values` | **Type:** `dict` |
 
-1. Go to wolfram alpha and sign up for a developer account
-2. Create an app and get your APP ID
-3. Save your APP ID into WOLFRAM_ALPHA_APPID env variable
-4. pip install wolframalpha
+<br />
 
-#### wolfram\_client
+### Instance Methods
 
-:meta private:
-
-## Config
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### run
+<a href="#autogen.agentchat.contrib.math_user_proxy_agent.WolframAlphaAPIWrapper.run" class="headerlink" title="Permanent link"></a>
 
 ```python
-class Config()
+run(self, query: str) -> tuple[str, bool]
 ```
 
-Configuration for this pydantic object.
+    Run query through WolframAlpha and parse result.
 
-### validate\_environment
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | **Type:** `str` |
 
-```python
-@root_validator(skip_on_failure=True)
-@classmethod
-def validate_environment(cls, values: dict) -> dict
-```
-
-Validate that api key and python package exists in environment.
-
-### run
-
-```python
-def run(query: str) -> tuple[str, bool]
-```
-
-Run query through WolframAlpha and parse result.
-
+<br />

@@ -1,146 +1,222 @@
 ---
 sidebarTitle: teachability
-title: agentchat.contrib.capabilities.teachability
+title: autogen.agentchat.contrib.capabilities.teachability
 ---
 
-## Teachability
+    <h2 id="autogen.agentchat.contrib.capabilities.teachability.MemoStore" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">MemoStore</span>
+        <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class Teachability(AgentCapability)
+MemoStore(
+    verbosity: int | None = 0,
+    reset: bool | None = False,
+    path_to_db_dir: str | None = './tmp/teachable_agent_db'
+)
 ```
 
-Teachability uses a vector database to give an agent the ability to remember user teachings,
-where the user is any caller (human or not) sending messages to the teachable agent.
-Teachability is designed to be composable with other agent capabilities.
-To make any conversable agent teachable, instantiate both the agent and the Teachability class,
-then pass the agent to teachability.add_to_agent(agent).
-Note that teachable agents in a group chat must be given unique path_to_db_dir values.
+    Provides memory storage and retrieval for a teachable agent, using a vector database.
+    Each DB entry (called a memo) is a pair of strings: an input text and an output text.
+    The input text might be a question, or a task to perform.
+    The output text might be an answer to the question, or advice on how to perform the task.
+    Vector embeddings are currently supplied by Chroma's default Sentence Transformers.
 
-When adding Teachability to an agent, the following are modified:
-- The agent's system message is appended with a note about the agent's new ability.
-- A hook is added to the agent's `process_last_received_message` hookable method,
-and the hook potentially modifies the last of the received messages to include earlier teachings related to the message.
-Added teachings do not propagate into the stored message history.
-If new user teachings are detected, they are added to new memos in the vector database.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `verbosity` | **Type:** `int \| None`<br/><br/>**Default:** 0 |
+| `reset` | **Type:** `bool \| None`<br/><br/>**Default:** False |
+| `path_to_db_dir` | **Type:** `str \| None`<br/><br/>**Default:** './tmp/teachable_agent_db' |
 
-### \_\_init\_\_
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_input_output_pair
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.add_input_output_pair" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(verbosity: Optional[int] = 0,
-             reset_db: Optional[bool] = False,
-             path_to_db_dir: Optional[str] = "./tmp/teachable_agent_db",
-             recall_threshold: Optional[float] = 1.5,
-             max_num_retrievals: Optional[int] = 10,
-             llm_config: Optional[Union[dict, bool]] = None)
+add_input_output_pair(
+    self,
+    input_text: str,
+    output_text: str
+) -> 
 ```
 
-**Arguments**:
+    Adds an input-output pair to the vector DB.
 
-- `verbosity` _Optional, int_ - # 0 (default) for basic info, 1 to add memory operations, 2 for analyzer messages, 3 for memo lists.
-- `reset_db` _Optional, bool_ - True to clear the DB before starting. Default False.
-- `path_to_db_dir` _Optional, str_ - path to the directory where this particular agent's DB is stored. Default "./tmp/teachable_agent_db"
-- `recall_threshold` _Optional, float_ - The maximum distance for retrieved memos, where 0.0 is exact match. Default 1.5. Larger values allow more (but less relevant) memos to be recalled.
-- `max_num_retrievals` _Optional, int_ - The maximum number of memos to retrieve from the DB. Default 10.
-- `llm_config` _dict or False_ - llm inference configuration passed to TextAnalyzerAgent.
-  If None, TextAnalyzerAgent uses llm_config from the teachable agent.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `input_text` | **Type:** `str` |
+| `output_text` | **Type:** `str` |
 
-### add\_to\_agent
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_nearest_memo
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.get_nearest_memo" class="headerlink" title="Permanent link"></a>
 
 ```python
-def add_to_agent(agent: ConversableAgent)
+get_nearest_memo(self, query_text: str) -> 
 ```
 
-Adds teachability to the given agent.
+    Retrieves the nearest memo to the given query text.
 
-### prepopulate\_db
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query_text` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_related_memos
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.get_related_memos" class="headerlink" title="Permanent link"></a>
 
 ```python
-def prepopulate_db()
+get_related_memos(
+    self,
+    query_text: str,
+    n_results: int,
+    threshold: int | float
+) -> 
 ```
 
-Adds a few arbitrary memos to the DB.
+    Retrieves memos that are related to the given query text within the specified distance threshold.
 
-### process\_last\_received\_message
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query_text` | **Type:** `str` |
+| `n_results` | **Type:** `int` |
+| `threshold` | **Type:** `int \| float` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### list_memos
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.list_memos" class="headerlink" title="Permanent link"></a>
 
 ```python
-def process_last_received_message(text: Union[dict, str])
+list_memos(self) -> 
 ```
 
-Appends any relevant memos to the message text, and stores any apparent teachings in new memos.
-Uses TextAnalyzerAgent to make decisions about memo storage and retrieval.
+    Prints the contents of MemoStore.
 
-## MemoStore
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### prepopulate
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.prepopulate" class="headerlink" title="Permanent link"></a>
 
 ```python
-class MemoStore()
+prepopulate(self) -> 
 ```
 
-Provides memory storage and retrieval for a teachable agent, using a vector database.
-Each DB entry (called a memo) is a pair of strings: an input text and an output text.
-The input text might be a question, or a task to perform.
-The output text might be an answer to the question, or advice on how to perform the task.
-Vector embeddings are currently supplied by Chroma's default Sentence Transformers.
+    Adds a few arbitrary examples to the vector DB, just to make retrieval less trivial.
 
-### \_\_init\_\_
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### reset_db
+<a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.reset_db" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(verbosity: Optional[int] = 0,
-             reset: Optional[bool] = False,
-             path_to_db_dir: Optional[str] = "./tmp/teachable_agent_db")
+reset_db(self) -> 
 ```
 
-**Arguments**:
+    Forces immediate deletion of the DB's contents, in memory and on disk.
 
-  - verbosity (Optional, int): 1 to print memory operations, 0 to omit them. 3+ to print memo lists.
-  - reset (Optional, bool): True to clear the DB before starting. Default False.
-  - path_to_db_dir (Optional, str): path to the directory where the DB is stored.
+<br />
 
-### list\_memos
+    <h2 id="autogen.agentchat.contrib.capabilities.teachability.Teachability" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">Teachability</span>
+        <a href="#autogen.agentchat.contrib.capabilities.teachability.Teachability" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def list_memos()
+Teachability(
+    verbosity: int | None = 0,
+    reset_db: bool | None = False,
+    path_to_db_dir: str | None = './tmp/teachable_agent_db',
+    recall_threshold: float | None = 1.5,
+    max_num_retrievals: int | None = 10,
+    llm_config: dict | bool | None = None
+)
 ```
 
-Prints the contents of MemoStore.
+    Teachability uses a vector database to give an agent the ability to remember user teachings,
+    where the user is any caller (human or not) sending messages to the teachable agent.
+    Teachability is designed to be composable with other agent capabilities.
+    To make any conversable agent teachable, instantiate both the agent and the Teachability class,
+    then pass the agent to teachability.add_to_agent(agent).
+    Note that teachable agents in a group chat must be given unique path_to_db_dir values.
+    
+    When adding Teachability to an agent, the following are modified:
+    - The agent's system message is appended with a note about the agent's new ability.
+    - A hook is added to the agent's `process_last_received_message` hookable method,
+    and the hook potentially modifies the last of the received messages to include earlier teachings related to the message.
+    Added teachings do not propagate into the stored message history.
+    If new user teachings are detected, they are added to new memos in the vector database.
 
-### reset\_db
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `verbosity` | # 0 (default) for basic info, 1 to add memory operations, 2 for analyzer messages, 3 for memo lists.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 0 |
+| `reset_db` | True to clear the DB before starting.<br/><br/>Default False.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** False |
+| `path_to_db_dir` | path to the directory where this particular agent's DB is stored.<br/><br/>Default "./tmp/teachable_agent_db"<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** './tmp/teachable_agent_db' |
+| `recall_threshold` | The maximum distance for retrieved memos, where 0.0 is exact match.<br/><br/>Default 1.5. Larger values allow more (but less relevant) memos to be recalled.<br/><br/>**Type:** `float \| None`<br/><br/>**Default:** 1.5 |
+| `max_num_retrievals` | The maximum number of memos to retrieve from the DB.<br/><br/>Default 10.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 10 |
+| `llm_config` | llm inference configuration passed to TextAnalyzerAgent.<br/><br/>If None, TextAnalyzerAgent uses llm_config from the teachable agent.<br/><br/>**Type:** `dict \| bool \| None`<br/><br/>**Default:** None |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_to_agent
+<a href="#autogen.agentchat.contrib.capabilities.teachability.Teachability.add_to_agent" class="headerlink" title="Permanent link"></a>
 
 ```python
-def reset_db()
+add_to_agent(self, agent: autogen.agentchat.conversable_agent.ConversableAgent) -> 
 ```
 
-Forces immediate deletion of the DB's contents, in memory and on disk.
+    Adds teachability to the given agent.
 
-### add\_input\_output\_pair
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | **Type:** `autogen.agentchat.conversable_agent.ConversableAgent` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### prepopulate_db
+<a href="#autogen.agentchat.contrib.capabilities.teachability.Teachability.prepopulate_db" class="headerlink" title="Permanent link"></a>
 
 ```python
-def add_input_output_pair(input_text: str, output_text: str)
+prepopulate_db(self) -> 
 ```
 
-Adds an input-output pair to the vector DB.
+    Adds a few arbitrary memos to the DB.
 
-### get\_nearest\_memo
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### process_last_received_message
+<a href="#autogen.agentchat.contrib.capabilities.teachability.Teachability.process_last_received_message" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get_nearest_memo(query_text: str)
+process_last_received_message(self, text: str | dict) -> 
 ```
 
-Retrieves the nearest memo to the given query text.
+    Appends any relevant memos to the message text, and stores any apparent teachings in new memos.
+    Uses TextAnalyzerAgent to make decisions about memo storage and retrieval.
 
-### get\_related\_memos
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `text` | **Type:** `str \| dict` |
 
-```python
-def get_related_memos(query_text: str, n_results: int,
-                      threshold: Union[int, float])
-```
-
-Retrieves memos that are related to the given query text within the specified distance threshold.
-
-### prepopulate
-
-```python
-def prepopulate()
-```
-
-Adds a few arbitrary examples to the vector DB, just to make retrieval less trivial.
-
+<br />

@@ -1,68 +1,105 @@
 ---
 sidebarTitle: embedded_ipython_code_executor
-title: coding.jupyter.embedded_ipython_code_executor
+title: autogen.coding.jupyter.embedded_ipython_code_executor
 ---
 
-## EmbeddedIPythonCodeExecutor
+    <h2 id="autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">EmbeddedIPythonCodeExecutor</span>
+        <a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class EmbeddedIPythonCodeExecutor(BaseModel)
+EmbeddedIPythonCodeExecutor(**kwargs: Any)
 ```
 
-(Experimental) A code executor class that executes code statefully using an embedded
-IPython kernel managed by this class.
+    (Experimental) A code executor class that executes code statefully using an embedded
+    IPython kernel managed by this class.
+    
+    **This will execute LLM generated code on the local machine.**
+    
+    Each execution is stateful and can access variables created from previous
+    executions in the same session. The kernel must be installed before using
+    this class. The kernel can be installed using the following command:
+    `python -m ipykernel install --user --name \{kernel_name}`
+    where `kernel_name` is the name of the kernel to install.
 
-**This will execute LLM generated code on the local machine.**
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**kwargs` | **Type:** `Any` |
 
-Each execution is stateful and can access variables created from previous
-executions in the same session. The kernel must be installed before using
-this class. The kernel can be installed using the following command:
-`python -m ipykernel install --user --name {kernel_name}`
-where `kernel_name` is the name of the kernel to install.
+### Class Attributes
 
-**Arguments**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### kernel_name
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.kernel_name" class="headerlink" title="Permanent link"></a>
 
-- `timeout` _int_ - The timeout for code execution, by default 60.
-- `kernel_name` _str_ - The kernel name to use. Make sure it is installed.
-  By default, it is "python3".
-- `output_dir` _str_ - The directory to save output files, by default ".".
+    <br />
 
-### code\_extractor
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### output_dir
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.output_dir" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### timeout
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.timeout" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code_extractor
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.code_extractor" class="headerlink" title="Permanent link"></a>
+
+    (Experimental) Export a code extractor that can be used by an agent.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### execute_code_blocks
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.execute_code_blocks" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def code_extractor() -> CodeExtractor
+execute_code_blocks(self, code_blocks: list[autogen.coding.base.CodeBlock]) -> autogen.coding.base.IPythonCodeResult
 ```
 
-(Experimental) Export a code extractor that can be used by an agent.
+    (Experimental) Execute a list of code blocks and return the result.
+    
+    This method executes a list of code blocks as cells in an IPython kernel
+    managed by this class.
+    See: https://jupyter-client.readthedocs.io/en/stable/messaging.html
+    for the message protocol.
 
-### execute\_code\_blocks
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code_blocks` | A list of code blocks to execute.<br/><br/>**Type:** `list[autogen.coding.base.CodeBlock]` |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.coding.base.IPythonCodeResult` | IPythonCodeResult: The result of the code execution. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### restart
+<a href="#autogen.coding.jupyter.embedded_ipython_code_executor.EmbeddedIPythonCodeExecutor.restart" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_code_blocks(code_blocks: list[CodeBlock]) -> IPythonCodeResult
+restart(self) -> None
 ```
 
-(Experimental) Execute a list of code blocks and return the result.
+    (Experimental) Restart a new session.
 
-This method executes a list of code blocks as cells in an IPython kernel
-managed by this class.
-See: https://jupyter-client.readthedocs.io/en/stable/messaging.html
-for the message protocol.
-
-**Arguments**:
-
-- `code_blocks` _List[CodeBlock]_ - A list of code blocks to execute.
-  
-
-**Returns**:
-
-- `IPythonCodeResult` - The result of the code execution.
-
-### restart
-
-```python
-def restart() -> None
-```
-
-(Experimental) Restart a new session.
-
+<br />

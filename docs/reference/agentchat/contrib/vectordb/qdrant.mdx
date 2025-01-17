@@ -1,222 +1,163 @@
 ---
 sidebarTitle: qdrant
-title: agentchat.contrib.vectordb.qdrant
+title: autogen.agentchat.contrib.vectordb.qdrant
 ---
 
-## FastEmbedEmbeddingFunction
+    <h2 id="autogen.agentchat.contrib.vectordb.qdrant.EmbeddingFunction" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">EmbeddingFunction</span>
+        <a href="#autogen.agentchat.contrib.vectordb.qdrant.EmbeddingFunction" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class FastEmbedEmbeddingFunction(EmbeddingFunction)
+EmbeddingFunction()
 ```
 
-Embedding function implementation using FastEmbed - https://qdrant.github.io/fastembed.
+    Helper class that provides a standard way to create an ABC using
+    inheritance.
 
-### \_\_init\_\_
+    <h2 id="autogen.agentchat.contrib.vectordb.qdrant.FastEmbedEmbeddingFunction" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">FastEmbedEmbeddingFunction</span>
+        <a href="#autogen.agentchat.contrib.vectordb.qdrant.FastEmbedEmbeddingFunction" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def __init__(model_name: str = "BAAI/bge-small-en-v1.5",
-             batch_size: int = 256,
-             cache_dir: Optional[str] = None,
-             threads: Optional[int] = None,
-             parallel: Optional[int] = None,
-             **kwargs)
+FastEmbedEmbeddingFunction(
+    model_name: str = 'BAAI/bge-small-en-v1.5',
+    batch_size: int = 256,
+    cache_dir: str | None = None,
+    threads: int | None = None,
+    parallel: int | None = None,
+    **kwargs
+)
 ```
 
-Initialize fastembed.TextEmbedding.
+    Embedding function implementation using FastEmbed - https://qdrant.github.io/fastembed.
+    
+    Initialize fastembed.TextEmbedding.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `model_name` | The name of the model to use.<br/><br/>Defaults to `"BAAI/bge-small-en-v1.5"`.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'BAAI/bge-small-en-v1.5' |
+| `batch_size` | Batch size for encoding.<br/><br/>Higher values will use more memory, but be faster.<br/><br/>Defaults to 256.<br/><br/>**Type:** `int`<br/><br/>**Default:** 256 |
+| `cache_dir` | The path to the model cache directory.<br/><br/>Can also be set using the `FASTEMBED_CACHE_PATH` env variable.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `threads` | The number of threads single onnxruntime session can use.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** None |
+| `parallel` | If `>1`, data-parallel encoding will be used, recommended for large datasets.<br/><br/>If `0`, use all available cores.<br/><br/>If `None`, don't use data-parallel processing, use default onnxruntime threading.<br/><br/>Defaults to None.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** None |
+| `**kwargs` | Additional options to pass to fastembed.TextEmbedding<br/><br/> |
 
-- `model_name` _str_ - The name of the model to use. Defaults to `"BAAI/bge-small-en-v1.5"`.
-- `batch_size` _int_ - Batch size for encoding. Higher values will use more memory, but be faster.                                        Defaults to 256.
-- `cache_dir` _str, optional_ - The path to the model cache directory.                                       Can also be set using the `FASTEMBED_CACHE_PATH` env variable.
-- `threads` _int, optional_ - The number of threads single onnxruntime session can use.
-- `parallel` _int, optional_ - If `>1`, data-parallel encoding will be used, recommended for large datasets.                                      If `0`, use all available cores.                                      If `None`, don't use data-parallel processing, use default onnxruntime threading.                                      Defaults to None.
-- `**kwargs` - Additional options to pass to fastembed.TextEmbedding
-
-**Raises**:
-
-- `ValueError` - If the model_name is not in the format `<org>/<model>` e.g. BAAI/bge-small-en-v1.5.
-
-## QdrantVectorDB
+    <h2 id="autogen.agentchat.contrib.vectordb.qdrant.QdrantVectorDB" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">QdrantVectorDB</span>
+        <a href="#autogen.agentchat.contrib.vectordb.qdrant.QdrantVectorDB" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class QdrantVectorDB(VectorDB)
+QdrantVectorDB(
+    *,
+    client=None,
+    embedding_function: autogen.agentchat.contrib.vectordb.qdrant.EmbeddingFunction = None,
+    content_payload_key: str = '_content',
+    metadata_payload_key: str = '_metadata',
+    collection_options: dict = \{},
+    **kwargs
+)
 ```
 
-A vector database implementation that uses Qdrant as the backend.
+    A vector database implementation that uses Qdrant as the backend.
+    
+    Initialize the vector database.
 
-### \_\_init\_\_
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `client=None` |  |
+| `embedding_function` | Callable | The embedding function used to generate the vector representation of the documents.<br/><br/>Defaults to FastEmbedEmbeddingFunction.<br/><br/>**Type:** `autogen.agentchat.contrib.vectordb.qdrant.EmbeddingFunction`<br/><br/>**Default:** None |
+| `content_payload_key` | **Type:** `str`<br/><br/>**Default:** '_content' |
+| `metadata_payload_key` | **Type:** `str`<br/><br/>**Default:** '_metadata' |
+| `collection_options` | dict | The options for creating the collection.<br/><br/>**Type:** `dict`<br/><br/>**Default:** \{} |
+| `**kwargs` |  |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_collection
+<a href="#autogen.agentchat.contrib.vectordb.qdrant.QdrantVectorDB.get_collection" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(*,
-             client=None,
-             embedding_function: EmbeddingFunction = None,
-             content_payload_key: str = "_content",
-             metadata_payload_key: str = "_metadata",
-             collection_options: dict = {},
-             **kwargs) -> None
+get_collection(self, collection_name: str = None) -> 
 ```
 
-Initialize the vector database.
+    Get the collection from the vector database.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `collection_name` | str | The name of the collection.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
 
-- `client` - qdrant_client.QdrantClient | An instance of QdrantClient.
-- `embedding_function` - Callable | The embedding function used to generate the vector representation
-  of the documents. Defaults to FastEmbedEmbeddingFunction.
-- `collection_options` - dict | The options for creating the collection.
-- `kwargs` - dict | Additional keyword arguments.
+<br />
 
-### create\_collection
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_docs_by_ids
+<a href="#autogen.agentchat.contrib.vectordb.qdrant.QdrantVectorDB.get_docs_by_ids" class="headerlink" title="Permanent link"></a>
 
 ```python
-def create_collection(collection_name: str,
-                      overwrite: bool = False,
-                      get_or_create: bool = True) -> None
+get_docs_by_ids(
+    self,
+    ids: list[str | int] = None,
+    collection_name: str = None,
+    include=True,
+    **kwargs
+) -> list[autogen.agentchat.contrib.vectordb.base.Document]
 ```
 
-Create a collection in the vector database.
-Case 1. if the collection does not exist, create the collection.
-Case 2. the collection exists, if overwrite is True, it will overwrite the collection.
-Case 3. the collection exists and overwrite is False, if get_or_create is True, it will get the collection,
-otherwise it raise a ValueError.
+    Retrieve documents from the collection of the vector database based on the ids.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `ids` | List[ItemID] | A list of document ids.<br/><br/>If None, will return all the documents.<br/><br/>Default is None.<br/><br/>**Type:** `list[str \| int]`<br/><br/>**Default:** None |
+| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
+| `include=True` |  |
+| `**kwargs` |  |
 
-- `collection_name` - str | The name of the collection.
-- `overwrite` - bool | Whether to overwrite the collection if it exists. Default is False.
-- `get_or_create` - bool | Whether to get the collection if it exists. Default is True.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[autogen.agentchat.contrib.vectordb.base.Document]` | List[Document] \| The results. |
 
-**Returns**:
+<br />
 
-  Any | The collection object.
-
-### get\_collection
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### retrieve_docs
+<a href="#autogen.agentchat.contrib.vectordb.qdrant.QdrantVectorDB.retrieve_docs" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get_collection(collection_name: str = None)
+retrieve_docs(
+    self,
+    queries: list[str],
+    collection_name: str = None,
+    n_results: int = 10,
+    distance_threshold: float = 0,
+    **kwargs
+) -> list[list[tuple[autogen.agentchat.contrib.vectordb.base.Document, float]]]
 ```
 
-Get the collection from the vector database.
+    Retrieve documents from the collection of the vector database based on the queries.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `queries` | List[str] | A list of queries.<br/><br/>Each query is a string.<br/><br/>**Type:** `list[str]` |
+| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
+| `n_results` | int | The number of relevant documents to return.<br/><br/>Default is 10.<br/><br/>**Type:** `int`<br/><br/>**Default:** 10 |
+| `distance_threshold` | float | The threshold for the distance score, only distance smaller than it will be returned.<br/><br/>Don't filter with it if `&lt; 0`.<br/><br/>Default is 0.<br/><br/>**Type:** `float`<br/><br/>**Default:** 0 |
+| `**kwargs` |  |
 
-- `collection_name` - str | The name of the collection.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[list[tuple[autogen.agentchat.contrib.vectordb.base.Document, float]]]` | QueryResults \| The query results. Each query result is a list of list of tuples containing the document and the distance. |
 
-**Returns**:
-
-  Any | The collection object.
-
-### delete\_collection
-
-```python
-def delete_collection(collection_name: str) -> None
-```
-
-Delete the collection from the vector database.
-
-**Arguments**:
-
-- `collection_name` - str | The name of the collection.
-  
-
-**Returns**:
-
-  Any
-
-### insert\_docs
-
-```python
-def insert_docs(docs: list[Document],
-                collection_name: str = None,
-                upsert: bool = False) -> None
-```
-
-Insert documents into the collection of the vector database.
-
-**Arguments**:
-
-- `docs` - List[Document] | A list of documents. Each document is a TypedDict `Document`.
-- `collection_name` - str | The name of the collection. Default is None.
-- `upsert` - bool | Whether to update the document if it exists. Default is False.
-- `kwargs` - Dict | Additional keyword arguments.
-  
-
-**Returns**:
-
-  None
-
-### delete\_docs
-
-```python
-def delete_docs(ids: list[ItemID],
-                collection_name: str = None,
-                **kwargs) -> None
-```
-
-Delete documents from the collection of the vector database.
-
-**Arguments**:
-
-- `ids` - List[ItemID] | A list of document ids. Each id is a typed `ItemID`.
-- `collection_name` - str | The name of the collection. Default is None.
-- `kwargs` - Dict | Additional keyword arguments.
-  
-
-**Returns**:
-
-  None
-
-### retrieve\_docs
-
-```python
-def retrieve_docs(queries: list[str],
-                  collection_name: str = None,
-                  n_results: int = 10,
-                  distance_threshold: float = 0,
-                  **kwargs) -> QueryResults
-```
-
-Retrieve documents from the collection of the vector database based on the queries.
-
-**Arguments**:
-
-- `queries` - List[str] | A list of queries. Each query is a string.
-- `collection_name` - str | The name of the collection. Default is None.
-- `n_results` - int | The number of relevant documents to return. Default is 10.
-- `distance_threshold` - float | The threshold for the distance score, only distance smaller than it will be
-  returned. Don't filter with it if `< 0`. Default is 0.
-- `kwargs` - Dict | Additional keyword arguments.
-  
-
-**Returns**:
-
-  QueryResults | The query results. Each query result is a list of list of tuples containing the document and
-  the distance.
-
-### get\_docs\_by\_ids
-
-```python
-def get_docs_by_ids(ids: list[ItemID] = None,
-                    collection_name: str = None,
-                    include=True,
-                    **kwargs) -> list[Document]
-```
-
-Retrieve documents from the collection of the vector database based on the ids.
-
-**Arguments**:
-
-- `ids` - List[ItemID] | A list of document ids. If None, will return all the documents. Default is None.
-- `collection_name` - str | The name of the collection. Default is None.
-- `include` - List[str] | The fields to include. Default is True.
-  If None, will include ["metadatas", "documents"], ids will always be included.
-- `kwargs` - dict | Additional keyword arguments.
-  
-
-**Returns**:
-
-  List[Document] | The results.
-
+<br />

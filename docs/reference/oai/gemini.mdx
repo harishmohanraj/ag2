@@ -1,92 +1,157 @@
 ---
 sidebarTitle: gemini
-title: oai.gemini
+title: autogen.oai.gemini
 ---
 
-Create a OpenAI-compatible client for Gemini features.
+## Functions
 
-**Example**:
-
-    ```python
-    llm_config = {
-        "config_list": [
-            {
-                "api_type": "google",
-                "model": "gemini-pro",
-                "api_key": os.environ.get("GOOGLE_GEMINI_API_KEY"),
-                "safety_settings": [
-                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
-                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
-                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH"},
-                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH"},
-                ],
-                "top_p": 0.5,
-                "max_tokens": 2048,
-                "temperature": 1.0,
-                "top_k": 5,
-            }
-        ]
-    }
-
-    agent = autogen.AssistantAgent("my_agent", llm_config=llm_config)
-    ```
-  
-  Resources:
-  - https://ai.google.dev/docs
-  - https://cloud.google.com/vertex-ai/generative-ai/docs/migrate/migrate-from-azure-to-gemini
-  - https://blog.google/technology/ai/google-gemini-pro-imagen-duet-ai-update/
-  - https://ai.google.dev/api/python/google/generativeai/ChatSession
-
-## GeminiClient
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### calculate_gemini_cost
+<a href="#autogen.oai.gemini..calculate_gemini_cost" class="headerlink" title="Permanent link"></a>
 
 ```python
-class GeminiClient()
+calculate_gemini_cost(
+    use_vertexai: bool,
+    input_tokens: int,
+    output_tokens: int,
+    model_name: str
+) -> float
 ```
 
-Client for Google's Gemini API.
+    
 
-### \_\_init\_\_
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `use_vertexai` | **Type:** `bool` |
+| `input_tokens` | **Type:** `int` |
+| `output_tokens` | **Type:** `int` |
+| `model_name` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### get_image_data
+<a href="#autogen.oai.gemini..get_image_data" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(**kwargs)
+get_image_data(image_file: str, use_b64=True) -> bytes
 ```
 
-Uses either either api_key for authentication from the LLM config
-(specifying the GOOGLE_GEMINI_API_KEY environment variable also works),
-or follows the Google authentication mechanism for VertexAI in Google Cloud if no api_key is specified,
-where project_id and location can also be passed as parameters. Previously created credentials object can be provided,
-or a Service account key file can also be used. If neither a service account key file, nor the api_key are passed,
-then the default credentials will be used, which could be a personal account if the user is already authenticated in,
-like in Google Cloud Shell.
+    
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `image_file` | **Type:** `str` |
+| `use_b64=True` |  |
 
-- `api_key` _str_ - The API key for using Gemini.
-- `credentials` _google.auth.credentials.Credentials_ - credentials to be used for authentication with vertexai.
-- `google_application_credentials` _str_ - Path to the JSON service account key file of the service account.
-  Alternatively, the GOOGLE_APPLICATION_CREDENTIALS environment variable
-  can also be set instead of using this argument.
-- `project_id` _str_ - Google Cloud project id, which is only valid in case no API key is specified.
-- `location` _str_ - Compute region to be used, like 'us-west1'.
-  This parameter is only valid in case no API key is specified.
+<br />
 
-### message\_retrieval
+    <h2 id="autogen.oai.gemini.GeminiClient" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">GeminiClient</span>
+        <a href="#autogen.oai.gemini.GeminiClient" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def message_retrieval(response) -> list
+GeminiClient(**kwargs)
 ```
 
-Retrieve and return a list of strings or a list of Choice.Message from the response.
+    Client for Google's Gemini API.
+    
+    Uses either either api_key for authentication from the LLM config
+    (specifying the GOOGLE_GEMINI_API_KEY environment variable also works),
+    or follows the Google authentication mechanism for VertexAI in Google Cloud if no api_key is specified,
+    where project_id and location can also be passed as parameters. Previously created credentials object can be provided,
+    or a Service account key file can also be used. If neither a service account key file, nor the api_key are passed,
+    then the default credentials will be used, which could be a personal account if the user is already authenticated in,
+    like in Google Cloud Shell.
 
-NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
-since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**kwargs` |  |
 
-### get\_usage
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### PARAMS_MAPPING
+<a href="#autogen.oai.gemini.GeminiClient.PARAMS_MAPPING" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_usage
+<a href="#autogen.oai.gemini.GeminiClient.get_usage" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def get_usage(response) -> dict
+get_usage(response) -> dict
 ```
 
-Return usage summary of the response using RESPONSE_USAGE_KEYS.
+    Return usage summary of the response using RESPONSE_USAGE_KEYS.
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### cost
+<a href="#autogen.oai.gemini.GeminiClient.cost" class="headerlink" title="Permanent link"></a>
+
+```python
+cost(self, response) -> float
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create
+<a href="#autogen.oai.gemini.GeminiClient.create" class="headerlink" title="Permanent link"></a>
+
+```python
+create(self, params: dict) -> openai.types.chat.chat_completion.ChatCompletion
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `params` | **Type:** `dict` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### message_retrieval
+<a href="#autogen.oai.gemini.GeminiClient.message_retrieval" class="headerlink" title="Permanent link"></a>
+
+```python
+message_retrieval(self, response) -> list
+```
+
+    Retrieve and return a list of strings or a list of Choice.Message from the response.
+    
+    NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
+    since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />

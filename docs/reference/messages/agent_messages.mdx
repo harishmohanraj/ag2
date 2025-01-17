@@ -1,38 +1,896 @@
 ---
 sidebarTitle: agent_messages
-title: messages.agent_messages
+title: autogen.messages.agent_messages
 ---
 
-## FunctionCallMessage
+    <h2 id="autogen.messages.agent_messages.ClearAgentsHistoryMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ClearAgentsHistoryMessage</span>
+        <a href="#autogen.messages.agent_messages.ClearAgentsHistoryMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@wrap_message
-class FunctionCallMessage(BasePrintReceivedMessage)
+ClearAgentsHistoryMessage(*args: Any, **data: Any)
 ```
 
-#### content
+    A message class for clearing an agent's history.
 
-type: ignore [assignment]
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
 
-## ToolCallMessage
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### agent_name
+<a href="#autogen.messages.agent_messages.ClearAgentsHistoryMessage.agent_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ClearAgentsHistoryMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### nr_messages_to_preserve
+<a href="#autogen.messages.agent_messages.ClearAgentsHistoryMessage.nr_messages_to_preserve" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ClearConversableAgentHistoryMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ClearConversableAgentHistoryMessage</span>
+        <a href="#autogen.messages.agent_messages.ClearConversableAgentHistoryMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@wrap_message
-class ToolCallMessage(BasePrintReceivedMessage)
+ClearConversableAgentHistoryMessage(*args: Any, **data: Any)
 ```
 
-#### content
+    A message class for clearing a conversable agent's history.
 
-type: ignore [assignment]
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
 
-## TextMessage
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### agent_name
+<a href="#autogen.messages.agent_messages.ClearConversableAgentHistoryMessage.agent_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ClearConversableAgentHistoryMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### no_messages_preserved
+<a href="#autogen.messages.agent_messages.ClearConversableAgentHistoryMessage.no_messages_preserved" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.ClearConversableAgentHistoryMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ConversableAgentUsageSummaryMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ConversableAgentUsageSummaryMessage</span>
+        <a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@wrap_message
-class TextMessage(BasePrintReceivedMessage)
+ConversableAgentUsageSummaryMessage(*args: Any, **data: Any)
 ```
 
+    A message class for summarizing the usage of a conversable agent.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ConversableAgentUsageSummaryNoCostIncurredMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ConversableAgentUsageSummaryNoCostIncurredMessage</span>
+        <a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryNoCostIncurredMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ConversableAgentUsageSummaryNoCostIncurredMessage(*args: Any, **data: Any)
+```
+
+    A message class indicating that no cost was incurred from a conversable agent.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryNoCostIncurredMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.ConversableAgentUsageSummaryNoCostIncurredMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ExecuteCodeBlockMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ExecuteCodeBlockMessage</span>
+        <a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ExecuteCodeBlockMessage(*args: Any, **data: Any)
+```
+
+    A message class for executing a code block.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code
+<a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage.code" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code_block_count
+<a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage.code_block_count" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### language
+<a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage.language" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.ExecuteCodeBlockMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ExecuteFunctionMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ExecuteFunctionMessage</span>
+        <a href="#autogen.messages.agent_messages.ExecuteFunctionMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ExecuteFunctionMessage(*args: Any, **data: Any)
+```
+
+    A message class for executing a function.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### arguments
+<a href="#autogen.messages.agent_messages.ExecuteFunctionMessage.arguments" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### call_id
+<a href="#autogen.messages.agent_messages.ExecuteFunctionMessage.call_id" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### func_name
+<a href="#autogen.messages.agent_messages.ExecuteFunctionMessage.func_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ExecuteFunctionMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.ExecuteFunctionMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.FunctionCallMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">FunctionCallMessage</span>
+        <a href="#autogen.messages.agent_messages.FunctionCallMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+FunctionCallMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a function call.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### content
+<a href="#autogen.messages.agent_messages.FunctionCallMessage.content" class="headerlink" title="Permanent link"></a>
 
-type: ignore [assignment]
+    <br />
 
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### function_call
+<a href="#autogen.messages.agent_messages.FunctionCallMessage.function_call" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.FunctionCallMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.FunctionResponseMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">FunctionResponseMessage</span>
+        <a href="#autogen.messages.agent_messages.FunctionResponseMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+FunctionResponseMessage(*args: Any, **data: Any)
+```
+
+    A message class representing the response from a function call.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### content
+<a href="#autogen.messages.agent_messages.FunctionResponseMessage.content" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.FunctionResponseMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### name
+<a href="#autogen.messages.agent_messages.FunctionResponseMessage.name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### role
+<a href="#autogen.messages.agent_messages.FunctionResponseMessage.role" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">GenerateCodeExecutionReplyMessage</span>
+        <a href="#autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+GenerateCodeExecutionReplyMessage(*args: Any, **data: Any)
+```
+
+    A message class for generating a code execution reply.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code_block_languages
+<a href="#autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage.code_block_languages" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### sender_name
+<a href="#autogen.messages.agent_messages.GenerateCodeExecutionReplyMessage.sender_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.GroupChatResumeMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">GroupChatResumeMessage</span>
+        <a href="#autogen.messages.agent_messages.GroupChatResumeMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+GroupChatResumeMessage(*args: Any, **data: Any)
+```
+
+    A message class for resuming a group chat.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### last_speaker_name
+<a href="#autogen.messages.agent_messages.GroupChatResumeMessage.last_speaker_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### messages
+<a href="#autogen.messages.agent_messages.GroupChatResumeMessage.messages" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.GroupChatResumeMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.GroupChatResumeMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.GroupChatRunChatMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">GroupChatRunChatMessage</span>
+        <a href="#autogen.messages.agent_messages.GroupChatRunChatMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+GroupChatRunChatMessage(*args: Any, **data: Any)
+```
+
+    A message class for running a group chat.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.GroupChatRunChatMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### speaker_name
+<a href="#autogen.messages.agent_messages.GroupChatRunChatMessage.speaker_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.GroupChatRunChatMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.PostCarryoverProcessingMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">PostCarryoverProcessingMessage</span>
+        <a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+PostCarryoverProcessingMessage(*args: Any, **data: Any)
+```
+
+    A message class for post-carryover processing.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### carryover
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.carryover" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### max_turns
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.max_turns" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### message
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.message" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### sender_name
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.sender_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### summary_args
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.summary_args" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### summary_method
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.summary_method" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.PostCarryoverProcessingMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.SelectSpeakerMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SelectSpeakerMessage</span>
+        <a href="#autogen.messages.agent_messages.SelectSpeakerMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+SelectSpeakerMessage(*args: Any, **data: Any)
+```
+
+    A message class for selecting the next speaker.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### agent_names
+<a href="#autogen.messages.agent_messages.SelectSpeakerMessage.agent_names" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.SelectSpeakerMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SpeakerAttemptFailedMultipleAgentsMessage</span>
+        <a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+SpeakerAttemptFailedMultipleAgentsMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a failed speaker selection attempt due to multiple agent names.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempt
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage.attempt" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempts_left
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage.attempts_left" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### mentions
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage.mentions" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedMultipleAgentsMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SpeakerAttemptFailedNoAgentsMessage</span>
+        <a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+SpeakerAttemptFailedNoAgentsMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a failed speaker selection attempt due to no agent names.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempt
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage.attempt" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempts_left
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage.attempts_left" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### mentions
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage.mentions" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.SpeakerAttemptFailedNoAgentsMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SpeakerAttemptSuccessfullMessage</span>
+        <a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+SpeakerAttemptSuccessfullMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a successful speaker selection attempt.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempt
+<a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage.attempt" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### attempts_left
+<a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage.attempts_left" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### mentions
+<a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage.mentions" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### verbose
+<a href="#autogen.messages.agent_messages.SpeakerAttemptSuccessfullMessage.verbose" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.TerminationAndHumanReplyMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">TerminationAndHumanReplyMessage</span>
+        <a href="#autogen.messages.agent_messages.TerminationAndHumanReplyMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+TerminationAndHumanReplyMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a termination and human reply message.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.TerminationAndHumanReplyMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### no_human_input_msg
+<a href="#autogen.messages.agent_messages.TerminationAndHumanReplyMessage.no_human_input_msg" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### recipient_name
+<a href="#autogen.messages.agent_messages.TerminationAndHumanReplyMessage.recipient_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### sender_name
+<a href="#autogen.messages.agent_messages.TerminationAndHumanReplyMessage.sender_name" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.TextMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">TextMessage</span>
+        <a href="#autogen.messages.agent_messages.TextMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+TextMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a simple text message.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### content
+<a href="#autogen.messages.agent_messages.TextMessage.content" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.TextMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ToolCallMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ToolCallMessage</span>
+        <a href="#autogen.messages.agent_messages.ToolCallMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ToolCallMessage(*args: Any, **data: Any)
+```
+
+    A message class representing a tool call.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### audio
+<a href="#autogen.messages.agent_messages.ToolCallMessage.audio" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### content
+<a href="#autogen.messages.agent_messages.ToolCallMessage.content" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### function_call
+<a href="#autogen.messages.agent_messages.ToolCallMessage.function_call" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ToolCallMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### refusal
+<a href="#autogen.messages.agent_messages.ToolCallMessage.refusal" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### role
+<a href="#autogen.messages.agent_messages.ToolCallMessage.role" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tool_calls
+<a href="#autogen.messages.agent_messages.ToolCallMessage.tool_calls" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.messages.agent_messages.ToolResponseMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ToolResponseMessage</span>
+        <a href="#autogen.messages.agent_messages.ToolResponseMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ToolResponseMessage(*args: Any, **data: Any)
+```
+
+    A message class representing the response from a tool call.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### content
+<a href="#autogen.messages.agent_messages.ToolResponseMessage.content" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.agent_messages.ToolResponseMessage.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### role
+<a href="#autogen.messages.agent_messages.ToolResponseMessage.role" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tool_responses
+<a href="#autogen.messages.agent_messages.ToolResponseMessage.tool_responses" class="headerlink" title="Permanent link"></a>
+
+    <br />

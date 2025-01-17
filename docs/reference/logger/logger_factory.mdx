@@ -1,33 +1,41 @@
 ---
 sidebarTitle: logger_factory
-title: logger.logger_factory
+title: autogen.logger.logger_factory
 ---
 
-## LoggerFactory
+    <h2 id="autogen.logger.logger_factory.LoggerFactory" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">LoggerFactory</span>
+        <a href="#autogen.logger.logger_factory.LoggerFactory" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class LoggerFactory()
+LoggerFactory()
 ```
 
-Factory class to create logger objects.
+    Factory class to create logger objects.
 
-### get\_logger
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_logger
+<a href="#autogen.logger.logger_factory.LoggerFactory.get_logger" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def get_logger(logger_type: Literal["sqlite", "file"] = "sqlite",
-               config: Optional[dict[str, Any]] = None) -> BaseLogger
+get_logger(logger_type: Literal['sqlite', 'file'] = 'sqlite', config: dict[str, typing.Any] | None = None) -> autogen.logger.base_logger.BaseLogger
 ```
 
-Factory method to create logger objects.
+    Factory method to create logger objects.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `logger_type` | Type of logger.<br/><br/>Defaults to "sqlite".<br/><br/>**Type:** `Literal['sqlite', 'file']`<br/><br/>**Default:** 'sqlite' |
+| `config` | Configuration for logger.<br/><br/>Defaults to None.<br/><br/>**Type:** `dict[str, typing.Any] \| None`<br/><br/>**Default:** None |
 
-- `logger_type` _Literal["sqlite", "file"], optional_ - Type of logger. Defaults to "sqlite".
-- `config` _Optional[dict[str, Any]], optional_ - Configuration for logger. Defaults to None.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.logger.base_logger.BaseLogger` | BaseLogger: Logger object |
 
-**Returns**:
-
-- `BaseLogger` - Logger object
-
+<br />

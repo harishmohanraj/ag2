@@ -1,24 +1,29 @@
 ---
 sidebarTitle: perform_web_search
-title: agentchat.contrib.captainagent.tools.information_retrieval.perform_web_search
+title: autogen.agentchat.contrib.captainagent.tools.information_retrieval.perform_web_search
 ---
 
-### perform\_web\_search
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### perform_web_search
+<a href="#autogen.agentchat.contrib.captainagent.tools.information_retrieval.perform_web_search..perform_web_search" class="headerlink" title="Permanent link"></a>
 
 ```python
-def perform_web_search(query, count=10, offset=0)
+perform_web_search(
+    query,
+    count=10,
+    offset=0
+) -> 
 ```
 
-Perform a web search using Bing API.
+    Perform a web search using Bing API.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | The search query.<br/><br/> |
+| `count=10` |  |
+| `offset=0` |  |
 
-- `query` _str_ - The search query.
-- `count` _int, optional_ - Number of search results to retrieve. Defaults to 10.
-- `offset` _int, optional_ - Offset of the first search result. Defaults to 0.
-  
-
-**Returns**:
-
-  The name, URL and snippet of each search result.
-
+<br />

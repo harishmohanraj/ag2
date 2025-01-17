@@ -1,95 +1,158 @@
 ---
 sidebarTitle: together
-title: oai.together
+title: autogen.oai.together
 ---
 
-Create an OpenAI-compatible client using Together.AI's API.
+## Functions
 
-**Example**:
-
-    ```python
-    llm_config = {
-        "config_list": [
-            {
-                "api_type": "together",
-                "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
-                "api_key": os.environ.get("TOGETHER_API_KEY"),
-            }
-        ]
-    }
-
-    agent = autogen.AssistantAgent("my_agent", llm_config=llm_config)
-    ```
-  
-  Install Together.AI python library using: pip install --upgrade together
-  
-  Resources:
-  - https://docs.together.ai/docs/inference-python
-
-## TogetherClient
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### calculate_together_cost
+<a href="#autogen.oai.together..calculate_together_cost" class="headerlink" title="Permanent link"></a>
 
 ```python
-class TogetherClient()
+calculate_together_cost(
+    input_tokens: int,
+    output_tokens: int,
+    model_name: str
+) -> float
 ```
 
-Client for Together.AI's API.
+    Cost calculation for inference
 
-### \_\_init\_\_
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `input_tokens` | **Type:** `int` |
+| `output_tokens` | **Type:** `int` |
+| `model_name` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### oai_messages_to_together_messages
+<a href="#autogen.oai.together..oai_messages_to_together_messages" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(**kwargs)
+oai_messages_to_together_messages(messages: list[dict[str, Any]]) -> list[dict[str, typing.Any]]
 ```
 
-Requires api_key or environment variable to be set
+    Convert messages from OAI format to Together.AI format.
+    We correct for any specific role orders and types.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `messages` | **Type:** `list[dict[str, Any]]` |
 
-- `api_key` _str_ - The API key for using Together.AI (or environment variable TOGETHER_API_KEY needs to be set)
+<br />
 
-### message\_retrieval
+    <h2 id="autogen.oai.together.TogetherClient" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">TogetherClient</span>
+        <a href="#autogen.oai.together.TogetherClient" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def message_retrieval(response) -> list
+TogetherClient(**kwargs)
 ```
 
-Retrieve and return a list of strings or a list of Choice.Message from the response.
+    Client for Together.AI's API.
+    
+    Requires api_key or environment variable to be set
 
-NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
-since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**kwargs` |  |
 
-### get\_usage
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_usage
+<a href="#autogen.oai.together.TogetherClient.get_usage" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def get_usage(response) -> dict
+get_usage(response) -> dict
 ```
 
-Return usage summary of the response using RESPONSE_USAGE_KEYS.
+    Return usage summary of the response using RESPONSE_USAGE_KEYS.
 
-### parse\_params
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### cost
+<a href="#autogen.oai.together.TogetherClient.cost" class="headerlink" title="Permanent link"></a>
 
 ```python
-def parse_params(params: dict[str, Any]) -> dict[str, Any]
+cost(self, response) -> float
 ```
 
-Loads the parameters for Together.AI API from the passed in parameters and returns a validated set. Checks types, ranges, and sets defaults
+    
 
-### oai\_messages\_to\_together\_messages
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create
+<a href="#autogen.oai.together.TogetherClient.create" class="headerlink" title="Permanent link"></a>
 
 ```python
-def oai_messages_to_together_messages(
-        messages: list[dict[str, Any]]) -> list[dict[str, Any]]
+create(self, params: dict) -> openai.types.chat.chat_completion.ChatCompletion
 ```
 
-Convert messages from OAI format to Together.AI format.
-We correct for any specific role orders and types.
+    
 
-### calculate\_together\_cost
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `params` | **Type:** `dict` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### message_retrieval
+<a href="#autogen.oai.together.TogetherClient.message_retrieval" class="headerlink" title="Permanent link"></a>
 
 ```python
-def calculate_together_cost(input_tokens: int, output_tokens: int,
-                            model_name: str) -> float
+message_retrieval(self, response) -> list
 ```
 
-Cost calculation for inference
+    Retrieve and return a list of strings or a list of Choice.Message from the response.
+    
+    NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
+    since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### parse_params
+<a href="#autogen.oai.together.TogetherClient.parse_params" class="headerlink" title="Permanent link"></a>
+
+```python
+parse_params(self, params: dict[str, Any]) -> dict[str, typing.Any]
+```
+
+    Loads the parameters for Together.AI API from the passed in parameters and returns a validated set. Checks types, ranges, and sets defaults
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `params` | **Type:** `dict[str, Any]` |
+
+<br />

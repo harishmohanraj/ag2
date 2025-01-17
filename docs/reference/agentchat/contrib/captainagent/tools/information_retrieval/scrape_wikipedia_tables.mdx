@@ -1,24 +1,24 @@
 ---
 sidebarTitle: scrape_wikipedia_tables
-title: agentchat.contrib.captainagent.tools.information_retrieval.scrape_wikipedia_tables
+title: autogen.agentchat.contrib.captainagent.tools.information_retrieval.scrape_wikipedia_tables
 ---
 
-### scrape\_wikipedia\_tables
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### scrape_wikipedia_tables
+<a href="#autogen.agentchat.contrib.captainagent.tools.information_retrieval.scrape_wikipedia_tables..scrape_wikipedia_tables" class="headerlink" title="Permanent link"></a>
 
 ```python
-def scrape_wikipedia_tables(url: str, header_keyword: str)
+scrape_wikipedia_tables(url: str, header_keyword: str) -> 
 ```
 
-Scrapes Wikipedia tables based on a given URL and header keyword.
+    Scrapes Wikipedia tables based on a given URL and header keyword.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `url` | The URL of the Wikipedia page to scrape.<br/><br/>**Type:** `str` |
+| `header_keyword` | The keyword to search for in the headers of the page.<br/><br/>**Type:** `str` |
 
-- `url` - The URL of the Wikipedia page to scrape.
-- `header_keyword` - The keyword to search for in the headers of the page.
-  
-
-**Returns**:
-
-- `list` - A list of lists representing the scraped table data. Each inner list represents a row in the table,
-  with each element representing a cell value.
-
+<br />

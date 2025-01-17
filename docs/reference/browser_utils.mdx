@@ -1,48 +1,115 @@
 ---
 sidebarTitle: browser_utils
-title: browser_utils
+title: autogen.browser_utils
 ---
 
-## SimpleTextBrowser
+    <h2 id="autogen.browser_utils.SimpleTextBrowser" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SimpleTextBrowser</span>
+        <a href="#autogen.browser_utils.SimpleTextBrowser" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class SimpleTextBrowser()
+SimpleTextBrowser(
+    start_page: str | None = None,
+    viewport_size: int | None = 8192,
+    downloads_folder: str | None = None,
+    bing_base_url: str = 'https://api.bing.microsoft.com/v7.0/search',
+    bing_api_key: str | None = None,
+    request_kwargs: dict[str, typing.Any] | None = None
+)
 ```
 
-(In preview) An extremely simple text-based web browser comparable to Lynx. Suitable for Agentic use.
+    (In preview) An extremely simple text-based web browser comparable to Lynx. Suitable for Agentic use.
+    
+    Initialize the browser with the given parameters.
 
-### address
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `start_page` | The initial page to load.<br/><br/>Defaults to None.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `viewport_size` | The number of characters to display per page.<br/><br/>Defaults to 1024 * 8.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 8192 |
+| `downloads_folder` | The folder to save downloads to.<br/><br/>Defaults to None.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `bing_base_url` | The base URL for Bing searches.<br/><br/>Defaults to "https://api.bing.microsoft.com/v7.0/search".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'https |
+| `bing_api_key` | The API key for Bing searches.<br/><br/>Defaults to None.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `request_kwargs` | Additional keyword arguments to pass to the requests library.<br/><br/>Defaults to None.<br/><br/>**Type:** `dict[str, typing.Any] \| None`<br/><br/>**Default:** None |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### address
+<a href="#autogen.browser_utils.SimpleTextBrowser.address" class="headerlink" title="Permanent link"></a>
+
+    Return the address of the current page.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### page_content
+<a href="#autogen.browser_utils.SimpleTextBrowser.page_content" class="headerlink" title="Permanent link"></a>
+
+    Return the full contents of the current page.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### viewport
+<a href="#autogen.browser_utils.SimpleTextBrowser.viewport" class="headerlink" title="Permanent link"></a>
+
+    Return the content of the current viewport.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### page_down
+<a href="#autogen.browser_utils.SimpleTextBrowser.page_down" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def address() -> str
+page_down(self) -> None
 ```
 
-Return the address of the current page.
+    Move the viewport down by one page.
 
-### viewport
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### page_up
+<a href="#autogen.browser_utils.SimpleTextBrowser.page_up" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def viewport() -> str
+page_up(self) -> None
 ```
 
-Return the content of the current viewport.
+    Move the viewport up by one page.
 
-### page\_content
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_address
+<a href="#autogen.browser_utils.SimpleTextBrowser.set_address" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def page_content() -> str
+set_address(self, uri_or_path: str) -> None
 ```
 
-Return the full contents of the current page.
+    Set the address of the current page.
 
-### visit\_page
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `uri_or_path` | The URI or path to set as the current page.<br/><br/>**Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### visit_page
+<a href="#autogen.browser_utils.SimpleTextBrowser.visit_page" class="headerlink" title="Permanent link"></a>
 
 ```python
-def visit_page(path_or_uri: str) -> str
+visit_page(self, path_or_uri: str) -> str
 ```
 
-Update the address, visit the page, and return the content of the viewport.
+    Update the address, visit the page, and return the content of the viewport.
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `path_or_uri` | The URI or path to visit.<br/><br/>**Type:** `str` |
+
+<br />

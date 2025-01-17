@@ -1,53 +1,68 @@
 ---
 sidebarTitle: multimodal_conversable_agent
-title: agentchat.contrib.multimodal_conversable_agent
+title: autogen.agentchat.contrib.multimodal_conversable_agent
 ---
 
-## MultimodalConversableAgent
+    <h2 id="autogen.agentchat.contrib.multimodal_conversable_agent.MultimodalConversableAgent" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">MultimodalConversableAgent</span>
+        <a href="#autogen.agentchat.contrib.multimodal_conversable_agent.MultimodalConversableAgent" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class MultimodalConversableAgent(ConversableAgent)
+MultimodalConversableAgent(
+    name: str,
+    system_message: str | list | None = 'You are a helpful AI assistant.',
+    is_termination_msg: str = None,
+    *args,
+    **kwargs
+)
 ```
 
-### \_\_init\_\_
+    (In preview) A class for generic conversable agents which can be configured as assistant or user proxy.
+    
+    After receiving each message, the agent will send a reply to the sender unless the msg is a termination msg.
+    For example, AssistantAgent and UserProxyAgent are subclasses of this class,
+    configured with different default settings.
+    
+    To modify auto reply, override `generate_reply` method.
+    To disable/enable human response in every turn, set `human_input_mode` to "NEVER" or "ALWAYS".
+    To modify the way to get human input, override `get_human_input` method.
+    To modify the way to execute code blocks, single code block, or function call, override `execute_code_blocks`,
+    `run_code`, and `execute_function` methods respectively.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `name` | agent name.<br/><br/>**Type:** `str` |
+| `system_message` | system message for the OpenAIWrapper inference.<br/><br/>Please override this attribute if you want to reprogram the agent.<br/><br/>**Type:** `str \| list \| None`<br/><br/>**Default:** 'You are a helpful AI assistant.' |
+| `is_termination_msg` | **Type:** `str`<br/><br/>**Default:** None |
+| `*args` |  |
+| `**kwargs` | Please refer to other kwargs in [ConversableAgent](../conversable_agent#init).<br/><br/> |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_CONFIG
+<a href="#autogen.agentchat.contrib.multimodal_conversable_agent.MultimodalConversableAgent.DEFAULT_CONFIG" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### update_system_message
+<a href="#autogen.agentchat.contrib.multimodal_conversable_agent.MultimodalConversableAgent.update_system_message" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(name: str,
-             system_message: Optional[Union[str, list]] = DEFAULT_LMM_SYS_MSG,
-             is_termination_msg: str = None,
-             *args,
-             **kwargs)
+update_system_message(self, system_message: dict | list | str) -> 
 ```
 
-**Arguments**:
+    Update the system message.
 
-- `name` _str_ - agent name.
-- `system_message` _str_ - system message for the OpenAIWrapper inference.
-  Please override this attribute if you want to reprogram the agent.
-- `**kwargs` _dict_ - Please refer to other kwargs in
-  [ConversableAgent](../conversable_agent#init).
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `system_message` | system message for the OpenAIWrapper inference.<br/><br/>**Type:** `dict \| list \| str` |
 
-### update\_system\_message
-
-```python
-def update_system_message(system_message: Union[dict, list, str])
-```
-
-Update the system message.
-
-**Arguments**:
-
-- `system_message` _str_ - system message for the OpenAIWrapper inference.
-
-### generate\_oai\_reply
-
-```python
-def generate_oai_reply(
-    messages: Optional[list[dict]] = None,
-    sender: Optional[Agent] = None,
-    config: Optional[OpenAIWrapper] = None
-) -> tuple[bool, Union[str, dict, None]]
-```
-
-Generate a reply using autogen.oai.
-
+<br />

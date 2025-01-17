@@ -1,165 +1,211 @@
 ---
 sidebarTitle: sqlite_logger
-title: logger.sqlite_logger
+title: autogen.logger.sqlite_logger
 ---
 
-### safe\_serialize
+    <h2 id="autogen.logger.sqlite_logger.SqliteLogger" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">SqliteLogger</span>
+        <a href="#autogen.logger.sqlite_logger.SqliteLogger" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def safe_serialize(obj: Any) -> str
+SqliteLogger(config: dict[str, Any])
 ```
 
-Safely serialize an object to JSON.
+    Sqlite logger class.
+    
+    Initialize the SqliteLogger.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `config` | Configuration for the logger.<br/><br/>**Type:** `dict[str, Any]` |
 
-- `obj` _Any_ - Object to serialize.
-  
+### Class Attributes
 
-**Returns**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### schema_version
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.schema_version" class="headerlink" title="Permanent link"></a>
 
-- `str` - Serialized object.
+    <br />
 
-## SqliteLogger
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_connection
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.get_connection" class="headerlink" title="Permanent link"></a>
 
 ```python
-class SqliteLogger(BaseLogger)
+get_connection(self) -> None | sqlite3.Connection
 ```
 
-Sqlite logger class.
+    Get connection.
 
-### \_\_init\_\_
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_chat_completion
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_chat_completion" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(config: dict[str, Any])
+log_chat_completion(
+    self,
+    invocation_id: uuid.UUID,
+    client_id: int,
+    wrapper_id: int,
+    source: str | Agent,
+    request: dict[str, float | str | list[dict[str, str]]],
+    response: str | ChatCompletion,
+    is_cached: int,
+    cost: float,
+    start_time: str
+) -> None
 ```
 
-Initialize the SqliteLogger.
+    Log chat completion.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `invocation_id` | Invocation ID.<br/><br/>**Type:** `uuid.UUID` |
+| `client_id` | Client ID.<br/><br/>**Type:** `int` |
+| `wrapper_id` | Wrapper ID.<br/><br/>**Type:** `int` |
+| `source` | Source of the chat completion.<br/><br/>**Type:** `str \| Agent` |
+| `request` | Request for the chat completion.<br/><br/>**Type:** `dict[str, float \| str \| list[dict[str, str]]]` |
+| `response` | Response for the chat completion.<br/><br/>**Type:** `str \| ChatCompletion` |
+| `is_cached` | Whether the response is cached.<br/><br/>**Type:** `int` |
+| `cost` | Cost of the chat completion.<br/><br/>**Type:** `float` |
+| `start_time` | Start time of the chat completion.<br/><br/>**Type:** `str` |
 
-- `config` _dict[str, Any]_ - Configuration for the logger.
+<br />
 
-### log\_chat\_completion
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_event
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_event" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_chat_completion(invocation_id: uuid.UUID, client_id: int,
-                        wrapper_id: int, source: str | Agent,
-                        request: dict[str, float | str | list[dict[str, str]]],
-                        response: str | ChatCompletion, is_cached: int,
-                        cost: float, start_time: str) -> None
+log_event(
+    self,
+    source: str | Agent,
+    name: str,
+    **kwargs: dict[str, Any]
+) -> None
 ```
 
-Log chat completion.
+    Log event.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `source` | Source of the event.<br/><br/>**Type:** `str \| Agent` |
+| `name` | Name of the event.<br/><br/>**Type:** `str` |
+| `**kwargs` | Additional arguments for the event.<br/><br/>**Type:** `dict[str, Any]` |
 
-- `invocation_id` _uuid.UUID_ - Invocation ID.
-- `client_id` _int_ - Client ID.
-- `wrapper_id` _int_ - Wrapper ID.
-- `source` _str | Agent_ - Source of the chat completion.
-- `request` _dict[str, float | str | list[dict[str, str]]]_ - Request for the chat completion.
-- `response` _str | ChatCompletion_ - Response for the chat completion.
-- `is_cached` _int_ - Whether the response is cached.
-- `cost` _float_ - Cost of the chat completion.
-- `start_time` _str_ - Start time of the chat completion.
+<br />
 
-### log\_new\_agent
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_function_use
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_function_use" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_agent(agent: ConversableAgent, init_args: dict[str, Any]) -> None
+log_function_use(
+    self,
+    source: str | Agent,
+    function: F,
+    args: dict[str, Any],
+    returns: Any
+) -> None
 ```
 
-Log new agent.
+    Log function use.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `source` | Source of the function use.<br/><br/>**Type:** `str \| Agent` |
+| `function` | Function to log.<br/><br/>**Type:** `F` |
+| `args` | Arguments of the function.<br/><br/>**Type:** `dict[str, Any]` |
+| `returns` | Returns of the function.<br/><br/>**Type:** `Any` |
 
-- `agent` _ConversableAgent_ - Agent to log.
-- `init_args` _dict[str, Any]_ - Initialization arguments of the agent
+<br />
 
-### log\_event
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_agent
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_new_agent" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_event(source: str | Agent, name: str, **kwargs: dict[str,
-                                                             Any]) -> None
+log_new_agent(
+    self,
+    agent: ConversableAgent,
+    init_args: dict[str, Any]
+) -> None
 ```
 
-Log event.
+    Log new agent.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | Agent to log.<br/><br/>**Type:** `ConversableAgent` |
+| `init_args` | Initialization arguments of the agent<br/><br/>**Type:** `dict[str, Any]` |
 
-- `source` _str | Agent_ - Source of the event.
-- `name` _str_ - Name of the event.
-- `**kwargs` _dict[str, Any]_ - Additional arguments for the event.
+<br />
 
-### log\_new\_wrapper
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_client
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_new_client" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_wrapper(wrapper: OpenAIWrapper,
-                    init_args: dict[str, LLMConfig | list[LLMConfig]]) -> None
+log_new_client(
+    self,
+    client: AzureOpenAI | OpenAI | CerebrasClient | GeminiClient | AnthropicClient | MistralAIClient | TogetherClient | GroqClient | CohereClient | OllamaClient | BedrockClient,
+    wrapper: OpenAIWrapper,
+    init_args: dict[str, Any]
+) -> None
 ```
 
-Log new wrapper.
+    Log new client.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `client` | Client to log.<br/><br/>**Type:** `AzureOpenAI \| OpenAI \| CerebrasClient \| GeminiClient \| AnthropicClient \| MistralAIClient \| TogetherClient \| GroqClient \| CohereClient \| OllamaClient \| BedrockClient` |
+| `wrapper` | Wrapper of the client.<br/><br/>**Type:** `OpenAIWrapper` |
+| `init_args` | Initialization arguments of the client.<br/><br/>**Type:** `dict[str, Any]` |
 
-- `wrapper` _OpenAIWrapper_ - Wrapper to log.
-- `init_args` _dict[str, LLMConfig | list[LLMConfig]]_ - Initialization arguments of the wrapper
+<br />
 
-### log\_function\_use
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### log_new_wrapper
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.log_new_wrapper" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_function_use(source: str | Agent, function: F, args: dict[str, Any],
-                     returns: Any) -> None
+log_new_wrapper(
+    self,
+    wrapper: OpenAIWrapper,
+    init_args: dict[str, LLMConfig | list[LLMConfig]]
+) -> None
 ```
 
-Log function use.
+    Log new wrapper.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `wrapper` | Wrapper to log.<br/><br/>**Type:** `OpenAIWrapper` |
+| `init_args` | Initialization arguments of the wrapper<br/><br/>**Type:** `dict[str, LLMConfig \| list[LLMConfig]]` |
 
-- `source` _str | Agent_ - Source of the function use.
-- `function` _F_ - Function to log.
-- `args` _dict[str, Any]_ - Arguments of the function.
-- `returns` _Any_ - Returns of the function.
+<br />
 
-### log\_new\_client
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### stop
+<a href="#autogen.logger.sqlite_logger.SqliteLogger.stop" class="headerlink" title="Permanent link"></a>
 
 ```python
-def log_new_client(client: (AzureOpenAI
-                            | OpenAI
-                            | CerebrasClient
-                            | GeminiClient
-                            | AnthropicClient
-                            | MistralAIClient
-                            | TogetherClient
-                            | GroqClient
-                            | CohereClient
-                            | OllamaClient
-                            | BedrockClient), wrapper: OpenAIWrapper,
-                   init_args: dict[str, Any]) -> None
+stop(self) -> None
 ```
 
-Log new client.
+    Stop the logger
 
-**Arguments**:
-
-- `client` _AzureOpenAI | OpenAI | CerebrasClient | GeminiClient | AnthropicClient | MistralAIClient | TogetherClient | GroqClient | CohereClient | OllamaClient | BedrockClient_ - Client to log.
-- `wrapper` _OpenAIWrapper_ - Wrapper of the client.
-- `init_args` _dict[str, Any]_ - Initialization arguments of the client.
-
-### stop
-
-```python
-def stop() -> None
-```
-
-Stop the logger
-
-### get\_connection
-
-```python
-def get_connection() -> None | sqlite3.Connection
-```
-
-Get connection.
-
+<br />

@@ -1,177 +1,135 @@
 ---
 sidebarTitle: cache
-title: cache.cache
+title: autogen.cache.cache
 ---
 
-## Cache
+    <h2 id="autogen.cache.cache.Cache" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">Cache</span>
+        <a href="#autogen.cache.cache.Cache" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class Cache(AbstractCache)
+Cache(config: dict[str, Any])
 ```
 
-A wrapper class for managing cache configuration and instances.
+    A wrapper class for managing cache configuration and instances.
+    
+    This class provides a unified interface for creating and interacting with
+    different types of cache (e.g., Redis, Disk). It abstracts the underlying
+    cache implementation details, providing methods for cache operations.
+    
+    Attributes:
+        config (Dict[str, Any]): A dictionary containing cache configuration.
+        cache: The cache instance created based on the provided configuration.
+    
+    Initialize the Cache with the given configuration.
+    
+    Validates the configuration keys and creates the cache instance.
 
-This class provides a unified interface for creating and interacting with
-different types of cache (e.g., Redis, Disk). It abstracts the underlying
-cache implementation details, providing methods for cache operations.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `config` | A dictionary containing the cache configuration.<br/><br/>**Type:** `dict[str, Any]` |
 
-**Attributes**:
+### Class Attributes
 
-- `config` _Dict[str, Any]_ - A dictionary containing cache configuration.
-- `cache` - The cache instance created based on the provided configuration.
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### ALLOWED_CONFIG_KEYS
+<a href="#autogen.cache.cache.Cache.ALLOWED_CONFIG_KEYS" class="headerlink" title="Permanent link"></a>
 
-### redis
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### cosmos_db
+<a href="#autogen.cache.cache.Cache.cosmos_db" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def redis(cache_seed: str | int = 42,
-          redis_url: str = "redis://localhost:6379/0") -> Cache
+cosmos_db(
+    connection_string: str | None = None,
+    container_id: str | None = None,
+    cache_seed: str | int = 42,
+    client: any | None = None
+) -> Cache
 ```
 
-Create a Redis cache instance.
+    Create a Cosmos DB cache instance with 'autogen_cache' as database ID.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `connection_string` | Connection string to the Cosmos DB account.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `container_id` | The container ID for the Cosmos DB account.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `cache_seed` | A seed for the cache.<br/><br/>**Type:** `str \| int`<br/><br/>**Default:** 42 |
+| `client` | Optional[CosmosClient]: Pass an existing Cosmos DB client.<br/><br/>**Type:** `any \| None`<br/><br/>**Default:** None |
 
-- `cache_seed` _Union[str, int], optional_ - A seed for the cache. Defaults to 42.
-- `redis_url` _str, optional_ - The URL for the Redis server. Defaults to "redis://localhost:6379/0".
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `Cache` | Cache: A Cache instance configured for Cosmos DB. |
 
-**Returns**:
+<br />
 
-- `Cache` - A Cache instance configured for Redis.
-
-### disk
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### disk
+<a href="#autogen.cache.cache.Cache.disk" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def disk(cache_seed: str | int = 42, cache_path_root: str = ".cache") -> Cache
+disk(cache_seed: str | int = 42, cache_path_root: str = '.cache') -> autogen.cache.cache.Cache
 ```
 
-Create a Disk cache instance.
+    Create a Disk cache instance.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `cache_seed` | A seed for the cache.<br/><br/>Defaults to 42.<br/><br/>**Type:** `str \| int`<br/><br/>**Default:** 42 |
+| `cache_path_root` | The root path for the disk cache.<br/><br/>Defaults to ".cache".<br/><br/>**Type:** `str`<br/><br/>**Default:** '.cache' |
 
-- `cache_seed` _Union[str, int], optional_ - A seed for the cache. Defaults to 42.
-- `cache_path_root` _str, optional_ - The root path for the disk cache. Defaults to ".cache".
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.cache.cache.Cache` | Cache: A Cache instance configured for Disk caching. |
 
-**Returns**:
+<br />
 
-- `Cache` - A Cache instance configured for Disk caching.
-
-### cosmos\_db
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### redis
+<a href="#autogen.cache.cache.Cache.redis" class="headerlink" title="Permanent link"></a>
 
 ```python
-@staticmethod
-def cosmos_db(connection_string: str | None = None,
-              container_id: str | None = None,
-              cache_seed: str | int = 42,
-              client: any | None = None) -> Cache
+redis(cache_seed: str | int = 42, redis_url: str = 'redis://localhost:6379/0') -> autogen.cache.cache.Cache
 ```
 
-Create a Cosmos DB cache instance with 'autogen_cache' as database ID.
+    Create a Redis cache instance.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `cache_seed` | A seed for the cache.<br/><br/>Defaults to 42.<br/><br/>**Type:** `str \| int`<br/><br/>**Default:** 42 |
+| `redis_url` | The URL for the Redis server.<br/><br/>Defaults to "redis://localhost:6379/0".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'redis |
 
-- `connection_string` _str, optional_ - Connection string to the Cosmos DB account.
-- `container_id` _str, optional_ - The container ID for the Cosmos DB account.
-- `cache_seed` _Union[str, int], optional_ - A seed for the cache.
-- `client` - Optional[CosmosClient]: Pass an existing Cosmos DB client.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.cache.cache.Cache` | Cache: A Cache instance configured for Redis. |
 
-**Returns**:
+<br />
 
-- `Cache` - A Cache instance configured for Cosmos DB.
+### Instance Methods
 
-### \_\_init\_\_
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### close
+<a href="#autogen.cache.cache.Cache.close" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(config: dict[str, Any])
+close(self) -> None
 ```
 
-Initialize the Cache with the given configuration.
+    Close the cache.
+    
+    Perform any necessary cleanup, such as closing connections or releasing resources.
 
-Validates the configuration keys and creates the cache instance.
-
-**Arguments**:
-
-- `config` _Dict[str, Any]_ - A dictionary containing the cache configuration.
-  
-
-**Raises**:
-
-- `ValueError` - If an invalid configuration key is provided.
-
-### \_\_enter\_\_
-
-```python
-def __enter__() -> Cache
-```
-
-Enter the runtime context related to the cache object.
-
-**Returns**:
-
-  The cache instance for use within a context block.
-
-### \_\_exit\_\_
-
-```python
-def __exit__(exc_type: type[BaseException] | None,
-             exc_value: BaseException | None,
-             traceback: TracebackType | None) -> None
-```
-
-Exit the runtime context related to the cache object.
-
-Cleans up the cache instance and handles any exceptions that occurred
-within the context.
-
-**Arguments**:
-
-- `exc_type` - The exception type if an exception was raised in the context.
-- `exc_value` - The exception value if an exception was raised in the context.
-- `traceback` - The traceback if an exception was raised in the context.
-
-### get
-
-```python
-def get(key: str, default: Any | None = None) -> Any | None
-```
-
-Retrieve an item from the cache.
-
-**Arguments**:
-
-- `key` _str_ - The key identifying the item in the cache.
-- `default` _optional_ - The default value to return if the key is not found.
-  Defaults to None.
-  
-
-**Returns**:
-
-  The value associated with the key if found, else the default value.
-
-### set
-
-```python
-def set(key: str, value: Any) -> None
-```
-
-Set an item in the cache.
-
-**Arguments**:
-
-- `key` _str_ - The key under which the item is to be stored.
-- `value` - The value to be stored in the cache.
-
-### close
-
-```python
-def close() -> None
-```
-
-Close the cache.
-
-Perform any necessary cleanup, such as closing connections or releasing resources.
-
+<br />

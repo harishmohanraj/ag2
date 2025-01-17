@@ -1,72 +1,107 @@
 ---
 sidebarTitle: agent_optimizer
-title: agentchat.contrib.agent_optimizer
+title: autogen.agentchat.contrib.agent_optimizer
 ---
 
-### execute\_func
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### execute_func
+<a href="#autogen.agentchat.contrib.agent_optimizer..execute_func" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_func(name, packages, code, **args)
+execute_func(
+    name,
+    packages,
+    code,
+    **args
+) -> 
 ```
 
-The wrapper for generated functions.
+    The wrapper for generated functions.
 
-## AgentOptimizer
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `name` |  |
+| `packages` |  |
+| `code` |  |
+| `**args` |  |
+
+<br />
+
+    <h2 id="autogen.agentchat.contrib.agent_optimizer.AgentOptimizer" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">AgentOptimizer</span>
+        <a href="#autogen.agentchat.contrib.agent_optimizer.AgentOptimizer" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class AgentOptimizer()
+AgentOptimizer(
+    max_actions_per_step: int,
+    llm_config: dict,
+    optimizer_model: str | None = 'gpt-4-1106-preview'
+)
 ```
 
-Base class for optimizing AutoGen agents. Specifically, it is used to optimize the functions used in the agent.
-More information could be found in the following paper: https://arxiv.org/abs/2402.11359.
+    Base class for optimizing AutoGen agents. Specifically, it is used to optimize the functions used in the agent.
+    More information could be found in the following paper: https://arxiv.org/abs/2402.11359.
+    
+    (These APIs are experimental and may change in the future.)
 
-### \_\_init\_\_
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `max_actions_per_step` | the maximum number of actions that the optimizer can take in one step.<br/><br/>**Type:** `int` |
+| `llm_config` | llm inference configuration.<br/><br/>Please refer to [OpenAIWrapper.create](/docs/reference/oai/client#create) for available options.<br/><br/>When using OpenAI or Azure OpenAI endpoints, please specify a non-empty 'model' either in `llm_config` or in each config of 'config_list' in `llm_config`.<br/><br/>**Type:** `dict` |
+| `optimizer_model` | the model used for the optimizer.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** 'gpt-4-1106-preview' |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### record_one_conversation
+<a href="#autogen.agentchat.contrib.agent_optimizer.AgentOptimizer.record_one_conversation" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(max_actions_per_step: int,
-             llm_config: dict,
-             optimizer_model: Optional[str] = "gpt-4-1106-preview")
+record_one_conversation(
+    self,
+    conversation_history: list[dict],
+    is_satisfied: bool = None
+) -> 
 ```
 
-(These APIs are experimental and may change in the future.)
+    Record one conversation history.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `conversation_history` | the chat messages of the conversation.<br/><br/>**Type:** `list[dict]` |
+| `is_satisfied` | whether the user is satisfied with the solution.<br/><br/>If it is none, the user will be asked to input the satisfaction.<br/><br/>**Type:** `bool`<br/><br/>**Default:** None |
 
-- `max_actions_per_step` _int_ - the maximum number of actions that the optimizer can take in one step.
-- `llm_config` _dict_ - llm inference configuration.
-  Please refer to [OpenAIWrapper.create](/docs/reference/oai/client#create) for available options.
-  When using OpenAI or Azure OpenAI endpoints, please specify a non-empty 'model' either in `llm_config` or in each config of 'config_list' in `llm_config`.
-- `optimizer_model` - the model used for the optimizer.
+<br />
 
-### record\_one\_conversation
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### reset_optimizer
+<a href="#autogen.agentchat.contrib.agent_optimizer.AgentOptimizer.reset_optimizer" class="headerlink" title="Permanent link"></a>
 
 ```python
-def record_one_conversation(conversation_history: list[dict],
-                            is_satisfied: bool = None)
+reset_optimizer(self) -> 
 ```
 
-Record one conversation history.
+    Reset the optimizer.
 
-**Arguments**:
+<br />
 
-- `conversation_history` _List[Dict]_ - the chat messages of the conversation.
-- `is_satisfied` _bool_ - whether the user is satisfied with the solution. If it is none, the user will be asked to input the satisfaction.
-
-### step
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### step
+<a href="#autogen.agentchat.contrib.agent_optimizer.AgentOptimizer.step" class="headerlink" title="Permanent link"></a>
 
 ```python
-def step()
+step(self) -> 
 ```
 
-One step of training. It will return register_for_llm and register_for_executor at each iteration,
-which are subsequently utilized to update the assistant and executor agents, respectively.
-See example: https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_agentoptimizer.ipynb
+    One step of training. It will return register_for_llm and register_for_executor at each iteration,
+    which are subsequently utilized to update the assistant and executor agents, respectively.
+    See example: https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_agentoptimizer.ipynb
 
-### reset\_optimizer
-
-```python
-def reset_optimizer()
-```
-
-Reset the optimizer.
-
+<br />

@@ -1,130 +1,167 @@
 ---
 sidebarTitle: gpt_assistant_agent
-title: agentchat.contrib.gpt_assistant_agent
+title: autogen.agentchat.contrib.gpt_assistant_agent
 ---
 
-## GPTAssistantAgent
+    <h2 id="autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">GPTAssistantAgent</span>
+        <a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class GPTAssistantAgent(ConversableAgent)
+GPTAssistantAgent(
+    name='GPT Assistant',
+    instructions: str | None = None,
+    llm_config: dict | bool | None = None,
+    assistant_config: dict | None = None,
+    overwrite_instructions: bool = False,
+    overwrite_tools: bool = False,
+    **kwargs
+)
 ```
 
-An experimental AutoGen agent class that leverages the OpenAI Assistant API for conversational capabilities.
-This agent is unique in its reliance on the OpenAI Assistant for state management, differing from other agents like ConversableAgent.
+    An experimental AutoGen agent class that leverages the OpenAI Assistant API for conversational capabilities.
+    This agent is unique in its reliance on the OpenAI Assistant for state management, differing from other agents like ConversableAgent.
 
-### \_\_init\_\_
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `name='GPT Assistant'` |  |
+| `instructions` | instructions for the OpenAI assistant configuration.<br/><br/>When instructions is not None, the system message of the agent will be set to the provided instructions and used in the assistant run, irrespective of the overwrite_instructions flag.<br/><br/>But when instructions is None, and the assistant does not exist, the system message will be set to AssistantAgent.DEFAULT_SYSTEM_MESSAGE.<br/><br/>If the assistant exists, the system message will be set to the existing assistant instructions.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
+| `llm_config` | llm inference configuration.<br/><br/>- model: Model to use for the assistant (gpt-4-1106-preview, gpt-3.5-turbo-1106).<br/><br/>assistant_config - assistant_id: ID of the assistant to use.<br/><br/>If None, a new assistant will be created.<br/><br/>- check_every_ms: check thread run status interval - tools: Give Assistants access to OpenAI-hosted tools like Code Interpreter and Knowledge Retrieval, or build your own tools using Function calling.<br/><br/>ref https://platform.openai.com/docs/assistants/tools - file_ids: (Deprecated) files used by retrieval in run.<br/><br/>It is Deprecated, use tool_resources instead.<br/><br/>https://platform.openai.com/docs/assistants/migration/what-has-changed.<br/><br/>- tool_resources: A set of resources that are used by the assistant's tools.<br/><br/>The resources are specific to the type of tool.<br/><br/>**Type:** `dict \| bool \| None`<br/><br/>**Default:** None |
+| `assistant_config` | **Type:** `dict \| None`<br/><br/>**Default:** None |
+| `overwrite_instructions` | whether to overwrite the instructions of an existing assistant.<br/><br/>This parameter is in effect only when assistant_id is specified in llm_config.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
+| `overwrite_tools` | whether to overwrite the tools of an existing assistant.<br/><br/>This parameter is in effect only when assistant_id is specified in llm_config.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
+| `**kwargs` |  |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_MODEL_NAME
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.DEFAULT_MODEL_NAME" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### assistant_id
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.assistant_id" class="headerlink" title="Permanent link"></a>
+
+    Return the assistant id
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### oai_threads
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.oai_threads" class="headerlink" title="Permanent link"></a>
+
+    Return the threads of the agent.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### openai_assistant
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.openai_assistant" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### openai_client
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.openai_client" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### clear_history
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.clear_history" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(name="GPT Assistant",
-             instructions: Optional[str] = None,
-             llm_config: Optional[Union[dict, bool]] = None,
-             assistant_config: Optional[dict] = None,
-             overwrite_instructions: bool = False,
-             overwrite_tools: bool = False,
-             **kwargs)
+clear_history(self, agent: autogen.agentchat.agent.Agent | None = None) -> 
 ```
 
-**Arguments**:
+    Clear the chat history of the agent.
 
-- `name` _str_ - name of the agent. It will be used to find the existing assistant by name. Please remember to delete an old assistant with the same name if you intend to create a new assistant with the same name.
-- `instructions` _str_ - instructions for the OpenAI assistant configuration.
-  When instructions is not None, the system message of the agent will be
-  set to the provided instructions and used in the assistant run, irrespective
-  of the overwrite_instructions flag. But when instructions is None,
-  and the assistant does not exist, the system message will be set to
-  AssistantAgent.DEFAULT_SYSTEM_MESSAGE. If the assistant exists, the
-  system message will be set to the existing assistant instructions.
-- `llm_config` _dict or False_ - llm inference configuration.
-  - model: Model to use for the assistant (gpt-4-1106-preview, gpt-3.5-turbo-1106).
-  assistant_config
-  - assistant_id: ID of the assistant to use. If None, a new assistant will be created.
-  - check_every_ms: check thread run status interval
-  - tools: Give Assistants access to OpenAI-hosted tools like Code Interpreter and Knowledge Retrieval,
-  or build your own tools using Function calling. ref https://platform.openai.com/docs/assistants/tools
-  - file_ids: (Deprecated) files used by retrieval in run. It is Deprecated, use tool_resources instead. https://platform.openai.com/docs/assistants/migration/what-has-changed.
-  - tool_resources: A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
-- `overwrite_instructions` _bool_ - whether to overwrite the instructions of an existing assistant. This parameter is in effect only when assistant_id is specified in llm_config.
-- `overwrite_tools` _bool_ - whether to overwrite the tools of an existing assistant. This parameter is in effect only when assistant_id is specified in llm_config.
-- `kwargs` _dict_ - Additional configuration options for the agent.
-  - verbose (bool): If set to True, enables more detailed output from the assistant thread.
-  - Other kwargs: Except verbose, others are passed directly to ConversableAgent.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | the agent with whom the chat history to clear.<br/><br/>If None, clear the chat history with all agents.<br/><br/>**Type:** `autogen.agentchat.agent.Agent \| None`<br/><br/>**Default:** None |
 
-### can\_execute\_function
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### delete_assistant
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.delete_assistant" class="headerlink" title="Permanent link"></a>
 
 ```python
-def can_execute_function(name: str) -> bool
+delete_assistant(self) -> 
 ```
 
-Whether the agent can execute the function.
+    Delete the assistant from OAI assistant API
 
-### reset
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### find_matching_assistant
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.find_matching_assistant" class="headerlink" title="Permanent link"></a>
 
 ```python
-def reset()
+find_matching_assistant(
+    self,
+    candidate_assistants,
+    instructions,
+    tools
+) -> 
 ```
 
-Resets the agent, clearing any existing conversation thread and unread message indices.
+    Find the matching assistant from a list of candidate assistants.
+    Filter out candidates with the same name but different instructions, and function names.
 
-### clear\_history
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `candidate_assistants` |  |
+| `instructions` |  |
+| `tools` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_assistant_instructions
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.get_assistant_instructions" class="headerlink" title="Permanent link"></a>
 
 ```python
-def clear_history(agent: Optional[Agent] = None)
+get_assistant_instructions(self) -> 
 ```
 
-Clear the chat history of the agent.
+    Return the assistant instructions from OAI assistant API
 
-**Arguments**:
+<br />
 
-- `agent` - the agent with whom the chat history to clear. If None, clear the chat history with all agents.
-
-### pretty\_print\_thread
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### pretty_print_thread
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.pretty_print_thread" class="headerlink" title="Permanent link"></a>
 
 ```python
-def pretty_print_thread(thread)
+pretty_print_thread(self, thread) -> 
 ```
 
-Pretty print the thread.
+    Pretty print the thread.
 
-### oai\_threads
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `thread` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### reset
+<a href="#autogen.agentchat.contrib.gpt_assistant_agent.GPTAssistantAgent.reset" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def oai_threads() -> dict[Agent, Any]
+reset(self) -> 
 ```
 
-Return the threads of the agent.
+    Resets the agent, clearing any existing conversation thread and unread message indices.
 
-### assistant\_id
-
-```python
-@property
-def assistant_id()
-```
-
-Return the assistant id
-
-### get\_assistant\_instructions
-
-```python
-def get_assistant_instructions()
-```
-
-Return the assistant instructions from OAI assistant API
-
-### delete\_assistant
-
-```python
-def delete_assistant()
-```
-
-Delete the assistant from OAI assistant API
-
-### find\_matching\_assistant
-
-```python
-def find_matching_assistant(candidate_assistants, instructions, tools)
-```
-
-Find the matching assistant from a list of candidate assistants.
-Filter out candidates with the same name but different instructions, and function names.
-
+<br />

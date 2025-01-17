@@ -1,120 +1,253 @@
 ---
 sidebarTitle: tool_retriever
-title: agentchat.contrib.captainagent.tool_retriever
+title: autogen.agentchat.contrib.captainagent.tool_retriever
 ---
 
-## ToolBuilder
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### find_callables
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever..find_callables" class="headerlink" title="Permanent link"></a>
 
 ```python
-class ToolBuilder()
+find_callables(directory) -> 
 ```
 
-### bind
+    Find all callable objects defined in Python files within the specified directory.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `directory` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### format_ag2_tool
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever..format_ag2_tool" class="headerlink" title="Permanent link"></a>
 
 ```python
-def bind(agent: AssistantAgent, functions: str)
+format_ag2_tool(tool: autogen.tools.tool.Tool) -> 
 ```
 
-Binds the function to the agent so that agent is aware of it.
+    
 
-### bind\_user\_proxy
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool` | **Type:** `autogen.tools.tool.Tool` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### get_full_tool_description
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever..get_full_tool_description" class="headerlink" title="Permanent link"></a>
 
 ```python
-def bind_user_proxy(agent: UserProxyAgent, tool_root: Union[str, list])
+get_full_tool_description(py_file) -> 
 ```
 
-Updates user proxy agent with a executor so that code executor can successfully execute function-related code.
-Returns an updated user proxy.
+    Retrieves the function signature for a given Python file.
 
-## LocalExecutorWithTools
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `py_file` |  |
+
+<br />
+
+    <h2 id="autogen.agentchat.contrib.captainagent.tool_retriever.LocalExecutorWithTools" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">LocalExecutorWithTools</span>
+        <a href="#autogen.agentchat.contrib.captainagent.tool_retriever.LocalExecutorWithTools" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class LocalExecutorWithTools(CodeExecutor)
+LocalExecutorWithTools(tools: list[autogen.tools.tool.Tool] | None = None, work_dir: pathlib.Path | str = PosixPath('.'))
 ```
 
-An executor that executes code blocks with injected tools. In this executor, the func within the tools can be called directly without declaring in the code block.
-
-For example, for a tool converted from langchain, the relevant functions can be called directly.
-In this case, the `wikipedia` function can be called directly in the code block. This hides the complexity of the tool.
-
-```python
-from langchain_community.tools import WikipediaQueryRun
-from langchain_community.utilities import WikipediaAPIWrapper
-from autogen.interop import Interoperability
-
-api_wrapper = WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=3000)
-langchain_tool = WikipediaQueryRun(api_wrapper=api_wrapper)
-interop = Interoperability()
-ag2_tool = interop.convert_tool(tool=langchain_tool, type="langchain")
-
-# `ag2_tool.name` is wikipedia
-local_executor = LocalExecutorWithTools(tools=[ag2_tool], work_dir="./")
-
-code = '''
-result = wikipedia(tool_input={"query":"Christmas"})
-print(result)
-'''
-print(
-    local_executor.execute_code_blocks(
-        code_blocks=[
-            CodeBlock(language="python", code=code),
-        ]
+    An executor that executes code blocks with injected tools. In this executor, the func within the tools can be called directly without declaring in the code block.
+    
+    For example, for a tool converted from langchain, the relevant functions can be called directly.
+    ```python
+    from langchain_community.tools import WikipediaQueryRun
+    from langchain_community.utilities import WikipediaAPIWrapper
+    from autogen.interop import Interoperability
+    
+    api_wrapper = WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=3000)
+    langchain_tool = WikipediaQueryRun(api_wrapper=api_wrapper)
+    interop = Interoperability()
+    ag2_tool = interop.convert_tool(tool=langchain_tool, type="langchain")
+    
+    # `ag2_tool.name` is wikipedia
+    local_executor = LocalExecutorWithTools(tools=[ag2_tool], work_dir="./")
+    
+    code = '''
+    result = wikipedia(tool_input=\{"query":"Christmas"})
+    print(result)
+    '''
+    print(
+        local_executor.execute_code_blocks(
+            code_blocks=[
+                CodeBlock(language="python", code=code),
+            ]
+        )
     )
+    ```
+    In this case, the `wikipedia` function can be called directly in the code block. This hides the complexity of the tool.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tools` | The tools to inject into the code execution environment.<br/><br/>Default is an empty list.<br/><br/>**Type:** `list[autogen.tools.tool.Tool] \| None`<br/><br/>**Default:** None |
+| `work_dir` | The working directory for the code execution.<br/><br/>Default is the current directory.<br/><br/>**Type:** `pathlib.Path \| str`<br/><br/>**Default:** PosixPath('.') |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code_extractor
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.LocalExecutorWithTools.code_extractor" class="headerlink" title="Permanent link"></a>
+
+    (Experimental) Export a code extractor that can be used by an agent.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### execute_code_blocks
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.LocalExecutorWithTools.execute_code_blocks" class="headerlink" title="Permanent link"></a>
+
+```python
+execute_code_blocks(self, code_blocks: list[autogen.coding.base.CodeBlock]) -> autogen.coding.base.CodeResult
+```
+
+    Execute code blocks and return the result.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code_blocks` | The code blocks to execute.<br/><br/>**Type:** `list[autogen.coding.base.CodeBlock]` |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.coding.base.CodeResult` | CodeResult: The result of the code execution. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### restart
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.LocalExecutorWithTools.restart" class="headerlink" title="Permanent link"></a>
+
+```python
+restart(self) -> 
+```
+
+    Restart the code executor. Since this executor is stateless, no action is needed.
+
+<br />
+
+    <h2 id="autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ToolBuilder</span>
+        <a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+ToolBuilder(
+    corpus_root,
+    retriever='all-mpnet-base-v2',
+    type='default'
 )
 ```
 
-**Arguments**:
+    
 
-- `tools` - The tools to inject into the code execution environment. Default is an empty list.
-- `work_dir` - The working directory for the code execution. Default is the current directory.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `corpus_root` |  |
+| `retriever='all-mpnet-base-v2'` |  |
+| `type='default'` |  |
 
-### code\_extractor
+### Class Attributes
 
-```python
-@property
-def code_extractor() -> CodeExtractor
-```
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### TOOL_PROMPT_DEFAULT
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.TOOL_PROMPT_DEFAULT" class="headerlink" title="Permanent link"></a>
 
-(Experimental) Export a code extractor that can be used by an agent.
+    <br />
 
-### execute\_code\_blocks
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### TOOL_PROMPT_USER_DEFINED
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.TOOL_PROMPT_USER_DEFINED" class="headerlink" title="Permanent link"></a>
 
-```python
-def execute_code_blocks(code_blocks: list[CodeBlock]) -> CodeResult
-```
+    <br />
 
-Execute code blocks and return the result.
+### Instance Methods
 
-**Arguments**:
-
-- `code_blocks` _List[CodeBlock]_ - The code blocks to execute.
-  
-
-**Returns**:
-
-- `CodeResult` - The result of the code execution.
-
-### restart
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### bind
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.bind" class="headerlink" title="Permanent link"></a>
 
 ```python
-def restart()
+bind(
+    self,
+    agent: autogen.agentchat.assistant_agent.AssistantAgent,
+    functions: str
+) -> 
 ```
 
-Restart the code executor. Since this executor is stateless, no action is needed.
+    Binds the function to the agent so that agent is aware of it.
 
-### get\_full\_tool\_description
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | **Type:** `autogen.agentchat.assistant_agent.AssistantAgent` |
+| `functions` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### bind_user_proxy
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.bind_user_proxy" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get_full_tool_description(py_file)
+bind_user_proxy(
+    self,
+    agent: autogen.agentchat.user_proxy_agent.UserProxyAgent,
+    tool_root: str | list
+) -> 
 ```
 
-Retrieves the function signature for a given Python file.
+    Updates user proxy agent with a executor so that code executor can successfully execute function-related code.
+    Returns an updated user proxy.
 
-### find\_callables
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | **Type:** `autogen.agentchat.user_proxy_agent.UserProxyAgent` |
+| `tool_root` | **Type:** `str \| list` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### retrieve
+<a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.retrieve" class="headerlink" title="Permanent link"></a>
 
 ```python
-def find_callables(directory)
+retrieve(
+    self,
+    query,
+    top_k=3
+) -> 
 ```
 
-Find all callable objects defined in Python files within the specified directory.
+    
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` |  |
+| `top_k=3` |  |
+
+<br />

@@ -1,122 +1,105 @@
 ---
 sidebarTitle: redis_cache
-title: cache.redis_cache
+title: autogen.cache.redis_cache
 ---
 
-## RedisCache
+    <h2 id="autogen.cache.redis_cache.RedisCache" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">RedisCache</span>
+        <a href="#autogen.cache.redis_cache.RedisCache" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class RedisCache(AbstractCache)
+RedisCache(seed: str | int, redis_url: str)
 ```
 
-Implementation of AbstractCache using the Redis database.
+    Implementation of AbstractCache using the Redis database.
+    
+    This class provides a concrete implementation of the AbstractCache
+    interface using the Redis database for caching data.
+    
+    Attributes:
+        seed (Union[str, int]): A seed or namespace used as a prefix for cache keys.
+        cache (redis.Redis): The Redis client used for caching.
+    
+    Methods:
+        __init__(self, seed, redis_url): Initializes the RedisCache with the given seed and Redis URL.
+        _prefixed_key(self, key): Internal method to get a namespaced cache key.
+        get(self, key, default=None): Retrieves an item from the cache.
+        set(self, key, value): Sets an item in the cache.
+        close(self): Closes the Redis client.
+        __enter__(self): Context management entry.
+        __exit__(self, exc_type, exc_value, traceback): Context management exit.
+    
+    Initialize the RedisCache instance.
 
-This class provides a concrete implementation of the AbstractCache
-interface using the Redis database for caching data.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | A seed or namespace for the cache.<br/><br/>This is used as a prefix for all cache keys.<br/><br/>**Type:** `str \| int` |
+| `redis_url` | The URL for the Redis server.<br/><br/>**Type:** `str` |
 
-**Attributes**:
+### Instance Methods
 
-- `seed` _Union[str, int]_ - A seed or namespace used as a prefix for cache keys.
-- `cache` _redis.Redis_ - The Redis client used for caching.
-  
-
-**Methods**:
-
-  __init__(self, seed, redis_url): Initializes the RedisCache with the given seed and Redis URL.
-  _prefixed_key(self, key): Internal method to get a namespaced cache key.
-  get(self, key, default=None): Retrieves an item from the cache.
-  set(self, key, value): Sets an item in the cache.
-- `close(self)` - Closes the Redis client.
-- `__enter__(self)` - Context management entry.
-  __exit__(self, exc_type, exc_value, traceback): Context management exit.
-
-### \_\_init\_\_
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### close
+<a href="#autogen.cache.redis_cache.RedisCache.close" class="headerlink" title="Permanent link"></a>
 
 ```python
-def __init__(seed: Union[str, int], redis_url: str)
+close(self) -> None
 ```
 
-Initialize the RedisCache instance.
+    Close the Redis client.
+    
+    Perform any necessary cleanup, such as closing network connections.
 
-**Arguments**:
+<br />
 
-- `seed` _Union[str, int]_ - A seed or namespace for the cache. This is used as a prefix for all cache keys.
-- `redis_url` _str_ - The URL for the Redis server.
-
-### get
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get
+<a href="#autogen.cache.redis_cache.RedisCache.get" class="headerlink" title="Permanent link"></a>
 
 ```python
-def get(key: str, default: Optional[Any] = None) -> Optional[Any]
+get(
+    self,
+    key: str,
+    default: Any | None = None
+) -> Any | None
 ```
 
-Retrieve an item from the Redis cache.
+    Retrieve an item from the Redis cache.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key identifying the item in the cache.<br/><br/>**Type:** `str` |
+| `default` | The default value to return if the key is not found.<br/><br/>Defaults to None.<br/><br/>**Type:** `Any \| None`<br/><br/>**Default:** None |
 
-- `key` _str_ - The key identifying the item in the cache.
-- `default` _optional_ - The default value to return if the key is not found.
-  Defaults to None.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `Any \| None` | The deserialized value associated with the key if found, else the default value. |
 
-**Returns**:
+<br />
 
-  The deserialized value associated with the key if found, else the default value.
-
-### set
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set
+<a href="#autogen.cache.redis_cache.RedisCache.set" class="headerlink" title="Permanent link"></a>
 
 ```python
-def set(key: str, value: Any) -> None
+set(
+    self,
+    key: str,
+    value: Any
+) -> None
 ```
 
-Set an item in the Redis cache.
+    Set an item in the Redis cache.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key under which the item is to be stored.<br/><br/>**Type:** `str` |
+| `value` | The value to be stored in the cache.<br/><br/>**Type:** `Any` |
 
-- `key` _str_ - The key under which the item is to be stored.
-- `value` - The value to be stored in the cache.
-  
-
-**Notes**:
-
-  The value is serialized using pickle before being stored in Redis.
-
-### close
-
-```python
-def close() -> None
-```
-
-Close the Redis client.
-
-Perform any necessary cleanup, such as closing network connections.
-
-### \_\_enter\_\_
-
-```python
-def __enter__() -> Self
-```
-
-Enter the runtime context related to the object.
-
-**Returns**:
-
-- `self` - The instance itself.
-
-### \_\_exit\_\_
-
-```python
-def __exit__(exc_type: Optional[type[BaseException]],
-             exc_val: Optional[BaseException],
-             exc_tb: Optional[TracebackType]) -> None
-```
-
-Exit the runtime context related to the object.
-
-Perform cleanup actions such as closing the Redis client.
-
-**Arguments**:
-
-- `exc_type` - The exception type if an exception was raised in the context.
-- `exc_value` - The exception value if an exception was raised in the context.
-- `traceback` - The traceback if an exception was raised in the context.
-
+<br />

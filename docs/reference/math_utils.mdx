@@ -1,88 +1,170 @@
 ---
 sidebarTitle: math_utils
-title: math_utils
+title: autogen.math_utils
 ---
 
-### solve\_problem
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### eval_math_responses
+<a href="#autogen.math_utils..eval_math_responses" class="headerlink" title="Permanent link"></a>
 
 ```python
-def solve_problem(problem: str, **config) -> str
+eval_math_responses(
+    responses,
+    solution=None,
+    **args
+) -> 
 ```
 
-`(openai<1)` Solve the math problem.
+    Select a response for a math problem using voting, and check if the response is correct if the solution is provided.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `responses` | The list of responses.<br/><br/> |
+| `solution=None` |  |
+| `**args` |  |
 
-- `problem` _str_ - The problem statement.
-- `config` _Optional, dict_ - The configuration for the API call.
-  
+<br />
 
-**Returns**:
-
-- `str` - The solution to the problem.
-
-### remove\_boxed
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### get_answer
+<a href="#autogen.math_utils..get_answer" class="headerlink" title="Permanent link"></a>
 
 ```python
-def remove_boxed(string: str) -> Optional[str]
+get_answer(solution: str | None) -> str | None
 ```
 
-Source: https://github.com/hendrycks/math
-Extract the text within a \boxed`{...}` environment.
+    
 
-**Example**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `solution` | **Type:** `str \| None` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### is_equiv
+<a href="#autogen.math_utils..is_equiv" class="headerlink" title="Permanent link"></a>
 
 ```python
-> remove_boxed("\boxed{\frac{2}{3}}")
-
-\frac{2}{3}
+is_equiv(str1: str | None, str2: str | None) -> float
 ```
 
-### last\_boxed\_only\_string
+    Returns (as a float) whether two strings containing math are equivalent up to differences of formatting in
+    - units
+    - fractions
+    - square roots
+    - superfluous LaTeX.
+    Source: https://github.com/hendrycks/math
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `str1` | **Type:** `str \| None` |
+| `str2` | **Type:** `str \| None` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### is_equiv_chain_of_thought
+<a href="#autogen.math_utils..is_equiv_chain_of_thought" class="headerlink" title="Permanent link"></a>
 
 ```python
-def last_boxed_only_string(string: str) -> Optional[str]
+is_equiv_chain_of_thought(str1: str, str2: str) -> float
 ```
 
-Source: https://github.com/hendrycks/math
-Extract the last \boxed`{...}` or \fbox`{...}` element from a string.
+    Strips the solution first before calling `is_equiv`.
 
-### is\_equiv
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `str1` | **Type:** `str` |
+| `str2` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### last_boxed_only_string
+<a href="#autogen.math_utils..last_boxed_only_string" class="headerlink" title="Permanent link"></a>
 
 ```python
-def is_equiv(str1: Optional[str], str2: Optional[str]) -> float
+last_boxed_only_string(string: str) -> str | None
 ```
 
-Returns (as a float) whether two strings containing math are equivalent up to differences of formatting in
-- units
-- fractions
-- square roots
-- superfluous LaTeX.
-Source: https://github.com/hendrycks/math
+    Source: https://github.com/hendrycks/math
+    Extract the last \boxed`\{...}` or \fbox`\{...}` element from a string.
 
-### is\_equiv\_chain\_of\_thought
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `string` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### remove_boxed
+<a href="#autogen.math_utils..remove_boxed" class="headerlink" title="Permanent link"></a>
 
 ```python
-def is_equiv_chain_of_thought(str1: str, str2: str) -> float
+remove_boxed(string: str) -> str | None
 ```
 
-Strips the solution first before calling `is_equiv`.
+    Source: https://github.com/hendrycks/math
+    Extract the text within a \boxed`\{...}` environment.
+    
+    Example:
+    ```python
+    > remove_boxed("\boxed\{\frac\{2}\{3}}")
+    
+    \frac\{2}\{3}
+    ```
 
-### eval\_math\_responses
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `string` | **Type:** `str` |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### solve_problem
+<a href="#autogen.math_utils..solve_problem" class="headerlink" title="Permanent link"></a>
 
 ```python
-def eval_math_responses(responses, solution=None, **args)
+solve_problem(problem: str, **config) -> str
 ```
 
-Select a response for a math problem using voting, and check if the response is correct if the solution is provided.
+    `(openai&lt;1)` Solve the math problem.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `problem` | The problem statement.<br/><br/>**Type:** `str` |
+| `**config` |  |
 
-- `responses` _list_ - The list of responses.
-- `solution` _str_ - The canonical solution.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `str` | str: The solution to the problem. |
 
-**Returns**:
+<br />
 
-- `dict` - The success metrics.
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### voting_counts
+<a href="#autogen.math_utils..voting_counts" class="headerlink" title="Permanent link"></a>
 
+```python
+voting_counts(responses) -> 
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `responses` |  |
+
+<br />

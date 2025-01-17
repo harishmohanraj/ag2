@@ -1,99 +1,48 @@
 ---
 sidebarTitle: client_messages
-title: messages.client_messages
+title: autogen.messages.client_messages
 ---
 
-## ModelUsageSummary
+    <h2 id="autogen.messages.client_messages.UsageSummaryMessage" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">UsageSummaryMessage</span>
+        <a href="#autogen.messages.client_messages.UsageSummaryMessage" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class ModelUsageSummary(BaseModel)
+UsageSummaryMessage(*args: Any, **data: Any)
 ```
 
-Model usage summary.
+    Usage summary message.
 
-#### model
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** `Any` |
+| `**data` | **Type:** `Any` |
 
-Model name.
+### Class Attributes
 
-#### completion\_tokens
-
-Number of tokens used for completion.
-
-#### cost
-
-Cost of the completion.
-
-#### prompt\_tokens
-
-Number of tokens used for prompt.
-
-#### total\_tokens
-
-Total number of tokens used.
-
-## ActualUsageSummary
-
-```python
-class ActualUsageSummary(BaseModel)
-```
-
-Actual usage summary.
-
-#### usages
-
-List of model usage summaries.
-
-#### total\_cost
-
-Total cost.
-
-## TotalUsageSummary
-
-```python
-class TotalUsageSummary(BaseModel)
-```
-
-Total usage summary.
-
-#### usages
-
-List of model usage summaries.
-
-#### total\_cost
-
-Total cost.
-
-## UsageSummaryMessage
-
-```python
-@wrap_message
-class UsageSummaryMessage(BaseMessage)
-```
-
-Usage summary message.
-
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### actual
+<a href="#autogen.messages.client_messages.UsageSummaryMessage.actual" class="headerlink" title="Permanent link"></a>
 
-Actual usage summary.
+    Actual usage summary.
 
-#### total
-
-Total usage summary.
-
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### mode
+<a href="#autogen.messages.client_messages.UsageSummaryMessage.mode" class="headerlink" title="Permanent link"></a>
 
-Mode to display the usage summary.
+    Mode to display the usage summary.
 
-## StreamMessage
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.messages.client_messages.UsageSummaryMessage.model_config" class="headerlink" title="Permanent link"></a>
 
-```python
-@wrap_message
-class StreamMessage(BaseMessage)
-```
+    <br />
 
-Stream message.
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### total
+<a href="#autogen.messages.client_messages.UsageSummaryMessage.total" class="headerlink" title="Permanent link"></a>
 
-#### content
-
-Content of the message.
-
+    Total usage summary.

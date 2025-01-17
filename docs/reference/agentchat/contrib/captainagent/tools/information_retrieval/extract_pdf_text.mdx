@@ -1,25 +1,24 @@
 ---
 sidebarTitle: extract_pdf_text
-title: agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_text
+title: autogen.agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_text
 ---
 
-### extract\_pdf\_text
+## Functions
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### extract_pdf_text
+<a href="#autogen.agentchat.contrib.captainagent.tools.information_retrieval.extract_pdf_text..extract_pdf_text" class="headerlink" title="Permanent link"></a>
 
 ```python
-@with_requirements(["PyMuPDF"])
-def extract_pdf_text(pdf_path, page_number=None)
+extract_pdf_text(pdf_path, page_number=None) -> 
 ```
 
-Extracts text from a specified page or the entire PDF file.
+    Extracts text from a specified page or the entire PDF file.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `pdf_path` | The path to the PDF file.<br/><br/> |
+| `page_number=None` |  |
 
-- `pdf_path` _str_ - The path to the PDF file.
-- `page_number` _int, optional_ - The page number to extract (starting from 0). If not provided,
-  the function will extract text from the entire PDF file.
-  
-
-**Returns**:
-
-- `str` - The extracted text.
-
+<br />

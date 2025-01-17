@@ -1,115 +1,272 @@
 ---
 sidebarTitle: base
-title: coding.base
+title: autogen.coding.base
 ---
 
-## CodeBlock
+    <h2 id="autogen.coding.base.CodeBlock" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeBlock</span>
+        <a href="#autogen.coding.base.CodeBlock" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class CodeBlock(BaseModel)
+CodeBlock(**data: Any)
 ```
 
-(Experimental) A class that represents a code block.
+    (Experimental) A class that represents a code block.
+    
+    Create a new model by parsing and validating input data from keyword arguments.
+    
+    Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.
+    
+    `self` is explicitly positional-only to allow `self` as a field name.
 
-## CodeResult
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** `Any` |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code
+<a href="#autogen.coding.base.CodeBlock.code" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### language
+<a href="#autogen.coding.base.CodeBlock.language" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.coding.base.CodeBlock.model_config" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.coding.base.CodeExecutionConfig" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeExecutionConfig</span>
+        <a href="#autogen.coding.base.CodeExecutionConfig" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class CodeResult(BaseModel)
+CodeExecutionConfig(*args, **kwargs)
 ```
 
-(Experimental) A class that represents the result of a code execution.
+    dict() -> new empty dictionary
+    dict(mapping) -> new dictionary initialized from a mapping object's
+        (key, value) pairs
+    dict(iterable) -> new dictionary initialized as if via:
+        d = \{}
+        for k, v in iterable:
+            d[k] = v
+    dict(**kwargs) -> new dictionary initialized with the name=value pairs
+        in the keyword argument list.  For example:  dict(one=1, two=2)
 
-## CodeExtractor
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### commandline-local
+<a href="#autogen.coding.base.CodeExecutionConfig.commandline-local" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### executor
+<a href="#autogen.coding.base.CodeExecutionConfig.executor" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### ipython-embedded
+<a href="#autogen.coding.base.CodeExecutionConfig.ipython-embedded" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### last_n_messages
+<a href="#autogen.coding.base.CodeExecutionConfig.last_n_messages" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### timeout
+<a href="#autogen.coding.base.CodeExecutionConfig.timeout" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### use_docker
+<a href="#autogen.coding.base.CodeExecutionConfig.use_docker" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### work_dir
+<a href="#autogen.coding.base.CodeExecutionConfig.work_dir" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.coding.base.CodeExecutor" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeExecutor</span>
+        <a href="#autogen.coding.base.CodeExecutor" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class CodeExtractor(Protocol)
+CodeExecutor(*args, **kwargs)
 ```
 
-(Experimental) A code extractor class that extracts code blocks from a message.
+    (Experimental) A code executor class that executes code blocks and returns the result.
 
-### extract\_code\_blocks
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### code_extractor
+<a href="#autogen.coding.base.CodeExecutor.code_extractor" class="headerlink" title="Permanent link"></a>
+
+    (Experimental) The code extractor used by this code executor.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### execute_code_blocks
+<a href="#autogen.coding.base.CodeExecutor.execute_code_blocks" class="headerlink" title="Permanent link"></a>
 
 ```python
-def extract_code_blocks(
-    message: str
-    | list[Union[UserMessageTextContentPart, UserMessageImageContentPart]]
-    | None
-) -> list[CodeBlock]
+execute_code_blocks(self, code_blocks: list[CodeBlock]) -> autogen.coding.base.CodeResult
 ```
 
-(Experimental) Extract code blocks from a message.
+    (Experimental) Execute code blocks and return the result.
+    
+    This method should be implemented by the code executor.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `code_blocks` | The code blocks to execute.<br/><br/>**Type:** `list[CodeBlock]` |
 
-- `message` _str_ - The message to extract code blocks from.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `autogen.coding.base.CodeResult` | CodeResult: The result of the code execution. |
 
-**Returns**:
+<br />
 
-- `List[CodeBlock]` - The extracted code blocks.
-
-## CodeExecutor
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### restart
+<a href="#autogen.coding.base.CodeExecutor.restart" class="headerlink" title="Permanent link"></a>
 
 ```python
-@runtime_checkable
-class CodeExecutor(Protocol)
+restart(self) -> None
 ```
 
-(Experimental) A code executor class that executes code blocks and returns the result.
+    (Experimental) Restart the code executor.
+    
+    This method should be implemented by the code executor.
+    
+    This method is called when the agent is reset.
 
-### code\_extractor
+<br />
+
+    <h2 id="autogen.coding.base.CodeExtractor" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeExtractor</span>
+        <a href="#autogen.coding.base.CodeExtractor" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@property
-def code_extractor() -> CodeExtractor
+CodeExtractor(*args, **kwargs)
 ```
 
-(Experimental) The code extractor used by this code executor.
+    (Experimental) A code extractor class that extracts code blocks from a message.
 
-### execute\_code\_blocks
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### extract_code_blocks
+<a href="#autogen.coding.base.CodeExtractor.extract_code_blocks" class="headerlink" title="Permanent link"></a>
 
 ```python
-def execute_code_blocks(code_blocks: list[CodeBlock]) -> CodeResult
+extract_code_blocks(self, message: str | list[Union[UserMessageTextContentPart, UserMessageImageContentPart]] | None) -> list[autogen.coding.base.CodeBlock]
 ```
 
-(Experimental) Execute code blocks and return the result.
+    (Experimental) Extract code blocks from a message.
 
-This method should be implemented by the code executor.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `message` | The message to extract code blocks from.<br/><br/>**Type:** `str \| list[Union[UserMessageTextContentPart, UserMessageImageContentPart]] \| None` |
 
-**Arguments**:
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[autogen.coding.base.CodeBlock]` | List[CodeBlock]: The extracted code blocks. |
 
-- `code_blocks` _List[CodeBlock]_ - The code blocks to execute.
-  
+<br />
 
-**Returns**:
-
-- `CodeResult` - The result of the code execution.
-
-### restart
+    <h2 id="autogen.coding.base.CodeResult" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">CodeResult</span>
+        <a href="#autogen.coding.base.CodeResult" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def restart() -> None
+CodeResult(**data: Any)
 ```
 
-(Experimental) Restart the code executor.
+    (Experimental) A class that represents the result of a code execution.
+    
+    Create a new model by parsing and validating input data from keyword arguments.
+    
+    Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.
+    
+    `self` is explicitly positional-only to allow `self` as a field name.
 
-This method should be implemented by the code executor.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** `Any` |
 
-This method is called when the agent is reset.
+### Class Attributes
 
-## IPythonCodeResult
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### exit_code
+<a href="#autogen.coding.base.CodeResult.exit_code" class="headerlink" title="Permanent link"></a>
 
-```python
-class IPythonCodeResult(CodeResult)
-```
+    <br />
 
-(Experimental) A code result class for IPython code executor.
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<a href="#autogen.coding.base.CodeResult.model_config" class="headerlink" title="Permanent link"></a>
 
-## CommandLineCodeResult
+    <br />
 
-```python
-class CommandLineCodeResult(CodeResult)
-```
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### output
+<a href="#autogen.coding.base.CodeResult.output" class="headerlink" title="Permanent link"></a>
 
-(Experimental) A code result class for command line code executor.
-
+    <br />

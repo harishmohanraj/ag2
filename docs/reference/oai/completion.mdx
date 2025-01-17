@@ -1,424 +1,383 @@
 ---
 sidebarTitle: completion
-title: oai.completion
+title: autogen.oai.completion
 ---
 
-## Completion
+    <h2 id="autogen.oai.completion.ChatCompletion" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">ChatCompletion</span>
+        <a href="#autogen.oai.completion.ChatCompletion" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-class Completion(OpenAICompletion)
+ChatCompletion()
 ```
 
-`(openai<1)` A class for OpenAI completion API.
+    `(openai&lt;1)` A class for OpenAI API ChatCompletion. Share the same API as Completion.
 
-It also supports: ChatCompletion, Azure OpenAI API.
+### Class Attributes
 
-### set\_cache
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### default_search_space
+<a href="#autogen.oai.completion.ChatCompletion.default_search_space" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### openai_completion_class
+<a href="#autogen.oai.completion.ChatCompletion.openai_completion_class" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+    <h2 id="autogen.oai.completion.Completion" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">Completion</span>
+        <a href="#autogen.oai.completion.Completion" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@classmethod
-def set_cache(cls,
-              seed: Optional[int] = 41,
-              cache_path_root: Optional[str] = ".cache")
+Completion()
 ```
 
-Set cache path.
+    `(openai&lt;1)` A class for OpenAI completion API.
+    
+    It also supports: ChatCompletion, Azure OpenAI API.
 
-**Arguments**:
+### Class Attributes
 
-- `seed` _int, Optional_ - The integer identifier for the pseudo seed.
-  Results corresponding to different seeds will be cached in different places.
-- `cache_path` _str, Optional_ - The root path for the cache.
-  The complete cache path will be {cache_path_root}/{seed}.
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### cache_path
+<a href="#autogen.oai.completion.Completion.cache_path" class="headerlink" title="Permanent link"></a>
 
-### clear\_cache
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### cache_seed
+<a href="#autogen.oai.completion.Completion.cache_seed" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### chat_models
+<a href="#autogen.oai.completion.Completion.chat_models" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### default_search_space
+<a href="#autogen.oai.completion.Completion.default_search_space" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### logged_history
+<a href="#autogen.oai.completion.Completion.logged_history" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### max_retry_period
+<a href="#autogen.oai.completion.Completion.max_retry_period" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### openai_completion_class
+<a href="#autogen.oai.completion.Completion.openai_completion_class" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### optimization_budget
+<a href="#autogen.oai.completion.Completion.optimization_budget" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### price1K
+<a href="#autogen.oai.completion.Completion.price1K" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### request_timeout
+<a href="#autogen.oai.completion.Completion.request_timeout" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### retry_wait_time
+<a href="#autogen.oai.completion.Completion.retry_wait_time" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### clear_cache
+<a href="#autogen.oai.completion.Completion.clear_cache" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def clear_cache(cls,
-                seed: Optional[int] = None,
-                cache_path_root: Optional[str] = ".cache")
+clear_cache(seed: int | None = None, cache_path_root: str | None = '.cache') -> 
 ```
 
-Clear cache.
+    Clear cache.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | The integer identifier for the pseudo seed.<br/><br/>If omitted, all caches under cache_path_root will be cleared.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** None |
+| `cache_path_root` | **Type:** `str \| None`<br/><br/>**Default:** '.cache' |
 
-- `seed` _int, Optional_ - The integer identifier for the pseudo seed.
-  If omitted, all caches under cache_path_root will be cleared.
-- `cache_path` _str, Optional_ - The root path for the cache.
-  The complete cache path will be {cache_path_root}/{seed}.
+<br />
 
-### tune
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### cost
+<a href="#autogen.oai.completion.Completion.cost" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def tune(cls,
-         data: list[dict],
-         metric: str,
-         mode: str,
-         eval_func: Callable,
-         log_file_name: Optional[str] = None,
-         inference_budget: Optional[float] = None,
-         optimization_budget: Optional[float] = None,
-         num_samples: Optional[int] = 1,
-         logging_level: Optional[int] = logging.WARNING,
-         **config)
+cost(response: dict) -> 
 ```
 
-Tune the parameters for the OpenAI API call.
+    Compute the cost of an API call.
 
-TODO: support parallel tuning with ray or spark.
-TODO: support agg_method as in test
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` | The response from OpenAI API.<br/><br/>**Type:** `dict` |
 
-**Arguments**:
+<br />
 
-- `data` _list_ - The list of data points.
-- `metric` _str_ - The metric to optimize.
-- `mode` _str_ - The optimization mode, "min" or "max.
-- `eval_func` _Callable_ - The evaluation function for responses.
-  The function should take a list of responses and a data point as input,
-  and return a dict of metrics. For example,
-  
-```python
-def eval_func(responses, **data):
-    solution = data["solution"]
-    success_list = []
-    n = len(responses)
-    for i in range(n):
-        response = responses[i]
-        succeed = is_equiv_chain_of_thought(response, solution)
-        success_list.append(succeed)
-    return {
-        "expected_success": 1 - pow(1 - sum(success_list) / n, n),
-        "success": any(s for s in success_list),
-    }
-```
-  
-- `log_file_name` _str, optional_ - The log file.
-- `inference_budget` _float, optional_ - The inference budget, dollar per instance.
-- `optimization_budget` _float, optional_ - The optimization budget, dollar in total.
-- `num_samples` _int, optional_ - The number of samples to evaluate.
-  -1 means no hard restriction in the number of trials
-  and the actual number is decided by optimization_budget. Defaults to 1.
-- `logging_level` _optional_ - logging level. Defaults to logging.WARNING.
-- `**config` _dict_ - The search space to update over the default search.
-  For prompt, please provide a string/Callable or a list of strings/Callables.
-  - If prompt is provided for chat models, it will be converted to messages under role "user".
-  - Do not provide both prompt and messages for chat models, but provide either of them.
-  - A string template will be used to generate a prompt for each data instance
-  using `prompt.format(**data)`.
-  - A callable template will be used to generate a prompt for each data instance
-  using `prompt(data)`.
-  For stop, please provide a string, a list of strings, or a list of lists of strings.
-  For messages (chat models only), please provide a list of messages (for a single chat prefix)
-  or a list of lists of messages (for multiple choices of chat prefix to choose from).
-  Each message should be a dict with keys "role" and "content". The value of "content" can be a string/Callable template.
-  
-
-**Returns**:
-
-- `dict` - The optimized hyperparameter setting.
-- `tune.ExperimentAnalysis` - The tuning results.
-
-### create
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create
+<a href="#autogen.oai.completion.Completion.create" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def create(cls,
-           context: Optional[dict] = None,
-           use_cache: Optional[bool] = True,
-           config_list: Optional[list[dict]] = None,
-           filter_func: Optional[Callable[[dict, dict], bool]] = None,
-           raise_on_ratelimit_or_timeout: Optional[bool] = True,
-           allow_format_str_template: Optional[bool] = False,
-           **config)
+create(
+    context: dict | None = None,
+    use_cache: bool | None = True,
+    config_list: list[dict] | None = None,
+    filter_func: Callable[[dict, dict], bool] | None = None,
+    raise_on_ratelimit_or_timeout: bool | None = True,
+    allow_format_str_template: bool | None = False,
+    **config
+) -> 
 ```
 
-Make a completion for a given context.
+    Make a completion for a given context.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context` | The context to instantiate the prompt.<br/><br/>It needs to contain keys that are used by the prompt template or the filter function.<br/><br/>E.g., `prompt="Complete the following sentence: \\{prefix}, context=\\{"prefix": "Today I feel"}`.<br/><br/>The actual prompt will be: "Complete the following sentence: Today I feel".<br/><br/>More examples can be found at [templating](https://docs.ag2.ai/docs/Use-Cases/enhanced_inference#templating).<br/><br/>**Type:** `dict \| None`<br/><br/>**Default:** None |
+| `use_cache` | Whether to use cached responses.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** True |
+| `config_list` | List of configurations for the completion to try.<br/><br/>The first one that does not raise an error will be used.<br/><br/>Only the differences from the default config need to be provided.<br/><br/>E.g., ```python response = oai.Completion.create( config_list = [ \\{ "model": "gpt-4", "api_key": os.environ.get("AZURE_OPENAI_API_KEY"), "api_type": "azure", "base_url": os.environ.get("AZURE_OPENAI_API_BASE"), "api_version": "2024-02-01", }, \\{ "model": "gpt-3.5-turbo", "api_key": os.environ.get("OPENAI_API_KEY"), "api_type": "openai", "base_url": "https://api.openai.com/v1", }, \\{ "model": "llama-7B", "base_url": "http://127.0.0.1:8080", "api_type": "openai", }, ], prompt="Hi", ) ```<br/><br/>**Type:** `list[dict] \| None`<br/><br/>**Default:** None |
+| `filter_func` | A function that takes in the context and the response and returns a boolean to indicate whether the response is valid.<br/><br/>E.g., ```python def yes_or_no_filter(context, config, response): return context.get("yes_or_no_choice", False) is False or any( text in ["Yes.", "No."] for text in oai.Completion.extract_text(response) ) ```<br/><br/>**Type:** `Callable[[dict, dict], bool] \| None`<br/><br/>**Default:** None |
+| `raise_on_ratelimit_or_timeout` | Whether to raise RateLimitError or Timeout when all configs fail.<br/><br/>When set to False, -1 will be returned when all configs fail.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** True |
+| `allow_format_str_template` | Whether to allow format string template in the config.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** False |
+| `**config` | Configuration for the openai API call.<br/><br/>This is used as parameters for calling openai API.<br/><br/>The "prompt" or "messages" parameter can contain a template (str or Callable) which will be instantiated with the context.<br/><br/>Besides the parameters for the openai API call, it can also contain: - `max_retry_period` (int): the total time (in seconds) allowed for retrying failed requests.<br/><br/>- `retry_wait_time` (int): the time interval to wait (in seconds) before retrying a failed request.<br/><br/>- `cache_seed` (int) for the cache.<br/><br/>This is useful when implementing "controlled randomness" for the completion.<br/><br/> |
 
-- `context` _Dict, Optional_ - The context to instantiate the prompt.
-  It needs to contain keys that are used by the prompt template or the filter function.
-  E.g., `prompt="Complete the following sentence: {prefix}, context={"prefix": "Today I feel"}`.
-  The actual prompt will be:
-  "Complete the following sentence: Today I feel".
-  More examples can be found at [templating](https://docs.ag2.ai/docs/Use-Cases/enhanced_inference#templating).
-- `use_cache` _bool, Optional_ - Whether to use cached responses.
-- `config_list` _List, Optional_ - List of configurations for the completion to try.
-  The first one that does not raise an error will be used.
-  Only the differences from the default config need to be provided.
-  E.g.,
-  
-```python
-response = oai.Completion.create(
-    config_list=[
-        {
-            "model": "gpt-4",
-            "api_key": os.environ.get("AZURE_OPENAI_API_KEY"),
-            "api_type": "azure",
-            "base_url": os.environ.get("AZURE_OPENAI_API_BASE"),
-            "api_version": "2024-02-01",
-        },
-        {
-            "model": "gpt-3.5-turbo",
-            "api_key": os.environ.get("OPENAI_API_KEY"),
-            "api_type": "openai",
-            "base_url": "https://api.openai.com/v1",
-        },
-        {
-            "model": "llama-7B",
-            "base_url": "http://127.0.0.1:8080",
-            "api_type": "openai",
-        },
-    ],
-    prompt="Hi",
-)
-```
-  
-- `filter_func` _Callable, Optional_ - A function that takes in the context and the response and returns a boolean to indicate whether the response is valid. E.g.,
-  
-```python
-def yes_or_no_filter(context, config, response):
-    return context.get("yes_or_no_choice", False) is False or any(
-        text in ["Yes.", "No."] for text in oai.Completion.extract_text(response)
-    )
-```
-  
-- `raise_on_ratelimit_or_timeout` _bool, Optional_ - Whether to raise RateLimitError or Timeout when all configs fail.
-  When set to False, -1 will be returned when all configs fail.
-- `allow_format_str_template` _bool, Optional_ - Whether to allow format string template in the config.
-- `**config` - Configuration for the openai API call. This is used as parameters for calling openai API.
-  The "prompt" or "messages" parameter can contain a template (str or Callable) which will be instantiated with the context.
-  Besides the parameters for the openai API call, it can also contain:
-  - `max_retry_period` (int): the total time (in seconds) allowed for retrying failed requests.
-  - `retry_wait_time` (int): the time interval to wait (in seconds) before retrying a failed request.
-  - `cache_seed` (int) for the cache. This is useful when implementing "controlled randomness" for the completion.
-  
+<br />
 
-**Returns**:
-
-  Responses from OpenAI API, with additional fields.
-  - `cost`: the total cost.
-  When `config_list` is provided, the response will contain a few more fields:
-  - `config_id`: the index of the config in the config_list that is used to generate the response.
-  - `pass_filter`: whether the response passes the filter function. None if no filter is provided.
-
-### test
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### extract_text
+<a href="#autogen.oai.completion.Completion.extract_text" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def test(cls,
-         data,
-         eval_func=None,
-         use_cache=True,
-         agg_method="avg",
-         return_responses_and_per_instance_result=False,
-         logging_level=logging.WARNING,
-         **config)
+extract_text(response: dict) -> list[str]
 ```
 
-Evaluate the responses created with the config for the OpenAI API call.
+    Extract the text from a completion or chat response.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` | The response from OpenAI API.<br/><br/>**Type:** `dict` |
 
-- `data` _list_ - The list of test data points.
-- `eval_func` _Callable_ - The evaluation function for responses per data instance.
-  The function should take a list of responses and a data point as input,
-  and return a dict of metrics. You need to either provide a valid callable
-  eval_func; or do not provide one (set None) but call the test function after
-  calling the tune function in which a eval_func is provided.
-  In the latter case we will use the eval_func provided via tune function.
-  Defaults to None.
-  
-```python
-def eval_func(responses, **data):
-    solution = data["solution"]
-    success_list = []
-    n = len(responses)
-    for i in range(n):
-        response = responses[i]
-        succeed = is_equiv_chain_of_thought(response, solution)
-        success_list.append(succeed)
-    return {
-        "expected_success": 1 - pow(1 - sum(success_list) / n, n),
-        "success": any(s for s in success_list),
-    }
-```
-- `use_cache` _bool, Optional_ - Whether to use cached responses. Defaults to True.
-- `agg_method` _str, Callable or a dict of Callable_ - Result aggregation method (across
-  multiple instances) for each of the metrics. Defaults to 'avg'.
-  An example agg_method in str:
-  
-```python
-agg_method = "median"
-```
-  An example agg_method in a Callable:
-  
-```python
-agg_method = np.median
-```
-  
-  An example agg_method in a dict of Callable:
-  
-```python
-agg_method = {"median_success": np.median, "avg_success": np.mean}
-```
-  
-- `return_responses_and_per_instance_result` _bool_ - Whether to also return responses
-  and per instance results in addition to the aggregated results.
-- `logging_level` _optional_ - logging level. Defaults to logging.WARNING.
-- `**config` _dict_ - parameters passed to the openai api call `create()`.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[str]` | A list of text in the responses. |
 
-**Returns**:
+<br />
 
-  None when no valid eval_func is provided in either test or tune;
-  Otherwise, a dict of aggregated results, responses and per instance results if `return_responses_and_per_instance_result` is True;
-  Otherwise, a dict of aggregated results (responses and per instance results are not returned).
-
-### cost
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### extract_text_or_function_call
+<a href="#autogen.oai.completion.Completion.extract_text_or_function_call" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def cost(cls, response: dict)
+extract_text_or_function_call(response: dict) -> list[str]
 ```
 
-Compute the cost of an API call.
+    Extract the text or function calls from a completion or chat response.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response` | The response from OpenAI API.<br/><br/>**Type:** `dict` |
 
-- `response` _dict_ - The response from OpenAI API.
-  
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `list[str]` | A list of text or function calls in the responses. |
 
-**Returns**:
+<br />
 
-  The cost in USD. 0 if the model is not supported.
-
-### extract\_text
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### instantiate
+<a href="#autogen.oai.completion.Completion.instantiate" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def extract_text(cls, response: dict) -> list[str]
+instantiate(
+    template: str | None,
+    context: dict | None = None,
+    allow_format_str_template: bool | None = False
+) -> 
 ```
 
-Extract the text from a completion or chat response.
+    
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `template` | **Type:** `str \| None` |
+| `context` | **Type:** `dict \| None`<br/><br/>**Default:** None |
+| `allow_format_str_template` | **Type:** `bool \| None`<br/><br/>**Default:** False |
 
-- `response` _dict_ - The response from OpenAI API.
-  
+<br />
 
-**Returns**:
-
-  A list of text in the responses.
-
-### extract\_text\_or\_function\_call
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### print_usage_summary
+<a href="#autogen.oai.completion.Completion.print_usage_summary" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def extract_text_or_function_call(cls, response: dict) -> list[str]
+print_usage_summary() -> dict
 ```
 
-Extract the text or function calls from a completion or chat response.
+    Return the usage summary.
 
-**Arguments**:
+<br />
 
-- `response` _dict_ - The response from OpenAI API.
-  
-
-**Returns**:
-
-  A list of text or function calls in the responses.
-
-### logged\_history
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_cache
+<a href="#autogen.oai.completion.Completion.set_cache" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-@property
-def logged_history(cls) -> dict
+set_cache(seed: int | None = 41, cache_path_root: str | None = '.cache') -> 
 ```
 
-Return the book keeping dictionary.
+    Set cache path.
 
-### print\_usage\_summary
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `seed` | The integer identifier for the pseudo seed.<br/><br/>Results corresponding to different seeds will be cached in different places.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 41 |
+| `cache_path_root` | **Type:** `str \| None`<br/><br/>**Default:** '.cache' |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### start_logging
+<a href="#autogen.oai.completion.Completion.start_logging" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def print_usage_summary(cls) -> dict
+start_logging(
+    history_dict: dict | None = None,
+    compact: bool | None = True,
+    reset_counter: bool | None = True
+) -> 
 ```
 
-Return the usage summary.
+    Start book keeping.
 
-### start\_logging
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `history_dict` | A dictionary for book keeping.<br/><br/>If no provided, a new one will be created.<br/><br/>**Type:** `dict \| None`<br/><br/>**Default:** None |
+| `compact` | Whether to keep the history dictionary compact.<br/><br/>Compact history contains one key per conversation, and the value is a dictionary like:<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** True |
+| `reset_counter` | whether to reset the counter of the number of API calls.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** True |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### stop_logging
+<a href="#autogen.oai.completion.Completion.stop_logging" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def start_logging(cls,
-                  history_dict: Optional[dict] = None,
-                  compact: Optional[bool] = True,
-                  reset_counter: Optional[bool] = True)
+stop_logging() -> 
 ```
 
-Start book keeping.
+    End book keeping.
 
-**Arguments**:
+<br />
 
-- `history_dict` _Dict_ - A dictionary for book keeping.
-  If no provided, a new one will be created.
-- `compact` _bool_ - Whether to keep the history dictionary compact.
-  Compact history contains one key per conversation, and the value is a dictionary
-  like:
-```python
-{
-    "create_at": [0, 1],
-    "cost": [0.1, 0.2],
-}
-```
-  where "created_at" is the index of API calls indicating the order of all the calls,
-  and "cost" is the cost of each call. This example shows that the conversation is based
-  on two API calls. The compact format is useful for condensing the history of a conversation.
-  If compact is False, the history dictionary will contain all the API calls: the key
-  is the index of the API call, and the value is a dictionary like:
-```python
-{
-    "request": request_dict,
-    "response": response_dict,
-}
-```
-  where request_dict is the request sent to OpenAI API, and response_dict is the response.
-  For a conversation containing two API calls, the non-compact history dictionary will be like:
-```python
-{
-    0: {
-        "request": request_dict_0,
-        "response": response_dict_0,
-    },
-    1: {
-        "request": request_dict_1,
-        "response": response_dict_1,
-    },
-```
-  The first request's messages plus the response is equal to the second request's messages.
-  For a conversation with many turns, the non-compact history dictionary has a quadratic size
-  while the compact history dict has a linear size.
-- `reset_counter` _bool_ - whether to reset the counter of the number of API calls.
-
-### stop\_logging
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### test
+<a href="#autogen.oai.completion.Completion.test" class="headerlink" title="Permanent link"></a>
 
 ```python
-@classmethod
-def stop_logging(cls)
+test(
+    data,
+    eval_func=None,
+    use_cache=True,
+    agg_method='avg',
+    return_responses_and_per_instance_result=False,
+    logging_level=30,
+    **config
+) -> 
 ```
 
-End book keeping.
+    Evaluate the responses created with the config for the OpenAI API call.
 
-## ChatCompletion
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `data` | The list of test data points.<br/><br/> |
+| `eval_func=None` |  |
+| `use_cache=True` |  |
+| `agg_method='avg'` |  |
+| `return_responses_and_per_instance_result=False` |  |
+| `logging_level=30` |  |
+| `**config` |  |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### tune
+<a href="#autogen.oai.completion.Completion.tune" class="headerlink" title="Permanent link"></a>
 
 ```python
-class ChatCompletion(Completion)
+tune(
+    data: list[dict],
+    metric: str,
+    mode: str,
+    eval_func: Callable,
+    log_file_name: str | None = None,
+    inference_budget: float | None = None,
+    optimization_budget: float | None = None,
+    num_samples: int | None = 1,
+    logging_level: int | None = 30,
+    **config
+) -> 
 ```
 
-`(openai<1)` A class for OpenAI API ChatCompletion. Share the same API as Completion.
+    Tune the parameters for the OpenAI API call.
+    
+    TODO: support parallel tuning with ray or spark.
+    TODO: support agg_method as in test
 
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `data` | The list of data points.<br/><br/>**Type:** `list[dict]` |
+| `metric` | The metric to optimize.<br/><br/>**Type:** `str` |
+| `mode` | The optimization mode, "min" or "max.<br/><br/>**Type:** `str` |
+| `eval_func` | The evaluation function for responses.<br/><br/>The function should take a list of responses and a data point as input, and return a dict of metrics.<br/><br/>For example,<br/><br/>**Type:** `Callable` |
+| `log_file_name` | **Type:** `str \| None`<br/><br/>**Default:** None |
+| `inference_budget` | **Type:** `float \| None`<br/><br/>**Default:** None |
+| `optimization_budget` | **Type:** `float \| None`<br/><br/>**Default:** None |
+| `num_samples` | **Type:** `int \| None`<br/><br/>**Default:** 1 |
+| `logging_level` | **Type:** `int \| None`<br/><br/>**Default:** 30 |
+| `**config` |  |
+
+<br />

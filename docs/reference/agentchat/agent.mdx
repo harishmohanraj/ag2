@@ -1,178 +1,241 @@
 ---
 sidebarTitle: agent
-title: agentchat.agent
+title: autogen.agentchat.agent
 ---
 
-## Agent
+    <h2 id="autogen.agentchat.agent.Agent" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">Agent</span>
+        <a href="#autogen.agentchat.agent.Agent" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-@runtime_checkable
-class Agent(Protocol)
+Agent(*args, **kwargs)
 ```
 
-(In preview) A protocol for Agent.
+    (In preview) A protocol for Agent.
+    
+    An agent can communicate with other agents and perform actions.
+    Different agents can differ in what actions they perform in the `receive` method.
 
-An agent can communicate with other agents and perform actions.
-Different agents can differ in what actions they perform in the `receive` method.
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
 
-### name
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### description
+<a href="#autogen.agentchat.agent.Agent.description" class="headerlink" title="Permanent link"></a>
+
+    The description of the agent. Used for the agent's introduction in
+    a group chat setting.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### name
+<a href="#autogen.agentchat.agent.Agent.name" class="headerlink" title="Permanent link"></a>
+
+    The name of the agent.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### a_generate_reply
+<a href="#autogen.agentchat.agent.Agent.a_generate_reply" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def name() -> str
+a_generate_reply(
+    self,
+    messages: list[dict[str, typing.Any]] | None = None,
+    sender: ForwardRef('Agent') | None = None,
+    **kwargs: Any
+) -> str | dict[str, typing.Any] | None
 ```
 
-The name of the agent.
+    (Async) Generate a reply based on the received messages.
 
-### description
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `messages` | a list of messages received from other agents.<br/><br/>The messages are dictionaries that are JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `list[dict[str, typing.Any]] \| None`<br/><br/>**Default:** None |
+| `sender` | sender of an Agent instance.<br/><br/>**Type:** `ForwardRef('Agent') \| None`<br/><br/>**Default:** None |
+| `**kwargs` | **Type:** `Any` |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `str \| dict[str, typing.Any] \| None` | str or dict or None: the generated reply. If None, no reply is generated. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### a_receive
+<a href="#autogen.agentchat.agent.Agent.a_receive" class="headerlink" title="Permanent link"></a>
 
 ```python
-@property
-def description() -> str
+a_receive(
+    self,
+    message: dict[str, typing.Any] | str,
+    sender: Agent,
+    request_reply: bool | None = None
+) -> None
 ```
 
-The description of the agent. Used for the agent's introduction in
-a group chat setting.
+    (Async) Receive a message from another agent.
 
-### send
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `message` | the message received.<br/><br/>If a dict, it should be a JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `dict[str, typing.Any] \| str` |
+| `sender` | the sender of the message.<br/><br/>**Type:** `Agent` |
+| `request_reply` | whether the sender requests a reply.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** None |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### a_send
+<a href="#autogen.agentchat.agent.Agent.a_send" class="headerlink" title="Permanent link"></a>
 
 ```python
-def send(message: Union[dict[str, Any], str],
-         recipient: "Agent",
-         request_reply: Optional[bool] = None) -> None
+a_send(
+    self,
+    message: dict[str, typing.Any] | str,
+    recipient: Agent,
+    request_reply: bool | None = None
+) -> None
 ```
 
-Send a message to another agent.
+    (Async) Send a message to another agent.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `message` | the message to send.<br/><br/>If a dict, it should be a JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `dict[str, typing.Any] \| str` |
+| `recipient` | the recipient of the message.<br/><br/>**Type:** `Agent` |
+| `request_reply` | whether to request a reply from the recipient.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** None |
 
-- `message` _dict or str_ - the message to send. If a dict, it should be
-  a JSON-serializable and follows the OpenAI's ChatCompletion schema.
-- `recipient` _Agent_ - the recipient of the message.
-- `request_reply` _bool_ - whether to request a reply from the recipient.
+<br />
 
-### a\_send
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### generate_reply
+<a href="#autogen.agentchat.agent.Agent.generate_reply" class="headerlink" title="Permanent link"></a>
 
 ```python
-async def a_send(message: Union[dict[str, Any], str],
-                 recipient: "Agent",
-                 request_reply: Optional[bool] = None) -> None
+generate_reply(
+    self,
+    messages: list[dict[str, typing.Any]] | None = None,
+    sender: ForwardRef('Agent') | None = None,
+    **kwargs: Any
+) -> str | dict[str, typing.Any] | None
 ```
 
-(Async) Send a message to another agent.
+    Generate a reply based on the received messages.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `messages` | a list of messages received from other agents.<br/><br/>The messages are dictionaries that are JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `list[dict[str, typing.Any]] \| None`<br/><br/>**Default:** None |
+| `sender` | sender of an Agent instance.<br/><br/>**Type:** `ForwardRef('Agent') \| None`<br/><br/>**Default:** None |
+| `**kwargs` | **Type:** `Any` |
 
-- `message` _dict or str_ - the message to send. If a dict, it should be
-  a JSON-serializable and follows the OpenAI's ChatCompletion schema.
-- `recipient` _Agent_ - the recipient of the message.
-- `request_reply` _bool_ - whether to request a reply from the recipient.
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| `str \| dict[str, typing.Any] \| None` | str or dict or None: the generated reply. If None, no reply is generated. |
 
-### receive
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### receive
+<a href="#autogen.agentchat.agent.Agent.receive" class="headerlink" title="Permanent link"></a>
 
 ```python
-def receive(message: Union[dict[str, Any], str],
-            sender: "Agent",
-            request_reply: Optional[bool] = None) -> None
+receive(
+    self,
+    message: dict[str, typing.Any] | str,
+    sender: Agent,
+    request_reply: bool | None = None
+) -> None
 ```
 
-Receive a message from another agent.
+    Receive a message from another agent.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `message` | the message received.<br/><br/>If a dict, it should be a JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `dict[str, typing.Any] \| str` |
+| `sender` | the sender of the message.<br/><br/>**Type:** `Agent` |
+| `request_reply` | whether the sender requests a reply.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** None |
 
-- `message` _dict or str_ - the message received. If a dict, it should be
-  a JSON-serializable and follows the OpenAI's ChatCompletion schema.
-- `sender` _Agent_ - the sender of the message.
-- `request_reply` _bool_ - whether the sender requests a reply.
+<br />
 
-### a\_receive
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### send
+<a href="#autogen.agentchat.agent.Agent.send" class="headerlink" title="Permanent link"></a>
 
 ```python
-async def a_receive(message: Union[dict[str, Any], str],
-                    sender: "Agent",
-                    request_reply: Optional[bool] = None) -> None
+send(
+    self,
+    message: dict[str, typing.Any] | str,
+    recipient: Agent,
+    request_reply: bool | None = None
+) -> None
 ```
 
-(Async) Receive a message from another agent.
+    Send a message to another agent.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `message` | the message to send.<br/><br/>If a dict, it should be a JSON-serializable and follows the OpenAI's ChatCompletion schema.<br/><br/>**Type:** `dict[str, typing.Any] \| str` |
+| `recipient` | the recipient of the message.<br/><br/>**Type:** `Agent` |
+| `request_reply` | whether to request a reply from the recipient.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** None |
 
-- `message` _dict or str_ - the message received. If a dict, it should be
-  a JSON-serializable and follows the OpenAI's ChatCompletion schema.
-- `sender` _Agent_ - the sender of the message.
-- `request_reply` _bool_ - whether the sender requests a reply.
+<br />
 
-### generate\_reply
+    <h2 id="autogen.agentchat.agent.LLMAgent" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">LLMAgent</span>
+        <a href="#autogen.agentchat.agent.LLMAgent" class="headerlink" title="Permanent link"></a>
+    </h2>
 
 ```python
-def generate_reply(messages: Optional[list[dict[str, Any]]] = None,
-                   sender: Optional["Agent"] = None,
-                   **kwargs: Any) -> Union[str, dict[str, Any], None]
+LLMAgent(*args, **kwargs)
 ```
 
-Generate a reply based on the received messages.
+    (In preview) A protocol for an LLM agent.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
 
-- `messages` _list[dict]_ - a list of messages received from other agents.
-  The messages are dictionaries that are JSON-serializable and
-  follows the OpenAI's ChatCompletion schema.
-- `sender` - sender of an Agent instance.
-  
+### Instance Attributes
 
-**Returns**:
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### system_message
+<a href="#autogen.agentchat.agent.LLMAgent.system_message" class="headerlink" title="Permanent link"></a>
 
-  str or dict or None: the generated reply. If None, no reply is generated.
+    The system message of this agent.
 
-### a\_generate\_reply
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### update_system_message
+<a href="#autogen.agentchat.agent.LLMAgent.update_system_message" class="headerlink" title="Permanent link"></a>
 
 ```python
-async def a_generate_reply(messages: Optional[list[dict[str, Any]]] = None,
-                           sender: Optional["Agent"] = None,
-                           **kwargs: Any) -> Union[str, dict[str, Any], None]
+update_system_message(self, system_message: str) -> None
 ```
 
-(Async) Generate a reply based on the received messages.
+    Update this agent's system message.
 
-**Arguments**:
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `system_message` | system message for inference.<br/><br/>**Type:** `str` |
 
-- `messages` _list[dict]_ - a list of messages received from other agents.
-  The messages are dictionaries that are JSON-serializable and
-  follows the OpenAI's ChatCompletion schema.
-- `sender` - sender of an Agent instance.
-  
-
-**Returns**:
-
-  str or dict or None: the generated reply. If None, no reply is generated.
-
-## LLMAgent
-
-```python
-@runtime_checkable
-class LLMAgent(Agent, Protocol)
-```
-
-(In preview) A protocol for an LLM agent.
-
-### system\_message
-
-```python
-@property
-def system_message() -> str
-```
-
-The system message of this agent.
-
-### update\_system\_message
-
-```python
-def update_system_message(system_message: str) -> None
-```
-
-Update this agent's system message.
-
-**Arguments**:
-
-- `system_message` _str_ - system message for inference.
-
+<br />
