@@ -63,8 +63,8 @@ Amazon Bedrock pricing is available
 [here](https://aws.amazon.com/bedrock/pricing/).
 
 ```python
-# If you need to install AutoGen with Amazon Bedrock
-!pip install pyautogen["bedrock"]
+# If you need to install AG2 with Amazon Bedrock
+%pip install ag2["bedrock"]
 ```
 
 ## Set the config for Amazon Bedrock
@@ -721,8 +721,8 @@ together on a single cloud platform.
 
 ## Image classification with Anthropic’s Claude 3 Sonnet
 
-AutoGen’s Amazon Bedrock client class supports inputting images for the
-LLM to respond to.
+AG2’s Amazon Bedrock client class supports inputting images for the LLM
+to respond to.
 
 In this simple example, we’ll use an image on the Internet and send it
 to Anthropic’s Claude 3 Sonnet model to describe.
@@ -731,7 +731,7 @@ Here’s the image we’ll use:
 
 <figure>
 <img
-src="https://microsoft.github.io/autogen/assets/images/love-ec54b2666729d3e9d93f91773d1a77cf.png"
+src="https://mintlify.s3.us-west-1.amazonaws.com/ag2ai/blog/2024-03-03-AutoGen-Update/img/love.png"
 title="width=400 height=400" alt="I -heart- AutoGen" />
 <figcaption aria-hidden="true">I -heart- AutoGen</figcaption>
 </figure>
