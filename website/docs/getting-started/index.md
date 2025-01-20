@@ -67,6 +67,16 @@ my_agent = ConversableAgent(
 my_agent.run("In one sentence, what's the big deal about AI?")
 ```
 
+Let's break it down:
+
+1. Import `ConversableAgent`, you'll find the most popular classes available directly from `autogen`.
+
+2. Create our LLM configuration to define the LLM that our agent will use.
+
+3. Create our ConversableAgent.
+
+4. Run a chat directly with the agent's `run` method, passing in our starting message.
+
 ```console
 human (to helpful_agent):
 
@@ -82,19 +92,9 @@ The big deal about AI is its transformative potential to enhance productivity, a
 --------------------------------------------------------------------------------
 ```
 
-Let's break it down:
-
-1. Import `ConversableAgent`, you'll find the most popular classes available directly from `autogen`.
-
-2. Create our LLM configuration to define the LLM that our agent will use.
-
-3. Create our ConversableAgent.
-
-4. Run a chat directly with the agent's `run` method, passing in our starting message.
-
 ## Defining an agent
 
-So far we created an agent that is just equivalent to a chat bot, so let's give them a purpose, a fourth grade lesson planner.
+So far we created an agent that is just equivalent to a chat bot, so let's give them make them a fourth grade lesson planner.
 
 --SNIPPET: conversableagentdefine.py
 
@@ -124,7 +124,7 @@ lesson_planner = ConversableAgent(
 lesson_planner.run("Today, let's introduce our kids to the solar system.")
 ```
 
-1. Define strict instructions on what our agent should do.
+1. Define strict instructions on what our agent should do and provide guidance on the format we want them to reply with.
 
 2. Create our agent, setting the `system_message` with our instructions.
 
@@ -162,7 +162,7 @@ We'll also watch a short video that takes us on a spaceship tour of space, visit
 
 When running the previous examples you were able to chat with the agents and this is because another agent was automatically created to represent you, the human in the loop, when using an agent's `run` method.
 
-As you build your own workflows, you'll want to create your own agent to represent the *human in the loop*, and you do that by using a ConversableAgent and setting the `human_input_mode` to `ALWAYS`.
+As you build your own workflows, you'll want to create your own *human in the loop* agents and you do that by using a ConversableAgent and setting the `human_input_mode` to `ALWAYS`.
 
 Here's the previous example with an agent created for human input.
 
@@ -208,13 +208,13 @@ It's time to move on from our simple two-agent conversations and think about orc
 
 There are two mechanisms for building multi-agent workflows, GroupChat and Swarm.
 
-:::note
-We'll refer to *conversation patterns* throughout the documentation - they are simply a structured way of organizing the flow between agents.
-:::
-
 GroupChat contains a number of built-in conversation patterns and also allows you to define your own.
 
 Swarm is a conversation pattern based on agents with handoffs. There's a shared context and each agent has tools and the ability to transfer control to other agents. The [original swarm concept](https://github.com/openai/swarm) was created by OpenAI.
+
+:::note
+We'll refer to *conversation patterns* throughout the documentation - they are simply a structured way of organizing the flow between agents.
+:::
 
 ## GroupChat
 
@@ -225,8 +225,8 @@ Swarm is a conversation pattern based on agents with handoffs. There's a shared 
 | `auto` (default) | Chosen by the `GroupChatManager` using an LLM |
 | `round_robin` | Sequentially in their added order |
 | `random` | Randomly |
-| `manual` | Selected manually by you at each turn |
-| *Callable* | You can use your own function to create your own flow |
+| `manual` | Selected by you at each turn |
+| *Callable* | Furthermore, use a function to create your own flow |
 
 Coordinating the `GroupChat` is the `GroupChatManager`, an agent that provides a way to start and resume multi-agent chats.
 
@@ -307,15 +307,15 @@ teacher.initiate_chat(recipient=manager, message="Today, let's introduce our kid
 ```
 1. Separate to `system_message`, we add a `description` for our planner and reviewer agents and this is used exclusively for the purposes of determining the next agent by the `GroupChatManager`.
 
-2. The teacher's `system_message` is suitable as a description, so by not setting it the `GroupChatManager` will use the `system_message` for the teacher when determining the next agent.
+2. The teacher's `system_message` is suitable as a description so, by not setting it, the `GroupChatManager` will use the `system_message` for the teacher when determining the next agent.
 
 3. The workflow is ended when the teacher's message contains the phrase "DONE!".
 
 4. Construct the `GroupChat` with our agents and selection method as automatic (which is the default).
 
-5. `GroupChat`'s require a `GroupChatManager` to manage the chat and an LLM configuration is required because they'll use an LLM to decide the next agent.
+5. `GroupChat` requires a `GroupChatManager` to manage the chat and an LLM configuration is needed because they'll use an LLM to decide the next agent.
 
-6. Starting a chat with the `GroupChatManager` as the `recipient` kicks off the group chat
+6. Starting a chat with the `GroupChatManager` as the `recipient` kicks off the group chat.
 
 ```console
 teacher_agent (to group_manager):
