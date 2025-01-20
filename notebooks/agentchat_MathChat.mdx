@@ -296,14 +296,14 @@ mathproxyagent = MathUserProxyAgent(
 ### Example 1
 
 Problem: Find all $x$ that satisfy the inequality
-$(2x+10)(x+3)<(3x+9)(x+8)$. Express your answer in interval notation.
+`$(2x+10)(x+3)<(3x+9)(x+8)$`. Express your answer in interval notation.
 
 Correct Solution: We have This inequality is satisfied if and only if
 $(x+14)$ and $(x+3)$ are either both positive or both negative. Both
 factors are positive for $x>-3$ and both factors are negative for
-$x<-14$. When $-14<x<-3$, one factor is positive and the other negative,
-so their product is negative. Therefore, the range of $x$ that satisfies
-the inequality is \$ \$.
+`$x<-14$`. When `$-14<x<-3$`, one factor is positive and the other
+negative, so their product is negative. Therefore, the range of $x$ that
+satisfies the inequality is \$ \$.
 
 ```python
 # given a math problem, we use the mathproxyagent to generate a prompt to be sent to the assistant as the initial message.
@@ -892,7 +892,7 @@ has solutions exactly when the discriminant is nonnegative:
 nonnegative when $a$ and $a-4$ are either both $\ge 0$ or both $\le 0$.
 This is true for $a$ in $$(-\infty,0]\cup[4,\infty).$$ Therefore the
 line and quadratic intersect exactly when $a$ is in
-$\boxed{(-\infty,0]\cup[4,\infty)}$.
+`$\boxed{(-\infty,0]\cup[4,\infty)}$`.
 
 ```python
 # The wolfram alpha app id is required for this example (the assistant may choose to query Wolfram Alpha).
