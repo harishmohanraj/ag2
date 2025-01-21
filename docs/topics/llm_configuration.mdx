@@ -47,12 +47,10 @@ allows specifying the different endpoints and configurations that are to
 be used. It is a list of dictionaries, each of which contains the
 following keys depending on the kind of endpoint being used:
 
-````mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
+<div class="tabs">
 <Tabs>
-  <TabItem value="openai" label="OpenAI" default>
+<Tab title="OpenAI">
     - `model` (str, required): The identifier of the model to be used, such as 'gpt-4', 'gpt-3.5-turbo'.
     - `api_key` (str, optional): The API key required for authenticating requests to the model's API endpoint.
     - `base_url` (str, optional): The base URL of the API endpoint. This is the root address where API calls are directed.
@@ -67,8 +65,8 @@ import TabItem from '@theme/TabItem';
       }
     ]
     ```
-  </TabItem>
-  <TabItem value="azureopenai" label="Azure OpenAI">
+  </Tab>
+  <Tab title="Azure OpenAI">
     - `model` (str, required): The deployment to be used. The model corresponds to the deployment name on Azure OpenAI.
     - `api_key` (str, optional): The API key required for authenticating requests to the model's API endpoint.
     - `api_type`: `azure`
@@ -88,8 +86,8 @@ import TabItem from '@theme/TabItem';
       }
     ]
     ```
-  </TabItem>
-  <TabItem value="other" label="Other OpenAI compatible">
+  </Tab>
+  <Tab title="Other OpenAI compatible">
     - `model` (str, required): The identifier of the model to be used, such as 'llama-7B'.
     - `api_key` (str, optional): The API key required for authenticating requests to the model's API endpoint.
     - `base_url` (str, optional): The base URL of the API endpoint. This is the root address where API calls are directed.
@@ -104,9 +102,10 @@ import TabItem from '@theme/TabItem';
       }
     ]
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
-````
+</div>
+
 
 ------------------------------------------------------------------------
 
