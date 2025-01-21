@@ -377,30 +377,35 @@ from autogen import SwarmAgent, initiate_swarm_chat, AfterWorkOption, ON_CONDITI
 
 llm_config = {"model": "gpt-4o-mini", "cache_seed": None}
 
-# Context
+# 1. Context
 
 shared_context = {
     "lesson_plans": [],
     "lesson_reviews": [],
+    # Will be decremented, resulting in 0 (aka False) when no reviews are left
     "reviews_left": 2,
 }
 
-# Functions
+# 2. Functions
 def record_plan(lesson_plan: str, context_variables: dict) -> SwarmResult:
     """Record the lesson plan"""
     context_variables["lesson_plans"].append(lesson_plan)
+
+    # Returning the updated context so the shared context can be updated
     return SwarmResult(context_variables=context_variables)
 
 def record_review(lesson_review: str, context_variables: dict) -> SwarmResult:
     """After a review has been made, increment the count of reviews"""
     context_variables["lesson_reviews"].append(lesson_review)
     context_variables["reviews_left"] -= 1
+
+    # Controlling the flow to the next agent from a tool call
     return SwarmResult(
         agent=teacher if context_variables["reviews_left"] < 0 else lesson_planner,
         context_variables=context_variables
     )
 
-# 1. Our agents are setup with just a system message and LLM
+# 3. Our agents now have tools to use (functions above)
 planner_message = """You are a classroom lesson planner.
 Given a topic, write a lesson plan for a fourth grade class.
 If you are given revision feedback, update your lesson plan and record it.
@@ -441,13 +446,10 @@ teacher = SwarmAgent(
     system_message=teacher_message,
 )
 
+# 4. Transitions using hand-offs
 
-# Helper functions
-
-# Transitions using hand-offs
-
-# Lesson planner will create a plan and hand off to the reviewer if we're still allowing reviews,
-# otherwise transition to the teacher
+# Lesson planner will create a plan and hand off to the reviewer if we're still
+# allowing reviews, otherwise transition to the teacher
 lesson_planner.register_hand_off(
     [
         ON_CONDITION(
@@ -460,8 +462,8 @@ lesson_planner.register_hand_off(
     ]
 )
 
-# Lesson reviewer will review the plan and return control to the planner if there's no plan to review, otherwise it will
-# provide a review and
+# Lesson reviewer will review the plan and return control to the planner if there's
+# no plan to review, otherwise it will provide a review and
 lesson_reviewer.register_hand_off(
     [
         ON_CONDITION(
@@ -485,17 +487,35 @@ teacher.register_hand_off(
     ]
 )
 
+# 5. Run the Swarm which returns the chat and updated context variables
 chat_result, context_variables, last_agent = initiate_swarm_chat(
     initial_agent=teacher,
     agents=[lesson_planner, lesson_reviewer, teacher],
     messages="Today, let's introduce our kids to the solar system.",
     context_variables=shared_context,
 )
-print(context_variables["reviews_left"])
-print(len(context_variables["lesson_reviews"]))
-print(context_variables["lesson_reviews"][-1])
-print(len(context_variables["lesson_plans"]))
-print(context_variables["lesson_plans"][-1])
+
+print(f"Number of reviews: {len(context_variables['lesson_reviews'])}")
+print(f"Reviews remaining: {context_variables['reviews_left']}")
+print(f"Final Lesson Plan:\n{context_variables['lesson_plans'][-1]}")
+```
+1. Our shared context, available in function calls and on agents.
+
+2. Functions that represent the work the agents carry out, these the update shared context and, optionally, managed transitions.
+
+3. Agents setup with their tools, `functions`, and a system message and LLM configuration.
+
+4. The important hand-offs, defining the conditions for which to transfer to other agents and what to do after their work is finished (equivalent to no longer calling tools). Transfer conditions can be turned on/off using the `available` parameter.
+
+5. Kick off the swarm with our agents and shared context. Similar to `initiate_chat`, `initiate_swarm_chat` returns the chat result (messages and summary) and the final shared context.
+
+```console
+Number of reviews: 2
+Reviews remaining: 0
+Final Lesson Plan:
+<title>Exploring the Solar System</title>
+<learning_objectives>Students will be able to identify and describe the planets in the Solar System, understand the concept of orbits, and recognize the sun as the center of our Solar System.</learning_objectives>
+<script>Using a large poster of the Solar System, I will introduce the planets one by one, discussing key characteristics such as size, color, and distance from the sun. I will engage the students by asking questions about their favorite planets and what they know about them. We will do a quick demo using a simple model to show how planets orbit around the sun. Students will create their own solar system models in small groups with various materials to understand the scale and distance better, fostering teamwork. We will incorporate a multimedia presentation to visualize the orbits and relative sizes of the planets. Finally, a short assessment will be conducted at the end of the lesson to gauge students' understanding, using quizzes or presentations of their models.</script>
 ```
 
 # Tools

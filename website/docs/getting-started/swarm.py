@@ -2,19 +2,22 @@ from autogen import AFTER_WORK, ON_CONDITION, AfterWorkOption, SwarmAgent, Swarm
 
 llm_config = {"model": "gpt-4o-mini", "cache_seed": None}
 
-# Context
+# 1. Context
 
 shared_context = {
     "lesson_plans": [],
     "lesson_reviews": [],
+    # Will be decremented, resulting in 0 (aka False) when no reviews are left
     "reviews_left": 2,
 }
 
 
-# Functions
+# 2. Functions
 def record_plan(lesson_plan: str, context_variables: dict) -> SwarmResult:
     """Record the lesson plan"""
     context_variables["lesson_plans"].append(lesson_plan)
+
+    # Returning the updated context so the shared context can be updated
     return SwarmResult(context_variables=context_variables)
 
 
@@ -22,12 +25,14 @@ def record_review(lesson_review: str, context_variables: dict) -> SwarmResult:
     """After a review has been made, increment the count of reviews"""
     context_variables["lesson_reviews"].append(lesson_review)
     context_variables["reviews_left"] -= 1
+
+    # Controlling the flow to the next agent from a tool call
     return SwarmResult(
         agent=teacher if context_variables["reviews_left"] < 0 else lesson_planner, context_variables=context_variables
     )
 
 
-# 1. Our agents are setup with just a system message and LLM
+# 3. Our agents now have tools to use (functions above)
 planner_message = """You are a classroom lesson planner.
 Given a topic, write a lesson plan for a fourth grade class.
 If you are given revision feedback, update your lesson plan and record it.
@@ -62,13 +67,10 @@ teacher = SwarmAgent(
     system_message=teacher_message,
 )
 
+# 4. Transitions using hand-offs
 
-# Helper functions
-
-# Transitions using hand-offs
-
-# Lesson planner will create a plan and hand off to the reviewer if we're still allowing reviews,
-# otherwise transition to the teacher
+# Lesson planner will create a plan and hand off to the reviewer if we're still
+# allowing reviews, otherwise transition to the teacher
 lesson_planner.register_hand_off(
     [
         ON_CONDITION(
@@ -80,8 +82,8 @@ lesson_planner.register_hand_off(
     ]
 )
 
-# Lesson reviewer will review the plan and return control to the planner if there's no plan to review, otherwise it will
-# provide a review and
+# Lesson reviewer will review the plan and return control to the planner if there's
+# no plan to review, otherwise it will provide a review and
 lesson_reviewer.register_hand_off(
     [
         ON_CONDITION(
@@ -98,14 +100,14 @@ teacher.register_hand_off(
     ]
 )
 
+# 5. Run the Swarm which returns the chat and updated context variables
 chat_result, context_variables, last_agent = initiate_swarm_chat(
     initial_agent=teacher,
     agents=[lesson_planner, lesson_reviewer, teacher],
     messages="Today, let's introduce our kids to the solar system.",
     context_variables=shared_context,
 )
-print(context_variables["reviews_left"])
-print(len(context_variables["lesson_reviews"]))
-print(context_variables["lesson_reviews"][-1])
-print(len(context_variables["lesson_plans"]))
-print(context_variables["lesson_plans"][-1])
+
+print(f"Number of reviews: {len(context_variables['lesson_reviews'])}")
+print(f"Reviews remaining: {context_variables['reviews_left']}")
+print(f"Final Lesson Plan:\n{context_variables['lesson_plans'][-1]}")
