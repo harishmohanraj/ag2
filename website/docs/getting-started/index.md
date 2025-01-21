@@ -43,7 +43,7 @@ If you would like to use a different provider, [see how here](https://docs.ag2.a
 
 ConversableAgent is at the heart of all AG2 agents while also being a fully functioning agent.
 
-Let's *converse* with ConversableAgent.
+Let's *converse* with ConversableAgent in just 4 simple steps.
 
 --SNIPPET: conversableagentchat.py
 
@@ -61,6 +61,7 @@ llm_config = {"model": "gpt-4o-mini"}
 my_agent = ConversableAgent(
     name="helpful_agent",
     llm_config=llm_config,
+    system_message="You are a poetic AI assistant",
 )
 
 # 4. Chat directly with our agent
@@ -73,9 +74,9 @@ Let's break it down:
 
 2. Create our LLM configuration to define the LLM that our agent will use.
 
-3. Create our ConversableAgent.
+3. Create our ConversableAgent give them a unique name, and use `system_message` to define their purpose.
 
-4. Run a chat directly with the agent's `run` method, passing in our starting message.
+4. Chat with the agent using their `run` method, passing in our starting message.
 
 ```console
 human (to helpful_agent):
@@ -87,84 +88,19 @@ In one sentence, what's the big deal about AI?
 >>>>>>>> USING AUTO REPLY...
 helpful_agent (to human):
 
-The big deal about AI is its transformative potential to enhance productivity, automate tasks, and enable advanced problem-solving across various fields, fundamentally reshaping how we work and live.
-
---------------------------------------------------------------------------------
-```
-
-## Defining an agent
-
-So far we created an agent that is just equivalent to a chat bot, so let's give them make them a fourth grade lesson planner.
-
---SNIPPET: conversableagentdefine.py
-
-```python
-# TEMPORARY, THIS WILL BE REPLACED BY ABOVE SNIPPET
-
-from autogen import ConversableAgent
-llm_config = {"model": "gpt-4o-mini"}
-
-# 1. Define our system message, our agent's instruction
-system_message = """You are a classroom lesson agent.
-Given a topic, write a lesson plan for a fourth grade class.
-Use the following format:
-<title>Lesson plan title</title>
-<learning_objectives>Key learning objectives</learning_objectives>
-<script>How to introduce the topic to the kids</script>
-"""
-
-# 2. Create our purposeful agent
-lesson_planner = ConversableAgent(
-    name="lesson_agent",
-    llm_config=llm_config,
-    system_message=system_message,
-)
-
-# 3. Instruct the agent to create our lesson plan
-lesson_planner.run("Today, let's introduce our kids to the solar system.")
-```
-
-1. Define strict instructions on what our agent should do and provide guidance on the format we want them to reply with.
-
-2. Create our agent, setting the `system_message` with our instructions.
-
-3. Run the chat and get our lesson plan in the format we want.
-
-```console
-human (to lesson_agent):
-
-Today, let's introduce our kids to the solar system.
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-lesson_agent (to human):
-
-<title>Exploring Our Solar System</title>
-<learning_objectives>
-1. Identify and name the eight planets of the solar system.
-2. Understand the basic characteristics of each planet.
-3. Recognize the sun as the center of our solar system.
-4. Develop an appreciation for the scale of our solar system using a hands-on activity.
-</learning_objectives>
-<script>
-"Good morning, class! Today, we are going to embark on a magical journey through our solar system! Have you ever looked up at the night sky and wondered what those shiny dots are? Some of them are stars, but many of them are planets that travel around our sun.
-
-First, let’s gather around the whiteboard. I will draw a big circle in the center and label it 'SUN' – that’s the powerful star at the heart of our solar system! Around it, we will be drawing the eight planets. We'll explore each planet together, learning some fascinating facts like which planet is the hottest, which one has rings, and which one is known for having a day longer than its year!
-
-We'll also watch a short video that takes us on a spaceship tour of space, visiting each planet in order from the sun. After that, I have a special activity for you: we will create a solar system model using colored balls and markers! Get ready to have fun while discovering the wonders of our solar system!"
-</script>
+AI’s a marvel that transforms the mundane,
+Empowering minds, making tasks less a strain.
 
 --------------------------------------------------------------------------------
 ```
 
 # Human in the loop
 
-When running the previous examples you were able to chat with the agents and this is because another agent was automatically created to represent you, the human in the loop, when using an agent's `run` method.
+If you run the previous example you'll be able to chat with the agent and this is because another agent was automatically created to represent you, the human in the loop, when using an agent's `run` method.
 
-As you build your own workflows, you'll want to create your own *human in the loop* agents and you do that by using a ConversableAgent and setting the `human_input_mode` to `ALWAYS`.
+As you build your own workflows, you'll want to create your own *human in the loop* agents and decide if and how to use them. To do so, simply use the ConversableAgent and set the `human_input_mode` to `ALWAYS`.
 
-Here's the previous example with an agent created for human input.
+Let's start to build a more useful scenario, a classroom lesson planner, and create our human agent.
 
 --SNIPPET: humanintheloop.py
 
@@ -174,7 +110,7 @@ Here's the previous example with an agent created for human input.
 from autogen import ConversableAgent
 llm_config = {"model": "gpt-4o-mini"}
 
-system_message = """You are a classroom lesson agent.
+planner_system_message = """You are a classroom lesson agent.
 Given a topic, write a lesson plan for a fourth grade class.
 Use the following format:
 <title>Lesson plan title</title>
@@ -185,7 +121,7 @@ Use the following format:
 lesson_planner = ConversableAgent(
     name="lesson_agent",
     llm_config=llm_config,
-    system_message=system_message,
+    system_message=planner_system_message,
 )
 
 # 1. Create our human input agent
@@ -204,11 +140,11 @@ the_human.initiate_chat(recipient=lesson_planner, message="Today, let's introduc
 
 # Many agents
 
-It's time to move on from our simple two-agent conversations and think about orchestrating workflows containing many agents, a strength of the AG2 framework.
+Many hands make for light work, so it's time to move on from our simple two-agent conversations and think about orchestrating workflows containing many agents, a strength of the AG2 framework.
 
 There are two mechanisms for building multi-agent workflows, GroupChat and Swarm.
 
-GroupChat contains a number of built-in conversation patterns and also allows you to define your own.
+GroupChat contains a number of built-in conversation patterns to determine the next agent. You can also define your own.
 
 Swarm is a conversation pattern based on agents with handoffs. There's a shared context and each agent has tools and the ability to transfer control to other agents. The [original swarm concept](https://github.com/openai/swarm) was created by OpenAI.
 
@@ -222,15 +158,19 @@ We'll refer to *conversation patterns* throughout the documentation - they are s
 
 | Method | Agent selection|
 | --- | --- |
-| `auto` (default) | Chosen by the `GroupChatManager` using an LLM |
+| `auto` (default) | Automatic, chosen by the `GroupChatManager` using an LLM |
 | `round_robin` | Sequentially in their added order |
 | `random` | Randomly |
 | `manual` | Selected by you at each turn |
-| *Callable* | Furthermore, use a function to create your own flow |
+| *Callable* | Create your own flow |
 
 Coordinating the `GroupChat` is the `GroupChatManager`, an agent that provides a way to start and resume multi-agent chats.
 
-Let's enhance our lesson planner example to include a lesson reviewer and replace us with a teacher agent.
+Let's enhance our lesson planner example to include a lesson reviewer and a teacher agent.
+
+:::tip
+You can start any multi-agent chats using the `initiate_chat` method
+:::
 
 --SNIPPET: groupchat.py
 
@@ -305,7 +245,7 @@ manager = GroupChatManager(
 # 6. Starting a chat with the GroupChatManager as the recipient kicks off the group chat
 teacher.initiate_chat(recipient=manager, message="Today, let's introduce our kids to the solar system.")
 ```
-1. Separate to `system_message`, we add a `description` for our planner and reviewer agents and this is used exclusively for the purposes of determining the next agent by the `GroupChatManager`.
+1. Separate to `system_message`, we add a `description` for our planner and reviewer agents and this is used exclusively for the purposes of determining the next agent by the `GroupChatManager` when using automatic speaker selection.
 
 2. The teacher's `system_message` is suitable as a description so, by not setting it, the `GroupChatManager` will use the `system_message` for the teacher when determining the next agent.
 
@@ -419,6 +359,144 @@ DONE!
 ```
 
 ## Swarm
+
+Swarms provide controllable flows between agents that are determined at the agent-level. You define hand-off, post-tool, and post-work transitions from an agent to another agent (or to end the swarm).
+
+When designing your swarm, think about your agents in a diagram with the lines between agents being your hand-offs. Each line will have a condition statement which an LLM will evaluate. Control stays with an agent while they execute their tools and once they've finished with their tools the conditions to transition will be evaluated.
+
+One of the unique aspects of a swarm is a shared context. ConversableAgents have a context dictionary but in a swarm that context is made common across all agents, allowing a state of the workflow to be maintained and viewed by all agents. This context can also be used within the hand off condition statements, providing more control of transitions.
+
+AG2's swarm has a number of unique capabilities, find out more in our [Swarm documentation](https://docs.ag2.ai/docs/topics/swarm).
+
+Here's our lesson planner workflow using AG2's Swarm.
+
+--SNIPPET: swarm.py
+
+```python
+from autogen import SwarmAgent, initiate_swarm_chat, AfterWorkOption, ON_CONDITION, AFTER_WORK, SwarmResult
+
+llm_config = {"model": "gpt-4o-mini", "cache_seed": None}
+
+# Context
+
+shared_context = {
+    "lesson_plans": [],
+    "lesson_reviews": [],
+    "reviews_left": 2,
+}
+
+# Functions
+def record_plan(lesson_plan: str, context_variables: dict) -> SwarmResult:
+    """Record the lesson plan"""
+    context_variables["lesson_plans"].append(lesson_plan)
+    return SwarmResult(context_variables=context_variables)
+
+def record_review(lesson_review: str, context_variables: dict) -> SwarmResult:
+    """After a review has been made, increment the count of reviews"""
+    context_variables["lesson_reviews"].append(lesson_review)
+    context_variables["reviews_left"] -= 1
+    return SwarmResult(
+        agent=teacher if context_variables["reviews_left"] < 0 else lesson_planner,
+        context_variables=context_variables
+    )
+
+# 1. Our agents are setup with just a system message and LLM
+planner_message = """You are a classroom lesson planner.
+Given a topic, write a lesson plan for a fourth grade class.
+If you are given revision feedback, update your lesson plan and record it.
+Use the following format:
+<title>Lesson plan title</title>
+<learning_objectives>Key learning objectives</learning_objectives>
+<script>How to introduce the topic to the kids</script>
+"""
+
+lesson_planner = SwarmAgent(
+    name="planner_agent",
+    llm_config=llm_config,
+    system_message=planner_message,
+    functions=[record_plan]
+)
+
+reviewer_message = """You are a classroom lesson reviewer.
+You compare the lesson plan to the fourth grade curriculum
+and provide a maximum of 3 recommended changes for each review.
+Make sure you provide recommendations each time the plan is updated.
+"""
+
+lesson_reviewer = SwarmAgent(
+    name="reviewer_agent",
+    llm_config=llm_config,
+    system_message=reviewer_message,
+    functions=[record_review]
+)
+
+teacher_message = """You are a classroom teacher.
+You decide topics for lessons and work with a lesson planner.
+and reviewer to create and finalise lesson plans.
+"""
+
+teacher = SwarmAgent(
+    name="teacher_agent",
+    llm_config=llm_config,
+    system_message=teacher_message,
+)
+
+
+# Helper functions
+
+# Transitions using hand-offs
+
+# Lesson planner will create a plan and hand off to the reviewer if we're still allowing reviews,
+# otherwise transition to the teacher
+lesson_planner.register_hand_off(
+    [
+        ON_CONDITION(
+            target=lesson_reviewer,
+            condition="After creating/updating and recording the plan, it must be reviewed.",
+            available="reviews_left"),
+        AFTER_WORK(
+            agent=teacher
+        )
+    ]
+)
+
+# Lesson reviewer will review the plan and return control to the planner if there's no plan to review, otherwise it will
+# provide a review and
+lesson_reviewer.register_hand_off(
+    [
+        ON_CONDITION(
+            target=lesson_planner,
+            condition="After new feedback has been made and recorded, the plan must be updated."
+        ),
+        AFTER_WORK(
+            agent=teacher
+        )
+    ]
+)
+
+teacher.register_hand_off(
+    [
+        ON_CONDITION(
+            target=lesson_planner,
+            condition="Create a lesson plan.",
+            available="reviews_left"
+        ),
+        AFTER_WORK(AfterWorkOption.TERMINATE)
+    ]
+)
+
+chat_result, context_variables, last_agent = initiate_swarm_chat(
+    initial_agent=teacher,
+    agents=[lesson_planner, lesson_reviewer, teacher],
+    messages="Today, let's introduce our kids to the solar system.",
+    context_variables=shared_context,
+)
+print(context_variables["reviews_left"])
+print(len(context_variables["lesson_reviews"]))
+print(context_variables["lesson_reviews"][-1])
+print(len(context_variables["lesson_plans"]))
+print(context_variables["lesson_plans"][-1])
+```
 
 # Tools
 

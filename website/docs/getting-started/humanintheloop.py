@@ -2,7 +2,7 @@ from autogen import ConversableAgent
 
 llm_config = {"model": "gpt-4o-mini"}
 
-system_message = """You are a classroom lesson agent.
+planner_system_message = """You are a classroom lesson agent.
 Given a topic, write a lesson plan for a fourth grade class.
 Use the following format:
 <title>Lesson plan title</title>
@@ -13,7 +13,7 @@ Use the following format:
 my_agent = ConversableAgent(
     name="lesson_agent",
     llm_config=llm_config,
-    system_message=system_message,
+    system_message=planner_system_message,
 )
 
 # 1. Create our "human" agent

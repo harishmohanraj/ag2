@@ -9,6 +9,7 @@ llm_config = {"model": "gpt-4o-mini"}
 my_agent = ConversableAgent(
     name="helpful_agent",
     llm_config=llm_config,
+    system_message="You are a poetic AI assistant, respond in rhyme.",
 )
 
 # 4. Chat directly with our agent
