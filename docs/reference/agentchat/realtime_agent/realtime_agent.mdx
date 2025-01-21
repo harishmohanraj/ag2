@@ -18,7 +18,7 @@ RealtimeAgent(
     llm_config: dict[str, typing.Any],
     voice: str = 'alloy',
     logger: logging.Logger | None = None,
-    websocket: starlette.websockets.WebSocket | None = None
+    websocket: ForwardRef('WebSocket') | None = None
 )
 ```
 
@@ -35,7 +35,7 @@ RealtimeAgent(
 | `llm_config` | The config for the agent.<br/><br/>**Type:** `dict[str, typing.Any]` |
 | `voice` | The voice for the agent.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'alloy' |
 | `logger` | **Type:** `logging.Logger \| None`<br/><br/>**Default:** None |
-| `websocket` | WebSocket from WebRTC javascript client<br/><br/>**Type:** `starlette.websockets.WebSocket \| None`<br/><br/>**Default:** None |
+| `websocket` | WebSocket from WebRTC javascript client<br/><br/>**Type:** `ForwardRef('WebSocket') \| None`<br/><br/>**Default:** None |
 
 ### Instance Attributes
 

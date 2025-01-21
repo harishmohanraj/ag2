@@ -102,7 +102,7 @@ from_connection_string(
 ```python
 from_existing_client(
     seed: str | int,
-    client: azure.cosmos.cosmos_client.CosmosClient,
+    client: CosmosClient,
     database_id: str,
     container_id: str
 ) -> 
@@ -114,7 +114,7 @@ from_existing_client(
 | Name | Description |
 |--|--|
 | `seed` | **Type:** `str \| int` |
-| `client` | **Type:** `azure.cosmos.cosmos_client.CosmosClient` |
+| `client` | **Type:** `CosmosClient` |
 | `database_id` | **Type:** `str` |
 | `container_id` | **Type:** `str` |
 

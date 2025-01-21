@@ -13,7 +13,7 @@ title: autogen.retrieve_utils
 create_vector_db_from_dir(
     dir_path: str | list[str],
     max_tokens: int = 4000,
-    client: chromadb.api.ClientAPI = None,
+    client: API = None,
     db_path: str = 'tmp/chromadb.db',
     collection_name: str = 'all-my-documents',
     get_or_create: bool = False,
@@ -37,7 +37,7 @@ create_vector_db_from_dir(
 |--|--|
 | `dir_path` | the path to the directory, file, url or a list of them.<br/><br/>**Type:** `str \| list[str]` |
 | `max_tokens` | the maximum number of tokens per chunk.<br/><br/>Default is 4000.<br/><br/>**Type:** `int`<br/><br/>**Default:** 4000 |
-| `client` | the chromadb client.<br/><br/>Default is None.<br/><br/>**Type:** `chromadb.api.ClientAPI`<br/><br/>**Default:** None |
+| `client` | the chromadb client.<br/><br/>Default is None.<br/><br/>**Type:** `API`<br/><br/>**Default:** None |
 | `db_path` | the path to the chromadb.<br/><br/>Default is "tmp/chromadb.db".<br/><br/>The default was `/tmp/chromadb.db` for version `&lt;=0.2.24`.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'tmp/chromadb.db' |
 | `collection_name` | the name of the collection.<br/><br/>Default is "all-my-documents".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'all-my-documents' |
 | `get_or_create` | Whether to get or create the collection.<br/><br/>Default is False.<br/><br/>If True, the collection will be returned if it already exists.<br/><br/>Will raise ValueError if the collection already exists and get_or_create is False.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
@@ -158,7 +158,7 @@ parse_html_to_markdown(html: str, url: str = None) -> str
 query_vector_db(
     query_texts: list[str],
     n_results: int = 10,
-    client: chromadb.api.ClientAPI = None,
+    client: API = None,
     db_path: str = 'tmp/chromadb.db',
     collection_name: str = 'all-my-documents',
     search_string: str = '',
@@ -175,7 +175,7 @@ query_vector_db(
 |--|--|
 | `query_texts` | the list of strings which will be used to query the vector db.<br/><br/>**Type:** `list[str]` |
 | `n_results` | the number of results to return.<br/><br/>Default is 10.<br/><br/>**Type:** `int`<br/><br/>**Default:** 10 |
-| `client` | the chromadb compatible client.<br/><br/>Default is None, a chromadb client will be used.<br/><br/>**Type:** `chromadb.api.ClientAPI`<br/><br/>**Default:** None |
+| `client` | the chromadb compatible client.<br/><br/>Default is None, a chromadb client will be used.<br/><br/>**Type:** `API`<br/><br/>**Default:** None |
 | `db_path` | the path to the vector db.<br/><br/>Default is "tmp/chromadb.db".<br/><br/>The default was `/tmp/chromadb.db` for version `&lt;=0.2.24`.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'tmp/chromadb.db' |
 | `collection_name` | the name of the collection.<br/><br/>Default is "all-my-documents".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'all-my-documents' |
 | `search_string` | the search string.<br/><br/>Only docs that contain an exact match of this string will be retrieved.<br/><br/>Default is "".<br/><br/>**Type:** `str`<br/><br/>**Default:** '' |

@@ -55,7 +55,7 @@ extract_img_paths(paragraph: str) -> list
 <a href="#autogen.agentchat.contrib.img_utils..get_image_data" class="headerlink" title="Permanent link"></a>
 
 ```python
-get_image_data(image_file: str | PIL.Image.Image, use_b64=True) -> bytes
+get_image_data(image_file: str | ForwardRef('Image.Image'), use_b64=True) -> bytes
 ```
 
     Loads an image and returns its data either as raw bytes or in base64-encoded format.
@@ -78,7 +78,7 @@ get_image_data(image_file: str | PIL.Image.Image, use_b64=True) -> bytes
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `image_file` | **Type:** `str \| PIL.Image.Image` |
+| `image_file` | **Type:** `str \| ForwardRef('Image.Image')` |
 | `use_b64=True` |  |
 
 <b>Returns:</b>
@@ -93,7 +93,7 @@ get_image_data(image_file: str | PIL.Image.Image, use_b64=True) -> bytes
 <a href="#autogen.agentchat.contrib.img_utils..get_pil_image" class="headerlink" title="Permanent link"></a>
 
 ```python
-get_pil_image(image_file: str | PIL.Image.Image) -> PIL.Image.Image
+get_pil_image(image_file: str | ForwardRef('Image.Image')) -> PIL.Image.Image
 ```
 
     Loads an image from a file and returns a PIL Image object.
@@ -107,7 +107,7 @@ get_pil_image(image_file: str | PIL.Image.Image) -> PIL.Image.Image
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `image_file` | **Type:** `str \| PIL.Image.Image` |
+| `image_file` | **Type:** `str \| ForwardRef('Image.Image')` |
 
 <b>Returns:</b>
 | Type | Description |
@@ -236,7 +236,7 @@ message_formatter_pil_to_b64(messages: list[dict]) -> list[dict]
 
 ```python
 num_tokens_from_gpt_image(
-    image_data: str | PIL.Image.Image,
+    image_data: str | ForwardRef('Image.Image'),
     model: str = 'gpt-4-vision',
     low_quality: bool = False
 ) -> int
@@ -253,7 +253,7 @@ num_tokens_from_gpt_image(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `image_data` | Union[str, Image.Image]: The image data which can either be a base64 encoded string, a URL, a file path, or a PIL Image object.<br/><br/>**Type:** `str \| PIL.Image.Image` |
+| `image_data` | Union[str, Image.Image]: The image data which can either be a base64 encoded string, a URL, a file path, or a PIL Image object.<br/><br/>**Type:** `str \| ForwardRef('Image.Image')` |
 | `model` | str: The model being used for image processing.<br/><br/>Can be "gpt-4-vision", "gpt-4o", or "gpt-4o-mini".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'gpt-4-vision' |
 | `low_quality` | **Type:** `bool`<br/><br/>**Default:** False |
 
@@ -269,7 +269,7 @@ num_tokens_from_gpt_image(
 <a href="#autogen.agentchat.contrib.img_utils..pil_to_data_uri" class="headerlink" title="Permanent link"></a>
 
 ```python
-pil_to_data_uri(image: PIL.Image.Image) -> str
+pil_to_data_uri(image: Image.Image) -> str
 ```
 
     Converts a PIL Image object to a data URI.
@@ -283,7 +283,7 @@ pil_to_data_uri(image: PIL.Image.Image) -> str
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `image` | **Type:** `PIL.Image.Image` |
+| `image` | **Type:** `Image.Image` |
 
 <b>Returns:</b>
 | Type | Description |
