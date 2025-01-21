@@ -482,7 +482,7 @@ SwarmResult(**data: Any)
     </h2>
 
 ```python
-UPDATE_SYSTEM_MESSAGE(update_function: str | Callable)
+UPDATE_SYSTEM_MESSAGE(update_function: Callable | str)
 ```
 
     Update the agent's system message before they reply
@@ -490,7 +490,7 @@ UPDATE_SYSTEM_MESSAGE(update_function: str | Callable)
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `update_function` | The string or function to update the agent's system message.<br/><br/>Can be a string or a Callable.<br/><br/>If a string, it will be used as a template and substitute the context variables.<br/><br/>If a Callable, it should have the signature: def my_update_function(agent: ConversableAgent, messages: List[Dict[str, Any]]) -> str<br/><br/>**Type:** `str \| Callable` |
+| `update_function` | The string or function to update the agent's system message.<br/><br/>Can be a string or a Callable.<br/><br/>If a string, it will be used as a template and substitute the context variables.<br/><br/>If a Callable, it should have the signature: def my_update_function(agent: ConversableAgent, messages: List[Dict[str, Any]]) -> str<br/><br/>**Type:** `Callable \| str` |
 
 ### Class Attributes
 

@@ -129,6 +129,7 @@
             "docs/topics/non-openai-models/cloud-litellm-watsonx",
             "docs/topics/non-openai-models/cloud-mistralai",
             "docs/topics/non-openai-models/cloud-togetherai",
+            "docs/topics/non-openai-models/cloud-deepseek-v3",
             "docs/topics/non-openai-models/local-litellm-ollama",
             "docs/topics/non-openai-models/local-lm-studio",
             "docs/topics/non-openai-models/local-ollama",
@@ -193,6 +194,7 @@
                     "docs/reference/agentchat/contrib/capabilities/generate_images",
                     "docs/reference/agentchat/contrib/capabilities/teachability",
                     "docs/reference/agentchat/contrib/capabilities/text_compressors",
+                    "docs/reference/agentchat/contrib/capabilities/tools_capability",
                     "docs/reference/agentchat/contrib/capabilities/transform_messages",
                     "docs/reference/agentchat/contrib/capabilities/transforms",
                     "docs/reference/agentchat/contrib/capabilities/transforms_util",
@@ -445,6 +447,7 @@
         "docs/reference/formatting_utils",
         "docs/reference/function_utils",
         "docs/reference/graph_utils",
+        "docs/reference/import_utils",
         "docs/reference/math_utils",
         "docs/reference/retrieve_utils",
         "docs/reference/runtime_logging",
@@ -555,7 +558,6 @@
     {
       "group": "Examples",
       "pages": [
-        "notebooks/Examples",
         {
           "group": "Examples by Notebook",
           "pages": [

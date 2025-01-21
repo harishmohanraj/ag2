@@ -10,7 +10,7 @@ title: autogen.agentchat.contrib.capabilities.text_compressors
     </h2>
 
 ```python
-LLMLingua(prompt_compressor_kwargs: dict = \{'model_name': 'microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank', 'use_llmlingua2': True, 'device_map': 'cpu'}, structured_compression: bool = False)
+LLMLingua(**kwargs)
 ```
 
     Compresses text messages using LLMLingua for improved efficiency in processing and response generation.
@@ -21,32 +21,15 @@ LLMLingua(prompt_compressor_kwargs: dict = \{'model_name': 'microsoft/llmling
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `prompt_compressor_kwargs` | A dictionary of keyword arguments for the PromptCompressor.<br/><br/>Defaults to a dictionary with model_name set to "microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank", use_llmlingua2 set to True, and device_map set to "cpu".<br/><br/>**Type:** `dict`<br/><br/>**Default:** \{'model_name' |
-| `structured_compression` | A flag indicating whether to use structured compression.<br/><br/>If True, the structured_compress_prompt method of the PromptCompressor is used.<br/><br/>Otherwise, the compress_prompt method is used.<br/><br/>Defaults to False.<br/><br/>dictionary.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
+| `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### compress_text
 <a href="#autogen.agentchat.contrib.capabilities.text_compressors.LLMLingua.compress_text" class="headerlink" title="Permanent link"></a>
 
-```python
-compress_text(
-    self,
-    text: str,
-    **compression_params
-) -> dict[str, typing.Any]
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `text` | **Type:** `str` |
-| `**compression_params` |  |
-
-<br />
+    <br />
 
     <h2 id="autogen.agentchat.contrib.capabilities.text_compressors.TextCompressor" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>

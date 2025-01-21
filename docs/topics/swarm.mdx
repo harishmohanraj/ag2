@@ -210,7 +210,9 @@ agent’s name, an `AfterWorkOption`, or a callable function.
 The `AfterWorkOption` options are: - `TERMINATE`: Terminate the chat  
 - `STAY`: Stay at the current agent  
 - `REVERT_TO_USER`: Revert to the user agent. Only if a user agent is
-passed in when initializing. (See below for more details)
+passed in when initializing. (See below for more details) -
+`SWARM_MANAGER`: Use the internal group chat’s `auto` speaker selection
+method
 
 The callable function signature is:
 `def my_after_work_func(last_speaker: SwarmAgent, messages: List[Dict[str, Any]], groupchat: GroupChat) -> Union[AfterWorkOption, SwarmAgent, str]:`
@@ -245,21 +247,43 @@ chat_history, context_variables, last_active_agent = initiate_swarm_chat(
     ...
     after_work=AfterWorkOption.TERMINATE # Or an agent or Callable
 )
-
 ```
 
-``` text
+### SwarmResult
+
+When tools are called, a `SwarmResult` can be returned and that can be
+used to specify the next agent to speak through the `SwarmResult`’s
+`agent` parameter.
+
+The `agent` property can be an agent object, an agent’s name (string),
+an `AfterWorkOption`, or `None`. - If it is an agent object or agent
+name, that agent will be the next speaker. - If `None` it will return to
+the previous speaker. - If an `AfterWorkOption`, it will follow the
+rules noted in the previous section.
+
+By using an `AfterWorkOption` you have additional flexibility, such as
+terminating the swarm at this point, or transferring to the swarm’s user
+agent.
 
 ### Update Agent state before replying
 
-It can be useful to update a swarm agent's state before they reply. For example, using an agent's context variables you could change their system message based on the state of the workflow.
+It can be useful to update a swarm agent’s state before they reply. For
+example, using an agent’s context variables you could change their
+system message based on the state of the workflow.
 
-When initialising a swarm agent use the `update_agent_state_before_reply` parameter to register updates that run after the agent is selected, but before they reply.
+When initialising a swarm agent use the
+`update_agent_state_before_reply` parameter to register updates that run
+after the agent is selected, but before they reply.
 
-`update_agent_state_before_reply` takes a list of any combination of the following (executing them in the provided order):
+`update_agent_state_before_reply` takes a list of any combination of the
+following (executing them in the provided order):
 
-- `UPDATE_SYSTEM_MESSAGE` provides a simple way to update the agent's system message via an f-string that substitutes the values of context variables, or a Callable that returns a string
-- Callable with two parameters of type `ConversableAgent` for the agent and `List[Dict[str Any]]` for the messages, and does not return a value
+-   `UPDATE_SYSTEM_MESSAGE` provides a simple way to update the agent’s
+    system message via an f-string that substitutes the values of
+    context variables, or a Callable that returns a string
+-   Callable with two parameters of type `ConversableAgent` for the
+    agent and `List[Dict[str Any]]` for the messages, and does not
+    return a value
 
 Below is an example of setting these up when creating a Swarm agent.
 
