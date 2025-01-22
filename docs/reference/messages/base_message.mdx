@@ -13,15 +13,7 @@ title: autogen.messages.base_message
 get_annotated_type_for_message_classes() -> type[typing.Any]
 ```
 
-    Get annotated type for message classes
     
-    Returns:
-        Type[Any]: Annotated type for message classes
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `type[typing.Any]` | Type[Any]: Annotated type for message classes |
 
 <br />
 
@@ -54,7 +46,9 @@ wrap_message(message_cls: type[autogen.messages.base_message.BaseMessage]) -> t
 BaseMessage(uuid: uuid.UUID | None = None, **kwargs: Any)
 ```
 
-    Base message class
+    Usage docs: https://docs.pydantic.dev/2.10/concepts/models/
+    
+    A base class for creating Pydantic models.
 
 <b>Parameters:</b>
 | Name | Description |
