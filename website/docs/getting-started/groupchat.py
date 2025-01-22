@@ -10,7 +10,7 @@ Use the following format:
 <script>How to introduce the topic to the kids</script>
 """
 
-# 1. Add a 'description' for our planner and reviewer agents
+# 1. Add a separate 'description' for our planner and reviewer agents
 planner_description = "Creates or revises lesson plans."
 
 lesson_planner = ConversableAgent(
@@ -35,7 +35,7 @@ lesson_reviewer = ConversableAgent(
     description=reviewer_description,
 )
 
-# 2. The teacher's system message can also be used for the description, so we don't define it
+# 2. The teacher's system message can also be used as a description, so we don't define it
 teacher_message = """You are a classroom teacher.
 You decide topics for lessons and work with a lesson planner.
 and reviewer to create and finalise lesson plans.

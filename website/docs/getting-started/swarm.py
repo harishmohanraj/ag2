@@ -3,7 +3,6 @@ from autogen import AFTER_WORK, ON_CONDITION, AfterWorkOption, SwarmAgent, Swarm
 llm_config = {"model": "gpt-4o-mini", "cache_seed": None}
 
 # 1. Context
-
 shared_context = {
     "lesson_plans": [],
     "lesson_reviews": [],
@@ -32,7 +31,6 @@ def record_review(lesson_review: str, context_variables: dict) -> SwarmResult:
     )
 
 
-# 3. Our agents now have tools to use (functions above)
 planner_message = """You are a classroom lesson planner.
 Given a topic, write a lesson plan for a fourth grade class.
 If you are given revision feedback, update your lesson plan and record it.
@@ -42,6 +40,7 @@ Use the following format:
 <script>How to introduce the topic to the kids</script>
 """
 
+# 3. Our agents now have tools to use (functions above)
 lesson_planner = SwarmAgent(
     name="planner_agent", llm_config=llm_config, system_message=planner_message, functions=[record_plan]
 )
@@ -70,7 +69,7 @@ teacher = SwarmAgent(
 # 4. Transitions using hand-offs
 
 # Lesson planner will create a plan and hand off to the reviewer if we're still
-# allowing reviews, otherwise transition to the teacher
+# allowing reviews. After that's done, transition to the teacher.
 lesson_planner.register_hand_off(
     [
         ON_CONDITION(
@@ -93,6 +92,8 @@ lesson_reviewer.register_hand_off(
     ]
 )
 
+# Teacher works with the lesson planner to create a plan. When control returns to them and
+# a plan exists, they'll end the swarm.
 teacher.register_hand_off(
     [
         ON_CONDITION(target=lesson_planner, condition="Create a lesson plan.", available="reviews_left"),

@@ -149,7 +149,7 @@ GroupChat contains a number of built-in conversation patterns to determine the n
 Swarm is a conversation pattern based on agents with handoffs. There's a shared context and each agent has tools and the ability to transfer control to other agents. The [original swarm concept](https://github.com/openai/swarm) was created by OpenAI.
 
 :::note
-We'll refer to *conversation patterns* throughout the documentation - they are simply a structured way of organizing the flow between agents.
+We'll refer to *[conversation patterns](https://docs.ag2.ai/docs/tutorial/conversation-patterns)* throughout the documentation - they are simply a structured way of organizing the flow between agents.
 :::
 
 ## GroupChat
@@ -188,7 +188,7 @@ Use the following format:
 <script>How to introduce the topic to the kids</script>
 """
 
-# 1. Add a 'description' for our planner and reviewer agents
+# 1. Add a separate 'description' for our planner and reviewer agents
 planner_description = "Creates or revises lesson plans."
 
 lesson_planner = ConversableAgent(
@@ -213,7 +213,7 @@ lesson_reviewer = ConversableAgent(
     description=reviewer_description,
 )
 
-# 2. The teacher's system message can also be used for the description, so we don't define it
+# 2. The teacher's system message can also be used as a description, so we don't define it
 teacher_message = """You are a classroom teacher.
 You decide topics for lessons and work with a lesson planner.
 and reviewer to create and finalise lesson plans.
@@ -373,12 +373,13 @@ Here's our lesson planner workflow using AG2's Swarm.
 --SNIPPET: swarm.py
 
 ```python
+# TEMPORARY, THIS WILL BE REPLACED BY ABOVE SNIPPET
+
 from autogen import SwarmAgent, initiate_swarm_chat, AfterWorkOption, ON_CONDITION, AFTER_WORK, SwarmResult
 
 llm_config = {"model": "gpt-4o-mini", "cache_seed": None}
 
 # 1. Context
-
 shared_context = {
     "lesson_plans": [],
     "lesson_reviews": [],
@@ -405,7 +406,6 @@ def record_review(lesson_review: str, context_variables: dict) -> SwarmResult:
         context_variables=context_variables
     )
 
-# 3. Our agents now have tools to use (functions above)
 planner_message = """You are a classroom lesson planner.
 Given a topic, write a lesson plan for a fourth grade class.
 If you are given revision feedback, update your lesson plan and record it.
@@ -415,6 +415,7 @@ Use the following format:
 <script>How to introduce the topic to the kids</script>
 """
 
+# 3. Our agents now have tools to use (functions above)
 lesson_planner = SwarmAgent(
     name="planner_agent",
     llm_config=llm_config,
@@ -449,7 +450,7 @@ teacher = SwarmAgent(
 # 4. Transitions using hand-offs
 
 # Lesson planner will create a plan and hand off to the reviewer if we're still
-# allowing reviews, otherwise transition to the teacher
+# allowing reviews. After that's done, transition to the teacher.
 lesson_planner.register_hand_off(
     [
         ON_CONDITION(
@@ -462,8 +463,8 @@ lesson_planner.register_hand_off(
     ]
 )
 
-# Lesson reviewer will review the plan and return control to the planner if there's
-# no plan to review, otherwise it will provide a review and
+# Lesson reviewer will review the plan and return control to the planner. If they don't
+# provide feedback, they'll revert back to the teacher.
 lesson_reviewer.register_hand_off(
     [
         ON_CONDITION(
@@ -476,6 +477,8 @@ lesson_reviewer.register_hand_off(
     ]
 )
 
+# Teacher works with the lesson planner to create a plan. When control returns to them and
+# a plan exists, they'll end the swarm.
 teacher.register_hand_off(
     [
         ON_CONDITION(
@@ -520,21 +523,349 @@ Final Lesson Plan:
 
 # Tools
 
-Agents gain significant utility through tools because they provide access to external data, APIs, and functionality.
+Agents gain significant utility through tools as they provide access to external data, APIs, and functionality.
 
-In AG2, tool use is managed using two agents, one decides which tools to use (via their LLM) and another executes the tool.
+In AG2, using tools is done in two parts, an agent *suggests* which tools to use (via their LLM) and another *executes* the tool.
 
-Adding a tool to an agent is as simple as registering it with the agent.
+::note
+In a conversation the executor agent must follow the agent that suggests a tool.
+::
 
+In the swarm example above, we attached tools to our agents and, as part of the swarm, AG2 created a tool executor agent to run recommended tools. Typically, you'll create two agents, one to decide which tool to use and another to execute it.
+
+--SNIPPET: toolregister.py
+
+```python
+# TEMPORARY, THIS WILL BE REPLACED BY ABOVE SNIPPET
+
+from autogen import ConversableAgent, register_function
+from typing import Annotated
+from datetime import datetime
+llm_config = {"model": "gpt-4o-mini"}
+
+# 1. Our tool, returns the day of the week for a given date
+def get_weekday(date_string: Annotated[str, "Format: YYYY-MM-DD"]) -> str:
+    date = datetime.strptime(date_string, '%Y-%m-%d')
+    return date.strftime('%A')
+
+# 2. Agent for determining whether to run the tool
+date_agent = ConversableAgent(
+    name="date_agent",
+    system_message="You get the day of the week for a given date.",
+    llm_config=llm_config,
+)
+
+# 3. And an agent for executing the tool
+executor_agent = ConversableAgent(
+    name="executor_agent",
+    human_input_mode="NEVER",
+)
+
+# 4. Registers the tool with the agents, the description will be used by the LLM
+register_function(
+    get_weekday,
+    caller=date_agent,
+    executor=executor_agent,
+    description="Get the day of the week for a given date",
+)
+
+# 5. Two-way chat ensures the executor agent follows the suggesting agent
+chat_result = executor_agent.initiate_chat(
+    recipient=date_agent,
+    message="I was born on the 25th of March 1995, what day was it?",
+    max_turns=2,
+)
+
+print(chat_result.chat_history[-1]["content"])
+```
+1. Here's the tool, a function, that we'll attach to our agents, the `Annotated` parameter will be  included in the call to the LLM so it understands what the `date_string` needs.
+
+2. The date_agent will determine whether to use the tool, using its LLM.
+
+3. The executor_agent will run the tool and return the output as its reply.
+
+4. Registering the tool with the agents and giving it a description to help the LLM determine.
+
+5. We have a two-way chat, so after the date_agent the executor_agent will run and, if it sees that the date_agent suggested the use of the tool, it will execute it.
+
+```console
+executor_agent (to date_agent):
+
+I was born on the 25th of March 1995, what day was it?
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> USING AUTO REPLY...
+date_agent (to executor_agent):
+
+***** Suggested tool call (call_iOOZMTCoIVVwMkkSVu04Krj8): get_weekday *****
+Arguments:
+{"date_string":"1995-03-25"}
+****************************************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION get_weekday...
+Call ID: call_iOOZMTCoIVVwMkkSVu04Krj8
+Input arguments: {'date_string': '1995-03-25'}
+executor_agent (to date_agent):
+
+***** Response from calling tool (call_iOOZMTCoIVVwMkkSVu04Krj8) *****
+Saturday
+**********************************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> USING AUTO REPLY...
+date_agent (to executor_agent):
+
+It was a Saturday.
+
+--------------------------------------------------------------------------------
+```
+
+Alternatively, you can use decorators to register a tool. So, instead of using `register_function`, you can register them with the function definition.
+```python
+@date_agent.register_for_llm(description="Get the day of the week for a given date")
+@executor_agent.register_for_execution()
+def get_weekday(date_string: Annotated[str, "Format: YYYY-MM-DD"]) -> str:
+    date = datetime.strptime(date_string, '%Y-%m-%d')
+    return date.strftime('%A')
+```
+
+# Structured outputs
+
+Working with freefrom text from LLMs isn't optimal when you know how you want the reply formatted.
+
+Using structured outputs, you define a class, based on Pydantic's `BaseModel`, for the reply format you want and attach it to the LLM configuration. Replies from agent using that configuration will be in a matching JSON format.
+
+In earlier examples, we created a classroom lesson plan and provided guidance in the agent's system message to put the content in tags, like `<title>` and `<learning_objectives>`. Using structured outputs we can ensure that our lesson plans are formatted.
+
+--SNIPPET: structured_output.py
+```python
+# TEMPORARY, THIS WILL BE REPLACED BY ABOVE SNIPPET
+
+from autogen import ConversableAgent
+from pydantic import BaseModel
+import json
+
+# 1. Define our lesson plan structure, a lesson with a number of objectives
+class LearningObjective(BaseModel):
+    title: str
+    description: str
+
+class LessonPlan(BaseModel):
+    title: str
+    learning_objectives: list[LearningObjective]
+    script: str
+
+# 2. Add our lesson plan structure to the LLM configuration
+llm_config = {
+    "model": "gpt-4o-mini",
+    "response_format": LessonPlan,
+}
+
+# 3. The agent's system message doesn't need any formatting instructions
+system_message = """You are a classroom lesson agent.
+Given a topic, write a lesson plan for a fourth grade class.
+"""
+
+my_agent = ConversableAgent(name="lesson_agent", llm_config=llm_config, system_message=system_message)
+
+# 4. Chat directly with our agent
+chat_result = my_agent.run("In one sentence, what's the big deal about AI?")
+
+# 5. Get and print our lesson plan
+lesson_plan_json = json.loads(chat_result.chat_history[-1]["content"])
+print(json.dumps(lesson_plan_json, indent=2))
+```
+
+
+```console
+{
+  "title": "Exploring the Solar System",
+  "learning_objectives": [
+    {
+      "title": "Understanding the Solar System",
+      "description": "Students will learn the names and order of the planets in the solar system."
+    },
+    {
+      "title": "Identifying Planet Characteristics",
+      "description": "Students will be able to describe at least one distinctive feature of each planet."
+    },
+    {
+      "title": "Creating a Planet Fact Sheet",
+      "description": "Students will create a fact sheet for one planet of their choice."
+    }
+  ],
+  "script": "Introduction (10 minutes):\nBegin the class by asking students what they already know about the solar system. Write their responses on the board. \n\nIntroduce the topic by explaining that today they will be learning about the solar system, which includes the Sun, planets, moons, and other celestial objects.\n\nDirect Instruction (20 minutes):\nUse a visual aid (such as a poster or video) to show the solar system's structure. \n\nDiscuss the eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. \n\nFor each planet, mention:\n- Its position from the Sun.\n- Key characteristics (e.g., size, color, temperature).\n- Any notable features (e.g., rings, atmosphere). \n\nInteractive Activity (15 minutes):\nSplit the class into small groups. Give each group a set of planet cards that include pictures and information. Have them work together to put the planets in order from the Sun. Each group will present their order and one interesting fact about each planet they discussed."
+}
+```
+::tip
+Add a `format` function to the LessonPlan class in the example to convert the returned value into a string. [Example here](https://docs.ag2.ai/notebooks/agentchat_structured_outputs#define-the-reasoning-model-2).
+::
+
+# Ending a chat
+
+There are a number of ways a chat can end:
+1. The maximum number of turns in a chat is reached
+2. An agent's termination function passes on a received message
+3. An agent automatically replies a maximum number of times
+4. A human replies with 'exit' when prompted
+5. In a group chat, there's no next agent
+6. In a swarm, transitioning to AfterWorkOption.TERMINATE
+7. Custom reply functions
+
+### 1. Maximum turns
+For GroupChat and swarm, use `max_round` to set a limit on the number of replies. Each round represents an agent speaking and includes the initial message.
+
+```python
+# GroupChat with a maximum of 5 rounds
+groupchat = GroupChat(
+    agents=[agent_a, agent_b, agent_c],
+    speaker_selection_method="round_robin",
+    max_round=5,
+    ...
+)
+gcm = GroupChatManager(
+    ...
+)
+agent_a.initiate_chat(gcm, "first message")
+# 1. agent_a with "first message" > 2. agent_b > 3. agent_c > 4. agent_a > 5. agent_b > end
+
+# Swarm with a maximum of 5 rounds
+initiate_swarm_chat(
+    agents=[agent_a, agent_b, agent_c],
+    max_round=5,
+    messages="first message"
+    ...
+)
+# When initial agent is set to agent_a and agents hand off to the next agent.
+# 1. User with "first message" > 2. agent_a > 3. agent_b > 4. agent_c > 5. agent_a > end
+```
+
+For `initiate_chat` use `max_turns`. Each turn represents a round trip of both agents speaking and includes the initial message.
+
+```python
+# initiate_chat with a maximum of 2 turns across the 2 agents (effectively 4 steps)
+agent_a.initiate_chat(
+    recipient=agent_b,
+    max_turns=2,
+    message="first message"
+)
+# 1. agent_a with "first message" > 1. agent_b > 2. agent_a > 2. agent_b > end
+```
+
+### 2. Terminating message
+Agents can check their received message for a termination condition and, if that condition returns `True`, the chat will be ended. This check is carried out before they reply.
+
+When constructing an agent, use the `is_termination_msg` parameter with a Callable. To save creating a function, you can use a [lambda function](https://docs.python.org/2/tutorial/controlflow.html#lambda-expressions) as in the example below.
+
+It's important to put the termination check on the agents that will receive the message, not the agent creating the message.
+
+```python
+agent_a = ConversableAgent(
+    system_message="You're a helpful AI assistant, end your responses with 'DONE!'"
+    ...
+)
+
+# Terminates when the agent receives a message with "DONE!" in it.
+agent_b = ConversableAgent(
+    is_termination_msg=lambda x: "DONE!" in (x.get("content", "") or "").upper()
+    ...
+)
+
+# agent_b > agent_a replies with message "... DONE!" > agent_b ends before replying
+```
+
+::note
+If the termination condition is met and the agent's `human_input_mode` is "ALWAYS" or 'TERMINATE' (ConversableAgent's default), you will be asked for input and can decide to end the chat. If it is "NEVER" it will end immediately.
+::
+
+### 3. Number of automatic replies
+
+A conversation can be ended when an agent has responded to another agent a certain number of times. An agent evaluates this when it is next their time to reply, not immediately after they have replied.
+
+When constructing an agent, use the `max_consecutive_auto_reply` parameter to set this.
+
+```python
+agent_a = ConversableAgent(
+    max_consecutive_auto_reply=2
+    ...
+)
+
+agent_b = ConversableAgent(
+    ...
+)
+
+agent_a.initiate_chat(agent_b, ...)
+
+# agent_a > agent_b > agent_a with first auto reply > agent_b > agent_a with second auto reply > agent_b > agent_a ends before replying
+```
+
+::note
+If the agent's `human_input_mode` is "ALWAYS" or 'TERMINATE' (ConversableAgent's default), you will be asked for input and can decide to end the chat. If it is "NEVER" it will end immediately.
+::
+
+### 4. Human replies with 'exit'
+During the course of the conversation, if you are prompted and reply 'exit', the chat will end.
+
+```console
+--------------------------------------------------------------------------------
+Please give feedback to agent_a. Press enter to skip and use auto-reply, or type 'exit' to stop the conversation: exit
+```
+
+### 5. GroupChat, no next agent
+If the next agent in a GroupChat can't be determined the chat will end.
+
+If you are customizing the speaker selection method with a Callable, return `None` to end the chat.
+
+### 6. Swarm, transitioning to end the chat
+In a swarm, if you transition to `AfterWorkOption.TERMINATE` it will end the swarm. The default swarm-level AfterWork option is `AfterWorkOption.TERMINATE` and this will apply to any agent in the swarm that doesn't have an AfterWork hand-off specified.
+
+Additionally, if you transition to `AfterWorkOption.REVERT_TO_USER` but have not specified a `user_agent` in `initiate_swarm_chat` then it will end the swarm.
+
+### 7. Reply functions
+AG2 provides the ability to create custom reply functions for an agent using `register_reply`.
+
+In your function, return a `Tuple` of `True, None` to indicate that the reply is final with `None` indicating there's no reply and it should end the chat.
+
+```python
+agent_a = ConversableAgent(
+    ...
+)
+
+agent_b = ConversableAgent(
+    ...
+)
+
+def my_reply_func(
+    recipient: ConversableAgent,
+    messages: Optional[List[Dict]] = None,
+    sender: Optional[Agent] = None,
+    config: Optional[Any] = None,
+) -> Tuple[bool, Union[str, Dict, None]]:
+    return True, None # Indicates termination
+
+# Register the reply function as the agent_a's first reply function
+agent_a.register_reply(
+    trigger=[Agent, None],
+    reply_func=my_reply_func,
+    position=0
+
+)
+
+agent_a.initiate_chat(agent_b, ...)
+
+# agent_a > agent_b > agent_a ends with first custom reply function
+```
+
+# Code execution
 ...
 
 # Other topics TBD
 
-# Ending a chat
-
-# Structured outputs
-
-# Code execution
+# Resuming a chat
 
 # Advanced Agents
 
