@@ -15,10 +15,10 @@ Neo4jNativeGraphQueryEngine(
     port: int = 7687,
     username: str = 'neo4j',
     password: str = 'password',
-    embeddings: neo4j_graphrag.embeddings.base.Embedder | None = &lt;neo4j_graphrag.embeddings.openai.OpenAIEmbeddings object>,
+    embeddings: ForwardRef('Embedder') | None = None,
     embedding_dimension: int | None = 3072,
-    llm: neo4j_graphrag.llm.base.LLMInterface | None = &lt;neo4j_graphrag.llm.openai_llm.OpenAILLM object>,
-    query_llm: neo4j_graphrag.llm.base.LLMInterface | None = &lt;neo4j_graphrag.llm.openai_llm.OpenAILLM object>,
+    llm: ForwardRef('LLMInterface') | None = None,
+    query_llm: ForwardRef('LLMInterface') | None = None,
     entities: List[str] | None = None,
     relations: List[str] | None = None,
     potential_schema: List[tuple[str, str, str]] | None = None
@@ -38,10 +38,10 @@ Neo4jNativeGraphQueryEngine(
 | `port` | Neo4j port.<br/><br/>**Type:** `int`<br/><br/>**Default:** 7687 |
 | `username` | Neo4j username.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
 | `password` | Neo4j password.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'password' |
-| `embeddings` | Embedding model to embed chunk data and retrieve answers.<br/><br/>**Type:** `neo4j_graphrag.embeddings.base.Embedder \| None`<br/><br/>**Default:** &lt;neo4j_graphrag.embeddings.openai.OpenAIEmbeddings object> |
+| `embeddings` | Embedding model to embed chunk data and retrieve answers.<br/><br/>**Type:** `ForwardRef('Embedder') \| None`<br/><br/>**Default:** None |
 | `embedding_dimension` | Dimension of the embeddings for the model.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 3072 |
-| `llm` | Language model for creating the knowledge graph (returns JSON responses).<br/><br/>**Type:** `neo4j_graphrag.llm.base.LLMInterface \| None`<br/><br/>**Default:** &lt;neo4j_graphrag.llm.openai_llm.OpenAILLM object> |
-| `query_llm` | Language model for querying the knowledge graph.<br/><br/>**Type:** `neo4j_graphrag.llm.base.LLMInterface \| None`<br/><br/>**Default:** &lt;neo4j_graphrag.llm.openai_llm.OpenAILLM object> |
+| `llm` | Language model for creating the knowledge graph (returns JSON responses).<br/><br/>**Type:** `ForwardRef('LLMInterface') \| None`<br/><br/>**Default:** None |
+| `query_llm` | Language model for querying the knowledge graph.<br/><br/>**Type:** `ForwardRef('LLMInterface') \| None`<br/><br/>**Default:** None |
 | `entities` | Custom entities for guiding graph construction.<br/><br/>**Type:** `List[str] \| None`<br/><br/>**Default:** None |
 | `relations` | Custom relations for guiding graph construction.<br/><br/>**Type:** `List[str] \| None`<br/><br/>**Default:** None |
 | `potential_schema` | Schema (triplets, i.e., [entity] -> [relationship] -> [entity]) to guide graph construction.<br/><br/>**Type:** `List[tuple[str, str, str]] \| None`<br/><br/>**Default:** None |

@@ -16,8 +16,8 @@ FalkorGraphQueryEngine(
     port: int = 6379,
     username: str | None = None,
     password: str | None = None,
-    model: graphrag_sdk.models.model.GenerativeModel = &lt;graphrag_sdk.models.openai.OpenAiGenerativeModel object>,
-    ontology: graphrag_sdk.ontology.Ontology | None = None
+    model: ForwardRef('GenerativeModel') | None = None,
+    ontology: ForwardRef('Ontology') | None = None
 )
 ```
 
@@ -36,8 +36,8 @@ FalkorGraphQueryEngine(
 | `port` | FalkorDB port number.<br/><br/>**Type:** `int`<br/><br/>**Default:** 6379 |
 | `username` | FalkorDB username.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `password` | FalkorDB password.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
-| `model` | LLM model to use for FalkorDB to build and retrieve from the graph, default to use OAI gpt-4o.<br/><br/>**Type:** `graphrag_sdk.models.model.GenerativeModel`<br/><br/>**Default:** &lt;graphrag_sdk.models.openai.OpenAiGenerativeModel object> |
-| `ontology` | FalkorDB knowledge graph schema/ontology, https://github.com/FalkorDB/GraphRAG-SDK/blob/main/graphrag_sdk/ontology.py If None, FalkorDB will auto generate an ontology from the input docs.<br/><br/>**Type:** `graphrag_sdk.ontology.Ontology \| None`<br/><br/>**Default:** None |
+| `model` | LLM model to use for FalkorDB to build and retrieve from the graph, default to use OAI gpt-4o.<br/><br/>**Type:** `ForwardRef('GenerativeModel') \| None`<br/><br/>**Default:** None |
+| `ontology` | FalkorDB knowledge graph schema/ontology, https://github.com/FalkorDB/GraphRAG-SDK/blob/main/graphrag_sdk/ontology.py If None, FalkorDB will auto generate an ontology from the input docs.<br/><br/>**Type:** `ForwardRef('Ontology') \| None`<br/><br/>**Default:** None |
 
 ### Instance Methods
 

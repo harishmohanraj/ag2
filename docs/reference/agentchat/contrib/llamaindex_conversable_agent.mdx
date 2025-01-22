@@ -12,7 +12,7 @@ title: autogen.agentchat.contrib.llamaindex_conversable_agent
 ```python
 LLamaIndexConversableAgent(
     name: str,
-    llama_index_agent: llama_index.core.agent.runner.base.AgentRunner,
+    llama_index_agent: AgentRunner,
     description: str | None = None,
     **kwargs
 )
@@ -34,6 +34,6 @@ LLamaIndexConversableAgent(
 | Name | Description |
 |--|--|
 | `name` | agent name.<br/><br/>**Type:** `str` |
-| `llama_index_agent` | llama index agent.<br/><br/>Please override this attribute if you want to reprogram the agent.<br/><br/>**Type:** `llama_index.core.agent.runner.base.AgentRunner` |
+| `llama_index_agent` | llama index agent.<br/><br/>Please override this attribute if you want to reprogram the agent.<br/><br/>**Type:** `AgentRunner` |
 | `description` | a short description of the agent.<br/><br/>This description is used by other agents (e.g.<br/><br/>the GroupChatManager) to decide when to call upon this agent.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `**kwargs` | Please refer to other kwargs in [ConversableAgent](../conversable_agent#init).<br/><br/> |

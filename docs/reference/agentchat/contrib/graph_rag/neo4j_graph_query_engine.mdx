@@ -16,11 +16,11 @@ Neo4jGraphQueryEngine(
     database: str = 'neo4j',
     username: str = 'neo4j',
     password: str = 'neo4j',
-    llm: llama_index.core.llms.llm.LLM = OpenAI(callback_manager=&lt;llama_index.core.callbacks.base.CallbackManager object>, system_prompt=None, messages_to_prompt=&lt;function messages_to_prompt>, completion_to_prompt=&lt;function default_completion_to_prompt>, output_parser=None, pydantic_program_mode=&lt;PydanticProgramMode.DEFAULT: 'default'>, query_wrapper_prompt=None, model='gpt-4o', temperature=0.0, max_tokens=None, logprobs=None, top_logprobs=0, additional_kwargs=\{}, max_retries=3, timeout=60.0, default_headers=None, reuse_client=True, api_key='', api_base='https://api.openai.com/v1', api_version='', strict=False),
-    embedding: llama_index.core.base.embeddings.base.BaseEmbedding = OpenAIEmbedding(model_name='text-embedding-3-small', embed_batch_size=100, callback_manager=&lt;llama_index.core.callbacks.base.CallbackManager object>, num_workers=None, additional_kwargs=\{}, api_key='', api_base='https://api.openai.com/v1', api_version='', max_retries=10, timeout=60.0, default_headers=None, reuse_client=True, dimensions=None),
-    entities: TypeAlias | None = None,
-    relations: TypeAlias | None = None,
-    schema: dict[str, str] | list[typing.Tuple[str, str, str]] | None = None,
+    llm: ForwardRef('LLM') | None = None,
+    embedding: ForwardRef('BaseEmbedding') | None = None,
+    entities: ForwardRef('TypeAlias') | None = None,
+    relations: ForwardRef('TypeAlias') | None = None,
+    schema: dict[str, str] | list['Triple'] | None = None,
     strict: bool | None = False
 )
 ```
@@ -54,11 +54,11 @@ Neo4jGraphQueryEngine(
 | `database` | Neo4j database name.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
 | `username` | Neo4j username.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
 | `password` | Neo4j password.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
-| `llm` | Language model to use for extracting triplets.<br/><br/>**Type:** `llama_index.core.llms.llm.LLM = OpenAI(callback_manager=<llama_index.core.callbacks.base.CallbackManager object>, system_prompt=None, messages_to_prompt=<function messages_to_prompt>, completion_to_prompt=<function default_completion_to_prompt>, output_parser=None, pydantic_program_mode`<br/><br/>**Default:** &lt;PydanticProgramMode.DEFAULT |
-| `embedding` | Embedding model to use constructing index and query<br/><br/>**Type:** `llama_index.core.base.embeddings.base.BaseEmbedding = OpenAIEmbedding(model_name='text-embedding-3-small', embed_batch_size=100, callback_manager=<llama_index.core.callbacks.base.CallbackManager object>, num_workers=None, additional_kwargs={}, api_key='', api_base`<br/><br/>**Default:** 'https |
-| `entities` | Custom suggested entities to include in the graph.<br/><br/>**Type:** `TypeAlias \| None`<br/><br/>**Default:** None |
-| `relations` | Custom suggested relations to include in the graph.<br/><br/>**Type:** `TypeAlias \| None`<br/><br/>**Default:** None |
-| `schema` | Custom schema to specify allowed relationships for each entity.<br/><br/>**Type:** `dict[str, str] \| list[typing.Tuple[str, str, str]] \| None`<br/><br/>**Default:** None |
+| `llm` | Language model to use for extracting triplets.<br/><br/>**Type:** `ForwardRef('LLM') \| None`<br/><br/>**Default:** None |
+| `embedding` | Embedding model to use constructing index and query<br/><br/>**Type:** `ForwardRef('BaseEmbedding') \| None`<br/><br/>**Default:** None |
+| `entities` | Custom suggested entities to include in the graph.<br/><br/>**Type:** `ForwardRef('TypeAlias') \| None`<br/><br/>**Default:** None |
+| `relations` | Custom suggested relations to include in the graph.<br/><br/>**Type:** `ForwardRef('TypeAlias') \| None`<br/><br/>**Default:** None |
+| `schema` | Custom schema to specify allowed relationships for each entity.<br/><br/>**Type:** `dict[str, str] \| list['Triple'] \| None`<br/><br/>**Default:** None |
 | `strict` | If false, allows for values outside of the input schema.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** False |
 
 ### Instance Methods

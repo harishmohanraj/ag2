@@ -497,7 +497,7 @@ upsert(
 ```python
 PGVectorDB(
     *,
-    conn: psycopg.Connection | None = None,
+    conn: ForwardRef('psycopg.Connection') | None = None,
     connection_string: str | None = None,
     host: str | None = None,
     port: int | str | None = None,
@@ -519,7 +519,7 @@ PGVectorDB(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `conn` | psycopg.Connection | A customer connection object to connect to the database.<br/><br/>A connection object may include additional key/values: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING<br/><br/>**Type:** `psycopg.Connection \| None`<br/><br/>**Default:** None |
+| `conn` | psycopg.Connection | A customer connection object to connect to the database.<br/><br/>A connection object may include additional key/values: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING<br/><br/>**Type:** `ForwardRef('psycopg.Connection') \| None`<br/><br/>**Default:** None |
 | `connection_string` | "postgresql://username:password@hostname:port/database" | The PGVector connection string.<br/><br/>Default is None.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `host` | str | The host to connect to.<br/><br/>Default is None.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `port` | int | The port to connect to.<br/><br/>Default is None.<br/><br/>**Type:** `int \| str \| None`<br/><br/>**Default:** None |
@@ -594,7 +594,7 @@ delete_collection(self, collection_name: str) -> None
 ```python
 establish_connection(
     self,
-    conn: psycopg.Connection | None = None,
+    conn: ForwardRef('psycopg.Connection') | None = None,
     connection_string: str | None = None,
     host: str | None = None,
     port: int | str | None = None,
@@ -610,7 +610,7 @@ establish_connection(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `conn` | An existing psycopg connection object.<br/><br/>If provided, this connection will be used.<br/><br/>**Type:** `psycopg.Connection \| None`<br/><br/>**Default:** None |
+| `conn` | An existing psycopg connection object.<br/><br/>If provided, this connection will be used.<br/><br/>**Type:** `ForwardRef('psycopg.Connection') \| None`<br/><br/>**Default:** None |
 | `connection_string` | A string containing the connection information.<br/><br/>If provided, a new connection will be established using this string.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `host` | The hostname of the PostgreSQL server.<br/><br/>Used if connection_string is not provided.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `port` | The port number to connect to at the server host.<br/><br/>Used if connection_string is not provided.<br/><br/>**Type:** `int \| str \| None`<br/><br/>**Default:** None |

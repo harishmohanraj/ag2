@@ -32,11 +32,7 @@ with_id_rename(docs: &lt;class 'collections.abc.Iterable'>) -> list[dict[str,�
 MongoDBAtlasVectorDB(
     connection_string: str = '',
     database_name: str = 'vector_db',
-    embedding_function: Callable = &lt;bound method SentenceTransformer.encode of SentenceTransformer(
-  (0): Transformer(\{'max_seq_length': 256, 'do_lower_case': False}) with Transformer model: BertModel 
-  (1): Pooling(\{'word_embedding_dimension': 384, 'pooling_mode_cls_token': False, 'pooling_mode_mean_tokens': True, 'pooling_mode_max_tokens': False, 'pooling_mode_mean_sqrt_len_tokens': False, 'pooling_mode_weightedmean_tokens': False, 'pooling_mode_lasttoken': False, 'include_prompt': True})
-  (2): Normalize()
-)>,
+    embedding_function: Callable | None = None,
     collection_name: str = None,
     index_name: str = 'vector_index',
     overwrite: bool = False,
@@ -54,8 +50,7 @@ MongoDBAtlasVectorDB(
 |--|--|
 | `connection_string` | str | The MongoDB connection string to connect to.<br/><br/>Default is ''.<br/><br/>**Type:** `str`<br/><br/>**Default:** '' |
 | `database_name` | str | The name of the database.<br/><br/>Default is 'vector_db'.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'vector_db' |
-| `embedding_function` | Callable | The embedding function used to generate the vector representation.<br/><br/>**Type:** `Callable`<br/><br/>**Default:** &lt;bound method SentenceTransformer.encode of SentenceTransformer(
-  (0) |
+| `embedding_function` | Callable | The embedding function used to generate the vector representation.<br/><br/>**Type:** `Callable \| None`<br/><br/>**Default:** None |
 | `collection_name` | str | The name of the collection to create for this vector database Defaults to None<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
 | `index_name` | str | Index name for the vector database, defaults to 'vector_index'<br/><br/>**Type:** `str`<br/><br/>**Default:** 'vector_index' |
 | `overwrite` | bool = False<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
@@ -96,7 +91,7 @@ create_collection(
 create_index_if_not_exists(
     self,
     index_name: str = 'vector_index',
-    collection: pymongo.synchronous.collection.Collection = None
+    collection: Collection = None
 ) -> None
 ```
 
@@ -106,7 +101,7 @@ create_index_if_not_exists(
 | Name | Description |
 |--|--|
 | `index_name` | **Type:** `str`<br/><br/>**Default:** 'vector_index' |
-| `collection` | The MongoDB collection to create the index on.<br/><br/>Defaults to None.<br/><br/>**Type:** `pymongo.synchronous.collection.Collection`<br/><br/>**Default:** None |
+| `collection` | The MongoDB collection to create the index on.<br/><br/>Defaults to None.<br/><br/>**Type:** `Collection`<br/><br/>**Default:** None |
 
 <br />
 
@@ -117,7 +112,7 @@ create_index_if_not_exists(
 ```python
 create_vector_search_index(
     self,
-    collection: pymongo.synchronous.collection.Collection,
+    collection: Collection,
     index_name: str | None = 'vector_index',
     similarity: Literal['euclidean', 'cosine', 'dotProduct'] = 'cosine'
 ) -> None
@@ -128,7 +123,7 @@ create_vector_search_index(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `collection` | An existing Collection in the Atlas Database.<br/><br/>**Type:** `pymongo.synchronous.collection.Collection` |
+| `collection` | An existing Collection in the Atlas Database.<br/><br/>**Type:** `Collection` |
 | `index_name` | Vector Search Index name.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** 'vector_index' |
 | `similarity` | Algorithm used for measuring vector similarity.<br/><br/>**Type:** `Literal['euclidean', 'cosine', 'dotProduct']`<br/><br/>**Default:** 'cosine' |
 
