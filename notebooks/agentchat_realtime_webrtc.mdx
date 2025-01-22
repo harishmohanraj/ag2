@@ -23,9 +23,9 @@ get_weather function that the agent will be able to call.
 **Note**: This notebook cannot be run in Google Colab because it depends
 on local JavaScript files and HTML templates. To execute the notebook
 successfully, run it locally within the cloned project so that the
-`notebooks/agentchat_realtime_websocket/static` and
-`notebooks/agentchat_realtime_websocket/templates` folders are available
-in the correct relative paths.
+`notebooks/agentchat_realtime_webrtc/static` and
+`notebooks/agentchat_realtime_webrtc/templates` folders are available in
+the correct relative paths.
 
 
 <div class="info Requirements">
@@ -60,7 +60,7 @@ For more information, please refer to the [installation guide](/docs/installatio
 
 
 ```python
-!pip install "ag2" "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1"
+# !pip install "ag2" "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1"
 ```
 
 ### Import the dependencies
@@ -167,9 +167,18 @@ This sets up a basic FastAPI server and provides a simple health-check
 endpoint to confirm that the server is operational.
 
 ```python
+from contextlib import asynccontextmanager
+
 PORT = 5050
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(*args, **kwargs):
+    print("Application started. Please visit http://localhost:5050/start-chat to start voice chat.")
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/", response_class=JSONResponse)
@@ -245,7 +254,7 @@ async def handle_media_stream(websocket: WebSocket):
 
     realtime_agent = RealtimeAgent(
         name="Weather Bot",
-        system_message="Hello there! I am an AI voice assistant powered by Autogen and the OpenAI Realtime API. You can ask me about weather, jokes, or anything you can imagine. Start by saying 'How can I help you'?",
+        system_message="Hello there! You are an AI voice assistant powered by Autogen and the OpenAI Realtime API. You can answer questions me about weather, jokes, or anything you can imagine. Start by saying 'How can I help you'?",
         llm_config=realtime_llm_config,
         websocket=websocket,
         logger=logger,

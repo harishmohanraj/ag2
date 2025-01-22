@@ -1,12 +1,12 @@
 ---
 sidebarTitle: websocket_audio_adapter
-title: autogen.agentchat.realtime_agent.websocket_audio_adapter
+title: autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter
 ---
 
-    <h2 id="autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter" class="doc doc-heading">
+    <h2 id="autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
         <span class="doc doc-object-name doc-class-name">WebSocketAudioAdapter</span>
-        <a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter" class="headerlink" title="Permanent link"></a>
+        <a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter" class="headerlink" title="Permanent link"></a>
     </h2>
 
 ```python
@@ -31,7 +31,7 @@ WebSocketAudioAdapter(
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### handle_speech_started_event
-<a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter.handle_speech_started_event" class="headerlink" title="Permanent link"></a>
+<a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter.handle_speech_started_event" class="headerlink" title="Permanent link"></a>
 
 ```python
 handle_speech_started_event(self) -> None
@@ -43,7 +43,7 @@ handle_speech_started_event(self) -> None
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### initialize_session
-<a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter.initialize_session" class="headerlink" title="Permanent link"></a>
+<a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter.initialize_session" class="headerlink" title="Permanent link"></a>
 
 ```python
 initialize_session(self) -> None
@@ -55,10 +55,10 @@ initialize_session(self) -> None
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### on_event
-<a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter.on_event" class="headerlink" title="Permanent link"></a>
+<a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter.on_event" class="headerlink" title="Permanent link"></a>
 
 ```python
-on_event(self, event: dict[str, typing.Any]) -> None
+on_event(self, event: autogen.agentchat.realtime_agent.realtime_events.RealtimeEvent) -> None
 ```
 
     Receive events from the OpenAI Realtime API, send audio back to websocket.
@@ -66,13 +66,13 @@ on_event(self, event: dict[str, typing.Any]) -> None
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `event` | **Type:** `dict[str, typing.Any]` |
+| `event` | **Type:** `autogen.agentchat.realtime_agent.realtime_events.RealtimeEvent` |
 
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### run_loop
-<a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter.run_loop" class="headerlink" title="Permanent link"></a>
+<a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter.run_loop" class="headerlink" title="Permanent link"></a>
 
 ```python
 run_loop(self) -> None
@@ -84,7 +84,7 @@ run_loop(self) -> None
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### send_mark
-<a href="#autogen.agentchat.realtime_agent.websocket_audio_adapter.WebSocketAudioAdapter.send_mark" class="headerlink" title="Permanent link"></a>
+<a href="#autogen.agentchat.realtime_agent.audio_adapters.websocket_audio_adapter.WebSocketAudioAdapter.send_mark" class="headerlink" title="Permanent link"></a>
 
 ```python
 send_mark(self) -> None

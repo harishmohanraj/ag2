@@ -1,24 +1,22 @@
 ---
-custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_realtime_websocket.ipynb
-description: RealtimeAgent using websockets
-source_notebook: /notebook/agentchat_realtime_websocket.ipynb
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_realtime_gemini_websocket.ipynb
+description: RealtimeAgent with gemini client using websockets
+source_notebook: /notebook/agentchat_realtime_gemini_websocket.ipynb
 tags:
 - realtime
 - websockets
-title: RealtimeAgent with local websocket connection
+- gemini
+title: RealtimeAgent with gemini client
 ---
 
-<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_realtime_websocket.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
-<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_realtime_websocket.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_realtime_gemini_websocket.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_realtime_gemini_websocket.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
 
-AG2 supports **RealtimeAgent**, a powerful agent type that connects
-seamlessly to OpenAI’s [Realtime
-API](https://openai.com/index/introducing-the-realtime-api). In this
-example we will start a local RealtimeAgent and register a mock
-get_weather function that the agent will be able to call.
+AG2 **RealtimeAgent** suports Gemini [Multimodal Live
+API](https://ai.google.dev/api/multimodal-live)
 
 **Note**: This notebook cannot be run in Google Colab because it depends
 on local JavaScript files and HTML templates. To execute the notebook
@@ -26,6 +24,18 @@ successfully, run it locally within the cloned project so that the
 `notebooks/agentchat_realtime_websocket/static` and
 `notebooks/agentchat_realtime_websocket/templates` folders are available
 in the correct relative paths.
+
+
+<div class="info Requirements">
+<Info>
+Install `ag2`:
+```bash
+git clone https://github.com/ag2ai/ag2.git
+cd ag2
+```
+</Info>
+</div>
+
 
 ## Install AG2 and dependencies
 
@@ -35,15 +45,15 @@ the browser.
 We have prepared a `WebSocketAudioAdapter` to enable you to connect your
 realtime agent to a websocket service.
 
-To be able to run this notebook, you will need to install ag2, fastapi
-and uvicorn.
+To be able to run this notebook, you will need to install ag2, fastapi,
+uvicorn and jinja2.
 
 
 <div class="info Requirements">
 <Info>
-Install `ag2`:
+Install `ag2` with additional dependencies to run a fastAPI server:
 ```bash
-pip install "ag2", "fastapi>=0.115.0,<1", "uvicorn>=0.30.6,<1" "flaml[automl]"
+pip install "ag2", "fastapi>=0.115.0,<1", "uvicorn>=0.30.6,<1" "jinja2"
 ```
 For more information, please refer to the [installation guide](/docs/installation/Installation).
 </Info>
@@ -51,7 +61,7 @@ For more information, please refer to the [installation guide](/docs/installatio
 
 
 ```python
-# !pip install "ag2>=0.7.2" "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1" "jinja2"
+!pip install "fastapi>=0.115.0,<1" "uvicorn>=0.30.6,<1" "jinja2"
 ```
 
 ### Import the dependencies
@@ -86,7 +96,7 @@ a json file.
 realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
-        "tags": ["gpt-4o-mini-realtime"],
+        "tags": ["gemini-realtime"],
     },
 )
 
@@ -96,14 +106,20 @@ realtime_llm_config = {
     "temperature": 0.8,
 }
 
-assert realtime_config_list, (
-    "No LLM found for the given model, please add the following lines to the OAI_CONFIG_LIST file:"
-    """
+msg = """
     {
-        "model": "gpt-4o-mini-realtime-preview",
-        "api_key": "sk-***********************...*",
-        "tags": ["gpt-4o-mini-realtime", "realtime"]
+        "model": "gemini-2.0-flash-exp",
+        "api_key": "***********************...*",
+        "tags": ["gemini-realtime"],
+        "api_type": "google"
     }"""
+
+assert realtime_config_list, (
+    "No appropriate LLM found for the given model, please add the following lines to the OAI_CONFIG_LIST file:" + msg
+)
+assert set(realtime_config_list[0].keys()) == set({"model", "api_key", "tags", "api_type"}), (
+    f"Config in OAI_CONFIG_LIST is missing one of the required keys: {set({'model', 'api_key', 'tags', 'api_type'}) - realtime_config_list[0].keys()}. Should be something like:"
+    + msg
 )
 ```
 
@@ -140,7 +156,7 @@ real-time agent interactions.
     `app`, which serves as the main application.
 3.  **Define Root Endpoint**: Adds a `GET` endpoint at the root URL
     (`/`). When accessed, it returns a JSON response with the message
-    `"WebSocket Audio Stream Server is running!"`.
+    `"Websocket Audio Stream Server is running!"`.
 
 This sets up a basic FastAPI server and provides a simple health-check
 endpoint to confirm that the server is operational.
@@ -162,7 +178,7 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/", response_class=JSONResponse)
 async def index_page():
-    return {"message": "WebSocket Audio Stream Server is running!"}
+    return {"message": "Websocket Audio Stream Server is running!"}
 ```
 
 ### Prepare `start-chat` endpoint
@@ -238,7 +254,7 @@ async def handle_media_stream(websocket: WebSocket):
     audio_adapter = WebSocketAudioAdapter(websocket, logger=logger)
     realtime_agent = RealtimeAgent(
         name="Weather_Bot",
-        system_message="You are an AI voice assistant powered by AG2 and the OpenAI Realtime API. You can answer questions about weather. Start by saying 'How can I help you'?",
+        system_message="You are an AI voice assistant powered by AG2 and the Gemini Realtime API. You can answer questions about weather. Start by saying 'How can I help you'?",
         llm_config=realtime_llm_config,
         audio_adapter=audio_adapter,
         logger=logger,

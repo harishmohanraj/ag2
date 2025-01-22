@@ -16,9 +16,8 @@ RealtimeAgent(
     audio_adapter: autogen.agentchat.realtime_agent.realtime_observer.RealtimeObserver | None = None,
     system_message: str = 'You are a helpful AI Assistant.',
     llm_config: dict[str, typing.Any],
-    voice: str = 'alloy',
     logger: logging.Logger | None = None,
-    websocket: ForwardRef('WebSocket') | None = None
+    **client_kwargs: Any
 )
 ```
 
@@ -33,9 +32,8 @@ RealtimeAgent(
 | `audio_adapter` | The audio adapter for the agent.<br/><br/>**Type:** `autogen.agentchat.realtime_agent.realtime_observer.RealtimeObserver \| None`<br/><br/>**Default:** None |
 | `system_message` | The system message for the agent.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'You are a helpful AI Assistant.' |
 | `llm_config` | The config for the agent.<br/><br/>**Type:** `dict[str, typing.Any]` |
-| `voice` | The voice for the agent.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'alloy' |
-| `logger` | **Type:** `logging.Logger \| None`<br/><br/>**Default:** None |
-| `websocket` | WebSocket from WebRTC javascript client<br/><br/>**Type:** `ForwardRef('WebSocket') \| None`<br/><br/>**Default:** None |
+| `logger` | The logger for the agent.<br/><br/>**Type:** `logging.Logger \| None`<br/><br/>**Default:** None |
+| `**client_kwargs` | The keyword arguments for the client.<br/><br/>**Type:** `Any` |
 
 ### Instance Attributes
 
@@ -57,68 +55,13 @@ RealtimeAgent(
 
     Get the registered realtime tools.
 
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### system_message
+<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.system_message" class="headerlink" title="Permanent link"></a>
+
+    Get the system message for the agent.
+
 ### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### ask_question
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.ask_question" class="headerlink" title="Permanent link"></a>
-
-```python
-ask_question(
-    self,
-    question: str,
-    question_timeout: int
-) -> None
-```
-
-    Send a question for the user to the agent and wait for the answer.
-    If the answer is not received within the timeout, the question is repeated.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `question` | The question to ask the user.<br/><br/>**Type:** `str` |
-| `question_timeout` | The time in seconds to wait for the answer.<br/><br/>**Type:** `int` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### check_termination_and_human_reply
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.check_termination_and_human_reply" class="headerlink" title="Permanent link"></a>
-
-```python
-check_termination_and_human_reply(
-    self,
-    messages: list[dict[str, typing.Any]] | None = None,
-    sender: autogen.agentchat.agent.Agent | None = None,
-    config: Any | None = None
-) -> tuple[bool, str | None]
-```
-
-    Check if the conversation should be terminated and if the agent should reply.
-    
-    Called when its agents turn in the chat conversation.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `messages` | list of dict the messages in the conversation<br/><br/>**Type:** `list[dict[str, typing.Any]] \| None`<br/><br/>**Default:** None |
-| `sender` | Agent the agent sending the message<br/><br/>**Type:** `autogen.agentchat.agent.Agent \| None`<br/><br/>**Default:** None |
-| `config` | any the config for the agent<br/><br/>**Type:** `Any \| None`<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_answer
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.get_answer" class="headerlink" title="Permanent link"></a>
-
-```python
-get_answer(self) -> str
-```
-
-    Get the answer to the question.
-
-<br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### register_observer
@@ -166,43 +109,6 @@ register_realtime_function(
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### register_swarm
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.register_swarm" class="headerlink" title="Permanent link"></a>
-
-```python
-register_swarm(
-    self,
-    *,
-    initial_agent: autogen.agentchat.contrib.swarm_agent.SwarmAgent,
-    agents: list[autogen.agentchat.contrib.swarm_agent.SwarmAgent],
-    system_message: str | None = None
-) -> None
-```
-
-    Register a swarm of agents with the Realtime Agent.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `initial_agent` | The initial agent.<br/><br/>**Type:** `autogen.agentchat.contrib.swarm_agent.SwarmAgent` |
-| `agents` | The agents in the swarm.<br/><br/>**Type:** `list[autogen.agentchat.contrib.swarm_agent.SwarmAgent]` |
-| `system_message` | The system message for the agent.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### reset_answer
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.reset_answer" class="headerlink" title="Permanent link"></a>
-
-```python
-reset_answer(self) -> None
-```
-
-    Reset the answer event.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### run
 <a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.run" class="headerlink" title="Permanent link"></a>
 
@@ -215,18 +121,44 @@ run(self) -> None
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### set_answer
-<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.set_answer" class="headerlink" title="Permanent link"></a>
+#### start_observers
+<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgent.start_observers" class="headerlink" title="Permanent link"></a>
 
 ```python
-set_answer(self, answer: str) -> str
+start_observers(self) -> None
 ```
 
-    Set the answer to the question.
+    
+
+<br />
+
+    <h2 id="autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgentCallbacks" class="doc doc-heading">
+        <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+        <span class="doc doc-object-name doc-class-name">RealtimeAgentCallbacks</span>
+        <a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgentCallbacks" class="headerlink" title="Permanent link"></a>
+    </h2>
+
+```python
+RealtimeAgentCallbacks(on_observers_ready: Callable[[], Any] = &lt;function RealtimeAgentCallbacks.&lt;lambda>>)
+```
+
+    Callbacks for the Realtime Agent.
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `answer` | **Type:** `str` |
+| `on_observers_ready` | **Type:** `Callable[[], Any]`<br/><br/>**Default:** &lt;function RealtimeAgentCallbacks.&lt;lambda>> |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### on_observers_ready
+<a href="#autogen.agentchat.realtime_agent.realtime_agent.RealtimeAgentCallbacks.on_observers_ready" class="headerlink" title="Permanent link"></a>
+
+```python
+on_observers_ready() -> Callable[[], Any]
+```
+
+    
 
 <br />

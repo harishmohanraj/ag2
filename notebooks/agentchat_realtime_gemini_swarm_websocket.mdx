@@ -1,7 +1,7 @@
 ---
-custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_realtime_swarm_websocket.ipynb
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_realtime_gemini_swarm_websocket.ipynb
 description: Swarm Ochestration
-source_notebook: /notebook/agentchat_realtime_swarm_websocket.ipynb
+source_notebook: /notebook/agentchat_realtime_gemini_swarm_websocket.ipynb
 tags:
 - orchestration
 - group chat
@@ -9,17 +9,17 @@ tags:
 title: RealtimeAgent in a Swarm Orchestration
 ---
 
-<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_realtime_swarm_websocket.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
-<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_realtime_swarm_websocket.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_realtime_gemini_swarm_websocket.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_realtime_gemini_swarm_websocket.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
 
 
 
 
 AG2 supports **RealtimeAgent**, a powerful agent type that connects
-seamlessly to OpenAI’s [Realtime
-API](https://openai.com/index/introducing-the-realtime-api). With
-RealtimeAgent, you can add voice interaction and listening capabilities
-to your swarms, enabling dynamic and natural communication.
+seamlessly to Gemini [Multimodal Live
+API](https://ai.google.dev/api/multimodal-live). With RealtimeAgent, you
+can add voice interaction and listening capabilities to your swarms,
+enabling dynamic and natural communication.
 
 AG2 provides an intuitive programming interface to build and orchestrate
 swarms of agents. With RealtimeAgent, you can enhance swarm
@@ -32,24 +32,43 @@ In this notebook, we implement OpenAI’s [airline customer service
 example](https://github.com/openai/swarm/tree/main/examples/airline) in
 AG2 using the RealtimeAgent for enhanced interaction.
 
-## Install AG2 and dependencies
-
-To use the realtime agent we will connect it to a local websocket trough
-the browser.
-
-We have prepared a `WebSocketAudioAdapter` to enable you to connect your
-realtime agent to a websocket service.
-
-To be able to run this notebook, you will need to install ag2, fastapi
-and uvicorn.
+**Note**: This notebook cannot be run in Google Colab because it depends
+on local JavaScript files and HTML templates. To execute the notebook
+successfully, run it locally within the cloned project so that the
+`notebooks/agentchat_realtime_websocket/static` and
+`notebooks/agentchat_realtime_websocket/templates` folders are available
+in the correct relative paths.
 
 
 <div class="info Requirements">
 <Info>
 Install `ag2`:
 ```bash
-pip install "ag2", "fastapi>=0.115.0,<1", "uvicorn>=0.30.6,<1" "jinja2"
+git clone https://github.com/ag2ai/ag2.git
+cd ag2
 ```
+</Info>
+</div>
+
+
+## Install AG2 with fastapi and uvicorn dependencies
+
+To use the realtime agent we will connect it to local fastapi service.
+
+We have prepared a `WebSocketAudioAdapter` to enable you to connect your
+realtime agent to local fastapi service.
+
+To be able to run this notebook, you will need to install ag2 with
+additional dependencies.
+
+
+<div class="info Requirements">
+<Info>
+Install `ag2`:
+```bash
+pip install "ag2"
+```
+
 For more information, please refer to the [installation guide](/docs/installation/Installation).
 </Info>
 </div>
@@ -84,22 +103,22 @@ function loads a list of configurations from an environment variable or
 a json file.
 
 ```python
-swarm_config_list = autogen.config_list_from_json(
+config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
         "model": ["gpt-4o-mini"],
     },
 )
 
-swarm_llm_config = {
+llm_config = {
     "cache_seed": 42,  # change the cache_seed for different trials
     "temperature": 1,
-    "config_list": swarm_config_list,
+    "config_list": config_list,
     "timeout": 120,
     "tools": [],
 }
 
-assert swarm_config_list, "No LLM found for the given model"
+assert config_list, "No LLM found for the given model"
 ```
 
 
@@ -107,7 +126,7 @@ assert swarm_config_list, "No LLM found for the given model"
 realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
-        "tags": ["gpt-4o-mini-realtime"],
+        "tags": ["gemini-realtime"],
     },
 )
 
@@ -117,14 +136,20 @@ realtime_llm_config = {
     "temperature": 0.8,
 }
 
-assert realtime_config_list, (
-    "No LLM found for the given model, please add the following lines to the OAI_CONFIG_LIST file:"
-    """
+msg = """
     {
-        "model": "gpt-4o-realtime-preview",
-        "api_key": "sk-***********************...*",
-        "tags": ["gpt-4o-mini-realtime", "realtime"]
+        "model": "gemini-2.0-flash-exp",
+        "api_key": "***********************...*",
+        "tags": ["gemini-realtime"],
+        "api_type": "google"
     }"""
+
+assert realtime_config_list, (
+    "No appropriate LLM found for the given model, please add the following lines to the OAI_CONFIG_LIST file:" + msg
+)
+assert set(realtime_config_list[0].keys()) == set({"model", "api_key", "tags", "api_type"}), (
+    f"Config in OAI_CONFIG_LIST is missing one of the required keys: {set({'model', 'api_key', 'tags', 'api_type'}) - realtime_config_list[0].keys()}. Should be something like:"
+    + msg
 )
 ```
 
@@ -217,7 +242,7 @@ The flight # is 1919. The flight departure date is 3pm ET, 5/21/2024.""",
 }
 
 
-def triage_instructions(context_variables):
+def triage_instructions(context_variables: dict[str, str]) -> str:
     customer_context = context_variables.get("customer_context", None)
     flight_context = context_variables.get("flight_context", None)
     return f"""You are to triage a users request, and call a tool to transfer to the right intent.
@@ -272,7 +297,7 @@ from autogen import ON_CONDITION, SwarmAgent
 triage_agent = SwarmAgent(
     name="Triage_Agent",
     system_message=triage_instructions(context_variables=context_variables),
-    llm_config=swarm_llm_config,
+    llm_config=llm_config,
     functions=[non_flight_enquiry],
 )
 
@@ -283,14 +308,14 @@ flight_modification = SwarmAgent(
       Your task is to determine if the user wants to cancel or change their flight.
       Use message history and ask clarifying questions as needed to decide.
       Once clear, call the appropriate transfer function.""",
-    llm_config=swarm_llm_config,
+    llm_config=llm_config,
 )
 
 # Flight Cancel Agent
 flight_cancel = SwarmAgent(
     name="Flight_Cancel_Traversal",
     system_message=STARTER_PROMPT + FLIGHT_CANCELLATION_POLICY,
-    llm_config=swarm_llm_config,
+    llm_config=llm_config,
     functions=[initiate_refund, initiate_flight_credits, case_resolved, escalate_to_agent],
 )
 
@@ -298,7 +323,7 @@ flight_cancel = SwarmAgent(
 flight_change = SwarmAgent(
     name="Flight_Change_Traversal",
     system_message=STARTER_PROMPT + FLIGHT_CHANGE_POLICY,
-    llm_config=swarm_llm_config,
+    llm_config=llm_config,
     functions=[valid_to_change_flight, change_flight, case_resolved, escalate_to_agent],
 )
 
@@ -306,7 +331,7 @@ flight_change = SwarmAgent(
 lost_baggage = SwarmAgent(
     name="Lost_Baggage_Traversal",
     system_message=STARTER_PROMPT + LOST_BAGGAGE_POLICY,
-    llm_config=swarm_llm_config,
+    llm_config=llm_config,
     functions=[initiate_baggage_search, case_resolved, escalate_to_agent],
 )
 ```
@@ -340,7 +365,7 @@ for agent in [flight_modification, flight_cancel, flight_change, lost_baggage]:
 
 ### Before you start the server
 
-To run uviconrn server inside the notebook, you will need to use
+To run uvicorn server inside the notebook, you will need to use
 nest_asyncio. This is because Jupyter uses the asyncio event loop, and
 uvicorn uses its own event loop. nest_asyncio will allow uvicorn to run
 in Jupyter.
@@ -439,7 +464,7 @@ async def start_chat(request: Request):
     connecting the WebSocket to handle audio streaming with logging.
 5.  **Set Up Realtime Agent**: Create a `RealtimeAgent` with the
     following:
-    -   **Name**: `Flight_Realtime_Agent`.
+    -   **Name**: `Airline_Realtime_Agent`.
     -   **System Message**: Introduces the AI assistant and its
         capabilities.
     -   **LLM Configuration**: Uses `realtime_llm_config` for language
@@ -458,14 +483,14 @@ from autogen.agentchat.realtime_agent import register_swarm
 
 @app.websocket("/media-stream")
 async def handle_media_stream(websocket: WebSocket):
-    """Handle WebSocket connections providing audio stream and OpenAI."""
+    """Handle WebSocket connections providing audio stream and Gemini Live API."""
     await websocket.accept()
 
     logger = getLogger("uvicorn.error")
 
     audio_adapter = WebSocketAudioAdapter(websocket, logger=logger)
     realtime_agent = RealtimeAgent(
-        name="Flight_Realtime_Agent",
+        name="Airline_Realtime_Agent",
         llm_config=realtime_llm_config,
         audio_adapter=audio_adapter,
         logger=logger,
