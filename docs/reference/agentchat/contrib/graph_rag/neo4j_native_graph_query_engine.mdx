@@ -10,19 +10,7 @@ title: autogen.agentchat.contrib.graph_rag.neo4j_native_graph_query_engine
     </h2>
 
 ```python
-Neo4jNativeGraphQueryEngine(
-    host: str = 'neo4j://localhost',
-    port: int = 7687,
-    username: str = 'neo4j',
-    password: str = 'password',
-    embeddings: ForwardRef('Embedder') | None = None,
-    embedding_dimension: int | None = 3072,
-    llm: ForwardRef('LLMInterface') | None = None,
-    query_llm: ForwardRef('LLMInterface') | None = None,
-    entities: List[str] | None = None,
-    relations: List[str] | None = None,
-    potential_schema: List[tuple[str, str, str]] | None = None
-)
+Neo4jNativeGraphQueryEngine(**kwargs)
 ```
 
     A graph query engine implemented using the Neo4j GraphRAG SDK.
@@ -34,90 +22,4 @@ Neo4jNativeGraphQueryEngine(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `host` | Neo4j host URL.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j |
-| `port` | Neo4j port.<br/><br/>**Type:** `int`<br/><br/>**Default:** 7687 |
-| `username` | Neo4j username.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
-| `password` | Neo4j password.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'password' |
-| `embeddings` | Embedding model to embed chunk data and retrieve answers.<br/><br/>**Type:** `ForwardRef('Embedder') \| None`<br/><br/>**Default:** None |
-| `embedding_dimension` | Dimension of the embeddings for the model.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** 3072 |
-| `llm` | Language model for creating the knowledge graph (returns JSON responses).<br/><br/>**Type:** `ForwardRef('LLMInterface') \| None`<br/><br/>**Default:** None |
-| `query_llm` | Language model for querying the knowledge graph.<br/><br/>**Type:** `ForwardRef('LLMInterface') \| None`<br/><br/>**Default:** None |
-| `entities` | Custom entities for guiding graph construction.<br/><br/>**Type:** `List[str] \| None`<br/><br/>**Default:** None |
-| `relations` | Custom relations for guiding graph construction.<br/><br/>**Type:** `List[str] \| None`<br/><br/>**Default:** None |
-| `potential_schema` | Schema (triplets, i.e., [entity] -> [relationship] -> [entity]) to guide graph construction.<br/><br/>**Type:** `List[tuple[str, str, str]] \| None`<br/><br/>**Default:** None |
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### add_records
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_native_graph_query_engine.Neo4jNativeGraphQueryEngine.add_records" class="headerlink" title="Permanent link"></a>
-
-```python
-add_records(self, new_records: list[autogen.agentchat.contrib.graph_rag.document.Document]) -> bool
-```
-
-    Add new records to the Neo4j database.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `new_records` | List of new Documents to be added<br/><br/>**Type:** `list[autogen.agentchat.contrib.graph_rag.document.Document]` |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `bool` | bool: True if records were added successfully, False otherwise. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### init_db
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_native_graph_query_engine.Neo4jNativeGraphQueryEngine.init_db" class="headerlink" title="Permanent link"></a>
-
-```python
-init_db(self, input_doc: list[autogen.agentchat.contrib.graph_rag.document.Document] | None = None) -> 
-```
-
-    Initialize the Neo4j graph database using the provided input doc.
-    Currently this method only supports single document input (only reads the first doc).
-    
-    This method supports both text and PDF documents. It performs the following steps:
-    1. Clears the existing database.
-    2. Extracts graph nodes and relationships from the input data to build a knowledge graph.
-    3. Creates a vector index for efficient retrieval.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `input_doc` | Input documents for building the graph.<br/><br/>**Type:** `list[autogen.agentchat.contrib.graph_rag.document.Document] \| None`<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### query
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_native_graph_query_engine.Neo4jNativeGraphQueryEngine.query" class="headerlink" title="Permanent link"></a>
-
-```python
-query(
-    self,
-    question: str,
-    n_results: int = 1,
-    **kwargs
-) -> autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult
-```
-
-    Query the Neo4j database using a natural language question.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `question` | The question to be answered by querying the graph.<br/><br/>**Type:** `str` |
-| `n_results` | **Type:** `int`<br/><br/>**Default:** 1 |
 | `**kwargs` |  |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult` | GraphStoreQueryResult: The result of the query. |
-
-<br />

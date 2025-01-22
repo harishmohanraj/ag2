@@ -1234,7 +1234,7 @@ register_nested_chats(
     self,
     chat_queue: list[dict[str, typing.Any]],
     trigger: type[autogen.agentchat.agent.Agent] | str | autogen.agentchat.agent.Agent | Callable[[autogen.agentchat.agent.Agent], bool] | list,
-    reply_func_from_nested_chats: Callable | str = 'summary_from_nested_chats',
+    reply_func_from_nested_chats: str | Callable = 'summary_from_nested_chats',
     position: int = 2,
     use_async: bool | None = None,
     **kwargs
@@ -1248,7 +1248,7 @@ register_nested_chats(
 |--|--|
 | `chat_queue` | a list of chat objects to be initiated.<br/><br/>If use_async is used, then all messages in chat_queue must have a chat-id associated with them.<br/><br/>**Type:** `list[dict[str, typing.Any]]` |
 | `trigger` | refer to `register_reply` for details.<br/><br/>**Type:** `type[autogen.agentchat.agent.Agent] \| str \| autogen.agentchat.agent.Agent \| Callable[[autogen.agentchat.agent.Agent], bool] \| list` |
-| `reply_func_from_nested_chats` | the reply function for the nested chat.<br/><br/>The function takes a chat_queue for nested chat, recipient agent, a list of messages, a sender agent and a config as input and returns a reply message.<br/><br/>Default to "summary_from_nested_chats", which corresponds to a built-in reply function that get summary from the nested chat_queue.<br/><br/>```python def reply_func_from_nested_chats( chat_queue: List[Dict], recipient: ConversableAgent, messages: Optional[List[Dict]] = None, sender: Optional[Agent] = None, config: Optional[Any] = None,<br/><br/>**Type:** `Callable \| str`<br/><br/>**Default:** 'summary_from_nested_chats' |
+| `reply_func_from_nested_chats` | the reply function for the nested chat.<br/><br/>The function takes a chat_queue for nested chat, recipient agent, a list of messages, a sender agent and a config as input and returns a reply message.<br/><br/>Default to "summary_from_nested_chats", which corresponds to a built-in reply function that get summary from the nested chat_queue.<br/><br/>```python def reply_func_from_nested_chats( chat_queue: List[Dict], recipient: ConversableAgent, messages: Optional[List[Dict]] = None, sender: Optional[Agent] = None, config: Optional[Any] = None,<br/><br/>**Type:** `str \| Callable`<br/><br/>**Default:** 'summary_from_nested_chats' |
 | `position` | Ref to `register_reply` for details.<br/><br/>Default to 2. It means we first check the termination and human reply, then check the registered nested chat reply.<br/><br/>**Type:** `int`<br/><br/>**Default:** 2 |
 | `use_async` | Uses a_initiate_chats internally to start nested chats.<br/><br/>If the original chat is initiated with a_initiate_chats, you may set this to true so nested chats do not run in sync.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** None |
 | `**kwargs` |  |

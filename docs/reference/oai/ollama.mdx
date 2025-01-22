@@ -22,23 +22,6 @@ is_valid_tool_call_item(call_item: dict) -> bool
 
 <br />
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
-#### response_to_tool_call
-<a href="#autogen.oai.ollama..response_to_tool_call" class="headerlink" title="Permanent link"></a>
-
-```python
-response_to_tool_call(response_string: str) -> Any
-```
-
-    Attempts to convert the response to an object, aimed to align with function format `[\{},\{}]`
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response_string` | **Type:** `str` |
-
-<br />
-
     <h2 id="autogen.oai.ollama.OllamaClient" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
         <span class="doc doc-object-name doc-class-name">OllamaClient</span>
@@ -78,6 +61,12 @@ OllamaClient(**kwargs)
 
     <br />
 
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### create
+<a href="#autogen.oai.ollama.OllamaClient.create" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
 ### Static Methods
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
@@ -113,23 +102,6 @@ cost(self, response) -> float
 | Name | Description |
 |--|--|
 | `response` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### create
-<a href="#autogen.oai.ollama.OllamaClient.create" class="headerlink" title="Permanent link"></a>
-
-```python
-create(self, params: dict) -> openai.types.chat.chat_completion.ChatCompletion
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict` |
 
 <br />
 

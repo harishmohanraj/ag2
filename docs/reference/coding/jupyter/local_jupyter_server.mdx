@@ -10,15 +10,7 @@ title: autogen.coding.jupyter.local_jupyter_server
     </h2>
 
 ```python
-LocalJupyterServer(
-    ip: str = '127.0.0.1',
-    port: int | None = None,
-    token: str | GenerateToken = &lt;autogen.coding.jupyter.local_jupyter_server.LocalJupyterServer.GenerateToken object>,
-    log_file: str = 'jupyter_gateway.log',
-    log_level: str = 'INFO',
-    log_max_bytes: int = 1048576,
-    log_backup_count: int = 3
-)
+LocalJupyterServer(**kwargs)
 ```
 
     (Experimental)
@@ -28,13 +20,7 @@ LocalJupyterServer(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `ip` | IP address to bind to.<br/><br/>Defaults to "127.0.0.1".<br/><br/>**Type:** `str`<br/><br/>**Default:** '127.0.0.1' |
-| `port` | Port to use, if None it automatically selects a port.<br/><br/>Defaults to None.<br/><br/>**Type:** `int \| None`<br/><br/>**Default:** None |
-| `token` | Token to use for Jupyter server.<br/><br/>By default will generate a token.<br/><br/>Using None will use no token for authentication.<br/><br/>Defaults to GenerateToken().<br/><br/>**Type:** `str \| GenerateToken`<br/><br/>**Default:** &lt;autogen.coding.jupyter.local_jupyter_server.LocalJupyterServer.GenerateToken object> |
-| `log_file` | File for Jupyter Kernel Gateway logs.<br/><br/>Defaults to "jupyter_gateway.log".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'jupyter_gateway.log' |
-| `log_level` | Level for Jupyter Kernel Gateway logs.<br/><br/>Defaults to "INFO".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'INFO' |
-| `log_max_bytes` | Max logfile size.<br/><br/>Defaults to 1048576.<br/><br/>**Type:** `int`<br/><br/>**Default:** 1048576 |
-| `log_backup_count` | Number of backups for rotating log.<br/><br/>Defaults to 3.<br/><br/>**Type:** `int`<br/><br/>**Default:** 3 |
+| `**kwargs` |  |
 
 ### Class Attributes
 
@@ -44,28 +30,14 @@ LocalJupyterServer(
 
     <br />
 
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### get_client
 <a href="#autogen.coding.jupyter.local_jupyter_server.LocalJupyterServer.get_client" class="headerlink" title="Permanent link"></a>
 
-```python
-get_client(self) -> autogen.coding.jupyter.jupyter_client.JupyterClient
-```
+    <br />
 
-    
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### stop
 <a href="#autogen.coding.jupyter.local_jupyter_server.LocalJupyterServer.stop" class="headerlink" title="Permanent link"></a>
 
-```python
-stop(self) -> None
-```
-
-    
-
-<br />
+    <br />

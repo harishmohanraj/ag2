@@ -30,24 +30,6 @@ calculate_gemini_cost(
 
 <br />
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
-#### get_image_data
-<a href="#autogen.oai.gemini..get_image_data" class="headerlink" title="Permanent link"></a>
-
-```python
-get_image_data(image_file: str, use_b64=True) -> bytes
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `image_file` | **Type:** `str` |
-| `use_b64=True` |  |
-
-<br />
-
     <h2 id="autogen.oai.gemini.GeminiClient" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
         <span class="doc doc-object-name doc-class-name">GeminiClient</span>
@@ -81,77 +63,26 @@ GeminiClient(**kwargs)
 
     <br />
 
-### Static Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_usage
-<a href="#autogen.oai.gemini.GeminiClient.get_usage" class="headerlink" title="Permanent link"></a>
-
-```python
-get_usage(response) -> dict
-```
-
-    Return usage summary of the response using RESPONSE_USAGE_KEYS.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### cost
 <a href="#autogen.oai.gemini.GeminiClient.cost" class="headerlink" title="Permanent link"></a>
 
-```python
-cost(self, response) -> float
-```
+    <br />
 
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### create
 <a href="#autogen.oai.gemini.GeminiClient.create" class="headerlink" title="Permanent link"></a>
 
-```python
-create(self, params: dict) -> openai.types.chat.chat_completion.ChatCompletion
-```
+    <br />
 
-    
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### get_usage
+<a href="#autogen.oai.gemini.GeminiClient.get_usage" class="headerlink" title="Permanent link"></a>
 
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict` |
+    <br />
 
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### message_retrieval
 <a href="#autogen.oai.gemini.GeminiClient.message_retrieval" class="headerlink" title="Permanent link"></a>
 
-```python
-message_retrieval(self, response) -> list
-```
-
-    Retrieve and return a list of strings or a list of Choice.Message from the response.
-    
-    NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
-    since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
+    <br />

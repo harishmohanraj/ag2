@@ -10,14 +10,7 @@ title: autogen.agentchat.contrib.vectordb.chromadb
     </h2>
 
 ```python
-ChromaVectorDB(
-    *,
-    client=None,
-    path: str = 'tmp/db',
-    embedding_function: Callable = None,
-    metadata: dict = None,
-    **kwargs
-)
+ChromaVectorDB(**kwargs)
 ```
 
     A vector database that uses ChromaDB as the backend.
@@ -27,178 +20,24 @@ ChromaVectorDB(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `client=None` |  |
-| `path` | str | The path to the vector database.<br/><br/>Default is `tmp/db`.<br/><br/>The default was `None` for version `&lt;=0.2.24`.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'tmp/db' |
-| `embedding_function` | Callable | The embedding function used to generate the vector representation of the documents.<br/><br/>Default is None, SentenceTransformerEmbeddingFunction("all-MiniLM-L6-v2") will be used.<br/><br/>**Type:** `Callable`<br/><br/>**Default:** None |
-| `metadata` | dict | The metadata of the vector database.<br/><br/>Default is None.<br/><br/>If None, it will use this setting: `\\{"hnsw:space": "ip", "hnsw:construction_ef": 30, "hnsw:M": 32}`.<br/><br/>For more details of the metadata, please refer to [distances](https://github.com/nmslib/hnswlib#supported-distances), [hnsw](https://github.com/chroma-core/chroma/blob/566bc80f6c8ee29f7d99b6322654f32183c368c4/chromadb/segment/impl/vector/local_hnsw.py#L184), and [ALGO_PARAMS](https://github.com/nmslib/hnswlib/blob/master/ALGO_PARAMS.md).<br/><br/>**Type:** `dict`<br/><br/>**Default:** None |
 | `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### create_collection
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.create_collection" class="headerlink" title="Permanent link"></a>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### active_collection
+<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.active_collection" class="headerlink" title="Permanent link"></a>
 
-```python
-create_collection(
-    self,
-    collection_name: str,
-    overwrite: bool = False,
-    get_or_create: bool = True
-) -> chromadb.api.models.Collection.Collection
-```
+    <br />
 
-    Create a collection in the vector database.
-    Case 1. if the collection does not exist, create the collection.
-    Case 2. the collection exists, if overwrite is True, it will overwrite the collection.
-    Case 3. the collection exists and overwrite is False, if get_or_create is True, it will get the collection,
-        otherwise it raise a ValueError.
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### embedding_function
+<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.embedding_function" class="headerlink" title="Permanent link"></a>
 
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `collection_name` | str | The name of the collection.<br/><br/>**Type:** `str` |
-| `overwrite` | bool | Whether to overwrite the collection if it exists.<br/><br/>Default is False.<br/><br/>**Type:** `bool`<br/><br/>**Default:** False |
-| `get_or_create` | bool | Whether to get the collection if it exists.<br/><br/>Default is True.<br/><br/>**Type:** `bool`<br/><br/>**Default:** True |
+    <br />
 
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `chromadb.api.models.Collection.Collection` | Collection \| The collection object. |
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### type
+<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.type" class="headerlink" title="Permanent link"></a>
 
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### delete_collection
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.delete_collection" class="headerlink" title="Permanent link"></a>
-
-```python
-delete_collection(self, collection_name: str) -> None
-```
-
-    Delete the collection from the vector database.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `collection_name` | str | The name of the collection.<br/><br/>**Type:** `str` |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `None` | None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_collection
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.get_collection" class="headerlink" title="Permanent link"></a>
-
-```python
-get_collection(self, collection_name: str = None) -> chromadb.api.models.Collection.Collection
-```
-
-    Get the collection from the vector database.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>If None, return the current active collection.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `chromadb.api.models.Collection.Collection` | Collection \| The collection object. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_docs_by_ids
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.get_docs_by_ids" class="headerlink" title="Permanent link"></a>
-
-```python
-get_docs_by_ids(
-    self,
-    ids: list[str | int] = None,
-    collection_name: str = None,
-    include=None,
-    **kwargs
-) -> list[autogen.agentchat.contrib.vectordb.base.Document]
-```
-
-    Retrieve documents from the collection of the vector database based on the ids.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `ids` | List[ItemID] | A list of document ids.<br/><br/>If None, will return all the documents.<br/><br/>Default is None.<br/><br/>**Type:** `list[str \| int]`<br/><br/>**Default:** None |
-| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
-| `include=None` |  |
-| `**kwargs` |  |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `list[autogen.agentchat.contrib.vectordb.base.Document]` | List[Document] \| The results. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### retrieve_docs
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.retrieve_docs" class="headerlink" title="Permanent link"></a>
-
-```python
-retrieve_docs(
-    self,
-    queries: list[str],
-    collection_name: str = None,
-    n_results: int = 10,
-    distance_threshold: float = -1,
-    **kwargs
-) -> list[list[tuple[autogen.agentchat.contrib.vectordb.base.Document, float]]]
-```
-
-    Retrieve documents from the collection of the vector database based on the queries.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `queries` | List[str] | A list of queries.<br/><br/>Each query is a string.<br/><br/>**Type:** `list[str]` |
-| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
-| `n_results` | int | The number of relevant documents to return.<br/><br/>Default is 10.<br/><br/>**Type:** `int`<br/><br/>**Default:** 10 |
-| `distance_threshold` | float | The threshold for the distance score, only distance smaller than it will be returned.<br/><br/>Don't filter with it if `&lt; 0`.<br/><br/>Default is -1.<br/><br/>**Type:** `float`<br/><br/>**Default:** -1 |
-| `**kwargs` |  |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `list[list[tuple[autogen.agentchat.contrib.vectordb.base.Document, float]]]` | QueryResults \| The query results. Each query result is a list of list of tuples containing the document and the distance. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### update_docs
-<a href="#autogen.agentchat.contrib.vectordb.chromadb.ChromaVectorDB.update_docs" class="headerlink" title="Permanent link"></a>
-
-```python
-update_docs(
-    self,
-    docs: list[autogen.agentchat.contrib.vectordb.base.Document],
-    collection_name: str = None
-) -> None
-```
-
-    Update documents in the collection of the vector database.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `docs` | List[Document] | A list of documents.<br/><br/>**Type:** `list[autogen.agentchat.contrib.vectordb.base.Document]` |
-| `collection_name` | str | The name of the collection.<br/><br/>Default is None.<br/><br/>**Type:** `str`<br/><br/>**Default:** None |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `None` | None |
-
-<br />
+    <br />

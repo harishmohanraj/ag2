@@ -28,23 +28,6 @@ calculate_mistral_cost(
 
 <br />
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
-#### tool_def_to_mistral
-<a href="#autogen.oai.mistral..tool_def_to_mistral" class="headerlink" title="Permanent link"></a>
-
-```python
-tool_def_to_mistral(tool_definitions: list[dict[str, typing.Any]]) -> list[dict[str, typing.Any]]
-```
-
-    Converts AutoGen tool definition to a mistral tool format
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `tool_definitions` | **Type:** `list[dict[str, typing.Any]]` |
-
-<br />
-
     <h2 id="autogen.oai.mistral.MistralAIClient" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
         <span class="doc doc-object-name doc-class-name">MistralAIClient</span>
@@ -64,91 +47,34 @@ MistralAIClient(**kwargs)
 |--|--|
 | `**kwargs` |  |
 
-### Static Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_usage
-<a href="#autogen.oai.mistral.MistralAIClient.get_usage" class="headerlink" title="Permanent link"></a>
-
-```python
-get_usage(response: openai.types.chat.chat_completion.ChatCompletion) -> dict
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` | **Type:** `openai.types.chat.chat_completion.ChatCompletion` |
-
-<br />
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### cost
 <a href="#autogen.oai.mistral.MistralAIClient.cost" class="headerlink" title="Permanent link"></a>
 
-```python
-cost(self, response) -> float
-```
+    <br />
 
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### create
 <a href="#autogen.oai.mistral.MistralAIClient.create" class="headerlink" title="Permanent link"></a>
 
-```python
-create(self, params: dict[str, typing.Any]) -> openai.types.chat.chat_completion.ChatCompletion
-```
+    <br />
 
-    
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### get_usage
+<a href="#autogen.oai.mistral.MistralAIClient.get_usage" class="headerlink" title="Permanent link"></a>
 
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict[str, typing.Any]` |
+    <br />
 
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### message_retrieval
 <a href="#autogen.oai.mistral.MistralAIClient.message_retrieval" class="headerlink" title="Permanent link"></a>
 
-```python
-message_retrieval(self, response: openai.types.chat.chat_completion.ChatCompletion) -> list[str] | list[openai.types.chat.chat_completion_message.ChatCompletionMessage]
-```
+    <br />
 
-    Retrieve the messages from the response.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` | **Type:** `openai.types.chat.chat_completion.ChatCompletion` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### parse_params
 <a href="#autogen.oai.mistral.MistralAIClient.parse_params" class="headerlink" title="Permanent link"></a>
 
-```python
-parse_params(self, params: dict[str, typing.Any]) -> dict[str, typing.Any]
-```
-
-    Loads the parameters for Mistral.AI API from the passed in parameters and returns a validated set. Checks types, ranges, and sets defaults
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict[str, typing.Any]` |
-
-<br />
+    <br />

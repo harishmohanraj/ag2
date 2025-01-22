@@ -10,7 +10,7 @@ title: autogen.cache.redis_cache
     </h2>
 
 ```python
-RedisCache(seed: str | int, redis_url: str)
+RedisCache(**kwargs)
 ```
 
     Implementation of AbstractCache using the Redis database.
@@ -36,70 +36,4 @@ RedisCache(seed: str | int, redis_url: str)
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `seed` | A seed or namespace for the cache.<br/><br/>This is used as a prefix for all cache keys.<br/><br/>**Type:** `str \| int` |
-| `redis_url` | The URL for the Redis server.<br/><br/>**Type:** `str` |
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### close
-<a href="#autogen.cache.redis_cache.RedisCache.close" class="headerlink" title="Permanent link"></a>
-
-```python
-close(self) -> None
-```
-
-    Close the Redis client.
-    
-    Perform any necessary cleanup, such as closing network connections.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get
-<a href="#autogen.cache.redis_cache.RedisCache.get" class="headerlink" title="Permanent link"></a>
-
-```python
-get(
-    self,
-    key: str,
-    default: Any | None = None
-) -> Any | None
-```
-
-    Retrieve an item from the Redis cache.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `key` | The key identifying the item in the cache.<br/><br/>**Type:** `str` |
-| `default` | The default value to return if the key is not found.<br/><br/>Defaults to None.<br/><br/>**Type:** `Any \| None`<br/><br/>**Default:** None |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `Any \| None` | The deserialized value associated with the key if found, else the default value. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### set
-<a href="#autogen.cache.redis_cache.RedisCache.set" class="headerlink" title="Permanent link"></a>
-
-```python
-set(
-    self,
-    key: str,
-    value: Any
-) -> None
-```
-
-    Set an item in the Redis cache.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `key` | The key under which the item is to be stored.<br/><br/>**Type:** `str` |
-| `value` | The value to be stored in the cache.<br/><br/>**Type:** `Any` |
-
-<br />
+| `**kwargs` |  |

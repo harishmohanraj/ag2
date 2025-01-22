@@ -10,19 +10,7 @@ title: autogen.agentchat.contrib.graph_rag.neo4j_graph_query_engine
     </h2>
 
 ```python
-Neo4jGraphQueryEngine(
-    host: str = 'bolt://localhost',
-    port: int = 7687,
-    database: str = 'neo4j',
-    username: str = 'neo4j',
-    password: str = 'neo4j',
-    llm: ForwardRef('LLM') | None = None,
-    embedding: ForwardRef('BaseEmbedding') | None = None,
-    entities: ForwardRef('TypeAlias') | None = None,
-    relations: ForwardRef('TypeAlias') | None = None,
-    schema: dict[str, str] | list['Triple'] | None = None,
-    strict: bool | None = False
-)
+Neo4jGraphQueryEngine(**kwargs)
 ```
 
     This class serves as a wrapper for a property graph query engine backed by LlamaIndex and Neo4j,
@@ -49,100 +37,12 @@ Neo4jGraphQueryEngine(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `host` | Neo4j hostname.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'bolt |
-| `port` | Neo4j port number.<br/><br/>**Type:** `int`<br/><br/>**Default:** 7687 |
-| `database` | Neo4j database name.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
-| `username` | Neo4j username.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
-| `password` | Neo4j password.<br/><br/>**Type:** `str`<br/><br/>**Default:** 'neo4j' |
-| `llm` | Language model to use for extracting triplets.<br/><br/>**Type:** `ForwardRef('LLM') \| None`<br/><br/>**Default:** None |
-| `embedding` | Embedding model to use constructing index and query<br/><br/>**Type:** `ForwardRef('BaseEmbedding') \| None`<br/><br/>**Default:** None |
-| `entities` | Custom suggested entities to include in the graph.<br/><br/>**Type:** `ForwardRef('TypeAlias') \| None`<br/><br/>**Default:** None |
-| `relations` | Custom suggested relations to include in the graph.<br/><br/>**Type:** `ForwardRef('TypeAlias') \| None`<br/><br/>**Default:** None |
-| `schema` | Custom schema to specify allowed relationships for each entity.<br/><br/>**Type:** `dict[str, str] \| list['Triple'] \| None`<br/><br/>**Default:** None |
-| `strict` | If false, allows for values outside of the input schema.<br/><br/>**Type:** `bool \| None`<br/><br/>**Default:** False |
+| `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### add_records
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_graph_query_engine.Neo4jGraphQueryEngine.add_records" class="headerlink" title="Permanent link"></a>
-
-```python
-add_records(self, new_records: list) -> bool
-```
-
-    Add new records to the knowledge graph. Must be local files.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `new_records` | List of new documents to add.<br/><br/>**Type:** `list` |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `bool` | bool: True if successful, False otherwise. |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### connect_db
 <a href="#autogen.agentchat.contrib.graph_rag.neo4j_graph_query_engine.Neo4jGraphQueryEngine.connect_db" class="headerlink" title="Permanent link"></a>
 
-```python
-connect_db(self) -> 
-```
-
-    Connect to an existing knowledge graph database.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### init_db
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_graph_query_engine.Neo4jGraphQueryEngine.init_db" class="headerlink" title="Permanent link"></a>
-
-```python
-init_db(self, input_doc: list[autogen.agentchat.contrib.graph_rag.document.Document] | None = None) -> 
-```
-
-    Build the knowledge graph with input documents.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `input_doc` | **Type:** `list[autogen.agentchat.contrib.graph_rag.document.Document] \| None`<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### query
-<a href="#autogen.agentchat.contrib.graph_rag.neo4j_graph_query_engine.Neo4jGraphQueryEngine.query" class="headerlink" title="Permanent link"></a>
-
-```python
-query(
-    self,
-    question: str,
-    n_results: int = 1,
-    **kwargs
-) -> autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult
-```
-
-    Query the property graph with a question using LlamaIndex chat engine.
-    We use the condense_plus_context chat mode
-    which condenses the conversation history and the user query into a standalone question,
-    and then build a context for the standadlone question
-    from the property graph to generate a response.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `question` | a human input question.<br/><br/>**Type:** `str` |
-| `n_results` | number of results to return.<br/><br/>**Type:** `int`<br/><br/>**Default:** 1 |
-| `**kwargs` |  |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult` | A GrapStoreQueryResult object containing the answer and related triplets. |
-
-<br />
+    <br />

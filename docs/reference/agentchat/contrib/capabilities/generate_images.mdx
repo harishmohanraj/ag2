@@ -10,12 +10,7 @@ title: autogen.agentchat.contrib.capabilities.generate_images
     </h2>
 
 ```python
-DalleImageGenerator(
-    llm_config: dict,
-    resolution: Literal['256x256', '512x512', '1024x1024', '1792x1024', '1024x1792'] = '1024x1024',
-    quality: Literal['standard', 'hd'] = 'standard',
-    num_images: int = 1
-)
+DalleImageGenerator(**kwargs)
 ```
 
     Generates images using OpenAI's DALL-E models.
@@ -28,46 +23,21 @@ DalleImageGenerator(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | llm config, must contain a valid dalle model and OpenAI API key in config_list.<br/><br/>**Type:** `dict` |
-| `resolution` | The resolution of the image you want to generate.<br/><br/>Must be one of "256x256", "512x512", "1024x1024", "1792x1024", "1024x1792".<br/><br/>**Type:** `Literal['256x256', '512x512', '1024x1024', '1792x1024', '1024x1792']`<br/><br/>**Default:** '1024x1024' |
-| `quality` | The quality of the image you want to generate.<br/><br/>Must be one of "standard", "hd".<br/><br/>**Type:** `Literal['standard', 'hd']`<br/><br/>**Default:** 'standard' |
-| `num_images` | The number of images to generate.<br/><br/>**Type:** `int`<br/><br/>**Default:** 1 |
+| `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### cache_key
 <a href="#autogen.agentchat.contrib.capabilities.generate_images.DalleImageGenerator.cache_key" class="headerlink" title="Permanent link"></a>
 
-```python
-cache_key(self, prompt: str) -> str
-```
+    <br />
 
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `prompt` | **Type:** `str` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### generate_image
 <a href="#autogen.agentchat.contrib.capabilities.generate_images.DalleImageGenerator.generate_image" class="headerlink" title="Permanent link"></a>
 
-```python
-generate_image(self, prompt: str) -> PIL.Image.Image
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `prompt` | **Type:** `str` |
-
-<br />
+    <br />
 
     <h2 id="autogen.agentchat.contrib.capabilities.generate_images.ImageGeneration" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
@@ -76,14 +46,7 @@ generate_image(self, prompt: str) -> PIL.Image.Image
     </h2>
 
 ```python
-ImageGeneration(
-    image_generator: autogen.agentchat.contrib.capabilities.generate_images.ImageGenerator,
-    cache: autogen.cache.abstract_cache_base.AbstractCache | None = None,
-    text_analyzer_llm_config: dict | None = None,
-    text_analyzer_instructions: str = 'In detail, please summarize the provided prompt to generate the image described in the TEXT.\nDO NOT include any advice. RESPOND like the following example:\nEXAMPLE: Blue background, 3D shapes, ...\n',
-    verbosity: int = 0,
-    register_reply_position: int = 2
-)
+ImageGeneration(**kwargs)
 ```
 
     This capability allows a ConversableAgent to generate images based on the message received from other Agents.
@@ -117,42 +80,7 @@ ImageGeneration(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `image_generator` | The image generator you would like to use to generate images.<br/><br/>**Type:** `autogen.agentchat.contrib.capabilities.generate_images.ImageGenerator` |
-| `cache` | The cache client to use to store and retrieve generated images.<br/><br/>If None, no caching will be used.<br/><br/>**Type:** `autogen.cache.abstract_cache_base.AbstractCache \| None`<br/><br/>**Default:** None |
-| `text_analyzer_llm_config` | The LLM config for the text analyzer.<br/><br/>If None, the LLM config will be retrieved from the agent you're adding the ability to.<br/><br/>**Type:** `dict \| None`<br/><br/>**Default:** None |
-| `text_analyzer_instructions` | Instructions provided to the TextAnalyzerAgent used to analyze incoming messages and extract the prompt for image generation.<br/><br/>The default instructions focus on summarizing the prompt.<br/><br/>You can customize the instructions to achieve more granular control over prompt extraction.<br/><br/>Example: 'Extract specific details from the message, like desired objects, styles, or backgrounds.'<br/><br/>**Type:** `str`<br/><br/>**Default:** 'In detail, please summarize the provided prompt to generate the image described in the TEXT.\nDO NOT include any advice. RESPOND like the following example |
-| `verbosity` | The verbosity level.<br/><br/>Defaults to 0 and must be greater than or equal to 0. The text analyzer llm calls will be silent if verbosity is less than 2.<br/><br/>**Type:** `int`<br/><br/>**Default:** 0 |
-| `register_reply_position` | The position of the reply function in the agent's list of reply functions.<br/><br/>This capability registers a new reply function to handle messages with image generation requests.<br/><br/>Defaults to 2 to place it after the check termination and human reply for a ConversableAgent.<br/><br/>**Type:** `int`<br/><br/>**Default:** 2 |
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### add_to_agent
-<a href="#autogen.agentchat.contrib.capabilities.generate_images.ImageGeneration.add_to_agent" class="headerlink" title="Permanent link"></a>
-
-```python
-add_to_agent(self, agent: autogen.agentchat.conversable_agent.ConversableAgent) -> 
-```
-
-    Adds the Image Generation capability to the specified ConversableAgent.
-    
-    This function performs the following modifications to the agent:
-    
-    1. Registers a reply function: A new reply function is registered with the agent to handle messages that
-       potentially request image generation. This function analyzes the message and triggers image generation if
-       necessary.
-    2. Creates an Agent (TextAnalyzerAgent): This is used to analyze messages for image generation requirements.
-    3. Updates System Message: The agent's system message is updated to include a message indicating the
-       capability to generate images has been added.
-    4. Updates Description: The agent's description is updated to reflect the addition of the Image Generation
-       capability. This might be helpful in certain use cases, like group chats.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `agent` | The ConversableAgent to add the capability to.<br/><br/>**Type:** `autogen.agentchat.conversable_agent.ConversableAgent` |
-
-<br />
+| `**kwargs` |  |
 
     <h2 id="autogen.agentchat.contrib.capabilities.generate_images.ImageGenerator" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
@@ -208,7 +136,7 @@ cache_key(self, prompt: str) -> str
 <a href="#autogen.agentchat.contrib.capabilities.generate_images.ImageGenerator.generate_image" class="headerlink" title="Permanent link"></a>
 
 ```python
-generate_image(self, prompt: str) -> PIL.Image.Image
+generate_image(self, prompt: str) -> Image
 ```
 
     Generates an image based on the provided prompt.
@@ -221,6 +149,6 @@ generate_image(self, prompt: str) -> PIL.Image.Image
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `PIL.Image.Image` | A PIL Image object representing the generated image. |
+| `Image` | A PIL Image object representing the generated image. |
 
 <br />

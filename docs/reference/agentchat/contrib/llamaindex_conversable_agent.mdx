@@ -10,12 +10,7 @@ title: autogen.agentchat.contrib.llamaindex_conversable_agent
     </h2>
 
 ```python
-LLamaIndexConversableAgent(
-    name: str,
-    llama_index_agent: AgentRunner,
-    description: str | None = None,
-    **kwargs
-)
+LLamaIndexConversableAgent(**kwargs)
 ```
 
     (In preview) A class for generic conversable agents which can be configured as assistant or user proxy.
@@ -33,7 +28,36 @@ LLamaIndexConversableAgent(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `name` | agent name.<br/><br/>**Type:** `str` |
-| `llama_index_agent` | llama index agent.<br/><br/>Please override this attribute if you want to reprogram the agent.<br/><br/>**Type:** `AgentRunner` |
-| `description` | a short description of the agent.<br/><br/>This description is used by other agents (e.g.<br/><br/>the GroupChatManager) to decide when to call upon this agent.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
 | `**kwargs` | Please refer to other kwargs in [ConversableAgent](../conversable_agent#init).<br/><br/> |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_CONFIG
+<a href="#autogen.agentchat.contrib.llamaindex_conversable_agent.LLamaIndexConversableAgent.DEFAULT_CONFIG" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_SUMMARY_METHOD
+<a href="#autogen.agentchat.contrib.llamaindex_conversable_agent.LLamaIndexConversableAgent.DEFAULT_SUMMARY_METHOD" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### DEFAULT_SUMMARY_PROMPT
+<a href="#autogen.agentchat.contrib.llamaindex_conversable_agent.LLamaIndexConversableAgent.DEFAULT_SUMMARY_PROMPT" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### MAX_CONSECUTIVE_AUTO_REPLY
+<a href="#autogen.agentchat.contrib.llamaindex_conversable_agent.LLamaIndexConversableAgent.MAX_CONSECUTIVE_AUTO_REPLY" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### a_initiate_chats
+<a href="#autogen.agentchat.contrib.llamaindex_conversable_agent.LLamaIndexConversableAgent.a_initiate_chats" class="headerlink" title="Permanent link"></a>
+
+    <br />

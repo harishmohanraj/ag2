@@ -111,6 +111,12 @@ Completion()
 
     <br />
 
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tune
+<a href="#autogen.oai.completion.Completion.tune" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
 ### Static Methods
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
@@ -338,46 +344,6 @@ test(
 | `agg_method='avg'` |  |
 | `return_responses_and_per_instance_result=False` |  |
 | `logging_level=30` |  |
-| `**config` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### tune
-<a href="#autogen.oai.completion.Completion.tune" class="headerlink" title="Permanent link"></a>
-
-```python
-tune(
-    data: list[dict],
-    metric: str,
-    mode: str,
-    eval_func: Callable,
-    log_file_name: str | None = None,
-    inference_budget: float | None = None,
-    optimization_budget: float | None = None,
-    num_samples: int | None = 1,
-    logging_level: int | None = 30,
-    **config
-) -> 
-```
-
-    Tune the parameters for the OpenAI API call.
-    
-    TODO: support parallel tuning with ray or spark.
-    TODO: support agg_method as in test
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `data` | The list of data points.<br/><br/>**Type:** `list[dict]` |
-| `metric` | The metric to optimize.<br/><br/>**Type:** `str` |
-| `mode` | The optimization mode, "min" or "max.<br/><br/>**Type:** `str` |
-| `eval_func` | The evaluation function for responses.<br/><br/>The function should take a list of responses and a data point as input, and return a dict of metrics.<br/><br/>For example,<br/><br/>**Type:** `Callable` |
-| `log_file_name` | **Type:** `str \| None`<br/><br/>**Default:** None |
-| `inference_budget` | **Type:** `float \| None`<br/><br/>**Default:** None |
-| `optimization_budget` | **Type:** `float \| None`<br/><br/>**Default:** None |
-| `num_samples` | **Type:** `int \| None`<br/><br/>**Default:** 1 |
-| `logging_level` | **Type:** `int \| None`<br/><br/>**Default:** 30 |
 | `**config` |  |
 
 <br />

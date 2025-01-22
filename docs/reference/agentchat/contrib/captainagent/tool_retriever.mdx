@@ -153,11 +153,7 @@ restart(self) ->
     </h2>
 
 ```python
-ToolBuilder(
-    corpus_root,
-    retriever='all-mpnet-base-v2',
-    type='default'
-)
+ToolBuilder(**kwargs)
 ```
 
     
@@ -165,9 +161,7 @@ ToolBuilder(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `corpus_root` |  |
-| `retriever='all-mpnet-base-v2'` |  |
-| `type='default'` |  |
+| `**kwargs` |  |
 
 ### Class Attributes
 
@@ -183,71 +177,20 @@ ToolBuilder(
 
     <br />
 
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### bind
 <a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.bind" class="headerlink" title="Permanent link"></a>
 
-```python
-bind(
-    self,
-    agent: autogen.agentchat.assistant_agent.AssistantAgent,
-    functions: str
-) -> 
-```
+    <br />
 
-    Binds the function to the agent so that agent is aware of it.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `agent` | **Type:** `autogen.agentchat.assistant_agent.AssistantAgent` |
-| `functions` | **Type:** `str` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### bind_user_proxy
 <a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.bind_user_proxy" class="headerlink" title="Permanent link"></a>
 
-```python
-bind_user_proxy(
-    self,
-    agent: autogen.agentchat.user_proxy_agent.UserProxyAgent,
-    tool_root: str | list
-) -> 
-```
+    <br />
 
-    Updates user proxy agent with a executor so that code executor can successfully execute function-related code.
-    Returns an updated user proxy.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `agent` | **Type:** `autogen.agentchat.user_proxy_agent.UserProxyAgent` |
-| `tool_root` | **Type:** `str \| list` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### retrieve
 <a href="#autogen.agentchat.contrib.captainagent.tool_retriever.ToolBuilder.retrieve" class="headerlink" title="Permanent link"></a>
 
-```python
-retrieve(
-    self,
-    query,
-    top_k=3
-) -> 
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `query` |  |
-| `top_k=3` |  |
-
-<br />
+    <br />

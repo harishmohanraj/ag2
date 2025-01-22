@@ -28,68 +28,6 @@ calculate_cohere_cost(
 
 <br />
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
-#### extract_to_cohere_tool_results
-<a href="#autogen.oai.cohere..extract_to_cohere_tool_results" class="headerlink" title="Permanent link"></a>
-
-```python
-extract_to_cohere_tool_results(
-    tool_call_id: str,
-    content_output: str,
-    all_tool_calls
-) -> list[dict[str, typing.Any]]
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `tool_call_id` | **Type:** `str` |
-| `content_output` | **Type:** `str` |
-| `all_tool_calls` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
-#### oai_messages_to_cohere_messages
-<a href="#autogen.oai.cohere..oai_messages_to_cohere_messages" class="headerlink" title="Permanent link"></a>
-
-```python
-oai_messages_to_cohere_messages(
-    messages: list[dict[str, Any]],
-    params: dict[str, Any],
-    cohere_params: dict[str, Any]
-) -> tuple[list[dict[str, typing.Any]], str, str]
-```
-
-    Convert messages from OAI format to Cohere's format.
-    We correct for any specific role orders and types.
-    
-    Parameters:
-        messages: list[Dict[str, Any]]: AutoGen messages
-        params: Dict[str, Any]:         AutoGen parameters dictionary
-        cohere_params: Dict[str, Any]:  Cohere parameters dictionary
-    
-    Returns:
-        List[Dict[str, Any]]:   Chat History messages
-        str:                    Preamble (system message)
-        str:                    Message (the final user message)
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `messages` | **Type:** `list[dict[str, Any]]` |
-| `params` | **Type:** `dict[str, Any]` |
-| `cohere_params` | **Type:** `dict[str, Any]` |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `tuple[list[dict[str, typing.Any]], str, str]` | List[Dict[str, Any]]: Chat History messages str: Preamble (system message) str: Message (the final user message) |
-
-<br />
-
     <h2 id="autogen.oai.cohere.CohereClient" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
         <span class="doc doc-object-name doc-class-name">CohereClient</span>
@@ -108,6 +46,14 @@ CohereClient(**kwargs)
 | Name | Description |
 |--|--|
 | `**kwargs` |  |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### create
+<a href="#autogen.oai.cohere.CohereClient.create" class="headerlink" title="Permanent link"></a>
+
+    <br />
 
 ### Static Methods
 
@@ -144,23 +90,6 @@ cost(self, response) -> float
 | Name | Description |
 |--|--|
 | `response` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### create
-<a href="#autogen.oai.cohere.CohereClient.create" class="headerlink" title="Permanent link"></a>
-
-```python
-create(self, params: dict) -> openai.types.chat.chat_completion.ChatCompletion
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict` |
 
 <br />
 

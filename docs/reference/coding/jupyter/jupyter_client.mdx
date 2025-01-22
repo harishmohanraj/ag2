@@ -20,6 +20,14 @@ JupyterClient(connection_info: JupyterConnectionInfo)
 |--|--|
 | `connection_info` | Connection information<br/><br/>**Type:** `JupyterConnectionInfo` |
 
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### get_kernel_client
+<a href="#autogen.coding.jupyter.jupyter_client.JupyterClient.get_kernel_client" class="headerlink" title="Permanent link"></a>
+
+    <br />
+
 ### Instance Methods
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
@@ -28,23 +36,6 @@ JupyterClient(connection_info: JupyterConnectionInfo)
 
 ```python
 delete_kernel(self, kernel_id: str) -> None
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `kernel_id` | **Type:** `str` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_kernel_client
-<a href="#autogen.coding.jupyter.jupyter_client.JupyterClient.get_kernel_client" class="headerlink" title="Permanent link"></a>
-
-```python
-get_kernel_client(self, kernel_id: str) -> autogen.coding.jupyter.jupyter_client.JupyterKernelClient
 ```
 
     
@@ -126,7 +117,7 @@ start_kernel(self, kernel_spec_name: str) -> str
     </h2>
 
 ```python
-JupyterKernelClient(websocket: "'WebSocket'")
+JupyterKernelClient(**kwargs)
 ```
 
     (Experimental) A client for communicating with a Jupyter kernel.
@@ -134,7 +125,7 @@ JupyterKernelClient(websocket: "'WebSocket'")
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `websocket` | **Type:** `"'WebSocket'"` |
+| `**kwargs` |  |
 
 ### Class Attributes
 
@@ -144,55 +135,20 @@ JupyterKernelClient(websocket: "'WebSocket'")
 
     <br />
 
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### execute
 <a href="#autogen.coding.jupyter.jupyter_client.JupyterKernelClient.execute" class="headerlink" title="Permanent link"></a>
 
-```python
-execute(
-    self,
-    code: str,
-    timeout_seconds: float | None = None
-) -> ExecutionResult
-```
+    <br />
 
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `code` | **Type:** `str` |
-| `timeout_seconds` | **Type:** `float \| None`<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### stop
 <a href="#autogen.coding.jupyter.jupyter_client.JupyterKernelClient.stop" class="headerlink" title="Permanent link"></a>
 
-```python
-stop(self) -> None
-```
+    <br />
 
-    
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### wait_for_ready
 <a href="#autogen.coding.jupyter.jupyter_client.JupyterKernelClient.wait_for_ready" class="headerlink" title="Permanent link"></a>
 
-```python
-wait_for_ready(self, timeout_seconds: float | None = None) -> bool
-```
-
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `timeout_seconds` | **Type:** `float \| None`<br/><br/>**Default:** None |
-
-<br />
+    <br />

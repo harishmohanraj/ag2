@@ -10,11 +10,7 @@ title: autogen.agentchat.contrib.capabilities.teachability
     </h2>
 
 ```python
-MemoStore(
-    verbosity: int | None = 0,
-    reset: bool | None = False,
-    path_to_db_dir: str | None = './tmp/teachable_agent_db'
-)
+MemoStore(**kwargs)
 ```
 
     Provides memory storage and retrieval for a teachable agent, using a vector database.
@@ -26,110 +22,45 @@ MemoStore(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `verbosity` | **Type:** `int \| None`<br/><br/>**Default:** 0 |
-| `reset` | **Type:** `bool \| None`<br/><br/>**Default:** False |
-| `path_to_db_dir` | **Type:** `str \| None`<br/><br/>**Default:** './tmp/teachable_agent_db' |
+| `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### add_input_output_pair
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.add_input_output_pair" class="headerlink" title="Permanent link"></a>
 
-```python
-add_input_output_pair(
-    self,
-    input_text: str,
-    output_text: str
-) -> 
-```
+    <br />
 
-    Adds an input-output pair to the vector DB.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `input_text` | **Type:** `str` |
-| `output_text` | **Type:** `str` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### get_nearest_memo
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.get_nearest_memo" class="headerlink" title="Permanent link"></a>
 
-```python
-get_nearest_memo(self, query_text: str) -> 
-```
+    <br />
 
-    Retrieves the nearest memo to the given query text.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `query_text` | **Type:** `str` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### get_related_memos
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.get_related_memos" class="headerlink" title="Permanent link"></a>
 
-```python
-get_related_memos(
-    self,
-    query_text: str,
-    n_results: int,
-    threshold: int | float
-) -> 
-```
+    <br />
 
-    Retrieves memos that are related to the given query text within the specified distance threshold.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `query_text` | **Type:** `str` |
-| `n_results` | **Type:** `int` |
-| `threshold` | **Type:** `int \| float` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### list_memos
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.list_memos" class="headerlink" title="Permanent link"></a>
 
-```python
-list_memos(self) -> 
-```
+    <br />
 
-    Prints the contents of MemoStore.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### prepopulate
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.prepopulate" class="headerlink" title="Permanent link"></a>
 
-```python
-prepopulate(self) -> 
-```
+    <br />
 
-    Adds a few arbitrary examples to the vector DB, just to make retrieval less trivial.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### reset_db
 <a href="#autogen.agentchat.contrib.capabilities.teachability.MemoStore.reset_db" class="headerlink" title="Permanent link"></a>
 
-```python
-reset_db(self) -> 
-```
-
-    Forces immediate deletion of the DB's contents, in memory and on disk.
-
-<br />
+    <br />
 
     <h2 id="autogen.agentchat.contrib.capabilities.teachability.Teachability" class="doc doc-heading">
         <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>

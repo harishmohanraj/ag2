@@ -177,7 +177,7 @@ parse_image(image_url: str) -> tuple[bytes, str]
     </h2>
 
 ```python
-BedrockClient(**kwargs: Any)
+BedrockClient(**kwargs)
 ```
 
     Client for Amazon's Bedrock Converse API.
@@ -187,111 +187,42 @@ BedrockClient(**kwargs: Any)
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `**kwargs` | **Type:** `Any` |
+| `**kwargs` |  |
 
-### Static Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_usage
-<a href="#autogen.oai.bedrock.BedrockClient.get_usage" class="headerlink" title="Permanent link"></a>
-
-```python
-get_usage(response) -> dict
-```
-
-    Get the usage of tokens and their cost information.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
-
-### Instance Methods
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### cost
 <a href="#autogen.oai.bedrock.BedrockClient.cost" class="headerlink" title="Permanent link"></a>
 
-```python
-cost(self, response: ChatCompletion) -> float
-```
+    <br />
 
-    Calculate the cost of the response.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` | **Type:** `ChatCompletion` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### create
 <a href="#autogen.oai.bedrock.BedrockClient.create" class="headerlink" title="Permanent link"></a>
 
-```python
-create(self, params) -> openai.types.chat.chat_completion.ChatCompletion
-```
+    <br />
 
-    Run Amazon Bedrock inference and return AutoGen response
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### get_usage
+<a href="#autogen.oai.bedrock.BedrockClient.get_usage" class="headerlink" title="Permanent link"></a>
 
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` |  |
+    <br />
 
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### message_retrieval
 <a href="#autogen.oai.bedrock.BedrockClient.message_retrieval" class="headerlink" title="Permanent link"></a>
 
-```python
-message_retrieval(self, response) -> 
-```
+    <br />
 
-    Retrieve the messages from the response.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `response` |  |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### parse_custom_params
 <a href="#autogen.oai.bedrock.BedrockClient.parse_custom_params" class="headerlink" title="Permanent link"></a>
 
-```python
-parse_custom_params(self, params: dict[str, Any]) -> 
-```
+    <br />
 
-    Parses custom parameters for logic in this client class
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict[str, Any]` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### parse_params
 <a href="#autogen.oai.bedrock.BedrockClient.parse_params" class="headerlink" title="Permanent link"></a>
 
-```python
-parse_params(self, params: dict[str, Any]) -> tuple[dict[str, typing.Any], dict[str, typing.Any]]
-```
-
-    Loads the valid parameters required to invoke Bedrock Converse
-    Returns a tuple of (base_params, additional_params)
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `params` | **Type:** `dict[str, Any]` |
-
-<br />
+    <br />

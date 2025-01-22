@@ -10,15 +10,7 @@ title: autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine
     </h2>
 
 ```python
-FalkorGraphQueryEngine(
-    name: str,
-    host: str = '127.0.0.1',
-    port: int = 6379,
-    username: str | None = None,
-    password: str | None = None,
-    model: ForwardRef('GenerativeModel') | None = None,
-    ontology: ForwardRef('Ontology') | None = None
-)
+FalkorGraphQueryEngine(**kwargs)
 ```
 
     This is a wrapper for FalkorDB KnowledgeGraph.
@@ -31,99 +23,36 @@ FalkorGraphQueryEngine(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `name` | Knowledge graph name.<br/><br/>**Type:** `str` |
-| `host` | FalkorDB hostname.<br/><br/>**Type:** `str`<br/><br/>**Default:** '127.0.0.1' |
-| `port` | FalkorDB port number.<br/><br/>**Type:** `int`<br/><br/>**Default:** 6379 |
-| `username` | FalkorDB username.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
-| `password` | FalkorDB password.<br/><br/>**Type:** `str \| None`<br/><br/>**Default:** None |
-| `model` | LLM model to use for FalkorDB to build and retrieve from the graph, default to use OAI gpt-4o.<br/><br/>**Type:** `ForwardRef('GenerativeModel') \| None`<br/><br/>**Default:** None |
-| `ontology` | FalkorDB knowledge graph schema/ontology, https://github.com/FalkorDB/GraphRAG-SDK/blob/main/graphrag_sdk/ontology.py If None, FalkorDB will auto generate an ontology from the input docs.<br/><br/>**Type:** `ForwardRef('Ontology') \| None`<br/><br/>**Default:** None |
+| `**kwargs` |  |
 
-### Instance Methods
+### Class Attributes
 
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### add_records
 <a href="#autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine.add_records" class="headerlink" title="Permanent link"></a>
 
-```python
-add_records(self, new_records: list[autogen.agentchat.contrib.graph_rag.document.Document]) -> bool
-```
+    <br />
 
-    
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `new_records` | **Type:** `list[autogen.agentchat.contrib.graph_rag.document.Document]` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### connect_db
 <a href="#autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine.connect_db" class="headerlink" title="Permanent link"></a>
 
-```python
-connect_db(self) -> 
-```
+    <br />
 
-    Connect to an existing knowledge graph.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### delete
 <a href="#autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine.delete" class="headerlink" title="Permanent link"></a>
 
-```python
-delete(self) -> bool
-```
+    <br />
 
-    Delete graph and its data from database.
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### init_db
 <a href="#autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine.init_db" class="headerlink" title="Permanent link"></a>
 
-```python
-init_db(self, input_doc: list[autogen.agentchat.contrib.graph_rag.document.Document]) -> 
-```
+    <br />
 
-    Build the knowledge graph with input documents.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `input_doc` | **Type:** `list[autogen.agentchat.contrib.graph_rag.document.Document]` |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### query
 <a href="#autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine.query" class="headerlink" title="Permanent link"></a>
 
-```python
-query(
-    self,
-    question: str,
-    n_results: int = 1,
-    **kwargs
-) -> autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult
-```
-
-    Query the knowledge graph with a question and optional message history.
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `question` | a human input question.<br/><br/>**Type:** `str` |
-| `n_results` | number of returned results.<br/><br/>**Type:** `int`<br/><br/>**Default:** 1 |
-| `**kwargs` |  |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| `autogen.agentchat.contrib.graph_rag.graph_query_engine.GraphStoreQueryResult` | FalkorGraphQueryResult |
-
-<br />
+    <br />
