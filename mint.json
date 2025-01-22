@@ -543,7 +543,6 @@
         {
           "group": "Recent posts",
           "pages": [
-            "blog/2025-01-22-Tools-ChatContext-Dependency-Injection/index",
             "blog/2025-01-10-WebSockets/index",
             "blog/2025-01-09-RealtimeAgent-over-WebRTC/index",
             "blog/2025-01-08-RealtimeAgent-over-websocket/index",
