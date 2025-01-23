@@ -1,3 +1,21 @@
+*This page is no longer necessary*
+
+Replaced by these pages, in order:
+- installing-ag2.md
+- llm-configuration.md
+- conversable-agent.md
+- human-in-the-loop.md
+- many-agents.md
+- groupchat.md
+- swarm.md
+- tools.md
+- structured-outputs.md
+- ending-a-chat.md
+
+
+
+-- BELOW CONTENT MOVED INTO MD FILES --
+
 In this guide, you'll learn how to create AG2 agents and get them to work together.
 
 ## Before we get started...
