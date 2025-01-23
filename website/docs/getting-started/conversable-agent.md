@@ -1,8 +1,10 @@
 ### GitHub Codespaces
 
-Before we jump into some code, each code block will have a button that allows you to open it in GitHub Codespaces and start playing with AG2 yourself, inside a fully configured environment.
+Before we jump into some code, each code block will have a button that opens it in GitHub Codespaces so you can start playing with AG2 inside a fully configured environment.
 
-Add an OPENAI_API_KEY secret to your GitHub Codespaces so your agents can use an LLM. See the [instructions here](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces).
+Add an `OPENAI_API_KEY` secret to your GitHub Codespaces so your agents can use an LLM. See the [instructions here](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces).
+
+If you want to run it on your machine, just follow the previous installing AG2 and LLM configuration steps.
 
 # Say hello to ConversableAgent
 
