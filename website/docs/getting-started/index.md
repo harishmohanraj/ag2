@@ -5,7 +5,7 @@ Replaced by these pages, in order:
 - llm-configuration.md
 - conversable-agent.md
 - human-in-the-loop.md
-- many-agents.md
+- orchestrations.md
 - groupchat.md
 - swarm.md
 - tools.md

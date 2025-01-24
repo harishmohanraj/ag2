@@ -201,6 +201,9 @@ false
 ```
 The same occurred for the other 3rd party tool and function, with all credentials silently injected.
 
-### Need more examples?
-
+### More Tool with Dependency Injection examples
 See the [Tools with Dependency Injection](https://docs.ag2.ai/notebooks/tools_dependency_injection) notebook.
+
+### API
+- [BaseContext](TODO)
+- [Depends](TODO)

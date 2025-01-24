@@ -401,3 +401,13 @@ The command line code executor does not keep any state in memory between executi
 Contrast to the command line code executor, the Jupyter code executor runs all code blocks in the same Jupyter kernel, which keeps the state in memory between executions. See the topic page for [Jupyter Code Executor](/docs/topics/code-execution/jupyter-code-executor).
 
 The choice between command line and Jupyter code executor depends on the nature of the code blocks in agents' conversation. If each code block is a "script" that does not use variables from previous code blocks, the command line code executor is a good choice. If some code blocks contain expensive computations (e.g., training a machine learning model and loading a large amount of data), and you want to keep the state in memory to avoid repeated computations, the Jupyter code executor is a better choice.
+
+### More Code Execution examples
+- [Task Solving with Code Generation, Execution, and Debugging](https://docs.ag2.ai/notebooks/agentchat_auto_feedback_from_code_execution)
+- [Auto-Generated Agent Chat: Task Solving with Code Gen, Execution, Debugging & Human Feedback](https://docs.ag2.ai/notebooks/agentchat_human_feedback)
+
+### API
+- [ConversableAgent.code_execution_config](TODO)
+- [LocalCommandLineCodeExecutor](TODO)
+- [DockerCommandLineCodeExecutor](TODO)
+- [jupyter.JupyterCodeExecutor](TODO)

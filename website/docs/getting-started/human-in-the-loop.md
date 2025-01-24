@@ -42,4 +42,4 @@ the_human.initiate_chat(recipient=lesson_planner, message="Today, let's introduc
 
 2. Our `the_human` agent starts a conversation by sending a message to `lesson_planner`. An agent's `initiate_chat` method is used to start a conversation between two agents.
 
-Next > many-agents.md
+Next > orchestrations.md

@@ -12,16 +12,16 @@ In this walk-through of a customer service workflow, we will utilize three of th
 - Conditional handoffs
 
 #### Visualizing a Swarm
-It's useful to draw your agents, flows, context variables, and tools.
+It's useful to draw your agents, flows, context variables, and tools and then create the swarm based on the diagram.
 
 This is the scenario we will run through, with customers able to enquire about their orders. However, we will make sure that they are authenticated to do so.
 
-![Swarm Enhanced Demonstration](./assets/swarm_enhanced_01.png)
+![Swarm Enhanced Demonstration](./assets/swarm-enhanced-01.png)
 
 Key aspects of this swarm are:
 
-1. System messages are customised, incorporating the context of the workflow
-2. A nested chat handles the order retrieval and summarisation
+1. System messages are customized, incorporating the context of the workflow
+2. A nested chat handles the order retrieval and summarization
 3. Handoffs are conditional, only being available when they are relevant
 
 #### Setting up
@@ -32,8 +32,8 @@ import os
 from typing import Any, Dict, List
 
 from autogen import (
-    AFTER_WORK,
-    ON_CONDITION,
+    AfterWork,
+    OnCondition,
     UpdateSystemMessage,
     AfterWorkOption,
     ConversableAgent,
@@ -218,7 +218,7 @@ Logged in: {logged_in}
 Enquiring for Order ID: {order_id}
 """
 
-order_triage_agent = SwarmAgent(
+order_triage_agent = ConversableAgent(
     name="order_triage_agent",
     update_agent_state_before_reply=[
         UpdateSystemMessage(order_triage_prompt),
@@ -229,7 +229,7 @@ order_triage_agent = SwarmAgent(
 
 authentication_prompt = "You are an authentication agent that verifies the identity of the customer."
 
-authentication_agent = SwarmAgent(
+authentication_agent = ConversableAgent(
     name="authentication_agent",
     system_message=authentication_prompt,
     functions=[login_customer_by_username],
@@ -248,7 +248,7 @@ Logged in: {logged_in}
 Enquiring for Order ID: {order_id}
 """
 
-order_mgmt_agent = SwarmAgent(
+order_mgmt_agent = ConversableAgent(
     name="order_mgmt_agent",
     update_agent_state_before_reply=[
         UpdateSystemMessage(order_management_prompt),
@@ -260,9 +260,9 @@ order_mgmt_agent = SwarmAgent(
 #### Nested chats
 For tasks that require a separate AG2 chat to occur, nested chats are a great option. This is the second enhanced feature we're covering, nested chats as hand-offs.
 
-In our scenario, we want to be able to find out the details of an order if a customer asks. To do this we need a couple of agents, one with access to the order database, to work together to retrieve and summarise the order details.
+In our scenario, we want to be able to find out the details of an order if a customer asks. To do this we need a couple of agents, one with access to the order database, to work together to retrieve and summarize the order details.
 
-Our nested chats are setup as a queue of two chats, the first is for the `order_retrieval_agent` who will extract the order information from the database and pass the details of it on to the second chat. The `order_summariser_agent` uses their LLM to format that and return it to the Swarm.
+Our nested chats are setup as a queue of two chats, the first is for the `order_retrieval_agent` who will extract the order information from the database and pass the details of it on to the second chat. The `order_summarizer_agent` uses their LLM to format that and return it to the Swarm.
 
 ```python
 # NESTED CHAT - Delivery Status
@@ -272,9 +272,9 @@ order_retrieval_agent = ConversableAgent(
     llm_config=llm_config,
 )
 
-order_summariser_agent = ConversableAgent(
-    name="order_summariser_agent",
-    system_message="You are an order summariser agent that provides a summary of the order details.",
+order_summarizer_agent = ConversableAgent(
+    name="order_summarizer_agent",
+    system_message="You are an order summarizer agent that provides a summary of the order details.",
     llm_config=llm_config,
 )
 
@@ -297,8 +297,8 @@ nested_chat_one = {
 }
 
 nested_chat_two = {
-    "recipient": order_summariser_agent,
-    "message": "Summarise the order details provided in a tabulated, text-based, order sheet format",
+    "recipient": order_summarizer_agent,
+    "message": "Summarize the order details provided in a tabulated, text-based, order sheet format",
     "max_turns": 1,
     "summary_method": "last_msg",
 }
@@ -318,52 +318,52 @@ Here we can see the use of context variable keys in the `available` parameter as
 # HANDOFFS
 order_triage_agent.register_hand_off(
     [
-        ON_CONDITION(
+        OnCondition(
             target=authentication_agent,
             condition="The customer is not logged in, authenticate the customer.",
             available="requires_login",
         ),
-        ON_CONDITION(
+        OnCondition(
             target=order_mgmt_agent,
             condition="The customer is logged in, continue with the order triage.",
             available="logged_in",
         ),
-        AFTER_WORK(AfterWorkOption.REVERT_TO_USER),
+        AfterWork(AfterWorkOption.REVERT_TO_USER),
     ]
 )
 
 authentication_agent.register_hand_off(
     [
-        ON_CONDITION(
+        OnCondition(
             target=order_triage_agent,
             condition="The customer is logged in, continue with the order triage.",
             available="logged_in",
         ),
-        AFTER_WORK(AfterWorkOption.REVERT_TO_USER),
+        AfterWork(AfterWorkOption.REVERT_TO_USER),
     ]
 )
 
 
-def has_order_in_context(agent: SwarmAgent, messages: List[Dict[str, Any]]) -> bool:
+def has_order_in_context(agent: ConversableAgent, messages: List[Dict[str, Any]]) -> bool:
     return agent.get_context("has_order_id")
 
 
 order_mgmt_agent.register_hand_off(
     [
-        ON_CONDITION(
+        OnCondition(
             target={
                 "chat_queue": chat_queue,
             },
             condition="Retrieve the status of the order",
             available=has_order_in_context,
         ),
-        ON_CONDITION(
+        OnCondition(
             target=authentication_agent,
             condition="The customer is not logged in, authenticate the customer.",
             available="requires_login",
         ),
-        ON_CONDITION(target=order_triage_agent, condition="The customer has no more enquiries about this order."),
-        AFTER_WORK(AfterWorkOption.REVERT_TO_USER),
+        OnCondition(target=order_triage_agent, condition="The customer has no more enquiries about this order."),
+        AfterWork(AfterWorkOption.REVERT_TO_USER),
     ]
 )
 ```
@@ -672,16 +672,16 @@ It looks like order TR13845 for a mattress has been shipped. The shipping addres
 Starting a new chat....
 
 ********************************************************************************
-nested_chat_order_mgmt_agent_1 (to order_summariser_agent):
+nested_chat_order_mgmt_agent_1 (to order_summarizer_agent):
 
-Summarise the order details provided in a tabulated, text-based, order sheet format
+Summarize the order details provided in a tabulated, text-based, order sheet format
 Context:
 It looks like order TR13845 for a mattress has been shipped. The shipping address for this order is 123 Main St, State College, PA 12345. If you need further details about this order, just let me know!
 
 --------------------------------------------------------------------------------
 
 >>>>>>>> USING AUTO REPLY...
-order_summariser_agent (to nested_chat_order_mgmt_agent_1):
+order_summarizer_agent (to nested_chat_order_mgmt_agent_1):
 
 '''
 Order Summary:
@@ -721,7 +721,7 @@ If you have any more questions or need further assistance, feel free to ask!
 --------------------------------------------------------------------------------
 ```
 
-Our nested chats queue ran, with the `order_retrieval_agent` validating and retrieving the order and the `order_summariser_agent` taking those details and summarizing them before returning them to the Swarm.
+Our nested chats queue ran, with the `order_retrieval_agent` validating and retrieving the order and the `order_summarizer_agent` taking those details and summarizing them before returning them to the Swarm.
 
 Finally, with no more queries we return back to the triage agent and the workflow is complete.
 
@@ -761,16 +761,21 @@ Using the three enhanced features of AG2's Swarm, we were able to control the fl
 Here's the flow above.
 
 At the beginning, we weren't logged in and there was only one path.
-![Swarm Enhanced Demonstration](./assets/swarm_enhanced_02.png)
+![Swarm Enhanced Demonstration](./assets/swarm-enhanced-02.png)
 
 After we logged in, we needed to get the order id.
-![Swarm Enhanced Demonstration](./assets/swarm_enhanced_03.png)
+![Swarm Enhanced Demonstration](./assets/swarm-enhanced-03.png)
 
 With the order id, we can handle order enquiries and retrieve order details.
-![Swarm Enhanced Demonstration](./assets/swarm_enhanced_04.png)
+![Swarm Enhanced Demonstration](./assets/swarm-enhanced-04.png)
 
-
-
-### Need more examples
+### More Swarm examples
 - [Introduction to Swarm notebook](https://docs.ag2.ai/notebooks/agentchat_swarm)
 - [Swarm with GraphRAG notebook](https://docs.ag2.ai/notebooks/agentchat_swarm_graphrag_trip_planner)
+
+### API
+
+- [initiate_swarm_chat](TODO)
+- [OnCondition](TODO)
+- [AfterWork](TODO)
+- [UpdateSystemMessage](TODO)
