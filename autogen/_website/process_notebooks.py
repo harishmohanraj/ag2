@@ -902,7 +902,7 @@ def add_authors_and_social_img_to_blog_posts(website_dir: Path) -> None:
             new_content = f"{front_matter_string}\n{social_img_html}\n{authors_html}\n{content}"
 
             file_path.write_text(f"{new_content}\n", encoding="utf-8")
-            print(f"Authors info and social share image checked in {file_path}")
+            # print(f"Authors info and social share image checked in {file_path}")
 
         except Exception as e:
             print(f"Error processing {file_path}: {e}")
@@ -1031,7 +1031,7 @@ def main() -> None:
         # Post-processing steps after all notebooks are handled
         if not args.dry_run:
             copy_examples_mdx_files(args.website_directory)
-            update_navigation_with_notebooks(args.website_directory)
+            # update_navigation_with_notebooks(args.website_directory)
             fix_internal_references_in_mdx_files(args.website_directory)
             add_authors_and_social_img_to_blog_posts(args.website_directory)
 
