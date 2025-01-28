@@ -1,8 +1,10 @@
-# Enhanced Swarm
+---
+title: Enhanced Swarm
+---
 
-::tip
+<Tip>
 If you haven't had a chance to read about or use AG2's Swarm orchestration, see the [Getting Started](TODO) introduction to Swarm and the [Swarm documentation]().
-::
+</Tip>
 
 You can build complex, yet flexible, workflows using AG2's Swarm orchestration.
 
@@ -127,9 +129,9 @@ In Swarms, functions can be used to handle transitions to the next agent as well
 
 Later we will see the use of the `available` parameter in an OnCondition hand-off to determine if a hand-off is made available for evaluation by the LLM. As that parameter takes a context variable that must be equivalent to `True`, we use two context variable keys to control authentication hand-offs, `logged_in` and `requires_login`, which have alternating boolean values.
 
-::tip
+<Tip>
 If you are updating context variables in a function, be sure to return it in the `SwarmResult` so the shared context variables can be updated.
-::
+</Tip>
 
 ```python
 # ORDER FUNCTIONS
