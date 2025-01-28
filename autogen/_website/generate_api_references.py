@@ -158,7 +158,7 @@ def convert_md_to_mdx(input_dir: Path) -> None:
 
         # Remove original .md file
         md_file.unlink()
-        print(f"Converted: {md_file} -> {mdx_file}")
+        # print(f"Converted: {md_file} -> {mdx_file}")
 
 
 def get_mdx_files(directory: Path) -> list[str]:
