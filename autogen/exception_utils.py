@@ -1,4 +1,4 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -6,20 +6,25 @@
 # SPDX-License-Identifier: MIT
 from typing import Any
 
+from .doc_utils import export_module
+
 __all__ = [
     "AgentNameConflict",
     "InvalidCarryOverType",
+    "ModelToolNotSupportedError",
     "NoEligibleSpeaker",
     "SenderRequired",
     "UndefinedNextAgent",
 ]
 
 
+@export_module("autogen")
 class AgentNameConflict(Exception):  # noqa: N818
     def __init__(self, msg: str = "Found multiple agents with the same name.", *args: Any, **kwargs: Any):
         super().__init__(msg, *args, **kwargs)
 
 
+@export_module("autogen")
 class NoEligibleSpeaker(Exception):  # noqa: N818
     """Exception raised for early termination of a GroupChat."""
 
@@ -28,6 +33,7 @@ class NoEligibleSpeaker(Exception):  # noqa: N818
         super().__init__(self.message)
 
 
+@export_module("autogen")
 class SenderRequired(Exception):  # noqa: N818
     """Exception raised when the sender is required but not provided."""
 
@@ -36,6 +42,7 @@ class SenderRequired(Exception):  # noqa: N818
         super().__init__(self.message)
 
 
+@export_module("autogen")
 class InvalidCarryOverType(Exception):  # noqa: N818
     """Exception raised when the carryover type is invalid."""
 
@@ -46,6 +53,7 @@ class InvalidCarryOverType(Exception):  # noqa: N818
         super().__init__(self.message)
 
 
+@export_module("autogen")
 class UndefinedNextAgent(Exception):  # noqa: N818
     """Exception raised when the provided next agents list does not overlap with agents in the group."""
 
@@ -55,9 +63,7 @@ class UndefinedNextAgent(Exception):  # noqa: N818
 
 
 class ModelToolNotSupportedError(Exception):
-    """
-    Exception raised when attempting to use tools with models that do not support them.
-    """
+    """Exception raised when attempting to use tools with models that do not support them."""
 
     def __init__(
         self,

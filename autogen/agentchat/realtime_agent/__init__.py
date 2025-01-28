@@ -1,11 +1,18 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 
+from .audio_adapters import TwilioAudioAdapter, WebSocketAudioAdapter
 from .function_observer import FunctionObserver
 from .realtime_agent import RealtimeAgent
 from .realtime_observer import RealtimeObserver
-from .twilio_audio_adapter import TwilioAudioAdapter
-from .websocket_audio_adapter import WebSocketAudioAdapter
+from .realtime_swarm import register_swarm
 
-__all__ = ["FunctionObserver", "RealtimeAgent", "RealtimeObserver", "TwilioAudioAdapter", "WebSocketAudioAdapter"]
+__all__ = [
+    "FunctionObserver",
+    "RealtimeAgent",
+    "RealtimeObserver",
+    "TwilioAudioAdapter",
+    "WebSocketAudioAdapter",
+    "register_swarm",
+]

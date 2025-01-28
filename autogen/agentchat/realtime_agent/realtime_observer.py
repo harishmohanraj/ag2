@@ -1,14 +1,16 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 
 from abc import ABC, abstractmethod
 from logging import Logger, getLogger
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Optional
 
 from anyio import Event
 
-from .realtime_client import RealtimeClientProtocol
+from ...doc_utils import export_module
+from .clients.realtime_client import RealtimeClientProtocol
+from .realtime_events import RealtimeEvent
 
 if TYPE_CHECKING:
     from .realtime_agent import RealtimeAgent
@@ -18,6 +20,7 @@ __all__ = ["RealtimeObserver"]
 global_logger = getLogger(__name__)
 
 
+@export_module("autogen.agentchat.realtime_agent")
 class RealtimeObserver(ABC):
     """Observer for the OpenAI Realtime API."""
 
@@ -28,7 +31,7 @@ class RealtimeObserver(ABC):
             logger (Logger): The logger for the observer.
         """
         self._ready_event = Event()
-        self._agent: Optional["RealtimeAgent"] = None
+        self._agent: Optional[RealtimeAgent] = None
         self._logger = logger
 
     @property
@@ -84,7 +87,7 @@ class RealtimeObserver(ABC):
         await self._ready_event.wait()
 
     @abstractmethod
-    async def on_event(self, event: dict[str, Any]) -> None:
+    async def on_event(self, event: RealtimeEvent) -> None:
         """Handle an event from the OpenAI Realtime API.
 
         Args:
