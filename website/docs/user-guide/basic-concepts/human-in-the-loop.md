@@ -1,0 +1,45 @@
+# Human in the loop
+
+If the previous ConversableAgent example you were able to chat with the agent and this is because another agent was automatically created to represent you, the human in the loop, when using an agent's `run` method.
+
+As you build your own workflows, you'll want to create your own *human in the loop* agents and decide if and how to use them. To do so, simply use the ConversableAgent and set the `human_input_mode` to `ALWAYS`.
+
+Let's start to build a more useful scenario, a classroom lesson planner, and create our human agent.
+
+--SNIPPET: humanintheloop.py
+
+```python
+# TEMPORARY, THIS WILL BE REPLACED BY ABOVE SNIPPET
+
+from autogen import ConversableAgent
+llm_config = {"model": "gpt-4o-mini"}
+
+planner_system_message = """You are a classroom lesson agent.
+Given a topic, write a lesson plan for a fourth grade class.
+Use the following format:
+<title>Lesson plan title</title>
+<learning_objectives>Key learning objectives</learning_objectives>
+<script>How to introduce the topic to the kids</script>
+"""
+
+lesson_planner = ConversableAgent(
+    name="lesson_agent",
+    llm_config=llm_config,
+    system_message=planner_system_message,
+)
+
+# 1. Create our human input agent
+the_human = ConversableAgent(
+    name="human",
+    human_input_mode="ALWAYS",
+)
+
+# 2. Initiate our chat between the agents
+the_human.initiate_chat(recipient=lesson_planner, message="Today, let's introduce our kids to the solar system.")
+```
+
+1. Create a second agent and set its `human_input_mode` with no `llm_config` required.
+
+2. Our `the_human` agent starts a conversation by sending a message to `lesson_planner`. An agent's `initiate_chat` method is used to start a conversation between two agents.
+
+Next > orchestrations.md
