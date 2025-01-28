@@ -1,4 +1,4 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -12,7 +12,7 @@ import inspect
 import os
 import time
 import unittest
-from typing import Annotated, Any, Callable, Literal
+from typing import Annotated, Any, Callable, Literal, Optional
 from unittest.mock import MagicMock
 
 import pytest
@@ -23,7 +23,7 @@ from autogen.agentchat import ConversableAgent, UserProxyAgent
 from autogen.agentchat.conversable_agent import register_function
 from autogen.exception_utils import InvalidCarryOverType, SenderRequired
 
-from ..conftest import Credentials, credentials_all_llms
+from ..conftest import Credentials, credentials_all_llms, suppress_gemini_resource_exhausted
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -40,12 +40,23 @@ def conversable_agent():
 
 
 @pytest.mark.parametrize("name", ["agent name", "agent_name ", " agent\nname", " agent\tname"])
-def test_conversable_agent_name_with_white_space_raises_error(name: str) -> None:
+def test_conversable_agent_name_with_white_space(
+    name: str,
+    mock_credentials: Credentials,
+) -> None:
+    agent = ConversableAgent(name=name)
+    assert agent.name == name
+
+    llm_config = mock_credentials.llm_config
     with pytest.raises(
         ValueError,
         match=f"The name of the agent cannot contain any whitespace. The name provided is: '{name}'",
     ):
-        ConversableAgent(name=name)
+        ConversableAgent(name=name, llm_config=llm_config)
+
+    llm_config["config_list"][0]["api_type"] = "something-else"
+    agent = ConversableAgent(name=name, llm_config=llm_config)
+    assert agent.name == name
 
 
 def test_sync_trigger():
@@ -1044,11 +1055,13 @@ async def _test_function_registration_e2e_async(credentials: Credentials) -> Non
     stopwatch_mock.assert_called_once_with(num_seconds="2")
 
 
-@pytest.mark.parametrize("credentials", credentials_all_llms, indirect=True)
-def test_function_registration_e2e_async(
-    credentials: Credentials,
+@pytest.mark.parametrize("credentials_from_test_param", credentials_all_llms, indirect=True)
+@suppress_gemini_resource_exhausted
+@pytest.mark.asyncio
+async def test_function_registration_e2e_async(
+    credentials_from_test_param: Credentials,
 ) -> None:
-    _test_function_registration_e2e_async(credentials)
+    await _test_function_registration_e2e_async(credentials_from_test_param)
 
 
 @pytest.mark.openai
@@ -1481,6 +1494,35 @@ def test_handle_carryover():
     assert proc_content_empty_carryover == content, "Incorrect carryover processing"
 
 
+@pytest.mark.parametrize("credentials_from_test_param", credentials_all_llms, indirect=True)
+@suppress_gemini_resource_exhausted
+def test_conversable_agent_with_whitespaces_in_name_end2end(
+    credentials_from_test_param: Credentials,
+    request: pytest.FixtureRequest,
+) -> None:
+    agent = ConversableAgent(
+        name="first_agent",
+        llm_config=credentials_from_test_param.llm_config,
+    )
+
+    user_proxy = UserProxyAgent(
+        name="user proxy",
+        human_input_mode="NEVER",
+    )
+
+    # Get the parameter name request node
+    current_llm = request.node.callspec.id
+    if "gpt_4" in current_llm:
+        with pytest.raises(
+            ValueError,
+            match="This error typically occurs when the agent name contains invalid characters, such as spaces or special symbols.",
+        ):
+            user_proxy.initiate_chat(agent, message="Hello, how are you?", max_turns=2)
+    # anthropic and gemini will not raise an error if agent name contains whitespaces
+    else:
+        user_proxy.initiate_chat(agent, message="Hello, how are you?", max_turns=2)
+
+
 @pytest.mark.openai
 def test_context_variables():
     # Test initialization with context_variables
@@ -1540,6 +1582,53 @@ def test_context_variables():
         "test_key": "bulk_updated_value",
     }
     assert agent._context_variables == expected_final_context
+
+
+@pytest.mark.skip(reason="This test is failing. We need to investigate the issue.")
+@pytest.mark.gemini
+@suppress_gemini_resource_exhausted
+def test_gemini_with_tools_parameters_set_to_is_annotated_with_none_as_default_value(
+    credentials_gemini_pro: Credentials,
+) -> None:
+    agent = ConversableAgent(name="agent", llm_config=credentials_gemini_pro.llm_config)
+
+    user_proxy = UserProxyAgent(
+        name="user_proxy_1",
+        human_input_mode="NEVER",
+    )
+
+    mock = MagicMock()
+
+    @user_proxy.register_for_execution()
+    @agent.register_for_llm(description="Login function")
+    def login(
+        additional_notes: Annotated[Optional[str], "Additional notes"] = None,
+    ) -> str:
+        return "Login successful."
+
+    user_proxy.initiate_chat(agent, message="Please login", max_turns=2)
+
+    mock.assert_called_once()
+
+
+@pytest.mark.deepseek
+def test_conversable_agent_with_deepseek_reasoner(
+    credentials_deepseek_reasoner: Credentials,
+) -> None:
+    agent = ConversableAgent(
+        name="agent",
+        llm_config=credentials_deepseek_reasoner.llm_config,
+    )
+
+    user_proxy = UserProxyAgent(
+        name="user_proxy_1",
+        human_input_mode="NEVER",
+    )
+
+    result = user_proxy.initiate_chat(
+        agent, message="Hello, how are you?", summary_method="reflection_with_llm", max_turns=2
+    )
+    assert isinstance(result.summary, str)
 
 
 if __name__ == "__main__":

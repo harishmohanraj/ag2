@@ -1,4 +1,4 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 import copy
@@ -12,9 +12,9 @@ from typing import Any, Callable, Literal, Optional, Union
 
 from pydantic import BaseModel
 
-from autogen.oai import OpenAIWrapper
-from autogen.tools import get_function_schema
-
+from ...doc_utils import export_module
+from ...oai import OpenAIWrapper
+from ...tools import get_function_schema
 from ..agent import Agent
 from ..chat import ChatResult
 from ..conversable_agent import ConversableAgent
@@ -29,6 +29,7 @@ __CONTEXT_VARIABLES_PARAM_NAME__ = "context_variables"
 __TOOL_EXECUTOR_NAME__ = "Tool_Execution"
 
 
+@export_module("autogen")
 class AfterWorkOption(Enum):
     TERMINATE = "TERMINATE"
     REVERT_TO_USER = "REVERT_TO_USER"
@@ -37,6 +38,7 @@ class AfterWorkOption(Enum):
 
 
 @dataclass
+@export_module("autogen")
 class AFTER_WORK:  # noqa: N801
     """Handles the next step in the conversation when an agent doesn't suggest a tool call or a handoff
 
@@ -54,6 +56,7 @@ class AFTER_WORK:  # noqa: N801
 
 
 @dataclass
+@export_module("autogen")
 class ON_CONDITION:  # noqa: N801
     """Defines a condition for transitioning to another agent or nested chats
 
@@ -73,9 +76,7 @@ class ON_CONDITION:  # noqa: N801
     def __post_init__(self):
         # Ensure valid types
         if self.target is not None:
-            assert isinstance(self.target, SwarmAgent) or isinstance(self.target, dict), (
-                "'target' must be a SwarmAgent or a Dict"
-            )
+            assert isinstance(self.target, (SwarmAgent, dict)), "'target' must be a SwarmAgent or a Dict"
 
         # Ensure they have a condition
         assert isinstance(self.condition, str) and self.condition.strip(), "'condition' must be a non-empty string"
@@ -85,6 +86,7 @@ class ON_CONDITION:  # noqa: N801
 
 
 @dataclass
+@export_module("autogen")
 class UPDATE_SYSTEM_MESSAGE:  # noqa: N801
     """Update the agent's system message before they reply
 
@@ -135,9 +137,8 @@ def _prepare_swarm_agents(
 
     # Ensure all agents in hand-off after-works are in the passed in agents list
     for agent in agents:
-        if agent.after_work is not None:
-            if isinstance(agent.after_work.agent, SwarmAgent):
-                assert agent.after_work.agent in agents, "Agent in hand-off must be in the agents list"
+        if agent.after_work is not None and isinstance(agent.after_work.agent, SwarmAgent):
+            assert agent.after_work.agent in agents, "Agent in hand-off must be in the agents list"
 
     tool_execution = SwarmAgent(
         name=__TOOL_EXECUTOR_NAME__,
@@ -223,7 +224,7 @@ def _process_initial_messages(
     temp_user_proxy = None
     temp_user_list = []
     if len(messages) == 1 and "name" not in messages[0] and not user_agent:
-        temp_user_proxy = UserProxyAgent(name="_User")
+        temp_user_proxy = UserProxyAgent(name="_User", code_execution_config=False)
         last_agent = temp_user_proxy
         temp_user_list.append(temp_user_proxy)
     else:
@@ -297,24 +298,31 @@ def _determine_next_agent(
     if "tool_calls" in groupchat.messages[-1]:
         return tool_execution
 
+    after_work_condition = None
+
     if tool_execution._next_agent is not None:
         next_agent = tool_execution._next_agent
         tool_execution._next_agent = None
 
-        # Check for string, access agent from group chat.
+        if not isinstance(next_agent, AfterWorkOption):
+            # Check for string, access agent from group chat.
 
-        if isinstance(next_agent, str):
-            if next_agent in swarm_agent_names:
-                next_agent = groupchat.agent_by_name(name=next_agent)
-            else:
-                raise ValueError(f"No agent found with the name '{next_agent}'. Ensure the agent exists in the swarm.")
+            if isinstance(next_agent, str):
+                if next_agent in swarm_agent_names:
+                    next_agent = groupchat.agent_by_name(name=next_agent)
+                else:
+                    raise ValueError(
+                        f"No agent found with the name '{next_agent}'. Ensure the agent exists in the swarm."
+                    )
 
-        return next_agent
+            return next_agent
+        else:
+            after_work_condition = next_agent
 
     # get the last swarm agent
     last_swarm_speaker = None
     for message in reversed(groupchat.messages):
-        if "name" in message and message["name"] in swarm_agent_names:
+        if "name" in message and message["name"] in swarm_agent_names and message["name"] != __TOOL_EXECUTOR_NAME__:
             agent = groupchat.agent_by_name(name=message["name"])
             if isinstance(agent, SwarmAgent):
                 last_swarm_speaker = agent
@@ -322,20 +330,22 @@ def _determine_next_agent(
     if last_swarm_speaker is None:
         raise ValueError("No swarm agent found in the message history")
 
-    # If the user last spoke, return to the agent prior
-    if (user_agent and last_speaker == user_agent) or groupchat.messages[-1]["role"] == "tool":
-        return last_swarm_speaker
+    if after_work_condition is None:
+        # If the user last spoke, return to the agent prior
+        if (user_agent and last_speaker == user_agent) or groupchat.messages[-1]["role"] == "tool":
+            return last_swarm_speaker
 
-    # Resolve after_work condition (agent-level overrides global)
-    after_work_condition = (
-        last_swarm_speaker.after_work if last_swarm_speaker.after_work is not None else swarm_after_work
-    )
-    if isinstance(after_work_condition, AFTER_WORK):
-        after_work_condition = after_work_condition.agent
+        # Resolve after_work condition (agent-level overrides global)
+        after_work_condition = (
+            last_swarm_speaker.after_work if last_swarm_speaker.after_work is not None else swarm_after_work
+        )
 
-    # Evaluate callable after_work
-    if isinstance(after_work_condition, Callable):
-        after_work_condition = after_work_condition(last_speaker, groupchat.messages, groupchat)
+        if isinstance(after_work_condition, AFTER_WORK):
+            after_work_condition = after_work_condition.agent
+
+        # Evaluate callable after_work
+        if isinstance(after_work_condition, Callable):
+            after_work_condition = after_work_condition(last_swarm_speaker, groupchat.messages, groupchat)
 
     if isinstance(after_work_condition, str):  # Agent name in a string
         if after_work_condition in swarm_agent_names:
@@ -350,7 +360,7 @@ def _determine_next_agent(
         elif after_work_condition == AfterWorkOption.REVERT_TO_USER:
             return None if user_agent is None else user_agent
         elif after_work_condition == AfterWorkOption.STAY:
-            return last_speaker
+            return last_swarm_speaker
         elif after_work_condition == AfterWorkOption.SWARM_MANAGER:
             return "auto"
     else:
@@ -397,6 +407,7 @@ def create_swarm_transition(
     return swarm_transition
 
 
+@export_module("autogen")
 def initiate_swarm_chat(
     initial_agent: "SwarmAgent",
     messages: Union[list[dict[str, Any]], str],
@@ -476,6 +487,7 @@ def initiate_swarm_chat(
     return chat_result, context_variables, manager.last_speaker
 
 
+@export_module("autogen")
 async def a_initiate_swarm_chat(
     initial_agent: "SwarmAgent",
     messages: Union[list[dict[str, Any]], str],
@@ -555,26 +567,7 @@ async def a_initiate_swarm_chat(
     return chat_result, context_variables, manager.last_speaker
 
 
-class SwarmResult(BaseModel):
-    """Encapsulates the possible return values for a swarm agent function.
-
-    Args:
-        values (str): The result values as a string.
-        agent (SwarmAgent): The swarm agent instance, if applicable.
-        context_variables (dict): A dictionary of context variables.
-    """
-
-    values: str = ""
-    agent: Optional[Union["SwarmAgent", str]] = None
-    context_variables: dict[str, Any] = {}
-
-    class Config:  # Add this inner class
-        arbitrary_types_allowed = True
-
-    def __str__(self):
-        return self.values
-
-
+@export_module("autogen")
 class SwarmAgent(ConversableAgent):
     """Swarm agent for participating in a swarm.
 
@@ -1031,6 +1024,27 @@ class SwarmAgent(ConversableAgent):
             chat_queue[0]["message"] = original_chat_queue_message
 
         return True, res[-1].summary
+
+
+@export_module("autogen")
+class SwarmResult(BaseModel):
+    """Encapsulates the possible return values for a swarm agent function.
+
+    Args:
+        values (str): The result values as a string.
+        agent (SwarmAgent): The swarm agent instance, if applicable.
+        context_variables (dict): A dictionary of context variables.
+    """
+
+    values: str = ""
+    agent: Optional[Union["SwarmAgent", str, AfterWorkOption]] = None
+    context_variables: dict[str, Any] = {}
+
+    class Config:  # Add this inner class
+        arbitrary_types_allowed = True
+
+    def __str__(self):
+        return self.values
 
 
 # Forward references for SwarmAgent in SwarmResult

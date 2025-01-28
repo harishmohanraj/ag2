@@ -1,4 +1,4 @@
-# Copyright (c) 2023 - 2024, Owners of https://github.com/ag2ai
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from functools import partial
 from typing import Any
 
+from ..doc_utils import export_module
 from ..io.base import IOStream
 from ..messages.agent_messages import PostCarryoverProcessingMessage
 from .utils import consolidate_chat_info
@@ -22,6 +23,7 @@ Prerequisite = tuple[int, int]
 
 
 @dataclass
+@export_module("autogen")
 class ChatResult:
     """(Experimental) The result of a chat. Almost certain to be changed."""
 
@@ -130,6 +132,7 @@ def __post_carryover_processing(chat_info: dict[str, Any]) -> None:
     iostream.send(PostCarryoverProcessingMessage(chat_info=chat_info))
 
 
+@export_module("autogen")
 def initiate_chats(chat_queue: list[dict[str, Any]]) -> list[ChatResult]:
     """Initiate a list of chats.
 
