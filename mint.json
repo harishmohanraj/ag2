@@ -40,170 +40,154 @@
   },
   "tabs": [
     {
-      "name": "Documentation",
-      "url": "docs"
+      "name": "Home",
+      "url": "docs/home"
     },
     {
-      "name": "Examples",
-      "url": "notebooks"
+      "name": "User Guide",
+      "url": "docs/user-guide"
+    },
+    {
+      "name": "API References",
+      "url": "docs/api-reference"
+    },
+    {
+      "name": "Use Cases",
+      "url": "docs/use-cases"
+    },
+    {
+      "name": "Contribute",
+      "url": "contributor-guide"
+    },
+    {
+      "name": "FAQs",
+      "url": "faq"
+    },
+    {
+      "name": "Ecosystem",
+      "url": "ecosystem"
     },
     {
       "name": "Blog",
-      "url": "blog"
+      "url": "docs/blog"
     },
     {
       "name": "Community Talks",
-      "url": "talks"
-    },
-    {
-      "name": "API Reference",
-      "url": "reference"
+      "url": "docs/talks"
     }
   ],
   "anchors": [],
   "navigation": [
     {
-      "group": "",
+      "group": "Home",
       "pages": [
-        "docs/Home",
-        "docs/Getting-Started"
-      ]
-    },
-    {
-      "group": "Installation",
-      "pages": [
-        "docs/installation/Installation",
-        "docs/installation/Optional-Dependencies"
-      ]
-    },
-    {
-      "group": "Tutorials",
-      "pages": [
-        "docs/tutorial/introduction",
-        "docs/tutorial/chat-termination",
-        "docs/tutorial/human-in-the-loop",
-        "docs/tutorial/code-executors",
-        "docs/tutorial/tool-use",
-        "docs/tutorial/conversation-patterns",
-        "docs/tutorial/what-next"
-      ]
-    },
-    {
-      "group": "Use Cases",
-      "pages": [
-        "docs/Use-Cases/agent_chat",
-        "docs/Use-Cases/enhanced_inference"
+        "docs/home/Home"
       ]
     },
     {
       "group": "User Guide",
       "pages": [
         {
-          "group": "Code Execution",
+          "group": "Getting started",
           "pages": [
-            "docs/topics/code-execution/cli-code-executor",
-            "docs/topics/code-execution/custom-executor",
-            "docs/topics/code-execution/jupyter-code-executor",
-            "docs/topics/code-execution/user-defined-functions"
+            "docs/user-guide/getting-started/Getting-Started"
           ]
         },
         {
-          "group": "OpenAI Assistant",
+          "group": "Basic Concepts",
           "pages": [
-            "docs/topics/openai-assistant/gpt_assistant_agent"
+            "docs/user-guide/basic-concepts/installing-ag2",
+            "docs/user-guide/basic-concepts/llm-configuration",
+            "docs/user-guide/basic-concepts/conversable-agent",
+            "docs/user-guide/basic-concepts/human-in-the-loop",
+            "docs/user-guide/basic-concepts/orchestrations",
+            "docs/user-guide/basic-concepts/groupchat",
+            "docs/user-guide/basic-concepts/swarm",
+            "docs/user-guide/basic-concepts/tools",
+            "docs/user-guide/basic-concepts/structured-outputs",
+            "docs/user-guide/basic-concepts/ending-a-chat"
           ]
         },
         {
-          "group": "GroupChat",
+          "group": "Advanced Concepts",
           "pages": [
-            "docs/topics/groupchat/customized_speaker_selection",
-            "docs/topics/groupchat/resuming_groupchat",
-            "docs/topics/groupchat/transform_messages_speaker_selection",
-            "docs/topics/groupchat/using_custom_model_client_classes"
+            "docs/user-guide/advanced-concepts/rag",
+            "docs/user-guide/advanced-concepts/custom-group-chat",
+            "docs/user-guide/advanced-concepts/enhanced-swarm",
+            "docs/user-guide/advanced-concepts/tools-with-secrets",
+            "docs/user-guide/advanced-concepts/code-execution"
           ]
-        },
-        {
-          "group": "Using Non-OpenAI Models",
-          "pages": [
-            "docs/topics/non-openai-models/about-using-nonopenai-models",
-            "docs/topics/non-openai-models/best-tips-for-nonopenai-models",
-            "docs/topics/non-openai-models/cloud-anthropic",
-            "docs/topics/non-openai-models/cloud-bedrock",
-            "docs/topics/non-openai-models/cloud-cerebras",
-            "docs/topics/non-openai-models/cloud-cohere",
-            "docs/topics/non-openai-models/cloud-gemini",
-            "docs/topics/non-openai-models/cloud-gemini_vertexai",
-            "docs/topics/non-openai-models/cloud-groq",
-            "docs/topics/non-openai-models/cloud-litellm-watsonx",
-            "docs/topics/non-openai-models/cloud-mistralai",
-            "docs/topics/non-openai-models/cloud-togetherai",
-            "docs/topics/non-openai-models/cloud-deepseek-v3",
-            "docs/topics/non-openai-models/local-litellm-ollama",
-            "docs/topics/non-openai-models/local-lm-studio",
-            "docs/topics/non-openai-models/local-ollama",
-            "docs/topics/non-openai-models/local-vllm"
-          ]
-        },
-        {
-          "group": "CaptainAgent",
-          "pages": [
-            "docs/topics/captainagent/agent_library",
-            "docs/topics/captainagent/configurations",
-            "docs/topics/captainagent/tool_library"
-          ]
-        },
-        {
-          "group": "Handling Long Contexts",
-          "pages": [
-            "docs/topics/handling_long_contexts/compressing_text_w_llmligua",
-            "docs/topics/handling_long_contexts/intro_to_transform_messages"
-          ]
-        },
-        "docs/topics/llm-caching",
-        "docs/topics/llm-observability",
-        "docs/topics/llm_configuration",
-        {
-          "group": "Prompting and Reasoning",
-          "pages": [
-            "docs/topics/prompting-and-reasoning/react",
-            "docs/topics/prompting-and-reasoning/reflection"
-          ]
-        },
-        "docs/topics/retrieval_augmentation",
-        "docs/topics/swarm",
-        "docs/topics/task_decomposition",
-        "docs/FAQ"
+        }
       ]
     },
     {
-      "group": "Ecosystem",
+      "group": "Use Cases",
       "pages": [
-        "docs/ecosystem/agentops",
-        "docs/ecosystem/azure_cosmos_db",
-        "docs/ecosystem/composio",
-        "docs/ecosystem/databricks",
-        "docs/ecosystem/llamaindex",
-        "docs/ecosystem/mem0",
-        "docs/ecosystem/memgpt",
-        "docs/ecosystem/microsoft-fabric",
-        "docs/ecosystem/ollama",
-        "docs/ecosystem/pgvector",
-        "docs/ecosystem/portkey",
-        "docs/ecosystem/promptflow"
+        {
+          "group": "Reference Agents",
+          "pages": [
+            "docs/use-cases/reference-agents/captainagent",
+            "docs/use-cases/reference-agents/communication-agents",
+            "docs/use-cases/reference-agents/documentagent",
+            "docs/use-cases/reference-agents/reasoningagent",
+            "docs/use-cases/reference-agents/websurferagent"
+          ]
+        },
+        {
+          "group": "Notebooks",
+          "pages": [
+            "docs/use-cases/notebooks/notebooks"
+          ]
+        },
+        {
+          "group": "Sample Apps",
+          "pages": [
+            "docs/use-cases/sample-apps/sample-apps"
+          ]
+        },
+        {
+          "group": "Community Gallery",
+          "pages": [
+            "docs/use-cases/community-gallery/community-gallery"
+          ]
+        }
       ]
     },
     {
       "group": "Contributor Guide",
       "pages": [
-        "docs/contributor-guide/contributing",
-        "docs/contributor-guide/docker",
-        "docs/contributor-guide/documentation",
-        "docs/contributor-guide/file-bug-report",
-        "docs/contributor-guide/maintainer",
-        "docs/contributor-guide/pre-commit",
-        "docs/contributor-guide/tests",
-        "docs/Research",
-        "docs/Migration-Guide"
+        "contributor-guide/contributing",
+        "contributor-guide/docker",
+        "contributor-guide/documentation",
+        "contributor-guide/file-bug-report",
+        "contributor-guide/maintainer",
+        "contributor-guide/pre-commit",
+        "contributor-guide/tests",
+        "contributor-guide/Research",
+        "contributor-guide/Migration-Guide"
+      ]
+    },
+    {
+      "group": "FAQs",
+      "pages": [
+        "faq/FAQ"
+      ]
+    },
+    {
+      "group": "Ecosystem",
+      "pages": [
+        "ecosystem/agentops",
+        "ecosystem/azure_cosmos_db",
+        "ecosystem/composio",
+        "ecosystem/databricks",
+        "ecosystem/llamaindex",
+        "ecosystem/mem0",
+        "ecosystem/memgpt",
+        "ecosystem/microsoft-fabric",
+        "ecosystem/ollama",
+        "ecosystem/pgvector",
+        "ecosystem/portkey",
+        "ecosystem/promptflow"
       ]
     },
     {
@@ -212,53 +196,53 @@
         {
           "group": "autogen",
           "pages": [
-            "reference/autogen/overview",
-            "reference/autogen/AFTER_WORK",
-            "reference/autogen/AfterWorkOption",
-            "reference/autogen/Agent",
-            "reference/autogen/AgentNameConflict",
-            "reference/autogen/AssistantAgent",
-            "reference/autogen/Cache",
-            "reference/autogen/ChatCompletion",
-            "reference/autogen/ChatResult",
-            "reference/autogen/Completion",
-            "reference/autogen/ConversableAgent",
-            "reference/autogen/GroupChat",
-            "reference/autogen/GroupChatManager",
-            "reference/autogen/InvalidCarryOverType",
-            "reference/autogen/ModelClient",
-            "reference/autogen/NoEligibleSpeaker",
-            "reference/autogen/ON_CONDITION",
-            "reference/autogen/OpenAIWrapper",
-            "reference/autogen/ReasoningAgent",
-            "reference/autogen/SenderRequired",
-            "reference/autogen/SwarmAgent",
-            "reference/autogen/SwarmResult",
-            "reference/autogen/ThinkNode",
-            "reference/autogen/UPDATE_SYSTEM_MESSAGE",
-            "reference/autogen/UndefinedNextAgent",
-            "reference/autogen/UserProxyAgent",
-            "reference/autogen/a_initiate_swarm_chat",
-            "reference/autogen/config_list_from_dotenv",
-            "reference/autogen/config_list_from_json",
-            "reference/autogen/config_list_from_models",
-            "reference/autogen/config_list_gpt4_gpt35",
-            "reference/autogen/config_list_openai_aoai",
-            "reference/autogen/filter_config",
-            "reference/autogen/gather_usage_summary",
-            "reference/autogen/get_config_list",
-            "reference/autogen/initiate_chats",
-            "reference/autogen/initiate_swarm_chat",
-            "reference/autogen/register_function",
-            "reference/autogen/visualize_tree",
+            "docs/api-reference/autogen/overview",
+            "docs/api-reference/autogen/AFTER_WORK",
+            "docs/api-reference/autogen/AfterWorkOption",
+            "docs/api-reference/autogen/Agent",
+            "docs/api-reference/autogen/AgentNameConflict",
+            "docs/api-reference/autogen/AssistantAgent",
+            "docs/api-reference/autogen/Cache",
+            "docs/api-reference/autogen/ChatCompletion",
+            "docs/api-reference/autogen/ChatResult",
+            "docs/api-reference/autogen/Completion",
+            "docs/api-reference/autogen/ConversableAgent",
+            "docs/api-reference/autogen/GroupChat",
+            "docs/api-reference/autogen/GroupChatManager",
+            "docs/api-reference/autogen/InvalidCarryOverType",
+            "docs/api-reference/autogen/ModelClient",
+            "docs/api-reference/autogen/NoEligibleSpeaker",
+            "docs/api-reference/autogen/ON_CONDITION",
+            "docs/api-reference/autogen/OpenAIWrapper",
+            "docs/api-reference/autogen/ReasoningAgent",
+            "docs/api-reference/autogen/SenderRequired",
+            "docs/api-reference/autogen/SwarmAgent",
+            "docs/api-reference/autogen/SwarmResult",
+            "docs/api-reference/autogen/ThinkNode",
+            "docs/api-reference/autogen/UPDATE_SYSTEM_MESSAGE",
+            "docs/api-reference/autogen/UndefinedNextAgent",
+            "docs/api-reference/autogen/UserProxyAgent",
+            "docs/api-reference/autogen/a_initiate_swarm_chat",
+            "docs/api-reference/autogen/config_list_from_dotenv",
+            "docs/api-reference/autogen/config_list_from_json",
+            "docs/api-reference/autogen/config_list_from_models",
+            "docs/api-reference/autogen/config_list_gpt4_gpt35",
+            "docs/api-reference/autogen/config_list_openai_aoai",
+            "docs/api-reference/autogen/filter_config",
+            "docs/api-reference/autogen/gather_usage_summary",
+            "docs/api-reference/autogen/get_config_list",
+            "docs/api-reference/autogen/initiate_chats",
+            "docs/api-reference/autogen/initiate_swarm_chat",
+            "docs/api-reference/autogen/register_function",
+            "docs/api-reference/autogen/visualize_tree",
             {
               "group": "agentchat",
               "pages": [
                 {
                   "group": "chat",
                   "pages": [
-                    "reference/autogen/agentchat/chat/overview",
-                    "reference/autogen/agentchat/chat/a_initiate_chats"
+                    "docs/api-reference/autogen/agentchat/chat/overview",
+                    "docs/api-reference/autogen/agentchat/chat/a_initiate_chats"
                   ]
                 },
                 {
@@ -270,44 +254,44 @@
                         {
                           "group": "agent_eval",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/agent_eval/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/agent_eval/generate_criteria",
-                            "reference/autogen/agentchat/contrib/agent_eval/agent_eval/quantify_criteria"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/agent_eval/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/agent_eval/generate_criteria",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/agent_eval/quantify_criteria"
                           ]
                         },
                         {
                           "group": "criterion",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/criterion/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/criterion/Criterion"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/criterion/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/criterion/Criterion"
                           ]
                         },
                         {
                           "group": "critic_agent",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/critic_agent/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/critic_agent/CriticAgent"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/critic_agent/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/critic_agent/CriticAgent"
                           ]
                         },
                         {
                           "group": "quantifier_agent",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/quantifier_agent/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/quantifier_agent/QuantifierAgent"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/quantifier_agent/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/quantifier_agent/QuantifierAgent"
                           ]
                         },
                         {
                           "group": "subcritic_agent",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/subcritic_agent/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/subcritic_agent/SubCriticAgent"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/subcritic_agent/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/subcritic_agent/SubCriticAgent"
                           ]
                         },
                         {
                           "group": "task",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/agent_eval/task/overview",
-                            "reference/autogen/agentchat/contrib/agent_eval/task/Task"
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/task/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/agent_eval/task/Task"
                           ]
                         }
                       ]
@@ -315,9 +299,9 @@
                     {
                       "group": "agent_optimizer",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/agent_optimizer/overview",
-                        "reference/autogen/agentchat/contrib/agent_optimizer/AgentOptimizer",
-                        "reference/autogen/agentchat/contrib/agent_optimizer/execute_func"
+                        "docs/api-reference/autogen/agentchat/contrib/agent_optimizer/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/agent_optimizer/AgentOptimizer",
+                        "docs/api-reference/autogen/agentchat/contrib/agent_optimizer/execute_func"
                       ]
                     },
                     {
@@ -326,79 +310,79 @@
                         {
                           "group": "agent_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/agent_capability/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/agent_capability/AgentCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/agent_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/agent_capability/AgentCapability"
                           ]
                         },
                         {
                           "group": "generate_images",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/generate_images/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/generate_images/DalleImageGenerator",
-                            "reference/autogen/agentchat/contrib/capabilities/generate_images/ImageGeneration",
-                            "reference/autogen/agentchat/contrib/capabilities/generate_images/ImageGenerator"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/generate_images/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/generate_images/DalleImageGenerator",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/generate_images/ImageGeneration",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/generate_images/ImageGenerator"
                           ]
                         },
                         {
                           "group": "teachability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/teachability/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/teachability/MemoStore",
-                            "reference/autogen/agentchat/contrib/capabilities/teachability/Teachability"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/teachability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/teachability/MemoStore",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/teachability/Teachability"
                           ]
                         },
                         {
                           "group": "text_compressors",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/text_compressors/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/text_compressors/LLMLingua",
-                            "reference/autogen/agentchat/contrib/capabilities/text_compressors/TextCompressor"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/text_compressors/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/text_compressors/LLMLingua",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/text_compressors/TextCompressor"
                           ]
                         },
                         {
                           "group": "tools_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/tools_capability/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/tools_capability/ToolsCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/tools_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/tools_capability/ToolsCapability"
                           ]
                         },
                         {
                           "group": "transform_messages",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/transform_messages/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/transform_messages/TransformMessages"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transform_messages/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transform_messages/TransformMessages"
                           ]
                         },
                         {
                           "group": "transforms",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/MessageHistoryLimiter",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/MessageTokenLimiter",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/MessageTransform",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/TextMessageCompressor",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms/TextMessageContentName"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/MessageHistoryLimiter",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/MessageTokenLimiter",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/MessageTransform",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/TextMessageCompressor",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms/TextMessageContentName"
                           ]
                         },
                         {
                           "group": "transforms_util",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_content_get",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_content_set",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_key",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/count_text_tokens",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/is_content_right_type",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/is_content_text_empty",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/min_tokens_reached",
-                            "reference/autogen/agentchat/contrib/capabilities/transforms_util/should_transform_message"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_content_get",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_content_set",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/cache_key",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/count_text_tokens",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/is_content_right_type",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/is_content_text_empty",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/min_tokens_reached",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/transforms_util/should_transform_message"
                           ]
                         },
                         {
                           "group": "vision_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/capabilities/vision_capability/overview",
-                            "reference/autogen/agentchat/contrib/capabilities/vision_capability/VisionCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/vision_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/capabilities/vision_capability/VisionCapability"
                           ]
                         }
                       ]
@@ -406,25 +390,25 @@
                     {
                       "group": "captainagent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/captainagent/overview",
-                        "reference/autogen/agentchat/contrib/captainagent/AgentBuilder",
-                        "reference/autogen/agentchat/contrib/captainagent/CaptainAgent",
-                        "reference/autogen/agentchat/contrib/captainagent/ToolBuilder",
-                        "reference/autogen/agentchat/contrib/captainagent/format_ag2_tool",
-                        "reference/autogen/agentchat/contrib/captainagent/get_full_tool_description",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/AgentBuilder",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/CaptainAgent",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/ToolBuilder",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/format_ag2_tool",
+                        "docs/api-reference/autogen/agentchat/contrib/captainagent/get_full_tool_description",
                         {
                           "group": "captainagent",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/captainagent/captainagent/overview",
-                            "reference/autogen/agentchat/contrib/captainagent/captainagent/CaptainUserProxyAgent"
+                            "docs/api-reference/autogen/agentchat/contrib/captainagent/captainagent/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/captainagent/captainagent/CaptainUserProxyAgent"
                           ]
                         },
                         {
                           "group": "tool_retriever",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/captainagent/tool_retriever/overview",
-                            "reference/autogen/agentchat/contrib/captainagent/tool_retriever/LocalExecutorWithTools",
-                            "reference/autogen/agentchat/contrib/captainagent/tool_retriever/find_callables"
+                            "docs/api-reference/autogen/agentchat/contrib/captainagent/tool_retriever/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/captainagent/tool_retriever/LocalExecutorWithTools",
+                            "docs/api-reference/autogen/agentchat/contrib/captainagent/tool_retriever/find_callables"
                           ]
                         },
                         {
@@ -436,43 +420,43 @@
                                 {
                                   "group": "calculate_correlation",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_correlation/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_correlation/calculate_correlation"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_correlation/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_correlation/calculate_correlation"
                                   ]
                                 },
                                 {
                                   "group": "calculate_skewness_and_kurtosis",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_skewness_and_kurtosis/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_skewness_and_kurtosis/calculate_skewness_and_kurtosis"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_skewness_and_kurtosis/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/calculate_skewness_and_kurtosis/calculate_skewness_and_kurtosis"
                                   ]
                                 },
                                 {
                                   "group": "detect_outlier_iqr",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_iqr/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_iqr/detect_outlier_iqr"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_iqr/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_iqr/detect_outlier_iqr"
                                   ]
                                 },
                                 {
                                   "group": "detect_outlier_zscore",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_zscore/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_zscore/detect_outlier_zscore"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_zscore/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/detect_outlier_zscore/detect_outlier_zscore"
                                   ]
                                 },
                                 {
                                   "group": "explore_csv",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/explore_csv/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/explore_csv/explore_csv"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/explore_csv/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/explore_csv/explore_csv"
                                   ]
                                 },
                                 {
                                   "group": "shapiro_wilk_test",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/shapiro_wilk_test/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/shapiro_wilk_test/shapiro_wilk_test"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/shapiro_wilk_test/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/data_analysis/shapiro_wilk_test/shapiro_wilk_test"
                                   ]
                                 }
                               ]
@@ -483,85 +467,85 @@
                                 {
                                   "group": "arxiv_download",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_download/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_download/arxiv_download"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_download/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_download/arxiv_download"
                                   ]
                                 },
                                 {
                                   "group": "arxiv_search",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_search/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_search/arxiv_search"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_search/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/arxiv_search/arxiv_search"
                                   ]
                                 },
                                 {
                                   "group": "extract_pdf_image",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_image/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_image/extract_pdf_image"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_image/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_image/extract_pdf_image"
                                   ]
                                 },
                                 {
                                   "group": "extract_pdf_text",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_text/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_text/extract_pdf_text"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_text/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/extract_pdf_text/extract_pdf_text"
                                   ]
                                 },
                                 {
                                   "group": "get_wikipedia_text",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_wikipedia_text/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_wikipedia_text/get_wikipedia_text"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_wikipedia_text/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_wikipedia_text/get_wikipedia_text"
                                   ]
                                 },
                                 {
                                   "group": "get_youtube_caption",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_youtube_caption/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_youtube_caption/get_youtube_caption"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_youtube_caption/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/get_youtube_caption/get_youtube_caption"
                                   ]
                                 },
                                 {
                                   "group": "image_qa",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/image_qa/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/image_qa/image_qa"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/image_qa/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/image_qa/image_qa"
                                   ]
                                 },
                                 {
                                   "group": "optical_character_recognition",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/optical_character_recognition/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/optical_character_recognition/optical_character_recognition"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/optical_character_recognition/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/optical_character_recognition/optical_character_recognition"
                                   ]
                                 },
                                 {
                                   "group": "perform_web_search",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/perform_web_search/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/perform_web_search/perform_web_search"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/perform_web_search/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/perform_web_search/perform_web_search"
                                   ]
                                 },
                                 {
                                   "group": "scrape_wikipedia_tables",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/scrape_wikipedia_tables/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/scrape_wikipedia_tables/scrape_wikipedia_tables"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/scrape_wikipedia_tables/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/scrape_wikipedia_tables/scrape_wikipedia_tables"
                                   ]
                                 },
                                 {
                                   "group": "transcribe_audio_file",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/transcribe_audio_file/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/transcribe_audio_file/transcribe_audio_file"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/transcribe_audio_file/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/transcribe_audio_file/transcribe_audio_file"
                                   ]
                                 },
                                 {
                                   "group": "youtube_download",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/youtube_download/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/youtube_download/youtube_download"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/youtube_download/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/information_retrieval/youtube_download/youtube_download"
                                   ]
                                 }
                               ]
@@ -572,106 +556,106 @@
                                 {
                                   "group": "calculate_circle_area_from_diameter",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_circle_area_from_diameter/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_circle_area_from_diameter/calculate_circle_area_from_diameter"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_circle_area_from_diameter/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_circle_area_from_diameter/calculate_circle_area_from_diameter"
                                   ]
                                 },
                                 {
                                   "group": "calculate_day_of_the_week",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_day_of_the_week/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_day_of_the_week/calculate_day_of_the_week"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_day_of_the_week/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_day_of_the_week/calculate_day_of_the_week"
                                   ]
                                 },
                                 {
                                   "group": "calculate_fraction_sum",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_fraction_sum/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_fraction_sum/calculate_fraction_sum"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_fraction_sum/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_fraction_sum/calculate_fraction_sum"
                                   ]
                                 },
                                 {
                                   "group": "calculate_matrix_power",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_matrix_power/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_matrix_power/calculate_matrix_power"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_matrix_power/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_matrix_power/calculate_matrix_power"
                                   ]
                                 },
                                 {
                                   "group": "calculate_reflected_point",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_reflected_point/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_reflected_point/calculate_reflected_point"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_reflected_point/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/calculate_reflected_point/calculate_reflected_point"
                                   ]
                                 },
                                 {
                                   "group": "complex_numbers_product",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/complex_numbers_product/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/complex_numbers_product/complex_numbers_product"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/complex_numbers_product/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/complex_numbers_product/complex_numbers_product"
                                   ]
                                 },
                                 {
                                   "group": "compute_currency_conversion",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/compute_currency_conversion/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/compute_currency_conversion/compute_currency_conversion"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/compute_currency_conversion/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/compute_currency_conversion/compute_currency_conversion"
                                   ]
                                 },
                                 {
                                   "group": "count_distinct_permutations",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/count_distinct_permutations/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/count_distinct_permutations/count_distinct_permutations"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/count_distinct_permutations/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/count_distinct_permutations/count_distinct_permutations"
                                   ]
                                 },
                                 {
                                   "group": "evaluate_expression",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/evaluate_expression/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/evaluate_expression/evaluate_expression"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/evaluate_expression/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/evaluate_expression/evaluate_expression"
                                   ]
                                 },
                                 {
                                   "group": "find_continuity_point",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/find_continuity_point/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/find_continuity_point/find_continuity_point"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/find_continuity_point/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/find_continuity_point/find_continuity_point"
                                   ]
                                 },
                                 {
                                   "group": "fraction_to_mixed_numbers",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/fraction_to_mixed_numbers/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/fraction_to_mixed_numbers/fraction_to_mixed_numbers"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/fraction_to_mixed_numbers/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/fraction_to_mixed_numbers/fraction_to_mixed_numbers"
                                   ]
                                 },
                                 {
                                   "group": "modular_inverse_sum",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/modular_inverse_sum/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/modular_inverse_sum/modular_inverse_sum"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/modular_inverse_sum/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/modular_inverse_sum/modular_inverse_sum"
                                   ]
                                 },
                                 {
                                   "group": "simplify_mixed_numbers",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/simplify_mixed_numbers/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/simplify_mixed_numbers/simplify_mixed_numbers"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/simplify_mixed_numbers/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/simplify_mixed_numbers/simplify_mixed_numbers"
                                   ]
                                 },
                                 {
                                   "group": "sum_of_digit_factorials",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_digit_factorials/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_digit_factorials/sum_of_digit_factorials"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_digit_factorials/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_digit_factorials/sum_of_digit_factorials"
                                   ]
                                 },
                                 {
                                   "group": "sum_of_primes_below",
                                   "pages": [
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_primes_below/overview",
-                                    "reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_primes_below/sum_of_primes_below"
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_primes_below/overview",
+                                    "docs/api-reference/autogen/agentchat/contrib/captainagent/tools/math/sum_of_primes_below/sum_of_primes_below"
                                   ]
                                 }
                               ]
@@ -683,8 +667,8 @@
                     {
                       "group": "gpt_assistant_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/gpt_assistant_agent/overview",
-                        "reference/autogen/agentchat/contrib/gpt_assistant_agent/GPTAssistantAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/gpt_assistant_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/gpt_assistant_agent/GPTAssistantAgent"
                       ]
                     },
                     {
@@ -693,66 +677,66 @@
                         {
                           "group": "document",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/document/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/document/Document",
-                            "reference/autogen/agentchat/contrib/graph_rag/document/DocumentType"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/document/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/document/Document",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/document/DocumentType"
                           ]
                         },
                         {
                           "group": "falkor_graph_query_engine",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/falkor_graph_query_engine/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/falkor_graph_query_engine/FalkorGraphQueryEngine"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/falkor_graph_query_engine/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/falkor_graph_query_engine/FalkorGraphQueryEngine"
                           ]
                         },
                         {
                           "group": "falkor_graph_rag_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/falkor_graph_rag_capability/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/falkor_graph_rag_capability/FalkorGraphRagCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/falkor_graph_rag_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/falkor_graph_rag_capability/FalkorGraphRagCapability"
                           ]
                         },
                         {
                           "group": "graph_query_engine",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/GraphQueryEngine",
-                            "reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/GraphStoreQueryResult"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/GraphQueryEngine",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/graph_query_engine/GraphStoreQueryResult"
                           ]
                         },
                         {
                           "group": "graph_rag_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/graph_rag_capability/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/graph_rag_capability/GraphRagCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/graph_rag_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/graph_rag_capability/GraphRagCapability"
                           ]
                         },
                         {
                           "group": "neo4j_graph_query_engine",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_query_engine/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_query_engine/Neo4jGraphQueryEngine"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_query_engine/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_query_engine/Neo4jGraphQueryEngine"
                           ]
                         },
                         {
                           "group": "neo4j_graph_rag_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_rag_capability/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_rag_capability/Neo4jGraphCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_rag_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_graph_rag_capability/Neo4jGraphCapability"
                           ]
                         },
                         {
                           "group": "neo4j_native_graph_query_engine",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_query_engine/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_query_engine/Neo4jNativeGraphQueryEngine"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_query_engine/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_query_engine/Neo4jNativeGraphQueryEngine"
                           ]
                         },
                         {
                           "group": "neo4j_native_graph_rag_capability",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_rag_capability/overview",
-                            "reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_rag_capability/Neo4jNativeGraphCapability"
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_rag_capability/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/graph_rag/neo4j_native_graph_rag_capability/Neo4jNativeGraphCapability"
                           ]
                         }
                       ]
@@ -760,61 +744,61 @@
                     {
                       "group": "img_utils",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/img_utils/overview",
-                        "reference/autogen/agentchat/contrib/img_utils/convert_base64_to_data_uri",
-                        "reference/autogen/agentchat/contrib/img_utils/extract_img_paths"
+                        "docs/api-reference/autogen/agentchat/contrib/img_utils/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/img_utils/convert_base64_to_data_uri",
+                        "docs/api-reference/autogen/agentchat/contrib/img_utils/extract_img_paths"
                       ]
                     },
                     {
                       "group": "llamaindex_conversable_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/llamaindex_conversable_agent/overview",
-                        "reference/autogen/agentchat/contrib/llamaindex_conversable_agent/LLamaIndexConversableAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/llamaindex_conversable_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/llamaindex_conversable_agent/LLamaIndexConversableAgent"
                       ]
                     },
                     {
                       "group": "llava_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/llava_agent/overview",
-                        "reference/autogen/agentchat/contrib/llava_agent/LLaVAAgent",
-                        "reference/autogen/agentchat/contrib/llava_agent/llava_call"
+                        "docs/api-reference/autogen/agentchat/contrib/llava_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/llava_agent/LLaVAAgent",
+                        "docs/api-reference/autogen/agentchat/contrib/llava_agent/llava_call"
                       ]
                     },
                     {
                       "group": "math_user_proxy_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/math_user_proxy_agent/overview",
-                        "reference/autogen/agentchat/contrib/math_user_proxy_agent/MathUserProxyAgent",
-                        "reference/autogen/agentchat/contrib/math_user_proxy_agent/WolframAlphaAPIWrapper",
-                        "reference/autogen/agentchat/contrib/math_user_proxy_agent/get_from_dict_or_env"
+                        "docs/api-reference/autogen/agentchat/contrib/math_user_proxy_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/math_user_proxy_agent/MathUserProxyAgent",
+                        "docs/api-reference/autogen/agentchat/contrib/math_user_proxy_agent/WolframAlphaAPIWrapper",
+                        "docs/api-reference/autogen/agentchat/contrib/math_user_proxy_agent/get_from_dict_or_env"
                       ]
                     },
                     {
                       "group": "multimodal_conversable_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/multimodal_conversable_agent/overview",
-                        "reference/autogen/agentchat/contrib/multimodal_conversable_agent/MultimodalConversableAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/multimodal_conversable_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/multimodal_conversable_agent/MultimodalConversableAgent"
                       ]
                     },
                     {
                       "group": "qdrant_retrieve_user_proxy_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/qdrant_retrieve_user_proxy_agent/overview",
-                        "reference/autogen/agentchat/contrib/qdrant_retrieve_user_proxy_agent/QdrantRetrieveUserProxyAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/qdrant_retrieve_user_proxy_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/qdrant_retrieve_user_proxy_agent/QdrantRetrieveUserProxyAgent"
                       ]
                     },
                     {
                       "group": "rag",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/rag/overview",
-                        "reference/autogen/agentchat/contrib/rag/handle_input",
+                        "docs/api-reference/autogen/agentchat/contrib/rag/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/rag/handle_input",
                         {
                           "group": "document_utils",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/rag/document_utils/overview",
-                            "reference/autogen/agentchat/contrib/rag/document_utils/download_url",
-                            "reference/autogen/agentchat/contrib/rag/document_utils/is_url",
-                            "reference/autogen/agentchat/contrib/rag/document_utils/list_files"
+                            "docs/api-reference/autogen/agentchat/contrib/rag/document_utils/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/rag/document_utils/download_url",
+                            "docs/api-reference/autogen/agentchat/contrib/rag/document_utils/is_url",
+                            "docs/api-reference/autogen/agentchat/contrib/rag/document_utils/list_files"
                           ]
                         }
                       ]
@@ -822,44 +806,44 @@
                     {
                       "group": "reasoning_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/reasoning_agent/overview",
-                        "reference/autogen/agentchat/contrib/reasoning_agent/extract_rlhf_preference_dataset",
-                        "reference/autogen/agentchat/contrib/reasoning_agent/extract_sft_dataset"
+                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/extract_rlhf_preference_dataset",
+                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/extract_sft_dataset"
                       ]
                     },
                     {
                       "group": "retrieve_assistant_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/retrieve_assistant_agent/overview",
-                        "reference/autogen/agentchat/contrib/retrieve_assistant_agent/RetrieveAssistantAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/retrieve_assistant_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/retrieve_assistant_agent/RetrieveAssistantAgent"
                       ]
                     },
                     {
                       "group": "retrieve_user_proxy_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/overview",
-                        "reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/RetrieveUserProxyAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/RetrieveUserProxyAgent"
                       ]
                     },
                     {
                       "group": "society_of_mind_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/society_of_mind_agent/overview",
-                        "reference/autogen/agentchat/contrib/society_of_mind_agent/SocietyOfMindAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/society_of_mind_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/society_of_mind_agent/SocietyOfMindAgent"
                       ]
                     },
                     {
                       "group": "swarm_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/swarm_agent/overview",
-                        "reference/autogen/agentchat/contrib/swarm_agent/create_swarm_transition"
+                        "docs/api-reference/autogen/agentchat/contrib/swarm_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/swarm_agent/create_swarm_transition"
                       ]
                     },
                     {
                       "group": "text_analyzer_agent",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/text_analyzer_agent/overview",
-                        "reference/autogen/agentchat/contrib/text_analyzer_agent/TextAnalyzerAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/text_analyzer_agent/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/text_analyzer_agent/TextAnalyzerAgent"
                       ]
                     },
                     {
@@ -868,52 +852,52 @@
                         {
                           "group": "base",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/base/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/base/Document",
-                            "reference/autogen/agentchat/contrib/vectordb/base/VectorDB",
-                            "reference/autogen/agentchat/contrib/vectordb/base/VectorDBFactory"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/base/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/base/Document",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/base/VectorDB",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/base/VectorDBFactory"
                           ]
                         },
                         {
                           "group": "chromadb",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/chromadb/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/chromadb/ChromaVectorDB"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/chromadb/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/chromadb/ChromaVectorDB"
                           ]
                         },
                         {
                           "group": "mongodb",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/mongodb/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/mongodb/MongoDBAtlasVectorDB",
-                            "reference/autogen/agentchat/contrib/vectordb/mongodb/with_id_rename"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/mongodb/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/mongodb/MongoDBAtlasVectorDB",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/mongodb/with_id_rename"
                           ]
                         },
                         {
                           "group": "pgvectordb",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/pgvectordb/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/pgvectordb/Collection",
-                            "reference/autogen/agentchat/contrib/vectordb/pgvectordb/PGVectorDB"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/pgvectordb/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/pgvectordb/Collection",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/pgvectordb/PGVectorDB"
                           ]
                         },
                         {
                           "group": "qdrant",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/qdrant/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/qdrant/EmbeddingFunction",
-                            "reference/autogen/agentchat/contrib/vectordb/qdrant/FastEmbedEmbeddingFunction",
-                            "reference/autogen/agentchat/contrib/vectordb/qdrant/QdrantVectorDB"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/qdrant/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/qdrant/EmbeddingFunction",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/qdrant/FastEmbedEmbeddingFunction",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/qdrant/QdrantVectorDB"
                           ]
                         },
                         {
                           "group": "utils",
                           "pages": [
-                            "reference/autogen/agentchat/contrib/vectordb/utils/overview",
-                            "reference/autogen/agentchat/contrib/vectordb/utils/ColoredLogger",
-                            "reference/autogen/agentchat/contrib/vectordb/utils/chroma_results_to_query_results",
-                            "reference/autogen/agentchat/contrib/vectordb/utils/filter_results_by_distance",
-                            "reference/autogen/agentchat/contrib/vectordb/utils/get_logger"
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/utils/overview",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/utils/ColoredLogger",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/utils/chroma_results_to_query_results",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/utils/filter_results_by_distance",
+                            "docs/api-reference/autogen/agentchat/contrib/vectordb/utils/get_logger"
                           ]
                         }
                       ]
@@ -921,8 +905,8 @@
                     {
                       "group": "web_surfer",
                       "pages": [
-                        "reference/autogen/agentchat/contrib/web_surfer/overview",
-                        "reference/autogen/agentchat/contrib/web_surfer/WebSurferAgent"
+                        "docs/api-reference/autogen/agentchat/contrib/web_surfer/overview",
+                        "docs/api-reference/autogen/agentchat/contrib/web_surfer/WebSurferAgent"
                       ]
                     }
                   ]
@@ -933,31 +917,31 @@
                     {
                       "group": "experimental",
                       "pages": [
-                        "reference/autogen/agentchat/realtime/experimental/overview",
-                        "reference/autogen/agentchat/realtime/experimental/FunctionObserver",
-                        "reference/autogen/agentchat/realtime/experimental/RealtimeAgent",
-                        "reference/autogen/agentchat/realtime/experimental/RealtimeObserver",
-                        "reference/autogen/agentchat/realtime/experimental/TwilioAudioAdapter",
-                        "reference/autogen/agentchat/realtime/experimental/WebSocketAudioAdapter",
-                        "reference/autogen/agentchat/realtime/experimental/register_swarm",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/overview",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/FunctionObserver",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/RealtimeAgent",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/RealtimeObserver",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/TwilioAudioAdapter",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/WebSocketAudioAdapter",
+                        "docs/api-reference/autogen/agentchat/realtime/experimental/register_swarm",
                         {
                           "group": "clients",
                           "pages": [
-                            "reference/autogen/agentchat/realtime/experimental/clients/overview",
-                            "reference/autogen/agentchat/realtime/experimental/clients/GeminiRealtimeClient",
-                            "reference/autogen/agentchat/realtime/experimental/clients/OpenAIRealtimeClient",
-                            "reference/autogen/agentchat/realtime/experimental/clients/RealtimeClientProtocol",
-                            "reference/autogen/agentchat/realtime/experimental/clients/get_client",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/clients/overview",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/clients/GeminiRealtimeClient",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/clients/OpenAIRealtimeClient",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/clients/RealtimeClientProtocol",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/clients/get_client",
                             {
                               "group": "oai",
                               "pages": [
-                                "reference/autogen/agentchat/realtime/experimental/clients/oai/overview",
-                                "reference/autogen/agentchat/realtime/experimental/clients/oai/OpenAIRealtimeWebRTCClient",
+                                "docs/api-reference/autogen/agentchat/realtime/experimental/clients/oai/overview",
+                                "docs/api-reference/autogen/agentchat/realtime/experimental/clients/oai/OpenAIRealtimeWebRTCClient",
                                 {
                                   "group": "utils",
                                   "pages": [
-                                    "reference/autogen/agentchat/realtime/experimental/clients/oai/utils/overview",
-                                    "reference/autogen/agentchat/realtime/experimental/clients/oai/utils/parse_oai_message"
+                                    "docs/api-reference/autogen/agentchat/realtime/experimental/clients/oai/utils/overview",
+                                    "docs/api-reference/autogen/agentchat/realtime/experimental/clients/oai/utils/parse_oai_message"
                                   ]
                                 }
                               ]
@@ -965,8 +949,8 @@
                             {
                               "group": "realtime_client",
                               "pages": [
-                                "reference/autogen/agentchat/realtime/experimental/clients/realtime_client/overview",
-                                "reference/autogen/agentchat/realtime/experimental/clients/realtime_client/register_realtime_client"
+                                "docs/api-reference/autogen/agentchat/realtime/experimental/clients/realtime_client/overview",
+                                "docs/api-reference/autogen/agentchat/realtime/experimental/clients/realtime_client/register_realtime_client"
                               ]
                             }
                           ]
@@ -974,27 +958,27 @@
                         {
                           "group": "realtime_agent",
                           "pages": [
-                            "reference/autogen/agentchat/realtime/experimental/realtime_agent/overview",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_agent/RealtimeAgentCallbacks"
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_agent/overview",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_agent/RealtimeAgentCallbacks"
                           ]
                         },
                         {
                           "group": "realtime_events",
                           "pages": [
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/overview",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/AudioDelta",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/FunctionCall",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/RealtimeEvent",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/SessionCreated",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/SessionUpdated",
-                            "reference/autogen/agentchat/realtime/experimental/realtime_events/SpeechStarted"
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/overview",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/AudioDelta",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/FunctionCall",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/RealtimeEvent",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/SessionCreated",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/SessionUpdated",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/realtime_events/SpeechStarted"
                           ]
                         },
                         {
                           "group": "websockets",
                           "pages": [
-                            "reference/autogen/agentchat/realtime/experimental/websockets/overview",
-                            "reference/autogen/agentchat/realtime/experimental/websockets/WebSocketProtocol"
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/websockets/overview",
+                            "docs/api-reference/autogen/agentchat/realtime/experimental/websockets/WebSocketProtocol"
                           ]
                         }
                       ]
@@ -1004,9 +988,9 @@
                 {
                   "group": "utils",
                   "pages": [
-                    "reference/autogen/agentchat/utils/overview",
-                    "reference/autogen/agentchat/utils/consolidate_chat_info",
-                    "reference/autogen/agentchat/utils/parse_tags_from_content"
+                    "docs/api-reference/autogen/agentchat/utils/overview",
+                    "docs/api-reference/autogen/agentchat/utils/consolidate_chat_info",
+                    "docs/api-reference/autogen/agentchat/utils/parse_tags_from_content"
                   ]
                 }
               ]
@@ -1014,49 +998,49 @@
             {
               "group": "browser_utils",
               "pages": [
-                "reference/autogen/browser_utils/overview",
-                "reference/autogen/browser_utils/SimpleTextBrowser"
+                "docs/api-reference/autogen/browser_utils/overview",
+                "docs/api-reference/autogen/browser_utils/SimpleTextBrowser"
               ]
             },
             {
               "group": "cache",
               "pages": [
-                "reference/autogen/cache/overview",
-                "reference/autogen/cache/AbstractCache",
+                "docs/api-reference/autogen/cache/overview",
+                "docs/api-reference/autogen/cache/AbstractCache",
                 {
                   "group": "cache_factory",
                   "pages": [
-                    "reference/autogen/cache/cache_factory/overview",
-                    "reference/autogen/cache/cache_factory/CacheFactory"
+                    "docs/api-reference/autogen/cache/cache_factory/overview",
+                    "docs/api-reference/autogen/cache/cache_factory/CacheFactory"
                   ]
                 },
                 {
                   "group": "cosmos_db_cache",
                   "pages": [
-                    "reference/autogen/cache/cosmos_db_cache/overview",
-                    "reference/autogen/cache/cosmos_db_cache/CosmosDBCache",
-                    "reference/autogen/cache/cosmos_db_cache/CosmosDBConfig"
+                    "docs/api-reference/autogen/cache/cosmos_db_cache/overview",
+                    "docs/api-reference/autogen/cache/cosmos_db_cache/CosmosDBCache",
+                    "docs/api-reference/autogen/cache/cosmos_db_cache/CosmosDBConfig"
                   ]
                 },
                 {
                   "group": "disk_cache",
                   "pages": [
-                    "reference/autogen/cache/disk_cache/overview",
-                    "reference/autogen/cache/disk_cache/DiskCache"
+                    "docs/api-reference/autogen/cache/disk_cache/overview",
+                    "docs/api-reference/autogen/cache/disk_cache/DiskCache"
                   ]
                 },
                 {
                   "group": "in_memory_cache",
                   "pages": [
-                    "reference/autogen/cache/in_memory_cache/overview",
-                    "reference/autogen/cache/in_memory_cache/InMemoryCache"
+                    "docs/api-reference/autogen/cache/in_memory_cache/overview",
+                    "docs/api-reference/autogen/cache/in_memory_cache/InMemoryCache"
                   ]
                 },
                 {
                   "group": "redis_cache",
                   "pages": [
-                    "reference/autogen/cache/redis_cache/overview",
-                    "reference/autogen/cache/redis_cache/RedisCache"
+                    "docs/api-reference/autogen/cache/redis_cache/overview",
+                    "docs/api-reference/autogen/cache/redis_cache/RedisCache"
                   ]
                 }
               ]
@@ -1064,82 +1048,82 @@
             {
               "group": "code_utils",
               "pages": [
-                "reference/autogen/code_utils/overview",
-                "reference/autogen/code_utils/PassAssertionFilter",
-                "reference/autogen/code_utils/check_can_use_docker_or_throw",
-                "reference/autogen/code_utils/content_str",
-                "reference/autogen/code_utils/create_virtual_env",
-                "reference/autogen/code_utils/decide_use_docker",
-                "reference/autogen/code_utils/eval_function_completions",
-                "reference/autogen/code_utils/execute_code",
-                "reference/autogen/code_utils/extract_code",
-                "reference/autogen/code_utils/generate_assertions",
-                "reference/autogen/code_utils/generate_code",
-                "reference/autogen/code_utils/get_powershell_command",
-                "reference/autogen/code_utils/implement",
-                "reference/autogen/code_utils/improve_code",
-                "reference/autogen/code_utils/improve_function",
-                "reference/autogen/code_utils/in_docker_container",
-                "reference/autogen/code_utils/infer_lang",
-                "reference/autogen/code_utils/is_docker_running",
-                "reference/autogen/code_utils/timeout_handler"
+                "docs/api-reference/autogen/code_utils/overview",
+                "docs/api-reference/autogen/code_utils/PassAssertionFilter",
+                "docs/api-reference/autogen/code_utils/check_can_use_docker_or_throw",
+                "docs/api-reference/autogen/code_utils/content_str",
+                "docs/api-reference/autogen/code_utils/create_virtual_env",
+                "docs/api-reference/autogen/code_utils/decide_use_docker",
+                "docs/api-reference/autogen/code_utils/eval_function_completions",
+                "docs/api-reference/autogen/code_utils/execute_code",
+                "docs/api-reference/autogen/code_utils/extract_code",
+                "docs/api-reference/autogen/code_utils/generate_assertions",
+                "docs/api-reference/autogen/code_utils/generate_code",
+                "docs/api-reference/autogen/code_utils/get_powershell_command",
+                "docs/api-reference/autogen/code_utils/implement",
+                "docs/api-reference/autogen/code_utils/improve_code",
+                "docs/api-reference/autogen/code_utils/improve_function",
+                "docs/api-reference/autogen/code_utils/in_docker_container",
+                "docs/api-reference/autogen/code_utils/infer_lang",
+                "docs/api-reference/autogen/code_utils/is_docker_running",
+                "docs/api-reference/autogen/code_utils/timeout_handler"
               ]
             },
             {
               "group": "coding",
               "pages": [
-                "reference/autogen/coding/overview",
-                "reference/autogen/coding/CodeBlock",
-                "reference/autogen/coding/CodeExecutor",
-                "reference/autogen/coding/CodeExecutorFactory",
-                "reference/autogen/coding/CodeExtractor",
-                "reference/autogen/coding/CodeResult",
-                "reference/autogen/coding/DockerCommandLineCodeExecutor",
-                "reference/autogen/coding/LocalCommandLineCodeExecutor",
-                "reference/autogen/coding/MarkdownCodeExtractor",
+                "docs/api-reference/autogen/coding/overview",
+                "docs/api-reference/autogen/coding/CodeBlock",
+                "docs/api-reference/autogen/coding/CodeExecutor",
+                "docs/api-reference/autogen/coding/CodeExecutorFactory",
+                "docs/api-reference/autogen/coding/CodeExtractor",
+                "docs/api-reference/autogen/coding/CodeResult",
+                "docs/api-reference/autogen/coding/DockerCommandLineCodeExecutor",
+                "docs/api-reference/autogen/coding/LocalCommandLineCodeExecutor",
+                "docs/api-reference/autogen/coding/MarkdownCodeExtractor",
                 {
                   "group": "base",
                   "pages": [
-                    "reference/autogen/coding/base/overview",
-                    "reference/autogen/coding/base/CodeExecutionConfig"
+                    "docs/api-reference/autogen/coding/base/overview",
+                    "docs/api-reference/autogen/coding/base/CodeExecutionConfig"
                   ]
                 },
                 {
                   "group": "func_with_reqs",
                   "pages": [
-                    "reference/autogen/coding/func_with_reqs/overview",
-                    "reference/autogen/coding/func_with_reqs/Alias",
-                    "reference/autogen/coding/func_with_reqs/FunctionWithRequirements",
-                    "reference/autogen/coding/func_with_reqs/FunctionWithRequirementsStr",
-                    "reference/autogen/coding/func_with_reqs/ImportFromModule",
-                    "reference/autogen/coding/func_with_reqs/to_stub",
-                    "reference/autogen/coding/func_with_reqs/with_requirements"
+                    "docs/api-reference/autogen/coding/func_with_reqs/overview",
+                    "docs/api-reference/autogen/coding/func_with_reqs/Alias",
+                    "docs/api-reference/autogen/coding/func_with_reqs/FunctionWithRequirements",
+                    "docs/api-reference/autogen/coding/func_with_reqs/FunctionWithRequirementsStr",
+                    "docs/api-reference/autogen/coding/func_with_reqs/ImportFromModule",
+                    "docs/api-reference/autogen/coding/func_with_reqs/to_stub",
+                    "docs/api-reference/autogen/coding/func_with_reqs/with_requirements"
                   ]
                 },
                 {
                   "group": "jupyter",
                   "pages": [
-                    "reference/autogen/coding/jupyter/overview",
-                    "reference/autogen/coding/jupyter/DockerJupyterServer",
-                    "reference/autogen/coding/jupyter/EmbeddedIPythonCodeExecutor",
-                    "reference/autogen/coding/jupyter/JupyterClient",
-                    "reference/autogen/coding/jupyter/JupyterCodeExecutor",
-                    "reference/autogen/coding/jupyter/JupyterConnectable",
-                    "reference/autogen/coding/jupyter/JupyterConnectionInfo",
-                    "reference/autogen/coding/jupyter/LocalJupyterServer",
+                    "docs/api-reference/autogen/coding/jupyter/overview",
+                    "docs/api-reference/autogen/coding/jupyter/DockerJupyterServer",
+                    "docs/api-reference/autogen/coding/jupyter/EmbeddedIPythonCodeExecutor",
+                    "docs/api-reference/autogen/coding/jupyter/JupyterClient",
+                    "docs/api-reference/autogen/coding/jupyter/JupyterCodeExecutor",
+                    "docs/api-reference/autogen/coding/jupyter/JupyterConnectable",
+                    "docs/api-reference/autogen/coding/jupyter/JupyterConnectionInfo",
+                    "docs/api-reference/autogen/coding/jupyter/LocalJupyterServer",
                     {
                       "group": "import_utils",
                       "pages": [
-                        "reference/autogen/coding/jupyter/import_utils/overview",
-                        "reference/autogen/coding/jupyter/import_utils/require_jupyter_kernel_gateway_installed",
-                        "reference/autogen/coding/jupyter/import_utils/skip_on_missing_jupyter_kernel_gateway"
+                        "docs/api-reference/autogen/coding/jupyter/import_utils/overview",
+                        "docs/api-reference/autogen/coding/jupyter/import_utils/require_jupyter_kernel_gateway_installed",
+                        "docs/api-reference/autogen/coding/jupyter/import_utils/skip_on_missing_jupyter_kernel_gateway"
                       ]
                     },
                     {
                       "group": "jupyter_client",
                       "pages": [
-                        "reference/autogen/coding/jupyter/jupyter_client/overview",
-                        "reference/autogen/coding/jupyter/jupyter_client/JupyterKernelClient"
+                        "docs/api-reference/autogen/coding/jupyter/jupyter_client/overview",
+                        "docs/api-reference/autogen/coding/jupyter/jupyter_client/JupyterKernelClient"
                       ]
                     }
                   ]
@@ -1147,8 +1131,8 @@
                 {
                   "group": "utils",
                   "pages": [
-                    "reference/autogen/coding/utils/overview",
-                    "reference/autogen/coding/utils/silence_pip"
+                    "docs/api-reference/autogen/coding/utils/overview",
+                    "docs/api-reference/autogen/coding/utils/silence_pip"
                   ]
                 }
               ]
@@ -1156,55 +1140,55 @@
             {
               "group": "doc_utils",
               "pages": [
-                "reference/autogen/doc_utils/overview",
-                "reference/autogen/doc_utils/export_module"
+                "docs/api-reference/autogen/doc_utils/overview",
+                "docs/api-reference/autogen/doc_utils/export_module"
               ]
             },
             {
               "group": "exception_utils",
               "pages": [
-                "reference/autogen/exception_utils/overview",
-                "reference/autogen/exception_utils/ModelToolNotSupportedError"
+                "docs/api-reference/autogen/exception_utils/overview",
+                "docs/api-reference/autogen/exception_utils/ModelToolNotSupportedError"
               ]
             },
             {
               "group": "graph_utils",
               "pages": [
-                "reference/autogen/graph_utils/overview",
-                "reference/autogen/graph_utils/check_graph_validity",
-                "reference/autogen/graph_utils/has_self_loops",
-                "reference/autogen/graph_utils/invert_disallowed_to_allowed",
-                "reference/autogen/graph_utils/visualize_speaker_transitions_dict"
+                "docs/api-reference/autogen/graph_utils/overview",
+                "docs/api-reference/autogen/graph_utils/check_graph_validity",
+                "docs/api-reference/autogen/graph_utils/has_self_loops",
+                "docs/api-reference/autogen/graph_utils/invert_disallowed_to_allowed",
+                "docs/api-reference/autogen/graph_utils/visualize_speaker_transitions_dict"
               ]
             },
             {
               "group": "import_utils",
               "pages": [
-                "reference/autogen/import_utils/overview",
-                "reference/autogen/import_utils/optional_import_block",
-                "reference/autogen/import_utils/patch_object",
-                "reference/autogen/import_utils/require_optional_import",
-                "reference/autogen/import_utils/skip_on_missing_imports"
+                "docs/api-reference/autogen/import_utils/overview",
+                "docs/api-reference/autogen/import_utils/optional_import_block",
+                "docs/api-reference/autogen/import_utils/patch_object",
+                "docs/api-reference/autogen/import_utils/require_optional_import",
+                "docs/api-reference/autogen/import_utils/skip_on_missing_imports"
               ]
             },
             {
               "group": "interop",
               "pages": [
-                "reference/autogen/interop/overview",
-                "reference/autogen/interop/CrewAIInteroperability",
-                "reference/autogen/interop/Interoperability",
-                "reference/autogen/interop/Interoperable",
-                "reference/autogen/interop/LangChainInteroperability",
-                "reference/autogen/interop/PydanticAIInteroperability",
-                "reference/autogen/interop/register_interoperable_class",
+                "docs/api-reference/autogen/interop/overview",
+                "docs/api-reference/autogen/interop/CrewAIInteroperability",
+                "docs/api-reference/autogen/interop/Interoperability",
+                "docs/api-reference/autogen/interop/Interoperable",
+                "docs/api-reference/autogen/interop/LangChainInteroperability",
+                "docs/api-reference/autogen/interop/PydanticAIInteroperability",
+                "docs/api-reference/autogen/interop/register_interoperable_class",
                 {
                   "group": "pydantic_ai",
                   "pages": [
                     {
                       "group": "pydantic_ai_tool",
                       "pages": [
-                        "reference/autogen/interop/pydantic_ai/pydantic_ai_tool/overview",
-                        "reference/autogen/interop/pydantic_ai/pydantic_ai_tool/PydanticAITool"
+                        "docs/api-reference/autogen/interop/pydantic_ai/pydantic_ai_tool/overview",
+                        "docs/api-reference/autogen/interop/pydantic_ai/pydantic_ai_tool/PydanticAITool"
                       ]
                     }
                   ]
@@ -1212,8 +1196,8 @@
                 {
                   "group": "registry",
                   "pages": [
-                    "reference/autogen/interop/registry/overview",
-                    "reference/autogen/interop/registry/InteroperableRegistry"
+                    "docs/api-reference/autogen/interop/registry/overview",
+                    "docs/api-reference/autogen/interop/registry/InteroperableRegistry"
                   ]
                 }
               ]
@@ -1221,34 +1205,34 @@
             {
               "group": "io",
               "pages": [
-                "reference/autogen/io/overview",
-                "reference/autogen/io/IOConsole",
-                "reference/autogen/io/IOStream",
-                "reference/autogen/io/IOWebsockets",
-                "reference/autogen/io/InputStream",
-                "reference/autogen/io/OutputStream"
+                "docs/api-reference/autogen/io/overview",
+                "docs/api-reference/autogen/io/IOConsole",
+                "docs/api-reference/autogen/io/IOStream",
+                "docs/api-reference/autogen/io/IOWebsockets",
+                "docs/api-reference/autogen/io/InputStream",
+                "docs/api-reference/autogen/io/OutputStream"
               ]
             },
             {
               "group": "logger",
               "pages": [
-                "reference/autogen/logger/overview",
-                "reference/autogen/logger/FileLogger",
-                "reference/autogen/logger/LoggerFactory",
-                "reference/autogen/logger/SqliteLogger",
+                "docs/api-reference/autogen/logger/overview",
+                "docs/api-reference/autogen/logger/FileLogger",
+                "docs/api-reference/autogen/logger/LoggerFactory",
+                "docs/api-reference/autogen/logger/SqliteLogger",
                 {
                   "group": "base_logger",
                   "pages": [
-                    "reference/autogen/logger/base_logger/overview",
-                    "reference/autogen/logger/base_logger/BaseLogger"
+                    "docs/api-reference/autogen/logger/base_logger/overview",
+                    "docs/api-reference/autogen/logger/base_logger/BaseLogger"
                   ]
                 },
                 {
                   "group": "logger_utils",
                   "pages": [
-                    "reference/autogen/logger/logger_utils/overview",
-                    "reference/autogen/logger/logger_utils/get_current_ts",
-                    "reference/autogen/logger/logger_utils/to_dict"
+                    "docs/api-reference/autogen/logger/logger_utils/overview",
+                    "docs/api-reference/autogen/logger/logger_utils/get_current_ts",
+                    "docs/api-reference/autogen/logger/logger_utils/to_dict"
                   ]
                 }
               ]
@@ -1256,62 +1240,62 @@
             {
               "group": "math_utils",
               "pages": [
-                "reference/autogen/math_utils/overview",
-                "reference/autogen/math_utils/eval_math_responses",
-                "reference/autogen/math_utils/get_answer",
-                "reference/autogen/math_utils/is_equiv",
-                "reference/autogen/math_utils/is_equiv_chain_of_thought",
-                "reference/autogen/math_utils/last_boxed_only_string",
-                "reference/autogen/math_utils/remove_boxed",
-                "reference/autogen/math_utils/solve_problem",
-                "reference/autogen/math_utils/voting_counts"
+                "docs/api-reference/autogen/math_utils/overview",
+                "docs/api-reference/autogen/math_utils/eval_math_responses",
+                "docs/api-reference/autogen/math_utils/get_answer",
+                "docs/api-reference/autogen/math_utils/is_equiv",
+                "docs/api-reference/autogen/math_utils/is_equiv_chain_of_thought",
+                "docs/api-reference/autogen/math_utils/last_boxed_only_string",
+                "docs/api-reference/autogen/math_utils/remove_boxed",
+                "docs/api-reference/autogen/math_utils/solve_problem",
+                "docs/api-reference/autogen/math_utils/voting_counts"
               ]
             },
             {
               "group": "messages",
               "pages": [
-                "reference/autogen/messages/overview",
-                "reference/autogen/messages/BaseMessage",
-                "reference/autogen/messages/get_annotated_type_for_message_classes",
-                "reference/autogen/messages/wrap_message",
+                "docs/api-reference/autogen/messages/overview",
+                "docs/api-reference/autogen/messages/BaseMessage",
+                "docs/api-reference/autogen/messages/get_annotated_type_for_message_classes",
+                "docs/api-reference/autogen/messages/wrap_message",
                 {
                   "group": "agent_messages",
                   "pages": [
-                    "reference/autogen/messages/agent_messages/overview",
-                    "reference/autogen/messages/agent_messages/ClearAgentsHistoryMessage",
-                    "reference/autogen/messages/agent_messages/ClearConversableAgentHistoryMessage",
-                    "reference/autogen/messages/agent_messages/ConversableAgentUsageSummaryMessage",
-                    "reference/autogen/messages/agent_messages/ConversableAgentUsageSummaryNoCostIncurredMessage",
-                    "reference/autogen/messages/agent_messages/ExecuteCodeBlockMessage",
-                    "reference/autogen/messages/agent_messages/ExecuteFunctionMessage",
-                    "reference/autogen/messages/agent_messages/FunctionCallMessage",
-                    "reference/autogen/messages/agent_messages/FunctionResponseMessage",
-                    "reference/autogen/messages/agent_messages/GenerateCodeExecutionReplyMessage",
-                    "reference/autogen/messages/agent_messages/GroupChatResumeMessage",
-                    "reference/autogen/messages/agent_messages/GroupChatRunChatMessage",
-                    "reference/autogen/messages/agent_messages/PostCarryoverProcessingMessage",
-                    "reference/autogen/messages/agent_messages/SelectSpeakerMessage",
-                    "reference/autogen/messages/agent_messages/SpeakerAttemptFailedMultipleAgentsMessage",
-                    "reference/autogen/messages/agent_messages/SpeakerAttemptFailedNoAgentsMessage",
-                    "reference/autogen/messages/agent_messages/SpeakerAttemptSuccessfullMessage",
-                    "reference/autogen/messages/agent_messages/TerminationAndHumanReplyMessage",
-                    "reference/autogen/messages/agent_messages/TextMessage",
-                    "reference/autogen/messages/agent_messages/ToolCallMessage",
-                    "reference/autogen/messages/agent_messages/ToolResponseMessage"
+                    "docs/api-reference/autogen/messages/agent_messages/overview",
+                    "docs/api-reference/autogen/messages/agent_messages/ClearAgentsHistoryMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ClearConversableAgentHistoryMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ConversableAgentUsageSummaryMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ConversableAgentUsageSummaryNoCostIncurredMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ExecuteCodeBlockMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ExecuteFunctionMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/FunctionCallMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/FunctionResponseMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/GenerateCodeExecutionReplyMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/GroupChatResumeMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/GroupChatRunChatMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/PostCarryoverProcessingMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/SelectSpeakerMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/SpeakerAttemptFailedMultipleAgentsMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/SpeakerAttemptFailedNoAgentsMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/SpeakerAttemptSuccessfullMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/TerminationAndHumanReplyMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/TextMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ToolCallMessage",
+                    "docs/api-reference/autogen/messages/agent_messages/ToolResponseMessage"
                   ]
                 },
                 {
                   "group": "client_messages",
                   "pages": [
-                    "reference/autogen/messages/client_messages/overview",
-                    "reference/autogen/messages/client_messages/UsageSummaryMessage"
+                    "docs/api-reference/autogen/messages/client_messages/overview",
+                    "docs/api-reference/autogen/messages/client_messages/UsageSummaryMessage"
                   ]
                 },
                 {
                   "group": "print_message",
                   "pages": [
-                    "reference/autogen/messages/print_message/overview",
-                    "reference/autogen/messages/print_message/PrintMessage"
+                    "docs/api-reference/autogen/messages/print_message/overview",
+                    "docs/api-reference/autogen/messages/print_message/PrintMessage"
                   ]
                 }
               ]
@@ -1322,115 +1306,115 @@
                 {
                   "group": "anthropic",
                   "pages": [
-                    "reference/autogen/oai/anthropic/overview",
-                    "reference/autogen/oai/anthropic/AnthropicClient"
+                    "docs/api-reference/autogen/oai/anthropic/overview",
+                    "docs/api-reference/autogen/oai/anthropic/AnthropicClient"
                   ]
                 },
                 {
                   "group": "bedrock",
                   "pages": [
-                    "reference/autogen/oai/bedrock/overview",
-                    "reference/autogen/oai/bedrock/BedrockClient",
-                    "reference/autogen/oai/bedrock/calculate_cost",
-                    "reference/autogen/oai/bedrock/convert_stop_reason_to_finish_reason",
-                    "reference/autogen/oai/bedrock/extract_system_messages",
-                    "reference/autogen/oai/bedrock/format_tool_calls",
-                    "reference/autogen/oai/bedrock/format_tools",
-                    "reference/autogen/oai/bedrock/oai_messages_to_bedrock_messages",
-                    "reference/autogen/oai/bedrock/parse_content_parts",
-                    "reference/autogen/oai/bedrock/parse_image"
+                    "docs/api-reference/autogen/oai/bedrock/overview",
+                    "docs/api-reference/autogen/oai/bedrock/BedrockClient",
+                    "docs/api-reference/autogen/oai/bedrock/calculate_cost",
+                    "docs/api-reference/autogen/oai/bedrock/convert_stop_reason_to_finish_reason",
+                    "docs/api-reference/autogen/oai/bedrock/extract_system_messages",
+                    "docs/api-reference/autogen/oai/bedrock/format_tool_calls",
+                    "docs/api-reference/autogen/oai/bedrock/format_tools",
+                    "docs/api-reference/autogen/oai/bedrock/oai_messages_to_bedrock_messages",
+                    "docs/api-reference/autogen/oai/bedrock/parse_content_parts",
+                    "docs/api-reference/autogen/oai/bedrock/parse_image"
                   ]
                 },
                 {
                   "group": "cerebras",
                   "pages": [
-                    "reference/autogen/oai/cerebras/overview",
-                    "reference/autogen/oai/cerebras/CerebrasClient",
-                    "reference/autogen/oai/cerebras/calculate_cerebras_cost",
-                    "reference/autogen/oai/cerebras/oai_messages_to_cerebras_messages"
+                    "docs/api-reference/autogen/oai/cerebras/overview",
+                    "docs/api-reference/autogen/oai/cerebras/CerebrasClient",
+                    "docs/api-reference/autogen/oai/cerebras/calculate_cerebras_cost",
+                    "docs/api-reference/autogen/oai/cerebras/oai_messages_to_cerebras_messages"
                   ]
                 },
                 {
                   "group": "client",
                   "pages": [
-                    "reference/autogen/oai/client/overview",
-                    "reference/autogen/oai/client/OpenAIClient",
-                    "reference/autogen/oai/client/PlaceHolderClient"
+                    "docs/api-reference/autogen/oai/client/overview",
+                    "docs/api-reference/autogen/oai/client/OpenAIClient",
+                    "docs/api-reference/autogen/oai/client/PlaceHolderClient"
                   ]
                 },
                 {
                   "group": "client_utils",
                   "pages": [
-                    "reference/autogen/oai/client_utils/overview",
-                    "reference/autogen/oai/client_utils/FormatterProtocol",
-                    "reference/autogen/oai/client_utils/should_hide_tools",
-                    "reference/autogen/oai/client_utils/validate_parameter"
+                    "docs/api-reference/autogen/oai/client_utils/overview",
+                    "docs/api-reference/autogen/oai/client_utils/FormatterProtocol",
+                    "docs/api-reference/autogen/oai/client_utils/should_hide_tools",
+                    "docs/api-reference/autogen/oai/client_utils/validate_parameter"
                   ]
                 },
                 {
                   "group": "cohere",
                   "pages": [
-                    "reference/autogen/oai/cohere/overview",
-                    "reference/autogen/oai/cohere/CohereClient",
-                    "reference/autogen/oai/cohere/CohereError",
-                    "reference/autogen/oai/cohere/CohereRateLimitError",
-                    "reference/autogen/oai/cohere/calculate_cohere_cost"
+                    "docs/api-reference/autogen/oai/cohere/overview",
+                    "docs/api-reference/autogen/oai/cohere/CohereClient",
+                    "docs/api-reference/autogen/oai/cohere/CohereError",
+                    "docs/api-reference/autogen/oai/cohere/CohereRateLimitError",
+                    "docs/api-reference/autogen/oai/cohere/calculate_cohere_cost"
                   ]
                 },
                 {
                   "group": "gemini",
                   "pages": [
-                    "reference/autogen/oai/gemini/overview",
-                    "reference/autogen/oai/gemini/GeminiClient",
-                    "reference/autogen/oai/gemini/calculate_gemini_cost"
+                    "docs/api-reference/autogen/oai/gemini/overview",
+                    "docs/api-reference/autogen/oai/gemini/GeminiClient",
+                    "docs/api-reference/autogen/oai/gemini/calculate_gemini_cost"
                   ]
                 },
                 {
                   "group": "groq",
                   "pages": [
-                    "reference/autogen/oai/groq/overview",
-                    "reference/autogen/oai/groq/GroqClient",
-                    "reference/autogen/oai/groq/calculate_groq_cost",
-                    "reference/autogen/oai/groq/oai_messages_to_groq_messages"
+                    "docs/api-reference/autogen/oai/groq/overview",
+                    "docs/api-reference/autogen/oai/groq/GroqClient",
+                    "docs/api-reference/autogen/oai/groq/calculate_groq_cost",
+                    "docs/api-reference/autogen/oai/groq/oai_messages_to_groq_messages"
                   ]
                 },
                 {
                   "group": "mistral",
                   "pages": [
-                    "reference/autogen/oai/mistral/overview",
-                    "reference/autogen/oai/mistral/MistralAIClient",
-                    "reference/autogen/oai/mistral/calculate_mistral_cost"
+                    "docs/api-reference/autogen/oai/mistral/overview",
+                    "docs/api-reference/autogen/oai/mistral/MistralAIClient",
+                    "docs/api-reference/autogen/oai/mistral/calculate_mistral_cost"
                   ]
                 },
                 {
                   "group": "ollama",
                   "pages": [
-                    "reference/autogen/oai/ollama/overview",
-                    "reference/autogen/oai/ollama/OllamaClient",
-                    "reference/autogen/oai/ollama/is_valid_tool_call_item"
+                    "docs/api-reference/autogen/oai/ollama/overview",
+                    "docs/api-reference/autogen/oai/ollama/OllamaClient",
+                    "docs/api-reference/autogen/oai/ollama/is_valid_tool_call_item"
                   ]
                 },
                 {
                   "group": "openai_utils",
                   "pages": [
-                    "reference/autogen/oai/openai_utils/overview",
-                    "reference/autogen/oai/openai_utils/create_gpt_assistant",
-                    "reference/autogen/oai/openai_utils/create_gpt_vector_store",
-                    "reference/autogen/oai/openai_utils/detect_gpt_assistant_api_version",
-                    "reference/autogen/oai/openai_utils/get_config",
-                    "reference/autogen/oai/openai_utils/get_key",
-                    "reference/autogen/oai/openai_utils/is_valid_api_key",
-                    "reference/autogen/oai/openai_utils/retrieve_assistants_by_name",
-                    "reference/autogen/oai/openai_utils/update_gpt_assistant"
+                    "docs/api-reference/autogen/oai/openai_utils/overview",
+                    "docs/api-reference/autogen/oai/openai_utils/create_gpt_assistant",
+                    "docs/api-reference/autogen/oai/openai_utils/create_gpt_vector_store",
+                    "docs/api-reference/autogen/oai/openai_utils/detect_gpt_assistant_api_version",
+                    "docs/api-reference/autogen/oai/openai_utils/get_config",
+                    "docs/api-reference/autogen/oai/openai_utils/get_key",
+                    "docs/api-reference/autogen/oai/openai_utils/is_valid_api_key",
+                    "docs/api-reference/autogen/oai/openai_utils/retrieve_assistants_by_name",
+                    "docs/api-reference/autogen/oai/openai_utils/update_gpt_assistant"
                   ]
                 },
                 {
                   "group": "together",
                   "pages": [
-                    "reference/autogen/oai/together/overview",
-                    "reference/autogen/oai/together/TogetherClient",
-                    "reference/autogen/oai/together/calculate_together_cost",
-                    "reference/autogen/oai/together/oai_messages_to_together_messages"
+                    "docs/api-reference/autogen/oai/together/overview",
+                    "docs/api-reference/autogen/oai/together/TogetherClient",
+                    "docs/api-reference/autogen/oai/together/calculate_together_cost",
+                    "docs/api-reference/autogen/oai/together/oai_messages_to_together_messages"
                   ]
                 }
               ]
@@ -1438,60 +1422,60 @@
             {
               "group": "retrieve_utils",
               "pages": [
-                "reference/autogen/retrieve_utils/overview",
-                "reference/autogen/retrieve_utils/get_file_from_url",
-                "reference/autogen/retrieve_utils/get_files_from_dir",
-                "reference/autogen/retrieve_utils/is_url",
-                "reference/autogen/retrieve_utils/split_files_to_chunks",
-                "reference/autogen/retrieve_utils/split_text_to_chunks"
+                "docs/api-reference/autogen/retrieve_utils/overview",
+                "docs/api-reference/autogen/retrieve_utils/get_file_from_url",
+                "docs/api-reference/autogen/retrieve_utils/get_files_from_dir",
+                "docs/api-reference/autogen/retrieve_utils/is_url",
+                "docs/api-reference/autogen/retrieve_utils/split_files_to_chunks",
+                "docs/api-reference/autogen/retrieve_utils/split_text_to_chunks"
               ]
             },
             {
               "group": "runtime_logging",
               "pages": [
-                "reference/autogen/runtime_logging/overview",
-                "reference/autogen/runtime_logging/get_connection",
-                "reference/autogen/runtime_logging/log_chat_completion",
-                "reference/autogen/runtime_logging/log_event",
-                "reference/autogen/runtime_logging/log_function_use",
-                "reference/autogen/runtime_logging/log_new_agent",
-                "reference/autogen/runtime_logging/log_new_client",
-                "reference/autogen/runtime_logging/log_new_wrapper",
-                "reference/autogen/runtime_logging/logging_enabled",
-                "reference/autogen/runtime_logging/start",
-                "reference/autogen/runtime_logging/stop"
+                "docs/api-reference/autogen/runtime_logging/overview",
+                "docs/api-reference/autogen/runtime_logging/get_connection",
+                "docs/api-reference/autogen/runtime_logging/log_chat_completion",
+                "docs/api-reference/autogen/runtime_logging/log_event",
+                "docs/api-reference/autogen/runtime_logging/log_function_use",
+                "docs/api-reference/autogen/runtime_logging/log_new_agent",
+                "docs/api-reference/autogen/runtime_logging/log_new_client",
+                "docs/api-reference/autogen/runtime_logging/log_new_wrapper",
+                "docs/api-reference/autogen/runtime_logging/logging_enabled",
+                "docs/api-reference/autogen/runtime_logging/start",
+                "docs/api-reference/autogen/runtime_logging/stop"
               ]
             },
             {
               "group": "token_count_utils",
               "pages": [
-                "reference/autogen/token_count_utils/overview",
-                "reference/autogen/token_count_utils/count_token",
-                "reference/autogen/token_count_utils/get_max_token_limit",
-                "reference/autogen/token_count_utils/num_tokens_from_functions",
-                "reference/autogen/token_count_utils/num_tokens_from_gpt_image",
-                "reference/autogen/token_count_utils/percentile_used",
-                "reference/autogen/token_count_utils/token_left"
+                "docs/api-reference/autogen/token_count_utils/overview",
+                "docs/api-reference/autogen/token_count_utils/count_token",
+                "docs/api-reference/autogen/token_count_utils/get_max_token_limit",
+                "docs/api-reference/autogen/token_count_utils/num_tokens_from_functions",
+                "docs/api-reference/autogen/token_count_utils/num_tokens_from_gpt_image",
+                "docs/api-reference/autogen/token_count_utils/percentile_used",
+                "docs/api-reference/autogen/token_count_utils/token_left"
               ]
             },
             {
               "group": "tools",
               "pages": [
-                "reference/autogen/tools/overview",
-                "reference/autogen/tools/BaseContext",
-                "reference/autogen/tools/ChatContext",
-                "reference/autogen/tools/Depends",
-                "reference/autogen/tools/Tool",
-                "reference/autogen/tools/get_function_schema",
-                "reference/autogen/tools/load_basemodels_if_needed",
-                "reference/autogen/tools/serialize_to_str",
+                "docs/api-reference/autogen/tools/overview",
+                "docs/api-reference/autogen/tools/BaseContext",
+                "docs/api-reference/autogen/tools/ChatContext",
+                "docs/api-reference/autogen/tools/Depends",
+                "docs/api-reference/autogen/tools/Tool",
+                "docs/api-reference/autogen/tools/get_function_schema",
+                "docs/api-reference/autogen/tools/load_basemodels_if_needed",
+                "docs/api-reference/autogen/tools/serialize_to_str",
                 {
                   "group": "dependency_injection",
                   "pages": [
-                    "reference/autogen/tools/dependency_injection/overview",
-                    "reference/autogen/tools/dependency_injection/Field",
-                    "reference/autogen/tools/dependency_injection/get_context_params",
-                    "reference/autogen/tools/dependency_injection/inject_params"
+                    "docs/api-reference/autogen/tools/dependency_injection/overview",
+                    "docs/api-reference/autogen/tools/dependency_injection/Field",
+                    "docs/api-reference/autogen/tools/dependency_injection/get_context_params",
+                    "docs/api-reference/autogen/tools/dependency_injection/inject_params"
                   ]
                 },
                 {
@@ -1503,9 +1487,9 @@
                         {
                           "group": "browser_use",
                           "pages": [
-                            "reference/autogen/tools/experimental/browser_use/browser_use/overview",
-                            "reference/autogen/tools/experimental/browser_use/browser_use/BrowserUseResult",
-                            "reference/autogen/tools/experimental/browser_use/browser_use/BrowserUseTool"
+                            "docs/api-reference/autogen/tools/experimental/browser_use/browser_use/overview",
+                            "docs/api-reference/autogen/tools/experimental/browser_use/browser_use/BrowserUseResult",
+                            "docs/api-reference/autogen/tools/experimental/browser_use/browser_use/BrowserUseTool"
                           ]
                         }
                       ]
@@ -1517,191 +1501,13 @@
             {
               "group": "types",
               "pages": [
-                "reference/autogen/types/overview",
-                "reference/autogen/types/UserMessageImageContentPart",
-                "reference/autogen/types/UserMessageTextContentPart"
+                "docs/api-reference/autogen/types/overview",
+                "docs/api-reference/autogen/types/UserMessageImageContentPart",
+                "docs/api-reference/autogen/types/UserMessageTextContentPart"
               ]
             }
           ]
         }
-      ]
-    },
-    {
-      "group": "Talks",
-      "pages": [
-        "talks/future_talks/index",
-        "talks/2025-01-23/index",
-        "talks/2025-01-16/index",
-        "talks/2024-12-19-special_talk/index",
-        "talks/2024-12-19/index",
-        "talks/2024-12-12/index",
-        "talks/2024-11-28/index",
-        "talks/2024-11-25/index",
-        "talks/2024-11-18/index",
-        "talks/2024-11-12/index",
-        "talks/2024-11-11/index",
-        "talks/2024-11-04/index",
-        "talks/2024-10-15/index",
-        "talks/2024-10-14/index",
-        "talks/2024-09-30/index",
-        "talks/2024-09-23/index",
-        "talks/2024-08-26/index"
-      ]
-    },
-    {
-      "group": "Blog",
-      "pages": [
-        {
-          "group": "Recent posts",
-          "pages": [
-            "blog/2025-01-22-Tools-ChatContext-Dependency-Injection/index",
-            "blog/2025-01-10-WebSockets/index",
-            "blog/2025-01-09-RealtimeAgent-over-WebRTC/index",
-            "blog/2025-01-08-RealtimeAgent-over-websocket/index",
-            "blog/2025-01-07-Tools-Dependency-Injection/index",
-            "blog/2024-12-20-Tools-interoperability/index",
-            "blog/2024-12-20-Reasoning-Update/index",
-            "blog/2024-12-20-RealtimeAgent/index",
-            "blog/2024-12-06-FalkorDB-Structured/index",
-            "blog/2024-12-02-ReasoningAgent2/index",
-            "blog/2024-11-27-Prompt-Leakage-Probing/index",
-            "blog/2024-11-17-Swarm/index",
-            "blog/2024-11-15-CaptainAgent/index",
-            "blog/2024-10-23-NOVA/index",
-            "blog/2024-07-25-AgentOps/index",
-            "blog/2024-06-24-AltModels-Classes/index",
-            "blog/2024-06-21-AgentEval/index",
-            "blog/2024-05-24-Agent/index",
-            "blog/2024-03-11-AutoDefense/index",
-            "blog/2024-03-03-AutoGen-Update/index",
-            "blog/2024-02-29-StateFlow/index",
-            "blog/2024-02-11-FSM-GroupChat/index",
-            "blog/2024-02-02-AutoAnny/index",
-            "blog/2024-01-26-Custom-Models/index",
-            "blog/2024-01-25-AutoGenBench/index",
-            "blog/2024-01-23-Code-execution-in-docker/index",
-            "blog/2023-12-29-AgentDescriptions/index",
-            "blog/2023-12-23-AgentOptimizer/index",
-            "blog/2023-12-01-AutoGenStudio/index",
-            "blog/2023-11-26-Agent-AutoBuild/index",
-            "blog/2023-11-20-AgentEval/index",
-            "blog/2023-11-13-OAI-assistants/index",
-            "blog/2023-11-09-EcoAssistant/index",
-            "blog/2023-11-06-LMM-Agent/index",
-            "blog/2023-10-26-TeachableAgent/index",
-            "blog/2023-10-18-RetrieveChat/index",
-            "blog/2023-07-14-Local-LLMs/index",
-            "blog/2023-06-28-MathChat/index",
-            "blog/2023-05-18-GPT-adaptive-humaneval/index",
-            "blog/2023-04-21-LLM-tuning-math/index"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Examples",
-      "pages": [
-        {
-          "group": "Examples by Notebook",
-          "pages": [
-            "notebooks/Notebooks",
-            "notebooks/agentchat_groupchat_customized",
-            "notebooks/agentchat_oai_assistant_retrieval",
-            "notebooks/agentchat_RetrieveChat_qdrant",
-            "notebooks/agentchat_inception_function",
-            "notebooks/agentchat_function_call_async",
-            "notebooks/agentchat_guidance",
-            "notebooks/agentchat_nested_sequential_chats",
-            "notebooks/agentchat_groupchat",
-            "notebooks/agentchat_multi_task_async_chats",
-            "notebooks/agentchat_function_call",
-            "notebooks/agentchat_nested_chats_chess_altmodels",
-            "notebooks/agentchat_realtime_websocket",
-            "notebooks/agentchat_webscraping_with_apify",
-            "notebooks/tools_browser_use_deepseek",
-            "notebooks/agentchat_stream",
-            "notebooks/agentchat_image_generation_capability",
-            "notebooks/agentchat_realtime_swarm_websocket",
-            "notebooks/agentchat_groupchat_research",
-            "notebooks/agentchat_agentops",
-            "notebooks/agentchat_video_transcript_translate_with_whisper",
-            "notebooks/autobuild_agent_library",
-            "notebooks/agentchat_two_users",
-            "notebooks/agentchat_structured_outputs",
-            "notebooks/agentchat_captainagent",
-            "notebooks/agentchat_groupchat_vis",
-            "notebooks/tools_interoperability",
-            "notebooks/agentchat_graph_rag_falkordb",
-            "notebooks/agenteval_cq_math",
-            "notebooks/agentchat_realtime_swarm_webrtc",
-            "notebooks/autogen_uniformed_api_calling",
-            "notebooks/gpt_assistant_agent_function_call",
-            "notebooks/agentchat_nestedchat",
-            "notebooks/agentchat_cost_token_tracking",
-            "notebooks/agentchat_memory_using_mem0",
-            "notebooks/agentchat_RetrieveChat_pgvector",
-            "notebooks/tools_dependency_injection",
-            "notebooks/agentchats_sequential_chats",
-            "notebooks/agentchat_RetrieveChat_mongodb",
-            "notebooks/agentchat_azr_ai_search",
-            "notebooks/agentchat_reasoning_agent",
-            "notebooks/agentchat_tabular_data_rag_workflow",
-            "notebooks/agentchat_teachable_oai_assistants",
-            "notebooks/autobuild_basic",
-            "notebooks/agentchat_multi_task_chats",
-            "notebooks/agentchat_function_call_currency_calculator",
-            "notebooks/agentchat_swarm",
-            "notebooks/agentchat_databricks_dbrx",
-            "notebooks/agentchat_swarm_graphrag_telemetry_trip_planner",
-            "notebooks/agentchat_web_info",
-            "notebooks/agentchat_groupchat_stateflow",
-            "notebooks/agentchat_group_chat_with_llamaindex_agents",
-            "notebooks/agentchat_graph_rag_neo4j_native",
-            "notebooks/agentchat_surfer",
-            "notebooks/agentchat_lmm_llava",
-            "notebooks/agentchat_groupchat_RAG",
-            "notebooks/agentchat_logging",
-            "notebooks/agentchat_society_of_mind",
-            "notebooks/agentchat_dalle_and_gpt4v",
-            "notebooks/agentchat_openlit",
-            "notebooks/JSON_mode_example",
-            "notebooks/agentchat_swarm_graphrag_trip_planner",
-            "notebooks/lats_search",
-            "notebooks/agentchat_planning",
-            "notebooks/agentchat_nestedchat_optiguide",
-            "notebooks/agentchat_langchain",
-            "notebooks/agentchat_function_call_code_writing",
-            "notebooks/agentchat_oai_code_interpreter",
-            "notebooks/tools_browser_use",
-            "notebooks/agentchat_MathChat",
-            "notebooks/agentchat_teachability",
-            "notebooks/agentchat_realtime_gemini_websocket",
-            "notebooks/agentchat_transform_messages",
-            "notebooks/agentchat_oai_assistant_function_call",
-            "notebooks/agentchat_websockets",
-            "notebooks/agentchat_auto_feedback_from_code_execution",
-            "notebooks/async_human_input",
-            "notebooks/agentchat_custom_model",
-            "notebooks/tools_chat_context_dependency_injection",
-            "notebooks/agentchat_nested_chats_chess",
-            "notebooks/agentchat_oai_assistant_groupchat",
-            "notebooks/agentchat_captainagent_crosstool",
-            "notebooks/agentchat_teaching",
-            "notebooks/agentchat_sql_spider",
-            "notebooks/agentchat_human_feedback",
-            "notebooks/agentchat_oai_assistant_twoagents_basic",
-            "notebooks/agentchat_swarm_w_groupchat_legacy",
-            "notebooks/agentchat_swarm_enhanced",
-            "notebooks/agentchat_RetrieveChat",
-            "notebooks/agentchat_graph_rag_neo4j",
-            "notebooks/agentchat_agentoptimizer",
-            "notebooks/agentchat_lmm_gpt-4v",
-            "notebooks/agentchat_realtime_webrtc",
-            "notebooks/agentchat_groupchat_finite_state_machine",
-            "notebooks/config_loader_utility_functions"
-          ]
-        },
-        "notebooks/Gallery"
       ]
     }
   ],
