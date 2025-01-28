@@ -67,7 +67,12 @@ def build_pdoc_dict(module_name: str) -> None:
     if not hasattr(module, "__pdoc__"):
         setattr(module, "__pdoc__", {})
 
+    all = module.__all__ if hasattr(module, "__all__") else None
+
     for name, obj in module.__dict__.items():
+        if all and name not in all:
+            continue
+
         if not hasattr(obj, "__name__") or name.startswith("_"):
             continue
 
