@@ -1,4 +1,6 @@
-# Ending a chat
+---
+title: Ending a chat
+---
 
 There are a number of ways a chat can end:
 1. The maximum number of turns in a chat is reached
@@ -71,9 +73,9 @@ agent_b = ConversableAgent(
 # agent_b > agent_a replies with message "... DONE!" > agent_b ends before replying
 ```
 
-::note
+<Note>
 If the termination condition is met and the agent's `human_input_mode` is "ALWAYS" or 'TERMINATE' (ConversableAgent's default), you will be asked for input and can decide to end the chat. If it is "NEVER" it will end immediately.
-::
+</Note>
 
 ### 3. Number of automatic replies
 
@@ -96,9 +98,9 @@ agent_a.initiate_chat(agent_b, ...)
 # agent_a > agent_b > agent_a with first auto reply > agent_b > agent_a with second auto reply > agent_b > agent_a ends before replying
 ```
 
-::note
+<Note>
 If the agent's `human_input_mode` is "ALWAYS" or 'TERMINATE' (ConversableAgent's default), you will be asked for input and can decide to end the chat. If it is "NEVER" it will end immediately.
-::
+</Note>
 
 ### 4. Human replies with 'exit'
 During the course of the conversation, if you are prompted and reply 'exit', the chat will end.

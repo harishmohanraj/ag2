@@ -1,4 +1,6 @@
-# Structured outputs
+---
+title: Structured outputs
+---
 
 Working with freefrom text from LLMs isn't optimal when you know how you want the reply formatted.
 
@@ -66,8 +68,8 @@ print(json.dumps(lesson_plan_json, indent=2))
   "script": "Introduction (10 minutes):\nBegin the class by asking students what they already know about the solar system. Write their responses on the board. \n\nIntroduce the topic by explaining that today they will be learning about the solar system, which includes the Sun, planets, moons, and other celestial objects.\n\nDirect Instruction (20 minutes):\nUse a visual aid (such as a poster or video) to show the solar system's structure. \n\nDiscuss the eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. \n\nFor each planet, mention:\n- Its position from the Sun.\n- Key characteristics (e.g., size, color, temperature).\n- Any notable features (e.g., rings, atmosphere). \n\nInteractive Activity (15 minutes):\nSplit the class into small groups. Give each group a set of planet cards that include pictures and information. Have them work together to put the planets in order from the Sun. Each group will present their order and one interesting fact about each planet they discussed."
 }
 ```
-::tip
+<Tip>
 Add a `format` function to the LessonPlan class in the example to convert the returned value into a string. [Example here](https://docs.ag2.ai/notebooks/agentchat_structured_outputs#define-the-reasoning-model-2).
-::
+</Tip>
 
 Next > ending-a-chat.md

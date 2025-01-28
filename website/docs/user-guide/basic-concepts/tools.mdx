@@ -1,12 +1,12 @@
-# Tools
+---
+title: Tools
+---
 
 Agents gain significant utility through tools as they provide access to external data, APIs, and functionality.
 
 In AG2, using tools is done in two parts, an agent *suggests* which tools to use (via their LLM) and another *executes* the tool.
 
-::note
-In a conversation the executor agent must follow the agent that suggests a tool.
-::
+<Note>In a conversation the executor agent must follow the agent that suggests a tool.</Note>
 
 In the swarm example above, we attached tools to our agents and, as part of the swarm, AG2 created a tool executor agent to run recommended tools. Typically, you'll create two agents, one to decide which tool to use and another to execute it.
 

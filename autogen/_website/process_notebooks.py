@@ -1031,7 +1031,7 @@ def main() -> None:
         # Post-processing steps after all notebooks are handled
         if not args.dry_run:
             copy_examples_mdx_files(args.website_directory)
-            update_navigation_with_notebooks(args.website_directory)
+            # update_navigation_with_notebooks(args.website_directory)
             fix_internal_references_in_mdx_files(args.website_directory)
             add_authors_and_social_img_to_blog_posts(args.website_directory)
 
