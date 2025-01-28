@@ -257,7 +257,7 @@ proxy_agent = UserProxyAgent(
     code_execution_config=False,
     system_message="Reply in JSON",
     default_auto_reply="",
-    description="""This agent is the user. Your job is to get an anwser from the friendly_agent or Suspicious agent back to this user agent. Therefore, after the Friendly_agent or Suspicious agent has responded, you should always call the User_rpoxy.""",
+    description="""This agent is the user. Your job is to get an answer from the friendly_agent or Suspicious agent back to this user agent. Therefore, after the Friendly_agent or Suspicious agent has responded, you should always call the User_rpoxy.""",
     is_termination_msg=lambda x: True,
 )
 ```

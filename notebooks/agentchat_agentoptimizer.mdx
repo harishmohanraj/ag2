@@ -225,7 +225,7 @@ Problem:
         except BadRequestError as e:
             error_message = str(e)
             self.is_correct = 0
-            print("error information: {}".format(error_message))
+            print(f"error information: {error_message}")
 
         recipient.reset()
         is_correct = copy.deepcopy(self.is_correct)
@@ -283,10 +283,10 @@ problems as examples.
 
 ```python
 test_data, train_data = [], []
-with open("MATH/dataset/algebra.jsonl", "r", encoding="utf-8") as f:
+with open("MATH/dataset/algebra.jsonl", encoding="utf-8") as f:
     for line in f:
         test_data.append(json.loads(line))
-with open("MATH/dataset/train/algebra.jsonl", "r", encoding="utf-8") as f:
+with open("MATH/dataset/train/algebra.jsonl", encoding="utf-8") as f:
     for line in f:
         train_data.append(json.loads(line))
 test_data, train_data = test_data[0:10], train_data[0:10]
@@ -389,8 +389,8 @@ print(
 for func in assistant.llm_config["functions"]:
     print(func["name"] + ": " + func["description"] + "\n")
 print("------------------------------------------------Summary------------------------------------------------\n")
-print("success_rate_without_agent_training: {average}%\n".format(average=success_rate_without_agent_training * 100))
-print("success_rate_with_agent_training: {average}%\n".format(average=success_rate_with_agent_training * 100))
+print(f"success_rate_without_agent_training: {success_rate_without_agent_training * 100}%\n")
+print(f"success_rate_with_agent_training: {success_rate_with_agent_training * 100}%\n")
 ```
 
 ``` text

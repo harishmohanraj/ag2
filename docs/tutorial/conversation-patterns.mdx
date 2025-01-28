@@ -547,7 +547,7 @@ sequence.
 ## Group Chat
 
 So far we have only seen conversation patterns that involve two agents
-or a sequence of two-agent chats. AutoGen provides a more general
+or a sequence of two-agent chats. AG2 provides a more general
 conversation pattern called group chat, which involves more than two
 agents. The core idea of group chat is that all agents contribute to a
 single conversation thread and share the same context. This is useful
@@ -1263,7 +1263,7 @@ A poem is returned as the response, which describes the transformation
 attempt from 3 to 7.
 
 The implementation of the nested chats handler makes use of the
-[`register_reply`](../../docs/reference/agentchat/conversable_agent#register-reply)
+[`register_reply`](../../reference/autogen/ConversableAgent#register-reply)
 method, which allows you to make extensive customization to
 `ConversableAgent`. The GroupChatManager uses the same mechanism to
 implement the group chat.
@@ -1281,7 +1281,7 @@ notebook](../../notebooks/agentchat_nested_chats_chess) for an example.
 In this chapter, we covered two-agent chat, sequential chat, group chat,
 and nested chat patterns. You can compose these patterns like LEGO
 blocks to create complex workflows. You can also use
-[`register_reply`](../../docs/reference/agentchat/conversable_agent#register-reply)
+[`register_reply`](../../reference/autogen/ConversableAgent#register-reply)
 to create new patterns.
 
 This is the last chapter on basic AutoGen concepts. In the next chatper,

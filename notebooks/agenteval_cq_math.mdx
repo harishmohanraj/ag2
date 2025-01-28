@@ -111,7 +111,7 @@ Note: you may need to restart the kernel to use updated packages.
 ## Set your API Endpoint
 
 -   The
-    [`config_list_from_json`](https://docs.ag2.ai/docs/reference/oai/openai_utils#config-list-from-json)
+    [`config_list_from_json`](https://docs.ag2.ai/reference/autogen/config_list_from_json#config-list-from-json)
     function loads a list of configurations from an environment variable
     or a json file. It first looks for an environment variable with a
     specified name. The value of the environment variable needs to be a
@@ -125,6 +125,7 @@ for full code examples of the different methods.
 ```python
 import json
 import os
+from contextlib import suppress
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -157,9 +158,9 @@ def remove_ground_truth(test_case):
 
 
 # Reading one successful and one failed example of the task
-success_str = open("../test/test_files/agenteval-in-out/samples/sample_math_response_successful.txt", "r").read()
+success_str = open("../test/test_files/agenteval-in-out/samples/sample_math_response_successful.txt").read()  # noqa: SIM115
 response_successful = remove_ground_truth(success_str)[0]
-failed_str = open("../test/test_files/agenteval-in-out/samples/sample_math_response_failed.txt", "r").read()
+failed_str = open("../test/test_files/agenteval-in-out/samples/sample_math_response_failed.txt").read()  # noqa: SIM115
 response_failed = remove_ground_truth(failed_str)[0]
 
 task = Task(
@@ -250,7 +251,7 @@ Now, we print the designed criteria for assessing math problems.
 
 ```python
 current_task_name = "_".join(task.name.split()).lower()
-cr_file = open(f"../test/test_files/agenteval-in-out/{current_task_name}_criteria.json", "w")
+cr_file = open(f"../test/test_files/agenteval-in-out/{current_task_name}_criteria.json", "w")  # noqa: SIM115
 cr_file.write(Criterion.write_json(criteria))
 cr_file.close()
 ```
@@ -267,7 +268,7 @@ criteria in `criteria_file`.
 
 ```python
 criteria_file = f"../test/test_files/agenteval-in-out/{current_task_name}_criteria.json"
-criteria = open(criteria_file, "r").read()
+criteria = open(criteria_file).read()  # noqa: SIM115
 criteria = Criterion.parse_json_str(criteria)
 ```
 
@@ -277,7 +278,7 @@ Here, we run the quantifier on a single math problem test case,
 `sample_test_case.json`, for demonstration.
 
 ```python
-test_case = open("../test/test_files/agenteval-in-out/samples/sample_test_case.json", "r").read()
+test_case = open("../test/test_files/agenteval-in-out/samples/sample_test_case.json").read()  # noqa: SIM115
 test_case, ground_truth = remove_ground_truth(test_case)
 quantifier_output = quantify_criteria(
     llm_config={"config_list": config_list},
@@ -534,14 +535,14 @@ warning:  skipped "../" path component(s) in ../prealgebra/5.json
 
 ```python
 criteria_file = "../test/test_files/agenteval-in-out/samples/sample_math_criteria.json"
-criteria = Criterion.parse_json_str(open(criteria_file, "r").read())
+criteria = Criterion.parse_json_str(open(criteria_file).read())  # noqa: SIM115
 outcome = {}
 
 for prefix in os.listdir(log_path):
     for file_name in os.listdir(log_path + "/" + prefix):
         gameid = prefix + "_" + file_name
         if file_name.split(".")[-1] == "json":
-            test_case, ground_truth = remove_ground_truth(open(log_path + "/" + prefix + "/" + file_name, "r").read())
+            test_case, ground_truth = remove_ground_truth(open(log_path + "/" + prefix + "/" + file_name).read())  # noqa: SIM115
             quantifier_output = quantify_criteria(
                 llm_config={"config_list": config_list},
                 criteria=criteria,
@@ -2506,18 +2507,16 @@ the histogram form (similar to the one in the blog post).
 
 ```python
 # computing average and 95% interval for failed and successful cases on all criteria
-try:
-    criteria = Criterion.parse_json_str(open(criteria_file, "r").read())
-except:  # noqa: E722
-    pass
+
+
+with suppress(Exception):
+    criteria = Criterion.parse_json_str(open(criteria_file).read())  # noqa: SIM115
 
 
 nl2int = {}
 for criterion in criteria:
-    score = 0
-    for v in criterion.accepted_values:
+    for score, v in enumerate(criterion.accepted_values):
         nl2int[v] = score
-        score += 1
 print(nl2int)
 
 average_s = {}
@@ -2530,14 +2529,12 @@ for criterion in criteria:
     task = {"s": [], "f": []}
 
     for game in outcome:
-        try:
+        with suppress(Exception):
             tmp_dic = eval(outcome[game]["estimated_performance"])
             if outcome[game]["actual_success"] == "false":
                 task["f"].append(nl2int[tmp_dic[criterion.name]])
             else:
                 task["s"].append(nl2int[tmp_dic[criterion.name]])
-        except:  # noqa: E722
-            pass
 
     average_f[criterion.name] = np.mean(task["f"])
     average_s[criterion.name] = np.mean(task["s"])

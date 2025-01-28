@@ -18,10 +18,10 @@ properties of this is that when an error is encountered, only the
 failing code needs to be re-executed, and not the entire script.
 
 To use the
-[`JupyterCodeExecutor`](../../../docs/reference/coding/jupyter/jupyter_code_executor#jupytercodeexecutor)
+[`JupyterCodeExecutor`](../../../reference/autogen/coding/jupyter/JupyterCodeExecutor#jupytercodeexecutor)
 you need a Jupyter server running. This can be in Docker, local, or even
 a remote server. Then, when constructing the
-[`JupyterCodeExecutor`](../../../docs/reference/coding/jupyter/jupyter_code_executor#jupytercodeexecutor)
+[`JupyterCodeExecutor`](../../../reference/autogen/coding/jupyter/JupyterCodeExecutor#jupytercodeexecutor)
 you pass it the server it should connect to.
 
 ## Dependencies
@@ -38,7 +38,7 @@ pip install 'pyautogen[jupyter-executor]'
 ### Docker
 
 To run a Docker based Jupyter server, the
-[`DockerJupyterServer`](../../../docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver)
+[`DockerJupyterServer`](../../../reference/autogen/coding/jupyter/DockerJupyterServer#dockerjupyterserver)
 can be used.
 
 ```python
@@ -61,7 +61,7 @@ exit_code=0 output='Hello, World!\n' output_files=[]
 ```
 
 By default the
-[`DockerJupyterServer`](../../../docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver)
+[`DockerJupyterServer`](../../../reference/autogen/coding/jupyter/DockerJupyterServer#dockerjupyterserver)
 will build and use a bundled Dockerfile, which can be seen below:
 
 ```python
@@ -88,7 +88,7 @@ WORKDIR "${HOME}"
 
 A custom image can be used by passing the `custom_image_name` parameter
 to the
-[`DockerJupyterServer`](../../../docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver)
+[`DockerJupyterServer`](../../../reference/autogen/coding/jupyter/DockerJupyterServer#dockerjupyterserver)
 constructor. There are some requirements of the image for it to work
 correctly:
 
@@ -153,13 +153,13 @@ The local version will run code on your local system. Use it with caution.
 
 
 To run a local Jupyter server, the
-[`LocalJupyterServer`](../../../docs/reference/coding/jupyter/local_jupyter_server#localjupyterserver)
+[`LocalJupyterServer`](../../../reference/autogen/coding/jupyter/LocalJupyterServer#localjupyterserver)
 can be used.
 
 
 <div class="warning">
 <Warning>
-The [`LocalJupyterServer`](/docs/reference/coding/jupyter/local_jupyter_server#localjupyterserver) does not function on Windows due to a bug. In this case, you can use the [`DockerJupyterServer`](/docs/reference/coding/jupyter/docker_jupyter_server#dockerjupyterserver) instead or use the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor). Do note that the intention is to remove the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor) when the bug is fixed.
+The [`LocalJupyterServer`](/reference/autogen/coding/jupyter/LocalJupyterServer#localjupyterserver) does not function on Windows due to a bug. In this case, you can use the [`DockerJupyterServer`](/reference/autogen/coding/jupyter/DockerJupyterServer#dockerjupyterserver) instead or use the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor). Do note that the intention is to remove the [`EmbeddedIPythonCodeExecutor`](/docs/reference/coding/jupyter/embedded_ipython_code_executor) when the bug is fixed.
 </Warning>
 </div>
 

@@ -1,7 +1,7 @@
 ---
 custom_edit_url: https://github.com/ag2ai/ag2/edit/main/website/docs/tutorial/introduction.ipynb
 source_notebook: /website/docs/tutorial/introduction.ipynb
-title: Introduction to AutoGen
+title: Introduction to AG2
 ---
 
 <a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/website/docs/tutorial/introduction.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
@@ -10,49 +10,48 @@ title: Introduction to AutoGen
 
 
 
-Welcome! AutoGen is an open-source framework that leverages multiple
+Welcome! AG2 is an open-source framework that leverages multiple
 *agents* to enable complex workflows. This tutorial introduces basic
-concepts and building blocks of AutoGen.
+concepts and building blocks of AG2.
 
-## Why AutoGen?
+## Why AG2?
 
 > *The whole is greater than the sum of its parts.*<br/> -**Aristotle**
 
-While there are many definitions of agents, in AutoGen, an agent is an
+While there are many definitions of agents, in AG2, an agent is an
 entity that can send messages, receive messages and generate a reply
 using models, tools, human inputs or a mixture of them. This abstraction
 not only allows agents to model real-world and abstract entities, such
 as people and algorithms, but it also simplifies implementation of
 complex workflows as collaboration among agents.
 
-Further, AutoGen is extensible and composable: you can extend a simple
-agent with customizable components and create workflows that can combine
-these agents and power a more sophisticated agent, resulting in
+Further, AG2 is extensible and composable: you can extend a simple agent
+with customizable components and create workflows that can combine these
+agents and power a more sophisticated agent, resulting in
 implementations that are modular and easy to maintain.
 
-Most importantly, AutoGen is developed by a vibrant community of
-researchers and engineers. It incorporates the latest research in
-multi-agent systems and has been used in many real-world applications,
-including agent platform, advertising, AI employees, blog/article
-writing, blockchain, calculate burned areas by wildfires, customer
-support, cybersecurity, data analytics, debate, education, finance,
-gaming, legal consultation, research, robotics, sales/marketing, social
-simulation, software engineering, software security, supply chain,
-t-shirt design, training data generation, Youtube service…
+Most importantly, AG2 is developed by a vibrant community of researchers
+and engineers. It incorporates the latest research in multi-agent
+systems and has been used in many real-world applications, including
+agent platform, advertising, AI employees, blog/article writing,
+blockchain, calculate burned areas by wildfires, customer support,
+cybersecurity, data analytics, debate, education, finance, gaming, legal
+consultation, research, robotics, sales/marketing, social simulation,
+software engineering, software security, supply chain, t-shirt
+design, training data generation, Youtube service…
 
 ## Installation
 
-The simplest way to install AutoGen is from pip: `pip install autogen`.
-Find more options in
-[Installation](../../docs/installation/Installation).
+The simplest way to install AG2 is from pip: `pip install ag2`. Find
+more options in [Installation](../../docs/installation/Installation).
 
 ## Agents
 
-In AutoGen, an agent is an entity that can send and receive messages to
-and from other agents in its environment. An agent can be powered by
-models (such as a large language model like GPT-4), code executors (such
-as an IPython kernel), human, or a combination of these and other
-pluggable and customizable components.
+In AG2, an agent is an entity that can send and receive messages to and
+from other agents in its environment. An agent can be powered by models
+(such as a large language model like GPT-4), code executors (such as an
+IPython kernel), human, or a combination of these and other pluggable
+and customizable components.
 
 ![ConversableAgent](/docs/tutorial/assets/conversable-agent.jpg)
 
@@ -67,7 +66,7 @@ supports the following components:
 You can switch each component on or off and customize it to suit the
 need of your application. For advanced users, you can add additional
 components to the agent by using
-[`registered_reply`](../../docs/reference/agentchat/conversable_agent#register-reply).
+[`registered_reply`](../../reference/autogen/ConversableAgent#register-reply).
 
 LLMs, for example, enable agents to converse in natural languages and
 transform between structured and unstructured text. The following
@@ -110,7 +109,7 @@ Because they make up everything!
 
 ## Roles and Conversations
 
-In AutoGen, you can assign roles to agents and have them participate in
+You can assign roles to agents and have them participate in
 conversations or chat with each other. A conversation is a sequence of
 messages exchanged between agents. You can then use these conversations
 to make progress on a task. For example, in the example below, we assign
@@ -180,7 +179,7 @@ The comedians are bouncing off each other!
 ## Summary
 
 In this chapter, we introduced the concept of agents, roles and
-conversations in AutoGen. For simplicity, we only used LLMs and created
+conversations in AG2. For simplicity, we only used LLMs and created
 fully autonomous agents (`human_input_mode` was set to `NEVER`). In the
 next chapter, we will show how you can control when to *terminate* a
 conversation between autonomous agents.

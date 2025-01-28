@@ -83,13 +83,13 @@ code suggested by the assistant agent.
 assistant = autogen.AssistantAgent(
     name="assistant",
     llm_config=llm_config,
-    is_termination_msg=lambda x: True if "TERMINATE" in x.get("content") else False,
+    is_termination_msg=lambda x: "TERMINATE" in x.get("content"),
 )
 # create a UserProxyAgent instance named "user_proxy"
 user_proxy = autogen.UserProxyAgent(
     name="user_proxy",
     human_input_mode="NEVER",
-    is_termination_msg=lambda x: True if "TERMINATE" in x.get("content") else False,
+    is_termination_msg=lambda x: "TERMINATE" in x.get("content"),
     max_consecutive_auto_reply=10,
     code_execution_config={
         "work_dir": "work_dir",
@@ -737,13 +737,13 @@ The user can apply the same recipe to similar tasks in future.
 assistant = autogen.AssistantAgent(
     name="assistant",
     llm_config=llm_config,
-    is_termination_msg=lambda x: True if "TERMINATE" in x.get("content") else False,
+    is_termination_msg=lambda x: "TERMINATE" in x.get("content"),
 )
 # create a UserProxyAgent instance named "user_proxy"
 user_proxy = autogen.UserProxyAgent(
     name="user_proxy",
     human_input_mode="NEVER",
-    is_termination_msg=lambda x: True if "TERMINATE" in x.get("content") else False,
+    is_termination_msg=lambda x: "TERMINATE" in x.get("content"),
     max_consecutive_auto_reply=10,
     code_execution_config={
         "work_dir": "work_dir",

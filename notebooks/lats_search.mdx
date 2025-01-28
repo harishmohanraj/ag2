@@ -138,7 +138,7 @@ class Node:
     ):
         self.messages = messages
         self.parent = parent
-        self.children: List["Node"] = []
+        self.children: List[Node] = []
         self.value = 0.0
         self.visits = 0
         self.reflection = reflection

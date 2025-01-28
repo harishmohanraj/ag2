@@ -142,7 +142,7 @@ def replace(src_code: str, old_code: str, new_code: str) -> str:
         #     print("Hola, mundo!")
         # Some other code here
     """
-    pattern = r"( *){old_code}".format(old_code=old_code)
+    pattern = rf"( *){old_code}"
     head_spaces = re.search(pattern, src_code, flags=re.DOTALL).group(1)
     new_code = "\n".join([head_spaces + line for line in new_code.split("\n")])
     rst = re.sub(pattern, new_code, src_code)
@@ -466,10 +466,9 @@ def writer_init_messsage(recipient, messages, sender, config):
     sender_history = recipient.chat_messages[sender]
     user_chat_history = f"\nHere are the history of discussions:\n{sender_history}"
 
-    if sender.name == "user":
-        execution_result = msg_content  # TODO: get the execution result of the original source code
-    else:
-        execution_result = ""
+    # TODO: get the execution result of the original source code
+    execution_result = msg_content if sender.name == "user" else ""
+
     writer_sys_msg = (
         WRITER_SYSTEM_MSG.format(
             source_code=recipient.source_code,

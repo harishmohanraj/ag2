@@ -27,17 +27,17 @@ export const quartoRawHtml =
 </thead>
 <tbody>
 <tr>
-<td><a href="../../docs/reference/coding/local_commandline_code_executor#localcommandlinecodeexecutor"><code>LocalCommandLineCodeExecutor</code></a></td>
+<td><a href="../../reference/autogen/coding/LocalCommandLineCodeExecutor#localcommandlinecodeexecutor"><code>LocalCommandLineCodeExecutor</code></a></td>
 <td>Shell</td>
 <td>Local</td>
 </tr>
 <tr>
-<td><a href="../../docs/reference/coding/docker_commandline_code_executor#dockercommandlinecodeexecutor"><code>DockerCommandLineCodeExecutor</code></a></td>
+<td><a href="../../reference/autogen/coding/DockerCommandLineCodeExecutor#dockercommandlinecodeexecutor"><code>DockerCommandLineCodeExecutor</code></a></td>
 <td>Shell</td>
 <td>Docker</td>
 </tr>
 <tr>
-<td><a href="../../docs/reference/coding/jupyter/jupyter_code_executor#jupytercodeexecutor"><code>jupyter.JupyterCodeExecutor</code></a></td>
+<td><a href="../../reference/autogen/coding/jupyter/JupyterCodeExecutor#jupytercodeexecutor"><code>jupyter.JupyterCodeExecutor</code></a></td>
 <td>Jupyter Kernel (e.g., python3)</td>
 <td>Local/Docker</td>
 </tr>
@@ -53,17 +53,17 @@ actions.
 
 ## Overview
 
-In AutoGen, a code executor is a component that takes input messages
-(e.g., those containing code blocks), performs execution, and outputs
-messages with the results. AutoGen provides two types of built-in code
-executors, one is command line code executor, which runs code in a
-command line environment such as a UNIX shell, and the other is Jupyter
-executor, which runs code in an interactive [Jupyter
+In AG2, a code executor is a component that takes input messages (e.g.,
+those containing code blocks), performs execution, and outputs messages
+with the results. AG2 provides two types of built-in code executors, one
+is command line code executor, which runs code in a command line
+environment such as a UNIX shell, and the other is Jupyter executor,
+which runs code in an interactive [Jupyter
 kernel](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
-For each type of executor, AutoGen provides two ways to execute code:
+For each type of executor, AG2 provides two ways to execute code:
 locally and in a Docker container. One way is to execute code directly
-in the same host platform where AutoGen is running, i.e., the local
+in the same host platform where AG2 is running, i.e., the local
 operating system. It is for development and testing, but it is not ideal
 for production as LLM can generate arbitrary code. The other way is to
 execute code in a Docker container. The table below shows the
@@ -79,7 +79,7 @@ Code Executor](../../docs/topics/code-execution/jupyter-code-executor).
 
 The figure below shows the architecture of the local command line code
 executor
-([`autogen.coding.LocalCommandLineCodeExecutor`](../../docs/reference/coding/local_commandline_code_executor#localcommandlinecodeexecutor)).
+([`autogen.coding.LocalCommandLineCodeExecutor`](../../reference/autogen/coding/LocalCommandLineCodeExecutor#localcommandlinecodeexecutor)).
 
 
 <div class="danger">
@@ -196,7 +196,7 @@ temp_dir.cleanup()
 
 To mitigate the security risk of running LLM-generated code locally, we
 can use the docker command line code executor
-([`autogen.coding.DockerCommandLineCodeExecutor`](../../docs/reference/coding/docker_commandline_code_executor#dockercommandlinecodeexecutor))
+([`autogen.coding.DockerCommandLineCodeExecutor`](../../reference/autogen/coding/DockerCommandLineCodeExecutor#dockercommandlinecodeexecutor))
 to execute code in a docker container. This way, the generated code can
 only access resources that are explicitly given to it.
 
@@ -247,10 +247,10 @@ to it.
 ## Use Code Execution in Conversation
 
 Writing and executing code is necessary for many tasks such as data
-analysis, machine learning, and mathematical modeling. In AutoGen,
-coding can be a conversation between a code writer agent and a code
-executor agent, mirroring the interaction between a programmer and a
-code interpreter.
+analysis, machine learning, and mathematical modeling. In AG2, coding
+can be a conversation between a code writer agent and a code executor
+agent, mirroring the interaction between a programmer and a code
+interpreter.
 
 ![Code Writer and Code Executor](/docs/tutorial/assets/code-execution-in-conversation.png)
 
@@ -558,12 +558,11 @@ better choice.
 
 In the previous examples, we create the code executor agent directly
 using the
-[`ConversableAgent`](../../docs/reference/agentchat/conversable_agent#conversableagent)
-class. Existing AutoGen examples often create code executor agent using
-the
-[`UserProxyAgent`](../../docs/reference/agentchat/user_proxy_agent#userproxyagent)
+[`ConversableAgent`](../../reference/autogen/ConversableAgent#conversableagent)
+class. Existing AG2 examples often create code executor agent using the
+[`UserProxyAgent`](../../reference/autogen/UserProxyAgent#userproxyagent)
 class, which is a subclass of
-[`ConversableAgent`](../../docs/reference/agentchat/conversable_agent#conversableagent)
+[`ConversableAgent`](../../reference/autogen/ConversableAgent#conversableagent)
 with `human_input_mode=ALWAYS` and `llm_config=False` – it always
 requests human input for every message and does not use LLM. It also
 comes with default `description` field for each of the
@@ -574,12 +573,12 @@ creating an agent that is intended to be used as a code executor.
 
 In the previous examples, we created the code writer agent directly
 using the
-[`ConversableAgent`](../../docs/reference/agentchat/conversable_agent#conversableagent)
-class. Existing AutoGen examples often create the code writer agent
-using the
-[`AssistantAgent`](../../docs/reference/agentchat/assistant_agent#assistantagent)
+[`ConversableAgent`](../../reference/autogen/ConversableAgent#conversableagent)
+class. Existing AG2 examples often create the code writer agent using
+the
+[`AssistantAgent`](../../reference/autogen/AssistantAgent#assistantagent)
 class, which is a subclass of
-[`ConversableAgent`](../../docs/reference/agentchat/conversable_agent#conversableagent)
+[`ConversableAgent`](../../reference/autogen/ConversableAgent#conversableagent)
 with `human_input_mode=NEVER` and `code_execution_config=False` – it
 never requests human input and does not use code executor. It also comes
 with default `system_message` and `description` fields. This class is a
@@ -588,7 +587,7 @@ as a code writer and does not execute code.
 
 In fact, in the previous example we use the default `system_message`
 field of the
-[`AssistantAgent`](../../docs/reference/agentchat/assistant_agent#assistantagent)
+[`AssistantAgent`](../../reference/autogen/AssistantAgent#assistantagent)
 class to instruct the code writer agent how to use code executor.
 
 ```python
@@ -638,12 +637,12 @@ pprint.pprint(AssistantAgent.DEFAULT_SYSTEM_MESSAGE)
 ### Best Practice
 
 It is very important to note that the
-[`UserProxyAgent`](../../docs/reference/agentchat/user_proxy_agent#userproxyagent)
+[`UserProxyAgent`](../../reference/autogen/UserProxyAgent#userproxyagent)
 and
-[`AssistantAgent`](../../docs/reference/agentchat/assistant_agent#assistantagent)
+[`AssistantAgent`](../../reference/autogen/AssistantAgent#assistantagent)
 are meant to be shortcuts to avoid writing the `system_message`
 instructions for the
-[`ConversableAgent`](../../docs/reference/agentchat/conversable_agent#conversableagent)
+[`ConversableAgent`](../../reference/autogen/ConversableAgent#conversableagent)
 class. They are not suitable for all use cases. As we will show in the
 next chapter, tuning the `system_message` field is vital for agent to
 work properly in more complex conversation patterns beyond two-agent
@@ -651,9 +650,9 @@ chat.
 
 As a best practice, always tune your agent’s `system_message`
 instructions for your specific use case and avoid subclassing
-[`UserProxyAgent`](../../docs/reference/agentchat/user_proxy_agent#userproxyagent)
+[`UserProxyAgent`](../../reference/autogen/UserProxyAgent#userproxyagent)
 and
-[`AssistantAgent`](../../docs/reference/agentchat/assistant_agent#assistantagent).
+[`AssistantAgent`](../../reference/autogen/AssistantAgent#assistantagent).
 
 ## Summary
 

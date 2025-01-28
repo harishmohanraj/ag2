@@ -122,7 +122,7 @@ By default this will create a model client which assumes an OpenAI API (or compa
 A common, useful pattern used is to define this `config_list` via JSON
 (specified as a file or an environment variable set to a JSON-formatted
 string) and then use the
-[`config_list_from_json`](../../docs/reference/oai/openai_utils#config-list-from-json)
+[`config_list_from_json`](../../reference/autogen/config_list_from_json#config-list-from-json)
 helper function to load it:
 
 ```python
@@ -187,14 +187,14 @@ filter_dict = {"model": ["gpt-3.5-turbo"]}
 ```
 
 This can then be applied to a config list loaded in Python with
-[`filter_config`](../../docs/reference/oai/openai_utils#filter-config):
+[`filter_config`](../../reference/autogen/filter_config#filter-config):
 
 ```python
 config_list = autogen.filter_config(config_list, filter_dict)
 ```
 
 Or, directly when loading the config list using
-[`config_list_from_json`](../../docs/reference/oai/openai_utils#config-list-from-json):
+[`config_list_from_json`](../../reference/autogen/config_list_from_json#config-list-from-json):
 
 ```python
 config_list = autogen.config_list_from_json(env_or_file="OAI_CONFIG_LIST", filter_dict=filter_dict)
@@ -421,7 +421,7 @@ used by Autogen and those passed into the model client.
     [DiskCache](../../docs/reference/cache/disk_cache) will be used. For
     the new way of using caching, pass a
     [Cache](../../docs/reference/cache/cache) object into
-    [`initiate_chat`](../../docs/reference/agentchat/conversable_agent#initiate-chat).
+    [`initiate_chat`](../../reference/autogen/ConversableAgent#initiate-chat).
 
 ### Extra model client parameters
 
@@ -459,18 +459,18 @@ llm_config = {
 
 ## Other helpers for loading a config list
 
--   [`get_config_list`](../../docs/reference/oai/openai_utils#get-config-list):
+-   [`get_config_list`](../../reference/autogen/get_config_list#get-config-list):
     Generates configurations for API calls, primarily from provided API
     keys.
--   [`config_list_openai_aoai`](../../docs/reference/oai/openai_utils#config-list-openai-aoai):
+-   [`config_list_openai_aoai`](../../reference/autogen/config_list_openai_aoai#config-list-openai-aoai):
     Constructs a list of configurations using both Azure OpenAI and
     OpenAI endpoints, sourcing API keys from environment variables or
     local files.
--   [`config_list_from_models`](../../docs/reference/oai/openai_utils#config-list-from-models):
+-   [`config_list_from_models`](../../reference/autogen/config_list_from_models#config-list-from-models):
     Creates configurations based on a provided list of models, useful
     when targeting specific models without manually specifying each
     configuration.
--   [`config_list_from_dotenv`](../../docs/reference/oai/openai_utils#config-list-from-dotenv):
+-   [`config_list_from_dotenv`](../../reference/autogen/config_list_from_dotenv#config-list-from-dotenv):
     Constructs a configuration list from a `.env` file, offering a
     consolidated way to manage multiple API configurations and keys from
     a single file.

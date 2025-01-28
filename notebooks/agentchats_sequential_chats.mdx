@@ -811,7 +811,7 @@ def my_writing_task(sender, recipient, context):
 
     try:
         filename = context.get("work_dir", "") + "/stock_prices.md"
-        with open(filename, "r") as file:
+        with open(filename) as file:
             data = file.read()
     except Exception as e:
         data = f"An error occurred while reading the file: {e}"

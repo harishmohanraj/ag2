@@ -46,15 +46,14 @@ pip install pyautogen
 ## Set your API Endpoint
 
 The
-[`config_list_from_json`](https://docs.ag2.ai/docs/reference/oai/openai_utils#config-list-from-json)
+[`config_list_from_json`](https://docs.ag2.ai/reference/autogen/config_list_from_json#config-list-from-json)
 function loads a list of configurations from an environment variable or
 a json file.
 
 ```python
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field
-from typing_extensions import Annotated
 
 import autogen
 from autogen.cache import Cache

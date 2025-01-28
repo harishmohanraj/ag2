@@ -16,10 +16,10 @@ execute that file. This means that each code block is executed in a new
 process. There are two forms of this executor:
 
 -   Docker
-    ([`DockerCommandLineCodeExecutor`](../../../docs/reference/coding/docker_commandline_code_executor#dockercommandlinecodeexecutor)) -
+    ([`DockerCommandLineCodeExecutor`](../../../reference/autogen/coding/DockerCommandLineCodeExecutor#dockercommandlinecodeexecutor)) -
     this is where all commands are executed in a Docker container
 -   Local
-    ([`LocalCommandLineCodeExecutor`](../../../docs/reference/coding/local_commandline_code_executor#localcommandlinecodeexecutor)) -
+    ([`LocalCommandLineCodeExecutor`](../../../reference/autogen/coding/LocalCommandLineCodeExecutor#localcommandlinecodeexecutor)) -
     this is where all commands are executed on the host machine
 
 This executor type is similar to the legacy code execution in AutoGen.
@@ -27,7 +27,7 @@ This executor type is similar to the legacy code execution in AutoGen.
 ## Docker
 
 The
-[`DockerCommandLineCodeExecutor`](../../../docs/reference/coding/docker_commandline_code_executor#dockercommandlinecodeexecutor)
+[`DockerCommandLineCodeExecutor`](../../../reference/autogen/coding/DockerCommandLineCodeExecutor#dockercommandlinecodeexecutor)
 will create a Docker container and run all commands within that
 container. The default image that is used is `python:3-slim`, this can
 be customized by passing the `image` parameter to the constructor. If
@@ -118,7 +118,7 @@ The local version will run code on your local system. Use it with caution.
 
 To execute code on the host machine, as in the machine running AutoGen,
 the
-[`LocalCommandLineCodeExecutor`](../../../docs/reference/coding/local_commandline_code_executor#localcommandlinecodeexecutor)
+[`LocalCommandLineCodeExecutor`](../../../reference/autogen/coding/LocalCommandLineCodeExecutor#localcommandlinecodeexecutor)
 can be used.
 
 ### Example
@@ -196,7 +196,7 @@ code_executor_agent = ConversableAgent(
 When using code execution it is critical that you update the system
 prompt of agents you expect to write code to be able to make use of the
 executor. For example, for the
-[`DockerCommandLineCodeExecutor`](../../../docs/reference/coding/docker_commandline_code_executor#dockercommandlinecodeexecutor)
+[`DockerCommandLineCodeExecutor`](../../../reference/autogen/coding/DockerCommandLineCodeExecutor#dockercommandlinecodeexecutor)
 you might setup a code writing agent like so:
 
 ```python

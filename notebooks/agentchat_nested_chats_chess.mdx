@@ -76,10 +76,11 @@ player_black_config_list = [
 Write functions for getting legal moves and making a move.
 
 ```python
+from typing import Annotated
+
 import chess
 import chess.svg
 from IPython.display import display
-from typing_extensions import Annotated
 
 # Initialize the board.
 board = chess.Board()

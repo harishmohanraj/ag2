@@ -18,9 +18,9 @@ showed how to properly terminate a conversation between agents.
 But many applications may require putting humans in-the-loop with
 agents. For example, to allow human feedback to steer agents in the
 right direction, specify goals, etc. In this chapter, we will show how
-AutoGen supports human intervention.
+AG2 supports human intervention.
 
-In AutoGen’s `ConversableAgent`, the human-in-the-loop component sits in
+In AG2’s `ConversableAgent`, the human-in-the-loop component sits in
 front of the auto-reply components. It can intercept the incoming
 messages and decide whether to pass them to the auto-reply components or
 to provide human feedback. The figure below illustrates the design.
@@ -33,7 +33,7 @@ following sections.
 
 ## Human Input Modes
 
-Currently AutoGen supports three modes for human input. The mode is
+Currently AG2 supports three modes for human input. The mode is
 specified through the `human_input_mode` argument of the
 `ConversableAgent`. The three modes are:
 
