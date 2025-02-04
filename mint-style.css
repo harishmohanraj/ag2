@@ -28,6 +28,13 @@ h4 {
   }
 }
 
+.prose :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 1em;
+}
+.prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 0.8em;
+}
+
 .card h2 {
   font-size: 2rem !important;
 
@@ -417,7 +424,6 @@ a.colab-badge > img, a.github-badge  > img {
   text-align: center;
 }
 .popular-resources .youtube-video a {
-  color: #000;
   display: block;
   --font-family-headings-custom: "Jersey 10" !important;
   font-family: var(

@@ -64,7 +64,11 @@ joe = ConversableAgent(
 
 
 ```python
-result = joe.initiate_chat(cathy, message="Cathy, tell me a joke.", max_turns=2)
+result = joe.initiate_chat(
+    cathy, 
+    message="Cathy, tell me a joke.", 
+    max_turns=2
+)
 ```
 
 ``` text
@@ -104,8 +108,10 @@ Because it was two-tired!
 
 ```python
 result = joe.initiate_chat(
-    cathy, message="Cathy, tell me a joke.", max_turns=3
-)  # increase the number of max turns before termination
+    cathy, 
+    message="Cathy, tell me a joke.", 
+    max_turns=3 # increase the number of max turns before termination
+)
 ```
 
 ``` text

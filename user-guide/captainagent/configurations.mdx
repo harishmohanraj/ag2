@@ -34,7 +34,7 @@ If you run CaptainAgent without specifying a `nested_config`, a default is used 
 
 To see the default configuration and the OpenAI model used, see the [captainagent.py](https://github.com/ag2ai/ag2/blob/ceb75d865d0a7eb2b7c0bc51776e093681e0970e/autogen/agentchat/contrib/captainagent.py) file.
 
-For advice on using OAI_CONFIG_LIST, [see the documentation](/docs/topics/llm_configuration#oai-config-list-pattern).
+For advice on using OAI_CONFIG_LIST, [see the documentation](/docs/user-guide/advanced-concepts/llm-configuration-deep-dive#introduction-to-config-list).
 
 </Info>
 </div>
@@ -61,7 +61,7 @@ This section is used to configure the building process of autobuild. `autobuild_
 Configures the default parameters for the builder during the autobuild process. Defaults to `{"temperature": 1, "top_p": 0.95, "max_tokens": 2048}`. `config_list` is **not** needed here.
 
 ### `code_execution_config`
-Configures how the user proxy executes code within the nested chat. Defaults to `{"timeout": 300, "work_dir": "groupchat", "last_n_messages": 1, "use_docker": False}`. Full configuration docs [here](/docs/reference/agentchat/user_proxy_agent).
+Configures how the user proxy executes code within the nested chat. Defaults to `{"timeout": 300, "work_dir": "groupchat", "last_n_messages": 1, "use_docker": False}`. Full configuration docs [here](/docs/api-reference/autogen/UserProxyAgent).
 
 ### `coding`
 Enables or disables whether to add the user proxy in the nested chat. Defaults to `True`.

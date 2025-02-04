@@ -1,16 +1,6 @@
 ---
-title: Conversable agent
+title: ConversableAgent
 ---
-
-### GitHub Codespaces
-
-Before we jump into some code, each code block will have a button that opens it in GitHub Codespaces so you can start playing with AG2 inside a fully configured environment.
-
-Add an `OPENAI_API_KEY` secret to your GitHub Codespaces so your agents can use an LLM. See the [instructions here](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces).
-
-If you want to run it on your machine, just follow the previous installing AG2 and LLM configuration steps.
-
-# Say hello to ConversableAgent
 
 ConversableAgent is at the heart of all AG2 agents while also being a fully functioning agent.
 
@@ -28,20 +18,20 @@ Let's break it down:
 
 3. Create our ConversableAgent give them a unique name, and use `system_message` to define their purpose.
 
-4. Chat with the agent using their `run` method, passing in our starting message.
+4. Ask the agent a question using their `run` method, passing in our starting message.
 
     ```console
-    human (to helpful_agent):
+    user (to helpful_agent):
 
     In one sentence, what's the big deal about AI?
 
     --------------------------------------------------------------------------------
 
     >>>>>>>> USING AUTO REPLY...
-    helpful_agent (to human):
+    helpful_agent (to user):
 
-    AI’s a marvel that transforms the mundane,
-    Empowering minds, making tasks less a strain.
+    AI transforms our world with endless potential, enhancing lives and knowledge, truly essential.
 
     --------------------------------------------------------------------------------
+    Replying as user. Provide feedback to helpful_agent. Press enter to skip and use auto-reply, or type 'exit' to end the conversation:
     ```
