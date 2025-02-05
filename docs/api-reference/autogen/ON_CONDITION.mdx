@@ -8,38 +8,13 @@ title: autogen.ON_CONDITION
 </h2>
 
 ```python
-ON_CONDITION(
-    target: ForwardRef('SwarmAgent') | dict[str, typing.Any] = None,
-    condition: str = '',
-    available: str | Callable | None = None
-)
+ON_CONDITION(*args, **kwargs)
 ```
 
-    Defines a condition for transitioning to another agent or nested chats
+    Deprecated: Use OnCondition instead. This class will be removed in a future version (TBD).
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `target` | The agent to hand off to or the nested chat configuration.<br/><br/>Can be a SwarmAgent or a Dict.<br/><br/>If a Dict, it should follow the convention of the nested chat configuration, with the exception of a carryover configuration which is unique to Swarms.<br/><br/>Swarm Nested chat documentation: https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive#registering-handoffs-to-a-nested-chat<br/><br/>**Type:** `ForwardRef('SwarmAgent') \| dict[str, typing.Any]`<br/><br/>**Default:** None |
-| `condition` | The condition for transitioning to the target agent, evaluated by the LLM to determine whether to call the underlying function/tool which does the transition.<br/><br/>**Type:** `str`<br/><br/>**Default:** '' |
-| `available` | Optional condition to determine if this ON_CONDITION is available.<br/><br/>Can be a Callable or a string.<br/><br/>If a string, it will look up the value of the context variable with that name, which should be a bool.<br/><br/>**Type:** `str \| Callable \| None`<br/><br/>**Default:** None |
-
-### Class Attributes
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
-#### available
-<br />
-
-    <br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
-#### condition
-<br />
-
-    <br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
-#### target
-<br />
-
-    <br />
+| `*args` |  |
+| `**kwargs` |  |

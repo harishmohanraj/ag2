@@ -36,12 +36,31 @@ example](https://github.com/openai/swarm/tree/main/examples/airline) in
 AG2.
 
 
+<div class="note">
+<Note>
+This notebook has been updated as swarms can now accommodate any ConversableAgent.
+</Note>
+</div>
+
+
+
 <div class="info Requirements">
 <Info>
 Install `ag2`:
 ```bash
 pip install ag2
 ```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> ```bash
+> pip install -U autogen
+> ```
+> or  
+> ```bash
+> pip install -U pyautogen
+> ```
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+
 
 For more information, please refer to the [installation guide](/docs/user-guide/basic-concepts/installing-ag2).
 </Info>
@@ -212,10 +231,10 @@ def non_flight_enquiry() -> str:
 ## Define Agents and register functions
 
 ```python
-from autogen import ON_CONDITION, AfterWorkOption, SwarmAgent, initiate_swarm_chat
+from autogen import AfterWorkOption, ConversableAgent, OnCondition, initiate_swarm_chat, register_hand_off
 
 # Triage Agent
-triage_agent = SwarmAgent(
+triage_agent = ConversableAgent(
     name="Triage_Agent",
     system_message=triage_instructions(context_variables=context_variables),
     llm_config=llm_config,
@@ -223,7 +242,7 @@ triage_agent = SwarmAgent(
 )
 
 # Flight Modification Agent
-flight_modification = SwarmAgent(
+flight_modification = ConversableAgent(
     name="Flight_Modification_Agent",
     system_message="""You are a Flight Modification Agent for a customer service airline.
       Your task is to determine if the user wants to cancel or change their flight.
@@ -233,7 +252,7 @@ flight_modification = SwarmAgent(
 )
 
 # Flight Cancel Agent
-flight_cancel = SwarmAgent(
+flight_cancel = ConversableAgent(
     name="Flight_Cancel_Traversal",
     system_message=STARTER_PROMPT + FLIGHT_CANCELLATION_POLICY,
     llm_config=llm_config,
@@ -241,7 +260,7 @@ flight_cancel = SwarmAgent(
 )
 
 # Flight Change Agent
-flight_change = SwarmAgent(
+flight_change = ConversableAgent(
     name="Flight_Change_Traversal",
     system_message=STARTER_PROMPT + FLIGHT_CHANGE_POLICY,
     llm_config=llm_config,
@@ -249,7 +268,7 @@ flight_change = SwarmAgent(
 )
 
 # Lost Baggage Agent
-lost_baggage = SwarmAgent(
+lost_baggage = ConversableAgent(
     name="Lost_Baggage_Traversal",
     system_message=STARTER_PROMPT + LOST_BAGGAGE_POLICY,
     llm_config=llm_config,
@@ -261,27 +280,29 @@ lost_baggage = SwarmAgent(
 
 Now we register the handoffs for the agents. Note that you don’t need to
 define the transfer functions and pass them in. Instead, you can
-directly register the handoffs using the `ON_CONDITION` class.
+directly register the handoffs using the `OnCondition` class.
 
 ```python
 # Register hand-offs
-triage_agent.register_hand_off(
-    [
-        ON_CONDITION(flight_modification, "To modify a flight"),
-        ON_CONDITION(lost_baggage, "To find lost baggage"),
-    ]
+register_hand_off(
+    agent=triage_agent,
+    hand_to=[
+        OnCondition(flight_modification, "To modify a flight"),
+        OnCondition(lost_baggage, "To find lost baggage"),
+    ],
 )
 
-flight_modification.register_hand_off(
-    [
-        ON_CONDITION(flight_cancel, "To cancel a flight"),
-        ON_CONDITION(flight_change, "To change a flight"),
-    ]
+register_hand_off(
+    agent=flight_modification,
+    hand_to=[
+        OnCondition(flight_cancel, "To cancel a flight"),
+        OnCondition(flight_change, "To change a flight"),
+    ],
 )
 
 transfer_to_triage_description = "Call this function when a user needs to be transferred to a different agent and a different policy.\nFor instance, if a user is asking about a topic that is not handled by the current agent, call this function."
 for agent in [flight_modification, flight_cancel, flight_change, lost_baggage]:
-    agent.register_hand_off(ON_CONDITION(triage_agent, transfer_to_triage_description))
+    register_hand_off(agent=agent, hand_to=OnCondition(triage_agent, transfer_to_triage_description))
 ```
 
 ## Run the code
@@ -322,142 +343,4 @@ chat_history, context_variables, last_agent = initiate_swarm_chat(
     messages="I want to cancel flight",
     after_work=AfterWorkOption.REVERT_TO_USER,
 )
-```
-
-``` text
-User (to chat_manager):
-
-I want to cancel flight
-
---------------------------------------------------------------------------------
-
-Next speaker: Triage_Agent
-
-Triage_Agent (to chat_manager):
-
-What is the reason for canceling your flight?
-
---------------------------------------------------------------------------------
-
-Next speaker: User
-
-User (to chat_manager):
-
-please cancel it
-
---------------------------------------------------------------------------------
-
-Next speaker: Triage_Agent
-
-Triage_Agent (to chat_manager):
-
-***** Suggested tool call (call_Qgji9KAw1e3ktxykLU8v1wg7): transfer_to_Flight_Modification_Agent *****
-Arguments: 
-{}
-******************************************************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Tool_Execution
-
-
->>>>>>>> EXECUTING FUNCTION transfer_to_Flight_Modification_Agent...
-Tool_Execution (to chat_manager):
-
-***** Response from calling tool (call_Qgji9KAw1e3ktxykLU8v1wg7) *****
-SwarmAgent --> Flight_Modification_Agent
-**********************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Flight_Modification_Agent
-
-Flight_Modification_Agent (to chat_manager):
-
-I'm here to help you with your flight cancellation. We can proceed with the process now.
-***** Suggested tool call (call_QYu7uBko1EaEZ7VzxPwx2jNO): transfer_to_Flight_Cancel_Traversal *****
-Arguments: 
-{}
-****************************************************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Tool_Execution
-
-
->>>>>>>> EXECUTING FUNCTION transfer_to_Flight_Cancel_Traversal...
-Tool_Execution (to chat_manager):
-
-***** Response from calling tool (call_QYu7uBko1EaEZ7VzxPwx2jNO) *****
-SwarmAgent --> Flight_Cancel_Traversal
-**********************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Flight_Cancel_Traversal
-
-Flight_Cancel_Traversal (to chat_manager):
-
-I can assist you with cancelling your flight. Can you please confirm which flight you would like to cancel?
-
---------------------------------------------------------------------------------
-
-Next speaker: User
-
-User (to chat_manager):
-
-1919
-
---------------------------------------------------------------------------------
-
-Next speaker: Flight_Cancel_Traversal
-
-Flight_Cancel_Traversal (to chat_manager):
-
-Thank you for confirming the flight number as 1919. Do you want a refund for this flight or flight credits for future travel?
-
---------------------------------------------------------------------------------
-
-Next speaker: User
-
-User (to chat_manager):
-
-refund
-
---------------------------------------------------------------------------------
-
-Next speaker: Flight_Cancel_Traversal
-
-Flight_Cancel_Traversal (to chat_manager):
-
-***** Suggested tool call (call_yYakoWErBeNwrNfI5YGOaMf0): initiate_refund *****
-Arguments: 
-{}
-********************************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Tool_Execution
-
-
->>>>>>>> EXECUTING FUNCTION initiate_refund...
-Tool_Execution (to chat_manager):
-
-***** Response from calling tool (call_yYakoWErBeNwrNfI5YGOaMf0) *****
-Refund initiated
-**********************************************************************
-
---------------------------------------------------------------------------------
-
-Next speaker: Flight_Cancel_Traversal
-
-Flight_Cancel_Traversal (to chat_manager):
-
-The refund process has been initiated and you can expect it to be processed within 3-5 business days. 
-
-If you have any more questions or need further assistance, feel free to ask!
-
---------------------------------------------------------------------------------
-
-Next speaker: User
 ```
