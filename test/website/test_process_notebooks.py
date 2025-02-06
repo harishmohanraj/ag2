@@ -14,7 +14,7 @@ import pytest
 from autogen._website.process_notebooks import (
     add_authors_and_social_img_to_blog_posts,
     add_front_matter_to_metadata_mdx,
-    cleanup_tmp_dirs_if_no_metadata,
+    cleanup_tmp_dirs,
     convert_callout_blocks,
     ensure_mint_json_exists,
     extract_example_group,
@@ -131,7 +131,7 @@ def test_cleanup_tmp_dirs_if_no_metadata() -> None:
         (notebooks_dir / "example-1.mdx").touch()
         (notebooks_dir / "example-2.mdx").touch()
 
-        cleanup_tmp_dirs_if_no_metadata(tmp_path)
+        cleanup_tmp_dirs(tmp_path, False)
         assert not notebooks_dir.exists()
 
     # Test with the tmp_dir / "snippets" / "data" / "NotebooksMetadata.mdx"
@@ -148,7 +148,7 @@ def test_cleanup_tmp_dirs_if_no_metadata() -> None:
         metadata_dir.mkdir(parents=True, exist_ok=True)
         (metadata_dir / "NotebooksMetadata.mdx").touch()
 
-        cleanup_tmp_dirs_if_no_metadata(tmp_path)
+        cleanup_tmp_dirs(tmp_path, False)
         assert notebooks_dir.exists()
 
 

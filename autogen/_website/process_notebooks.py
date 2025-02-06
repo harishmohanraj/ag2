@@ -324,7 +324,7 @@ def add_front_matter_to_metadata_mdx(
     front_matter: dict[str, Union[str, list[str], None]], website_dir: Path, rendered_mdx: Path
 ) -> None:
     source = front_matter.get("source_notebook")
-    if isinstance(source, str) and source.startswith("/website/docs/"):
+    if isinstance(source, str) and source.startswith("/website_tmp/docs/"):
         return
 
     metadata_mdx = website_dir / "snippets" / "data" / "NotebooksMetadata.mdx"
@@ -662,10 +662,10 @@ def extract_example_group(metadata_path: Path) -> list[str]:
         Path(item["source"])
         .with_suffix("")
         .as_posix()
-        .replace("/website/", "/")
+        .replace("/website_tmp/", "/")
         .replace("/notebook/", "docs/use-cases/notebooks/notebooks/")
         for item in notebooks_metadata
-        if not item["source"].startswith("/website/docs/")
+        if not item["source"].startswith("/website_tmp/docs/")
     ]
 
     return notebooks
@@ -924,16 +924,19 @@ def ensure_mint_json_exists(website_dir: Path) -> None:
         sys.exit(1)
 
 
-def cleanup_tmp_dirs_if_no_metadata(website_dir: Path) -> None:
+def cleanup_tmp_dirs(website_dir: Path, re_generate_notebooks: bool) -> None:
     """Remove the temporary notebooks directory if NotebooksMetadata.mdx is not found.
 
     This is to ensure a clean build and generate the metadata file as well as to
     update the navigation with correct entries.
     """
+    delete_tmp_dir = re_generate_notebooks
     metadata_mdx = website_dir / "snippets" / "data" / "NotebooksMetadata.mdx"
     if not metadata_mdx.exists():
         print(f"NotebooksMetadata.mdx not found at {metadata_mdx}")
+        delete_tmp_dir = True
 
+    if delete_tmp_dir:
         notebooks_dir = notebooks_target_dir(website_dir)
         print(f"Removing the {notebooks_dir} and to ensure a clean build.")
         shutil.rmtree(notebooks_dir, ignore_errors=True)
@@ -941,9 +944,14 @@ def cleanup_tmp_dirs_if_no_metadata(website_dir: Path) -> None:
 
 def main() -> None:
     root_dir = Path(__file__).resolve().parents[2]
-    website_dir = root_dir / "website"
+    website_source_dir = root_dir / "website"
+    website_dir = root_dir / "website_tmp"
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="subcommand")
+
+    if not website_dir.exists():
+        website_dir.mkdir()
+        shutil.copytree(website_source_dir, website_dir, dirs_exist_ok=True)
 
     parser.add_argument(
         "--notebook-directory",
@@ -954,6 +962,8 @@ def main() -> None:
     parser.add_argument(
         "--website-directory", type=path, help="Root directory of mintlify website", default=website_dir
     )
+
+    parser.add_argument("--force", help="Force re-rendering of all notebooks", default=False)
 
     render_parser = subparsers.add_parser("render")
     render_parser.add_argument("--quarto-bin", help="Path to quarto binary", default="quarto")
@@ -972,7 +982,7 @@ def main() -> None:
         sys.exit(1)
 
     ensure_mint_json_exists(args.website_directory)
-    cleanup_tmp_dirs_if_no_metadata(args.website_directory)
+    cleanup_tmp_dirs(args.website_directory, args.force)
 
     if args.notebooks:
         collected_notebooks = args.notebooks

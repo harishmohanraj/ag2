@@ -361,11 +361,6 @@ def main() -> None:
     website_source_dir = root_dir / "website"
     website_dir = root_dir / "website_tmp"
 
-    if not website_dir.exists():
-        print("website_dir does not exists")
-        website_dir.mkdir()
-        shutil.copytree(website_source_dir, website_dir, dirs_exist_ok=True)
-
     parser = argparse.ArgumentParser(description="Process API reference documentation")
     parser.add_argument(
         "--api-dir",
@@ -374,13 +369,23 @@ def main() -> None:
         default=website_dir / "docs" / "api-reference",
     )
 
+    parser.add_argument("--force", action="store_true", help="Force generation")
+
     args = parser.parse_args()
+
+    if args.force:
+        shutil.rmtree(website_dir, ignore_errors=True)
+
+    if not website_dir.exists():
+        website_dir.mkdir()
+        shutil.copytree(website_source_dir, website_dir, dirs_exist_ok=True)
 
     if args.api_dir.exists():
         # Force delete the directory and its contents
         shutil.rmtree(args.api_dir, ignore_errors=True)
 
-    target_dir = args.api_dir.resolve().relative_to(website_dir.parent)
+    target_dir = args.api_dir
+
     template_dir = website_dir / "mako_templates"
 
     # Generate API reference documentation
