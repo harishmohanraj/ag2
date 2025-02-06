@@ -135,30 +135,6 @@ def generate(target_dir: Path, template_dir: Path) -> None:
     generate_markdown(target_dir)
 
 
-def read_file_content(file_path: Path) -> str:
-    """Read content from a file.
-
-    Args:
-        file_path (str): Path to the file
-
-    Returns:
-        str: Content of the file
-    """
-    with open(file_path, encoding="utf-8") as f:
-        return f.read()
-
-
-def write_file_content(file_path: str, content: str) -> None:
-    """Write content to a file.
-
-    Args:
-        file_path (str): Path to the file
-        content (str): Content to write
-    """
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(content)
-
-
 def convert_md_to_mdx(input_dir: Path) -> None:
     """Convert all .md files in directory to .mdx while preserving structure.
 
@@ -281,7 +257,7 @@ def generate_mint_json_from_template(mint_json_template_path: Path, mint_json_pa
         os.remove(mint_json_path)
 
     # Copy the template file to mint.json
-    contents = read_file_content(mint_json_template_path)
+    contents = mint_json_template_path.read_text(encoding="utf-8")
     mint_json_template_content = Template(contents).render()
 
     # Parse the rendered template content as JSON
@@ -382,7 +358,13 @@ title: Overview
 
 def main() -> None:
     root_dir = Path(__file__).resolve().parents[2]
-    website_dir = root_dir / "website"
+    website_source_dir = root_dir / "website"
+    website_dir = root_dir / "website_tmp"
+
+    if not website_dir.exists():
+        print("website_dir does not exists")
+        website_dir.mkdir()
+        shutil.copytree(website_source_dir, website_dir, dirs_exist_ok=True)
 
     parser = argparse.ArgumentParser(description="Process API reference documentation")
     parser.add_argument(
@@ -398,7 +380,7 @@ def main() -> None:
         # Force delete the directory and its contents
         shutil.rmtree(args.api_dir, ignore_errors=True)
 
-    target_dir = args.api_dir.resolve().relative_to(website_dir)
+    target_dir = args.api_dir.resolve().relative_to(website_dir.parent)
     template_dir = website_dir / "mako_templates"
 
     # Generate API reference documentation
