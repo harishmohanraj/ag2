@@ -84,10 +84,6 @@
     {
       "name": "Blog",
       "url": "docs/blog"
-    },
-    {
-      "name": "Community Talks",
-      "url": "docs/talks"
     }
   ],
   "anchors": [],
@@ -1094,7 +1090,6 @@
                               "group": "realtime_client",
                               "pages": [
                                 "docs/api-reference/autogen/agentchat/realtime/experimental/clients/realtime_client/overview",
-                                "docs/api-reference/autogen/agentchat/realtime/experimental/clients/realtime_client/RealtimeClientProtocol",
                                 "docs/api-reference/autogen/agentchat/realtime/experimental/clients/realtime_client/register_realtime_client"
                               ]
                             }
