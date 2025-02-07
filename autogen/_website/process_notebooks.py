@@ -28,13 +28,14 @@ from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from textwrap import dedent, indent
-from typing import Any, Callable, Dict, List, Tuple, TypeVar, Union
+from typing import Any, Callable, Dict, List, Tuple, TypeVar, TypedDict, Union
 
 from ..import_utils import optional_import_block, require_optional_import
 
 with optional_import_block():
     import nbformat
     import yaml
+    from jinja2 import Template
     from nbclient.client import NotebookClient
     from nbclient.exceptions import (
         CellExecutionError,
@@ -976,6 +977,55 @@ def cleanup_tmp_dirs(website_build_directory: Path, re_generate_notebooks: bool)
         shutil.rmtree(notebooks_dir, ignore_errors=True)
 
 
+class NavigationGroup(TypedDict):
+    group: str
+    pages: List[Union[str, "NavigationGroup"]]
+
+
+def get_files_path_from_navigation(navigation: List[NavigationGroup]) -> List[Path]:
+    """
+    Extract all file paths from the navigation structure.
+
+    Args:
+        navigation: List of navigation groups containing nested pages and groups
+
+    Returns:
+        List of file paths found in the navigation structure
+    """
+    file_paths = []
+
+    def extract_paths(items: Union[List[Union[str, NavigationGroup]], List[str]]) -> None:
+        for item in items:
+            if isinstance(item, str):
+                file_paths.append(Path(item))
+            elif isinstance(item, dict) and "pages" in item:
+                extract_paths(item["pages"])
+
+    extract_paths(navigation)
+    return file_paths
+
+
+@require_optional_import("jinja2", "docs")
+def add_edit_urls_to_non_generated_mdx_files(website_build_directory: Path) -> None:
+    """Add edit links to the non generated mdx files in the website directory.
+
+    For the generated mdx files i.e. mdx files of _blogs and notebooks, it is added in their respective post processing functions.
+    """
+    mint_json_template_path = website_build_directory / "mint-json-template.json.jinja"
+
+    mint_json_template_content = Template(mint_json_template_path.read_text(encoding="utf-8")).render()
+    mint_json_data = json.loads(mint_json_template_content)
+
+    mdx_files = get_files_path_from_navigation(mint_json_data["navigation"])
+    mdx_files_with_prefix = [Path(f"{website_build_directory}/{str(file_path)}.mdx") for file_path in mdx_files]
+
+    for mdx_file_path in mdx_files_with_prefix:
+        rel_path = str(mdx_file_path.relative_to(website_build_directory.parent)).replace("build/", "website/")
+        content = mdx_file_path.read_text(encoding="utf-8")
+        content_with_edit_url = ensure_edit_url(content, rel_path)
+        mdx_file_path.write_text(content_with_edit_url, encoding="utf-8")
+
+
 def main() -> None:
     root_dir = Path(__file__).resolve().parents[2]
     website_dir = root_dir / "website"
@@ -1082,6 +1132,7 @@ def main() -> None:
             add_mdx_generated_from_notebooks_to_nav(args.website_build_directory)
             fix_internal_references_in_mdx_files(args.website_build_directory)
             add_authors_and_social_img_to_blog_posts(args.website_build_directory)
+            add_edit_urls_to_non_generated_mdx_files(args.website_build_directory)
 
     else:
         print("Unknown subcommand")
