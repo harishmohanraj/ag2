@@ -16,8 +16,7 @@ docs_generate() {
         else
             python ./generate_api_references.py
         fi && \
-        python ./process_notebooks.py render && \
-        cd ..
+        python ./process_notebooks.py render
 }
 
 docs_build() {
