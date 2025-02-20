@@ -1,0 +1,7 @@
+---
+search:
+  exclude: true
+---
+- Home
+    - [Home](home/home.md)
+    - [Quick Start](home/quick-start.md)
