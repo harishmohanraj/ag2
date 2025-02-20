@@ -11,9 +11,7 @@ title: autogen.oai.cerebras.CerebrasClient
 CerebrasClient(api_key=None, **kwargs)
 ```
 
-    Client for Cerebras's API.
-    
-    Requires api_key or environment variable to be set
+    Client for Cerebras's API.<br/>Requires api_key or environment variable to be set
 
 <b>Parameters:</b>
 | Name | Description |
@@ -43,7 +41,7 @@ get_usage(response: ChatCompletion) -> dict
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `response` | **Type:** `ChatCompletion` |
+| `response` | **Type:** ChatCompletion |
 
 <br />
 
@@ -61,7 +59,7 @@ cost(self, response: ChatCompletion) -> float
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `response` | **Type:** `ChatCompletion` |
+| `response` | **Type:** ChatCompletion |
 
 <br />
 
@@ -72,15 +70,13 @@ cost(self, response: ChatCompletion) -> float
 message_retrieval(self, response: ChatCompletion) -> list
 ```
 
-    Retrieve and return a list of strings or a list of Choice.Message from the response.
-    
-    NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
+    Retrieve and return a list of strings or a list of Choice.Message from the response.<br/>NOTE: if a list of Choice.Message is returned, it currently needs to contain the fields of OpenAI's ChatCompletion Message object,
     since that is expected for function or tool calling in the rest of the codebase at the moment, unless a custom agent is being used.
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `response` | **Type:** `ChatCompletion` |
+| `response` | **Type:** ChatCompletion |
 
 <br />
 
@@ -88,7 +84,7 @@ message_retrieval(self, response: ChatCompletion) -> list
 #### parse_params
 
 ```python
-parse_params(self, params: dict[str, Any]) -> dict[str, typing.Any]
+parse_params(self, params: dict[str, Any]) -> dict[str, Any]
 ```
 
     Loads the parameters for Cerebras API from the passed in parameters and returns a validated set. Checks types, ranges, and sets defaults
@@ -96,6 +92,6 @@ parse_params(self, params: dict[str, Any]) -> dict[str, typing.Any]
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `params` | **Type:** `dict[str, Any]` |
+| `params` | **Type:** dict[str, Any] |
 
 <br />

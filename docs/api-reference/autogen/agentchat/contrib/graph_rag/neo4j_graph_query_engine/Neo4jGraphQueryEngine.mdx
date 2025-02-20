@@ -12,25 +12,12 @@ Neo4jGraphQueryEngine(**kwargs)
 ```
 
     This class serves as a wrapper for a property graph query engine backed by LlamaIndex and Neo4j,
-    facilitating the creating, connecting, updating, and querying of LlamaIndex property graphs.
+    facilitating the creating, connecting, updating, and querying of LlamaIndex property graphs.<br/>It builds a property graph Index from input documents,
+    storing and retrieving data from the property graph in the Neo4j database.<br/>It extracts triplets, i.e., [entity] -> [relationship] -> [entity] sets,
+    from the input documents using llamIndex extractors.<br/>Users can provide custom entities, relationships, and schema to guide the extraction process.<br/>If strict is True, the engine will extract triplets following the schema
+    of allowed relationships for each entity specified in the schema.<br/>It also leverages LlamaIndex's chat engine which has a conversation history internally to provide context-aware responses.<br/>For usage, please refer to example notebook/agentchat_graph_rag_neo4j.ipynb
     
-    It builds a property graph Index from input documents,
-    storing and retrieving data from the property graph in the Neo4j database.
-    
-    It extracts triplets, i.e., [entity] -> [relationship] -> [entity] sets,
-    from the input documents using llamIndex extractors.
-    
-    Users can provide custom entities, relationships, and schema to guide the extraction process.
-    
-    If strict is True, the engine will extract triplets following the schema
-    of allowed relationships for each entity specified in the schema.
-    
-    It also leverages LlamaIndex's chat engine which has a conversation history internally to provide context-aware responses.
-    
-    For usage, please refer to example notebook/agentchat_graph_rag_neo4j.ipynb
-    
-    Initialize a Neo4j Property graph.
-    Please also refer to https://docs.llamaindex.ai/en/stable/examples/property_graph/graph_store/
+    Initialize a Neo4j Property graph.<br/>Please also refer to https://docs.llamaindex.ai/en/stable/examples/property_graph/graph_store/
 
 <b>Parameters:</b>
 | Name | Description |
@@ -40,7 +27,26 @@ Neo4jGraphQueryEngine(**kwargs)
 ### Class Attributes
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### add_records
+<br />
+
+    Add new records to the underlying database and add to the graph if required.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### connect_db
 <br />
 
     <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### init_db
+<br />
+
+    This method initializes graph database with the input documents or records.<br/>Usually, it takes the following steps,
+    1. connecting to a graph database.<br/>2. extract graph nodes, edges based on input data, graph schema and etc.<br/>3. build indexes etc.<br/>
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### query
+<br />
+
+    This method transform a string format question into database query and return the result.

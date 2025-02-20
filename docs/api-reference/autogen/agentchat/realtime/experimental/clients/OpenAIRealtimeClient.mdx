@@ -10,20 +10,18 @@ title: autogen.agentchat.realtime.experimental.clients.OpenAIRealtimeClient
 ```python
 OpenAIRealtimeClient(
     *,
-    llm_config: dict[str, typing.Any],
-    logger: logging.Logger | None = None
+    llm_config: dict[str, Any],
+    logger: Logger | None = None
 )
 ```
 
-    (Experimental) Client for OpenAI Realtime API.
-    
-    (Experimental) Client for OpenAI Realtime API.
+    (Experimental) Client for OpenAI Realtime API.<br/>(Experimental) Client for OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | The config for the client.<br/><br/>**Type:** `dict[str, typing.Any]` |
-| `logger` | **Type:** `logging.Logger \| None`<br/><br/>**Default:** None |
+| `llm_config` | **Type:** dict[str, typing.Any] |
+| `logger` | **Type:** logging.Logger \| None<br/><br/>**Default:** None |
 
 ### Static Methods
 
@@ -32,20 +30,20 @@ OpenAIRealtimeClient(
 
 ```python
 get_factory(
-    llm_config: dict[str, typing.Any],
-    logger: logging.Logger,
+    llm_config: dict[str, Any],
+    logger: Logger,
     **kwargs: Any
 ) -> 
 ```
 
-    Create a Realtime API client.
+    Create a Realtime API client.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** `dict[str, typing.Any]` |
-| `logger` | **Type:** `logging.Logger` |
-| `**kwargs` | **Type:** `Any` |
+| `llm_config` | **Type:** dict[str, typing.Any] |
+| `logger` | **Type:** logging.Logger |
+| `**kwargs` | **Type:** Any |
 
 <br />
 
@@ -80,7 +78,7 @@ connect(self) -> AsyncGenerator[None, None]
 #### read_events
 
 ```python
-read_events(self) -> AsyncGenerator[autogen.agentchat.realtime.experimental.realtime_events.RealtimeEvent, None]
+read_events(self) -> AsyncGenerator[RealtimeEvent, None]
 ```
 
     Read messages from the OpenAI Realtime API.
@@ -94,12 +92,12 @@ read_events(self) -> AsyncGenerator[autogen.agentchat.realtime.experimental.real
 send_audio(self, audio: str) -> None
 ```
 
-    Send audio to the OpenAI Realtime API.
+    Send audio to the OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `audio` | The audio to send.<br/><br/>**Type:** `str` |
+| `audio` | The audio to send.<br/><br/>**Type:** str |
 
 <br />
 
@@ -114,13 +112,13 @@ send_function_result(
 ) -> None
 ```
 
-    Send the result of a function call to the OpenAI Realtime API.
+    Send the result of a function call to the OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `call_id` | The ID of the function call.<br/><br/>**Type:** `str` |
-| `result` | The result of the function call.<br/><br/>**Type:** `str` |
+| `call_id` | The ID of the function call.<br/><br/>**Type:** str |
+| `result` | The result of the function call.<br/><br/>**Type:** str |
 
 <br />
 
@@ -136,13 +134,13 @@ send_text(
 ) -> None
 ```
 
-    Send a text message to the OpenAI Realtime API.
+    Send a text message to the OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `role` | The role of the message.<br/><br/>**Type:** `Literal['user', 'assistant', 'system']` |
-| `text` | The text of the message.<br/><br/>**Type:** `str` |
+| `role` | The role of the message.<br/><br/>**Type:** Literal['user', 'assistant', 'system'] |
+| `text` | The text of the message.<br/><br/>**Type:** str |
 
 <br />
 
@@ -150,15 +148,15 @@ send_text(
 #### session_update
 
 ```python
-session_update(self, session_options: dict[str, typing.Any]) -> None
+session_update(self, session_options: dict[str, Any]) -> None
 ```
 
-    Send a session update to the OpenAI Realtime API.
+    Send a session update to the OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `session_options` | The session options to update.<br/><br/>**Type:** `dict[str, typing.Any]` |
+| `session_options` | The session options to update.<br/><br/>**Type:** dict[str, typing.Any] |
 
 <br />
 
@@ -174,13 +172,13 @@ truncate_audio(
 ) -> None
 ```
 
-    Truncate audio in the OpenAI Realtime API.
+    Truncate audio in the OpenAI Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `audio_end_ms` | The end of the audio to truncate.<br/><br/>**Type:** `int` |
-| `content_index` | The index of the content to truncate.<br/><br/>**Type:** `int` |
-| `item_id` | The ID of the item to truncate.<br/><br/>**Type:** `str` |
+| `audio_end_ms` | The end of the audio to truncate.<br/><br/>**Type:** int |
+| `content_index` | The index of the content to truncate.<br/><br/>**Type:** int |
+| `item_id` | The ID of the item to truncate.<br/><br/>**Type:** str |
 
 <br />

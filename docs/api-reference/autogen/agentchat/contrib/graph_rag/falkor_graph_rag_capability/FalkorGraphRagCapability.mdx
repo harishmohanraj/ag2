@@ -8,11 +8,10 @@ title: autogen.agentchat.contrib.graph_rag.falkor_graph_rag_capability.FalkorGra
 </h2>
 
 ```python
-FalkorGraphRagCapability(query_engine: autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine)
+FalkorGraphRagCapability(query_engine: FalkorGraphQueryEngine)
 ```
 
-    The FalkorDB GraphRAG capability integrate FalkorDB with graphrag_sdk version: 0.1.3b0.
-    Ref: https://github.com/FalkorDB/GraphRAG-SDK/tree/2-move-away-from-sql-to-json-ontology-detection
+    The FalkorDB GraphRAG capability integrate FalkorDB with graphrag_sdk version: 0.1.3b0.<br/>Ref: https://github.com/FalkorDB/GraphRAG-SDK/tree/2-move-away-from-sql-to-json-ontology-detection
     
     For usage, please refer to example notebook/agentchat_graph_rag_falkordb.ipynb
     
@@ -21,7 +20,7 @@ FalkorGraphRagCapability(query_engine: autogen.agentchat.contrib.graph_rag.falk
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `query_engine` | **Type:** `autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine.FalkorGraphQueryEngine` |
+| `query_engine` | **Type:** [FalkorGraphQueryEngine](/docs/api-reference/autogen/agentchat/contrib/graph_rag/falkor_graph_query_engine/FalkorGraphQueryEngine) |
 
 ### Instance Methods
 
@@ -29,15 +28,14 @@ FalkorGraphRagCapability(query_engine: autogen.agentchat.contrib.graph_rag.falk
 #### add_to_agent
 
 ```python
-add_to_agent(self, agent: autogen.agentchat.user_proxy_agent.UserProxyAgent) -> 
+add_to_agent(self, agent: UserProxyAgent) -> 
 ```
 
-    Add FalkorDB GraphRAG capability to a UserProxyAgent.
-    The restriction to a UserProxyAgent to make sure the returned message does not contain information retrieved from the graph DB instead of any LLMs.
+    Add FalkorDB GraphRAG capability to a UserProxyAgent.<br/>The restriction to a UserProxyAgent to make sure the returned message does not contain information retrieved from the graph DB instead of any LLMs.
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `agent` | **Type:** `autogen.agentchat.user_proxy_agent.UserProxyAgent` |
+| `agent` | **Type:** [UserProxyAgent](/docs/api-reference/autogen/UserProxyAgent) |
 
 <br />

@@ -44,12 +44,9 @@ and early-stop, to streamline the training process. In the example
 scenario, we test the proposed AgentOptimizer in solving problems from
 the [MATH dataset](https://github.com/hendrycks/math).
 
-<figure>
 <img
 src="https://media.githubusercontent.com/media/ag2ai/ag2/main/website/blog/2023-12-23-AgentOptimizer/img/agentoptimizer.png"
 alt="AgentOptimizer" />
-<figcaption aria-hidden="true">AgentOptimizer</figcaption>
-</figure>
 
 More information could be found in the
 [paper](https://arxiv.org/abs/2402.11359).
@@ -141,7 +138,7 @@ Problem:
         human_input_mode: Literal["ALWAYS", "NEVER", "TERMINATE"] = "NEVER",
         default_auto_reply: Optional[Union[str, Dict, None]] = DEFAULT_REPLY,
         max_invalid_q_per_step=3,
-        **kwargs,
+        **kwargs: Any,
     ):
         super().__init__(
             name=name,
@@ -391,21 +388,6 @@ for func in assistant.llm_config["functions"]:
 print("------------------------------------------------Summary------------------------------------------------\n")
 print(f"success_rate_without_agent_training: {success_rate_without_agent_training * 100}%\n")
 print(f"success_rate_with_agent_training: {success_rate_with_agent_training * 100}%\n")
-```
-
-``` text
-------------------------------------------------Functions learned------------------------------------------------
-evaluate_expression: Evaluate arithmetic or mathematical expressions provided as strings.
-
-calculate_compound_interest_principal: Calculate the principal amount needed to achieve a certain future value with quarterly compound interest.
-
-solve_linear_system: Solve a system of linear equations represented as coefficients and variables.
-
-------------------------------------------------Summary------------------------------------------------
-
-success_rate_without_agent_training: 60.0%
-
-success_rate_with_agent_training: 90.0%
 ```
 
 <div className="edit-url-container">

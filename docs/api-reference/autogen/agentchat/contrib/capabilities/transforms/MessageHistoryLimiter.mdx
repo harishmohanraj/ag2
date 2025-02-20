@@ -11,16 +11,13 @@ title: autogen.agentchat.contrib.capabilities.transforms.MessageHistoryLimiter
 MessageHistoryLimiter(max_messages: int | None = None, keep_first_message: bool = False)
 ```
 
-    Limits the number of messages considered by an agent for response generation.
-    
-    This transform keeps only the most recent messages up to the specified maximum number of messages (max_messages).
-    It trims the conversation history by removing older messages, retaining only the most recent messages.
+    Limits the number of messages considered by an agent for response generation.<br/>This transform keeps only the most recent messages up to the specified maximum number of messages (max_messages).<br/>It trims the conversation history by removing older messages, retaining only the most recent messages.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `max_messages` | **Type:** `int \| None`<br/><br/>**Default:** None |
-| `keep_first_message` | **Type:** `bool`<br/><br/>**Default:** False |
+| `max_messages` | **Type:** int \| None<br/><br/>**Default:** None |
+| `keep_first_message` | **Type:** bool<br/><br/>**Default:** False |
 
 ### Instance Methods
 
@@ -28,24 +25,22 @@ MessageHistoryLimiter(max_messages: int | None = None, keep_first_message:�
 #### apply_transform
 
 ```python
-apply_transform(self, messages: list[dict]) -> list[dict]
+apply_transform(self, messages: list[dict[str, Any]]) -> list[dict[str, Any]]
 ```
 
-    Truncates the conversation history to the specified maximum number of messages.
-    
-    This method returns a new list containing the most recent messages up to the specified
+    Truncates the conversation history to the specified maximum number of messages.<br/>This method returns a new list containing the most recent messages up to the specified
     maximum number of messages (max_messages). If max_messages is None, it returns the
-    original list of messages unmodified.
+    original list of messages unmodified.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `messages` | The list of messages representing the conversation history.<br/><br/>**Type:** `list[dict]` |
+| `messages` | The list of messages representing the conversation history.<br/><br/>**Type:** list[dict[str, typing.Any]] |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `list[dict]` | List[Dict]: A new list containing the most recent messages up to the specified maximum. |
+| list[dict[str, typing.Any]] | List[Dict]: A new list containing the most recent messages up to the specified maximum. |
 
 <br />
 
@@ -55,8 +50,8 @@ apply_transform(self, messages: list[dict]) -> list[dict]
 ```python
 get_logs(
     self,
-    pre_transform_messages: list[dict],
-    post_transform_messages: list[dict]
+    pre_transform_messages: list[dict[str, Any]],
+    post_transform_messages: list[dict[str, Any]]
 ) -> tuple[str, bool]
 ```
 
@@ -65,7 +60,7 @@ get_logs(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `pre_transform_messages` | **Type:** `list[dict]` |
-| `post_transform_messages` | **Type:** `list[dict]` |
+| `pre_transform_messages` | **Type:** list[dict[str, typing.Any]] |
+| `post_transform_messages` | **Type:** list[dict[str, typing.Any]] |
 
 <br />

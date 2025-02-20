@@ -30,7 +30,7 @@ from autogen import ConversableAgent
 
 # 2. Define our LLM configuration for OpenAI's GPT-4o mini
 #    uses the OPENAI_API_KEY environment variable
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"api_type": "openai", "model": "gpt-4o-mini"}
 
 # 3. Create our LLM agent
 my_agent = ConversableAgent(
@@ -39,19 +39,10 @@ my_agent = ConversableAgent(
     system_message="You are a poetic AI assistant, respond in rhyme.",
 )
 
-# 4. Create our human in the loop
-the_human = ConversableAgent(
-    name="user",
-    human_input_mode="ALWAYS",
-)
+# 4. Run the agent with a prompt
+chat_result = my_agent.run("In one sentence, what's the big deal about AI?")
 
-# 5. Get a reply from our agent
-chat_result = the_human.initiate_chat(
-    recipient=my_agent,
-    message="In one sentence, what's the big deal about AI?"
-    )
-
-# 6. Print the chat
+# 5. Print the chat
 print(chat_result.chat_history)
 ```
     </Tab>
@@ -65,7 +56,7 @@ from autogen import ConversableAgent
 
 # 2. Define our LLM configuration for OpenAI's GPT-4o mini,
 #    uses the OPENAI_API_KEY environment variable
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"api_type": "openai", "model": "gpt-4o-mini"}
 
 # 3. Create our agents who will tell each other jokes,
 #    with Jack ending the chat when Emma says FINISH
@@ -83,7 +74,7 @@ emma = ConversableAgent(
     llm_config=llm_config,
     system_message=(
       "Your name is Emma and you are a comedian "
-      "in two-person comedy show. Say the word FINISH "
+      "in a two-person comedy show. Say the word FINISH "
       "ONLY AFTER you've heard 2 of Jack's jokes."
     ),
 )
@@ -111,7 +102,7 @@ from autogen import ConversableAgent, GroupChat, GroupChatManager
 
 # Define our LLM configuration for OpenAI's GPT-4o mini
 # uses the OPENAI_API_KEY environment variable
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"api_type": "openai", "model": "gpt-4o-mini"}
 
 # Planner agent setup
 planner_message = "Create lesson plans for 4th grade. Use format: <title>, <learning_objectives>, <script>"

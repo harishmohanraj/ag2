@@ -9,28 +9,24 @@ title: autogen.coding.jupyter.JupyterCodeExecutor
 
 ```python
 JupyterCodeExecutor(
-    jupyter_server: autogen.coding.jupyter.base.JupyterConnectable | autogen.coding.jupyter.base.JupyterConnectionInfo,
+    jupyter_server: JupyterConnectable | JupyterConnectionInfo,
     kernel_name: str = 'python3',
     timeout: int = 60,
-    output_dir: pathlib.Path | str = PosixPath('.')
+    output_dir: Path | str = PosixPath('.')
 )
 ```
 
-    (Experimental) A code executor class that executes code blocks and returns the result.
-    
-    (Experimental) A code executor class that executes code statefully using
-    a Jupyter server supplied to this class.
-    
-    Each execution is stateful and can access variables created from previous
-    executions in the same session.
+    (Experimental) A code executor class that executes code blocks and returns the result.<br/>(Experimental) A code executor class that executes code statefully using
+    a Jupyter server supplied to this class.<br/>Each execution is stateful and can access variables created from previous
+    executions in the same session.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `jupyter_server` | The Jupyter server to use.<br/><br/>**Type:** `autogen.coding.jupyter.base.JupyterConnectable \| autogen.coding.jupyter.base.JupyterConnectionInfo` |
-| `kernel_name` | The kernel name to use.<br/><br/>Make sure it is installed.<br/><br/>By default, it is "python3".<br/><br/>**Type:** `str`<br/><br/>**Default:** 'python3' |
-| `timeout` | The timeout for code execution, by default 60.<br/><br/>**Type:** `int`<br/><br/>**Default:** 60 |
-| `output_dir` | The directory to save output files, by default ".".<br/><br/>**Type:** `pathlib.Path \| str`<br/><br/>**Default:** PosixPath('.') |
+| `jupyter_server` | **Type:** [JupyterConnectable](/docs/api-reference/autogen/coding/jupyter/JupyterConnectable) \| [JupyterConnectionInfo](/docs/api-reference/autogen/coding/jupyter/JupyterConnectionInfo) |
+| `kernel_name` | **Type:** str<br/><br/>**Default:** 'python3' |
+| `timeout` | **Type:** int<br/><br/>**Default:** 60 |
+| `output_dir` | **Type:** pathlib.Path \| str<br/><br/>**Default:** PosixPath('.') |
 
 ### Instance Attributes
 
@@ -46,24 +42,21 @@ JupyterCodeExecutor(
 #### execute_code_blocks
 
 ```python
-execute_code_blocks(self, code_blocks: list[autogen.coding.base.CodeBlock]) -> autogen.coding.base.IPythonCodeResult
+execute_code_blocks(self, code_blocks: list[CodeBlock]) -> IPythonCodeResult
 ```
 
-    (Experimental) Execute a list of code blocks and return the result.
-    
-    This method executes a list of code blocks as cells in the Jupyter kernel.
-    See: https://jupyter-client.readthedocs.io/en/stable/messaging.html
-    for the message protocol.
+    (Experimental) Execute a list of code blocks and return the result.<br/>This method executes a list of code blocks as cells in the Jupyter kernel.<br/>See: https://jupyter-client.readthedocs.io/en/stable/messaging.html
+    for the message protocol.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `code_blocks` | A list of code blocks to execute.<br/><br/>**Type:** `list[autogen.coding.base.CodeBlock]` |
+| `code_blocks` | A list of code blocks to execute.<br/><br/>**Type:** list[[CodeBlock](/docs/api-reference/autogen/coding/CodeBlock)] |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `autogen.coding.base.IPythonCodeResult` | IPythonCodeResult: The result of the code execution. |
+| autogen.coding.base.IPythonCodeResult | IPythonCodeResult: The result of the code execution. |
 
 <br />
 

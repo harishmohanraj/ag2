@@ -11,14 +11,13 @@ title: autogen.cache.in_memory_cache.InMemoryCache
 InMemoryCache(seed: str | int = '')
 ```
 
-    This protocol defines the basic interface for cache operations.
-    Implementing classes should provide concrete implementations for
+    This protocol defines the basic interface for cache operations.<br/>Implementing classes should provide concrete implementations for
     these methods to handle caching mechanisms.
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `seed` | **Type:** `str \| int`<br/><br/>**Default:** '' |
+| `seed` | **Type:** str \| int<br/><br/>**Default:** '' |
 
 ### Instance Methods
 
@@ -45,18 +44,18 @@ get(
 ) -> Any | None
 ```
 
-    Retrieve an item from the cache.
+    Retrieve an item from the cache.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `key` | The key identifying the item in the cache.<br/><br/>**Type:** `str` |
-| `default` | The default value to return if the key is not found.<br/><br/>Defaults to None.<br/><br/>**Type:** `Any \| None`<br/><br/>**Default:** None |
+| `key` | The key identifying the item in the cache.<br/><br/>**Type:** str |
+| `default` | The default value to return if the key is not found.<br/><br/>Defaults to None.<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `Any \| None` | The value associated with the key if found, else the default value. |
+| Any \| None | The value associated with the key if found, else the default value. |
 
 <br />
 
@@ -71,12 +70,12 @@ set(
 ) -> None
 ```
 
-    Set an item in the cache.
+    Set an item in the cache.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `key` | The key under which the item is to be stored.<br/><br/>**Type:** `str` |
-| `value` | The value to be stored in the cache.<br/><br/>**Type:** `Any` |
+| `key` | The key under which the item is to be stored.<br/><br/>**Type:** str |
+| `value` | The value to be stored in the cache.<br/><br/>**Type:** Any |
 
 <br />

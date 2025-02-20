@@ -1,0 +1,223 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_RetrieveChat_couchbase.ipynb
+description: Explore the use of AG2's RetrieveChat for tasks like code generation
+  from docstrings, answering complex questions with human feedback, and exploiting
+  features like Update Context, custom prompts, and few-shot learning.
+source_notebook: /notebook/agentchat_RetrieveChat_couchbase.ipynb
+tags:
+- RAG
+title: Using RetrieveChat Powered by Couchbase Capella for Retrieve Augmented Code
+  Generation and Question Answering
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_RetrieveChat_couchbase.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_RetrieveChat_couchbase.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+AG2 offers conversable agents powered by LLM, tool or human, which can
+be used to perform tasks collectively via automated chat. This framework
+allows tool use and human participation through multi-agent
+conversation. Please find documentation about this feature
+[here](https://microsoft.github.io/autogen/docs/Use-Cases/agent_chat).
+
+RetrieveChat is a conversational system for retrieval-augmented code
+generation and question answering. In this notebook, we demonstrate how
+to utilize RetrieveChat to generate code and answer questions based on
+customized documentations that are not present in the LLM’s training
+dataset. RetrieveChat uses the `AssistantAgent` and
+`RetrieveUserProxyAgent`, which is similar to the usage of
+`AssistantAgent` and `UserProxyAgent` in other notebooks (e.g.,
+[Automated Task Solving with Code Generation, Execution &
+Debugging](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_auto_feedback_from_code_execution.ipynb)).
+Essentially, `RetrieveUserProxyAgent` implement a different auto-reply
+mechanism corresponding to the RetrieveChat prompts.
+
+## Table of Contents
+
+We’ll demonstrate six examples of using RetrieveChat for code generation
+and question answering:
+
+-   [Example 1: Generate code based off docstrings w/o human
+    feedback](#example-1)
+
+
+<div class="info Requirements">
+<Info>
+Some extra dependencies are needed for this notebook, which can be installed via pip:
+
+```bash
+pip install pyautogen[retrievechat-couchbase] flaml[automl]
+```
+
+For more information, please refer to the [installation guide](/docs/installation/).
+</Info>
+</div>
+
+
+## Setup Couchbase Capella Cluster
+
+Before we proceed with the notebook. We will require a Couchbase Capella
+Database Cluster Running.
+
+-   To setup a free operational cluster, Head over [Couchbase
+    Cloud](https://cloud.couchbase.com) and create an account. Over
+    there create a free cluster. For more details on creating a cluster,
+    [refer
+    here](https://docs.couchbase.com/cloud/get-started/create-account.html).
+
+-   After creating the cluster, We will create our required bucket,
+    scope, collections. Head over to <b>Data Tools</b>. On the left hand
+    side panel, you will get an option to create a bucket. Give
+    appropriate Bucket Name, Scope Name, Collection Name. For this
+    tutorial, set
+
+    -   Bucket Name : test_db
+    -   Scope Name: test_scope
+    -   Collection Name: demo_collection
+
+-   Now, we will connect to cluster. [Refer this page for
+    connection](https://docs.couchbase.com/cloud/get-started/connect.html)
+
+-   Next, let’s create user to connect. Head over to settings tab. Click
+    \[Create Cluster Access\]. Specify username and password and give
+    read/write all buckets access. You may create more users with less
+    than admin access. For more information, [refer
+    here](https://docs.couchbase.com/cloud/clusters/manage-database-users.html#create-database-credentials)
+
+-   Add IP Address to allowed IPs. in settings, click on \[Networking\].
+    Add [allowed
+    IP](https://docs.couchbase.com/cloud/clusters/allow-ip-address.html)
+    based on your requirements.
+
+-   Let’s fill our environment variables. First get the connection
+    string from the \[Connect\] Tab. Now we will have 3 envs for
+    Couchbase cluster and one for open AI
+
+    -   CB_CONN_STR : Couchbase Cluster Connection string
+    -   CB_USERNAME : Username of the user, created above
+    -   CB_PASSWORD : Password of the user, created above
+    -   OPENAI_API_KEY : OpenAI API Key which agents will require.
+
+Voila, your cluster is ready to be used.
+
+## Set your API Endpoint
+
+```python
+import os
+import sys
+
+from autogen import AssistantAgent
+
+sys.path.append(os.path.abspath("/workspaces/autogen/autogen/agentchat/contrib"))
+
+from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
+
+# Accepted file formats for that can be stored in
+# a vector database instance
+from autogen.retrieve_utils import TEXT_FORMATS
+
+config_list = [{"model": "gpt-4o-mini", "api_key": os.environ["OPENAI_API_KEY"], "api_type": "openai"}]
+assert len(config_list) > 0
+print("models to use: ", [config_list[i]["model"] for i in range(len(config_list))])
+```
+
+
+<div class="tip">
+<Tip>
+Learn more about configuring LLMs for agents [here](/docs/topics/llm_configuration).
+</Tip>
+</div>
+
+
+## Construct agents for RetrieveChat
+
+We start by initializing the `AssistantAgent` and
+`RetrieveUserProxyAgent`. The system message needs to be set to “You are
+a helpful assistant.” for AssistantAgent. The detailed instructions are
+given in the user message. Later we will use the
+`RetrieveUserProxyAgent.message_generator` to combine the instructions
+and a retrieval augmented generation task for an initial prompt to be
+sent to the LLM assistant.
+
+```python
+print("Accepted file formats for `docs_path`:")
+print(TEXT_FORMATS)
+```
+
+
+```python
+# 1. create an AssistantAgent instance named "assistant"
+assistant = AssistantAgent(
+    name="assistant",
+    system_message="You are a helpful assistant.",
+    llm_config={
+        "timeout": 600,
+        "cache_seed": 42,
+        "config_list": config_list,
+    },
+)
+
+# 2. create the RetrieveUserProxyAgent instance named "ragproxyagent"
+# Refer to https://ag2ai.github.io/ag2/docs/reference/agentchat/contrib/retrieve_user_proxy_agent
+# and https://ag2ai.github.io/ag2/docs/reference/agentchat/contrib/vectordb/couchbase
+# for more information on the RetrieveUserProxyAgent and CouchbaseVectorDB
+ragproxyagent = RetrieveUserProxyAgent(
+    name="ragproxyagent",
+    human_input_mode="NEVER",
+    max_consecutive_auto_reply=3,
+    retrieve_config={
+        "task": "code",
+        "docs_path": [
+            "https://raw.githubusercontent.com/microsoft/FLAML/main/website/docs/Examples/Integrate%20-%20Spark.md",
+            "https://raw.githubusercontent.com/microsoft/FLAML/main/website/docs/Research.md",
+        ],
+        "chunk_token_size": 2000,
+        "model": config_list[0]["model"],
+        "vector_db": "couchbase",  # Couchbase Capella VectorDB
+        "collection_name": "demo_collection",  # Couchbase Capella collection name to be utilized/created
+        "db_config": {
+            "connection_string": os.environ["CB_CONN_STR"],  # Couchbase Capella connection string
+            "username": os.environ["CB_USERNAME"],  # Couchbase Capella username
+            "password": os.environ["CB_PASSWORD"],  # Couchbase Capella password
+            "bucket_name": "test_db",  # Couchbase Capella bucket name
+            "scope_name": "test_scope",  # Couchbase Capella scope name
+            "index_name": "vector_index",  # Couchbase Capella index name to be created
+        },
+        "get_or_create": True,  # set to False if you don't want to reuse an existing collection
+        "overwrite": False,  # set to True if you want to overwrite an existing collection, each overwrite will force a index creation and reupload of documents
+    },
+    code_execution_config=False,  # set to False if you don't want to execute the code
+)
+```
+
+### Example 1
+
+[Back to top](#table-of-contents)
+
+Use RetrieveChat to help generate sample code and automatically run the
+code and fix errors if there is any.
+
+Problem: Which API should I use if I want to use FLAML for a
+classification task and I want to train the model in 30 seconds. Use
+spark to parallel the training. Force cancel jobs if time limit is
+reached.
+
+Note: You may need to create an index on the cluster to query
+
+```python
+# reset the assistant. Always reset the assistant before starting a new conversation.
+assistant.reset()
+
+# given a problem, we use the ragproxyagent to generate a prompt to be sent to the assistant as the initial message.
+# the assistant receives the message and generates a response. The response will be sent back to the ragproxyagent for processing.
+# The conversation continues until the termination condition is met, in RetrieveChat, the termination condition when no human-in-loop is no code block detected.
+# With human-in-loop, the conversation will continue until the user says "exit".
+code_problem = "How can I use FLAML to perform a classification task and use spark to do parallel training. Train 30 seconds and force cancel jobs if time limit is reached."
+chat_result = ragproxyagent.initiate_chat(assistant, message=ragproxyagent.message_generator, problem=code_problem)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_RetrieveChat_couchbase.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

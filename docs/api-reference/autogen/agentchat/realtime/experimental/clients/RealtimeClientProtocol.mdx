@@ -11,34 +11,16 @@ title: autogen.agentchat.realtime.experimental.clients.RealtimeClientProtocol
 RealtimeClientProtocol(*args, **kwargs)
 ```
 
-    Base class for protocol classes.
+    Base class for protocol classes.<br/>Protocol classes are defined as:: <br/>    class Proto(Protocol): <br/>        def meth(self) -> int: <br/>            ...<br/>Such classes are primarily used with static type checkers that recognize
+    structural subtyping (static duck-typing), for example:: <br/>    class C: <br/>        def meth(self) -> int: <br/>            return 0
     
-    Protocol classes are defined as::
-    
-        class Proto(Protocol):
-            def meth(self) -> int:
-                ...
-    
-    Such classes are primarily used with static type checkers that recognize
-    structural subtyping (static duck-typing), for example::
-    
-        class C:
-            def meth(self) -> int:
-                return 0
-    
-        def func(x: Proto) -> int:
-            return x.meth()
+        def func(x: Proto) -> int: <br/>        return x.meth()
     
         func(C())  # Passes static type check
     
     See PEP 544 for details. Protocol classes decorated with
     @typing.runtime_checkable act as simple-minded runtime protocols that check
-    only the presence of given attributes, ignoring their type signatures.
-    Protocol classes can be generic, they are defined as::
-    
-        class GenProto(Protocol[T]):
-            def meth(self) -> T:
-                ...
+    only the presence of given attributes, ignoring their type signatures.<br/>Protocol classes can be generic, they are defined as:: <br/>    class GenProto(Protocol[T]): <br/>        def meth(self) -> T: <br/>            ...
 
 <b>Parameters:</b>
 | Name | Description |
@@ -53,25 +35,25 @@ RealtimeClientProtocol(*args, **kwargs)
 
 ```python
 get_factory(
-    llm_config: dict[str, typing.Any],
-    logger: logging.Logger,
+    llm_config: dict[str, Any],
+    logger: Logger,
     **kwargs: Any
-) -> Callable[[], autogen.agentchat.realtime.experimental.clients.realtime_client.RealtimeClientProtocol] | None
+) -> Callable[[], RealtimeClientProtocol] | None
 ```
 
-    Create a Realtime API client.
+    Create a Realtime API client.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | The config for the client.<br/><br/>**Type:** `dict[str, typing.Any]` |
-| `logger` | **Type:** `logging.Logger` |
-| `**kwargs` | **Type:** `Any` |
+| `llm_config` | The config for the client.<br/><br/>**Type:** dict[str, typing.Any] |
+| `logger` | **Type:** logging.Logger |
+| `**kwargs` | **Type:** Any |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `Callable[[], autogen.agentchat.realtime.experimental.clients.realtime_client.RealtimeClientProtocol] \| None` | RealtimeClientProtocol: The Realtime API client is returned if the model matches the pattern |
+| Callable[[], [RealtimeClientProtocol](/docs/api-reference/autogen/agentchat/realtime/experimental/clients/RealtimeClientProtocol)] \| None | RealtimeClientProtocol: The Realtime API client is returned if the model matches the pattern |
 
 <br />
 
@@ -92,10 +74,10 @@ connect(self) -> AsyncContextManager[None]
 #### read_events
 
 ```python
-read_events(self) -> AsyncGenerator[autogen.agentchat.realtime.experimental.realtime_events.RealtimeEvent, None]
+read_events(self) -> AsyncGenerator[RealtimeEvent, None]
 ```
 
-    Read messages from a Realtime API.
+    Read events from a Realtime Client.
 
 <br />
 
@@ -106,12 +88,12 @@ read_events(self) -> AsyncGenerator[autogen.agentchat.realtime.experimental.real
 send_audio(self, audio: str) -> None
 ```
 
-    Send audio to a Realtime API.
+    Send audio to a Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `audio` | The audio to send.<br/><br/>**Type:** `str` |
+| `audio` | The audio to send.<br/><br/>**Type:** str |
 
 <br />
 
@@ -126,13 +108,13 @@ send_function_result(
 ) -> None
 ```
 
-    Send the result of a function call to a Realtime API.
+    Send the result of a function call to a Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `call_id` | The ID of the function call.<br/><br/>**Type:** `str` |
-| `result` | The result of the function call.<br/><br/>**Type:** `str` |
+| `call_id` | The ID of the function call.<br/><br/>**Type:** str |
+| `result` | The result of the function call.<br/><br/>**Type:** str |
 
 <br />
 
@@ -148,13 +130,13 @@ send_text(
 ) -> None
 ```
 
-    Send a text message to a Realtime API.
+    Send a text message to a Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `role` | The role of the message.<br/><br/>**Type:** `Literal['user', 'assistant', 'system']` |
-| `text` | The text of the message.<br/><br/>**Type:** `str` |
+| `role` | The role of the message.<br/><br/>**Type:** Literal['user', 'assistant', 'system'] |
+| `text` | The text of the message.<br/><br/>**Type:** str |
 
 <br />
 
@@ -162,15 +144,15 @@ send_text(
 #### session_update
 
 ```python
-session_update(self, session_options: dict[str, typing.Any]) -> None
+session_update(self, session_options: dict[str, Any]) -> None
 ```
 
-    Send a session update to a Realtime API.
+    Send a session update to a Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `session_options` | The session options to update.<br/><br/>**Type:** `dict[str, typing.Any]` |
+| `session_options` | The session options to update.<br/><br/>**Type:** dict[str, typing.Any] |
 
 <br />
 
@@ -186,13 +168,13 @@ truncate_audio(
 ) -> None
 ```
 
-    Truncate audio in a Realtime API.
+    Truncate audio in a Realtime API.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `audio_end_ms` | The end of the audio to truncate.<br/><br/>**Type:** `int` |
-| `content_index` | The index of the content to truncate.<br/><br/>**Type:** `int` |
-| `item_id` | The ID of the item to truncate.<br/><br/>**Type:** `str` |
+| `audio_end_ms` | The end of the audio to truncate.<br/><br/>**Type:** int |
+| `content_index` | The index of the content to truncate.<br/><br/>**Type:** int |
+| `item_id` | The ID of the item to truncate.<br/><br/>**Type:** str |
 
 <br />

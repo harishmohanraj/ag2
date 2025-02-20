@@ -74,14 +74,6 @@ from autogen import ConversableAgent, UserProxyAgent, config_list_from_json
 agentops.init(api_key="...")
 ```
 
-``` text
-🖇 AgentOps: Session Replay: https://app.agentops.ai/drilldown?session_id=8bfaeed1-fd51-4c68-b3ec-276b1a3ce8a4
-```
-
-``` text
-UUID('8bfaeed1-fd51-4c68-b3ec-276b1a3ce8a4')
-```
-
 Autogen will now start automatically tracking - LLM prompts and
 completions - Token usage and costs - Agent names and actions -
 Correspondence between agents - Tool usage - Errors
@@ -108,49 +100,21 @@ assistant.initiate_chat(user_proxy, message="How can I help you today?")
 agentops.end_session("Success")
 ```
 
-``` text
-agent (to user):
-
-How can I help you today?
-
---------------------------------------------------------------------------------
-user (to agent):
-
-2+2
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-agent (to user):
-
-2 + 2 equals 4.
-
---------------------------------------------------------------------------------
-```
-
-``` text
-🖇 AgentOps: This run's cost $0.000960
-🖇 AgentOps: Session Replay: https://app.agentops.ai/drilldown?session_id=8bfaeed1-fd51-4c68-b3ec-276b1a3ce8a4
-```
-
 You can view data on this run at
 [app.agentops.ai](https://app.agentops.ai).
 
 The dashboard will display LLM events for each message sent by each
 agent, including those made by the human user.
 
-<figure>
 <img
 src="https://github.com/AgentOps-AI/agentops/blob/main/docs/images/external/app_screenshots/session-overview.png?raw=true"
 alt="session replay" />
-<figcaption aria-hidden="true">session replay</figcaption>
-</figure>
 
 # Tool Example
 
 AgentOps also tracks when Autogen agents use tools. You can find more
 information on this example in
-[tool-use.ipynb](https://github.com/ag2ai/ag2/blob/main/website/docs/tutorial/tool-use.ipynb)
+[tool-use.ipynb](https://docs.ag2.ai/docs/user-guide/basic-concepts/tools)
 
 ```python
 from typing import Annotated, Literal
@@ -213,188 +177,14 @@ user_proxy.initiate_chat(assistant, message="What is (1423 - 123) / 3 + (32 + 23
 agentops.end_session("Success")
 ```
 
-``` text
-🖇 AgentOps: Session Replay: https://app.agentops.ai/drilldown?session_id=880c206b-751e-4c23-9313-8684537fc04d
-```
-
-``` text
-User (to Assistant):
-
-What is (1423 - 123) / 3 + (32 + 23) * 5?
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-***** Suggested tool call (call_aINcGyo0Xkrh9g7buRuhyCz0): calculator *****
-Arguments: 
-{
-  "a": 1423,
-  "b": 123,
-  "operator": "-"
-}
-***************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION calculator...
-User (to Assistant):
-
-User (to Assistant):
-
-***** Response from calling tool (call_aINcGyo0Xkrh9g7buRuhyCz0) *****
-1300
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-***** Suggested tool call (call_prJGf8V0QVT7cbD91e0Fcxpb): calculator *****
-Arguments: 
-{
-  "a": 1300,
-  "b": 3,
-  "operator": "/"
-}
-***************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION calculator...
-User (to Assistant):
-
-User (to Assistant):
-
-***** Response from calling tool (call_prJGf8V0QVT7cbD91e0Fcxpb) *****
-433
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-```
-
-``` text
-/Users/braelynboynton/Developer/agentops/autogen/autogen/agentchat/conversable_agent.py:2489: UserWarning: Function 'calculator' is being overridden.
-  warnings.warn(f"Function '{tool_sig['function']['name']}' is being overridden.", UserWarning)
-/Users/braelynboynton/Developer/agentops/autogen/autogen/agentchat/conversable_agent.py:2408: UserWarning: Function 'calculator' is being overridden.
-  warnings.warn(f"Function '{name}' is being overridden.", UserWarning)
-```
-
-``` text
-Assistant (to User):
-
-***** Suggested tool call (call_CUIgHRsySLjayDKuUphI1TGm): calculator *****
-Arguments: 
-{
-  "a": 32,
-  "b": 23,
-  "operator": "+"
-}
-***************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION calculator...
-User (to Assistant):
-
-User (to Assistant):
-
-***** Response from calling tool (call_CUIgHRsySLjayDKuUphI1TGm) *****
-55
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-***** Suggested tool call (call_L7pGtBLUf9V0MPL90BASyesr): calculator *****
-Arguments: 
-{
-  "a": 55,
-  "b": 5,
-  "operator": "*"
-}
-***************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION calculator...
-User (to Assistant):
-
-User (to Assistant):
-
-***** Response from calling tool (call_L7pGtBLUf9V0MPL90BASyesr) *****
-275
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-***** Suggested tool call (call_Ygo6p4XfcxRjkYBflhG3UVv6): calculator *****
-Arguments: 
-{
-  "a": 433,
-  "b": 275,
-  "operator": "+"
-}
-***************************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION calculator...
-User (to Assistant):
-
-User (to Assistant):
-
-***** Response from calling tool (call_Ygo6p4XfcxRjkYBflhG3UVv6) *****
-708
-**********************************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-The result of the calculation is 708.
-
---------------------------------------------------------------------------------
-User (to Assistant):
-
-
-
---------------------------------------------------------------------------------
-
->>>>>>>> USING AUTO REPLY...
-Assistant (to User):
-
-TERMINATE
-
---------------------------------------------------------------------------------
-```
-
-``` text
-🖇 AgentOps: This run's cost $0.001800
-🖇 AgentOps: Session Replay: https://app.agentops.ai/drilldown?session_id=880c206b-751e-4c23-9313-8684537fc04d
-```
-
 You can see your run in action at
 [app.agentops.ai](https://app.agentops.ai). In this example, the
 AgentOps dashboard will show: - Agents talking to each other - Each use
 of the `calculator` tool - Each call to OpenAI for LLM use
 
-<figure>
 <img
 src="https://github.com/AgentOps-AI/agentops/blob/main/docs/images/external/app_screenshots/session-replay.png?raw=true"
 alt="Session Drilldown" />
-<figcaption aria-hidden="true">Session Drilldown</figcaption>
-</figure>
 
 <div className="edit-url-container">
     <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_agentops.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>

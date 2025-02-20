@@ -10,19 +10,17 @@ title: autogen.tools.dependency_injection.inject_params
 inject_params(f: Callable[..., Any]) -> Callable[..., Any]
 ```
 
-    Injects parameters into a function, removing injected dependencies from its signature.
-    
-    This function is used to modify a function by injecting dependencies and removing
-    injected parameters from the function's signature.
+    Injects parameters into a function, removing injected dependencies from its signature.<br/>This function is used to modify a function by injecting dependencies and removing
+    injected parameters from the function's signature.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `f` | The function to modify with dependency injection.<br/><br/>**Type:** `Callable[..., Any]` |
+| `f` | The function to modify with dependency injection.<br/><br/>**Type:** Callable[..., Any] |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| `Callable[..., Any]` | The modified function with injected dependencies and updated signature. |
+| Callable[..., Any] | The modified function with injected dependencies and updated signature. |
 
 <br />

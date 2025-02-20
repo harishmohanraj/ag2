@@ -68,7 +68,7 @@ steps:
     playwright install-deps
     ```
 
-3.  For running the code in Jupyther, use `nest_asyncio` to allow nested
+3.  For running the code in Jupyter, use `nest_asyncio` to allow nested
     event loops. `bash     pip install nest_asyncio`
 
 You’re all set! Now you can start using browsing features in AG2.
@@ -81,7 +81,7 @@ import os
 import nest_asyncio
 
 from autogen.agentchat import UserProxyAgent
-from autogen.agents import WebSurferAgent
+from autogen.agents.experimental import WebSurferAgent
 
 nest_asyncio.apply()
 ```
@@ -186,7 +186,7 @@ steps:
     playwright install-deps
     ```
 
-3.  For running the code in Jupyther, use `nest_asyncio` to allow nested
+3.  For running the code in Jupyter, use `nest_asyncio` to allow nested
     event loops. `bash     pip install nest_asyncio`
 
 You’re all set! Now you can start using browsing features in AG2.
@@ -199,7 +199,7 @@ import os
 import nest_asyncio
 
 from autogen.agentchat import UserProxyAgent
-from autogen.agents import WebSurferAgent
+from autogen.agents.experimental import WebSurferAgent
 
 nest_asyncio.apply()
 ```

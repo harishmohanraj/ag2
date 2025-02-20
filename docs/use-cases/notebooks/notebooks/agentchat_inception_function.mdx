@@ -1,7 +1,7 @@
 ---
 custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_inception_function.ipynb
-description: 'Function Inception: Enable AutoGen agents to update/remove functions
-  during conversations.'
+description: 'Function Inception: Enable AG2 agents to update/remove functions during
+  conversations.'
 source_notebook: /notebook/agentchat_inception_function.ipynb
 tags:
 - function inception
@@ -15,9 +15,9 @@ title: 'Auto Generated Agent Chat: Function Inception'
 
 
 
-AutoGen offers conversable agents powered by LLM, tool or human, which
-can be used to perform tasks collectively via automated chat. This
-framework allows tool use and human participation through multi-agent
+AG2 offers conversable agents powered by LLM, tool or human, which can
+be used to perform tasks collectively via automated chat. This framework
+allows tool use and human participation through multi-agent
 conversation. Please find documentation about this feature
 [here](https://docs.ag2.ai/docs/Use-Cases/agent_chat).
 
@@ -37,7 +37,7 @@ function.
 
 ## Requirements
 
-AutoGen requires `Python>=3.9`.
+AG2 requires `Python>=3.9`.
 
 ```python
 import json
@@ -169,147 +169,6 @@ user_proxy.initiate_chat(
 user_proxy.initiate_chat(
     assistant, message="Print the response body of https://echo.free.beeceptor.com/\nUse the functions you know about."
 )
-```
-
-``` text
-user_proxy (to chatbot):
-
-Define a function that gets a URL, then prints the response body.
-Reply TERMINATE when the function is defined.
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-***** Suggested function Call: define_function *****
-Arguments: 
-{
-  "name": "get_url_response_body",
-  "description": "Gets a URL, then prints the response body",
-  "arguments": "{\"url\": {\"type\": \"string\", \"description\": \"The URL\"}}",
-  "packages": "requests",
-  "code": "import requests\n\n\ndef get_url_response_body(url):\n    response = requests.get(url)\n    print(response.text)\n"
-}
-****************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION define_function...
-user_proxy (to chatbot):
-
-***** Response from calling function "define_function" *****
-A function has been added to the context of this conversation.
-Description: Gets a URL, then prints the response body
-************************************************************
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-TERMINATE
-
---------------------------------------------------------------------------------
-user_proxy (to chatbot):
-
-Print the response body of https://echo.free.beeceptor.com/
-Use the functions you know about.
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-***** Suggested function Call: get_url_response_body *****
-Arguments: 
-{
-  "url": "https://echo.free.beeceptor.com/"
-}
-**********************************************************
-
---------------------------------------------------------------------------------
-
->>>>>>>> EXECUTING FUNCTION get_url_response_body...
-execute_code:
-
-import subprocess
-print("Installing package: requests")
-subprocess.run(["pip", "-qq", "install", "requests"])
-print("Result of get_url_response_body function execution:")
-import requests
-
-
-def get_url_response_body(url):
-    response = requests.get(url)
-    print(response.text)
-
-args={'url': 'https://echo.free.beeceptor.com/'}
-result=get_url_response_body(**args)
-if result is not None: print(result)
-
-Result: Installing package: requests
-Result of get_url_response_body function execution:
-{
-  "method": "GET",
-  "path": "/",
-  "ip": "104.28.208.116",
-  "headers": {
-    "host": "echo.free.beeceptor.com",
-    "user-agent": "python-requests/2.31.0",
-    "accept": "*/*",
-    "accept-encoding": "gzip, deflate",
-    "x-forwarded-for": "104.28.208.116",
-    "x-forwarded-host": "echo.free.beeceptor.com",
-    "x-forwarded-proto": "https",
-    "x-real-ip": "104.28.208.116"
-  },
-  "parsedQueryParams": {}
-}
-
-user_proxy (to chatbot):
-
-***** Response from calling function "get_url_response_body" *****
-Installing package: requests
-Result of get_url_response_body function execution:
-{
-  "method": "GET",
-  "path": "/",
-  "ip": "104.28.208.116",
-  "headers": {
-    "host": "echo.free.beeceptor.com",
-    "user-agent": "python-requests/2.31.0",
-    "accept": "*/*",
-    "accept-encoding": "gzip, deflate",
-    "x-forwarded-for": "104.28.208.116",
-    "x-forwarded-host": "echo.free.beeceptor.com",
-    "x-forwarded-proto": "https",
-    "x-real-ip": "104.28.208.116"
-  },
-  "parsedQueryParams": {}
-}
-
-******************************************************************
-
---------------------------------------------------------------------------------
-chatbot (to user_proxy):
-
-The response body of https://echo.free.beeceptor.com/ is:
-
-{
-  "method": "GET",
-  "path": "/",
-  "ip": "104.28.208.116",
-  "headers": {
-    "host": "echo.free.beeceptor.com",
-    "user-agent": "python-requests/2.31.0",
-    "accept": "*/*",
-    "accept-encoding": "gzip, deflate",
-    "x-forwarded-for": "104.28.208.116",
-    "x-forwarded-host": "echo.free.beeceptor.com",
-    "x-forwarded-proto": "https",
-    "x-real-ip": "104.28.208.116"
-  },
-  "parsedQueryParams": {}
-}
-
-TERMINATE
-
---------------------------------------------------------------------------------
 ```
 
 <div className="edit-url-container">
