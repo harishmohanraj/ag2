@@ -3,6 +3,9 @@ all variables
 https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_colors.scss
 */
 
+/* Load Jersey 10 font*/
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
 :root {
     --md-primary-fg-color: #4b9cd6;
     --md-primary-bg-color: #FFF;
@@ -86,4 +89,16 @@ a.internal-link::after {
             to make the mark be on the same line as the link
         */
     content: "\00A0↪";
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+    letter-spacing: 0.01em;
+    font-family: 'Jersey 10', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
 }

@@ -27,7 +27,8 @@ theme:
   logo: assets/img/logo.svg
   favicon: assets/img/favicon.ico
   font:
-    text: Roboto
+    text: Inter
+    code: Roboto Mono
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
