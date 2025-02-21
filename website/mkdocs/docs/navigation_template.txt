@@ -2,6 +2,8 @@
 search:
   exclude: true
 ---
-- Home
-    - [Home](home/home.md)
-    - [Quick Start](home/quick-start.md)
+- [Home](docs/home/home.md)
+    - [Quick Start](docs/home/quick-start.md)
+- User Guide
+    - Basic Concepts
+        - [Installing AG2](docs/user-guide/basic-concepts/installing-ag2.md)
