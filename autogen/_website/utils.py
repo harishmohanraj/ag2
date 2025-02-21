@@ -5,6 +5,12 @@
 import shutil
 import subprocess
 from pathlib import Path
+from typing import TypedDict, Union
+
+
+class NavigationGroup(TypedDict):
+    group: str
+    pages: list[Union[str, "NavigationGroup"]]
 
 
 def get_git_tracked_and_untracked_files_in_directory(directory: Path) -> set[Path]:

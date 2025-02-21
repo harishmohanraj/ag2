@@ -12,7 +12,6 @@ from typing import Optional, Union
 import pytest
 
 from autogen._website.process_notebooks import (
-    NavigationGroup,
     add_authors_and_social_img_to_blog_and_user_stories,
     add_front_matter_to_metadata_mdx,
     cleanup_tmp_dirs,
@@ -26,6 +25,7 @@ from autogen._website.process_notebooks import (
     get_sorted_files,
     update_group_pages,
 )
+from autogen._website.utils import NavigationGroup
 
 
 class TestUpdateGroupPages:

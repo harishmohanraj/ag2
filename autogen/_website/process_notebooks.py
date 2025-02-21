@@ -27,9 +27,10 @@ from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from textwrap import dedent, indent
-from typing import Any, Callable, Optional, Sequence, TypeVar, TypedDict, Union
+from typing import Any, Callable, Optional, Sequence, TypeVar, Union
 
 from ..import_utils import optional_import_block, require_optional_import
+from .utils import NavigationGroup
 
 with optional_import_block():
     import nbformat
@@ -1030,11 +1031,6 @@ def cleanup_tmp_dirs(website_build_directory: Path, re_generate_notebooks: bool)
         notebooks_dir = notebooks_target_dir(website_build_directory)
         print(f"Removing the {notebooks_dir} and to ensure a clean build.")
         shutil.rmtree(notebooks_dir, ignore_errors=True)
-
-
-class NavigationGroup(TypedDict):
-    group: str
-    pages: list[Union[str, "NavigationGroup"]]
 
 
 def get_files_path_from_navigation(navigation: list[NavigationGroup]) -> list[Path]:
