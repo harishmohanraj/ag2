@@ -55,7 +55,7 @@ search:
         - [Index](docs/user-guide/reference-agents/index.md)
         - [Captainagent](docs/user-guide/reference-agents/captainagent.md)
         - [Communication Agents](docs/user-guide/reference-agents/communication-agents.md)
-        - [Documentagent](docs/user-guide/reference-agents/documentagent.md)
+        - [Docagent](docs/user-guide/reference-agents/docagent.md)
         - [Reasoningagent](docs/user-guide/reference-agents/reasoningagent.md)
         - [Websurferagent](docs/user-guide/reference-agents/websurferagent.md)
 - Contributor Guide

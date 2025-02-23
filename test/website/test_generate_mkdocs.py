@@ -218,15 +218,19 @@ def test_generate_mkdocs_navigation(navigation: list[NavigationGroup], expected_
         nav_exclusions = ["Contributing"]
         generate_mkdocs_navigation(website_dir, mkdocs_root_dir, nav_exclusions)
         actual = mkdocs_nav_path.read_text()
-        expected = """---
+        expected = (
+            """---
 search:
   exclude: true
 ---
-""" + expected_nav.replace(
-            """
+"""
+            + expected_nav.replace(
+                """
 - Contributing
     - [Contributing](docs/contributing/contributing.md)""",
-            "",
+                "",
+            )
+            + "\n"
         )
         assert actual == expected
         assert summary_md_path.read_text() == expected

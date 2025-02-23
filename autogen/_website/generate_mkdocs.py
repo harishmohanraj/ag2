@@ -132,7 +132,7 @@ def generate_mkdocs_navigation(website_dir: Path, mkdocs_root_dir: Path, nav_exc
     mintlify_nav = mintlify_json["navigation"]
     filtered_nav = [item for item in mintlify_nav if item["group"] not in nav_exclusions]
 
-    mkdocs_nav_content = "---\nsearch:\n  exclude: true\n---\n" + format_navigation(filtered_nav)
+    mkdocs_nav_content = "---\nsearch:\n  exclude: true\n---\n" + format_navigation(filtered_nav) + "\n"
     mkdocs_nav_path.write_text(mkdocs_nav_content)
     summary_md_path.write_text(mkdocs_nav_content)
 
