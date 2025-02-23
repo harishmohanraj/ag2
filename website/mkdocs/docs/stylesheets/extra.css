@@ -103,6 +103,10 @@ a.internal-link::after {
     font-weight: 400;
 }
 
+.md-banner__inner strong.primary-text {
+    color: var(--md-primary-fg-color);
+}
+
 /* Home page hero section starts */
 .homepage-hero-section {
     background-image: url('/assets/img/homepage-hero-background.png');
