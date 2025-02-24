@@ -1,7 +1,6 @@
 """Create API documentation for a module."""
 
 import itertools
-import shutil
 from importlib import import_module
 from inspect import getmembers, isclass, isfunction
 from pathlib import Path
@@ -203,8 +202,6 @@ def _load_submodules(
 
 
 def _update_single_api_doc(symbol: Union[FunctionType, Type[Any]], docs_path: Path, module_name: str) -> None:
-    en_docs_path = docs_path / "docs" / "en"
-
     if isinstance(symbol, str):
         class_name = symbol.split(".")[-1]
         module_name = ".".join(symbol.split(".")[:-1])
@@ -222,7 +219,7 @@ def _update_single_api_doc(symbol: Union[FunctionType, Type[Any]], docs_path: Pa
 
     target_file_path = "/".join(filename.split(".")) + ".md"
 
-    (en_docs_path / "api" / target_file_path).write_text(MD_API_META + content)
+    (docs_path / "api-reference" / target_file_path).write_text(MD_API_META + content)
 
 
 def _update_api_docs(symbols: List[Union[FunctionType, Type[Any]]], docs_path: Path, module_name: str) -> None:
@@ -230,11 +227,11 @@ def _update_api_docs(symbols: List[Union[FunctionType, Type[Any]]], docs_path: P
         _update_single_api_doc(symbol=symbol, docs_path=docs_path, module_name=module_name)
 
 
-def _generate_api_docs_for_module(root_path: Path, module_name: str) -> Tuple[str, str]:
+def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[str, str]:
     """Generate API documentation for a module.
 
     Args:
-        root_path: The root path of the project.
+        docs_path: Path to mkdocs/docs directory.
         module_name: The name of the module.
 
     Returns:
@@ -248,31 +245,32 @@ def _generate_api_docs_for_module(root_path: Path, module_name: str) -> Tuple[st
     # https://github.com/mkdocs/mkdocs/issues/1974
     public_api_summary = public_api_summary.replace("(api/", "(public_api/")
 
-    members = _import_all_members(module_name)
-    members_with_submodules = _add_all_submodules(members)
-    api_summary = _get_api_summary(members_with_submodules)
+    # members = _import_all_members(module_name)
+    # members_with_submodules = _add_all_submodules(members)
+    # api_summary = _get_api_summary(members_with_submodules)
 
-    api_root = root_path / "docs" / "en" / "api"
-    shutil.rmtree(api_root / module_name, ignore_errors=True)
-    api_root.mkdir(parents=True, exist_ok=True)
+    # api_root = docs_path / "docs" / "api-reference"
+    # shutil.rmtree(api_root / module_name, ignore_errors=True)
+    # api_root.mkdir(parents=True, exist_ok=True)
 
-    (api_root / ".meta.yml").write_text(API_META)
+    # (api_root / ".meta.yml").write_text(API_META)
 
-    _generate_api_docs(members_with_submodules, api_root)
+    # _generate_api_docs(members_with_submodules, api_root)
 
-    members_with_submodules = _get_submodule_members(module_name)
-    symbols = _load_submodules(module_name, members_with_submodules)
+    # members_with_submodules = _get_submodule_members(module_name)
+    # symbols = _load_submodules(module_name, members_with_submodules)
 
-    _update_api_docs(symbols, root_path, module_name)
+    # _update_api_docs(symbols, docs_path, module_name)
 
-    # todo: fix the problem and remove this
-    src = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
-"""
-    dst = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
-                        - [EmailStr](api/faststream/asyncapi/schema/info/EmailStr.md)
-"""
-    api_summary = api_summary.replace(src, dst)
+    #     # todo: fix the problem and remove this
+    #     src = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
+    # """
+    #     dst = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
+    #                         - [EmailStr](api/faststream/asyncapi/schema/info/EmailStr.md)
+    # """
+    #     api_summary = api_summary.replace(src, dst)
 
+    api_summary = ""
     return api_summary, public_api_summary
 
 
@@ -287,14 +285,15 @@ def create_api_docs(
         module: The name of the module.
 
     """
-    api, public_api = _generate_api_docs_for_module(root_path, module)
-
     docs_dir = root_path / "docs"
+
+    _, public_api = _generate_api_docs_for_module(docs_dir, module)
 
     # read summary template from file
     navigation_template = (docs_dir / "navigation_template.txt").read_text()
 
-    summary = navigation_template.format(api=api, public_api=public_api)
+    # summary = navigation_template.format(api=api, public_api=public_api)
+    summary = navigation_template.format(public_api=public_api)
 
     summary = "\n".join(filter(bool, (x.rstrip() for x in summary.split("\n"))))
 
