@@ -14,6 +14,8 @@ from create_api_docs import create_api_docs
 from mkdocs.config import load_config
 from typing_extensions import Annotated
 
+from autogen._website.generate_mkdocs import main as generate_files_for_mkdocs
+
 IGNORE_DIRS = ("assets", "stylesheets", "javascripts")
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -219,6 +221,7 @@ def _build():
     # typer.echo("Updating Release Notes")
     # update_release_notes(realease_notes_path=EN_DOCS_DIR / "release.md")
 
+    generate_files_for_mkdocs()
     subprocess.run(["mkdocs", "build", "--site-dir", BUILD_DIR], check=True)
 
 
