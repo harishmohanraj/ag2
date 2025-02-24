@@ -13,9 +13,9 @@ watch:
   - includes
   - overrides
 
-repo_name: ag2ai/ag2
-repo_url: https://github.com/ag2ai/ag2
-edit_uri: https://github.com/ag2ai/ag2/website/mkdocs/docs
+repo_name: harishmohanraj/ag2
+repo_url: https://github.com/harishmohanraj/ag2
+edit_uri: https://github.com/harishmohanraj/ag2/website/mkdocs/docs
 
 exclude_docs: |
   navigation_template.txt
