@@ -1,23 +1,23 @@
 ---
-sidebarTitle: DocumentAgent
-title: autogen.agents.experimental.DocumentAgent
+sidebarTitle: DocAgent
+title: autogen.agents.experimental.DocAgent
 ---
-<h2 id="autogen.agents.experimental.DocumentAgent" class="doc doc-heading">
+<h2 id="autogen.agents.experimental.DocAgent" class="doc doc-heading">
     <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
-    <span class="doc doc-object-name doc-class-name">DocumentAgent</span>
+    <span class="doc doc-object-name doc-class-name">DocAgent</span>
 </h2>
 
 ```python
-DocumentAgent(
+DocAgent(
     name: str | None = None,
     llm_config: dict[str, Any] | None = None,
     system_message: str | None = None,
-    parsed_docs_path: str | Path | None = None,
+    parsed_docs_path: Path | str | None = None,
     collection_name: str | None = None
 )
 ```
 
-    The DocumentAgent is responsible for ingest and querying documents.<br/>Internally, it generates a group of swarm agents to solve tasks.<br/>Initialize the DocumentAgent.<br/>
+    The DocAgent is responsible for ingest and querying documents.<br/>Internally, it generates a group of swarm agents to solve tasks.<br/>Initialize the DocAgent.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
@@ -25,7 +25,7 @@ DocumentAgent(
 | `name` | **Type:** str \| None<br/><br/>**Default:** None |
 | `llm_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `system_message` | **Type:** str \| None<br/><br/>**Default:** None |
-| `parsed_docs_path` | **Type:** str \| pathlib.Path \| None<br/><br/>**Default:** None |
+| `parsed_docs_path` | **Type:** pathlib.Path \| str \| None<br/><br/>**Default:** None |
 | `collection_name` | **Type:** str \| None<br/><br/>**Default:** None |
 
 ### Instance Attributes

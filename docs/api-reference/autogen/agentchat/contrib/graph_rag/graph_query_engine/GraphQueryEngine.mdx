@@ -25,7 +25,7 @@ GraphQueryEngine(*args, **kwargs)
 #### add_records
 
 ```python
-add_records(self, new_records: list) -> bool
+add_records(self, new_records: list[Any]) -> bool
 ```
 
     Add new records to the underlying database and add to the graph if required.
@@ -33,7 +33,7 @@ add_records(self, new_records: list) -> bool
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `new_records` | **Type:** list |
+| `new_records` | **Type:** list[typing.Any] |
 
 <br />
 
@@ -41,7 +41,7 @@ add_records(self, new_records: list) -> bool
 #### init_db
 
 ```python
-init_db(self, input_doc: list[Document] | None = None) -> 
+init_db(self, input_doc: list[Document] | None = None) -> None
 ```
 
     This method initializes graph database with the input documents or records.<br/>Usually, it takes the following steps,
@@ -62,7 +62,7 @@ query(
     self,
     question: str,
     n_results: int = 1,
-    **kwargs
+    **kwarg: Any
 ) -> GraphStoreQueryResult
 ```
 
@@ -73,6 +73,6 @@ query(
 |--|--|
 | `question` | **Type:** str |
 | `n_results` | **Type:** int<br/><br/>**Default:** 1 |
-| `**kwargs` |  |
+| `**kwarg` | **Type:** Any |
 
 <br />
