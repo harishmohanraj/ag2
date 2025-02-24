@@ -5,12 +5,12 @@ title: "Key Features"
 <div class="homepage-hero-section">
   <div class="hero-content">
     <div class="hero-logo-section">
-      <img class="hero-logo" noZoom src="/assets/img/ag2.svg" alt="AG2 Logo" />
+      <img class="hero-logo" noZoom src="/ag2/assets/img/ag2.svg" alt="AG2 Logo" />
     </div>
     <div class="hero-text-section">
       <h2 class="hero-title">AG2</h2>
       <p class="hero-subtitle">The Open Source Agent OS</p>
-      <a class="hero-btn" href="/docs/home/quick-start">
+      <a class="hero-btn" href="/ag2/docs/home/quick-start">
         <div>Getting Started - 3 Minute</div>
       </a>
     </div>
@@ -22,7 +22,7 @@ title: "Key Features"
 <div class="key-features not-prose grid gap-x-4 sm:grid-cols-3">
   <div class="card">
     <div class="key-feature">
-        <img noZoom src="/assets/img/conv_2.svg" alt="Multi-Agent Conversation Framework" />
+        <img noZoom src="/ag2/assets/img/conv_2.svg" alt="Multi-Agent Conversation Framework" />
         <p><b>Multi-Agent Conversation Framework</b></p>
         <p>AG2 provides multi-agent conversation framework as a high-level abstraction. With this framework, one can conveniently build LLM workflows.</p>
     </div>
@@ -30,7 +30,7 @@ title: "Key Features"
 
   <div class="card">
     <div class="key-feature">
-      <img noZoom src='/assets/img/autogen_app.svg' alt='Easily Build Diverse Applications' />
+      <img noZoom src='/ag2/assets/img/autogen_app.svg' alt='Easily Build Diverse Applications' />
       <p><b>Easily Build Diverse Applications</b></p>
       <p>AG2 offers a collection of working systems spanning a wide range of applications from various domains and complexities.</p>
     </div>
@@ -38,7 +38,7 @@ title: "Key Features"
 
   <div class="card">
     <div class="key-feature">
-        <img noZoom src='/assets/img/extend.svg' alt='Enhanced LLM Inference & Optimization' />
+        <img noZoom src='/ag2/assets/img/extend.svg' alt='Enhanced LLM Inference & Optimization' />
         <p><b>Enhanced LLM Inference & Optimization</b></p>
         <p>AG2 supports enhanced LLM inference APIs, which can be used to improve inference performance and reduce cost.</p>
     </div>
@@ -48,7 +48,7 @@ title: "Key Features"
 ### Explore content
 <div class="explore-content">
     <div class="not-prose grid gap-x-4 sm:grid-cols-2">
-      <a class="card" href="/docs/home/quick-start">
+      <a class="card" href="/ag2/docs/home/quick-start">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">Quick Start</h2>
@@ -56,7 +56,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/user-guide/basic-concepts/installing-ag2">
+      <a class="card" href="/ag2/docs/user-guide/basic-concepts/installing-ag2">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">Concepts</h2>
@@ -64,7 +64,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/user-guide/advanced-concepts">
+      <a class="card" href="/ag2/docs/user-guide/advanced-concepts">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">Advanced Concepts</h2>
@@ -72,7 +72,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/use-cases/use-cases">
+      <a class="card" href="/ag2/docs/use-cases/use-cases">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">Use Cases</h2>
@@ -80,7 +80,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/use-cases/notebooks/Notebooks">
+      <a class="card" href="/ag2/docs/use-cases/notebooks/Notebooks">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">Notebook Examples</h2>
@@ -88,7 +88,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/api-reference">
+      <a class="card" href="/ag2/docs/api-reference">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">API Reference</h2>
@@ -96,7 +96,7 @@ title: "Key Features"
           </div>
         </div>
       </a>
-      <a class="card" href="/docs/contributor-guide/contributing">
+      <a class="card" href="/ag2/docs/contributor-guide/contributing">
         <div class="px-6 py-5">
           <div>
             <h2 class="font-semibold text-base text-gray-800 dark:text-white">How to Contribute</h2>
