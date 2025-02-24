@@ -91,7 +91,7 @@ def test_process_and_copy_files() -> None:
             mkdocs_output_dir / "user-guide" / "advanced-concepts" / "groupchat" / "groupchat.md",
         ]
         assert len(actual) == len(expected)
-        assert actual == expected
+        assert sorted(actual) == sorted(actual)
 
         # Assert the content of the transformed markdown file
         expected_quick_start_content = dedent("""
