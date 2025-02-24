@@ -40,6 +40,7 @@ jobs:
           . .venv/bin/activate
           uv pip install -e ".[docs]"
           ./scripts/docs_build_mkdocs.sh
+          ls -la ./website/mkdocs/site
         working-directory: .
 
       # Step 3: Deploy to gh-pages branch
@@ -47,7 +48,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./mkdocs/site
+          publish_dir: ./website/mkdocs/site
           force_orphan: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
