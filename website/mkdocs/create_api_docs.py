@@ -231,26 +231,26 @@ def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[st
         A string containing the API documentation for the module.
 
     """
-    public_api_summary = _get_api_summary(
-        _add_all_submodules(_import_all_members(module_name, include_public_api_only=True))
-    )
-    # Using public_api/ symlink pointing to api/ because of the issue
-    # https://github.com/mkdocs/mkdocs/issues/1974
-    public_api_summary = public_api_summary.replace("(docs/api-reference/", "(docs/public_api/")
+    # public_api_summary = _get_api_summary(
+    #     _add_all_submodules(_import_all_members(module_name, include_public_api_only=True))
+    # )
+    # # Using public_api/ symlink pointing to api/ because of the issue
+    # # https://github.com/mkdocs/mkdocs/issues/1974
+    # public_api_summary = public_api_summary.replace("(docs/api-reference/", "(docs/public_api/")
 
-    # Create symlink from public_api to api-reference
-    public_api_path = docs_path / "docs" / "public_api"
-    api_ref_path = Path("api-reference")
+    # # Create symlink from public_api to api-reference
+    # public_api_path = docs_path / "docs" / "public_api"
+    # api_ref_path = Path("api-reference")
 
-    # Remove existing symlink or directory if it exists
-    if public_api_path.is_symlink() or public_api_path.exists():
-        if public_api_path.is_symlink():
-            public_api_path.unlink()
-        else:
-            shutil.rmtree(public_api_path)
+    # # Remove existing symlink or directory if it exists
+    # if public_api_path.is_symlink() or public_api_path.exists():
+    #     if public_api_path.is_symlink():
+    #         public_api_path.unlink()
+    #     else:
+    #         shutil.rmtree(public_api_path)
 
-    # Create symlink - adjust the relative path as needed
-    public_api_path.symlink_to(api_ref_path, target_is_directory=True)
+    # # Create symlink - adjust the relative path as needed
+    # public_api_path.symlink_to(api_ref_path, target_is_directory=True)
 
     members = _import_all_members(module_name)
     members_with_submodules = _add_all_submodules(members)
@@ -269,7 +269,8 @@ def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[st
 
     _update_api_docs(symbols, docs_path, module_name)
 
-    return api_summary, public_api_summary
+    # return api_summary, public_api_summary
+    return api_summary, ""
 
 
 def create_api_docs(
@@ -285,12 +286,13 @@ def create_api_docs(
     """
     docs_dir = root_path / "docs"
 
-    api, public_api = _generate_api_docs_for_module(docs_dir, module)
+    api, _ = _generate_api_docs_for_module(docs_dir, module)
 
     # read summary template from file
     navigation_template = (docs_dir / "navigation_template.txt").read_text()
 
-    summary = navigation_template.format(api=api, public_api=public_api)
+    # summary = navigation_template.format(api=api, public_api=public_api)
+    summary = navigation_template.format(api=api)
 
     summary = "\n".join(filter(bool, (x.rstrip() for x in summary.split("\n"))))
 

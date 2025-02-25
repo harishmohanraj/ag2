@@ -59,8 +59,6 @@ search:
         - [Reasoningagent](docs/user-guide/reference-agents/reasoningagent.md)
         - [Websurferagent](docs/user-guide/reference-agents/websurferagent.md)
 - API References
-    - Public API
-{public_api}
     - All API
 {api}
 - Contributor Guide
