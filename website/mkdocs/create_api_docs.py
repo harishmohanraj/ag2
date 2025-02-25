@@ -1,6 +1,7 @@
 """Create API documentation for a module."""
 
 import itertools
+import shutil
 from importlib import import_module
 from inspect import getmembers, isclass, isfunction
 from pathlib import Path
@@ -12,17 +13,9 @@ API_META = "# 0.5 - API\n# 2 - Release\n# 3 - Contributing\n# 5 - Template Page\
 
 MD_API_META = "---\n" + API_META + "\n---\n\n"
 
-
+# Todo: Decide which modules should be included in the public API
 PUBLIC_API_FILES = [
-    "faststream/opentelemetry/__init__.py",
-    "faststream/asgi/__init__.py",
-    "faststream/asyncapi/__init__.py",
-    "faststream/__init__.py",
-    "faststream/nats/__init__.py",
-    "faststream/rabbit/__init__.py",
-    "faststream/confluent/__init__.py",
-    "faststream/kafka/__init__.py",
-    "faststream/redis/__init__.py",
+    "autogen/__init__.py",
 ]
 
 
@@ -60,9 +53,9 @@ def _import_submodules(module_name: str, include_public_api_only: bool = False) 
     package_names = _get_submodules(module_name)
     modules = [_import_module(n) for n in package_names]
     if include_public_api_only:
-        repo_path = Path.cwd().parent
+        repo_path = Path.cwd().parents[1]
 
-        # Extract only faststream/__init__.py or faststream/<something>/__init__.py
+        # Extract only autogen/__init__.py or autogen/<something>/__init__.py
         public_api_modules = [
             m for m in modules if m and m.__file__.replace(str(repo_path) + "/", "") in PUBLIC_API_FILES
         ]
@@ -138,7 +131,7 @@ def _get_api_summary_item(x: str) -> str:
         return f"{indent}- {xs[-2]}"
     else:
         indent = " " * (4 * (len(xs) + 1))
-        return f"{indent}- [{xs[-1]}](api/{'/'.join(xs)}.md)"
+        return f"{indent}- [{xs[-1]}](docs/api-reference/{'/'.join(xs)}.md)"
 
 
 def _get_api_summary(members: List[str]) -> str:
@@ -219,7 +212,7 @@ def _update_single_api_doc(symbol: Union[FunctionType, Type[Any]], docs_path: Pa
 
     target_file_path = "/".join(filename.split(".")) + ".md"
 
-    (docs_path / "api-reference" / target_file_path).write_text(MD_API_META + content)
+    (docs_path / "docs" / "api-reference" / target_file_path).write_text(MD_API_META + content)
 
 
 def _update_api_docs(symbols: List[Union[FunctionType, Type[Any]]], docs_path: Path, module_name: str) -> None:
@@ -243,34 +236,39 @@ def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[st
     )
     # Using public_api/ symlink pointing to api/ because of the issue
     # https://github.com/mkdocs/mkdocs/issues/1974
-    public_api_summary = public_api_summary.replace("(api/", "(public_api/")
+    public_api_summary = public_api_summary.replace("(docs/api-reference/", "(docs/public_api/")
 
-    # members = _import_all_members(module_name)
-    # members_with_submodules = _add_all_submodules(members)
-    # api_summary = _get_api_summary(members_with_submodules)
+    # Create symlink from public_api to api-reference
+    public_api_path = docs_path / "docs" / "public_api"
+    api_ref_path = Path("api-reference")
 
-    # api_root = docs_path / "docs" / "api-reference"
-    # shutil.rmtree(api_root / module_name, ignore_errors=True)
-    # api_root.mkdir(parents=True, exist_ok=True)
+    # Remove existing symlink or directory if it exists
+    if public_api_path.is_symlink() or public_api_path.exists():
+        if public_api_path.is_symlink():
+            public_api_path.unlink()
+        else:
+            shutil.rmtree(public_api_path)
 
-    # (api_root / ".meta.yml").write_text(API_META)
+    # Create symlink - adjust the relative path as needed
+    public_api_path.symlink_to(api_ref_path, target_is_directory=True)
 
-    # _generate_api_docs(members_with_submodules, api_root)
+    members = _import_all_members(module_name)
+    members_with_submodules = _add_all_submodules(members)
+    api_summary = _get_api_summary(members_with_submodules)
 
-    # members_with_submodules = _get_submodule_members(module_name)
-    # symbols = _load_submodules(module_name, members_with_submodules)
+    api_root = docs_path / "docs" / "api-reference"
+    shutil.rmtree(api_root / module_name, ignore_errors=True)
+    api_root.mkdir(parents=True, exist_ok=True)
 
-    # _update_api_docs(symbols, docs_path, module_name)
+    (api_root / ".meta.yml").write_text(API_META)
 
-    #     # todo: fix the problem and remove this
-    #     src = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
-    # """
-    #     dst = """                    - [ContactDict](api/faststream/asyncapi/schema/info/ContactDict.md)
-    #                         - [EmailStr](api/faststream/asyncapi/schema/info/EmailStr.md)
-    # """
-    #     api_summary = api_summary.replace(src, dst)
+    _generate_api_docs(members_with_submodules, api_root)
 
-    api_summary = ""
+    members_with_submodules = _get_submodule_members(module_name)
+    symbols = _load_submodules(module_name, members_with_submodules)
+
+    _update_api_docs(symbols, docs_path, module_name)
+
     return api_summary, public_api_summary
 
 
@@ -287,13 +285,12 @@ def create_api_docs(
     """
     docs_dir = root_path / "docs"
 
-    _, public_api = _generate_api_docs_for_module(docs_dir, module)
+    api, public_api = _generate_api_docs_for_module(docs_dir, module)
 
     # read summary template from file
     navigation_template = (docs_dir / "navigation_template.txt").read_text()
 
-    # summary = navigation_template.format(api=api, public_api=public_api)
-    summary = navigation_template.format(public_api=public_api)
+    summary = navigation_template.format(api=api, public_api=public_api)
 
     summary = "\n".join(filter(bool, (x.rstrip() for x in summary.split("\n"))))
 
@@ -303,9 +300,9 @@ def create_api_docs(
 def on_page_markdown(markdown, *, page, config, files):
     """Mkdocs hook to update the edit URL for the public API pages."""
     if page.edit_url and "public_api" in page.edit_url:
-        page.edit_url = page.edit_url.replace("public_api", "api")
+        page.edit_url = page.edit_url.replace("public_api", "api-reference")
 
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parent
-    create_api_docs(root, "faststream")
+    create_api_docs(root, "autogen")
