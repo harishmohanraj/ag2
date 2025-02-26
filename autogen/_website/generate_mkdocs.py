@@ -125,7 +125,6 @@ def format_navigation(nav: list[NavigationGroup], depth: int = 0, keywords: dict
 def add_api_ref_to_mkdocs_template(mkdocs_nav: str, section_to_follow: str) -> str:
     """Add API Reference section to the navigation template."""
     api_reference_section = """- API References
-    - All API
 {api}
 """
     section_to_follow_marker = f"- {section_to_follow}"

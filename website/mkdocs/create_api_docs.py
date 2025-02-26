@@ -1,4 +1,6 @@
-"""Create API documentation for a module."""
+# Copyright (c) 2023 - 2025, AG2ai, Inc., AG2ai open-source projects maintainers and core contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 
 import itertools
 import shutil
@@ -48,10 +50,10 @@ def _add_all_submodules(members: List[str]) -> List[str]:
 def _get_api_summary_item(x: str) -> str:
     xs = x.split(".")
     if x.endswith("."):
-        indent = " " * (4 * (len(xs) - 1 + 1))
+        indent = " " * (4 * (len(xs) - 1))
         return f"{indent}- {xs[-2]}"
     else:
-        indent = " " * (4 * (len(xs) + 1))
+        indent = " " * (4 * (len(xs)))
         return f"{indent}- [{xs[-1]}](docs/api-reference/{'/'.join(xs)}.md)"
 
 

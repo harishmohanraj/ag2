@@ -205,7 +205,6 @@ def test_add_api_ref_to_mkdocs_template() -> None:
             - [LLM Configuration](docs/user-guide/basic-concepts/llm-configuration/llm-configuration.md)
         - [Websurferagent](docs/user-guide/reference-agents/websurferagent.md)
 - API References
-    - All API
 {api}
 - Contributor Guide
     - [Contributing](docs/contributor-guide/contributing.md)
