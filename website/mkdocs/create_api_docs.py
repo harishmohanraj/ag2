@@ -1,13 +1,15 @@
 """Create API documentation for a module."""
 
 import itertools
-import shutil
 from importlib import import_module
 from inspect import getmembers, isclass, isfunction
 from pathlib import Path
 from pkgutil import walk_packages
 from types import FunctionType, ModuleType
 from typing import Any, List, Optional, Tuple, Type, Union
+
+from autogen._website.generate_api_references import import_submodules
+from autogen.doc_utils import get_target_module
 
 API_META = "# 0.5 - API\n# 2 - Release\n# 3 - Contributing\n# 5 - Template Page\n# 10 - Default\nsearch:\n  boost: 0.5"
 
@@ -220,6 +222,31 @@ def _update_api_docs(symbols: List[Union[FunctionType, Type[Any]]], docs_path: P
         _update_single_api_doc(symbol=symbol, docs_path=docs_path, module_name=module_name)
 
 
+def _filter_submodules_by_export_path(submodules) -> list[str]:
+    ret_val = []
+    for submodule in submodules:
+        module = import_module(submodule)  # nosemgrep
+        all = module.__all__ if hasattr(module, "__all__") else None
+        for name, obj in module.__dict__.items():
+            if not all:
+                continue
+
+            if all and name not in all:
+                continue
+
+            if not hasattr(obj, "__name__") or name.startswith("_"):
+                continue
+
+            target_module = get_target_module(obj)
+            if target_module:
+                if submodule == target_module:
+                    ret_val.append(f"{submodule}.{obj.__name__}")
+            else:
+                fqn = f"{obj.__module__}.{obj.__name__}"
+                ret_val.append(fqn)
+    return ret_val
+
+
 def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[str, str]:
     """Generate API documentation for a module.
 
@@ -252,22 +279,27 @@ def _generate_api_docs_for_module(docs_path: Path, module_name: str) -> Tuple[st
     # # Create symlink - adjust the relative path as needed
     # public_api_path.symlink_to(api_ref_path, target_is_directory=True)
 
-    members = _import_all_members(module_name)
-    members_with_submodules = _add_all_submodules(members)
+    # members = _import_all_members(module_name)
+    # members_with_submodules = _add_all_submodules(members)
+
+    submodules = import_submodules(module_name)
+    filtered_submodules = _filter_submodules_by_export_path(submodules)
+    members_with_submodules = _add_all_submodules(filtered_submodules)
+
     api_summary = _get_api_summary(members_with_submodules)
 
-    api_root = docs_path / "docs" / "api-reference"
-    shutil.rmtree(api_root / module_name, ignore_errors=True)
-    api_root.mkdir(parents=True, exist_ok=True)
+    # api_root = docs_path / "docs" / "api-reference"
+    # shutil.rmtree(api_root / module_name, ignore_errors=True)
+    # api_root.mkdir(parents=True, exist_ok=True)
 
-    (api_root / ".meta.yml").write_text(API_META)
+    # (api_root / ".meta.yml").write_text(API_META)
 
-    _generate_api_docs(members_with_submodules, api_root)
+    # _generate_api_docs(members_with_submodules, api_root)
 
-    members_with_submodules = _get_submodule_members(module_name)
-    symbols = _load_submodules(module_name, members_with_submodules)
+    # members_with_submodules = _get_submodule_members(module_name)
+    # symbols = _load_submodules(module_name, members_with_submodules)
 
-    _update_api_docs(symbols, docs_path, module_name)
+    # _update_api_docs(symbols, docs_path, module_name)
 
     # return api_summary, public_api_summary
     return api_summary, ""
