@@ -8,7 +8,7 @@ title: "Key Features"
       <img class="hero-logo" noZoom src="/ag2/assets/img/ag2.svg" alt="AG2 Logo" />
     </div>
     <div class="hero-text-section">
-      <h2 class="hero-title">AG2</h2>
+      <h2 class="hero-title">AG2 - 0.7.6</h2>
       <p class="hero-subtitle">The Open Source Agent OS</p>
       <a class="hero-btn" href="/ag2/docs/home/quick-start">
         <div>Getting Started - 3 Minute</div>
