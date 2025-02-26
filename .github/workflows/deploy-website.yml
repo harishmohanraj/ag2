@@ -43,13 +43,24 @@ jobs:
           ls -la ./website/mkdocs/site
         working-directory: .
 
-      # Step 3: Deploy to gh-pages branch
+      # Step 3: Configure Git user
+      - name: Configure Git user
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      # Step 4: Deploy to gh-pages branch
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/mkdocs/site
-          force_orphan: true
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Deploy MkDocs site to GitHub pages'
+        run: |
+          echo "VERSION=$(python3 -c 'from importlib.metadata import version; print(".".join(version("pyautogen").split(".")[:3]))')" >> $GITHUB_ENV
+          echo "IS_RC=$(python3 -c 'from importlib.metadata import version; print("rc" in version("pyautogen"))')" >> $GITHUB_ENV
+
+          echo $VERSION
+          echo $IS_RC
+
+          if [ "$IS_RC" == "False" ]; then
+            cd website/mkdocs && mike deploy -F mkdocs.yml --update-aliases $VERSION latest
+            mike set-default --push --allow-empty -F mkdocs.yml latest
+          else
+            cd website/mkdocs && mike deploy --push -F mkdocs.yml --update-aliases $VERSION
+          fi
