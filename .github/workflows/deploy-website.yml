@@ -54,8 +54,13 @@ jobs:
         run: |
           . .venv/bin/activate
           
-          echo "VERSION=$(python -c 'from importlib.metadata import version; print(".".join(version("autogen").split(".")[:3]))')" >> $GITHUB_ENV
-          echo "IS_RC=$(python -c 'from importlib.metadata import version; print("rc" in version("autogen"))')" >> $GITHUB_ENV
+          # Get version directly from the package using a more reliable method
+          VERSION=$(python -c 'import os, sys; sys.path.insert(0, os.getcwd()); import autogen; print(".".join(autogen.__version__.split(".")[:3]))')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+    
+          # Check if version contains "rc"
+          IS_RC=$(python -c 'import os, sys; sys.path.insert(0, os.getcwd()); import autogen; print("rc" in autogen.__version__)')
+          echo "IS_RC=$IS_RC" >> $GITHUB_ENV
 
           echo $VERSION
           echo $IS_RC
