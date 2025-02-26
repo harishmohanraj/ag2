@@ -1010,9 +1010,7 @@
                       "group": "retrieve_user_proxy_agent",
                       "pages": [
                         "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/overview",
-                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/RetrieveUserProxyAgent",
-                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/create_vector_db_from_dir",
-                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/query_vector_db"
+                        "docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/RetrieveUserProxyAgent"
                       ]
                     },
                     {

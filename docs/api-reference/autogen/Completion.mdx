@@ -275,16 +275,31 @@ stop_logging() ->
 #### test
 
 ```python
-test(*args, **kwargs) -> 
+test(
+    cls,
+    data,
+    eval_func=None,
+    use_cache=True,
+    agg_method='avg',
+    return_responses_and_per_instance_result=False,
+    logging_level=30,
+    **config
+) -> 
 ```
 
-    Call self as a function.
+    Evaluate the responses created with the config for the OpenAI API call.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `*args` |  |
-| `**kwargs` |  |
+| `cls` |  |
+| `data` | The list of test data points.<br/><br/> |
+| `eval_func=None` |  |
+| `use_cache=True` |  |
+| `agg_method='avg'` |  |
+| `return_responses_and_per_instance_result=False` |  |
+| `logging_level=30` |  |
+| `**config` |  |
 
 <br />
 
@@ -292,15 +307,36 @@ test(*args, **kwargs) ->
 #### tune
 
 ```python
-tune(*args, **kwargs) -> 
+tune(
+    cls,
+    data: list[dict[str, Any]],
+    metric: str,
+    mode: str,
+    eval_func: Callable,
+    log_file_name: str | None = None,
+    inference_budget: float | None = None,
+    optimization_budget: float | None = None,
+    num_samples: int | None = 1,
+    logging_level: int | None = 30,
+    **config
+) -> 
 ```
 
-    Call self as a function.
+    Tune the parameters for the OpenAI API call.<br/>TODO: support parallel tuning with ray or spark.<br/>TODO: support agg_method as in test
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `*args` |  |
-| `**kwargs` |  |
+| `cls` |  |
+| `data` | The list of data points.<br/><br/>**Type:** list[dict[str, typing.Any]] |
+| `metric` | The metric to optimize.<br/><br/>**Type:** str |
+| `mode` | The optimization mode, "min" or "max.<br/><br/>**Type:** str |
+| `eval_func` | The evaluation function for responses.<br/><br/>The function should take a list of responses and a data point as input, and return a dict of metrics.<br/><br/>For example,<br/><br/>**Type:** Callable |
+| `log_file_name` | **Type:** str \| None<br/><br/>**Default:** None |
+| `inference_budget` | **Type:** float \| None<br/><br/>**Default:** None |
+| `optimization_budget` | **Type:** float \| None<br/><br/>**Default:** None |
+| `num_samples` | **Type:** int \| None<br/><br/>**Default:** 1 |
+| `logging_level` | **Type:** int \| None<br/><br/>**Default:** 30 |
+| `**config` |  |
 
 <br />
