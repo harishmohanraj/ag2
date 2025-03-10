@@ -1,0 +1,21 @@
+---
+sidebarTitle: run_for_optional_imports
+title: autogen.import_utils.run_for_optional_imports
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### run_for_optional_imports
+
+```python
+run_for_optional_imports(modules: str | Iterable[str], dep_target: str) -> Callable[[~G], ~G]
+```
+
+    Decorator to run a test if and only if optional modules are installed
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `modules` | Module name or list of module names<br/><br/>**Type:** str \| Iterable[str] |
+| `dep_target` | Target name for pip installation (e.g.<br/><br/>'test' in pip install ag2[test])<br/><br/>**Type:** str |
+
+<br />

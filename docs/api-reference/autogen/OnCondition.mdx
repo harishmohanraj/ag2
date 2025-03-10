@@ -9,20 +9,20 @@ title: autogen.OnCondition
 
 ```python
 OnCondition(
-    target: ConversableAgent | dict[str, Any] = None,
-    condition: str | ContextStr | Callable[..., Any] = '',
-    available: Callable | str | None = None
+    target: ConversableAgent | dict[str, Any] | None = None,
+    condition: str | ContextStr | Callable[[ConversableAgent, list[dict[str, Any]]], str] | None = None,
+    available: Callable[[ConversableAgent, list[dict[str, Any]]], bool] | str | ContextExpression | None = None
 )
 ```
 
-    Defines a condition for transitioning to another agent or nested chats
+    Defines a condition for transitioning to another agent or nested chats.<br/>This is for LLM-based condition evaluation where these conditions are translated into tools and attached to the agent.<br/>These are evaluated after the OnCondition conditions but before the AfterWork conditions.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `target` | **Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) \| dict[str, typing.Any]<br/><br/>**Default:** None |
-| `condition` | **Type:** str \| [ContextStr](/docs/api-reference/autogen/agentchat/contrib/swarm_agent/ContextStr) \| Callable[..., Any]<br/><br/>**Default:** '' |
-| `available` | **Type:** Callable \| str \| None<br/><br/>**Default:** None |
+| `target` | **Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `condition` | **Type:** str \| [ContextStr](/docs/api-reference/autogen/agentchat/contrib/swarm_agent/ContextStr) \| Callable[[[ConversableAgent](/docs/api-reference/autogen/ConversableAgent), list[dict[str, Any]]], str] \| None<br/><br/>**Default:** None |
+| `available` | **Type:** Callable[[[ConversableAgent](/docs/api-reference/autogen/ConversableAgent), list[dict[str, Any]]], bool] \| str \| [ContextExpression](/docs/api-reference/autogen/ContextExpression) \| None<br/><br/>**Default:** None |
 
 ### Class Attributes
 

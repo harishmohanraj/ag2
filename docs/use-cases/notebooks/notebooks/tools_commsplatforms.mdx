@@ -55,19 +55,19 @@ To use the Discord tools install AG2 with the `commsagent-discord`
 extra:
 
 ```bash
-pip install ag2[commsagent-discord]
+pip install -U ag2[openai,commsagent-discord]
 ```
 
 Similarly, for slack and telegram:
 
 ```bash
-pip install ag2[commsagent-slack]
+pip install -U ag2[openai,commsagent-slack]
 ```
 
 and
 
 ```bash
-pip install ag2[commsagent-telegram]
+pip install -U ag2[openai,commsagent-telegram]
 ```
 
 You’re all set! Now you can start sending to and retrieving messages
@@ -75,13 +75,12 @@ from these platforms.
 
 ### LLM Configuration
 
-The examples in this notebook will use OpenAI’s `GPT-4o mini` model. As
-OpenAI is the default model provider in AG2 and the `OPENAI_API_TOKEN`
-will be retrieved from environment variables, we can use an LLM
-configuration as follows:
+The examples in this notebook will use OpenAI’s `GPT-4o mini` model and
+the `OPENAI_API_TOKEN` will be retrieved from environment variables, we
+can use an LLM configuration as follows:
 
 ```python
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 For further information on LLM configurations and how to set your
@@ -131,7 +130,7 @@ executed by another agent in a simple 2-agent chat.
 from autogen import ConversableAgent
 from autogen.tools.experimental import DiscordRetrieveTool, DiscordSendTool
 
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.
@@ -349,7 +348,7 @@ forecast.
 from autogen import ConversableAgent, register_function
 from autogen.tools.experimental import SlackRetrieveTool, SlackSendTool
 
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.
@@ -567,27 +566,37 @@ you can send/retrieve messages to/from a bot channel, a group channel, a
 channel, or even your own private channel. This is all handled by giving
 the respective ID to the `chat_id` parameter when creating the tool.
 
-Here’s how to establish your API ID and Hash: - [API ID and
-Hash](https://docs.telethon.dev/en/stable/basic/signing-in.html)
+Here’s how to establish your API ID and Hash:
+
+-   [API ID and
+    Hash](https://docs.telethon.dev/en/stable/basic/signing-in.html)
 
 If you want to create a bot, which is optional but allows you to send
-messages to the bot channel: - In Telegram, search for
-(**BotFather?**) - Click on (**BotFather?**) (make sure it’s the correct
-one!) and click START - Message `/newbot` - Give it a name then a
-username - You’ll then receive a token for your bot and you see the
-links below to get the ID for your bot
+messages to the bot channel:
 
-There are four types of `chat_id`s you can send to: - Bot chat - Group
-chat - Channel chat - Private chat (noted in Telegram as
-`Saved Messages`)
+-   In Telegram, search for (**BotFather?**)
+-   Click on (**BotFather?**) (make sure it’s the correct one!) and
+    click START
+-   Message `/newbot`
+-   Give it a name then a username
+-   You’ll then receive a token for your bot and you see the links below
+    to get the ID for your bot
 
-To find these the IDs for these, here are some references: - [Bot,
-Private, Channel, Group
-IDs](https://gist.github.com/nafiesl/4ad622f344cd1dc3bb1ecbe468ff9f8a) -
-[Group and Channel
-IDs](https://docs.b2core.b2broker.com/how-to-articles/manage-communication-platforms/how-to-get-telegram-chat-group-and-channel-identifiers) -
-[Group
-ID](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
+There are four types of `chat_id`s you can send to:
+
+-   Bot chat
+-   Group chat
+-   Channel chat
+-   Private chat (noted in Telegram as `Saved Messages`)
+
+To find these the IDs for these, here are some references:
+
+-   [Bot, Private, Channel, Group
+    IDs](https://gist.github.com/nafiesl/4ad622f344cd1dc3bb1ecbe468ff9f8a)
+-   [Group and Channel
+    IDs](https://docs.b2core.b2broker.com/how-to-articles/manage-communication-platforms/how-to-get-telegram-chat-group-and-channel-identifiers)
+-   [Group
+    ID](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
 
 It takes a bit of time to get this sorted, but once you have your token
 and IDs, you’re ready to go!
@@ -610,7 +619,7 @@ executed by another agent in as simple 2-agent chat.
 from autogen import ConversableAgent
 from autogen.tools.experimental import TelegramRetrieveTool, TelegramSendTool
 
-llm_config = {"model": "gpt-4o-mini"}
+llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.

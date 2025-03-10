@@ -7,7 +7,7 @@ title: autogen.import_utils.skip_on_missing_imports
 #### skip_on_missing_imports
 
 ```python
-skip_on_missing_imports(modules: str | Iterable[str], dep_target: str | None = None) -> Callable[[~T], ~T]
+skip_on_missing_imports(modules: str | Iterable[str], dep_target: str) -> Callable[[~T], ~T]
 ```
 
     Decorator to skip a test if an optional module is missing
@@ -15,7 +15,7 @@ skip_on_missing_imports(modules: str | Iterable[str], dep_target: str | No
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `modules` | **Type:** str \| Iterable[str] |
-| `dep_target` | Target name for pip installation (e.g.<br/><br/>'test' in pip install ag2[test])<br/><br/>**Type:** str \| None<br/><br/>**Default:** None |
+| `modules` | Module name or list of module names<br/><br/>**Type:** str \| Iterable[str] |
+| `dep_target` | Target name for pip installation (e.g.<br/><br/>'test' in pip install ag2[test])<br/><br/>**Type:** str |
 
 <br />

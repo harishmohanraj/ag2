@@ -1,0 +1,127 @@
+---
+sidebarTitle: RAGQueryEngine
+title: autogen.agentchat.contrib.rag.RAGQueryEngine
+---
+<h2 id="autogen.agentchat.contrib.rag.RAGQueryEngine" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">RAGQueryEngine</span>
+</h2>
+
+```python
+RAGQueryEngine(*args, **kwargs)
+```
+
+    A protocol class that represents a document ingestation and query engine on top of an underlying database.<br/>This interface defines the basic methods for RAG.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_docs
+
+```python
+add_docs(
+    self,
+    new_doc_dir: Path | str | None = None,
+    new_doc_paths_or_urls: Sequence[Path | str] | None = None,
+    *args: Any,
+    **kwargs: Any
+) -> None
+```
+
+    Add new documents to the underlying data store.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `new_doc_dir` | **Type:** pathlib.Path \| str \| None<br/><br/>**Default:** None |
+| `new_doc_paths_or_urls` | **Type:** Sequence[pathlib.Path \| str] \| None<br/><br/>**Default:** None |
+| `*args` | **Type:** Any |
+| `**kwargs` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### connect_db
+
+```python
+connect_db(
+    self,
+    *args: Any,
+    **kwargs: Any
+) -> bool
+```
+
+    Connect to the database.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | Any additional arguments<br/><br/>**Type:** Any |
+| `**kwargs` | Any additional keyword arguments<br/><br/>**Type:** Any |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | bool: True if connection is successful, False otherwise |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### init_db
+
+```python
+init_db(
+    self,
+    new_doc_dir: Path | str | None = None,
+    new_doc_paths_or_urls: Sequence[Path | str] | None = None,
+    *args: Any,
+    **kwargs: Any
+) -> bool
+```
+
+    Initialize the database with the input documents or records.<br/>This method initializes database with the input documents or records.<br/>Usually, it takes the following steps: <br/>1. connecting to a database.<br/>2. insert records
+    3. build indexes etc.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `new_doc_dir` | A directory containing documents to be ingested.<br/><br/>**Type:** pathlib.Path \| str \| None<br/><br/>**Default:** None |
+| `new_doc_paths_or_urls` | A list of paths or URLs to documents to be ingested.<br/><br/>**Type:** Sequence[pathlib.Path \| str] \| None<br/><br/>**Default:** None |
+| `*args` | Any additional arguments<br/><br/>**Type:** Any |
+| `**kwargs` | Any additional keyword arguments<br/><br/>**Type:** Any |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | bool: True if initialization is successful, False otherwise |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### query
+
+```python
+query(
+    self,
+    question: str,
+    *args: Any,
+    **kwargs: Any
+) -> str
+```
+
+    Transform a string format question into database query and return the result.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `question` | a string format question<br/><br/>**Type:** str |
+| `*args` | Any additional arguments<br/><br/>**Type:** Any |
+| `**kwargs` | Any additional keyword arguments<br/><br/>**Type:** Any |
+
+<br />

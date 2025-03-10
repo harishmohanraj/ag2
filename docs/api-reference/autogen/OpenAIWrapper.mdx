@@ -32,19 +32,7 @@ OpenAIWrapper(
     <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
-#### aopenai_kwargs
-<br />
-
-    <br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
 #### extra_kwargs
-<br />
-
-    <br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
-#### openai_kwargs
 <br />
 
     <br />
@@ -100,6 +88,14 @@ instantiate(
 
 <br />
 
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### openai_kwargs
+<br />
+
+    <br />
+
 ### Instance Methods
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
@@ -125,7 +121,7 @@ create(self, **config: Any) -> ModelClientResponseProtocol
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `**config` | **Type:** Any |
+| `**config` | The config for the completion.<br/><br/>**Type:** Any |
 
 <br />
 
@@ -152,7 +148,7 @@ print_usage_summary(self, mode: Union[str, list[str]] = ['actual', 'total'])
 register_model_client(
     self,
     model_client_cls: ModelClient,
-    **kwargs
+    **kwargs: Any
 ) -> 
 ```
 
@@ -162,6 +158,6 @@ register_model_client(
 | Name | Description |
 |--|--|
 | `model_client_cls` | A custom client class that follows the ModelClient interface<br/><br/>**Type:** [ModelClient](/docs/api-reference/autogen/ModelClient) |
-| `**kwargs` | The kwargs for the custom client class to be initialized with<br/><br/> |
+| `**kwargs` | The kwargs for the custom client class to be initialized with<br/><br/>**Type:** Any |
 
 <br />

@@ -40,7 +40,7 @@ cost(self, response) -> float
 #### create
 
 ```python
-create(self, params: dict[str, Any]) -> ChatCompletion
+create(self, params: dict[str, Any]) -> ChatCompletionExtended
 ```
 
     
@@ -56,7 +56,7 @@ create(self, params: dict[str, Any]) -> ChatCompletion
 #### get_usage
 
 ```python
-get_usage(response: ChatCompletion) -> dict
+get_usage(response: ChatCompletionExtended) -> dict
 ```
 
     
@@ -64,7 +64,7 @@ get_usage(response: ChatCompletion) -> dict
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `response` | **Type:** openai.types.chat.chat_completion.ChatCompletion |
+| `response` | **Type:** autogen.oai.oai_models.chat_completion.ChatCompletionExtended |
 
 <br />
 
@@ -72,7 +72,7 @@ get_usage(response: ChatCompletion) -> dict
 #### message_retrieval
 
 ```python
-message_retrieval(self, response: ChatCompletion) -> list[str] | list[ChatCompletionMessage]
+message_retrieval(self, response: ChatCompletionExtended) -> list[str] | list[ChatCompletionMessage]
 ```
 
     Retrieve the messages from the response.
@@ -80,7 +80,7 @@ message_retrieval(self, response: ChatCompletion) -> list[str] | list[ChatCom
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `response` | **Type:** openai.types.chat.chat_completion.ChatCompletion |
+| `response` | **Type:** autogen.oai.oai_models.chat_completion.ChatCompletionExtended |
 
 <br />
 

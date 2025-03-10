@@ -10,7 +10,7 @@ title: autogen.GroupChat
 ```python
 GroupChat(
     agents: list[Agent],
-    messages: list[dict[str, Any]],
+    messages: list[dict[str, Any]] = &lt;factory&gt;,
     max_round: int = 10,
     admin_name: str = 'Admin',
     func_call_filter: bool = True,
@@ -64,7 +64,7 @@ GroupChat(
 | Name | Description |
 |--|--|
 | `agents` | **Type:** list[[Agent](/docs/api-reference/autogen/Agent)] |
-| `messages` | **Type:** list[dict[str, typing.Any]] |
+| `messages` | **Type:** list[dict[str, typing.Any]]<br/><br/>**Default:** &lt;factory&gt; |
 | `max_round` | **Type:** int<br/><br/>**Default:** 10 |
 | `admin_name` | **Type:** str<br/><br/>**Default:** 'Admin' |
 | `func_call_filter` | **Type:** bool<br/><br/>**Default:** True |
@@ -257,15 +257,15 @@ a_auto_select_speaker(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `last_speaker` | **Type:** [Agent](/docs/api-reference/autogen/Agent) |
-| `selector` | **Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) |
-| `messages` | **Type:** list[dict[str, typing.Any]] \| None |
-| `agents` | **Type:** list[[Agent](/docs/api-reference/autogen/Agent)] \| None |
+| `last_speaker` | The previous speaker in the group chat<br/><br/>**Type:** [Agent](/docs/api-reference/autogen/Agent) |
+| `selector` | The ConversableAgent that initiated the speaker selection<br/><br/>**Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) |
+| `messages` | Current chat messages<br/><br/>**Type:** list[dict[str, typing.Any]] \| None |
+| `agents` | Valid list of agents for speaker selection<br/><br/>**Type:** list[[Agent](/docs/api-reference/autogen/Agent)] \| None |
 
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| [Agent](/docs/api-reference/autogen/Agent) | Dict: a counter for mentioned agents. |
+| [Agent](/docs/api-reference/autogen/Agent) | A counter for mentioned agents. |
 
 <br />
 

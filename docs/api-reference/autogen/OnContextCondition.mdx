@@ -1,0 +1,45 @@
+---
+sidebarTitle: OnContextCondition
+title: autogen.OnContextCondition
+---
+<h2 id="autogen.OnContextCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">OnContextCondition</span>
+</h2>
+
+```python
+OnContextCondition(
+    target: ConversableAgent | dict[str, Any] | None = None,
+    condition: str | ContextExpression | None = None,
+    available: Callable[[ConversableAgent, list[dict[str, Any]]], bool] | str | ContextExpression | None = None
+)
+```
+
+    Defines a condition for transitioning to another agent or nested chats using context variables and the ContextExpression class.<br/>This is for context variable-based condition evaluation (does not use the agent's LLM).<br/>These are evaluated before the OnCondition and AfterWork conditions.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `target` | **Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `condition` | **Type:** str \| [ContextExpression](/docs/api-reference/autogen/ContextExpression) \| None<br/><br/>**Default:** None |
+| `available` | **Type:** Callable[[[ConversableAgent](/docs/api-reference/autogen/ConversableAgent), list[dict[str, Any]]], bool] \| str \| [ContextExpression](/docs/api-reference/autogen/ContextExpression) \| None<br/><br/>**Default:** None |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### available
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### condition
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### target
+<br />
+
+    <br />

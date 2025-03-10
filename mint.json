@@ -125,7 +125,22 @@
                 "docs/user-guide/basic-concepts/orchestration/ending-a-chat"
               ]
             },
-            "docs/user-guide/basic-concepts/tools"
+            {
+              "group": "Tools",
+              "pages": [
+                "docs/user-guide/basic-concepts/tools/index",
+                "docs/user-guide/basic-concepts/tools/basics",
+                "docs/user-guide/basic-concepts/tools/tools-with-secrets",
+                {
+                  "group": "Interoperability",
+                  "pages": [
+                    "docs/user-guide/basic-concepts/tools/interop/langchain",
+                    "docs/user-guide/basic-concepts/tools/interop/crewai",
+                    "docs/user-guide/basic-concepts/tools/interop/pydanticai"
+                  ]
+                }
+              ]
+            }
           ]
         },
         {
@@ -136,6 +151,7 @@
               "group": "GroupChat",
               "pages": [
                 "docs/user-guide/advanced-concepts/groupchat/groupchat",
+                "docs/user-guide/advanced-concepts/groupchat/tools",
                 "docs/user-guide/advanced-concepts/groupchat/custom-group-chat",
                 "docs/user-guide/advanced-concepts/groupchat/resuming-group-chat"
               ]
@@ -150,15 +166,15 @@
               ]
             },
             {
-              "group": "Interoperability",
+              "group": "RealtimeAgent",
               "pages": [
-                "docs/user-guide/advanced-concepts/interop/langchain",
-                "docs/user-guide/advanced-concepts/interop/crewai",
-                "docs/user-guide/advanced-concepts/interop/pydanticai"
+                "docs/user-guide/advanced-concepts/realtime-agent/index",
+                "docs/user-guide/advanced-concepts/realtime-agent/websocket",
+                "docs/user-guide/advanced-concepts/realtime-agent/webrtc",
+                "docs/user-guide/advanced-concepts/realtime-agent/twilio"
               ]
             },
             "docs/user-guide/advanced-concepts/code-execution",
-            "docs/user-guide/advanced-concepts/tools-with-secrets",
             "docs/user-guide/advanced-concepts/conversation-patterns-deep-dive",
             "docs/user-guide/advanced-concepts/llm-configuration-deep-dive"
           ]
@@ -166,7 +182,6 @@
         {
           "group": "Model Providers",
           "pages": [
-            "docs/user-guide/models/openai",
             "docs/user-guide/models/amazon-bedrock",
             "docs/user-guide/models/anthropic",
             "docs/user-guide/models/cerebras",
@@ -175,10 +190,19 @@
             "docs/user-guide/models/google-gemini",
             "docs/user-guide/models/google-vertexai",
             "docs/user-guide/models/groq",
-            "docs/user-guide/models/litellm-with-watsonx",
+            {
+              "group": "LiteLLM Proxy Server",
+              "pages": [
+                "docs/user-guide/models/litellm-proxy-server/installation",
+                "docs/user-guide/models/litellm-proxy-server/openai",
+                "docs/user-guide/models/litellm-proxy-server/azure",
+                "docs/user-guide/models/litellm-proxy-server/watsonx"
+              ]
+            },
             "docs/user-guide/models/lm-studio",
             "docs/user-guide/models/mistralai",
             "docs/user-guide/models/ollama",
+            "docs/user-guide/models/openai",
             "docs/user-guide/models/togetherai",
             "docs/user-guide/models/vLLM"
           ]
@@ -188,10 +212,36 @@
           "pages": [
             "docs/user-guide/reference-agents/index",
             "docs/user-guide/reference-agents/captainagent",
-            "docs/user-guide/reference-agents/communication-agents",
+            {
+              "group": "Communication Platforms",
+              "pages": [
+                "docs/user-guide/reference-agents/communication-platforms/overview",
+                "docs/user-guide/reference-agents/communication-platforms/discordagent",
+                "docs/user-guide/reference-agents/communication-platforms/slackagent",
+                "docs/user-guide/reference-agents/communication-platforms/telegramagent"
+              ]
+            },
             "docs/user-guide/reference-agents/docagent",
             "docs/user-guide/reference-agents/reasoningagent",
-            "docs/user-guide/reference-agents/websurferagent"
+            "docs/user-guide/reference-agents/websurferagent",
+            "docs/user-guide/reference-agents/deepresearchagent"
+          ]
+        },
+        {
+          "group": "Reference Tools",
+          "pages": [
+            "docs/user-guide/reference-tools/index",
+            "docs/user-guide/reference-tools/browser-use",
+            "docs/user-guide/reference-tools/deep-research",
+            {
+              "group": "Communication Platforms",
+              "pages": [
+                "docs/user-guide/reference-tools/communication-platforms/discord",
+                "docs/user-guide/reference-tools/communication-platforms/slack",
+                "docs/user-guide/reference-tools/communication-platforms/telegram"
+              ]
+            },
+            "docs/user-guide/reference-tools/crawl4ai"
           ]
         }
       ]
@@ -329,6 +379,22 @@
         "docs/contributor-guide/documentation",
         "docs/contributor-guide/file-bug-report",
         "docs/contributor-guide/maintainer",
+        {
+          "group": "How AG2 Works",
+          "pages": [
+            "docs/contributor-guide/how-ag2-works/overview",
+            "docs/contributor-guide/how-ag2-works/initiate-chat",
+            "docs/contributor-guide/how-ag2-works/generate-reply",
+            "docs/contributor-guide/how-ag2-works/hooks"
+          ]
+        },
+        {
+          "group": "Building Agents & Tools",
+          "pages": [
+            "docs/contributor-guide/building/creating-a-tool",
+            "docs/contributor-guide/building/creating-an-agent"
+          ]
+        },
         "docs/contributor-guide/pre-commit",
         "docs/contributor-guide/tests",
         "docs/contributor-guide/Research"
@@ -371,9 +437,8 @@
             "docs/api-reference/autogen/AgentNameConflictError",
             "docs/api-reference/autogen/AssistantAgent",
             "docs/api-reference/autogen/Cache",
-            "docs/api-reference/autogen/ChatCompletion",
             "docs/api-reference/autogen/ChatResult",
-            "docs/api-reference/autogen/Completion",
+            "docs/api-reference/autogen/ContextExpression",
             "docs/api-reference/autogen/ConversableAgent",
             "docs/api-reference/autogen/GroupChat",
             "docs/api-reference/autogen/GroupChatManager",
@@ -382,12 +447,11 @@
             "docs/api-reference/autogen/NoEligibleSpeakerError",
             "docs/api-reference/autogen/ON_CONDITION",
             "docs/api-reference/autogen/OnCondition",
+            "docs/api-reference/autogen/OnContextCondition",
             "docs/api-reference/autogen/OpenAIWrapper",
-            "docs/api-reference/autogen/ReasoningAgent",
             "docs/api-reference/autogen/SenderRequiredError",
             "docs/api-reference/autogen/SwarmAgent",
             "docs/api-reference/autogen/SwarmResult",
-            "docs/api-reference/autogen/ThinkNode",
             "docs/api-reference/autogen/UPDATE_SYSTEM_MESSAGE",
             "docs/api-reference/autogen/UndefinedNextAgentError",
             "docs/api-reference/autogen/UpdateSystemMessage",
@@ -405,7 +469,6 @@
             "docs/api-reference/autogen/initiate_swarm_chat",
             "docs/api-reference/autogen/register_function",
             "docs/api-reference/autogen/register_hand_off",
-            "docs/api-reference/autogen/visualize_tree",
             {
               "group": "agentchat",
               "pages": [
@@ -988,15 +1051,9 @@
                       "group": "rag",
                       "pages": [
                         "docs/api-reference/autogen/agentchat/contrib/rag/overview",
-                        "docs/api-reference/autogen/agentchat/contrib/rag/VectorDbQueryEngine"
-                      ]
-                    },
-                    {
-                      "group": "reasoning_agent",
-                      "pages": [
-                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/overview",
-                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/extract_rlhf_preference_dataset",
-                        "docs/api-reference/autogen/agentchat/contrib/reasoning_agent/extract_sft_dataset"
+                        "docs/api-reference/autogen/agentchat/contrib/rag/ChromaDBQueryEngine",
+                        "docs/api-reference/autogen/agentchat/contrib/rag/MongoDBQueryEngine",
+                        "docs/api-reference/autogen/agentchat/contrib/rag/RAGQueryEngine"
                       ]
                     },
                     {
@@ -1201,6 +1258,14 @@
               "group": "agents",
               "pages": [
                 {
+                  "group": "contrib",
+                  "pages": [
+                    "docs/api-reference/autogen/agents/contrib/overview",
+                    "docs/api-reference/autogen/agents/contrib/TimeReplyAgent",
+                    "docs/api-reference/autogen/agents/contrib/TimeToolAgent"
+                  ]
+                },
+                {
                   "group": "experimental",
                   "pages": [
                     "docs/api-reference/autogen/agents/experimental/overview",
@@ -1208,8 +1273,12 @@
                     "docs/api-reference/autogen/agents/experimental/DiscordAgent",
                     "docs/api-reference/autogen/agents/experimental/DocAgent",
                     "docs/api-reference/autogen/agents/experimental/DoclingDocIngestAgent",
+                    "docs/api-reference/autogen/agents/experimental/InMemoryQueryEngine",
+                    "docs/api-reference/autogen/agents/experimental/ReasoningAgent",
                     "docs/api-reference/autogen/agents/experimental/SlackAgent",
                     "docs/api-reference/autogen/agents/experimental/TelegramAgent",
+                    "docs/api-reference/autogen/agents/experimental/ThinkNode",
+                    "docs/api-reference/autogen/agents/experimental/VectorChromaQueryEngine",
                     "docs/api-reference/autogen/agents/experimental/WebSurferAgent",
                     {
                       "group": "document_agent",
@@ -1218,20 +1287,11 @@
                         "docs/api-reference/autogen/agents/experimental/document_agent/docling_parse_docs",
                         "docs/api-reference/autogen/agents/experimental/document_agent/handle_input",
                         {
-                          "group": "docling_query_engine",
+                          "group": "url_utils",
                           "pages": [
-                            "docs/api-reference/autogen/agents/experimental/document_agent/docling_query_engine/overview",
-                            "docs/api-reference/autogen/agents/experimental/document_agent/docling_query_engine/DoclingMdQueryEngine"
-                          ]
-                        },
-                        {
-                          "group": "document_utils",
-                          "pages": [
-                            "docs/api-reference/autogen/agents/experimental/document_agent/document_utils/overview",
-                            "docs/api-reference/autogen/agents/experimental/document_agent/document_utils/download_url",
-                            "docs/api-reference/autogen/agents/experimental/document_agent/document_utils/is_url",
-                            "docs/api-reference/autogen/agents/experimental/document_agent/document_utils/list_files",
-                            "docs/api-reference/autogen/agents/experimental/document_agent/document_utils/preprocess_path"
+                            "docs/api-reference/autogen/agents/experimental/document_agent/url_utils/overview",
+                            "docs/api-reference/autogen/agents/experimental/document_agent/url_utils/InputFormat",
+                            "docs/api-reference/autogen/agents/experimental/document_agent/url_utils/URLAnalyzer"
                           ]
                         }
                       ]
@@ -1294,7 +1354,6 @@
               "group": "code_utils",
               "pages": [
                 "docs/api-reference/autogen/code_utils/overview",
-                "docs/api-reference/autogen/code_utils/PassAssertionFilter",
                 "docs/api-reference/autogen/code_utils/check_can_use_docker_or_throw",
                 "docs/api-reference/autogen/code_utils/content_str",
                 "docs/api-reference/autogen/code_utils/create_virtual_env",
@@ -1302,12 +1361,7 @@
                 "docs/api-reference/autogen/code_utils/eval_function_completions",
                 "docs/api-reference/autogen/code_utils/execute_code",
                 "docs/api-reference/autogen/code_utils/extract_code",
-                "docs/api-reference/autogen/code_utils/generate_assertions",
-                "docs/api-reference/autogen/code_utils/generate_code",
                 "docs/api-reference/autogen/code_utils/get_powershell_command",
-                "docs/api-reference/autogen/code_utils/implement",
-                "docs/api-reference/autogen/code_utils/improve_code",
-                "docs/api-reference/autogen/code_utils/improve_function",
                 "docs/api-reference/autogen/code_utils/in_docker_container",
                 "docs/api-reference/autogen/code_utils/infer_lang",
                 "docs/api-reference/autogen/code_utils/is_docker_running",
@@ -1420,6 +1474,7 @@
                 "docs/api-reference/autogen/import_utils/optional_import_block",
                 "docs/api-reference/autogen/import_utils/patch_object",
                 "docs/api-reference/autogen/import_utils/require_optional_import",
+                "docs/api-reference/autogen/import_utils/run_for_optional_imports",
                 "docs/api-reference/autogen/import_utils/skip_on_missing_imports"
               ]
             },
@@ -1501,7 +1556,6 @@
                 "docs/api-reference/autogen/math_utils/is_equiv_chain_of_thought",
                 "docs/api-reference/autogen/math_utils/last_boxed_only_string",
                 "docs/api-reference/autogen/math_utils/remove_boxed",
-                "docs/api-reference/autogen/math_utils/solve_problem",
                 "docs/api-reference/autogen/math_utils/voting_counts"
               ]
             },
@@ -1647,6 +1701,66 @@
                   ]
                 },
                 {
+                  "group": "oai_models",
+                  "pages": [
+                    "docs/api-reference/autogen/oai/oai_models/overview",
+                    "docs/api-reference/autogen/oai/oai_models/ChatCompletion",
+                    "docs/api-reference/autogen/oai/oai_models/ChatCompletionMessage",
+                    "docs/api-reference/autogen/oai/oai_models/ChatCompletionMessageToolCall",
+                    "docs/api-reference/autogen/oai/oai_models/Choice",
+                    "docs/api-reference/autogen/oai/oai_models/CompletionUsage",
+                    {
+                      "group": "chat_completion",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion/overview",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion/ChatCompletion",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion/Choice",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion/ChoiceLogprobs"
+                      ]
+                    },
+                    {
+                      "group": "chat_completion_audio",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_audio/overview",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_audio/ChatCompletionAudio"
+                      ]
+                    },
+                    {
+                      "group": "chat_completion_message",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message/overview",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message/ChatCompletionMessage",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message/FunctionCall"
+                      ]
+                    },
+                    {
+                      "group": "chat_completion_message_tool_call",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message_tool_call/overview",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message_tool_call/ChatCompletionMessageToolCall",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_message_tool_call/Function"
+                      ]
+                    },
+                    {
+                      "group": "chat_completion_token_logprob",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_token_logprob/overview",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_token_logprob/ChatCompletionTokenLogprob",
+                        "docs/api-reference/autogen/oai/oai_models/chat_completion_token_logprob/TopLogprob"
+                      ]
+                    },
+                    {
+                      "group": "completion_usage",
+                      "pages": [
+                        "docs/api-reference/autogen/oai/oai_models/completion_usage/overview",
+                        "docs/api-reference/autogen/oai/oai_models/completion_usage/CompletionTokensDetails",
+                        "docs/api-reference/autogen/oai/oai_models/completion_usage/CompletionUsage",
+                        "docs/api-reference/autogen/oai/oai_models/completion_usage/PromptTokensDetails"
+                      ]
+                    }
+                  ]
+                },
+                {
                   "group": "ollama",
                   "pages": [
                     "docs/api-reference/autogen/oai/ollama/overview",
@@ -1734,6 +1848,13 @@
                 "docs/api-reference/autogen/tools/load_basemodels_if_needed",
                 "docs/api-reference/autogen/tools/serialize_to_str",
                 "docs/api-reference/autogen/tools/tool",
+                {
+                  "group": "contrib",
+                  "pages": [
+                    "docs/api-reference/autogen/tools/contrib/overview",
+                    "docs/api-reference/autogen/tools/contrib/TimeTool"
+                  ]
+                },
                 {
                   "group": "dependency_injection",
                   "pages": [
