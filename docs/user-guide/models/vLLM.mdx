@@ -100,12 +100,11 @@ As you are running this proxy server locally, no API key is required. As `api_ke
 
 Although we are specifying the model when running the vLLM command, we must still put it into the `model` value for vLLM.
 
-
 ```python
-from autogen import UserProxyAgent, ConversableAgent
+from autogen import UserProxyAgent, ConversableAgent, LLMConfig
 
-local_llm_config={
-    "config_list": [
+local_llm_config = LLMConfig(
+    config_list=[
         {
             "api_type": "openai",
             "model": "mistralai/Mistral-7B-Instruct-v0.2", # Same as in vLLM command
@@ -113,8 +112,8 @@ local_llm_config={
             "base_url": "http://0.0.0.0:8000/v1"  # Your vLLM URL, with '/v1' added
         }
     ],
-    "cache_seed": None # Turns off caching, useful for testing different models
-}
+    cache_seed=None # Turns off caching, useful for testing different models
+)
 
 # Create the agent that uses the LLM.
 assistant = ConversableAgent("agent", llm_config=local_llm_config,system_message="")
@@ -142,7 +141,6 @@ Why is the sky blue?
 >>>>>>>> USING AUTO REPLY...
 agent (to user):
 
-
 The sky appears blue due to a phenomenon called Rayleigh scattering. As sunlight reaches Earth's atmosphere, it interacts with molecules and particles in the air, causing the scattering of light. Blue light has a shorter wavelength and gets scattered more easily than other colors, which is why the sky appears blue during a clear day.
 
 However, during sunrise and sunset, the sky can appear red, orange, or purple due to a different type of scattering called scattering by dust, pollutants, and water droplets, which scatter longer wavelengths of light more effectively.
@@ -157,7 +155,6 @@ and why does it turn red?
 
 >>>>>>>> USING AUTO REPLY...
 agent (to user):
-
 
 During sunrise and sunset, the angle of the sun's rays in the sky is lower, and they have to pass through more of the Earth's atmosphere before reaching an observer. This additional distance results in more scattering of sunlight, which preferentially scatters the longer wavelengths (red, orange, and yellow) more than the shorter wavelengths (blue and green).
 

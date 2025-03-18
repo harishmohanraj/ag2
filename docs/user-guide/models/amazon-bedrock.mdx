@@ -137,9 +137,7 @@ config_list_bedrock = [
 
 assistant = autogen.AssistantAgent(
     "assistant",
-    llm_config={
-        "config_list": config_list_bedrock,
-    },
+    llm_config=autogen.LLMConfig(config_list=config_list_bedrock),
 )
 
 user_proxy = autogen.UserProxyAgent(
@@ -195,7 +193,6 @@ exitcode: 0 (execution succeeded)
 Code output:
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-
 --------------------------------------------------------------------------------
 assistant (to user_proxy):
 
@@ -238,9 +235,7 @@ chatbot = autogen.AssistantAgent(
         only use the functions you have been provided with.
         Output only the word 'TERMINATE' when an answer has been provided.
         Use both tools together if you can.""",
-    llm_config={
-        "config_list": config_list_bedrock,
-    },
+    llm_config=autogen.LLMConfig(config_list=config_list_bedrock),
 )
 
 user_proxy = autogen.UserProxyAgent(
@@ -260,7 +255,6 @@ CurrencySymbol = Literal["USD", "EUR"]
 
 # Define our function that we expect to call
 
-
 def exchange_rate(base_currency: CurrencySymbol, quote_currency: CurrencySymbol) -> float:
     if base_currency == quote_currency:
         return 1.0
@@ -271,9 +265,7 @@ def exchange_rate(base_currency: CurrencySymbol, quote_currency: CurrencySymbol)
     else:
         raise ValueError(f"Unknown currencies {base_currency}, {quote_currency}")
 
-
 # Register the function with the agent
-
 
 @user_proxy.register_for_execution()
 @chatbot.register_for_llm(description="Currency exchange calculator.")
@@ -289,9 +281,7 @@ def currency_calculator(
     quote_amount = exchange_rate(base_currency, quote_currency) * base_amount
     return f"{format(quote_amount, '.2f')} {quote_currency}"
 
-
 # Weather function
-
 
 # Example function to make available to model
 def get_current_weather(location, unit="fahrenheit"):
@@ -305,9 +295,7 @@ def get_current_weather(location, unit="fahrenheit"):
     else:
         return json.dumps({"location": location, "temperature": "unknown"})
 
-
 # Register the function with the agent
-
 
 @user_proxy.register_for_execution()
 @chatbot.register_for_llm(description="Weather forecast for US cities.")
@@ -334,7 +322,6 @@ What's the weather in New York and can you tell me how much is 123.45 EUR in USD
 
 --------------------------------------------------------------------------------
 chatbot (to user_proxy):
-
 
 ***** Suggested tool call (tooluse__h3d1AEDR3Sm2XRoGCjc2Q): weather_forecast *****
 Arguments:
@@ -368,12 +355,9 @@ user_proxy (to chatbot):
 --------------------------------------------------------------------------------
 chatbot (to user_proxy):
 
-
-
 TERMINATE
 
 --------------------------------------------------------------------------------
-
 
 The weather in New York is 11 degrees Fahrenheit. 123.45 EUR is equivalent to 135.30 USD.
 ```
@@ -388,7 +372,7 @@ Here we have a conversation that has two models (Anthropic's Claude 3 Sonnet and
 from typing import Annotated, Literal
 
 import autogen
-from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent
+from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent, LLMConfig
 
 config_list_sonnet = [
     {
@@ -432,36 +416,28 @@ config_list_llama31_70b = [
 alice = AssistantAgent(
     "sonnet_agent",
     system_message="You are from Anthropic, an AI company that created the Sonnet large language model. You make arguments to support your company's position. You analyse given text. You are not a programmer and don't use Python. Pass to mistral_agent when you have finished. Start your response with 'I am sonnet_agent'.",
-    llm_config={
-        "config_list": config_list_sonnet,
-    },
+    llm_config=LLMConfig(config_list=config_list_sonnet),
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
 )
 
 bob = autogen.AssistantAgent(
     "mistral_agent",
     system_message="You are from Mistral, an AI company that created the Large v2 large language model. You make arguments to support your company's position. You analyse given text. You are not a programmer and don't use Python. Pass to the judge if you have finished. Start your response with 'I am mistral_agent'.",
-    llm_config={
-        "config_list": config_list_mistral,
-    },
+    llm_config=LLMConfig(config_list=config_list_mistral),
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
 )
 
 charlie = AssistantAgent(
     "research_assistant",
     system_message="You are a helpful assistant to research the latest news and headlines. You have access to call functions to get the latest news articles for research through 'code_interpreter'.",
-    llm_config={
-        "config_list": config_list_llama31_70b,
-    },
+    llm_config=LLMConfig(config_list=config_list_llama31_70b),
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
 )
 
 dan = AssistantAgent(
     "judge",
     system_message="You are a judge. You will evaluate the arguments and make a decision on which one is more convincing. End your decision with the word 'TERMINATE' to conclude the debate.",
-    llm_config={
-        "config_list": config_list_llama31_70b,
-    },
+    llm_config=LLMConfig(config_list=config_list_llama31_70b),
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
 )
 
@@ -475,7 +451,6 @@ code_interpreter = UserProxyAgent(
     default_auto_reply="",
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
 )
-
 
 @code_interpreter.register_for_execution()  # Decorator factory for registering a function to be executed by an agent
 @charlie.register_for_llm(
@@ -495,7 +470,6 @@ def get_headlines(headline_date: Annotated[str, "Date in MMDDYY format, e.g., 06
     }
     return mock_news.get(headline_date, "No news available for today.")
 
-
 user_proxy = UserProxyAgent(
     "user_proxy",
     human_input_mode="NEVER",
@@ -513,9 +487,7 @@ groupchat = GroupChat(
 
 manager = GroupChatManager(
     groupchat=groupchat,
-    llm_config={
-        "config_list": config_list_llama31_70b,
-    },
+    llm_config=LLMConfig(config_list=config_list_llama31_70b),
 )
 
 task = "Analyze the potential of Anthropic and Mistral to revolutionize the field of AI based on today's headlines. Today is 06202024. Start by selecting 'research_assistant' to get relevant news articles and then ask sonnet_agent and mistral_agent to respond before the judge evaluates the conversation."
@@ -533,7 +505,6 @@ Next speaker: research_assistant
 
 research_assistant (to chat_manager):
 
-
 ***** Suggested tool call (tooluse_7lcHbL3TT5WHyTl8Ee0Kmg): get_headlines *****
 Arguments:
 {"headline_date": "06202024"}
@@ -542,7 +513,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: code_interpreter
-
 
 >>>>>>>> EXECUTING FUNCTION get_headlines...
 code_interpreter (to chat_manager):
@@ -599,8 +569,6 @@ Pass to the judge.
 Next speaker: judge
 
 judge (to chat_manager):
-
-
 
 After carefully evaluating the arguments presented by both sonnet_agent and mistral_agent, I have reached a decision.
 

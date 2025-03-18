@@ -1,0 +1,233 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/LlamaIndex_query_engine.ipynb
+description: Use any LlamaIndex vector store as a Query Engine
+source_notebook: /notebook/LlamaIndex_query_engine.ipynb
+tags:
+- agents
+- documents
+- RAG
+- docagent
+- chroma
+- chromadb
+- pinecone
+title: Use LLamaIndexQueryEngine to query Markdown files
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/LlamaIndex_query_engine.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/LlamaIndex_query_engine.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+This notebook demonstrates the use of the `LLamaIndexqueryEngine` for
+retrieval-augmented question answering over documents. It shows how to
+set up the engine with Docling parsed Markdown files, and execute
+natural language queries against the indexed data.
+
+The `LlamaIndexQueryEngine` provides an efficient way to query vectorDBs
+using any LlamaIndex’s [vector
+store](https://docs.llamaindex.ai/en/stable/module_guides/storing/vector_stores/).
+
+We use some Markdown (.md) files as input, feel free to try your own
+text or Markdown documents.
+
+You can create and add this ChromaDBQueryEngine to
+[DocAgent](https://docs.ag2.ai/docs/user-guide/reference-agents/docagent)
+to use.
+
+```python
+%pip install llama-index-vector-stores-chroma==0.4.1
+%pip install llama-index==0.12.16
+%pip install llama-index llama-index-vector-stores-pinecone==0.4.4
+```
+
+### Load LLM configuration
+
+This demonstration requires an `OPENAI_API_KEY` to be in your
+environment variables. See [our
+documentation](https://docs.ag2.ai/docs/user-guide/basic-concepts/llm-configuration/llm-configuration#environment-variables)
+for guidance.
+
+```python
+import os
+
+import autogen
+
+config_list = autogen.config_list_from_json(env_or_file="../OAI_CONFIG_LIST")
+
+assert len(config_list) > 0
+print("models to use: ", [config_list[i]["model"] for i in range(len(config_list))])
+
+# Put the OpenAI API key into the environment
+os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"]
+```
+
+### In the first example, we build a LLamaIndexQueryEngine instance using ChromaDB. 
+
+Refer to this
+[link](https://docs.trychroma.com/production/containers/docker) for
+running Chromadb in a Docker container.
+
+```python
+from chromadb import HttpClient
+from llama_index.vector_stores.chroma import ChromaVectorStore
+
+# we need to set up LlmaIndex's ChromaVectorStore
+# Refer to https://docs.llamaindex.ai/en/stable/examples/vector_stores/chroma_metadata_filter/ for more information
+chroma_client = HttpClient(
+    host="host.docker.internal",
+    port=8000,
+)
+
+# Option 1: get an existing collection
+# use get_collection to get an existing collection
+chroma_collection = chroma_client.get_collection("default_collection")
+
+# Option 2: create a new collection
+# chroma_collection = chroma_client.create_collection("default_collection")
+
+# Create the Chroma vector store
+chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+```
+
+Then we can use the LlamaIndex `chroma_vector_store` to create our AG2
+`LLamaIndexQueryEngine` instance.
+
+```python
+from llama_index.llms.openai import OpenAI
+
+from autogen.agentchat.contrib.rag import LlamaIndexQueryEngine
+
+chroma_query_engine = LlamaIndexQueryEngine(
+    vector_store=chroma_vector_store,
+    llm=OpenAI(model="gpt-4o", temperature=0.0),  # Default model for querying, change if needed
+)
+```
+
+Initialize the database with input docs and query it with the engine.
+
+```python
+input_dir = (
+    "/workspaces/ag2/test/agents/experimental/document_agent/pdf_parsed/"  # Update to match your input directory
+)
+input_docs = [input_dir + "nvidia_10k_2024.md"]  # Update to match your input documents
+```
+
+
+```python
+# Option 1: initialize the database and add new documents
+chroma_query_engine.init_db(new_doc_paths_or_urls=input_docs)
+
+# Option 2: connect to the database without initializing it
+# chroma_query_engine.connect_db()
+```
+
+
+```python
+# question = "How much money did Nvidia spend in research and development"
+question = "What was the latest quarter's GAAP revenue?"
+answer = chroma_query_engine.query(question)
+print(answer)
+```
+
+Great, we got the data we needed. Now, let’s add another document.
+
+```python
+new_docs = [input_dir + "Toast_financial_report.md"]
+```
+
+
+```python
+chroma_query_engine.add_docs(new_doc_paths_or_urls=new_docs)
+```
+
+And query again from the same database but this time for another
+corporate entity.
+
+```python
+question = "How much money did Toast earn in 2024?"
+answer = chroma_query_engine.query(question)
+print(answer)
+```
+
+## Pinecone
+
+### In the second example, we build a similar LLamaIndexQueryEngine instance, but on top of Pinecone. 
+
+Refer to
+https://docs.llamaindex.ai/en/stable/examples/vector_stores/PineconeIndexDemo/
+for more details on how to set up Pinecone and PineconeVectorStore
+
+Please put your Pinecone API key in an environment variable called
+`PINECONE_API_KEY`.
+
+```python
+from pinecone import Pinecone, ServerlessSpec
+
+# Load the Pinecode API key and create the Pinecone object
+api_key = os.environ["PINECONE_API_KEY"]
+pc = Pinecone(api_key=api_key)
+```
+
+
+```python
+# dimensions are for text-embedding-ada-002, which PineconeVectorStore uses for embedding text by default
+
+# Create an index named ag2
+pc.create_index(
+    name="ag2",
+    dimension=1536,
+    metric="euclidean",
+    spec=ServerlessSpec(cloud="aws", region="us-east-1"),
+)
+```
+
+
+```python
+from llama_index.vector_stores.pinecone import PineconeVectorStore
+
+# Create the vector store
+pinecone_index = pc.Index("ag2")
+pinecone_vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
+```
+
+
+```python
+pinecone_query_engine = LlamaIndexQueryEngine(
+    vector_store=pinecone_vector_store,
+    llm=OpenAI(model="gpt-4o", temperature=0.0),  # Default model for querying, change if needed
+)
+```
+
+
+```python
+# Initialize the database and add new documents
+pinecone_query_engine.init_db(new_doc_paths_or_urls=input_docs)
+```
+
+Query the Pinecone query engine
+
+```python
+question = "How much money did Nvidia spend in research and development"
+answer = pinecone_query_engine.query(question)
+print(answer)
+```
+
+Add another document
+
+```python
+new_docs = [input_dir + "Toast_financial_report.md"]
+pinecone_query_engine.add_docs(new_doc_paths_or_urls=new_docs)
+```
+
+Query again
+
+```python
+question = "How much money did Toast earn in 2024?"
+answer = pinecone_query_engine.query(question)
+print(answer)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/LlamaIndex_query_engine.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

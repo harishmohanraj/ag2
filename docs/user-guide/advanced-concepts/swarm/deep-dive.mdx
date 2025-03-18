@@ -29,7 +29,6 @@ Here are the main components that are needed to create a swarm chat:
 4. **Start Swarm Chat**: initiate the swarm chat with `initiate_swarm_chat` or `a_initiate_swarm_chat` for asynchronous calls.
     - API Reference: [`initiate_swarm_chat`](/docs/api-reference/autogen/initiate_swarm_chat), [`a_initiate_swarm_chat`](/docs/api-reference/autogen/a_initiate_swarm_chat)
 
-
 ### Create Agents
 
 You can directly create [`AssistantAgent`](/docs/api-reference/autogen/AssistantAgent) to be used in a swarm chat. Instead of registering functions one by one, you can pass in a list of functions when creating your agent, `AssistantAgent(functions=[func1, ...])`. These functions will be converted to schemas to be passed to the LLMs, and you don't need to worry about registering the functions for execution as the swarm handles that automatically.
@@ -44,7 +43,6 @@ You can directly create [`AssistantAgent`](/docs/api-reference/autogen/Assistant
 
 ### Registering Handoffs to agents
 While you can create functions to decide who the next agent to call is, we provide a quick way to register the handoff using [`OnCondition`](/docs/api-reference/autogen/OnCondition). Internally, a transition function is created and added to the LLM configuration directly.
-
 
 ```python
 from autogen import AssistantAgent, OnCondition, register_hand_off
@@ -124,7 +122,6 @@ The `available` parameter can take:
 | String | Will look up the value of the context variable with that name, which should be a bool, to determine whether it should include this condition. |
 | ContextExpression | Will evaluate the logical expression against the context variables (see previous section for examples) |
 | Callable | `def my_available_func(agent: ConversableAgent, messages: list[Dict[str, Any]]) -> bool` |
-
 
 In the following example the handoff will only be available to `agent_1` when the swarm context variable `has_plan` is `True`.
 
@@ -212,7 +209,6 @@ How we handle the `messages` parameter:
         - 1. User agent passed in: we assume this message is from the user agent.
         - 2. No user agent passed in: we will create a temporary user agent just to start the chat.
 - Case 2: We will use the [Resume GroupChat](/docs/user-guide/advanced-concepts/resuming-group-chat) feature to resume the chat. The `name` fields in these messages must match the names of the agents you passed in.
-
 
 ### AfterWork
 

@@ -38,10 +38,10 @@ Let's look at how we could prepend a message with who is sending the message (se
 In this example, our `Mike` agent will have this hook registered, so all their messages will have this text added.
 
 ```python
-from autogen import ConversableAgent, Agent
+from autogen import ConversableAgent, Agent, LLMConfig
 from typing import Any, Union
 
-llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
+llm_config = LLMConfig(model="gpt-4o-mini", api_type="openai")
 
 agent_mike = ConversableAgent(name="Mike", llm_config=llm_config)
 
@@ -152,7 +152,6 @@ Chat History:
 
 This is a good hook if you need to edit the message before it is added to the messages list, such as for redacting text.
 
-
 ### 2. "update_agent_state"
 
 The first of three hooks that run in the [ConversableAgent.generate_reply](/docs/api-reference/autogen/ConversableAgent#generate-reply) method before the reply functions are evaluated.
@@ -176,10 +175,10 @@ def my_update_function(
 In the following example we will update an agent's system message to have the current date in it.
 
 ```python
-from autogen import ConversableAgent
+from autogen import ConversableAgent, LLMConfig
 from typing import Any
 
-llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
+llm_config = LLMConfig(model="gpt-4o-mini", api_type="openai")
 
 calendar_prompt = ("You are a calendar agent who answers questions on the date and day.\n"
                    "The current date is: [CURRENT_DATE]\n"
@@ -266,10 +265,10 @@ def my_processing_function(
 Here's an example that changes any instances of the word "blue" to "red" in the last message.
 
 ```python
-from autogen import ConversableAgent
+from autogen import ConversableAgent, LLMConfig
 from typing import Any, Union
 
-llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
+llm_config = LLMConfig(model="gpt-4o-mini", api_type="openai")
 
 agent_scientist = ConversableAgent(name="scientist", llm_config=llm_config)
 
@@ -322,7 +321,6 @@ The sky appears red during sunrise or sunset due to the scattering of sunlight b
 Chat Result first message:
 {'content': 'In one sentence, why is the sky blue?', 'role': 'assistant', 'name': 'Bob'}
 
-
 Scientist agent's first chat message with Bob:
 {'content': 'In one sentence, why is the sky red?', 'role': 'user', 'name': 'Bob'}
 ```
@@ -347,11 +345,11 @@ def your_function_name(
 Here's an example that adds the agent's name to the start of each message.
 
 ```python
-from autogen import ConversableAgent
+from autogen import ConversableAgent, LLMConfig
 from typing import Any
 import json
 
-llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
+llm_config = LLMConfig(model="gpt-4o-mini", api_type="openai")
 
 agent_mike = ConversableAgent(name="Mike", llm_config=llm_config, system_message="You are a comedian.")
 
@@ -406,7 +404,6 @@ Let's tell some jokes!
   }
 ]
 
-
 >>>>>>>> USING AUTO REPLY...
 Mike (to Bob):
 
@@ -451,7 +448,6 @@ Got any other themes in mind?
     "name": "Bob"
   }
 ]
-
 
 >>>>>>>> USING AUTO REPLY...
 Mike (to Bob):

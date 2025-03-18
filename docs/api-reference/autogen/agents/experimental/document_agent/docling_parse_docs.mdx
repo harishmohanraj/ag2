@@ -10,7 +10,8 @@ title: autogen.agents.experimental.document_agent.docling_parse_docs
 docling_parse_docs(
     input_file_path: Annotated[Path | str, 'Path to the input file or directory'],
     output_dir_path: Annotated[Path | str | None, 'Path to the output directory'] = None,
-    output_formats: Annotated[list[str] | None, 'List of output formats (markdown, json)'] = None
+    output_formats: Annotated[list[str] | None, 'List of output formats (markdown, json)'] = None,
+    table_output_format: str = 'html'
 ) -> list[Path]
 ```
 
@@ -30,6 +31,7 @@ docling_parse_docs(
 | `input_file_path` | The path to the input file.<br/><br/>**Type:** Annotated[pathlib.Path \| str, 'Path to the input file or directory'] |
 | `output_dir_path` | The path to the output directory.<br/><br/>**Type:** Annotated[pathlib.Path \| str \| None, 'Path to the output directory']<br/><br/>**Default:** None |
 | `output_formats` | The output formats.<br/><br/>Defaults to ["markdown"].<br/><br/>**Type:** Annotated[list[str] \| None, 'List of output formats (markdown, json)']<br/><br/>**Default:** None |
+| `table_output_format` | The output format for tables.<br/><br/>Defaults to "html".<br/><br/>**Type:** str<br/><br/>**Default:** 'html' |
 
 <b>Returns:</b>
 | Type | Description |

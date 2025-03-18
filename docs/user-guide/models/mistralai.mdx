@@ -141,7 +141,7 @@ config_list = [
 
 from pathlib import Path
 
-from autogen import AssistantAgent, UserProxyAgent
+from autogen import AssistantAgent, UserProxyAgent, LLMConfig
 from autogen.coding import LocalCommandLineCodeExecutor
 
 # Setting up the code executor
@@ -172,7 +172,7 @@ IMPORTANT: Wait for the user to execute your code and then you can reply with th
 assistant_agent = AssistantAgent(
     name="Mistral Assistant",
     system_message=system_message,
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
 )
 
 # Start the chat, with the UserProxyAgent asking the AssistantAgent the message
@@ -260,7 +260,6 @@ User (to Mistral Assistant):
 exitcode: 0 (execution succeeded)
 Code output: 1229
 
-
 --------------------------------------------------------------------------------
 Mistral Assistant (to User):
 
@@ -314,7 +313,6 @@ from typing_extensions import Annotated
 
 board = chess.Board()
 
-
 def make_move() -> Annotated[str, "A move in UCI format"]:
     moves = list(board.legal_moves)
     move = random.choice(moves)
@@ -333,13 +331,13 @@ from autogen import ConversableAgent, register_function
 player_white = ConversableAgent(
     name="Player White",
     system_message="You are a chess player and you play as white. Always call make_move() to make a move",
-    llm_config={"config_list": config_list, "cache_seed": None},
+    llm_config=LLMConfig(config_list=config_list, cache_seed=None),
 )
 
 player_black = ConversableAgent(
     name="Player Black",
     system_message="You are a chess player and you play as black. Always call make_move() to make a move",
-    llm_config={"config_list": config_list, "cache_seed": None},
+    llm_config=LLMConfig(config_list=config_list, cache_seed=None),
 )
 
 board_proxy = ConversableAgent(
@@ -423,7 +421,6 @@ Let's play chess! Your move.
 >>>>>>>> USING AUTO REPLY...
 Player Black (to Board Proxy):
 
-
 ***** Suggested tool call (AcS1aX4Rl): make_move *****
 Arguments:
 {}
@@ -473,7 +470,6 @@ I have made my move. It's g1h3. Your turn.
 
 >>>>>>>> USING AUTO REPLY...
 Player White (to Board Proxy):
-
 
 ***** Suggested tool call (tWVXVAujE): make_move *****
 Arguments:
@@ -525,7 +521,6 @@ I have made my move. It's d7d5. Your turn.
 >>>>>>>> USING AUTO REPLY...
 Player Black (to Board Proxy):
 
-
 ***** Suggested tool call (ZOfvRz0B1): make_move *****
 Arguments:
 {}
@@ -576,7 +571,6 @@ I have made my move. It's b1c3. Your turn.
 >>>>>>>> USING AUTO REPLY...
 Player White (to Board Proxy):
 
-
 ***** Suggested tool call (LovRpi6Pq): make_move *****
 Arguments:
 {}
@@ -624,7 +618,6 @@ I have made my move. It's c8g4. Your turn.
 
 >>>>>>>> USING AUTO REPLY...
 Player Black (to Board Proxy):
-
 
 ***** Suggested tool call (RfhC8brG7): make_move *****
 Arguments:
@@ -674,7 +667,6 @@ I have made my move. It's a1b1. Your turn.
 >>>>>>>> USING AUTO REPLY...
 Player White (to Board Proxy):
 
-
 ***** Suggested tool call (6aVW1t0lm): make_move *****
 Arguments:
 {}
@@ -722,7 +714,6 @@ I have made my move. It's a7a6. Your turn.
 
 >>>>>>>> USING AUTO REPLY...
 Player Black (to Board Proxy):
-
 
 ***** Suggested tool call (kPTEInlLR): make_move *****
 Arguments:

@@ -31,6 +31,7 @@ from autogen import (
     GroupChatManager,
     UserProxyAgent,
     register_function,
+    LLMConfig,
 )
 ```
 
@@ -42,11 +43,11 @@ The [`GroupChat`](/docs/api-reference/autogen/GroupChat) will contain three agen
 - `user_proxy` - Acts as an intermediary between the user and other agents.
 
 ```python
-llm_config = {
-    "api_type": "openai",
-    "model": "gpt-4o-mini",
-    "api_key": os.environ["OPENAI_API_KEY"]
-}
+llm_config = LLMConfig(
+    api_type="openai",
+    model="gpt-4o-mini",
+    api_key=os.environ["OPENAI_API_KEY"],
+)
 
 sales_agent = ConversableAgent(
     name="SalesAgent",
@@ -85,7 +86,6 @@ Your ticket number is {ticket_number}.
 Please keep this number for future reference.
 """
 
-
 register_function(
     buy_airplane_ticket,
     caller=sales_agent,
@@ -93,10 +93,8 @@ register_function(
     description="Buy an airplane ticket",
 )
 
-
 def cancel_airplane_ticket(ticket_number: str) -> str:
     return f"Your ticket with ticket number {ticket_number} has been canceled"
-
 
 register_function(
     cancel_airplane_ticket,
@@ -123,7 +121,6 @@ manager = GroupChatManager(
     llm_config=llm_config,
 )
 
-
 user_proxy.initiate_chat(
     recipient=manager,
     message="I need to buy a plane ticket from New York to Los Angeles on 12th of April 2025",
@@ -141,7 +138,6 @@ I need to buy a plane ticket from New York to Los Angeles on 12th of April 2025
 
 Next speaker: SalesAgent
 
-
 >>>>>>>> USING AUTO REPLY...
 SalesAgent (to group_manager):
 
@@ -153,7 +149,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: user_proxy
-
 
 >>>>>>>> NO HUMAN INPUT RECEIVED.
 
@@ -175,7 +170,6 @@ Please keep this number for future reference.
 
 Next speaker: CanelationAgent
 
-
 >>>>>>>> USING AUTO REPLY...
 CanelationAgent (to group_manager):
 
@@ -184,7 +178,6 @@ Your ticket from New York to Los Angeles on April 12, 2025, has been successfull
 --------------------------------------------------------------------------------
 
 Next speaker: CanelationAgent
-
 
 >>>>>>>> USING AUTO REPLY...
 CanelationAgent (to group_manager):
@@ -203,7 +196,6 @@ Cancel it
 
 Next speaker: CanelationAgent
 
-
 >>>>>>>> USING AUTO REPLY...
 CanelationAgent (to group_manager):
 
@@ -215,7 +207,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: user_proxy
-
 
 >>>>>>>> NO HUMAN INPUT RECEIVED.
 

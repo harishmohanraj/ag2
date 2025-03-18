@@ -13,20 +13,20 @@ tags: [LLM, RAG]
 </div>
 
 <div class="blog-authors">
-  <p class="authors">Author:</p>
-  <CardGroup cols={2}>
-    <Card href="https://github.com/thinkall">
-        <div class="col card">
-          <div class="img-placeholder">
-            <img noZoom src="https://github.com/thinkall.png" />
-          </div>
-          <div>
-            <p class="name">Li Jiang</p>
-            <p>Senior Software Engineer at Microsoft</p>
-          </div>
-        </div>
-    </Card>
-  </CardGroup>
+<p class="authors">Author:</p>
+<CardGroup cols={2}>
+<Card href="https://github.com/thinkall">
+    <div class="col card">
+      <div class="img-placeholder">
+        <img noZoom src="https://github.com/thinkall.png" />
+      </div>
+      <div>
+        <p class="name">Li Jiang</p>
+        <p>Senior Software Engineer at Microsoft</p>
+      </div>
+    </div>
+</Card>
+</CardGroup>
 </div>
 
 *Last update: August 14, 2024; AutoGen version: v0.2.35*
@@ -101,7 +101,7 @@ You can find a list of all supported document types by using `autogen.retrieve_u
 1. Import Agents
 ```python
 import autogen
-from autogen import AssistantAgent
+from autogen import AssistantAgent, LLMConfig
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 ```
 
@@ -309,7 +309,7 @@ groupchat = autogen.GroupChat(
     allow_repeat_speaker=False,
 )
 
-llm_config = {"config_list": config_list, "timeout": 60, "temperature": 0}
+llm_config = LLMConfig(config_list=config_list, timeout=60, temperature=0)
 manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
 # Start chatting with the boss as this is the user proxy agent.

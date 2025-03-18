@@ -43,7 +43,7 @@ The agent is highly configurable through a single `reason_config` dictionary:
 import random
 
 from autogen.agents.experimental import ReasoningAgent, ThinkNode
-from autogen import AssistantAgent, UserProxyAgent
+from autogen import AssistantAgent, UserProxyAgent, LLMConfig, LLMConfig
 
 # Put your key in the OPENAI_API_KEY environment variable
 config_list = [{"api_type": "openai", "model": "gpt-4o-mini"}]
@@ -94,7 +94,7 @@ may show limited improvement with this approach.
 reason_agent = ReasoningAgent(
     name="reason_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=verbose,
     reason_config={"method": "dfs", "max_depth": 3},  # Using DFS
     # NOTE: it is equivalent to use beam size 1 for O1-style reasoning
@@ -219,7 +219,7 @@ In this approach, the agent generates multiple reasoning steps in parallel, allo
 ```python
 reason_agent = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=verbose,
     reason_config={"method": "beam_search", "beam_size": 3, "max_depth": 3},
 )
@@ -324,7 +324,7 @@ This section demonstrates how to use Monte Carlo Tree Search (MCTS) with [`Reaso
 mcts_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=True,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "mcts", "nsim": 5, "max_depth": 4},
@@ -408,7 +408,7 @@ It is important to note that our reasoning agent operates based on "process" and
 lats_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=True,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "lats", "nsim": 5, "max_depth": 4},
@@ -532,8 +532,6 @@ The expected maximum value when rolling a 6-sided die three times is approximate
 --------------------------------------------------------------------------------
 user_proxy (to reason_agent):
 
-
-
 --------------------------------------------------------------------------------
 reason_agent (to user_proxy):
 
@@ -739,7 +737,6 @@ With these formulations, you can set up the MILP using an optimization package l
 ### Conclusion
 This structured approach provides a foundation for creating a mixed integer linear program that effectively manages a coffee roasting supply chain, accounting for multiple factors such as costs, capacities, and demands.
 
-
 user_proxy (to mcts_agent):
 
 What is the expected maximum dice value if you can roll a 6-sided dice three times?
@@ -834,8 +831,6 @@ What is the expected maximum dice value if you can roll a 6-sided dice three tim
 mcts_agent (to tot_thinker):
 
 ## Here are some previous trajectories and reflections
-
-
 
 ---
 
@@ -940,7 +935,7 @@ The goal is to generate a concise yet engaging blog post about NVIDIA. The proce
 ```python
 writer = AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     system_message="""
     You are a professional writer, known for your insightful and engaging articles.
     You transform complex concepts into compelling narratives.
@@ -949,11 +944,10 @@ writer = AssistantAgent(
 )
 reason_agent_for_writer = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=verbose,
     reason_config={"method": "lats", "nsim": 2, "max_depth": 3},
 )
-
 
 def reflection_message(recipient, messages, sender, config):
     print("Reflecting...", "yellow")
@@ -999,11 +993,11 @@ To use a different model for grading instead of gpt-4o, pass the `grader_llm_con
 ```python
 # Put your key in the OPENAI_API_KEY environment variable
 grader_config_list = [{"api_type": "openai", "model": "gpt-4o-mini"}]
-grader_llm_config = {"config_list": grader_config_list}
+grader_llm_config = LLMConfig(config_list=grader_config_list)
 
 writer = AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     system_message="""
     You are a professional writer, known for your insightful and engaging articles.
     You transform complex concepts into compelling narratives.
@@ -1012,7 +1006,7 @@ writer = AssistantAgent(
 )
 reason_agent_for_writer = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     grader_llm_config=grader_llm_config,
     verbose=verbose,
     reason_config={"method": "lats", "nsim": 2, "max_depth": 3},
@@ -1063,12 +1057,11 @@ random.seed(1)  # setup seed for reproducibility
 mcts_agent2 = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=True,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "mcts", "nsim": 5, "max_depth": 4},
 )
-
 
 user_proxy = UserProxyAgent(
     name="user_proxy",
@@ -1076,7 +1069,6 @@ user_proxy = UserProxyAgent(
     code_execution_config=False,
     max_consecutive_auto_reply=10,
 )
-
 
 ans = user_proxy.initiate_chat(mcts_agent2, message=prompt, summary_method=last_meaningful_msg)
 
@@ -1190,8 +1182,6 @@ The expected maximum value when rolling a 6-sided die three times is approximate
 --------------------------------------------------------------------------------
 user_proxy (to reason_agent):
 
-
-
 --------------------------------------------------------------------------------
 reason_agent (to user_proxy):
 
@@ -1397,7 +1387,6 @@ With these formulations, you can set up the MILP using an optimization package l
 ### Conclusion
 This structured approach provides a foundation for creating a mixed integer linear program that effectively manages a coffee roasting supply chain, accounting for multiple factors such as costs, capacities, and demands.
 
-
 user_proxy (to mcts_agent):
 
 What is the expected maximum dice value if you can roll a 6-sided dice three times?
@@ -1492,8 +1481,6 @@ What is the expected maximum dice value if you can roll a 6-sided dice three tim
 mcts_agent (to tot_thinker):
 
 ## Here are some previous trajectories and reflections
-
-
 
 ---
 
@@ -1631,7 +1618,6 @@ rac{119}{24}, which approximates to 4.9583.
 Therefore, the expected maximum value when rolling a six-sided die three times is
 rac{119}{24} or approximately 4.9583.
 
-
 --------------------------------------------------------------------------------
 mcts_agent (to tot_thinker):
 
@@ -1721,7 +1707,7 @@ The concept of a "Forest of Thoughts" allows us to leverage bootstrapping techni
 forest_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
     verbose=True,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "dfs", "max_depth": 4, "forest_size": 3},

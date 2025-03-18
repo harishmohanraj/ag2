@@ -1,0 +1,133 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/Chromadb_query_engine.ipynb
+description: ChromaDB Query Engine for document queries
+source_notebook: /notebook/Chromadb_query_engine.ipynb
+tags:
+- agents
+- documents
+- RAG
+- docagent
+- chroma
+- chromadb
+title: Use ChromaDBQueryEngine to query Markdown files
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/Chromadb_query_engine.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/Chromadb_query_engine.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+This notebook demonstrates the use of the `ChromaDBQueryEngine` for
+retrieval-augmented question answering over documents. It shows how to
+set up the engine with Docling parsed Markdown files, and execute
+natural language queries against the indexed data.
+
+The `ChromaDBQueryEngine` integrates persistent ChromaDB vector storage
+with LlamaIndex for efficient document retrieval.
+
+You can create and add this ChromaDBQueryEngine to
+[DocAgent](https://docs.ag2.ai/docs/user-guide/reference-agents/docagent)
+to use.
+
+```python
+%pip install llama-index-vector-stores-chroma==0.4.1
+%pip install llama-index==0.12.16
+```
+
+### Load LLM configuration
+
+This demonstration requires an `OPENAI_API_KEY` to be in your
+environment variables. See [our
+documentation](https://docs.ag2.ai/docs/user-guide/basic-concepts/llm-configuration/llm-configuration#environment-variables)
+for guidance.
+
+```python
+import os
+
+import autogen
+
+config_list = autogen.config_list_from_json(env_or_file="../OAI_CONFIG_LIST")
+
+assert len(config_list) > 0
+print("models to use: ", [config_list[i]["model"] for i in range(len(config_list))])
+
+# Put the OpenAI API key into the environment
+os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"]
+```
+
+Refer to this
+[link](https://docs.trychroma.com/production/containers/docker) for
+running Chromadb in a Docker container. If the host and port are not
+provided, the engine will create an in-memory ChromaDB client.
+
+```python
+from autogen.agentchat.contrib.rag.chromadb_query_engine import ChromaDBQueryEngine
+
+query_engine = ChromaDBQueryEngine(
+    host="host.docker.internal",  # Change this to the IP of the ChromaDB server
+    port=8000,  # Change this to the port of the ChromaDB server
+)
+```
+
+Here we can see the default collection name in the vector store, this is
+where all documents will be ingested. When creating the
+`ChromaDBQueryEngine` you can specify a `collection_name` to ingest
+into.
+
+```python
+print(query_engine.get_collection_name())
+```
+
+Let’s ingest a document and query it.
+
+If you don’t have your documents ingested yet, follow the next two
+cells. Otherwise skip to the `connect_db` cell.
+
+`init_db` will overwrite the existing collection with the same name.
+
+```python
+input_dir = (
+    "/workspaces/ag2/test/agents/experimental/document_agent/pdf_parsed/"  # Update to match your input directory
+)
+```
+
+
+```python
+input_docs = [input_dir + "nvidia_10k_2024.md"]  # Update to match your input documents
+query_engine.init_db(new_doc_paths_or_urls=input_docs)
+```
+
+If the given collection already has the document you need, you can use
+`connect_db` to avoid overwriting the existing collection.
+
+```python
+# query_engine.connect_db()
+```
+
+
+```python
+question = "How much money did Nvidia spend in research and development"
+answer = query_engine.query(question)
+print(answer)
+```
+
+Great, we got the data we needed. Now, let’s add another document.
+
+```python
+new_docs = [input_dir + "Toast_financial_report.md"]
+query_engine.add_docs(new_doc_paths_or_urls=new_docs)
+```
+
+And query again from the same database but this time for another
+corporate entity.
+
+```python
+question = "How much money did Toast earn in 2024?"
+answer = query_engine.query(question)
+print(answer)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/Chromadb_query_engine.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

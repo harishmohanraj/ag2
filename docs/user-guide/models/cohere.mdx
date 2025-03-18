@@ -137,7 +137,7 @@ config_list = [
 
 from pathlib import Path
 
-from autogen import AssistantAgent, UserProxyAgent
+from autogen import AssistantAgent, UserProxyAgent, LLMConfig
 from autogen.coding import LocalCommandLineCodeExecutor
 
 # Setting up the code executor
@@ -168,7 +168,7 @@ IMPORTANT: Wait for the user to execute your code and then you can reply with th
 assistant_agent = AssistantAgent(
     name="Cohere Assistant",
     system_message=system_message,
-    llm_config={"config_list": config_list},
+    llm_config=LLMConfig(config_list=config_list),
 )
 
 # Start the chat, with the UserProxyAgent asking the AssistantAgent the message
@@ -216,7 +216,6 @@ User (to Cohere Assistant):
 exitcode: 0 (execution succeeded)
 Code output: 1229
 
-
 --------------------------------------------------------------------------------
 Cohere Assistant (to User):
 
@@ -258,7 +257,7 @@ chatbot = autogen.AssistantAgent(
     system_message="""For currency exchange and weather forecasting tasks,
         only use the functions you have been provided with.
         Output 'HAVE FUN!' when an answer has been provided.""",
-    llm_config={"config_list": config_list},
+    llm_config=autogen.LLMConfig(config_list=config_list),
 )
 
 # Note that we have changed the termination string to be "HAVE FUN!"
@@ -278,7 +277,6 @@ CurrencySymbol = Literal["USD", "EUR"]
 
 # Define our function that we expect to call
 
-
 def exchange_rate(base_currency: CurrencySymbol, quote_currency: CurrencySymbol) -> float:
     if base_currency == quote_currency:
         return 1.0
@@ -289,9 +287,7 @@ def exchange_rate(base_currency: CurrencySymbol, quote_currency: CurrencySymbol)
     else:
         raise ValueError(f"Unknown currencies {base_currency}, {quote_currency}")
 
-
 # Register the function with the agent
-
 
 @user_proxy.register_for_execution()
 @chatbot.register_for_llm(description="Currency exchange calculator.")
@@ -303,9 +299,7 @@ def currency_calculator(
     quote_amount = exchange_rate(base_currency, quote_currency) * base_amount
     return f"{format(quote_amount, '.2f')} {quote_currency}"
 
-
 # Weather function
-
 
 # Example function to make available to model
 def get_current_weather(location, unit="fahrenheit"):
@@ -319,9 +313,7 @@ def get_current_weather(location, unit="fahrenheit"):
     else:
         return json.dumps({"location": location, "temperature": "unknown"})
 
-
 # Register the function with the agent
-
 
 @user_proxy.register_for_execution()
 @chatbot.register_for_llm(description="Weather forecast for US cities.")

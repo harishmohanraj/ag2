@@ -8,10 +8,16 @@ title: autogen.oai.ollama.OllamaClient
 </h2>
 
 ```python
-OllamaClient()
+OllamaClient(response_format: Optional[Union[BaseModel, dict[str, Any]]] = None, **kwargs)
 ```
 
     Client for Ollama's API.<br/>Note that no api_key or environment variable is required for Ollama.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `response_format` | **Type:** Optional[Union[BaseModel, dict[str, Any]]]<br/><br/>**Default:** None |
+| `**kwargs` |  |
 
 ### Class Attributes
 

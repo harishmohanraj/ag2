@@ -1,0 +1,258 @@
+---
+sidebarTitle: LLMConfig
+title: autogen.llm_config.LLMConfig
+---
+<h2 id="autogen.llm_config.LLMConfig" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">LLMConfig</span>
+</h2>
+
+```python
+LLMConfig(**kwargs: Any)
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**kwargs` | **Type:** Any |
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### from_json
+
+```python
+from_json(
+    *,
+    env: str | None = None,
+    path: str | Path | None = None,
+    **kwargs: Any
+) -> LLMConfig
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `env` | **Type:** str \| None<br/><br/>**Default:** None |
+| `path` | **Type:** str \| pathlib.Path \| None<br/><br/>**Default:** None |
+| `**kwargs` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_current_llm_config
+
+```python
+get_current_llm_config() -> LLMConfig | None
+```
+
+    
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get
+
+```python
+get(
+    self,
+    key: str,
+    default: Any | None = None
+) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | **Type:** str |
+| `default` | **Type:** Any \| None<br/><br/>**Default:** None |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### items
+
+```python
+items(self) -> Iterable[tuple[str, Any]]
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### keys
+
+```python
+keys(self) -> Iterable[str]
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_dump
+
+```python
+model_dump(
+    self,
+    *args: Any,
+    exclude_none: bool = True,
+    **kwargs: Any
+) -> dict[str, Any]
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** Any |
+| `exclude_none` | **Type:** bool<br/><br/>**Default:** True |
+| `**kwargs` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_dump_json
+
+```python
+model_dump_json(
+    self,
+    *args: Any,
+    exclude_none: bool = True,
+    **kwargs: Any
+) -> str
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** Any |
+| `exclude_none` | **Type:** bool<br/><br/>**Default:** True |
+| `**kwargs` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_validate
+
+```python
+model_validate(
+    self,
+    *args: Any,
+    **kwargs: Any
+) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** Any |
+| `**kwargs` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_validate_json
+
+```python
+model_validate_json(
+    json_data: str | bytes | bytearray,
+    *,
+    strict: bool | None = None,
+    context: Any | None = None
+) -> Self
+```
+
+    Usage docs: https://docs.pydantic.dev/2.10/concepts/json/#json-parsing
+    
+    Validate the given JSON data against the Pydantic model.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `json_data` | The JSON data to validate.<br/><br/>**Type:** str \| bytes \| bytearray |
+| `strict` | Whether to enforce types strictly.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
+| `context` | Extra variables to pass to the validator.<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Self | The validated Pydantic model. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_validate_strings
+
+```python
+model_validate_strings(
+    obj: Any,
+    *,
+    strict: bool | None = None,
+    context: Any | None = None
+) -> Self
+```
+
+    Validate the given object with string data against the Pydantic model.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `obj` | The object containing string data to validate.<br/><br/>**Type:** Any |
+| `strict` | Whether to enforce types strictly.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
+| `context` | Extra variables to pass to the validator.<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Self | The validated Pydantic model. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### values
+
+```python
+values(self) -> Iterable[Any]
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### where
+
+```python
+where(
+    self,
+    *,
+    exclude: bool = False,
+    **kwargs: Any
+) -> LLMConfig
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `exclude` | **Type:** bool<br/><br/>**Default:** False |
+| `**kwargs` | **Type:** Any |
+
+<br />

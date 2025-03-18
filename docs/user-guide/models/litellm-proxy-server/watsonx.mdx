@@ -50,7 +50,6 @@ curl -L "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05
   \"project_id\": \"<PROJECT_ID>"}"
 ```
 
-
 With access to watsonX API’s validated you can install the python library from [here](https://ibm.github.io/watsonx-ai-python-sdk/install.html).
 
 ## Run LiteLLM as a Docker Container
@@ -87,7 +86,6 @@ docker run -v $(pwd)/litellm_config.yaml:/app/config.yaml \
 -e WATSONX_API_KEY="your_watsonx_api_key" -e WATSONX_URL="your_watsonx_url" -e WX_PROJECT_ID="your_watsonx_project_id" \
 -p 4000:4000 ghcr.io/berriai/litellm:main-latest --config /app/config.yaml --detailed_debug
 ```
-
 
 ## Initiate Chat
 To communicate with LiteLLM, configure the models in `phi1` and `phi2` and initiate a chat session.

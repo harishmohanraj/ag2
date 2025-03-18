@@ -1,0 +1,273 @@
+---
+sidebarTitle: LLMConfigEntry
+title: autogen.llm_config.LLMConfigEntry
+---
+<h2 id="autogen.llm_config.LLMConfigEntry" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">LLMConfigEntry</span>
+</h2>
+
+```python
+LLMConfigEntry(**data: Any)
+```
+
+    Usage docs: https://docs.pydantic.dev/2.10/concepts/models/
+    
+    A base class for creating Pydantic models.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### api_key
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### api_type
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### api_version
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### base_url
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### default_headers
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### http_client
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### max_tokens
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_client_cls
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### response_format
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tags
+<br />
+
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### check_base_url
+
+```python
+check_base_url(v: Any, info: ValidationInfo) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `v` | **Type:** Any |
+| `info` | **Type:** pydantic_core.core_schema.ValidationInfo |
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create_client
+
+```python
+create_client(self) -> ModelClient
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get
+
+```python
+get(
+    self,
+    key: str,
+    default: Any | None = None
+) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | **Type:** str |
+| `default` | **Type:** Any \| None<br/><br/>**Default:** None |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### items
+
+```python
+items(self) -> Iterable[tuple[str, Any]]
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### keys
+
+```python
+keys(self) -> Iterable[str]
+```
+
+    
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_dump
+
+```python
+model_dump(
+    self,
+    *args: Any,
+    exclude_none: bool = True,
+    **kwargs: Any
+) -> dict[str, Any]
+```
+
+    Usage docs: https://docs.pydantic.dev/2.10/concepts/serialization/#modelmodel_dump
+    
+    Generate a dictionary representation of the model, optionally specifying which fields to include or exclude.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** Any |
+| `exclude_none` | Whether to exclude fields that have a value of `None`.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+| `**kwargs` | **Type:** Any |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| dict[str, typing.Any] | A dictionary representation of the model. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### model_dump_json
+
+```python
+model_dump_json(
+    self,
+    *args: Any,
+    exclude_none: bool = True,
+    **kwargs: Any
+) -> str
+```
+
+    Usage docs: https://docs.pydantic.dev/2.10/concepts/serialization/#modelmodel_dump_json
+    
+    Generates a JSON representation of the model using Pydantic's `to_json` method.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` | **Type:** Any |
+| `exclude_none` | Whether to exclude fields that have a value of `None`.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+| `**kwargs` | **Type:** Any |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| str | A JSON string representation of the model. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### serialize_api_key
+
+```python
+serialize_api_key(self, v: SecretStr) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `v` | **Type:** pydantic.types.SecretStr |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### serialize_base_url
+
+```python
+serialize_base_url(self, v: Any) -> Any
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `v` | **Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### values
+
+```python
+values(self) -> Iterable[Any]
+```
+
+    
+
+<br />

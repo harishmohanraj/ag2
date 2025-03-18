@@ -42,16 +42,16 @@ from autogen import (
     SwarmResult,
     UserProxyAgent,
     initiate_swarm_chat,
-    register_hand_off
+    register_hand_off,
+    LLMConfig,
 )
 
 # Put your key in the OPENAI_API_KEY environment variable
-llm_config = {"api_type": "openai", "model": "gpt-4o-mini"}
+llm_config = LLMConfig(api_type="openai", model="gpt-4o-mini")
 ```
 
 #### Context
 With all agents in a Swarm sharing a common context as well as being able to use that context in system messages and hand-off conditions, context variables are a key component to AG2's Swarm.
-
 
 ```python
 workflow_context = {
@@ -75,7 +75,6 @@ The two workflow status keys will be used to ensure they are logged in, allowing
 Similarly, the `has_order_id`  keys will be used to ensure no hand-offs are available that require an order id.
 
 We assign this context to the Swarm when initiating it and it will be attached to all agents.
-
 
 #### Mock database
 We'll use dictionaries to mock actual databases. These will be used to validate the user based on a username (`USER_DATABASE`) and then to retrieve orders using that username to filter orders that can be queried (`ORDER_DATABSE`).
@@ -155,7 +154,6 @@ def check_order_id(order_id: str, context_variables: dict) -> SwarmResult:
             agent=order_triage_agent,
         )
 
-
 def record_order_id(order_id: str, context_variables: dict) -> SwarmResult:
     """Record the order ID in the workflow context"""
     if order_id not in ORDER_DATABASE:
@@ -170,7 +168,6 @@ def record_order_id(order_id: str, context_variables: dict) -> SwarmResult:
     return SwarmResult(
         context_variables=context_variables, values=f"Order ID Recorded: {order_id}", agent=order_mgmt_agent
     )
-
 
 # AUTHENTICATION FUNCTIONS
 def login_customer_by_username(username: str, context_variables: dict) -> SwarmResult:
@@ -282,7 +279,6 @@ order_summarizer_agent = AssistantAgent(
     llm_config=llm_config,
 )
 
-
 def extract_order_summary(recipient: AssistantAgent, messages, sender: AssistantAgent, config):
     """Extracts the order summary based on the OrderID in the context variables"""
     order_id = sender.get_context("order_id")
@@ -291,7 +287,6 @@ def extract_order_summary(recipient: AssistantAgent, messages, sender: Assistant
         return f"Order {order['order_number']} for {order['product']} is currently {order['status']}. The shipping address is {order['shipping_address']}."
     else:
         return f"Order {order_id} not found."
-
 
 nested_chat_one = {
     "carryover_config": {"summary_method": "last_msg"},
@@ -355,10 +350,8 @@ register_hand_off(
     ]
 )
 
-
 def has_order_in_context(agent: AssistantAgent, messages: List[Dict[str, Any]]) -> bool:
     return agent.get_context("has_order_id")
-
 
 register_hand_off(
     agent=order_mgmt_agent,
@@ -447,7 +440,6 @@ Arguments:
 
 Next speaker: Tool_Execution
 
-
 >>>>>>>> EXECUTING FUNCTION login_customer_by_username...
 Tool_Execution (to chat_manager):
 
@@ -533,7 +525,6 @@ Arguments:
 
 Next speaker: Tool_Execution
 
-
 >>>>>>>> EXECUTING FUNCTION check_order_id...
 
 >>>>>>>> EXECUTING FUNCTION record_order_id...
@@ -579,7 +570,6 @@ Arguments:
 
 Next speaker: Tool_Execution
 
-
 >>>>>>>> EXECUTING FUNCTION check_order_id...
 Tool_Execution (to chat_manager):
 
@@ -622,7 +612,6 @@ Arguments:
 
 Next speaker: Tool_Execution
 
-
 >>>>>>>> EXECUTING FUNCTION check_order_id...
 
 >>>>>>>> EXECUTING FUNCTION record_order_id...
@@ -659,7 +648,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: nested_chat_order_mgmt_agent_1
-
 
 ********************************************************************************
 Starting a new chat....

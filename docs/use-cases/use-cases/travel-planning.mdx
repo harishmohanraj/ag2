@@ -38,9 +38,6 @@ The following diagram outlines the key components of the Swarm, with highlights 
     ```
     **Note:** You need to have a FalkorDB graph database running. If you are running one in a Docker container, please ensure your Docker network is setup to allow access to it.
 
-
-
-
 ## Run the code
 
 ### 1. Google Maps API Key
@@ -54,7 +51,6 @@ Once you have your API key, set your environment variable `GOOGLE_MAP_API_KEY` t
 Please modify the `config_list` in the `main.py` file (line 35). Read more about configurations [here](/docs/user-guide/advanced-concepts/llm-configuration-deep-dive). This configuration will be used to set up ag2 agents.
 
 By default, FalkorDB uses OpenAI LLMs and that requires an OpenAI key in your environment variable `OPENAI_API_KEY`. We will extract the key from the configuration you set (line 49). If you are not using OpenAI in `config_list`, you may comment out the line and read from your environment variable directly.
-
 
 ### 3. Run the code
 ```bash

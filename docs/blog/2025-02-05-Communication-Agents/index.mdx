@@ -13,20 +13,20 @@ tags: [tools, tool calling, discord, slack, telegram, messaging]
 </div>
 
 <div class="blog-authors">
-  <p class="authors">Author:</p>
-  <CardGroup cols={2}>
-    <Card href="https://github.com/marklysze">
-        <div class="col card">
-          <div class="img-placeholder">
-            <img noZoom src="https://github.com/marklysze.png" />
-          </div>
-          <div>
-            <p class="name">Mark Sze</p>
-            <p>Software Engineer at AG2.ai</p>
-          </div>
-        </div>
-    </Card>
-  </CardGroup>
+<p class="authors">Author:</p>
+<CardGroup cols={2}>
+<Card href="https://github.com/marklysze">
+    <div class="col card">
+      <div class="img-placeholder">
+        <img noZoom src="https://github.com/marklysze.png" />
+      </div>
+      <div>
+        <p class="name">Mark Sze</p>
+        <p>Software Engineer at AG2.ai</p>
+      </div>
+    </div>
+</Card>
+</CardGroup>
 </div>
 
 ## Welcome DiscordAgent, SlackAgent, and TelegramAgent
@@ -173,12 +173,12 @@ We'll start with creating an equivalent [`DiscordAgent`](/docs/api-reference/aut
 from autogen import ConversableAgent # We'll build our DiscordAgent from ConversableAgent
 from autogen.agents.experimental import SlackAgent, TelegramAgent
 from autogen.tools.experimental.messageplatform import DiscordSendTool, DiscordRetrieveTool
-from autogen import GroupChatManager, GroupChat
+from autogen import GroupChatManager, GroupChat, LLMConfig
 
 # LLM Configuration
 # OpenAI GPT-4o mini for all agents
 # Put your OpenAI API key in the OPENAI_API_KEY environment key
-llm_config = {"api_type": "openai", "model": "gpt-4o-mini"}
+llm_config = LLMConfig(api_type="openai", model="gpt-4o-mini")
 ```
 
 All your tokens and identifiers, next.

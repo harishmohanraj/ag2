@@ -17,17 +17,17 @@ import autogen
 import random
 
 from autogen import (
- AfterWork,
- OnCondition,
- AfterWorkOption,
- AssistantAgent,
- SwarmResult,
- initiate_swarm_chat,
- register_hand_off
+    AfterWork,
+    OnCondition,
+    AfterWorkOption,
+    AssistantAgent,
+    SwarmResult,
+    initiate_swarm_chat,
+    register_hand_off,
+    LLMConfig,
 )
 
-config_list = autogen.config_list_from_json("<path_to_your_config_file>")
-llm_config = {"config_list": config_list}
+llm_config = LLMConfig.from_json(path="<path_to_your_config_file>")
 
 # 1. A function that returns a value of "success" and updates the context variable "1" to True
 def update_context_1(context_variables: dict) -> SwarmResult:
@@ -39,22 +39,18 @@ def transfer_to_agent_2() -> AssistantAgent:
     """Transfer to agent 2"""
     return agent_2
 
-
 # 3. A function that returns the value of "success", updates the context variable and transfers to agent 3
 def update_context_2_and_transfer_to_3(context_variables: dict) -> SwarmResult:
     context_variables["2"] = True
     return SwarmResult(value="success", context_variables=context_variables, agent=agent_3)
 
-
 # 4. A function that returns a normal value
 def get_random_number() -> str:
     return random.randint(1, 100)
 
-
 def update_context_3_with_random_number(context_variables: dict, random_number: int) -> SwarmResult:
  context_variables["3"] = random_number
     return SwarmResult(value="success", context_variables=context_variables)
-
 
 agent_1 = AssistantAgent(
     name="Agent_1",
@@ -90,7 +86,6 @@ agent_5 = AssistantAgent(
     functions=[update_context_3_with_random_number],
 )
 
-
 # 5. This is equivalent to writing a transfer function
 register_hand_off(agent=agent_3,hand_to=[OnCondition(agent_4, "Transfer to Agent 4")])
 print("Agent 3's registered hand-offs:")
@@ -98,7 +93,6 @@ print(agent_3._swarm_conditional_functions)
 
 # 6. When agent 4 replies without calling any functions, the `AfterWork` will be in effect, in this case, we transfer to agent 5
 register_hand_off(agent=agent_4,hand_to=[AfterWork(agent_5)])
-
 
 context_variables = {"1": False, "2": False, "3": False}
 chat_result, context_variables, last_agent = initiate_swarm_chat(

@@ -2,7 +2,6 @@
 title: Portkey Integration
 ---
 
-
 <img src="https://github.com/siddharthsambharia-portkey/Portkey-Product-Images/blob/main/Portkey-Autogen.png?raw=true" alt="Portkey Metrics Visualization"  />
 
 [Portkey](https://portkey.ai) is a 2-line upgrade to make your AG2 agents reliable, cost-efficient, and fast.
@@ -22,7 +21,7 @@ Portkey adds 4 core production capabilities to any AG2 agent:
    **Configure AG2 with Portkey:**
 
    ```python
-   from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
+   from autogen import AssistantAgent, UserProxyAgent
    from portkey_ai import PORTKEY_GATEWAY_URL, createHeaders
 
    config = [
@@ -50,7 +49,6 @@ import autogen
 
 # Create user proxy agent, coder, product manager
 
-
 user_proxy = autogen.UserProxyAgent(
     name="User_proxy",
     system_message="A human admin who will give the idea and run the code provided by Coder.",
@@ -58,19 +56,16 @@ user_proxy = autogen.UserProxyAgent(
     human_input_mode="ALWAYS",
 )
 
-
 coder = autogen.AssistantAgent(
     name="Coder",
     system_message = "You are a Python developer who is good at developing games. You work with Product Manager.",
-    llm_config={"config_list": config},
+    llm_config=autogen.LLMConfig(config_list=config)
 )
 
 # Create groupchat
 groupchat = autogen.GroupChat(
     agents=[user_proxy, coder], messages=[])
-manager = autogen.GroupChatManager(groupchat=groupchat, llm_config={"config_list": config})
-
-
+manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=autogen.LLMConfig(config_list=config))
 
 # Start the conversation
 user_proxy.initiate_chat(
@@ -94,12 +89,9 @@ Portkey offers a range of advanced features to enhance your AG2 agents. Here’s
 | 💾 [Smart Caching](#caching) | Reduce costs and latency with built-in caching mechanisms |
 | 🔐 [Enterprise-Grade Security](#security-and-compliance) | Set budget limits and implement fine-grained access controls |
 
-
 ## Colab Notebook
 
 For a hands-on example of integrating Portkey with AG2, check out our notebook<br /> <br />[![Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://git.new/Portkey-Autogen) .
-
-
 
 ## Advanced Features
 

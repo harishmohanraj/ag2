@@ -139,9 +139,10 @@ In the following simple example we ask the [`DocAgent`](/docs/api-reference/auto
 Note that the request is handled in natural language and the output will show the internal agents working together to understand, classify, ingest, and query.
 
 ```python
+from autogen import LLMConfig
 from autogen.agents.experimental import DocAgent
 
-llm_config = {"api_type": "openai", "model": "gpt-4o"}
+llm_config = LLMConfig(api_type="openai", model="gpt-4o")
 
 # Create our DocAgent
 document_agent = DocAgent(llm_config=llm_config)
@@ -190,7 +191,6 @@ Arguments:
 
 Next speaker: _Swarm_Tool_Executor
 
-
 >>>>>>>> EXECUTING FUNCTION initiate_tasks...
 Call ID: call_NG9mq8dtBEthy8YDsREjiRER
 Input arguments: {'ingestions': [{'path_or_url': '../test/agentchat/contrib/graph_rag/Toast_financial_report.pdf'}], 'queries': [{'query_type': 'RAG_QUERY', 'query': 'What is the fiscal year 2024 financial summary?'}], 'context_variables': {'CompletedTaskCount': 0, 'DocumentsToIngest': [], 'QueriesToRun': [], 'QueryResults': []}}
@@ -220,7 +220,6 @@ Arguments:
 
 Next speaker: _Swarm_Tool_Executor
 
-
 >>>>>>>> EXECUTING FUNCTION transfer_TaskManagerAgent_to_DoclingDocIngestAgent...
 Call ID: call_I30PrRbDngJPmidOOKutGhsa
 Input arguments: {}
@@ -234,7 +233,6 @@ Swarm agent --> DoclingDocIngestAgent
 
 Next speaker: DoclingDocIngestAgent
 
-
 >>>>>>>> USING AUTO REPLY...
 DoclingDocIngestAgent (to chat_manager):
 
@@ -246,7 +244,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: _Swarm_Tool_Executor
-
 
 >>>>>>>> EXECUTING FUNCTION data_ingest_task...
 Call ID: call_zloTpZZrxiNcvyflE0AHSjAw
@@ -292,7 +289,6 @@ Arguments:
 
 Next speaker: _Swarm_Tool_Executor
 
-
 >>>>>>>> EXECUTING FUNCTION transfer_TaskManagerAgent_to_QueryAgent...
 Call ID: call_jDHDy8MHHqvucS89X62yUpFE
 Input arguments: {}
@@ -306,7 +302,6 @@ Swarm agent --> QueryAgent
 
 Next speaker: QueryAgent
 
-
 >>>>>>>> USING AUTO REPLY...
 QueryAgent (to chat_manager):
 
@@ -318,7 +313,6 @@ Arguments:
 --------------------------------------------------------------------------------
 
 Next speaker: _Swarm_Tool_Executor
-
 
 >>>>>>>> EXECUTING FUNCTION execute_rag_query...
 Call ID: call_YFLZPfxUvG0cBqWw0dnH2keA
@@ -332,7 +326,6 @@ For the fiscal year 2024, Toast, Inc. reported total assets of $2,227 million as
 --------------------------------------------------------------------------------
 
 Next speaker: QueryAgent
-
 
 >>>>>>>> USING AUTO REPLY...
 QueryAgent (to chat_manager):
@@ -366,7 +359,6 @@ Arguments:
 
 Next speaker: _Swarm_Tool_Executor
 
-
 >>>>>>>> EXECUTING FUNCTION transfer_TaskManagerAgent_to_SummaryAgent...
 Call ID: call_3XuWepUFg5FPt6C6JtzrxbFJ
 Input arguments: {}
@@ -379,7 +371,6 @@ Swarm agent --> SummaryAgent
 --------------------------------------------------------------------------------
 
 Next speaker: SummaryAgent
-
 
 >>>>>>>> USING AUTO REPLY...
 SummaryAgent (to chat_manager):
@@ -442,7 +433,6 @@ Summary:
 | 20a | Local files, PDF and DOCX, one query to cover both | ✅ | ✅ | ✅ |
 | 20b | Follow-up query to DocAgent| N/A | ✅ | ❌ |
 
-
 ## Collections
 
 By default, [`DocAgent`](/docs/api-reference/autogen/agents/experimental/DocAgent) will ingest documents into the same collection. Every time you run the agent it will utilise this collection, enabling you to keep documents ingested across different runs.
@@ -450,9 +440,10 @@ By default, [`DocAgent`](/docs/api-reference/autogen/agents/experimental/DocAgen
 However, if you want to run multiple [`DocAgent`](/docs/api-reference/autogen/agents/experimental/DocAgent)s or want to ingest into a clean or specific vector store collection, you can use the `collection_name` parameter when creating the agent to set a unique collection name.
 
 ```python
+from autogen import LLMConfig
 from autogen.agents.experimental import DocAgent
 
-llm_config = {"api_type": "openai", "model": "gpt-4o"}
+llm_config = LLMConfig(api_type="openai", model="gpt-4o")
 
 # Create our DocAgents with their own collections
 # so that their ingested data and queries will be unique to them
