@@ -14,7 +14,7 @@ Teachability(
     path_to_db_dir: str | None = './tmp/teachable_agent_db',
     recall_threshold: float | None = 1.5,
     max_num_retrievals: int | None = 10,
-    llm_config: dict[str, Any] | bool | None = None
+    llm_config: LLMConfig | dict[str, Any] | bool | None = None
 )
 ```
 
@@ -29,9 +29,9 @@ Teachability(
 | `verbosity` | **Type:** int \| None<br/><br/>**Default:** 0 |
 | `reset_db` | **Type:** bool \| None<br/><br/>**Default:** False |
 | `path_to_db_dir` | **Type:** str \| None<br/><br/>**Default:** './tmp/teachable_agent_db' |
-| `recall_threshold` | The maximum distance for retrieved memos, where 0.0 is exact match.<br/><br/>Default 1.5. Larger values allow more (but less relevant) memos to be recalled.br/>max_num_retrievals (Optional, int): The maximum number of memos to retrieve from the DB.<br/><br/>Default 10.br/>llm_config (dict or False): llm inference configuration passed to TextAnalyzerAgent.br/> If None, TextAnalyzerAgent uses llm_config from the teachable agent.<br/><br/>**Type:** float \| None<br/><br/>**Default:** 1.5 |
+| `recall_threshold` | The maximum distance for retrieved memos, where 0.0 is exact match.<br/><br/>Default 1.5. Larger values allow more (but less relevant) memos to be recalled.br/>max_num_retrievals (Optional, int): The maximum number of memos to retrieve from the DB.<br/><br/>Default 10.br/>llm_config (LLMConfig or dict or False): llm inference configuration passed to TextAnalyzerAgent.br/> If None, TextAnalyzerAgent uses llm_config from the teachable agent.<br/><br/>**Type:** float \| None<br/><br/>**Default:** 1.5 |
 | `max_num_retrievals` | **Type:** int \| None<br/><br/>**Default:** 10 |
-| `llm_config` | **Type:** dict[str, typing.Any] \| bool \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| bool \| None<br/><br/>**Default:** None |
 
 ### Instance Methods
 

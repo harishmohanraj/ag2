@@ -10,7 +10,7 @@ title: autogen.agentchat.contrib.agent_optimizer.AgentOptimizer
 ```python
 AgentOptimizer(
     max_actions_per_step: int,
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any],
     optimizer_model: str | None = 'gpt-4-1106-preview'
 )
 ```
@@ -21,7 +21,7 @@ AgentOptimizer(
 | Name | Description |
 |--|--|
 | `max_actions_per_step` | **Type:** int |
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `optimizer_model` | **Type:** str \| None<br/><br/>**Default:** 'gpt-4-1106-preview' |
 
 ### Instance Methods

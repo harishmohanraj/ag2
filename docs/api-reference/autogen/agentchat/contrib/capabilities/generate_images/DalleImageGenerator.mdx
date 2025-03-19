@@ -9,7 +9,7 @@ title: autogen.agentchat.contrib.capabilities.generate_images.DalleImageGenerato
 
 ```python
 DalleImageGenerator(
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any],
     resolution: Literal['256x256', '512x512', '1024x1024', '1792x1024', '1024x1792'] = '1024x1024',
     quality: Literal['standard', 'hd'] = 'standard',
     num_images: int = 1
@@ -22,7 +22,7 @@ DalleImageGenerator(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `resolution` | **Type:** Literal['256x256', '512x512', '1024x1024', '1792x1024', '1024x1792']<br/><br/>**Default:** '1024x1024' |
 | `quality` | **Type:** Literal['standard', 'hd']<br/><br/>**Default:** 'standard' |
 | `num_images` | **Type:** int<br/><br/>**Default:** 1 |

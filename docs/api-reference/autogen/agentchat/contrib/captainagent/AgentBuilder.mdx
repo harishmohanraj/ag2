@@ -109,7 +109,7 @@ AgentBuilder(
 build(
     self,
     building_task: str,
-    default_llm_config: dict[str, Any],
+    default_llm_config: LLMConfig | dict[str, Any],
     coding: bool | None = None,
     code_execution_config: dict[str, Any] | None = None,
     use_oai_assistant: bool | None = False,
@@ -125,7 +125,7 @@ build(
 | Name | Description |
 |--|--|
 | `building_task` | instruction that helps build manager (gpt-4) to decide what agent should be built.<br/><br/>**Type:** str |
-| `default_llm_config` | specific configs for LLM (e.g., config_list, seed, temperature, ...).<br/><br/>**Type:** dict[str, typing.Any] |
+| `default_llm_config` | specific configs for LLM (e.g., config_list, seed, temperature, ...).<br/><br/>**Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `coding` | use to identify if the user proxy (a code interpreter) should be added.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 | `code_execution_config` | specific configs for user proxy (e.g., last_n_messages, work_dir, ...).<br/><br/>**Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `use_oai_assistant` | use OpenAI assistant api instead of self-constructed agent.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** False |
@@ -148,7 +148,7 @@ build_from_library(
     self,
     building_task: str,
     library_path_or_json: str,
-    default_llm_config: dict[str, Any],
+    default_llm_config: LLMConfig | dict[str, Any],
     top_k: int = 3,
     coding: bool | None = None,
     code_execution_config: dict[str, Any] | None = None,
@@ -166,7 +166,7 @@ build_from_library(
 |--|--|
 | `building_task` | instruction that helps build manager (gpt-4) to decide what agent should be built.<br/><br/>**Type:** str |
 | `library_path_or_json` | path or JSON string config of agent library.<br/><br/>**Type:** str |
-| `default_llm_config` | specific configs for LLM (e.g., config_list, seed, temperature, ...).<br/><br/>**Type:** dict[str, typing.Any] |
+| `default_llm_config` | specific configs for LLM (e.g., config_list, seed, temperature, ...).<br/><br/>**Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `top_k` | number of results to return.<br/><br/>**Type:** int<br/><br/>**Default:** 3 |
 | `coding` | use to identify if the user proxy (a code interpreter) should be added.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 | `code_execution_config` | specific configs for user proxy (e.g., last_n_messages, work_dir, ...).<br/><br/>**Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |

@@ -10,7 +10,7 @@ title: autogen.tools.experimental.BrowserUseTool
 ```python
 BrowserUseTool(
     *,
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any],
     browser: ForwardRef('Browser') | None = None,
     agent_kwargs: dict[str, Any] | None = None,
     browser_config: dict[str, Any] | None = None
@@ -22,7 +22,7 @@ BrowserUseTool(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `browser` | **Type:** ForwardRef('Browser') \| None<br/><br/>**Default:** None |
 | `agent_kwargs` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `browser_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |

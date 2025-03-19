@@ -10,7 +10,7 @@ title: autogen.agents.experimental.DocAgent
 ```python
 DocAgent(
     name: str | None = None,
-    llm_config: dict[str, Any] | None = None,
+    llm_config: LLMConfig | dict[str, Any] | None = None,
     system_message: str | None = None,
     parsed_docs_path: Path | str | None = None,
     collection_name: str | None = None,
@@ -24,7 +24,7 @@ DocAgent(
 | Name | Description |
 |--|--|
 | `name` | **Type:** str \| None<br/><br/>**Default:** None |
-| `llm_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `system_message` | **Type:** str \| None<br/><br/>**Default:** None |
 | `parsed_docs_path` | **Type:** pathlib.Path \| str \| None<br/><br/>**Default:** None |
 | `collection_name` | **Type:** str \| None<br/><br/>**Default:** None |

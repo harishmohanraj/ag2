@@ -7,7 +7,7 @@ title: autogen.agentchat.contrib.llava_agent.llava_call
 #### llava_call
 
 ```python
-llava_call(prompt: str, llm_config: dict) -> str
+llava_call(prompt: str, llm_config: LLMConfig | dict) -> str
 ```
 
     Makes a call to the LLaVA service to generate text based on a given prompt
@@ -16,6 +16,6 @@ llava_call(prompt: str, llm_config: dict) -> str
 | Name | Description |
 |--|--|
 | `prompt` | **Type:** str |
-| `llm_config` | **Type:** dict |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict |
 
 <br />

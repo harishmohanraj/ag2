@@ -9,7 +9,7 @@ title: autogen.tools.experimental.Crawl4AITool
 
 ```python
 Crawl4AITool(
-    llm_config: dict[str, Any] | None = None,
+    llm_config: LLMConfig | dict[str, Any] | None = None,
     extraction_model: type[BaseModel] | None = None,
     llm_strategy_kwargs: dict[str, Any] | None = None
 )
@@ -20,7 +20,7 @@ Crawl4AITool(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `extraction_model` | **Type:** type[pydantic.main.BaseModel] \| None<br/><br/>**Default:** None |
 | `llm_strategy_kwargs` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 

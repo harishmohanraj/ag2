@@ -13,7 +13,7 @@ RealtimeAgent(
     name: str,
     audio_adapter: RealtimeObserver | None = None,
     system_message: str = 'You are a helpful AI Assistant.',
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any] | None = None,
     logger: Logger | None = None,
     observers: list[RealtimeObserver] | None = None,
     **client_kwargs: Any
@@ -28,7 +28,7 @@ RealtimeAgent(
 | `name` | **Type:** str |
 | `audio_adapter` | **Type:** [RealtimeObserver](/docs/api-reference/autogen/agentchat/realtime/experimental/RealtimeObserver) \| None<br/><br/>**Default:** None |
 | `system_message` | **Type:** str<br/><br/>**Default:** 'You are a helpful AI Assistant.' |
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `logger` | **Type:** logging.Logger \| None<br/><br/>**Default:** None |
 | `observers` | **Type:** list[[RealtimeObserver](/docs/api-reference/autogen/agentchat/realtime/experimental/RealtimeObserver)] \| None<br/><br/>**Default:** None |
 | `**client_kwargs` | **Type:** Any |

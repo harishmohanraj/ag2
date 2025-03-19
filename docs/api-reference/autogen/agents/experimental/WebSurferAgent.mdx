@@ -10,8 +10,8 @@ title: autogen.agents.experimental.WebSurferAgent
 ```python
 WebSurferAgent(
     *,
-    llm_config: dict[str, Any],
-    web_tool_llm_config: dict[str, Any] | None = None,
+    llm_config: LLMConfig | dict[str, Any] | None = None,
+    web_tool_llm_config: LLMConfig | dict[str, Any] | None = None,
     web_tool: Literal['browser_use', 'crawl4ai'] = 'browser_use',
     web_tool_kwargs: dict[str, Any] | None = None,
     **kwargs: Any
@@ -23,8 +23,8 @@ WebSurferAgent(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
-| `web_tool_llm_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `web_tool_llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `web_tool` | **Type:** Literal['browser_use', 'crawl4ai']<br/><br/>**Default:** 'browser_use' |
 | `web_tool_kwargs` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `**kwargs` | **Type:** Any |

@@ -11,7 +11,7 @@ title: autogen.agentchat.contrib.captainagent.CaptainAgent
 CaptainAgent(
     name: str,
     system_message: str | None = None,
-    llm_config: dict[str, Any] | Literal[False] | None = None,
+    llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = None,
     is_termination_msg: Callable[[dict[str, Any]], bool] | None = None,
     max_consecutive_auto_reply: int | None = None,
     human_input_mode: str | None = 'NEVER',
@@ -32,7 +32,7 @@ CaptainAgent(
 |--|--|
 | `name` | **Type:** str |
 | `system_message` | **Type:** str \| None<br/><br/>**Default:** None |
-| `llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
 | `is_termination_msg` | **Type:** Callable[[dict[str, Any]], bool] \| None<br/><br/>**Default:** None |
 | `max_consecutive_auto_reply` | **Type:** int \| None<br/><br/>**Default:** None |
 | `human_input_mode` | **Type:** str \| None<br/><br/>**Default:** 'NEVER' |

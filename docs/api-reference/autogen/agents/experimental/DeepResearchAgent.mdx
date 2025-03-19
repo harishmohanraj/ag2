@@ -10,7 +10,7 @@ title: autogen.agents.experimental.DeepResearchAgent
 ```python
 DeepResearchAgent(
     name: str,
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any] | None = None,
     system_message: str | list[str] | None = 'You are a deep research agent. You have the ability to get information from the web and perform research tasks.',
     max_web_steps: int = 30,
     **kwargs: Any
@@ -23,7 +23,7 @@ DeepResearchAgent(
 | Name | Description |
 |--|--|
 | `name` | **Type:** str |
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `system_message` | **Type:** str \| list[str] \| None<br/><br/>**Default:** 'You are a deep research agent. You have the ability to get information from the web and perform research tasks.' |
 | `max_web_steps` | **Type:** int<br/><br/>**Default:** 30 |
 | `**kwargs` | **Type:** Any |

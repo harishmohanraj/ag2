@@ -17,7 +17,7 @@ CaptainUserProxyAgent(
     human_input_mode: str | None = 'NEVER',
     code_execution_config: dict[str, Any] | Literal[False] | None = None,
     default_auto_reply: str | dict[str, Any] | None = "I'm a proxy and I can only execute your tool or end the conversation. If you think the problem is solved, please reply me only with 'TERMINATE'.",
-    llm_config: dict[str, Any] | Literal[False] | None = False,
+    llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = False,
     system_message: str | list | None = '',
     description: str | None = None
 )
@@ -36,7 +36,7 @@ CaptainUserProxyAgent(
 | `human_input_mode` | **Type:** str \| None<br/><br/>**Default:** 'NEVER' |
 | `code_execution_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
 | `default_auto_reply` | **Type:** str \| dict[str, typing.Any] \| None<br/><br/>**Default:** "I'm a proxy and I can only execute your tool or end the conversation. If you think the problem is solved, please reply me only with 'TERMINATE'." |
-| `llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** False |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** False |
 | `system_message` | **Type:** str \| list \| None<br/><br/>**Default:** '' |
 | `description` | **Type:** str \| None<br/><br/>**Default:** None |
 

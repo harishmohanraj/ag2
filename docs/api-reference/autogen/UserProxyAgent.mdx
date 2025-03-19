@@ -16,7 +16,7 @@ UserProxyAgent(
     function_map: dict[str, Callable[..., Any]] | None = None,
     code_execution_config: dict[str, Any] | Literal[False] = {},
     default_auto_reply: str | dict[str, Any] | None = '',
-    llm_config: dict[str, Any] | Literal[False] | None = False,
+    llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = False,
     system_message: str | list[str] | None = '',
     description: str | None = None,
     **kwargs: Any
@@ -37,7 +37,7 @@ UserProxyAgent(
 | `function_map` | **Type:** dict[str, typing.Callable[..., typing.Any]] \| None<br/><br/>**Default:** None |
 | `code_execution_config` | **Type:** dict[str, typing.Any] \| Literal[False]<br/><br/>**Default:** \{} |
 | `default_auto_reply` | **Type:** str \| dict[str, typing.Any] \| None<br/><br/>**Default:** '' |
-| `llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** False |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** False |
 | `system_message` | **Type:** str \| list[str] \| None<br/><br/>**Default:** '' |
 | `description` | **Type:** str \| None<br/><br/>**Default:** None |
 | `**kwargs` | Please refer to other kwargs in [ConversableAgent](/docs/api-reference/autogen/ConversableAgent#conversableagent).<br/><br/>**Type:** Any |

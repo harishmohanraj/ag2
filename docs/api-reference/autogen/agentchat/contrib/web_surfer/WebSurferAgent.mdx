@@ -10,15 +10,15 @@ title: autogen.agentchat.contrib.web_surfer.WebSurferAgent
 ```python
 WebSurferAgent(
     name: str,
-    system_message: str | list[str] | None = "You are a helpful AI assistant with access to a web browser (via the provided functions). In fact, YOU ARE THE ONLY MEMBER OF YOUR PARTY WITH ACCESS TO A WEB BROWSER, so please help out where you can by performing web searches, navigating pages, and reporting what you find. Today's date is 2025-03-18",
+    system_message: str | list[str] | None = "You are a helpful AI assistant with access to a web browser (via the provided functions). In fact, YOU ARE THE ONLY MEMBER OF YOUR PARTY WITH ACCESS TO A WEB BROWSER, so please help out where you can by performing web searches, navigating pages, and reporting what you find. Today's date is 2025-03-19",
     description: str | None = 'A helpful assistant with access to a web browser. Ask them to perform web searches, open pages, navigate to Wikipedia, answer questions from pages, and or generate summaries.',
     is_termination_msg: Callable[[dict[str, Any]], bool] | None = None,
     max_consecutive_auto_reply: int | None = None,
     human_input_mode: Literal['ALWAYS', 'NEVER', 'TERMINATE'] = 'TERMINATE',
     function_map: dict[str, Callable[..., Any]] | None = None,
     code_execution_config: dict[str, Any] | Literal[False] = False,
-    llm_config: dict[str, Any] | Literal[False] | None = None,
-    summarizer_llm_config: dict[str, Any] | Literal[False] | None = None,
+    llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = None,
+    summarizer_llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = None,
     default_auto_reply: str | dict[str, Any] | None = '',
     browser_config: dict[str, Any] | None = None,
     **kwargs: Any
@@ -31,15 +31,15 @@ WebSurferAgent(
 | Name | Description |
 |--|--|
 | `name` | **Type:** str |
-| `system_message` | **Type:** str \| list[str] \| None<br/><br/>**Default:** "You are a helpful AI assistant with access to a web browser (via the provided functions). In fact, YOU ARE THE ONLY MEMBER OF YOUR PARTY WITH ACCESS TO A WEB BROWSER, so please help out where you can by performing web searches, navigating pages, and reporting what you find. Today's date is 2025-03-18" |
+| `system_message` | **Type:** str \| list[str] \| None<br/><br/>**Default:** "You are a helpful AI assistant with access to a web browser (via the provided functions). In fact, YOU ARE THE ONLY MEMBER OF YOUR PARTY WITH ACCESS TO A WEB BROWSER, so please help out where you can by performing web searches, navigating pages, and reporting what you find. Today's date is 2025-03-19" |
 | `description` | **Type:** str \| None<br/><br/>**Default:** 'A helpful assistant with access to a web browser. Ask them to perform web searches, open pages, navigate to Wikipedia, answer questions from pages, and or generate summaries.' |
 | `is_termination_msg` | **Type:** Callable[[dict[str, Any]], bool] \| None<br/><br/>**Default:** None |
 | `max_consecutive_auto_reply` | **Type:** int \| None<br/><br/>**Default:** None |
 | `human_input_mode` | **Type:** Literal['ALWAYS', 'NEVER', 'TERMINATE']<br/><br/>**Default:** 'TERMINATE' |
 | `function_map` | **Type:** dict[str, typing.Callable[..., typing.Any]] \| None<br/><br/>**Default:** None |
 | `code_execution_config` | **Type:** dict[str, typing.Any] \| Literal[False]<br/><br/>**Default:** False |
-| `llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
-| `summarizer_llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
+| `summarizer_llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
 | `default_auto_reply` | **Type:** str \| dict[str, typing.Any] \| None<br/><br/>**Default:** '' |
 | `browser_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `**kwargs` | **Type:** Any |

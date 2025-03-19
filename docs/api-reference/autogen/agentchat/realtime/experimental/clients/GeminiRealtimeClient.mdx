@@ -10,7 +10,7 @@ title: autogen.agentchat.realtime.experimental.clients.GeminiRealtimeClient
 ```python
 GeminiRealtimeClient(
     *,
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any],
     logger: Logger | None = None
 )
 ```
@@ -20,7 +20,7 @@ GeminiRealtimeClient(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `logger` | **Type:** logging.Logger \| None<br/><br/>**Default:** None |
 
 ### Static Methods
@@ -30,7 +30,7 @@ GeminiRealtimeClient(
 
 ```python
 get_factory(
-    llm_config: dict[str, Any],
+    llm_config: LLMConfig | dict[str, Any],
     logger: Logger,
     **kwargs: Any
 ) -> 
@@ -41,7 +41,7 @@ get_factory(
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | The LLM config for the client.<br/><br/>**Type:** dict[str, typing.Any] |
+| `llm_config` | The LLM config for the client.<br/><br/>**Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `logger` | The logger for the client.<br/><br/>**Type:** logging.Logger |
 | `**kwargs` | Additional arguments.<br/><br/>**Type:** Any |
 

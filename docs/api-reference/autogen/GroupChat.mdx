@@ -28,7 +28,7 @@ GroupChat(
     select_speaker_transform_messages: TransformMessages | None = None,
     select_speaker_auto_verbose: bool | None = False,
     select_speaker_auto_model_client_cls: ModelClient | list[ModelClient] | None = None,
-    select_speaker_auto_llm_config: dict[str, Any] | Literal[False] | None = None,
+    select_speaker_auto_llm_config: LLMConfig | dict[str, Any] | Literal[False] | None = None,
     role_for_select_speaker_messages: str | None = 'system'
 )
 ```
@@ -82,7 +82,7 @@ GroupChat(
 | `select_speaker_transform_messages` | **Type:** [TransformMessages](/docs/api-reference/autogen/agentchat/contrib/capabilities/transform_messages/TransformMessages) \| None<br/><br/>**Default:** None |
 | `select_speaker_auto_verbose` | **Type:** bool \| None<br/><br/>**Default:** False |
 | `select_speaker_auto_model_client_cls` | **Type:** [ModelClient](/docs/api-reference/autogen/ModelClient) \| list[[ModelClient](/docs/api-reference/autogen/ModelClient)] \| None<br/><br/>**Default:** None |
-| `select_speaker_auto_llm_config` | **Type:** dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
+| `select_speaker_auto_llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| Literal[False] \| None<br/><br/>**Default:** None |
 | `role_for_select_speaker_messages` | **Type:** str \| None<br/><br/>**Default:** 'system' |
 
 ### Class Attributes

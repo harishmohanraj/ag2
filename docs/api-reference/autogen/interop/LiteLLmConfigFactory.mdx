@@ -52,7 +52,7 @@ create(first_llm_config: dict[str, Any]) -> dict[str, Any]
 #### create_lite_llm_config
 
 ```python
-create_lite_llm_config(llm_config: dict[str, Any]) -> dict[str, Any]
+create_lite_llm_config(llm_config: LLMConfig | dict[str, Any]) -> dict[str, Any]
 ```
 
     
@@ -60,7 +60,7 @@ create_lite_llm_config(llm_config: dict[str, Any]) -> dict[str, Any]
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 
 <br />
 

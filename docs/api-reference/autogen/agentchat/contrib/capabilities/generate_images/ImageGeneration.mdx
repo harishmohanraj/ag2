@@ -11,7 +11,7 @@ title: autogen.agentchat.contrib.capabilities.generate_images.ImageGeneration
 ImageGeneration(
     image_generator: ImageGenerator,
     cache: AbstractCache | None = None,
-    text_analyzer_llm_config: dict[str, Any] | None = None,
+    text_analyzer_llm_config: LLMConfig | dict[str, Any] | None = None,
     text_analyzer_instructions: str = 'In detail, please summarize the provided prompt to generate the image described in the TEXT.\nDO NOT include any advice. RESPOND like the following example:\nEXAMPLE: Blue background, 3D shapes, ...\n',
     verbosity: int = 0,
     register_reply_position: int = 2
@@ -41,7 +41,7 @@ ImageGeneration(
 |--|--|
 | `image_generator` | **Type:** [ImageGenerator](/docs/api-reference/autogen/agentchat/contrib/capabilities/generate_images/ImageGenerator) |
 | `cache` | **Type:** [AbstractCache](/docs/api-reference/autogen/cache/AbstractCache) \| None<br/><br/>**Default:** None |
-| `text_analyzer_llm_config` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `text_analyzer_llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `text_analyzer_instructions` | **Type:** str<br/><br/>**Default:** 'In detail, please summarize the provided prompt to generate the image described in the TEXT.\nDO NOT include any advice. RESPOND like the following example |
 | `verbosity` | The verbosity level.<br/><br/>Defaults to 0 and must be greater than or equal to 0. The text analyzer llm calls will be silent if verbosity is less than 2.br/>register_reply_position (int): The position of the reply function in the agent's list of reply functions.br/> This capability registers a new reply function to handle messages with image generation requests.br/> Defaults to 2 to place it after the check termination and human reply for a ConversableAgent.<br/><br/>**Type:** int<br/><br/>**Default:** 0 |
 | `register_reply_position` | **Type:** int<br/><br/>**Default:** 2 |

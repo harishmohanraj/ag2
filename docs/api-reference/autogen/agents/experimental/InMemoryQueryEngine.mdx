@@ -8,7 +8,7 @@ title: autogen.agents.experimental.InMemoryQueryEngine
 </h2>
 
 ```python
-InMemoryQueryEngine(llm_config: dict[str, Any])
+InMemoryQueryEngine(llm_config: LLMConfig | dict[str, Any])
 ```
 
     This engine stores ingested documents in memory and then injects them into an internal agent's system message for answering queries.<br/>This implements the autogen.agentchat.contrib.rag.RAGQueryEngine protocol.
@@ -16,7 +16,7 @@ InMemoryQueryEngine(llm_config: dict[str, Any])
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 
 ### Instance Methods
 

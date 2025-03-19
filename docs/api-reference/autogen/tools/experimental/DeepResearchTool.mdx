@@ -8,7 +8,7 @@ title: autogen.tools.experimental.DeepResearchTool
 </h2>
 
 ```python
-DeepResearchTool(llm_config: dict[str, Any], max_web_steps: int = 30)
+DeepResearchTool(llm_config: LLMConfig | dict[str, Any], max_web_steps: int = 30)
 ```
 
     A tool that delegates a web research task to the subteams of agents.<br/>Initialize the DeepResearchTool.<br/>
@@ -16,7 +16,7 @@ DeepResearchTool(llm_config: dict[str, Any], max_web_steps: int = 30)
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `llm_config` | **Type:** dict[str, typing.Any] |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] |
 | `max_web_steps` | **Type:** int<br/><br/>**Default:** 30 |
 
 ### Class Attributes
