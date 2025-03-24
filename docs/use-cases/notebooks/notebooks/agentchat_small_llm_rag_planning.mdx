@@ -321,14 +321,14 @@ max_plan_steps = 6
 Initializes the LLM config and all of the agents of the workflow.
 
 ```python
-from autogen import ConversableAgent, coding
+from autogen import ConversableAgent, LLMConfig, coding
 
 ##################
 # AG2 Config
 ##################
 # LLM Config
-llm_config = {
-    "config_list": [
+llm_config = LLMConfig(
+    config_list=[
         {
             "model": default_model,
             "client_host": base_url,
@@ -337,8 +337,8 @@ llm_config = {
             "price": [0.0, 0.0],
         }
     ],
-    "temperature": model_temp,
-}
+    temperature=model_temp,
+)
 
 # Generic Assistant - Used for general inquiry. Does not call tools.
 generic_assistant = ConversableAgent(name="Generic_Assistant", llm_config=llm_config, human_input_mode="NEVER")

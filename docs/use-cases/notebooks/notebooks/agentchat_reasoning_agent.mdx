@@ -58,27 +58,29 @@ the reasoning space:
 1.  **Thinker Agent**: Generates potential next steps in the reasoning
     process
 2.  **Grader Agent**: Evaluates the quality of each reasoning step
-3.  **Code Execution**: a child user agent will execute code
+3.  **Interim Execution**: Option to execute the selected steps,
+    enabling stepwise reasoning.
+4.  **Code Execution**: a child user agent will execute code
     automatically during reasoning
-4.  **Tree Structure**: Organizes thoughts hierarchically for systematic
+5.  **Tree Structure**: Organizes thoughts hierarchically for systematic
     exploration
-5.  **Visualization Tools**: Built-in Graphviz support for analyzing
+6.  **Visualization Tools**: Built-in Graphviz support for analyzing
     reasoning paths
-6.  **Logging Features**: Log and save thinking trajectories to finetune
+7.  **Logging Features**: Log and save thinking trajectories to finetune
     the language model
-7.  **Configuration Options**: The agent is highly configurable through
+8.  **Configuration Options**: The agent is highly configurable through
     a single `reason_config` dictionary
 
 ```python
 import os
 import random
 
-from autogen import AssistantAgent, ThinkNode, UserProxyAgent
+from autogen import AssistantAgent, LLMConfig, ThinkNode, UserProxyAgent
 from autogen.agents.experimental import ReasoningAgent
 
 api_key = os.environ.get("OPENAI_API_KEY")
 
-config_list = [{"model": "gpt-4o-mini", "api_key": api_key}]
+llm_config = LLMConfig(config_list=[{"model": "gpt-4o-mini", "api_key": api_key}])
 
 question = "What is the expected maximum dice value if you can roll a 6-sided dice three times?"
 random.seed(1)  # setup seed for reproducibility
@@ -124,11 +126,15 @@ Note: The effectiveness depends on the underlying model’s training.
 Models not specifically trained for step-by-step reasoning may show
 limited improvement with this approach.
 
+Note 2: To enable the execution of each selected step before generating
+the next step suggestions, pass `"interim_execution": True` in
+reason_config.
+
 ```python
 reason_agent = ReasoningAgent(
     name="reason_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     reason_config={"method": "dfs", "max_depth": 3},  # Using DFS
     silent=False,
     # NOTE: it is equivalent to use beam size 1 for O1-style reasoning
@@ -177,7 +183,7 @@ intermediate evaluations are critical to the final outcome.
 ```python
 reason_agent = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     reason_config={"method": "beam_search", "beam_size": 3, "max_depth": 3},
 )
 user_proxy = UserProxyAgent(
@@ -216,7 +222,7 @@ advantages over beam search when:
 mcts_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "mcts", "nsim": 5, "max_depth": 4},
 )
@@ -255,7 +261,7 @@ define the agent using the LATS approach as follows.
 lats_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "lats", "nsim": 5, "max_depth": 4},
 )
@@ -288,13 +294,12 @@ specified configuration from the `config_list`, separate from the main
 `llm_config`.
 
 ```python
-grader_config_list = [{"model": "gpt-4o-mini", "api_key": api_key}]
+grader_llm_config = LLMConfig(config_list=[{"model": "gpt-4o-mini", "api_key": api_key}])
 
-grader_llm_config = {"config_list": grader_config_list}
 
 writer = AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     system_message="""
     You are a professional writer, known for your insightful and engaging articles.
     You transform complex concepts into compelling narratives.
@@ -303,7 +308,7 @@ writer = AssistantAgent(
 )
 reason_agent_for_writer = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     grader_llm_config=grader_llm_config,
     reason_config={"method": "lats", "nsim": 2, "max_depth": 3},
 )
@@ -363,7 +368,7 @@ reasoning.
 lats_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     reason_config={"method": "lats", "nsim": 5, "max_depth": 4},
     code_execution_config={"use_docker": False, "work_dir": "mypy_cache"},
     # Enable Code execution. We skip docker here for simplicity
@@ -424,7 +429,7 @@ minutes).
 ```python
 writer = AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     system_message="""
     You are a professional writer, known for your insightful and engaging articles.
     You transform complex concepts into compelling narratives.
@@ -433,7 +438,7 @@ writer = AssistantAgent(
 )
 reason_agent_for_writer = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     reason_config={"method": "lats", "nsim": 2, "max_depth": 3},
 )
 
@@ -478,13 +483,11 @@ specified configuration from the `config_list`, separate from the main
 `llm_config`.
 
 ```python
-grader_config_list = [{"model": "gpt-4o-mini", "api_key": api_key}]
-
-grader_llm_config = {"config_list": grader_config_list}
+grader_llm_config = LLMConfig(config_list=[{"model": "gpt-4o-mini", "api_key": api_key}])
 
 writer = AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     system_message="""
     You are a professional writer, known for your insightful and engaging articles.
     You transform complex concepts into compelling narratives.
@@ -493,7 +496,7 @@ writer = AssistantAgent(
 )
 reason_agent_for_writer = ReasoningAgent(
     name="reason_agent",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     grader_llm_config=grader_llm_config,
     reason_config={"method": "lats", "nsim": 2, "max_depth": 3},
 )
@@ -560,7 +563,7 @@ random.seed(1)  # setup seed for reproducibility
 mcts_agent2 = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "mcts", "nsim": 5, "max_depth": 4},
 )
@@ -593,7 +596,7 @@ reasoning processes, we can aggregate them to form our final answer.
 forest_agent = ReasoningAgent(
     name="mcts_agent",
     system_message="answer math questions",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     # setup small depth and simulations for conciseness.
     reason_config={"method": "dfs", "max_depth": 4, "forest_size": 3},
 )

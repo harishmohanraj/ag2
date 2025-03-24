@@ -56,10 +56,10 @@ out and execute code changes, and a user proxy Admin agent, through
 which we will guide our Engineer.
 
 ```python
-llm_config = {
-    "temperature": 0,
-    "config_list": config_list,
-}
+llm_config = autogen.LLMConfig(
+    temperature=0,
+    config_list=config_list,
+)
 
 engineer = autogen.AssistantAgent(
     name="Engineer",

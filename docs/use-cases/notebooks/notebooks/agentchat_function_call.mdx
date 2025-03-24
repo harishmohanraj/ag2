@@ -60,10 +60,9 @@ from IPython import get_ipython
 import autogen
 from autogen.cache import Cache
 
-config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={"tags": ["tool"]},  # comment out to get all
-)
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", timeout=120).where(
+    tags=["tool"]
+)  # comment out where to get all
 ```
 
 It first looks for environment variable “OAI_CONFIG_LIST” which needs to
@@ -117,10 +116,6 @@ config for the `AssistantAgent`. Then we register the functions in
 `UserProxyAgent`.
 
 ```python
-llm_config = {
-    "config_list": config_list,
-    "timeout": 120,
-}
 chatbot = autogen.AssistantAgent(
     name="chatbot",
     system_message="For coding tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done.",

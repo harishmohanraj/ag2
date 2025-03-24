@@ -35,12 +35,11 @@ import os
 
 import autogen
 
-config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={"tags": ["gpt-3.5-turbo"]},  # comment out to get all
-)
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", temperature=0).where(
+    tags=["gpt-3.5-turbo"]
+)  # comment out where to get all
 # When using a single openai endpoint, you can use the following:
-# config_list = [{"model": "gpt-3.5-turbo", "api_key": os.getenv("OPENAI_API_KEY")}]
+# llm_config = autogen.LLMConfig(config_list=[{"model": "gpt-3.5-turbo", "api_key": os.getenv("OPENAI_API_KEY")}])
 ```
 
 ## Set Llamaindex
@@ -82,11 +81,6 @@ fecting data from wikipedia and a user proxy agent.
 
 ```python
 from autogen.agentchat.contrib.llamaindex_conversable_agent import LLamaIndexConversableAgent
-
-llm_config = {
-    "temperature": 0,
-    "config_list": config_list,
-}
 
 trip_assistant = LLamaIndexConversableAgent(
     "trip_specialist",

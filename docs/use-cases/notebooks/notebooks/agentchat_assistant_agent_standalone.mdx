@@ -76,23 +76,14 @@ nest_asyncio.apply()
 ## Set your API Endpoint
 
 The
-[`config_list_from_json`](https://docs.ag2.ai/docs/api-reference/autogen/config_list_from_json#config-list-from-json)
-function loads a list of configurations from an environment variable or
-a JSON file.
+[`LLMConfig.from_json`](https://docs.ag2.ai/docs/api-reference/autogen/config_list_from_json#config-list-from-json)
+method loads a list of configurations from an environment variable or a
+JSON file.
 
 ```python
-config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "tags": ["gpt-4o-mini"],
-    },
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", temperature=0.8, timeout=600).where(
+    tags=["gpt-4o-mini"]
 )
-
-llm_config = {
-    "timeout": 600,
-    "config_list": config_list,
-    "temperature": 0.8,
-}
 ```
 
 # Configure your assistant agent

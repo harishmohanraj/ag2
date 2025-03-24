@@ -40,8 +40,7 @@ guide](../../../../docs/user-guide/basic-concepts/installing-ag2).
 ```python
 import autogen
 
-config_list = autogen.config_list_from_json(env_or_file="OAI_CONFIG_LIST")
-llm_config = {"config_list": config_list}
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST")
 ```
 
 
@@ -238,13 +237,13 @@ user_proxy = autogen.UserProxyAgent(
 
 research_assistant = autogen.AssistantAgent(
     name="Researcher",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     is_termination_msg=lambda x: x.get("content", "") and x.get("content", "").rstrip().endswith("TERMINATE"),
 )
 
 writer = autogen.AssistantAgent(
     name="Writer",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     system_message="""
     You are a professional writer, known for
     your insightful and engaging articles.
@@ -258,7 +257,7 @@ critic = autogen.AssistantAgent(
     system_message="""Critic. Double check plan, claims, code from other agents and provide feedback. Check whether the plan includes adding verifiable info such as source URL.
     Reply "TERMINATE" in the end when everything is done.
     """,
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
 )
 
 groupchat_1 = autogen.GroupChat(agents=[user_proxy, research_assistant, critic], messages=[], max_round=50)
@@ -268,7 +267,7 @@ groupchat_2 = autogen.GroupChat(agents=[user_proxy, writer, critic], messages=[]
 manager_1 = autogen.GroupChatManager(
     groupchat=groupchat_1,
     name="Research_manager",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
     code_execution_config={
         "last_n_messages": 1,
@@ -279,7 +278,7 @@ manager_1 = autogen.GroupChatManager(
 manager_2 = autogen.GroupChatManager(
     groupchat=groupchat_2,
     name="Writing_manager",
-    llm_config={"config_list": config_list},
+    llm_config=llm_config,
     is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,
     code_execution_config={
         "last_n_messages": 1,

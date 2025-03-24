@@ -42,52 +42,48 @@ AG2 requires `Python>=3.9`.
 ```python
 import json
 
-from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
+from autogen import AssistantAgent, LLMConfig, UserProxyAgent
 from autogen.code_utils import execute_code
 
-config_list = config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        # Function calling with GPT 3.5
-        "model": ["gpt-3.5-turbo-16k-0613"],
-    },
-)
-llm_config = {
-    "functions": [
-        {
-            "name": "define_function",
-            "description": "Define a function to add to the context of the conversation. Necessary Python packages must be declared. Once defined, the assistant may decide to use this function, respond with a normal message.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the function to define.",
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "A short description of the function.",
-                    },
-                    "arguments": {
-                        "type": "string",
-                        "description": 'JSON schema of arguments encoded as a string. For example: { "url": { "type": "string", "description": "The URL", }}',
-                    },
-                    "packages": {
-                        "type": "string",
-                        "description": "A list of package names imported by the function, and that need to be installed with pip prior to invoking the function. This solves ModuleNotFoundError.",
-                    },
-                    "code": {
-                        "type": "string",
-                        "description": "The implementation in Python. Do not include the function declaration.",
-                    },
+functions = [
+    {
+        "name": "define_function",
+        "description": "Define a function to add to the context of the conversation. Necessary Python packages must be declared. Once defined, the assistant may decide to use this function, respond with a normal message.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the function to define.",
                 },
-                "required": ["name", "description", "arguments", "packages", "code"],
+                "description": {
+                    "type": "string",
+                    "description": "A short description of the function.",
+                },
+                "arguments": {
+                    "type": "string",
+                    "description": 'JSON schema of arguments encoded as a string. For example: { "url": { "type": "string", "description": "The URL", }}',
+                },
+                "packages": {
+                    "type": "string",
+                    "description": "A list of package names imported by the function, and that need to be installed with pip prior to invoking the function. This solves ModuleNotFoundError.",
+                },
+                "code": {
+                    "type": "string",
+                    "description": "The implementation in Python. Do not include the function declaration.",
+                },
             },
+            "required": ["name", "description", "arguments", "packages", "code"],
         },
-    ],
-    "config_list": config_list,
-    "request_timeout": 120,
-}
+    },
+]
+
+
+llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST", functions=functions, timeout=120).where(
+    model=[
+        "gpt-3.5-turbo-16k-0613",
+    ]
+)
 
 
 def define_function(name, description, arguments, packages, code):

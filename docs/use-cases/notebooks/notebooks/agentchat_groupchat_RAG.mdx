@@ -51,9 +51,9 @@ import autogen
 from autogen import AssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 
-config_list = autogen.config_list_from_json("OAI_CONFIG_LIST")
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", timeout=60, temperature=0.8, seed=1234)
 
-print("LLM models: ", [config_list[i]["model"] for i in range(len(config_list))])
+print("LLM models: ", [x.model for x in llm_config.config_list])
 ```
 
 
@@ -70,8 +70,6 @@ Learn more about configuring LLMs for agents [here](/docs/topics/llm_configurati
 def termination_msg(x):
     return isinstance(x, dict) and str(x.get("content", ""))[-9:].upper() == "TERMINATE"
 
-
-llm_config = {"config_list": config_list, "timeout": 60, "temperature": 0.8, "seed": 1234}
 
 boss = autogen.UserProxyAgent(
     name="Boss",
@@ -92,7 +90,7 @@ boss_aid = RetrieveUserProxyAgent(
         "task": "code",
         "docs_path": "https://raw.githubusercontent.com/microsoft/FLAML/main/website/docs/Examples/Integrate%20-%20Spark.md",
         "chunk_token_size": 1000,
-        "model": config_list[0]["model"],
+        "model": llm_config.config_list[0].model,
         "collection_name": "groupchat",
         "get_or_create": True,
     },

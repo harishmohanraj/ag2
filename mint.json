@@ -1776,7 +1776,9 @@
                     "docs/api-reference/autogen/oai/anthropic/overview",
                     "docs/api-reference/autogen/oai/anthropic/AnthropicClient",
                     "docs/api-reference/autogen/oai/anthropic/AnthropicLLMConfigEntry",
-                    "docs/api-reference/autogen/oai/anthropic/oai_messages_to_anthropic_messages"
+                    "docs/api-reference/autogen/oai/anthropic/oai_messages_to_anthropic_messages",
+                    "docs/api-reference/autogen/oai/anthropic/process_image_content",
+                    "docs/api-reference/autogen/oai/anthropic/process_message_content"
                   ]
                 },
                 {
@@ -2057,7 +2059,8 @@
                       "group": "browser_use",
                       "pages": [
                         "docs/api-reference/autogen/tools/experimental/browser_use/overview",
-                        "docs/api-reference/autogen/tools/experimental/browser_use/BrowserUseResult"
+                        "docs/api-reference/autogen/tools/experimental/browser_use/BrowserUseResult",
+                        "docs/api-reference/autogen/tools/experimental/browser_use/ExtractedContent"
                       ]
                     }
                   ]

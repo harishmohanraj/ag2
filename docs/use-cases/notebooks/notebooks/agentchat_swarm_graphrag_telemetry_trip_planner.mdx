@@ -169,11 +169,10 @@ import os
 
 import autogen
 
-config_list = autogen.config_list_from_json(env_or_file="OAI_CONFIG_LIST", filter_dict={"model": ["gpt-4o"]})
-llm_config = {"config_list": config_list, "timeout": 120}
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", timeout=120).where(tags=["gpt-4o"])
 
 # Put the OpenAI API key into the environment using the config_list or env variable
-# os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"]
+# os.environ["OPENAI_API_KEY"] = llm_config.config_list[0].api_key
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 ```
 
@@ -358,7 +357,6 @@ query_engine.init_db(input_doc=input_documents)
 
 ```python
 # IMPORTS
-import copy
 import json
 import os
 from typing import Any, Dict
@@ -567,14 +565,15 @@ graph_rag_capability = FalkorGraphRagCapability(query_engine)
 graph_rag_capability.add_to_agent(graphrag_agent)
 
 # Structured Output agent, formatting the itinerary into a structured format through the response_format on the LLM Configuration
-structured_config_list = copy.deepcopy(config_list)
-for config in structured_config_list:
-    config["response_format"] = Itinerary
+structured_llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", timeout=120).where(tags=["gpt-4o"])
+
+for config in structured_llm_config.config_list:
+    config.response_format = Itinerary
 
 structured_output_agent = ConversableAgent(
     name="structured_output_agent",
     system_message="You are a data formatting agent, format the provided itinerary in the context below into the provided format.",
-    llm_config={"config_list": structured_config_list, "timeout": 120},
+    llm_config=structured_llm_config,
     functions=[create_structured_itinerary],
 )
 

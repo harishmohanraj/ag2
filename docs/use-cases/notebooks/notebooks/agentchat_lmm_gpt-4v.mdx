@@ -45,7 +45,7 @@ import numpy as np
 from PIL import Image
 
 import autogen
-from autogen import Agent, AssistantAgent, ConversableAgent, UserProxyAgent
+from autogen import Agent, AssistantAgent, ConversableAgent, LLMConfig, UserProxyAgent
 from autogen.agentchat.contrib.capabilities.vision_capability import VisionCapability
 from autogen.agentchat.contrib.img_utils import pil_to_data_uri
 from autogen.agentchat.contrib.multimodal_conversable_agent import MultimodalConversableAgent
@@ -66,22 +66,14 @@ This allows you to interact with LMM in a multi-round dialogue, enabling
 you to provide feedback as the conversation unfolds.
 
 ```python
-config_list_4v = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4-vision-preview"],
-    },
+llm_config_4v = LLMConfig.from_json(path="OAI_CONFIG_LIST", temperature=0.5, max_tokens=300).where(
+    model=["gpt-4-vision-preview"]
 )
 
 
-config_list_gpt4 = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
-    },
+gpt4_llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST", cache_seed=42).where(
+    model=["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"]
 )
-
-gpt4_llm_config = {"config_list": config_list_gpt4, "cache_seed": 42}
 ```
 
 Learn more about configuring LLMs for agents
@@ -91,7 +83,7 @@ Learn more about configuring LLMs for agents
 image_agent = MultimodalConversableAgent(
     name="image-explainer",
     max_consecutive_auto_reply=10,
-    llm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300},
+    llm_config=llm_config_4v,
 )
 
 user_proxy = autogen.UserProxyAgent(
@@ -184,7 +176,7 @@ class FigureCreator(ConversableAgent):
             system_message="""Criticize the input figure. How to replot the figure so it will be better? Find bugs and issues for the figure.
             Pay attention to the color, format, and presentation. Keep in mind of the reader-friendliness.
             If you think the figures is good enough, then simply say NO_ISSUES""",
-            llm_config={"config_list": config_list_4v, "max_tokens": 300},
+            llm_config=llm_config_4v,
             human_input_mode="NEVER",
             max_consecutive_auto_reply=1,
             #     use_docker=False,
@@ -259,13 +251,13 @@ can organize and understand images better.
 agent1 = MultimodalConversableAgent(
     name="image-explainer-1",
     max_consecutive_auto_reply=10,
-    llm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300},
+    llm_config=llm_config_4v,
     system_message="Your image description is poetic and engaging.",
 )
 agent2 = MultimodalConversableAgent(
     name="image-explainer-2",
     max_consecutive_auto_reply=10,
-    llm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300},
+    llm_config=llm_config_4v,
     system_message="Your image description is factual and to the point.",
 )
 
@@ -282,7 +274,7 @@ user_proxy = autogen.UserProxyAgent(
 # We set max_round to 5
 groupchat = autogen.GroupChat(agents=[agent1, agent2, user_proxy], messages=[], max_round=5)
 
-vision_capability = VisionCapability(lmm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300})
+vision_capability = VisionCapability(lmm_config=llm_config_4v)
 group_chat_manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=gpt4_llm_config)
 vision_capability.add_to_agent(group_chat_manager)
 
@@ -303,7 +295,7 @@ example.
 agent_no_vision = AssistantAgent(name="Regular LLM Agent", llm_config=gpt4_llm_config)
 
 agent_with_vision = AssistantAgent(name="Regular LLM Agent with Vision Capability", llm_config=gpt4_llm_config)
-vision_capability = VisionCapability(lmm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300})
+vision_capability = VisionCapability(lmm_config=llm_config_4v)
 vision_capability.add_to_agent(agent_with_vision)
 
 
@@ -406,7 +398,7 @@ agent_with_vision_and_func = AssistantAgent(
 )
 
 vision_capability_with_func = VisionCapability(
-    lmm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300},
+    lmm_config=llm_config_4v,
     custom_caption_func=my_description,
 )
 vision_capability_with_func.add_to_agent(agent_with_vision_and_func)

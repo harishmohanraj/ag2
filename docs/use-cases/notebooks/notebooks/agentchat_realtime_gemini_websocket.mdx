@@ -88,23 +88,16 @@ from autogen.agentchat.realtime.experimental import RealtimeAgent, WebSocketAudi
 ## Prepare your `llm_config` and `realtime_llm_config`
 
 The
-[`config_list_from_json`](https://docs.ag2.ai/docs/api-reference/autogen/config_list_from_json#config-list-from-json)
-function loads a list of configurations from an environment variable or
-a json file.
+[`LLMConfig.from_json`](https://docs.ag2.ai/docs/api-reference/autogen/LLMConfig#from-json)
+method loads a list of configurations from an environment variable or a
+json file.
 
 ```python
-realtime_config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "tags": ["gemini-realtime"],
-    },
-)
-
-realtime_llm_config = {
-    "timeout": 600,
-    "config_list": realtime_config_list,
-    "temperature": 0.8,
-}
+realtime_llm_config = autogen.LLMConfig.from_json(
+    path="OAI_CONFIG_LIST",
+    temperature=0.8,
+    timeout=600,
+).where(model="gemini-realtime")
 
 msg = """
     {
@@ -114,12 +107,8 @@ msg = """
         "api_type": "google"
     }"""
 
-assert realtime_config_list, (
+assert realtime_llm_config.config_list, (
     "No appropriate LLM found for the given model, please add the following lines to the OAI_CONFIG_LIST file:" + msg
-)
-assert set(realtime_config_list[0].keys()) == set({"model", "api_key", "tags", "api_type"}), (
-    f"Config in OAI_CONFIG_LIST is missing one of the required keys: {set({'model', 'api_key', 'tags', 'api_type'}) - realtime_config_list[0].keys()}. Should be something like:"
-    + msg
 )
 ```
 

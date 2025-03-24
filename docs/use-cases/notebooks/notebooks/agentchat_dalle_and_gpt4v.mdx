@@ -34,48 +34,40 @@ from PIL import Image
 from diskcache import Cache
 from openai import OpenAI
 
-import autogen
-from autogen import Agent, AssistantAgent, ConversableAgent, UserProxyAgent
+from autogen import Agent, AssistantAgent, ConversableAgent, LLMConfig, UserProxyAgent
 from autogen.agentchat.contrib.img_utils import _to_pil, get_image_data, get_pil_image
 from autogen.agentchat.contrib.multimodal_conversable_agent import MultimodalConversableAgent
 ```
 
 
 ```python
-config_list_4v = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4-vision-preview"],
-    },
+config_path = "OAI_CONFIG_LIST"
+
+llm_config_4v = LLMConfig.from_json(
+    path=config_path,
+    max_tokens=1000,
+).where(
+    model=["gpt-4-vision-preview"],
 )
 
-config_list_gpt4 = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
-    },
-)
+llm_config_dalle = LLMConfig.from_json(
+    path=config_path,
+).where(model=["dalle"])
 
-config_list_dalle = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["dalle"],
-    },
-)
 
-gpt4_llm_config = {"config_list": config_list_gpt4, "cache_seed": 42}
+gpt4_llm_config = LLMConfig.from_json(path=config_path, cache_seed=42).where(
+    model=["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
+)
 ```
 
-The `config_list_dalle` should be something like:
+The `llm_config_dalle` should be something like:
 
 ```python
-[
-    {
-        'model': 'dalle',
-        'api_key': 'Your API Key here',
-        'api_version': '2024-02-01'
-    }
-]
+LLMConfig(
+    config_list=[
+        {'api_type': 'openai', 'model': 'dalle', 'api_key': '**********', 'api_version': '2024-02-01', 'tags': []}
+    ]
+)
 ```
 
 ## Helper Functions
@@ -218,7 +210,7 @@ class DALLEAgent(ConversableAgent):
 ## Simple Example: Call directly from User
 
 ```python
-dalle = DALLEAgent(name="Dalle", llm_config={"config_list": config_list_dalle})
+dalle = DALLEAgent(name="Dalle", llm_config=llm_config_dalle)
 
 user_proxy = UserProxyAgent(
     name="User_proxy", system_message="A human admin.", human_input_mode="NEVER", max_consecutive_auto_reply=0
@@ -280,14 +272,12 @@ CRITICS: the image needs to improve...
 PROMPT: here is the updated prompt!
 
 """,
-            llm_config={"config_list": config_list_4v, "max_tokens": 1000},
+            llm_config=llm_config_4v,
             human_input_mode="NEVER",
             max_consecutive_auto_reply=3,
         )
 
-        self.dalle = DALLEAgent(
-            name="Dalle", llm_config={"config_list": config_list_dalle}, max_consecutive_auto_reply=0
-        )
+        self.dalle = DALLEAgent(name="Dalle", llm_config=llm_config_dalle, max_consecutive_auto_reply=0)
 
         # Data flow begins
         self.send(message=img_prompt, recipient=self.dalle, request_reply=True)

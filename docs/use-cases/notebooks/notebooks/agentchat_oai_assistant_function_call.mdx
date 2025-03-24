@@ -60,7 +60,7 @@ process data from GitHub, utilizing OSS Insight’s capabilities.
 import logging
 import os
 
-from autogen import UserProxyAgent, config_list_from_json
+from autogen import LLMConfig, UserProxyAgent
 from autogen.agentchat.contrib.gpt_assistant_agent import GPTAssistantAgent
 
 logger = logging.getLogger(__name__)
@@ -113,10 +113,7 @@ function calls for data retrieval and analysis.
 
 ```python
 assistant_id = os.environ.get("ASSISTANT_ID", None)
-config_list = config_list_from_json("OAI_CONFIG_LIST")
-llm_config = {
-    "config_list": config_list,
-}
+llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST")
 assistant_config = {
     "assistant_id": assistant_id,
     "tools": [

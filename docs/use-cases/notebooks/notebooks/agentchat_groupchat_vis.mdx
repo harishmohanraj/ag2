@@ -52,11 +52,8 @@ from IPython.display import Image
 
 import autogen
 
-config_list_gpt4 = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
-    },
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", cache_seed=42).where(
+    model=["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"]
 )
 ```
 
@@ -77,7 +74,6 @@ Learn more about configuring LLMs for agents [here](/docs/topics/llm_configurati
 
 
 ```python
-llm_config = {"config_list": config_list_gpt4, "cache_seed": 42}
 user_proxy = autogen.UserProxyAgent(
     name="User_proxy",
     system_message="A human admin.",

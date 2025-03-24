@@ -53,7 +53,7 @@ from typing import Annotated
 import autogen
 from autogen.cache import Cache
 
-config_list = autogen.config_list_from_json(env_or_file="OAI_CONFIG_LIST", filter_dict={"tags": ["tool"]})
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST").where(tags=["tool"])
 ```
 
 
@@ -76,10 +76,6 @@ config for the `AssistantAgent`. Then we register the functions in
 `UserProxyAgent`.
 
 ```python
-llm_config = {
-    "config_list": config_list,
-}
-
 coder = autogen.AssistantAgent(
     name="chatbot",
     system_message="For coding tasks, only use the functions you have been provided with. You have a stopwatch and a timer, these tools can and should be used in parallel. Reply TERMINATE when the task is done.",
@@ -164,13 +160,9 @@ def terminate_group_chat(message: Annotated[str, "Message to be sent to the grou
 
 groupchat = autogen.GroupChat(agents=[user_proxy, coder, markdownagent], messages=[], max_round=12)
 
-llm_config_manager = llm_config.copy()
-llm_config_manager.pop("functions", None)
-llm_config_manager.pop("tools", None)
-
 manager = autogen.GroupChatManager(
     groupchat=groupchat,
-    llm_config=llm_config_manager,
+    llm_config=llm_config,
     is_termination_msg=lambda x: "GROUPCHAT_TERMINATE" in x.get("content", ""),
 )
 ```

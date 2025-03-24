@@ -42,7 +42,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 import autogen
-from autogen import Agent, AssistantAgent
+from autogen import Agent, AssistantAgent, LLMConfig
 from autogen.agentchat.contrib.llava_agent import LLaVAAgent, llava_call
 
 LLAVA_MODE = "remote"  # Either "local" or "remote"
@@ -148,7 +148,7 @@ We cal test the `llava_call` function with the following AG2 image.
 ```python
 rst = llava_call(
     "Describe this AG2 framework <img https://raw.githubusercontent.com/microsoft/autogen/main/website/static/img/autogen_agentchat.png> with bullet points.",
-    llm_config={"config_list": llava_config_list, "temperature": 0},
+    llm_config=LLMConfig(config_list=llava_config_list, temperature=0),
 )
 
 print(rst)
@@ -171,7 +171,7 @@ enabling you to provide feedback as the conversation unfolds.
 image_agent = LLaVAAgent(
     name="image-explainer",
     max_consecutive_auto_reply=10,
-    llm_config={"config_list": llava_config_list, "temperature": 0.5, "max_new_tokens": 1000},
+    llm_config=LLMConfig(config_list=llava_config_list, temperature=0.5, max_new_tokens=1000),
 )
 
 user_proxy = autogen.UserProxyAgent(
@@ -266,7 +266,7 @@ class FigureCreator(AssistantAgent):
             system_message="""Criticize the input figure. How to replot the figure so it will be better? Find bugs and issues for the figure.
             Pay attention to the color, format, and presentation. Keep in mind of the reader-friendliness.
             If you think the figures is good enough, then simply say NO_ISSUES""",
-            llm_config={"config_list": llava_config_list},
+            llm_config=LLMConfig(config_list=llava_config_list),
             human_input_mode="NEVER",
             max_consecutive_auto_reply=1,
             #     use_docker=False,
@@ -311,23 +311,13 @@ class FigureCreator(AssistantAgent):
 
 
 ```python
-config_list_gpt4 = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "model": ["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
-    },
+gpt4_llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", cache_seed=42).where(
+    model=["gpt-4", "gpt-4-0314", "gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"]
 )
 
-gpt4_llm_config = {"config_list": config_list_gpt4, "cache_seed": 42}
-
-# config_list_gpt35 = autogen.config_list_from_json(
-#     "OAI_CONFIG_LIST",
-#     filter_dict={
-#         "model": ["gpt-35-turbo", "gpt-3.5-turbo"],
-#     },
-# )
-
-# gpt35_llm_config = {"config_list": config_list_gpt35, "cache_seed": 42}
+# gpt35_llm_config = autogen.LLMConfig.from_json(
+#     path="OAI_CONFIG_LIST", cache_seed=42
+# ).where(model=["gpt-35-turbo", "gpt-3.5-turbo"])
 
 
 creator = FigureCreator(name="Figure Creator~", llm_config=gpt4_llm_config)

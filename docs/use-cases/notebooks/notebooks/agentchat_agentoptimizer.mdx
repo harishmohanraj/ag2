@@ -296,8 +296,8 @@ problems. Here, we use gpt-4-1106-preview to construct the
 AssistantAgent.
 
 ```python
-llm_config = {
-    "config_list": [
+llm_config = autogen.LLMConfig(
+    config_list=[
         {
             "model": "gpt-4-1106-preview",
             "api_type": "azure",
@@ -306,7 +306,7 @@ llm_config = {
             "api_version": "2023-07-01-preview",
         }
     ]
-}
+)
 
 assistant = autogen.AssistantAgent(
     name="assistant",

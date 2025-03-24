@@ -99,6 +99,8 @@ Configuration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/llm-configu
 ```python
 import os
 
+from autogen import LLMConfig
+
 # Set environment variables with your current workspace host and a personal access token
 # To a secret you have already set up: dbutils.secrets.get('your_scope_name','databricks_host')
 
@@ -111,15 +113,15 @@ os.environ["DATABRICKS_HOST"] = "<FILL IN WITH YOUR WORKSPACE URL IN SUPPORTED D
 # Temp token: dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiToken().get()
 os.environ["DATABRICKS_TOKEN"] = "dapi...."
 
-llm_config = {
-    "config_list": [
+llm_config = LLMConfig(
+    config_list=[
         {
             "model": "databricks-dbrx-instruct",
             "api_key": str(os.environ["DATABRICKS_TOKEN"]),
             "base_url": str(os.getenv("DATABRICKS_HOST")) + "/serving-endpoints",
         }
     ],
-}
+)
 ```
 
 ## Hello World Example

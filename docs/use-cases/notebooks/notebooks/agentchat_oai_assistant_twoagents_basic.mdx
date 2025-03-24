@@ -23,7 +23,7 @@ conversational capabilities, working with `UserProxyAgent` in AG2.
 import logging
 import os
 
-from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
+from autogen import AssistantAgent, LLMConfig, UserProxyAgent
 from autogen.agentchat.contrib.gpt_assistant_agent import GPTAssistantAgent
 
 logger = logging.getLogger(__name__)
@@ -31,8 +31,7 @@ logger.setLevel(logging.WARNING)
 
 assistant_id = os.environ.get("ASSISTANT_ID", None)
 
-config_list = config_list_from_json("OAI_CONFIG_LIST")
-llm_config = {"config_list": config_list}
+llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST")
 
 assistant_config = {"assistant_id": assistant_id}
 
