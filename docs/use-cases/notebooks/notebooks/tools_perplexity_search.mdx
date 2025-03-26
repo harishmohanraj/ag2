@@ -1,0 +1,133 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_perplexity_search.ipynb
+description: Perplexity Search Integration with AG2
+source_notebook: /notebook/tools_perplexity_search.ipynb
+tags:
+- tools
+- perplexity
+- web-search
+- search
+title: Perplexity Search Tool
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_perplexity_search.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_perplexity_search.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+The Perplexity AI search integration allows users to perform real-time
+web searches within the AG2 framework. Follow these steps to integrate
+`PerplexitySearchTool` with AG2 Agents.
+
+## Configuring Your Perplexity API Key
+
+1.  **Create a Perplexity Account**:
+
+    -   Visit [Perplexity AI](https://www.perplexity.ai/)
+    -   Click `Sign Up` and create an account
+    -   Select Free Tier during registration
+
+2.  **Get API Key**:
+
+    -   Navigate to [API
+        Settings](https://www.perplexity.ai/settings/api)
+    -   Add payment method (required)
+    -   Generate API key under **API Keys**
+
+3.  **Set Environment Variable:**
+
+    ```bash
+    export PERPLEXITY_API_KEY="your_api_key_here"
+    ```
+
+## Package Installation
+
+To get started with the `Perplexity Search` integration in AG2, follow
+these steps:
+
+Install AG2 with `openai` extra since we use openai in our examples:
+
+```bash
+pip install -U "ag2[openai]"
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U "autogen[openai]"
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U "pyautogen[openai]"
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+You’re all set! Now you can start using Perplexity AI Search with AG2.
+
+## Implementation
+
+The `PerplexitySearchTool` enables agents to perform real time AI
+Powered web search.
+
+### Imports
+
+```python
+import os
+
+from autogen import AssistantAgent, UserProxyAgent
+from autogen.tools.experimental import PerplexitySearchTool
+```
+
+### Agent Configuration
+
+Configure an assistant agent and user proxy to be used for LLM
+recommendation and execution respectively.
+
+```python
+os.environ["AUTOGEN_USE_DOCKER"] = "False"
+
+from autogen import LLMConfig
+
+config_list = LLMConfig(api_type="openai", model="gpt-4o-mini")
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config=config_list,
+)
+
+user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER")
+```
+
+### Tool Setup
+
+```python
+perplexity_search_tool = PerplexitySearchTool(api_key=os.getenv("PERPLEXITY_API_KEY"), max_tokens=1000)
+
+# Register the tool for LLM recommendation and execution.
+perplexity_search_tool.register_for_llm(assistant)
+perplexity_search_tool.register_for_execution(user_proxy)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the assistant to fetch live web
+search results.
+
+```python
+response = user_proxy.initiate_chat(
+    recipient=assistant,
+    message="What happened with stock prices after deepseek was launched? please search the web.",
+    max_turns=2,
+)
+print(f"Final Answer: {response.summary}")
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_perplexity_search.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

@@ -11,6 +11,7 @@ title: autogen.agentchat.contrib.captainagent.AgentBuilder
 AgentBuilder(
     config_file_or_env: str | None = 'OAI_CONFIG_LIST',
     config_file_location: str | None = '',
+    llm_config: LLMConfig | dict[str, Any] | None = None,
     builder_model: str | list | None = [],
     agent_model: str | list | None = [],
     builder_model_tags: list | None = [],
@@ -26,6 +27,7 @@ AgentBuilder(
 |--|--|
 | `config_file_or_env` | **Type:** str \| None<br/><br/>**Default:** 'OAI_CONFIG_LIST' |
 | `config_file_location` | **Type:** str \| None<br/><br/>**Default:** '' |
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 | `builder_model` | **Type:** str \| list \| None<br/><br/>**Default:** [] |
 | `agent_model` | **Type:** str \| list \| None<br/><br/>**Default:** [] |
 | `builder_model_tags` | **Type:** list \| None<br/><br/>**Default:** [] |

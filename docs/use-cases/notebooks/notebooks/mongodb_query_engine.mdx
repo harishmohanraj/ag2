@@ -1,0 +1,128 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/mongodb_query_engine.ipynb
+description: Mongo DB Query Engine
+source_notebook: /notebook/mongodb_query_engine.ipynb
+tags:
+- agents
+- documents
+- RAG
+- docagent
+- mongodb
+- query
+title: Use MongoDBQueryEngine to query Markdown files
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/mongodb_query_engine.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/mongodb_query_engine.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+This notebook demonstrates the use of the `MongoDBQueryEngine` for
+retrieval-augmented question answering over documents. It shows how to
+set up the engine with Docling parsed Markdown files, and execute
+natural language queries against the indexed data.
+
+The `MongoDBQueryEngine` integrates cloud MongoDB Atlas vector storage
+with LlamaIndex for efficient document retrieval.
+
+```python
+%pip install llama-index==0.12.16
+%pip install llama-index-vector-stores-mongodb==0.6.0
+%pip install llama-index-embeddings-huggingface==0.5.2
+```
+
+### Set up Open AI key for query engine retrieval
+
+```python
+import os
+
+import autogen
+
+config_list = autogen.config_list_from_json(env_or_file="../OAI_CONFIG_LIST")
+
+assert len(config_list) > 0
+print("models to use: ", [config_list[i]["model"] for i in range(len(config_list))])
+
+# Put the OpenAI API key into the environment
+os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"]
+```
+
+### Set up Mongo DB instance
+
+To use this notebook, you will need to have a MongoDB Atlas environment.
+For this notebook, we use a docker instance. please refer [MongoDB:
+Create a Local Atlas Deployment with
+Docker](https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-docker/)
+for more info.
+
+Some info that you need to get include: - MongoDB Connection String
+(URI)
+
+```python
+from autogen.agentchat.contrib.rag.mongodb_query_engine import MongoDBQueryEngine
+
+query_engine = MongoDBQueryEngine(
+    connection_string="mongodb://localhost:27017/?directConnection=true",
+    database_name="vector_db",
+    collection_name="test_collection",
+)
+```
+
+Here we can see the default collection name in the vector store, this is
+where all documents will be ingested. When creating the
+`MongoDBQueryEngine` you can specify a `collection_name` and
+`database_name` to ingest into.
+
+```python
+print(query_engine.get_collection_name())
+```
+
+### Initialize DB and ingest documents
+
+Let’s ingest a document and query it.  
+`init_db` will overwrite the existing collection with the same name.
+
+```python
+input_dir = "../test/agents/experimental/document_agent/pdf_parsed/"  # Update to match your input directory
+```
+
+
+```python
+input_docs = [input_dir + "nvidia_10k_2024.md"]  # Update to match your input documents
+query_engine.init_db(new_doc_paths_or_urls=input_docs)
+```
+
+If the given collection already has the document you need, you can use
+`connect_db` to avoid overwriting the existing collection.
+
+```python
+query_engine.connect_db()
+```
+
+
+```python
+question = "What is Nvidia's revenue in 2024?"
+answer = query_engine.query(question)
+print(answer)
+```
+
+Great, we got the data we needed. Now, let’s add another document.
+
+```python
+new_docs = [input_dir + "Toast_financial_report.md"]
+query_engine.add_docs(new_doc_paths_or_urls=new_docs)
+```
+
+And query again from the same database but this time for another
+corporate entity.
+
+```python
+question = "What is the trading symbol for Toast"
+answer = query_engine.query(question)
+print(answer)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/mongodb_query_engine.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

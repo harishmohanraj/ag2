@@ -252,6 +252,7 @@
                 "docs/user-guide/reference-tools/google-api/google-search"
               ]
             },
+            "docs/user-guide/reference-tools/perplexity-search",
             "docs/user-guide/reference-tools/browser-use",
             "docs/user-guide/reference-tools/deep-research",
             {
@@ -306,6 +307,8 @@
             "docs/use-cases/notebooks/notebooks/agentchat_nested_sequential_chats",
             "docs/use-cases/notebooks/notebooks/agentchat_teaching",
             "docs/use-cases/notebooks/notebooks/agentchat_swarm_w_groupchat_legacy",
+            "docs/use-cases/notebooks/notebooks/oai_chatgpt_gpt4",
+            "docs/use-cases/notebooks/notebooks/tools_perplexity_search",
             "docs/use-cases/notebooks/notebooks/agentchat_groupchat_research",
             "docs/use-cases/notebooks/notebooks/agentchat_cost_token_tracking",
             "docs/use-cases/notebooks/notebooks/agentchat_planning",
@@ -313,6 +316,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_oai_assistant_function_call",
             "docs/use-cases/notebooks/notebooks/agentchat_realtime_gemini_websocket",
             "docs/use-cases/notebooks/notebooks/agentchat_multi_task_async_chats",
+            "docs/use-cases/notebooks/notebooks/agentchat_groupchat_tools",
             "docs/use-cases/notebooks/notebooks/agentchat_memory_using_mem0",
             "docs/use-cases/notebooks/notebooks/agentchat_oai_assistant_twoagents_basic",
             "docs/use-cases/notebooks/notebooks/agenteval_cq_math",
@@ -326,6 +330,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_groupchat_stateflow",
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat",
             "docs/use-cases/notebooks/notebooks/agentchat_reasoning_agent",
+            "docs/use-cases/notebooks/notebooks/oai_completion",
             "docs/use-cases/notebooks/notebooks/agentchat_image_generation_capability",
             "docs/use-cases/notebooks/notebooks/agents_deep_researcher",
             "docs/use-cases/notebooks/notebooks/agentchat_swarm_enhanced",
@@ -334,11 +339,14 @@
             "docs/use-cases/notebooks/notebooks/Chromadb_query_engine",
             "docs/use-cases/notebooks/notebooks/agentchat_web_info",
             "docs/use-cases/notebooks/notebooks/agentchat_auto_feedback_from_code_execution",
+            "docs/use-cases/notebooks/notebooks/mongodb_query_engine",
             "docs/use-cases/notebooks/notebooks/agentchat_realtime_webrtc",
+            "docs/use-cases/notebooks/notebooks/tools_google_search",
             "docs/use-cases/notebooks/notebooks/agentchat_multi_task_chats",
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat_qdrant",
             "docs/use-cases/notebooks/notebooks/agentchat_function_call_code_writing",
             "docs/use-cases/notebooks/notebooks/agentchat_logging",
+            "docs/use-cases/notebooks/notebooks/agentchat_quickstart_examples",
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat_mongodb",
             "docs/use-cases/notebooks/notebooks/agents_websurfer",
             "docs/use-cases/notebooks/notebooks/agentchat_graph_rag_falkordb",
@@ -380,6 +388,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_nested_chats_chess",
             "docs/use-cases/notebooks/notebooks/agentchat_function_call_async",
             "docs/use-cases/notebooks/notebooks/agentchat_society_of_mind",
+            "docs/use-cases/notebooks/notebooks/agentchat_microsoft_fabric",
             "docs/use-cases/notebooks/notebooks/lats_search",
             "docs/use-cases/notebooks/notebooks/agentchat_lmm_llava",
             "docs/use-cases/notebooks/notebooks/agentchat_dalle_and_gpt4v",
@@ -2051,6 +2060,7 @@
                     "docs/api-reference/autogen/tools/experimental/DiscordRetrieveTool",
                     "docs/api-reference/autogen/tools/experimental/DiscordSendTool",
                     "docs/api-reference/autogen/tools/experimental/GoogleSearchTool",
+                    "docs/api-reference/autogen/tools/experimental/PerplexitySearchTool",
                     "docs/api-reference/autogen/tools/experimental/SlackRetrieveTool",
                     "docs/api-reference/autogen/tools/experimental/SlackSendTool",
                     "docs/api-reference/autogen/tools/experimental/TelegramRetrieveTool",
@@ -2061,6 +2071,25 @@
                         "docs/api-reference/autogen/tools/experimental/browser_use/overview",
                         "docs/api-reference/autogen/tools/experimental/browser_use/BrowserUseResult",
                         "docs/api-reference/autogen/tools/experimental/browser_use/ExtractedContent"
+                      ]
+                    },
+                    {
+                      "group": "perplexity",
+                      "pages": [
+                        "docs/api-reference/autogen/tools/experimental/perplexity/overview",
+                        "docs/api-reference/autogen/tools/experimental/perplexity/PerplexitySearchTool",
+                        {
+                          "group": "perplexity_search",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/overview",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/Choice",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/Message",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/PerplexityChatCompletionResponse",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/PerplexitySearchTool",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/SearchResponse",
+                            "docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/Usage"
+                          ]
+                        }
                       ]
                     }
                   ]

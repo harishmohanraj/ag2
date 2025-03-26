@@ -1,0 +1,196 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_google_search.ipynb
+description: Google Search
+source_notebook: /notebook/tools_google_search.ipynb
+tags:
+- agents
+- tools
+- search
+- web
+- google
+- real-time search
+title: Adding Google Search Capability to AG2
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_google_search.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_google_search.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+The Google Search integration in AG2 allows users to perform real-time
+web searches within the AG2 framework. This is especially useful for
+retrieving up-to-date information that may not be available in static
+datasets.
+
+## Installation
+
+To get started with the `Google Search` integration in AG2, follow these
+steps:
+
+Install AG2 with the `google-search` extra. Since our examples also use
+`openai` and `gemini`, install them as well:
+
+```bash
+pip install -U ag2[openai,gemini,google-search]
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U autogen[openai,gemini,google-search]
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U pyautogen[openai,gemini,google-search]
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+You’re all set! Now you can start using Google Search with AG2.
+
+## Imports
+
+```python
+import os
+
+import autogen
+from autogen import AssistantAgent
+from autogen.tools.experimental import GoogleSearchTool
+```
+
+## Using GoogleSearchTool with Gemini GenAI
+
+The `GoogleSearchTool` enables search functionalities in AG2 and can be
+configured to use Gemini GenAI for an enhanced search experience. This
+section covers agent configuration and tool initialization.
+
+### Agent Configuration
+
+```python
+config_list = autogen.config_list_from_json(
+    env_or_file="OAI_CONFIG_LIST",
+    filter_dict={
+        "model": ["gemini-2.0-flash"],
+    },
+)
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"config_list": config_list},
+)
+```
+
+### GoogleSearchTool Initialization
+
+For Gemini GenAI, you can use the GenAI prebuilt Google Search tool by
+setting `use_internal_llm_tool_if_available` to `True`.
+
+> **Note:** You cannot combine other tools with the prebuilt Google
+> Search tool. If you need multiple tools, refer to the AG2
+> implementation section.
+
+```python
+gs_tool = GoogleSearchTool(
+    use_internal_llm_tool_if_available=True,
+)
+# Once initialized, register the tool with the assistant
+gs_tool.register_for_llm(assistant)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the assistant to fetch live web
+search results.
+
+```python
+assistant.run(
+    message="What happened with stock prices after deepseek was launched, please search the web.",
+    tools=assistant.tools,
+    max_turns=2,
+    user_input=False,
+)
+```
+
+## GoogleSearchTool with AG2 Google Search implementation
+
+For all other LLM providers or if you need to combine Google Search with
+other tools, follow this section to configure AG2’s implementation.
+
+### Setup Google Search Engine and API Key
+
+1.  Create a Google Custom Search Engine (CSE):
+    -   [Go to Google Programmable Search
+        Engine](https://programmablesearchengine.google.com/about/)
+    -   Click `Get Started` and create a search engine.
+    -   Under `Sites to Search`, select `Search the entire web` if you
+        want global search.
+    -   Copy the **Search Engine ID** from the CSE dashboard (`cx`
+        parameter from the url)
+2.  Get a Google API Key:
+    -   Go to [Google Cloud Console](https://console.cloud.google.com/)
+    -   Create a new project.
+    -   Navigate to **APIs & Services \> Library**, search for **Custom
+        Search API** and enable it.
+    -   Go to **APIs & Services \> Credentials**, click on **Create
+        Credentials \> API key** and copy it.
+3.  Export engine ID and api key
+    `bash     export GOOGLE_SEARCH_ENGINE_ID="your_engine_id"     export GOOGLE_SEARCH_API_KEY="your_api_key"`
+
+### Agent Configuration
+
+```python
+config_list = autogen.config_list_from_json(
+    env_or_file="OAI_CONFIG_LIST",
+    filter_dict={
+        "model": ["gpt-4o-mini"],
+    },
+)
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"config_list": config_list},
+)
+```
+
+### GoogleSearchTool Initialization
+
+Create `GoogleSearchTool` with your `search_api_key` and
+`search_engine_id`.
+
+```python
+search_api_key = os.getenv("GOOGLE_SEARCH_API_KEY")
+search_engine_id = os.getenv("GOOGLE_SEARCH_ENGINE_ID")
+
+assert search_api_key is not None, "Please set GOOGLE_SEARCH_API_KEY environment variable"
+assert search_engine_id is not None, "Please set GOOGLE_SEARCH_ENGINE_ID environment variable"
+
+gs_tool = GoogleSearchTool(
+    search_api_key=search_api_key,
+    search_engine_id=search_engine_id,
+)
+# Once initialized, register the tool with the assistant:
+gs_tool.register_for_llm(assistant)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the assistant to fetch live web
+search results.
+
+```python
+assistant.run(
+    message="What happened with stock prices after deepseek was launched, please search the web.",
+    tools=assistant.tools,
+    max_turns=2,
+    user_input=False,
+)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_google_search.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

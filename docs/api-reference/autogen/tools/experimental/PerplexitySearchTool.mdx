@@ -1,0 +1,52 @@
+---
+sidebarTitle: PerplexitySearchTool
+title: autogen.tools.experimental.PerplexitySearchTool
+---
+<h2 id="autogen.tools.experimental.PerplexitySearchTool" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">PerplexitySearchTool</span>
+</h2>
+
+```python
+PerplexitySearchTool(
+    model: str = 'sonar',
+    api_key: str | None = None,
+    max_tokens: int = 1000,
+    search_domain_filter: list[str] | None = None
+)
+```
+
+    Tool for interacting with the Perplexity AI search API.<br/>This tool uses the Perplexity API to perform web search, news search,
+    and conversational search, returning concise and precise responses.<br/>Attributes: <br/>    url (str): API endpoint URL.<br/>    model (str): Name of the model to be used.<br/>    api_key (str): API key for authenticating with the Perplexity API.<br/>    max_tokens (int): Maximum tokens allowed for the API response.<br/>    search_domain_filters (Optional[list[str]]): Optional list of domain filters for the search.<br/>Initializes a new instance of the PerplexitySearchTool.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `model` | **Type:** str<br/><br/>**Default:** 'sonar' |
+| `api_key` | **Type:** str \| None<br/><br/>**Default:** None |
+| `max_tokens` | **Type:** int<br/><br/>**Default:** 1000 |
+| `search_domain_filter` | **Type:** list[str] \| None<br/><br/>**Default:** None |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### search
+
+```python
+search(self, query: Annotated[str, 'The search query.']) -> SearchResponse
+```
+
+    Perform a search query using the Perplexity AI API.<br/>Constructs the payload, executes the query, and parses the response to return
+    a concise search result along with any provided citations.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | The search query.<br/><br/>**Type:** Annotated[str, 'The search query.'] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [SearchResponse](/docs/api-reference/autogen/tools/experimental/perplexity/perplexity_search/SearchResponse) | SearchResponse: A model containing the search result content and citations. |
+
+<br />
