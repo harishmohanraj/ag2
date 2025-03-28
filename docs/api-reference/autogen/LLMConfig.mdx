@@ -208,11 +208,14 @@ model_validate_json(
     json_data: str | bytes | bytearray,
     *,
     strict: bool | None = None,
-    context: Any | None = None
+    context: Any | None = None,
+    by_alias: bool | None = None,
+    by_name: bool | None = None
 ) -> Self
 ```
 
-    Usage docs: https://docs.pydantic.dev/2.10/concepts/json/#json-parsing
+    !!! abstract "Usage Documentation"
+        [JSON Parsing](/docs/api-reference/concepts/json#json-parsing)
     
     Validate the given JSON data against the Pydantic model.<br/>
 
@@ -222,6 +225,8 @@ model_validate_json(
 | `json_data` | The JSON data to validate.<br/><br/>**Type:** str \| bytes \| bytearray |
 | `strict` | Whether to enforce types strictly.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 | `context` | Extra variables to pass to the validator.<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
+| `by_alias` | Whether to use the field's alias when validating against the provided input data.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
+| `by_name` | Whether to use the field's name when validating against the provided input data.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 
 <b>Returns:</b>
 | Type | Description |
@@ -238,7 +243,9 @@ model_validate_strings(
     obj: Any,
     *,
     strict: bool | None = None,
-    context: Any | None = None
+    context: Any | None = None,
+    by_alias: bool | None = None,
+    by_name: bool | None = None
 ) -> Self
 ```
 
@@ -250,6 +257,8 @@ model_validate_strings(
 | `obj` | The object containing string data to validate.<br/><br/>**Type:** Any |
 | `strict` | Whether to enforce types strictly.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 | `context` | Extra variables to pass to the validator.<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
+| `by_alias` | Whether to use the field's alias when validating against the provided input data.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
+| `by_name` | Whether to use the field's name when validating against the provided input data.<br/><br/>**Type:** bool \| None<br/><br/>**Default:** None |
 
 <b>Returns:</b>
 | Type | Description |
