@@ -514,11 +514,8 @@
                 "docs/api-reference/autogen/agentchat/ContextStr",
                 "docs/api-reference/autogen/agentchat/ON_CONDITION",
                 "docs/api-reference/autogen/agentchat/SwarmAgent",
-                "docs/api-reference/autogen/agentchat/SwarmResult",
                 "docs/api-reference/autogen/agentchat/UPDATE_SYSTEM_MESSAGE",
-                "docs/api-reference/autogen/agentchat/UpdateSystemMessage",
                 "docs/api-reference/autogen/agentchat/a_initiate_chats",
-                "docs/api-reference/autogen/agentchat/register_hand_off",
                 {
                   "group": "chat",
                   "pages": [
@@ -1123,8 +1120,7 @@
                         "docs/api-reference/autogen/agentchat/contrib/swarm_agent/ContextStr",
                         "docs/api-reference/autogen/agentchat/contrib/swarm_agent/ON_CONDITION",
                         "docs/api-reference/autogen/agentchat/contrib/swarm_agent/SwarmAgent",
-                        "docs/api-reference/autogen/agentchat/contrib/swarm_agent/create_swarm_transition",
-                        "docs/api-reference/autogen/agentchat/contrib/swarm_agent/register_hand_off"
+                        "docs/api-reference/autogen/agentchat/contrib/swarm_agent/create_swarm_transition"
                       ]
                     },
                     {
