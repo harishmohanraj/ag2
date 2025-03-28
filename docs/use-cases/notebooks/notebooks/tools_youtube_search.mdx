@@ -1,0 +1,131 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_youtube_search.ipynb
+description: YouTube Search Integration with AG2
+source_notebook: /notebook/tools_youtube_search.ipynb
+tags:
+- tools
+- youtube
+- video
+- search
+title: Adding YouTube Search Capability to AG2
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_youtube_search.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_youtube_search.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+The YouTube Search integration in AG2 allows users to search for YouTube
+videos and retrieve video details directly within the AG2 framework.
+This is useful for extracting valuable information from video content,
+staying updated with the latest tutorials, reviews, and educational
+materials.
+
+## Installation
+
+To get started with the `YouTube Search` integration in AG2, follow
+these steps:
+
+Install AG2 with the `google-search` extra, which includes the necessary
+dependencies for YouTube search. Since our examples also use `openai`,
+install it as well:
+
+```bash
+pip install -U ag2[openai,google-search]
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U autogen[openai,google-search]
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U pyautogen[openai,google-search]
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+## Imports
+
+```python
+import os
+
+import autogen
+from autogen import AssistantAgent
+from autogen.tools.experimental import YoutubeSearchTool
+```
+
+## Setup YouTube Data API
+
+Before using the YouTube Search tool, you need to set up a YouTube Data
+API key:
+
+1.  Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2.  Create a new project or select an existing one
+3.  Navigate to **APIs & Services \> Library**
+4.  Search for **YouTube Data API v3** and enable it
+5.  Go to **APIs & Services \> Credentials**
+6.  Click on **Create Credentials \> API key** and copy your API key
+7.  Set the API key as an environment variable:
+
+```bash
+export YOUTUBE_API_KEY="your_api_key"
+```
+
+## Agent Configuration
+
+```python
+config_list = autogen.config_list_from_json(
+    env_or_file="OAI_CONFIG_LIST",
+    filter_dict={
+        "model": ["gpt-4o-mini"],
+    },
+)
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"config_list": config_list},
+)
+```
+
+## YoutubeSearchTool Initialization
+
+Create a `YoutubeSearchTool` with your YouTube API key.
+
+```python
+youtube_api_key = os.getenv("YOUTUBE_API_KEY")
+
+assert youtube_api_key is not None, "Please set YOUTUBE_API_KEY environment variable"
+
+# Create the YouTube search tool with your API key
+youtube_tool = YoutubeSearchTool(
+    youtube_api_key=youtube_api_key,
+)
+
+# Register the tool with the assistant
+youtube_tool.register_for_llm(assistant)
+```
+
+## YouTube Search
+
+Let’s start with a basic search to find YouTube videos on a particular
+topic.
+
+```python
+assistant.run(
+    message="Find the latest YouTube videos on large language models. List the titles and provide brief summaries.",
+    tools=assistant.tools,
+    max_turns=2,
+    user_input=False,
+)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_youtube_search.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

@@ -130,6 +130,7 @@
               "pages": [
                 "docs/user-guide/basic-concepts/tools/index",
                 "docs/user-guide/basic-concepts/tools/basics",
+                "docs/user-guide/basic-concepts/tools/controlling-use",
                 "docs/user-guide/basic-concepts/tools/tools-with-secrets",
                 {
                   "group": "Interoperability",
@@ -250,7 +251,8 @@
             {
               "group": "Google APIs",
               "pages": [
-                "docs/user-guide/reference-tools/google-api/google-search"
+                "docs/user-guide/reference-tools/google-api/google-search",
+                "docs/user-guide/reference-tools/google-api/youtube-search"
               ]
             },
             "docs/user-guide/reference-tools/perplexity-search",
@@ -319,6 +321,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_multi_task_async_chats",
             "docs/use-cases/notebooks/notebooks/agentchat_groupchat_tools",
             "docs/use-cases/notebooks/notebooks/agentchat_memory_using_mem0",
+            "docs/use-cases/notebooks/notebooks/tools_youtube_search",
             "docs/use-cases/notebooks/notebooks/agentchat_oai_assistant_twoagents_basic",
             "docs/use-cases/notebooks/notebooks/agenteval_cq_math",
             "docs/use-cases/notebooks/notebooks/tools_browser_use",
@@ -1862,6 +1865,19 @@
                   ]
                 },
                 {
+                  "group": "gemini_types",
+                  "pages": [
+                    "docs/api-reference/autogen/oai/gemini_types/overview",
+                    "docs/api-reference/autogen/oai/gemini_types/CaseInSensitiveEnum",
+                    "docs/api-reference/autogen/oai/gemini_types/CommonBaseModel",
+                    "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfig",
+                    "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfigDict",
+                    "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfigMode",
+                    "docs/api-reference/autogen/oai/gemini_types/ToolConfig",
+                    "docs/api-reference/autogen/oai/gemini_types/ToolConfigDict"
+                  ]
+                },
+                {
                   "group": "groq",
                   "pages": [
                     "docs/api-reference/autogen/oai/groq/overview",
@@ -2066,6 +2082,7 @@
                     "docs/api-reference/autogen/tools/experimental/SlackSendTool",
                     "docs/api-reference/autogen/tools/experimental/TelegramRetrieveTool",
                     "docs/api-reference/autogen/tools/experimental/TelegramSendTool",
+                    "docs/api-reference/autogen/tools/experimental/YoutubeSearchTool",
                     {
                       "group": "browser_use",
                       "pages": [
