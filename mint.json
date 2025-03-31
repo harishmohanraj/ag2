@@ -1867,10 +1867,8 @@
                     "docs/api-reference/autogen/oai/gemini_types/CaseInSensitiveEnum",
                     "docs/api-reference/autogen/oai/gemini_types/CommonBaseModel",
                     "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfig",
-                    "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfigDict",
                     "docs/api-reference/autogen/oai/gemini_types/FunctionCallingConfigMode",
-                    "docs/api-reference/autogen/oai/gemini_types/ToolConfig",
-                    "docs/api-reference/autogen/oai/gemini_types/ToolConfigDict"
+                    "docs/api-reference/autogen/oai/gemini_types/ToolConfig"
                   ]
                 },
                 {
