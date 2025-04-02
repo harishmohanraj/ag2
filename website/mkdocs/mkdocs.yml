@@ -117,10 +117,9 @@ plugins:
       css_files:
         - stylesheets/extra.css
   - mike:                        # versioning
-      alias_type: redirect
-      redirect_template: null
+      alias_type: copy
+      redirect_template: templates/redirect.html
       canonical_version: latest
-      deploy_prefix: ''
   - blog:
       blog_dir: docs/blog
       blog_toc: true
@@ -167,4 +166,3 @@ extra:
 
   version:
     provider: mike
-    default: latest
