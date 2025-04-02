@@ -33,7 +33,7 @@ PerplexitySearchTool(
 #### search
 
 ```python
-search(self, query: Annotated[str, 'The search query.']) -> SearchResponse
+search(self, query: str) -> SearchResponse
 ```
 
     Perform a search query using the Perplexity AI API.<br/>Constructs the payload, executes the query, and parses the response to return
@@ -42,7 +42,7 @@ search(self, query: Annotated[str, 'The search query.']) -> SearchResponse
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `query` | The search query.<br/><br/>**Type:** Annotated[str, 'The search query.'] |
+| `query` | The search query.<br/><br/>**Type:** str |
 
 <b>Returns:</b>
 | Type | Description |

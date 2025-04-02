@@ -1,0 +1,236 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_google_drive.ipynb
+description: Google Drive Tools
+source_notebook: /notebook/tools_google_drive.ipynb
+tags:
+- agents
+- tools
+- google drive
+title: Google Drive Tools
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_google_drive.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_google_drive.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+The Google Drive integration in AG2 empowers users to seamlessly access
+and manage their files within the AG2 framework. With this integration,
+users can easily list, download, and interact with files stored in their
+Google Drive, providing a smooth and efficient way to handle documents,
+images, and other data in real time.
+
+## Installation
+
+Before using Google APIs, you need to enable them in your Google Cloud
+project. You can enable multiple APIs within a single project.
+
+1.  Follow the [Setup
+    environment](https://developers.google.com/workspace/drive/api/quickstart/python#set-up-environment)
+    guide from Google Workspace to get started.
+
+2.  Once you’ve completed the setup, you should have the
+    `credentials.json` file downloaded to your local machine.
+
+3.  Install AG2 with the `google-api` extra. Since our examples also use
+    `openai`, install it as well:
+
+    ```bash
+    pip install -U ag2[openai,google-api]
+    ```
+
+    > **Note:** If you have been using `autogen` or `pyautogen`, all you
+    > need to do is upgrade it using:
+    >
+    > ```bash
+    > pip install -U autogen[openai,google-api]
+    > ```
+    >
+    > or
+    >
+    > ```bash
+    > pip install -U pyautogen[openai,google-api]
+    > ```
+    >
+    > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+    > package.
+
+You’re all set! Now you can start using Google Drive with AG2.
+
+## Imports
+
+```python
+from typing import Annotated, Optional
+
+from autogen import AssistantAgent, LLMConfig
+from autogen.tools import tool
+from autogen.tools.experimental.google import GoogleCredentialsLocalProvider, GoogleDriveToolkit
+from autogen.tools.experimental.google.model import GoogleFileInfo
+```
+
+## Google Authentication
+
+Configure authentication to allow AG2 to access Google Drive: -
+`client_secret_file`: The path to the client secret file, which you can
+download from the Google Cloud Console. This file contains the necessary
+credentials to authenticate the user with Google services. -
+`token_file`: The path to a file that will store the access token. After
+the first run of the script, this token will be saved and used for
+subsequent authentications, avoiding the need for repeated login
+processes. - `provider` (`GoogleCredentialsLocalProvider`): The provider
+is responsible for managing the authentication process. - `credentials`:
+This variable stores the credentials object, which will be used by the
+system to authenticate the user and gain access to their Google Drive
+resources.
+
+> **Note:** The first execution opens a Google Authentication page in
+> your browser.
+
+```python
+client_secret_file = "../credentials.json"
+token_file = "../my_token.json"
+
+provider = GoogleCredentialsLocalProvider(
+    client_secret_file=client_secret_file,
+    scopes=GoogleDriveToolkit.recommended_scopes(),
+    token_file=token_file,
+)
+
+credentials = provider.get_credentials()
+```
+
+## Agent Configuration
+
+```python
+llm_config = LLMConfig.from_json(
+    path="OAI_CONFIG_LIST",
+).where(model="gpt-4o-mini")
+
+assistant = AssistantAgent(name="assistant", llm_config=llm_config)
+```
+
+## Register Google Drive Tools
+
+The `GoogleDriveToolkit` class provides a set of predefined tools for
+seamless interaction with Google Drive. These tools include: -
+`list_drive_files_and_folders`: Allows the user to list all files and
+folders in their Google Drive. - `download_file_from_drive`: Enables
+downloading files directly from Google Drive to a specified local
+folder.
+
+Once the tool map is registered with the agent using `register_for_llm`,
+the agent becomes capable of suggesting these tool calls.
+
+```python
+google_drive_toolkit = GoogleDriveToolkit(
+    credentials=credentials,
+    download_folder="ag2_drive_downloads",
+)
+
+google_drive_toolkit.register_for_llm(assistant)
+```
+
+## Start the Conversation
+
+With the setup complete, you can now use the assistant to list and
+download files from your Google Drive.
+
+```python
+assistant.run(
+    message="""Get me the last 3 files and download all docs/sheets/slides meme types.
+Ignore subfolders for now.
+Once done, write 'TERMINATE'.""",
+    max_turns=5,
+    tools=google_drive_toolkit.tools,
+    user_input=False,
+)
+```
+
+## Custom GoogleDriveToolkit
+
+You can easily customize the predefined `GoogleDriveToolkit` based on
+your specific requirements. By subclassing `GoogleDriveToolkit`, you can
+modify the toolset available to your agent.
+
+For example: - **Add custom tools**: You can introduce new tools, like
+`list_docs`, to specifically retrieve document files from a folder. -
+**Remove existing tools**: You can eliminate unnecessary tools, such as
+`list_drive_files_and_folders`, to streamline functionality and focus on
+relevant features.
+
+```python
+class MyGoogleDriveToolkit(GoogleDriveToolkit):
+    def __init__(
+        self,
+        *,
+        credentials,
+        download_folder,
+    ):
+        super().__init__(credentials=credentials, download_folder=download_folder)
+
+        # Define a custom tool
+        @tool(description="List documents in a folder")
+        def list_docs(
+            page_size: Annotated[int, "The number of files to list per page."] = 10,
+            folder_id: Annotated[
+                Optional[str],
+                "The ID of the folder to list files from. If not provided, lists all files in the root folder.",
+            ] = None,
+        ) -> list[GoogleFileInfo]:
+            doc_mime_types = [
+                "application/vnd.google-apps.document",  # Google Docs
+                "application/pdf",  # PDFs
+                "application/msword",  # MS Word
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  # DOCX
+            ]
+
+            mime_type_filter = " or ".join(f"mimeType='{mime}'" for mime in doc_mime_types)
+            query = f"({mime_type_filter}) and trashed=false"
+
+            if folder_id:
+                query = f"'{folder_id}' in parents and {query}"
+
+            kwargs = {
+                "pageSize": page_size,
+                "fields": "nextPageToken, files(id, name, mimeType)",
+                "q": query,  # Apply filtering in the query itself
+            }
+
+            response = self.service.files().list(**kwargs).execute()
+            result = response.get("files", [])
+
+            if not isinstance(result, list):
+                raise ValueError(f"Expected a list of files, but got {result}")
+
+            return [GoogleFileInfo(**file_info) for file_info in result]
+
+        # Remove tool which you don't want to use
+        self.remove_tool("list_drive_files_and_folders")
+
+        # Add your custom tool
+        self.set_tool(list_docs)
+```
+
+
+```python
+assistant = AssistantAgent(name="assistant", llm_config=llm_config)
+
+google_drive_toolkit = MyGoogleDriveToolkit(
+    credentials=credentials,
+    download_folder="ag2_drive_downloads",
+)
+
+google_drive_toolkit.register_for_llm(assistant)
+
+assistant.run(
+    message="List the latest 3 files and write a short summary based on the file names and meme types.",
+    max_turns=4,
+    tools=google_drive_toolkit.tools,
+    user_input=False,
+)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_google_drive.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

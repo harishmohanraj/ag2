@@ -1,0 +1,114 @@
+---
+sidebarTitle: Toolkit
+title: autogen.tools.Toolkit
+---
+<h2 id="autogen.tools.Toolkit" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">Toolkit</span>
+</h2>
+
+```python
+Toolkit(tools: list[Tool])
+```
+
+    A class representing a set of tools that can be used by an agent for various tasks.<br/>Create a new Toolkit object.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tools` | **Type:** list[[Tool](/docs/api-reference/autogen/tools/Tool)] |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tools
+<br />
+
+    Get the list of tools in the set.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_tool
+
+```python
+get_tool(self, tool_name: str) -> Tool
+```
+
+    Get a tool from the set by name.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool_name` | The name of the tool to get.<br/><br/>**Type:** str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Tool](/docs/api-reference/autogen/tools/Tool) | Tool: The tool with the given name. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_for_execution
+
+```python
+register_for_execution(self, agent: ConversableAgent) -> 
+```
+
+    Register the tools in the set with an agent for
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent to register the tools with.<br/><br/>**Type:** ConversableAgent |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_for_llm
+
+```python
+register_for_llm(self, agent: ConversableAgent) -> 
+```
+
+    Register the tools in the set with an LLM agent.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The LLM agent to register the tools with.<br/><br/>**Type:** ConversableAgent |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### remove_tool
+
+```python
+remove_tool(self, tool_name: str) -> None
+```
+
+    Remove a tool from the set by name.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool_name` | The name of the tool to remove.<br/><br/>**Type:** str |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_tool
+
+```python
+set_tool(self, tool: Tool) -> None
+```
+
+    Set a tool in the set.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool` | The tool to set.<br/><br/>**Type:** [Tool](/docs/api-reference/autogen/tools/Tool) |
+
+<br />

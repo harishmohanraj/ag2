@@ -251,8 +251,9 @@
             {
               "group": "Google APIs",
               "pages": [
+                "docs/user-guide/reference-tools/google-api/youtube-search",
                 "docs/user-guide/reference-tools/google-api/google-search",
-                "docs/user-guide/reference-tools/google-api/youtube-search"
+                "docs/user-guide/reference-tools/google-api/google-drive"
               ]
             },
             "docs/user-guide/reference-tools/perplexity-search",
@@ -349,6 +350,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_multi_task_chats",
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat_qdrant",
             "docs/use-cases/notebooks/notebooks/agentchat_function_call_code_writing",
+            "docs/use-cases/notebooks/notebooks/tools_google_drive",
             "docs/use-cases/notebooks/notebooks/agentchat_logging",
             "docs/use-cases/notebooks/notebooks/agentchat_quickstart_examples",
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat_mongodb",
@@ -2039,6 +2041,7 @@
                 "docs/api-reference/autogen/tools/ChatContext",
                 "docs/api-reference/autogen/tools/Depends",
                 "docs/api-reference/autogen/tools/Tool",
+                "docs/api-reference/autogen/tools/Toolkit",
                 "docs/api-reference/autogen/tools/get_function_schema",
                 "docs/api-reference/autogen/tools/load_basemodels_if_needed",
                 "docs/api-reference/autogen/tools/serialize_to_str",
@@ -2083,6 +2086,50 @@
                         "docs/api-reference/autogen/tools/experimental/browser_use/overview",
                         "docs/api-reference/autogen/tools/experimental/browser_use/BrowserUseResult",
                         "docs/api-reference/autogen/tools/experimental/browser_use/ExtractedContent"
+                      ]
+                    },
+                    {
+                      "group": "google",
+                      "pages": [
+                        "docs/api-reference/autogen/tools/experimental/google/overview",
+                        "docs/api-reference/autogen/tools/experimental/google/GoogleToolkitProtocol",
+                        {
+                          "group": "authentication",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/google/authentication/overview",
+                            "docs/api-reference/autogen/tools/experimental/google/authentication/GoogleCredentialsLocalProvider",
+                            "docs/api-reference/autogen/tools/experimental/google/authentication/GoogleCredentialsProvider"
+                          ]
+                        },
+                        {
+                          "group": "drive",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/google/drive/overview",
+                            "docs/api-reference/autogen/tools/experimental/google/drive/GoogleDriveToolkit",
+                            {
+                              "group": "drive_functions",
+                              "pages": [
+                                "docs/api-reference/autogen/tools/experimental/google/drive/drive_functions/overview",
+                                "docs/api-reference/autogen/tools/experimental/google/drive/drive_functions/download_file",
+                                "docs/api-reference/autogen/tools/experimental/google/drive/drive_functions/list_files_and_folders"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "group": "model",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/google/model/overview",
+                            "docs/api-reference/autogen/tools/experimental/google/model/GoogleFileInfo"
+                          ]
+                        },
+                        {
+                          "group": "toolkit_protocol",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/google/toolkit_protocol/overview",
+                            "docs/api-reference/autogen/tools/experimental/google/toolkit_protocol/GoogleToolkitProtocol"
+                          ]
+                        }
                       ]
                     },
                     {
