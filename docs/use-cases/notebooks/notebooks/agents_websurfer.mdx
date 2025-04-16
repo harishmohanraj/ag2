@@ -117,12 +117,13 @@ manual `UserProxyAgent` creation.
 # The `web_tool="browser_use"` tells the agent to use the `BrowserUseTool` to surf the web.
 websurfer = WebSurferAgent(name="WebSurfer", llm_config=llm_config, web_tool="browser_use")
 
-websurfer.run(
+run_response = websurfer.run(
     message="Get info from https://docs.ag2.ai/docs/Home",
     tools=websurfer.tools,
     max_turns=2,
     user_input=False,
 )
+run_response.process()
 ```
 
 #### **Manual Setup:** Using `initiate_chat` Method
@@ -236,12 +237,13 @@ manual `UserProxyAgent` creation.
 # `web_tool` parameter must be set to `crawl4ai` in order for the `Crawl4AITool` to be used.
 websurfer = WebSurferAgent(name="WebSurfer", llm_config=llm_config, web_tool="crawl4ai")
 
-websurfer.run(
+run_response = websurfer.run(
     message="Get info from https://docs.ag2.ai/docs/Home",
     tools=websurfer.tools,
     max_turns=2,
     user_input=False,
 )
+run_response.process()
 ```
 
 #### **Manual Setup:** Using `initiate_chat` Method

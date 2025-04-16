@@ -93,19 +93,18 @@
   "anchors": [],
   "navigation": [
     {
-      "group": "Home",
+      "group": "Quick Start",
       "pages": [
-        "docs/home/home",
-        "docs/home/quick-start"
+        "docs/quick-start"
       ]
     },
     {
       "group": "User Guide",
       "pages": [
+        "docs/user-guide/basic-concepts/installing-ag2",
         {
           "group": "Basic Concepts",
           "pages": [
-            "docs/user-guide/basic-concepts/installing-ag2",
             {
               "group": "LLM Configuration",
               "pages": [
@@ -116,7 +115,7 @@
             "docs/user-guide/basic-concepts/conversable-agent",
             "docs/user-guide/basic-concepts/human-in-the-loop",
             {
-              "group": "Orchestrating Agents",
+              "group": "Agent Orchestration",
               "pages": [
                 "docs/user-guide/basic-concepts/orchestration/orchestrations",
                 "docs/user-guide/basic-concepts/orchestration/sequential-chat",
@@ -132,6 +131,12 @@
                 "docs/user-guide/basic-concepts/tools/basics",
                 "docs/user-guide/basic-concepts/tools/controlling-use",
                 "docs/user-guide/basic-concepts/tools/tools-with-secrets",
+                {
+                  "group": "Model Context Protocol",
+                  "pages": [
+                    "docs/user-guide/basic-concepts/tools/mcp/client"
+                  ]
+                },
                 {
                   "group": "Interoperability",
                   "pages": [
@@ -240,8 +245,9 @@
             "docs/user-guide/reference-agents/docagent",
             "docs/user-guide/reference-agents/docagent-performance",
             "docs/user-guide/reference-agents/reasoningagent",
+            "docs/user-guide/reference-agents/deepresearchagent",
             "docs/user-guide/reference-agents/websurferagent",
-            "docs/user-guide/reference-agents/deepresearchagent"
+            "docs/user-guide/reference-agents/wikipediaagent"
           ]
         },
         {
@@ -257,6 +263,7 @@
               ]
             },
             "docs/user-guide/reference-tools/perplexity-search",
+            "docs/user-guide/reference-tools/wikipedia-search",
             "docs/user-guide/reference-tools/browser-use",
             "docs/user-guide/reference-tools/deep-research",
             {
@@ -269,7 +276,54 @@
             },
             "docs/user-guide/reference-tools/crawl4ai"
           ]
-        }
+        },
+        "docs/faq/FAQ"
+      ]
+    },
+    {
+      "group": "Contributor Guide",
+      "pages": [
+        "docs/contributor-guide/contributing",
+        "docs/contributor-guide/setup-development-environment",
+        "docs/contributor-guide/documentation",
+        "docs/contributor-guide/file-bug-report",
+        "docs/contributor-guide/maintainer",
+        {
+          "group": "How AG2 Works",
+          "pages": [
+            "docs/contributor-guide/how-ag2-works/overview",
+            "docs/contributor-guide/how-ag2-works/initiate-chat",
+            "docs/contributor-guide/how-ag2-works/generate-reply",
+            "docs/contributor-guide/how-ag2-works/hooks"
+          ]
+        },
+        {
+          "group": "Building Agents & Tools",
+          "pages": [
+            "docs/contributor-guide/building/creating-a-tool",
+            "docs/contributor-guide/building/creating-an-agent"
+          ]
+        },
+        "docs/contributor-guide/pre-commit",
+        "docs/contributor-guide/tests",
+        "docs/contributor-guide/Research"
+      ]
+    },
+    {
+      "group": "Ecosystem",
+      "pages": [
+        "docs/ecosystem/agentops",
+        "docs/ecosystem/azure_cosmos_db",
+        "docs/ecosystem/composio",
+        "docs/ecosystem/databricks",
+        "docs/ecosystem/llamaindex",
+        "docs/ecosystem/mem0",
+        "docs/ecosystem/memgpt",
+        "docs/ecosystem/microsoft-fabric",
+        "docs/ecosystem/ollama",
+        "docs/ecosystem/pgvector",
+        "docs/ecosystem/portkey",
+        "docs/ecosystem/promptflow"
       ]
     },
     {
@@ -293,6 +347,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_nestedchat",
             "docs/use-cases/notebooks/notebooks/agentchat_agentops",
             "docs/use-cases/notebooks/notebooks/config_loader_utility_functions",
+            "docs/use-cases/notebooks/notebooks/agents_wikipedia",
             "docs/use-cases/notebooks/notebooks/agentchat_websockets",
             "docs/use-cases/notebooks/notebooks/autogen_uniformed_api_calling",
             "docs/use-cases/notebooks/notebooks/agentchat_oai_assistant_retrieval",
@@ -362,6 +417,7 @@
             "docs/use-cases/notebooks/notebooks/agentchat_groupchat_finite_state_machine",
             "docs/use-cases/notebooks/notebooks/agentchat_nestedchat_optiguide",
             "docs/use-cases/notebooks/notebooks/agentchat_groupchat_vis",
+            "docs/use-cases/notebooks/notebooks/run_and_event_processing",
             "docs/use-cases/notebooks/notebooks/JSON_mode_example",
             "docs/use-cases/notebooks/notebooks/agentchat_video_transcript_translate_with_whisper",
             "docs/use-cases/notebooks/notebooks/agentchat_oai_assistant_groupchat",
@@ -391,10 +447,13 @@
             "docs/use-cases/notebooks/notebooks/agentchat_RetrieveChat_couchbase",
             "docs/use-cases/notebooks/notebooks/agentchat_graph_rag_neo4j_native",
             "docs/use-cases/notebooks/notebooks/autobuild_agent_library",
+            "docs/use-cases/notebooks/notebooks/mcp_client",
             "docs/use-cases/notebooks/notebooks/agentchat_nested_chats_chess",
+            "docs/use-cases/notebooks/notebooks/tools_tavily_search",
             "docs/use-cases/notebooks/notebooks/agentchat_function_call_async",
             "docs/use-cases/notebooks/notebooks/agentchat_society_of_mind",
             "docs/use-cases/notebooks/notebooks/agentchat_microsoft_fabric",
+            "docs/use-cases/notebooks/notebooks/tools_wikipedia_search",
             "docs/use-cases/notebooks/notebooks/lats_search",
             "docs/use-cases/notebooks/notebooks/agentchat_lmm_llava",
             "docs/use-cases/notebooks/notebooks/agentchat_dalle_and_gpt4v",
@@ -407,58 +466,6 @@
           ]
         },
         "docs/use-cases/community-gallery/community-gallery"
-      ]
-    },
-    {
-      "group": "Contributor Guide",
-      "pages": [
-        "docs/contributor-guide/contributing",
-        "docs/contributor-guide/setup-development-environment",
-        "docs/contributor-guide/documentation",
-        "docs/contributor-guide/file-bug-report",
-        "docs/contributor-guide/maintainer",
-        {
-          "group": "How AG2 Works",
-          "pages": [
-            "docs/contributor-guide/how-ag2-works/overview",
-            "docs/contributor-guide/how-ag2-works/initiate-chat",
-            "docs/contributor-guide/how-ag2-works/generate-reply",
-            "docs/contributor-guide/how-ag2-works/hooks"
-          ]
-        },
-        {
-          "group": "Building Agents & Tools",
-          "pages": [
-            "docs/contributor-guide/building/creating-a-tool",
-            "docs/contributor-guide/building/creating-an-agent"
-          ]
-        },
-        "docs/contributor-guide/pre-commit",
-        "docs/contributor-guide/tests",
-        "docs/contributor-guide/Research"
-      ]
-    },
-    {
-      "group": "FAQs",
-      "pages": [
-        "docs/faq/FAQ"
-      ]
-    },
-    {
-      "group": "Ecosystem",
-      "pages": [
-        "docs/ecosystem/agentops",
-        "docs/ecosystem/azure_cosmos_db",
-        "docs/ecosystem/composio",
-        "docs/ecosystem/databricks",
-        "docs/ecosystem/llamaindex",
-        "docs/ecosystem/mem0",
-        "docs/ecosystem/memgpt",
-        "docs/ecosystem/microsoft-fabric",
-        "docs/ecosystem/ollama",
-        "docs/ecosystem/pgvector",
-        "docs/ecosystem/portkey",
-        "docs/ecosystem/promptflow"
       ]
     },
     {
@@ -496,6 +503,7 @@
             "docs/api-reference/autogen/UpdateSystemMessage",
             "docs/api-reference/autogen/UserProxyAgent",
             "docs/api-reference/autogen/a_initiate_swarm_chat",
+            "docs/api-reference/autogen/a_run_swarm",
             "docs/api-reference/autogen/config_list_from_dotenv",
             "docs/api-reference/autogen/config_list_from_json",
             "docs/api-reference/autogen/config_list_from_models",
@@ -508,6 +516,7 @@
             "docs/api-reference/autogen/initiate_swarm_chat",
             "docs/api-reference/autogen/register_function",
             "docs/api-reference/autogen/register_hand_off",
+            "docs/api-reference/autogen/run_swarm",
             {
               "group": "agentchat",
               "pages": [
@@ -1316,6 +1325,7 @@
                     "docs/api-reference/autogen/agents/experimental/ThinkNode",
                     "docs/api-reference/autogen/agents/experimental/VectorChromaQueryEngine",
                     "docs/api-reference/autogen/agents/experimental/WebSurferAgent",
+                    "docs/api-reference/autogen/agents/experimental/WikipediaAgent",
                     {
                       "group": "document_agent",
                       "pages": [
@@ -1480,6 +1490,71 @@
               ]
             },
             {
+              "group": "events",
+              "pages": [
+                "docs/api-reference/autogen/events/overview",
+                "docs/api-reference/autogen/events/BaseEvent",
+                "docs/api-reference/autogen/events/deprecated_by",
+                "docs/api-reference/autogen/events/get_annotated_type_for_event_classes",
+                "docs/api-reference/autogen/events/wrap_event",
+                {
+                  "group": "agent_events",
+                  "pages": [
+                    "docs/api-reference/autogen/events/agent_events/overview",
+                    "docs/api-reference/autogen/events/agent_events/ClearAgentsHistoryEvent",
+                    "docs/api-reference/autogen/events/agent_events/ClearConversableAgentHistoryEvent",
+                    "docs/api-reference/autogen/events/agent_events/ConversableAgentUsageSummaryEvent",
+                    "docs/api-reference/autogen/events/agent_events/ConversableAgentUsageSummaryNoCostIncurredEvent",
+                    "docs/api-reference/autogen/events/agent_events/ExecuteCodeBlockEvent",
+                    "docs/api-reference/autogen/events/agent_events/ExecuteFunctionEvent",
+                    "docs/api-reference/autogen/events/agent_events/FunctionCallEvent",
+                    "docs/api-reference/autogen/events/agent_events/FunctionResponseEvent",
+                    "docs/api-reference/autogen/events/agent_events/GenerateCodeExecutionReplyEvent",
+                    "docs/api-reference/autogen/events/agent_events/GroupChatResumeEvent",
+                    "docs/api-reference/autogen/events/agent_events/GroupChatRunChatEvent",
+                    "docs/api-reference/autogen/events/agent_events/PostCarryoverProcessingEvent",
+                    "docs/api-reference/autogen/events/agent_events/SelectSpeakerEvent",
+                    "docs/api-reference/autogen/events/agent_events/SpeakerAttemptFailedMultipleAgentsEvent",
+                    "docs/api-reference/autogen/events/agent_events/SpeakerAttemptFailedNoAgentsEvent",
+                    "docs/api-reference/autogen/events/agent_events/SpeakerAttemptSuccessfulEvent",
+                    "docs/api-reference/autogen/events/agent_events/TerminationAndHumanReplyNoInputEvent",
+                    "docs/api-reference/autogen/events/agent_events/TerminationEvent",
+                    "docs/api-reference/autogen/events/agent_events/TextEvent",
+                    "docs/api-reference/autogen/events/agent_events/ToolCallEvent",
+                    "docs/api-reference/autogen/events/agent_events/ToolResponseEvent"
+                  ]
+                },
+                {
+                  "group": "base_event",
+                  "pages": [
+                    "docs/api-reference/autogen/events/base_event/overview",
+                    "docs/api-reference/autogen/events/base_event/get_event_classes"
+                  ]
+                },
+                {
+                  "group": "client_events",
+                  "pages": [
+                    "docs/api-reference/autogen/events/client_events/overview",
+                    "docs/api-reference/autogen/events/client_events/UsageSummaryEvent"
+                  ]
+                },
+                {
+                  "group": "helpers",
+                  "pages": [
+                    "docs/api-reference/autogen/events/helpers/overview",
+                    "docs/api-reference/autogen/events/helpers/deprecated_by"
+                  ]
+                },
+                {
+                  "group": "print_event",
+                  "pages": [
+                    "docs/api-reference/autogen/events/print_event/overview",
+                    "docs/api-reference/autogen/events/print_event/PrintEvent"
+                  ]
+                }
+              ]
+            },
+            {
               "group": "exception_utils",
               "pages": [
                 "docs/api-reference/autogen/exception_utils/overview",
@@ -1631,18 +1706,6 @@
                 "docs/api-reference/autogen/interop/PydanticAIInteroperability",
                 "docs/api-reference/autogen/interop/register_interoperable_class",
                 {
-                  "group": "pydantic_ai",
-                  "pages": [
-                    {
-                      "group": "pydantic_ai_tool",
-                      "pages": [
-                        "docs/api-reference/autogen/interop/pydantic_ai/pydantic_ai_tool/overview",
-                        "docs/api-reference/autogen/interop/pydantic_ai/pydantic_ai_tool/PydanticAITool"
-                      ]
-                    }
-                  ]
-                },
-                {
                   "group": "registry",
                   "pages": [
                     "docs/api-reference/autogen/interop/registry/overview",
@@ -1659,7 +1722,29 @@
                 "docs/api-reference/autogen/io/IOStream",
                 "docs/api-reference/autogen/io/IOWebsockets",
                 "docs/api-reference/autogen/io/InputStream",
-                "docs/api-reference/autogen/io/OutputStream"
+                "docs/api-reference/autogen/io/OutputStream",
+                {
+                  "group": "run_response",
+                  "pages": [
+                    "docs/api-reference/autogen/io/run_response/overview",
+                    "docs/api-reference/autogen/io/run_response/AsyncRunResponse",
+                    "docs/api-reference/autogen/io/run_response/AsyncRunResponseProtocol",
+                    "docs/api-reference/autogen/io/run_response/Cost",
+                    "docs/api-reference/autogen/io/run_response/CostBreakdown",
+                    "docs/api-reference/autogen/io/run_response/RunInfoProtocol",
+                    "docs/api-reference/autogen/io/run_response/RunResponse",
+                    "docs/api-reference/autogen/io/run_response/RunResponseProtocol",
+                    "docs/api-reference/autogen/io/run_response/Usage"
+                  ]
+                },
+                {
+                  "group": "thread_io_stream",
+                  "pages": [
+                    "docs/api-reference/autogen/io/thread_io_stream/overview",
+                    "docs/api-reference/autogen/io/thread_io_stream/AsyncThreadIOStream",
+                    "docs/api-reference/autogen/io/thread_io_stream/ThreadIOStream"
+                  ]
+                }
               ]
             },
             {
@@ -1713,6 +1798,20 @@
                 "docs/api-reference/autogen/math_utils/last_boxed_only_string",
                 "docs/api-reference/autogen/math_utils/remove_boxed",
                 "docs/api-reference/autogen/math_utils/voting_counts"
+              ]
+            },
+            {
+              "group": "mcp",
+              "pages": [
+                "docs/api-reference/autogen/mcp/overview",
+                "docs/api-reference/autogen/mcp/create_toolkit",
+                {
+                  "group": "mcp_client",
+                  "pages": [
+                    "docs/api-reference/autogen/mcp/mcp_client/overview",
+                    "docs/api-reference/autogen/mcp/mcp_client/ResultSaved"
+                  ]
+                }
               ]
             },
             {
@@ -2075,10 +2174,14 @@
                     "docs/api-reference/autogen/tools/experimental/DiscordSendTool",
                     "docs/api-reference/autogen/tools/experimental/GoogleSearchTool",
                     "docs/api-reference/autogen/tools/experimental/PerplexitySearchTool",
+                    "docs/api-reference/autogen/tools/experimental/SlackRetrieveRepliesTool",
                     "docs/api-reference/autogen/tools/experimental/SlackRetrieveTool",
                     "docs/api-reference/autogen/tools/experimental/SlackSendTool",
+                    "docs/api-reference/autogen/tools/experimental/TavilySearchTool",
                     "docs/api-reference/autogen/tools/experimental/TelegramRetrieveTool",
                     "docs/api-reference/autogen/tools/experimental/TelegramSendTool",
+                    "docs/api-reference/autogen/tools/experimental/WikipediaPageLoadTool",
+                    "docs/api-reference/autogen/tools/experimental/WikipediaQueryRunTool",
                     "docs/api-reference/autogen/tools/experimental/YoutubeSearchTool",
                     {
                       "group": "browser_use",
@@ -2150,6 +2253,24 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "group": "wikipedia",
+                      "pages": [
+                        "docs/api-reference/autogen/tools/experimental/wikipedia/overview",
+                        "docs/api-reference/autogen/tools/experimental/wikipedia/WikipediaPageLoadTool",
+                        "docs/api-reference/autogen/tools/experimental/wikipedia/WikipediaQueryRunTool",
+                        {
+                          "group": "wikipedia",
+                          "pages": [
+                            "docs/api-reference/autogen/tools/experimental/wikipedia/wikipedia/overview",
+                            "docs/api-reference/autogen/tools/experimental/wikipedia/wikipedia/Document",
+                            "docs/api-reference/autogen/tools/experimental/wikipedia/wikipedia/WikipediaClient",
+                            "docs/api-reference/autogen/tools/experimental/wikipedia/wikipedia/WikipediaPageLoadTool",
+                            "docs/api-reference/autogen/tools/experimental/wikipedia/wikipedia/WikipediaQueryRunTool"
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -2173,6 +2294,10 @@
         {
           "group": "User Stories",
           "pages": [
+            "docs/user-stories/2025-04-15-CMBAgent/index",
+            "docs/user-stories/2025-04-11-Productionizing-OSS-Agents/index",
+            "docs/user-stories/2025-04-04-AgentWeb/index",
+            "docs/user-stories/2025-04-03-Fortune-500-RAG-Chatbot/index",
             "docs/user-stories/2025-02-11-NOVA/index"
           ]
         }

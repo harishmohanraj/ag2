@@ -1,0 +1,107 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agents_wikipedia.ipynb
+description: Search Wikipedia with WikipediaAgent
+source_notebook: /notebook/agents_wikipedia.ipynb
+tags:
+- tools
+- wikipedia
+- search
+title: Wikipedia Agent
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agents_wikipedia.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agents_wikipedia.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+In the [Wikipedia Search
+Tools](https://github.com/ag2ai/ag2/blob/main/notebook/tools_wikipedia_search.ipynb)
+notebook, we demonstrated how to create Agents with basic Wikipedia
+search capabilities.
+
+Now, we’re taking it a step further with `WikipediaAgent`—a powerful
+agent equipped with built-in wiki search tools right out of the box!
+
+## Package Installation
+
+To get started with the Wikipedia search integration in AG2, follow
+these steps:
+
+Install AG2 with `"wikipedia` and `openai` since we use OpenAI’s LLMs in
+our example:
+
+```bash
+pip install -U "ag2[wikipedia, openai]"
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U "autogen[wikipedia, openai]"
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U "pyautogen[wikipedia, openai]"
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+You’re all set! Now you can start using Wikipedia Search with AG2.
+
+## Demonstration
+
+The `WikipediaAgent` comes packaged with two Wikipedia tools,
+`WikipediaQueryRunTool` for running title/keyword searches and
+`WikipediaPageLoadTool` for fetching full page content. Together with
+the fact that it has a pre-configured system message (which you can
+override), you only need to create the agent and add it to a chat to get
+going.
+
+### Imports
+
+```python
+from autogen import LLMConfig
+from autogen.agents.experimental import WikipediaAgent
+```
+
+### Agent Configuration
+
+Configure `WikipediaAgent` and run it. Using the agent’s `run` command
+will automatically
+
+```python
+# LLM configuration
+config_list = LLMConfig(api_type="openai", model="gpt-4o-mini")
+
+# Create the agent
+wiki_agent = WikipediaAgent(name="wiki-agent", llm_config=config_list)
+
+# If you are adding this agent into a chat that requires separate tool execution, register the tools with the executing agent:
+# for tool in wiki_agent.tools:
+# tool.register_for_execution(the_executing_agent)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the conversation.
+
+```python
+response = wiki_agent.run(
+    message="What's the population of Australia?",
+    max_turns=2,
+    # Instruct the chat to associate the WikipediaAgent's tools with the internal tool executor
+    tools=wiki_agent.tools,
+)
+
+# Run the chat
+response.process()
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/agents_wikipedia.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

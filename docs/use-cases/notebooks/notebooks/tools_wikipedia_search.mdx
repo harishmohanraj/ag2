@@ -1,0 +1,133 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_wikipedia_search.ipynb
+description: Perplexity Search Integration with AG2
+source_notebook: /notebook/tools_wikipedia_search.ipynb
+tags:
+- tools
+- perplexity
+- web-search
+- search
+title: Wikipedia Search Tools
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_wikipedia_search.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_wikipedia_search.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+AG2’s Wikipedia search integration allows agents to perform searches in
+Wikipedia and retrieve the relevant pages. Follow these steps to
+integrate Wikipedia Search Tools with AG2 Agents.
+
+Two tools are available for your AG2 agents: - `WikipediaQueryRunTool`
+executes Wikipedia queries and returning summarized page results -
+`WikipediaPageLoadTool` loads the contents of a Wikipedia page together
+with its metadata (for detailed data extraction)
+
+## Package Installation
+
+To get started with the Wikipedia search integration in AG2, follow
+these steps:
+
+Install AG2 with `"wikipedia` and `openai` since we use OpenAI’s LLMs in
+our example:
+
+```bash
+pip install -U "ag2[wikipedia, openai]"
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U "autogen[wikipedia, openai]"
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U "pyautogen[wikipedia, openai]"
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+You’re all set! Now you can start using Wikipedia Search with AG2.
+
+## Implementation
+
+The `WikipediaQueryRunTool` enables agents to perform Wikipedia search.
+
+### Imports
+
+```python
+from autogen import AssistantAgent, LLMConfig, UserProxyAgent
+from autogen.tools.experimental import WikipediaPageLoadTool, WikipediaQueryRunTool
+```
+
+### Agent Configuration
+
+Configure an assistant agent and user proxy to be used for LLM
+recommendation and execution respectively.
+
+```python
+config_list = LLMConfig(api_type="openai", model="gpt-4o-mini")
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config=config_list,
+)
+
+user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER", code_execution_config=False)
+```
+
+### Query Tool Setup
+
+```python
+wikipedia_query_tool = WikipediaQueryRunTool()
+
+# Register the tool for LLM recommendation (assistant agent) and execution (user_proxy agent).
+wikipedia_query_tool.register_for_llm(assistant)
+wikipedia_query_tool.register_for_execution(user_proxy)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the assistant to search
+Wikipedia.
+
+```python
+response = user_proxy.initiate_chat(
+    recipient=assistant,
+    message="Who is the father of AI?",
+    max_turns=2,
+)
+```
+
+## Page Load Tool Setup
+
+```python
+# Start by removing the Query tool so we ensure our agent uses the Page Load tool
+assistant.remove_tool_for_llm(wikipedia_query_tool)
+
+# Create the Page Load tool
+wikipedia_page_load_tool = WikipediaPageLoadTool()
+
+# Register the tool for LLM recommendation (assistant agent) and execution (user_proxy agent).
+wikipedia_page_load_tool.register_for_llm(assistant)
+wikipedia_page_load_tool.register_for_execution(user_proxy)
+```
+
+
+```python
+response = user_proxy.initiate_chat(
+    recipient=assistant,
+    message="What's the population of Australia?",
+    max_turns=2,
+)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_wikipedia_search.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

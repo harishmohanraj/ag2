@@ -101,7 +101,7 @@ agent = DeepResearchAgent(
 
 message = "What was the impact of DeepSeek on stock prices and why?"
 
-result = agent.run(
+run_result = agent.run(
     message=message,
     tools=agent.tools,
     max_turns=2,
@@ -109,7 +109,8 @@ result = agent.run(
     summary_method="reflection_with_llm",
 )
 
-result.summary
+run_result.process()
+run_result.summary
 ```
 
 <div className="edit-url-container">

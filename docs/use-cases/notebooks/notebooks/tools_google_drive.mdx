@@ -137,7 +137,7 @@ With the setup complete, you can now use the assistant to list and
 download files from your Google Drive.
 
 ```python
-assistant.run(
+run_response = assistant.run(
     message="""Get me the last 3 files and download all docs/sheets/slides meme types.
 Ignore subfolders for now.
 Once done, write 'TERMINATE'.""",
@@ -145,6 +145,7 @@ Once done, write 'TERMINATE'.""",
     tools=google_drive_toolkit.tools,
     user_input=False,
 )
+run_response.process()
 ```
 
 ## Custom GoogleDriveToolkit
@@ -223,12 +224,13 @@ google_drive_toolkit = MyGoogleDriveToolkit(
 
 google_drive_toolkit.register_for_llm(assistant)
 
-assistant.run(
+run_response = assistant.run(
     message="List the latest 3 files and write a short summary based on the file names and meme types.",
     max_turns=4,
     tools=google_drive_toolkit.tools,
     user_input=False,
 )
+run_response.process()
 ```
 
 <div className="edit-url-container">

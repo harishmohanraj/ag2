@@ -1,0 +1,141 @@
+---
+sidebarTitle: WikipediaQueryRunTool
+title: autogen.tools.experimental.WikipediaQueryRunTool
+---
+<h2 id="autogen.tools.experimental.WikipediaQueryRunTool" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">WikipediaQueryRunTool</span>
+</h2>
+
+```python
+WikipediaQueryRunTool(
+    language: str = 'en',
+    top_k: int = 3,
+    verbose: bool = False
+)
+```
+
+    Tool for querying Wikipedia and returning summarized page results.<br/>This tool uses the `wikipediaapi` package to perform searches
+    against a specified language edition of Wikipedia and returns
+    up to `top_k` page summaries.<br/>Public methods: <br/>    query_run(query: str) -> list[str] | str
+    
+    Attributes: <br/>    language (str): Language code for the Wikipedia edition (e.g., 'en', 'es').<br/>    top_k (int): Max number of page summaries returned (≤ MAX_PAGE_RETRIEVE).<br/>    verbose (bool): If True, enables debug logging to stdout.<br/>    wiki_cli (WikipediaClient): Internal client for Wikipedia API calls.<br/>Initialize the WikipediaQueryRunTool.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `language` | **Type:** str<br/><br/>**Default:** 'en' |
+| `top_k` | **Type:** int<br/><br/>**Default:** 3 |
+| `verbose` | **Type:** bool<br/><br/>**Default:** False |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### description
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### func
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### function_schema
+<br />
+
+    Get the schema for the function.<br/>This is the old way of handling function calls with OpenAI and compatible frameworks.<br/>It is provided for backward compatibility.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### name
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### realtime_tool_schema
+<br />
+
+    Get the schema for the tool.<br/>This is the preferred way of handling function calls with OpeaAI and compatible frameworks.
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### tool_schema
+<br />
+
+    Get the schema for the tool.<br/>This is the preferred way of handling function calls with OpeaAI and compatible frameworks.
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### query_run
+
+```python
+query_run(self, query: str) -> str | list[str]
+```
+
+    Search Wikipedia and return formatted page summaries.<br/>        Truncates `query` to MAX_QUERY_LENGTH before searching.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | Search term(s) to look up in Wikipedia.<br/><br/>**Type:** str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| str \| list[str] | list[str]: Each element is "Page: &lt;title> Summary: &lt;text>". str: Error message if no results are found or on exception. Note: Automatically handles API exceptions and returns error strings for robust operation |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_for_execution
+
+```python
+register_for_execution(self, agent: ConversableAgent) -> 
+```
+
+    Registers the tool for direct execution by a ConversableAgent.<br/>This method registers the tool so that it can be executed by the agent,
+    typically outside of the context of an LLM interaction.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent to which the tool will be registered.<br/><br/>**Type:** ConversableAgent |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_for_llm
+
+```python
+register_for_llm(self, agent: ConversableAgent) -> 
+```
+
+    Registers the tool for use with a ConversableAgent's language model (LLM).<br/>This method registers the tool so that it can be invoked by the agent during
+    interactions with the language model.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent to which the tool will be registered.<br/><br/>**Type:** ConversableAgent |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_tool
+
+```python
+register_tool(self, agent: ConversableAgent) -> 
+```
+
+    Register a tool to be both proposed and executed by an agent.<br/>Equivalent to calling both `register_for_llm` and `register_for_execution` with the same agent.<br/>Note: This will not make the agent recommend and execute the call in the one step. If the agent
+    recommends the tool, it will need to be the next agent to speak in order to execute the tool.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent to which the tool will be registered.<br/><br/>**Type:** ConversableAgent |
+
+<br />

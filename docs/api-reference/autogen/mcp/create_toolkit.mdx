@@ -1,0 +1,34 @@
+---
+sidebarTitle: create_toolkit
+title: autogen.mcp.create_toolkit
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### create_toolkit
+
+```python
+create_toolkit(
+    session: ClientSession,
+    *,
+    use_mcp_tools: bool = True,
+    use_mcp_resources: bool = True,
+    resource_download_folder: str | Path | None = None
+) -> Toolkit
+```
+
+    Create a toolkit from the MCP client session.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `session` | The MCP client session.<br/><br/>**Type:** ClientSession |
+| `use_mcp_tools` | Whether to include MCP tools in the toolkit.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+| `use_mcp_resources` | Whether to include MCP resources in the toolkit.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+| `resource_download_folder` | The folder to download files to.<br/><br/>**Type:** str \| pathlib.Path \| None<br/><br/>**Default:** None |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Toolkit](/docs/api-reference/autogen/tools/Toolkit) | Toolkit: The toolkit containing the converted tools. |
+
+<br />

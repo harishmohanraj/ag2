@@ -140,12 +140,13 @@ Now, let’s create an X post using our x_assistant
 
 ```python
 # Scenario 1. This task requires x_assistant's past state
-post = x_assistant.run(
-    "Create an X post based on the hot topic and the following and mention the influencer:\n" + paper_abstract.summary,
+run_result = x_assistant.run(
+    message="Create an X post based on the hot topic and the following and mention the influencer:\n"
+    + paper_abstract.summary,
     user_input=False,
 )
-
-print(post.summary)
+run_result.process()
+print(run_result.summary)
 ```
 
 Finally, let’s ask our x_assistant who should we follow on X
@@ -153,14 +154,14 @@ Finally, let’s ask our x_assistant who should we follow on X
 ```python
 # Scenario 2. Doing another task that does not require history or past state
 
-influencer_choice = x_assistant.run(
+run_result = x_assistant.run(
     "Find a influencer I should follow on Twitter by searching the web",
     clear_history=True,
     tools=browser_use_tool,
     user_input=False,
 )
-
-print(influencer_choice.summary)
+run_result.process()
+print(run_result.summary)
 ```
 
 <div className="edit-url-container">

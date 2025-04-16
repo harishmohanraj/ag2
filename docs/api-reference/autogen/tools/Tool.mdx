@@ -12,11 +12,12 @@ Tool(
     *,
     name: str | None = None,
     description: str | None = None,
-    func_or_tool: ForwardRef('Tool') | Callable[..., Any]
+    func_or_tool: ForwardRef('Tool') | Callable[..., Any],
+    parameters_json_schema: dict[str, Any] | None = None
 )
 ```
 
-    A class representing a Tool that can be used by an agent for various tasks.<br/>This class encapsulates a tool with a name, description, and an executable function.<br/>The tool can be registered with a ConversableAgent for use either with an LLM or for direct execution.<br/>Attributes: <br/>    name (str): The name of the tool.<br/>    description (str): The description of the tool.<br/>    func_or_tool (Union[Tool, Callable[..., Any]]): The function or Tool instance to create a Tool from.<br/>Create a new Tool object.<br/>
+    A class representing a Tool that can be used by an agent for various tasks.<br/>This class encapsulates a tool with a name, description, and an executable function.<br/>The tool can be registered with a ConversableAgent for use either with an LLM or for direct execution.<br/>Attributes: <br/>    name (str): The name of the tool.<br/>    description (str): The description of the tool.<br/>    func_or_tool (Union[Tool, Callable[..., Any]]): The function or Tool instance to create a Tool from.<br/>    parameters_json_schema (Optional[ict[str, Any]]): A schema describing the parameters that the function accepts. If None, the schema will be generated from the function signature.<br/>Create a new Tool object.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
@@ -24,6 +25,7 @@ Tool(
 | `name` | **Type:** str \| None<br/><br/>**Default:** None |
 | `description` | **Type:** str \| None<br/><br/>**Default:** None |
 | `func_or_tool` | **Type:** ForwardRef('[Tool](/docs/api-reference/autogen/tools/Tool)') \| Callable[..., Any] |
+| `parameters_json_schema` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
 
 ### Instance Attributes
 

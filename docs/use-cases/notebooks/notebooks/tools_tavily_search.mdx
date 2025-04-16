@@ -1,0 +1,130 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_tavily_search.ipynb
+description: Tavily Search Integration with AG2
+source_notebook: /notebook/tools_tavily_search.ipynb
+tags:
+- tools
+- tavily
+- web-search
+- search
+title: Tavily Search Tool
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_tavily_search.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_tavily_search.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+The Tavily AI search integration allows users to perform real-time web
+searches within the AG2 framework. Follow these steps to integrate
+`TavilySearchTool` with AG2 Agents.
+
+## Configuring Your Tavily API Key
+
+1.  **Create a Tavily Account**:
+
+    -   Visit [Tavily AI](https://tavily.com/)
+    -   Click `Sign Up` and create an account
+
+2.  **Get API Key**:
+
+    -   Navigate to [Tavily API](https://app.tavily.com/)
+    -   Generate API key under **API Keys**
+
+3.  **Set Environment Variable:**
+
+    ```bash
+    export TAVILY_API_KEY="your_api_key_here"
+    ```
+
+## Package Installation
+
+To get started with the `Tavily Search` integration in AG2, follow these
+steps:
+
+Install AG2 with `openai` extra since we use openai in our examples:
+
+```bash
+pip install -U "ag2[openai]"
+```
+
+> **Note:** If you have been using `autogen` or `pyautogen`, all you
+> need to do is upgrade it using:
+>
+> ```bash
+> pip install -U "autogen[openai]"
+> ```
+>
+> or
+>
+> ```bash
+> pip install -U "pyautogen[openai]"
+> ```
+>
+> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
+> package.
+
+You’re all set! Now you can start using Tavily AI Search with AG2.
+
+## Implementation
+
+The `TavilySearchTool` enables agents to perform real time AI Powered
+web search.
+
+### Imports
+
+```python
+import os
+
+from autogen import AssistantAgent, UserProxyAgent
+from autogen.tools.experimental import TavilySearchTool
+```
+
+### Agent Configuration
+
+Configure an assistant agent and user proxy to be used for LLM
+recommendation and execution respectively.
+
+```python
+os.environ["AUTOGEN_USE_DOCKER"] = "False"
+
+from autogen import LLMConfig
+
+config_list = LLMConfig(api_type="openai", model="gpt-4o-mini")
+
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config=config_list,
+)
+
+user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER")
+```
+
+### Tool Setup
+
+```python
+tavily_search_tool = TavilySearchTool(tavily_api_key=os.getenv("TAVILY_API_KEY"))
+
+# Register the tool for LLM recommendation and execution.
+tavily_search_tool.register_for_llm(assistant)
+tavily_search_tool.register_for_execution(user_proxy)
+```
+
+### Start the Conversation
+
+With the setup complete, you can now use the assistant to fetch live web
+search results.
+
+```python
+response = user_proxy.initiate_chat(
+    recipient=assistant,
+    message="What happened with stock prices after deepseek was launched? Please search the web.",
+    max_turns=2,
+)
+print(f"Final Answer: {response.summary}")
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_tavily_search.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

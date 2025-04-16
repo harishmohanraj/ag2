@@ -197,6 +197,40 @@ print(ans.summary)
 We can see that in this case the agent suggests to execute a script.
 Later, we will see how it can do this internally.
 
+### Beam Search with Batch Grading
+
+By default, node grading is performed one at a time. While this approach
+is often sufficient, certain applications benefit from a batched grading
+approach on each beam expansion. In other words, instead of grading all
+nodes across the entire search in a single pass, we group each beam’s
+newly expanded nodes into a single batch for grading. This yields:
+
+1.  **Context-aware evaluation**: Within a single beam iteration, the
+    grader can compare and contrast multiple node expansions at once.
+2.  **Improved efficiency**: Combining multiple evaluations into one
+    request per beam iteration can reduce the total number of LLM calls.
+
+To enable batch grading, set `"batch_grading": True` in the
+`reason_config`. By default, `batch_grading` is set to `False`, meaning
+individual node grading is performed without batching.
+
+```python
+with llm_config:
+    reason_agent = ReasoningAgent(
+        name="reason_agent", reason_config={"method": "beam_search", "beam_size": 3, "batch_grading": True}
+    )
+```
+
+
+```python
+ans = user_proxy.initiate_chat(reason_agent, message=question, summary_method=last_meaningful_msg)
+```
+
+
+```python
+print(ans.summary)
+```
+
 ## MCTS
 
 This section demonstrates how to use Monte Carlo Tree Search (MCTS) with
@@ -571,6 +605,46 @@ with llm_config:
 
 ```python
 ans = user_proxy.initiate_chat(forest_agent, message=question, summary_method=last_meaningful_msg)
+```
+
+
+```python
+print(ans.summary)
+```
+
+## Scope
+
+The effectiveness of a LLM agent on a given task can be significantly
+enhanced through prompt optimization. To support this for the
+`ReasoningAgent`, a `scope` parameter can be specified during
+initialization. This parameter will provide valuable context about the
+agent’s intended use, the reasoning process it should follow, and any
+constraints or pitfalls to avoid. This information is incorporated into
+the agent’s thought process to guide its behavior more effectively.
+
+Note: The `scope` differs from the `system_message` in that it informs
+the agent’s reasoning throughout the entire thinking process, whereas
+the `system_message` is used solely when generating the final response.
+
+```python
+scope = """You assess ethical risks of AI systems used in services.
+Begin by identifying stakeholders and their interests.
+Then, evaluate potential ethical risks (bias, transparency, impact).
+Finally, suggest mitigation strategies and ethical safeguards"""
+
+with llm_config:
+    reason_agent = ReasoningAgent(
+        name="reason_agent",
+        reason_config={"method": "dfs", "max_depth": 3},  # Using DFS
+        silent=False,
+        scope=scope,
+    )
+```
+
+
+```python
+question = "What are the ethical risks of using AI in healthcare?"
+ans = user_proxy.initiate_chat(reason_agent, message=question, summary_method=last_meaningful_msg)
 ```
 
 

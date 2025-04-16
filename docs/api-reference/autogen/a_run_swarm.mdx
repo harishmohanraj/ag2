@@ -1,0 +1,38 @@
+---
+sidebarTitle: a_run_swarm
+title: autogen.a_run_swarm
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### a_run_swarm
+
+```python
+a_run_swarm(
+    initial_agent: ConversableAgent,
+    messages: list[dict[str, Any]] | str,
+    agents: list[ConversableAgent],
+    user_agent: UserProxyAgent | None = None,
+    swarm_manager_args: dict[str, Any] | None = None,
+    max_rounds: int = 20,
+    context_variables: dict[str, Any] | None = None,
+    after_work: AfterWorkOption | Callable[[ConversableAgent, list[dict[str, Any]], GroupChat], AfterWorkOption | ConversableAgent | str] | None = AfterWorkOption.TERMINATE,
+    exclude_transit_message: bool = True
+) -> AsyncRunResponseProtocol
+```
+
+    
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `initial_agent` | **Type:** [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) |
+| `messages` | **Type:** list[dict[str, typing.Any]] \| str |
+| `agents` | **Type:** list[[ConversableAgent](/docs/api-reference/autogen/ConversableAgent)] |
+| `user_agent` | **Type:** [UserProxyAgent](/docs/api-reference/autogen/UserProxyAgent) \| None<br/><br/>**Default:** None |
+| `swarm_manager_args` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `max_rounds` | **Type:** int<br/><br/>**Default:** 20 |
+| `context_variables` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `after_work` | **Type:** [AfterWorkOption](/docs/api-reference/autogen/AfterWorkOption) \| Callable[[[ConversableAgent](/docs/api-reference/autogen/ConversableAgent), list[dict[str, Any]], [GroupChat](/docs/api-reference/autogen/GroupChat)], [AfterWorkOption](/docs/api-reference/autogen/AfterWorkOption) \| [ConversableAgent](/docs/api-reference/autogen/ConversableAgent) \| str] \| None<br/><br/>**Default:** AfterWorkOption.TERMINATE |
+| `exclude_transit_message` | **Type:** bool<br/><br/>**Default:** True |
+
+<br />

@@ -28,7 +28,7 @@ convert_tool(
     tool: Any,
     deps: Any = None,
     **kwargs: Any
-) -> PydanticAITool
+) -> Tool
 ```
 
     Converts a given Pydantic AI tool into a general `Tool` format.<br/>This method verifies that the provided tool is a valid `PydanticAITool`,
@@ -45,7 +45,7 @@ convert_tool(
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| [PydanticAITool](/docs/api-reference/autogen/interop/pydantic_ai/pydantic_ai_tool/PydanticAITool) | AG2PydanticAITool: A standardized `Tool` object converted from the Pydantic AI tool. |
+| [Tool](/docs/api-reference/autogen/tools/Tool) | Tool: A standardized `Tool` object converted from the Pydantic AI tool. |
 
 <br />
 

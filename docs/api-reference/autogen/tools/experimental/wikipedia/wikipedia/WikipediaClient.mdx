@@ -1,0 +1,72 @@
+---
+sidebarTitle: WikipediaClient
+title: autogen.tools.experimental.wikipedia.wikipedia.WikipediaClient
+---
+<h2 id="autogen.tools.experimental.wikipedia.wikipedia.WikipediaClient" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">WikipediaClient</span>
+</h2>
+
+```python
+WikipediaClient(language: str = 'en', tool_name: str = 'wikipedia-client')
+```
+
+    Client for interacting with the Wikipedia API.<br/>Supports searching and page retrieval on a specified language edition.<br/>Public methods: <br/>    search(query: str, limit: int) -> list[dict[str, Any]]
+        get_page(title: str) -> Optional[wikipediaapi.WikipediaPage]
+    
+    Attributes: <br/>    base_url (str): URL of the MediaWiki API endpoint.<br/>    headers (dict[str, str]): HTTP headers, including User-Agent.<br/>    wiki (wikipediaapi.Wikipedia): Low-level Wikipedia API client.<br/>Initialize the WikipediaClient.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `language` | **Type:** str<br/><br/>**Default:** 'en' |
+| `tool_name` | **Type:** str<br/><br/>**Default:** 'wikipedia-client' |
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_page
+
+```python
+get_page(self, title: str) -> Any | None
+```
+
+    Retrieve a WikipediaPage object by title.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `title` | Title of the Wikipedia page.<br/><br/>**Type:** str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Any \| None | wikipediaapi.WikipediaPage \| None: The page object if it exists, otherwise None. |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### search
+
+```python
+search(
+    self,
+    query: str,
+    limit: int = 3
+) -> Any
+```
+
+    Search Wikipedia for pages matching a query string.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `query` | The search keywords.<br/><br/>**Type:** str |
+| `limit` | Max number of results to return.<br/><br/>**Type:** int<br/><br/>**Default:** 3 |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Any | list[dict[str, Any]]: Each dict has keys: - 'title' (str) - 'size' (int) - 'wordcount' (int) - 'timestamp' (str) |
+
+<br />

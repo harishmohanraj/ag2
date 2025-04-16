@@ -1,0 +1,25 @@
+---
+sidebarTitle: TavilySearchTool
+title: autogen.tools.experimental.TavilySearchTool
+---
+<h2 id="autogen.tools.experimental.TavilySearchTool" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">TavilySearchTool</span>
+</h2>
+
+```python
+TavilySearchTool(
+    *,
+    llm_config: LLMConfig | dict[str, Any] | None = None,
+    tavily_api_key: str | None = None
+)
+```
+
+    TavilySearchTool is a tool that uses the Tavily Search API to perform a search.<br/>This tool allows agents to leverage the Tavily search engine for information retrieval.<br/>It requires a Tavily API key, which can be provided during initialization or set as
+    an environment variable `TAVILY_API_KEY`.<br/>Attributes: <br/>    tavily_api_key (str): The API key used for authenticating with the Tavily API.<br/>Initializes the TavilySearchTool.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `llm_config` | **Type:** [LLMConfig](/docs/api-reference/autogen/llm_config/LLMConfig) \| dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `tavily_api_key` | **Type:** str \| None<br/><br/>**Default:** None |

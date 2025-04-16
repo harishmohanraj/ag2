@@ -99,7 +99,7 @@ from libraries. In this case, CaptainAgent will automatically generate a
 set of experts according to its identified subtask and initiate the
 group chat. By default, the backbone of the LLM is set to `gpt-4o`. For
 instructions on configuring the backbone, refer to docs on
-[`nested_mode`](https://docs.ag2.ai/docs/topics/captainagent/configurations).
+[`nested_mode`](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent).
 
 ```python
 from autogen import UserProxyAgent
@@ -134,8 +134,8 @@ then assign tools retrieved from tool library to the experts.
 For agent library, refer to
 [`captainagent_expert_library.json`](https://github.com/ag2ai/ag2/blob/main/notebook/captainagent_expert_library.json)
 for samples. You can refer to
-[docs](https://docs.ag2.ai/docs/topics/captainagent/agent_library) on
-how to customize your own expert library.
+[docs](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent)
+on how to customize your own expert library.
 
 For tool library, we provide a set of tools
 [here](https://github.com/ag2ai/ag2/tree/main/autogen/agentchat/contrib/captainagent/tools/README.md),
@@ -177,7 +177,7 @@ building experts for nested chat.
 To run the following demo, it is required to install the dependencies
 from the tool library and obtain BING search api and Rapid API key for
 tools in library to fully function. Please follow the instructions
-[here](https://docs.ag2.ai/docs/topics/captainagent/tool_library).
+[here](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent).
 
 ```python
 # The function requires BING api key and Rapid API key to work. You can follow the instructions from docs to get one.
@@ -222,14 +222,14 @@ potential of what user customized tools can bring.
 
 For a full list of the configurables and the functionalities in
 CaptainAgent, please refer
-[here](https://docs.ag2.ai/docs/topics/captainagent/configurations).
+[here](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent).
 
 For how to customize your own agent library, check
-[here](https://docs.ag2.ai/docs/topics/captainagent/agent_library).
+[here](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent).
 
 For how to implement your own tool library that suits your need, check
 the documents
-[here](https://docs.ag2.ai/docs/topics/captainagent/tool_library).
+[here](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/captainagent).
 
 <div className="edit-url-container">
     <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_captainagent.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>

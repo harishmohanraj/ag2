@@ -1,0 +1,22 @@
+---
+sidebarTitle: wrap_event
+title: autogen.events.wrap_event
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### wrap_event
+
+```python
+wrap_event(event_cls: type[BaseEvent]) -> type[BaseModel]
+```
+
+    Wrap a event class with a type field to be used in a union type
+    
+    This is needed for proper serialization and deserialization of events in a union type.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `event_cls` | Event class to wrap<br/><br/>**Type:** type[[BaseEvent](/docs/api-reference/autogen/events/BaseEvent)] |
+
+<br />

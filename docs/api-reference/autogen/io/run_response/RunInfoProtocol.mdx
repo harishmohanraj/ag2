@@ -1,0 +1,43 @@
+---
+sidebarTitle: RunInfoProtocol
+title: autogen.io.run_response.RunInfoProtocol
+---
+<h2 id="autogen.io.run_response.RunInfoProtocol" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">RunInfoProtocol</span>
+</h2>
+
+```python
+RunInfoProtocol(*args, **kwargs)
+```
+
+    Base class for protocol classes.<br/>Protocol classes are defined as:: <br/>    class Proto(Protocol): <br/>        def meth(self) -> int: <br/>            ...<br/>Such classes are primarily used with static type checkers that recognize
+    structural subtyping (static duck-typing).<br/>For example:: <br/>    class C: <br/>        def meth(self) -> int: <br/>            return 0
+    
+        def func(x: Proto) -> int: <br/>        return x.meth()
+    
+        func(C())  # Passes static type check
+    
+    See PEP 544 for details. Protocol classes decorated with
+    @typing.runtime_checkable act as simple-minded runtime protocols that check
+    only the presence of given attributes, ignoring their type signatures.<br/>Protocol classes can be generic, they are defined as:: <br/>    class GenProto[T](Protocol): <br/>        def meth(self) -> T: <br/>            ...
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `*args` |  |
+| `**kwargs` |  |
+
+### Instance Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### above_run
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### uuid
+<br />
+
+    <br />
