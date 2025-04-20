@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
+from typing import Any
+
 from pydantic import BaseModel
 
 from .context_expression import ContextExpression
@@ -53,6 +55,15 @@ class ExpressionContextCondition(ContextCondition):
     """
 
     expression: ContextExpression
+
+    def __init__(self, expression: ContextExpression, **data: Any) -> None:
+        """Initialize with an expression as a positional parameter.
+
+        Args:
+            expression: The context expression to evaluate
+            data: Additional data for the parent class
+        """
+        super().__init__(expression=expression, **data)
 
     def evaluate(self, context_variables: ContextVariables) -> bool:
         """Evaluate the expression against the context variables.

@@ -117,6 +117,10 @@ class AgentNameTarget(TransitionTarget):
 
     agent_name: str
 
+    def __init__(self, agent_name: str, **data: Any) -> None:
+        """Initialize with agent name as a positional parameter."""
+        super().__init__(agent_name=agent_name, **data)
+
     def can_resolve_for_speaker_selection(self) -> bool:
         """Check if the target can resolve for speaker selection."""
         return True
