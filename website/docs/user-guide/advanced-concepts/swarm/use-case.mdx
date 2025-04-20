@@ -1,6 +1,6 @@
 ---
 title: Swarm Use Case Example
-sidebarTitle: Use Case example
+sidebarTitle: Use Case Example
 ---
 
 <Warning>
@@ -10,6 +10,8 @@ Updating to the new group chat from your Swarm code is straightforward, see [thi
 
 The Swarm code has now been deprecated but will still function with some minor changes. See [this guide](/docs/user-guide/advanced-concepts/swarm/deprecation) to update your current Swarm code to work with v0.9 and up. We would advise updating your code to work with the new group chat with the Swarm code being deprecated.
 </Warning>
+
+### Building a Customer Service Workflow
 
 You can build complex, yet flexible, workflows using AG2's Swarm orchestration.
 
@@ -30,6 +32,8 @@ Key aspects of this swarm are:
 1. System messages are customized, incorporating the context of the workflow
 2. A nested chat handles the order retrieval and summarization
 3. Handoffs are conditional, only being available when they are relevant
+
+### Creating the Swarm Architecture
 
 #### Setting up
 
@@ -53,6 +57,8 @@ from autogen import (
 # Put your key in the OPENAI_API_KEY environment variable
 llm_config = LLMConfig(api_type="openai", model="gpt-4o-mini")
 ```
+
+### Implementing Advanced Swarm Features
 
 #### Context
 With all agents in a Swarm sharing a common context as well as being able to use that context in system messages and hand-off conditions, context variables are a key component to AG2's Swarm.

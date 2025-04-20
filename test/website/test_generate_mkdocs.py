@@ -22,9 +22,9 @@ from autogen._website.generate_mkdocs import (
     fix_internal_references,
     fix_snippet_imports,
     format_navigation,
+    generate_community_insights_nav,
     generate_mkdocs_navigation,
     generate_url_slug,
-    generate_user_stories_nav,
     process_and_copy_files,
     process_blog_contents,
     process_blog_files,
@@ -576,7 +576,7 @@ def test_add_notebooks_nav() -> None:
         - [Game Design](docs/use-cases/use-cases/game-design.md)
         - [Travel Planning](docs/use-cases/use-cases/travel-planning.md)
     - Notebooks
-        - [Notebooks](docs/use-cases/notebooks/Notebooks.md)
+        - [All Notebooks](docs/use-cases/notebooks/Notebooks.md)
     - [Community Gallery](docs/use-cases/community-gallery/community-gallery.md)
 - API References
 {api}
@@ -592,7 +592,7 @@ def test_add_notebooks_nav() -> None:
         - [Game Design](docs/use-cases/use-cases/game-design.md)
         - [Travel Planning](docs/use-cases/use-cases/travel-planning.md)
     - Notebooks
-        - [Notebooks](docs/use-cases/notebooks/Notebooks.md)
+        - [All Notebooks](docs/use-cases/notebooks/Notebooks.md)
         - [Run a standalone AssistantAgent](docs/use-cases/notebooks/notebooks/agentchat_assistant_agent_standalone)
         - [Mitigating Prompt hacking with JSON Mode in Autogen](docs/use-cases/notebooks/notebooks/JSON_mode_example)
     - [Community Gallery](docs/use-cases/community-gallery/community-gallery.md)
@@ -608,6 +608,7 @@ def test_generate_user_stories_nav() -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create User Stories directory
         user_stories_dir = Path(tmpdir) / "docs" / "user-stories"
+        community_talks_dir = Path(tmpdir) / "docs" / "community-talks"
 
         file_1 = user_stories_dir / "2025-03-11-NOVA" / "nova.md"
         file_1.parent.mkdir(parents=True, exist_ok=True)
@@ -635,6 +636,19 @@ tags: [data automation, agents, AG2, Nexla]
 > AG2 has been instrumental in helping Nexla build NOVA,
 """)
 
+        file_3 = community_talks_dir / "2025-02-11-NOVA" / "nova.md"
+        file_3.parent.mkdir(parents=True, exist_ok=True)
+        file_3.write_text("""---
+title: Some other text
+authors:
+  - sonichi
+  - qingyunwu
+tags: [data automation, agents, AG2, Nexla]
+---
+
+> AG2 has been instrumental in helping Nexla build NOVA,
+""")
+
         # Create source directory structure
         mkdocs_nav_path = Path(tmpdir) / "navigation_template.txt"
 
@@ -648,13 +662,13 @@ tags: [data automation, agents, AG2, Nexla]
     - Notebooks
         - [Notebooks](docs/use-cases/notebooks/Notebooks.md)
     - [Community Gallery](docs/use-cases/community-gallery/community-gallery.md)
-- Contributor Guide
+- Blog
     - [Contributing](docs/contributor-guide/contributing.md)
     - [Setup Development Environment](docs/contributor-guide/setup-development-environment.md)
 """)
         )
 
-        generate_user_stories_nav(Path(tmpdir), mkdocs_nav_path)
+        generate_community_insights_nav(Path(tmpdir), mkdocs_nav_path)
 
         expected = dedent("""
 - Use Cases
@@ -665,10 +679,13 @@ tags: [data automation, agents, AG2, Nexla]
     - Notebooks
         - [Notebooks](docs/use-cases/notebooks/Notebooks.md)
     - [Community Gallery](docs/use-cases/community-gallery/community-gallery.md)
-- User Stories
-    - [Unlocking the Power of Agentic Workflows at Nexla with AG2](docs/user-stories/2025-03-11-NOVA/nova.md)
-    - [Some other text](docs/user-stories/2025-02-11-NOVA/nova.md)
-- Contributor Guide
+- Community Insights
+    - User Stories
+        - [Unlocking the Power of Agentic Workflows at Nexla with AG2](docs/user-stories/2025-03-11-NOVA/nova.md)
+        - [Some other text](docs/user-stories/2025-02-11-NOVA/nova.md)
+    - Community Talks
+        - [Some other text](docs/community-talks/2025-02-11-NOVA/nova.md)
+- Blog
     - [Contributing](docs/contributor-guide/contributing.md)
     - [Setup Development Environment](docs/contributor-guide/setup-development-environment.md)
 """)
@@ -1048,7 +1065,7 @@ This should stay as 'custom'
 @pytest.fixture
 def navigation() -> list[NavigationGroup]:
     return [
-        {"group": "Home", "pages": ["docs/home/home", "docs/home/quick-start"]},
+        {"group": "Quick Start", "pages": ["docs/quick-start"]},
         {
             "group": "User Guide",
             "pages": [
@@ -1088,9 +1105,7 @@ def navigation() -> list[NavigationGroup]:
 
 @pytest.fixture
 def expected_nav() -> str:
-    return """- [Home](index.md)
-    - [Home](docs/home/home.md)
-    - [Quick Start](docs/home/quick-start.md)
+    return """- [Quick Start](docs/quick-start.md)
 - User Guide
     - Basic Concepts
         - [Installing AG2](docs/user-guide/basic-concepts/installing-ag2.md)
@@ -1109,8 +1124,9 @@ def expected_nav() -> str:
 
 
 def test_format_navigation(navigation: list[NavigationGroup], expected_nav: str) -> None:
-    actual = format_navigation(navigation)
-    assert actual == expected_nav
+    with tempfile.TemporaryDirectory() as tmpdir:
+        actual = format_navigation(navigation, Path(tmpdir))
+        assert actual == expected_nav
 
 
 def test_add_api_ref_to_mkdocs_template() -> None:
