@@ -194,7 +194,7 @@ class TestContextStrLLMCondition:
         """Test initialising with a template string instead of ContextStr object."""
         # Test that we need to pass a ContextStr, not a string
         with pytest.raises(ValidationError):
-            ContextStrLLMCondition(context_str="This is a {variable}")
+            ContextStrLLMCondition(context_str="This is a {variable}")  # type: ignore[arg-type]
 
     def test_get_prompt_with_empty_context_variables(self) -> None:
         """Test get_prompt with empty context variables."""

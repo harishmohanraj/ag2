@@ -40,7 +40,7 @@ The flow of information in the Escalation Pattern follows a deliberate path desi
 
 ### Implementation
 
-Implementing the Escalation Pattern requires careful design of both the agent architecture and the communication protocol between agents. The implementation leverages structured data formats and explicit confidence reporting to make escalation decisions transparent and consistent. By using the Swarm orchestration engine, the pattern can be implemented with minimal custom code while maintaining robust escalation logic and context preservation.
+Implementing the Escalation Pattern requires careful design of both the agent architecture and the communication protocol between agents. The implementation leverages structured data formats and explicit confidence reporting to make escalation decisions transparent and consistent. By using the group chat orchestration engine, the pattern can be implemented with minimal custom code while maintaining robust escalation logic and context preservation.
 
 * **Structured Response Format**: A Pydantic model (`ConsideredResponse`) captures answer, confidence, reasoning, and escalation information.
 
@@ -188,7 +188,7 @@ def answer_question_advanced(response: ConsideredResponse, context_variables: Co
 
 def main():
     """
-    Main function to demonstrate the Escalation Pattern with the Swarm orchestration engine.
+    Main function to demonstrate the Escalation Pattern with the Group Chat orchestration engine.
     """
     # Triage agent will handle the user interaction
     triage_agent = ConversableAgent(
@@ -379,7 +379,7 @@ def main():
     print(json.dumps(final_context.to_dict(), indent=2))
     print("\n\n===== SPEAKER ORDER =====\n")
     for message in chat_result.chat_history:
-        if "name" in message and message["name"] != "_Swarm_Tool_Executor":
+        if "name" in message and message["name"] != "_Group_Tool_Executor":
             print(f"{message['name']}")
 
 

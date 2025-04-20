@@ -39,6 +39,15 @@ class StringLLMCondition(LLMCondition):
 
     prompt: str
 
+    def __init__(self, prompt: str, **data: Any) -> None:
+        """Initialize with a prompt string as a positional parameter.
+
+        Args:
+            prompt: The static prompt string to evaluate
+            data: Additional data for the parent class
+        """
+        super().__init__(prompt=prompt, **data)
+
     def get_prompt(self, agent: "ConversableAgent", messages: list[dict[str, Any]]) -> str:
         """Return the static prompt string.
 
@@ -60,6 +69,15 @@ class ContextStrLLMCondition(LLMCondition):
     """
 
     context_str: ContextStr
+
+    def __init__(self, context_str: ContextStr, **data: Any) -> None:
+        """Initialize with a context string as a positional parameter.
+
+        Args:
+            context_str: The ContextStr object with variable placeholders
+            data: Additional data for the parent class
+        """
+        super().__init__(context_str=context_str, **data)
 
     def get_prompt(self, agent: "ConversableAgent", messages: list[dict[str, Any]]) -> str:
         """Return the prompt with context variables substituted.

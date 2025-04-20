@@ -593,7 +593,7 @@ def run_feedback_loop_pattern():
 
         print("\n\n===== SPEAKER ORDER =====\n")
         for message in chat_result.chat_history:
-            if "name" in message and message["name"] != "_Swarm_Tool_Executor":
+            if "name" in message and message["name"] != "_Group_Tool_Executor":
                 print(f"{message['name']}")
     else:
         print("Document creation did not complete successfully.")

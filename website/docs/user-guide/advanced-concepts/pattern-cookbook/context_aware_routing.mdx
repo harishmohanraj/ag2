@@ -34,7 +34,7 @@ In the Context-Aware Routing Pattern, information flows through a central router
 
 ### Implementation
 
-Our implementation using AG2's Swarm demonstrates the Context-Aware Routing Pattern with a router agent that analyzes queries and directs them to specialized domain experts. The system maintains rich contextual information about domain history, request patterns, and confidence levels, enabling intelligent routing decisions that improve as the conversation evolves.
+Our implementation using AG2's Group Chat demonstrates the Context-Aware Routing Pattern with a router agent that analyzes queries and directs them to specialized domain experts. The system maintains rich contextual information about domain history, request patterns, and confidence levels, enabling intelligent routing decisions that improve as the conversation evolves.
 
 * **Content Analysis Tools**: The router agent uses sophisticated analysis functions to determine query domains and calculate confidence scores.
 
@@ -570,7 +570,7 @@ def run_context_aware_routing():
     # Display the conversation flow
     print("\n===== SPEAKER ORDER =====\n")
     for message in chat_result.chat_history:
-        if "name" in message and message["name"] != "_Swarm_Tool_Executor":
+        if "name" in message and message["name"] != "_Group_Tool_Executor":
             print(f"{message['name']}")
 
 if __name__ == "__main__":
