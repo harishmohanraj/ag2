@@ -343,6 +343,8 @@ chat_history, context_variables, last_agent = initiate_swarm_chat(
     user_agent=user,
     messages="I want to cancel flight",
     after_work=AfterWorkOption.REVERT_TO_USER,
+    max_rounds=50,
+    context_variables=context_variables,
 )
 ```
 

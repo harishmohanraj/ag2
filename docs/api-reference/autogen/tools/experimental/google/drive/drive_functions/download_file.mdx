@@ -12,11 +12,12 @@ download_file(
     file_id: str,
     file_name: str,
     mime_type: str,
-    download_folder: Path
+    download_folder: Path,
+    subfolder_path: str | None = None
 ) -> str
 ```
 
-    Download or export file based on its MIME type.
+    Download or export file based on its MIME type, optionally saving to a subfolder.
 
 <b>Parameters:</b>
 | Name | Description |
@@ -26,5 +27,6 @@ download_file(
 | `file_name` | **Type:** str |
 | `mime_type` | **Type:** str |
 | `download_folder` | **Type:** pathlib.Path |
+| `subfolder_path` | **Type:** str \| None<br/><br/>**Default:** None |
 
 <br />
