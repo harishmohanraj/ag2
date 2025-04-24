@@ -197,6 +197,7 @@ When using some models, such as Mistral through Mistral.AI's API, the role on th
 
 To change the default behaviour, Autogen provides a way to set the value of the select speaker message's role to any string value by setting the `role_for_select_speaker_messages` parameter in the GroupChat's constructor. The default value is `system` and by setting it to `user` you can accommodate the last message role requirement of Mistral.AI's API.
 
+
 ## Conversation Patterns
 
 `GroupChat` has four built-in conversation patterns:
@@ -217,6 +218,7 @@ Before jumping into the code, here's a quick run down of what you need to do:
 - If using `auto` speaker selection, add specific descriptions to agents for GroupChatManager to use
 - Create a `GroupChat` and a `GroupChatManager`
 - Start the chat with the `GroupChatManager`
+
 
 <Tip>
 You can start any multi-agent chats using the `initiate_chat` method
@@ -247,6 +249,7 @@ import Example from "/snippets/python-examples/groupchat.mdx";
 
     Next speaker: planner_agent
 
+
     >>>>>>>> USING AUTO REPLY...
     planner_agent (to group_manager):
 
@@ -271,6 +274,7 @@ import Example from "/snippets/python-examples/groupchat.mdx";
 
     Next speaker: reviewer_agent
 
+
     >>>>>>>> USING AUTO REPLY...
     reviewer_agent (to group_manager):
 
@@ -287,6 +291,7 @@ import Example from "/snippets/python-examples/groupchat.mdx";
     --------------------------------------------------------------------------------
 
     Next speaker: planner_agent
+
 
     >>>>>>>> USING AUTO REPLY...
     planner_agent (to group_manager):
@@ -327,6 +332,7 @@ import Example from "/snippets/python-examples/groupchat.mdx";
 
     Next speaker: teacher_agent
 
+
     >>>>>>>> USING AUTO REPLY...
     teacher_agent (to group_manager):
 
@@ -336,7 +342,3 @@ import Example from "/snippets/python-examples/groupchat.mdx";
     ```
 
 Now, let's look at how this is done in a Swarm.
-
-<div className="edit-url-container">
-    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/website/docs/user-guide/advanced-concepts/groupchat/groupchat.mdx" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
-</div>

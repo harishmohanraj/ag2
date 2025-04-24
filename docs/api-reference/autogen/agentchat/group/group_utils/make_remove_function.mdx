@@ -1,0 +1,20 @@
+---
+sidebarTitle: make_remove_function
+title: autogen.agentchat.group.group_utils.make_remove_function
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### make_remove_function
+
+```python
+make_remove_function(tool_msgs_to_remove: list[str]) -> Callable[[list[dict[str, Any]]], list[dict[str, Any]]]
+```
+
+    Create a function to remove messages with tool calls from the messages list.<br/>The returned function can be registered as a hook to "process_all_messages_before_reply"" to remove messages with tool calls.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool_msgs_to_remove` | **Type:** list[str] |
+
+<br />

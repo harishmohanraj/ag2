@@ -1,0 +1,31 @@
+---
+sidebarTitle: prepare_group_agents
+title: autogen.agentchat.group.group_utils.prepare_group_agents
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### prepare_group_agents
+
+```python
+prepare_group_agents(
+    agents: list['ConversableAgent'],
+    context_variables: ContextVariables,
+    exclude_transit_message: bool = True
+) -> tuple[GroupToolExecutor, list['ConversableAgent']]
+```
+
+    Validates agents, create the tool executor, wrap necessary targets in agents.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agents` | List of all agents in the conversation.<br/><br/>**Type:** list['ConversableAgent'] |
+| `context_variables` | Context variables to assign to all agents.<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) |
+| `exclude_transit_message` | Whether to exclude transit messages from the agents.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| tuple[[GroupToolExecutor](/docs/api-reference/autogen/agentchat/group/group_tool_executor/GroupToolExecutor), list['ConversableAgent']] | "ConversableAgent": The tool executor agent. list["ConversableAgent"]: List of wrapped agents. |
+
+<br />

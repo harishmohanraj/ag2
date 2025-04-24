@@ -1,0 +1,63 @@
+---
+sidebarTitle: ContextStrLLMCondition
+title: autogen.agentchat.group.ContextStrLLMCondition
+---
+<h2 id="autogen.agentchat.group.ContextStrLLMCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">ContextStrLLMCondition</span>
+</h2>
+
+```python
+ContextStrLLMCondition(context_str: ContextStr, **data: Any)
+```
+
+    Context variable-based LLM condition.<br/>This condition uses a ContextStr object with context variable placeholders that
+    will be substituted before being evaluated by an LLM.<br/>Initialize with a context string as a positional parameter.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context_str` | **Type:** [ContextStr](/docs/api-reference/autogen/agentchat/group/context_str/ContextStr) |
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### context_str
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_prompt
+
+```python
+get_prompt(
+    self,
+    agent: ConversableAgent,
+    messages: list[dict[str, Any]]
+) -> str
+```
+
+    Return the prompt with context variables substituted.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent evaluating the condition (provides context variables)<br/><br/>**Type:** ConversableAgent |
+| `messages` | The conversation history (not used)<br/><br/>**Type:** list[dict[str, typing.Any]] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| str | The prompt with context variables substituted |
+
+<br />

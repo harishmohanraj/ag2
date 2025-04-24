@@ -336,6 +336,7 @@ quantitative metrics do not correlate well with faithfulness and quality.
 Finally, we test GPT-4 for automatic hallucination detection, which yields
 promising results.
 
+
 --------------------------------------------------------------------------------
 Scientist (to chat_manager):
 
@@ -472,6 +473,7 @@ for prefix in ["A", "B", "C"]:
         )
         speaker_transitions_dict[agents[-1]] = []
 
+
     # For each team, create the team's internal transitions (any agent to any agent in a team)
     for source_node in range(3):
         source_id = f"{prefix}{source_node}"
@@ -529,6 +531,7 @@ Looking at the output, we can see there were 20 chocolates across all the teams 
 ```console
 A0 (to chat_manager):
 
+
 There are 9 players in this game, split equally into Teams A, B, C. Therefore each team has 3 players, including the team leader.
 The task is to find out the sum of chocolate count from all nine players. I will now start with my team.
 NEXT: A1
@@ -536,6 +539,7 @@ NEXT: A1
 --------------------------------------------------------------------------------
 
 Next speaker: A1
+
 
 >>>>>>>> USING AUTO REPLY...
 A1 (to chat_manager):
@@ -551,6 +555,7 @@ NEXT: A2
 
 Next speaker: A2
 
+
 >>>>>>>> USING AUTO REPLY...
 A2 (to chat_manager):
 
@@ -565,6 +570,7 @@ NEXT: A0
 --------------------------------------------------------------------------------
 
 Next speaker: A0
+
 
 >>>>>>>> USING AUTO REPLY...
 A0 (to chat_manager):
@@ -583,6 +589,7 @@ NEXT: B0
 
 Next speaker: B0
 
+
 >>>>>>>> USING AUTO REPLY...
 B0 (to chat_manager):
 
@@ -598,6 +605,7 @@ NEXT: B1
 
 Next speaker: B1
 
+
 >>>>>>>> USING AUTO REPLY...
 B1 (to chat_manager):
 
@@ -612,6 +620,7 @@ NEXT: B2
 --------------------------------------------------------------------------------
 
 Next speaker: B2
+
 
 >>>>>>>> USING AUTO REPLY...
 B2 (to chat_manager):
@@ -632,6 +641,7 @@ NEXT: C0
 
 Next speaker: B0
 
+
 >>>>>>>> USING AUTO REPLY...
 B0 (to chat_manager):
 
@@ -642,6 +652,7 @@ NEXT: C0
 --------------------------------------------------------------------------------
 
 Next speaker: C0
+
 
 >>>>>>>> USING AUTO REPLY...
 C0 (to chat_manager):
@@ -658,6 +669,7 @@ NEXT: C1
 
 Next speaker: C1
 
+
 >>>>>>>> USING AUTO REPLY...
 C1 (to chat_manager):
 
@@ -672,6 +684,7 @@ NEXT: C2
 --------------------------------------------------------------------------------
 
 Next speaker: C2
+
 
 >>>>>>>> USING AUTO REPLY...
 C2 (to chat_manager):
@@ -705,7 +718,3 @@ DONE!
 ### API
 [GroupChat](/docs/api-reference/autogen/GroupChat)
 [GroupChatManager](/docs/api-reference/autogen/GroupChatManager)
-
-<div className="edit-url-container">
-    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/website/docs/user-guide/advanced-concepts/groupchat/custom-group-chat.mdx" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
-</div>

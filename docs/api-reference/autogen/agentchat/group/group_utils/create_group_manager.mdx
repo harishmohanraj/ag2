@@ -1,0 +1,31 @@
+---
+sidebarTitle: create_group_manager
+title: autogen.agentchat.group.group_utils.create_group_manager
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### create_group_manager
+
+```python
+create_group_manager(
+    groupchat: GroupChat,
+    group_manager_args: dict[str, Any] | None,
+    agents: list['ConversableAgent']
+) -> GroupChatManager
+```
+
+    Create a GroupChatManager for the group chat utilising any arguments passed in and ensure an LLM Config exists if needed
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `groupchat` | The groupchat.<br/><br/>**Type:** [GroupChat](/docs/api-reference/autogen/GroupChat) |
+| `group_manager_args` | Group manager arguments to create the GroupChatManager.<br/><br/>**Type:** dict[str, typing.Any] \| None |
+| `agents` | List of agents in the group.<br/><br/>**Type:** list['ConversableAgent'] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [GroupChatManager](/docs/api-reference/autogen/GroupChatManager) | GroupChatManager: GroupChatManager instance. |
+
+<br />

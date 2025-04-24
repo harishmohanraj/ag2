@@ -1,0 +1,302 @@
+---
+sidebarTitle: Handoffs
+title: autogen.agentchat.group.Handoffs
+---
+<h2 id="autogen.agentchat.group.Handoffs" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">Handoffs</span>
+</h2>
+
+```python
+Handoffs(**data: Any)
+```
+
+    Container for all handoff transition conditions of a ConversableAgent.<br/>Three types of conditions can be added, each with a different order and time of use: <br/>1. OnContextConditions (evaluated without an LLM)
+    2. OnConditions (evaluated with an LLM)
+    3. After work TransitionTarget (if no other transition is triggered)
+    
+    Supports method chaining: <br/>agent.handoffs.add_context_conditions([condition1])                    .add_llm_condition(condition2)                    .set_after_work(after_work)
+    
+    Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### after_work
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### context_conditions
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### llm_conditions
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add
+
+```python
+add(self, condition: OnContextCondition | OnCondition) -> Handoffs
+```
+
+    Add a single condition (OnContextCondition or OnCondition).<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `condition` | The condition to add (OnContextCondition or OnCondition)<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_context_condition
+
+```python
+add_context_condition(self, condition: OnContextCondition) -> Handoffs
+```
+
+    Add a single context condition.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `condition` | The OnContextCondition to add<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/OnContextCondition) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_context_conditions
+
+```python
+add_context_conditions(self, conditions: list[OnContextCondition]) -> Handoffs
+```
+
+    Add multiple context conditions.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `conditions` | List of OnContextConditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_llm_condition
+
+```python
+add_llm_condition(self, condition: OnCondition) -> Handoffs
+```
+
+    Add a single LLM condition.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `condition` | The OnCondition to add<br/><br/>**Type:** [OnCondition](/docs/api-reference/autogen/OnCondition) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_llm_conditions
+
+```python
+add_llm_conditions(self, conditions: list[OnCondition]) -> Handoffs
+```
+
+    Add multiple LLM conditions.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `conditions` | List of OnConditions to add<br/><br/>**Type:** list[[OnCondition](/docs/api-reference/autogen/OnCondition)] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### add_many
+
+```python
+add_many(self, conditions: list[OnContextCondition | OnCondition]) -> Handoffs
+```
+
+    Add multiple conditions of any supported types (OnContextCondition and OnCondition).<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `conditions` | List of conditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition)] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### clear
+
+```python
+clear(self) -> Handoffs
+```
+
+    Clear all handoff conditions.<br/>Returns: <br/>    Self for method chaining
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_context_conditions_by_target_type
+
+```python
+get_context_conditions_by_target_type(self, target_type: type) -> list[OnContextCondition]
+```
+
+    Get OnContextConditions for a specific target type.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `target_type` | The type of condition to retrieve<br/><br/>**Type:** type |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] | List of conditions of the specified type, or None if none exist |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_context_conditions_requiring_wrapping
+
+```python
+get_context_conditions_requiring_wrapping(self) -> list[OnContextCondition]
+```
+
+    Get context conditions that have targets that require wrapping.<br/>Returns: <br/>    List of context conditions that require wrapping
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] | List of context conditions that require wrapping |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_llm_conditions_by_target_type
+
+```python
+get_llm_conditions_by_target_type(self, target_type: type) -> list[OnCondition]
+```
+
+    Get OnConditions for a specific target type.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `target_type` | The type of condition to retrieve<br/><br/>**Type:** type |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| list[[OnCondition](/docs/api-reference/autogen/OnCondition)] | List of conditions of the specified type, or None if none exist |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_llm_conditions_requiring_wrapping
+
+```python
+get_llm_conditions_requiring_wrapping(self) -> list[OnCondition]
+```
+
+    Get LLM conditions that have targets that require wrapping.<br/>Returns: <br/>    List of LLM conditions that require wrapping
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| list[[OnCondition](/docs/api-reference/autogen/OnCondition)] | List of LLM conditions that require wrapping |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_after_work
+
+```python
+set_after_work(self, target: TransitionTarget) -> Handoffs
+```
+
+    Set the after work target (only one allowed).<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `target` | The after work TransitionTarget to set<br/><br/>**Type:** [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) | Self for method chaining |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_llm_function_names
+
+```python
+set_llm_function_names(self) -> None
+```
+
+    Set the LLM function names for all LLM conditions, creating unique names for each function.
+
+<br />

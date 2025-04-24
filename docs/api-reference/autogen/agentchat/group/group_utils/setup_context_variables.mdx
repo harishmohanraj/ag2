@@ -1,0 +1,28 @@
+---
+sidebarTitle: setup_context_variables
+title: autogen.agentchat.group.group_utils.setup_context_variables
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### setup_context_variables
+
+```python
+setup_context_variables(
+    tool_execution: ConversableAgent,
+    agents: list['ConversableAgent'],
+    manager: GroupChatManager,
+    context_variables: ContextVariables
+) -> 
+```
+
+    Assign a common context_variables reference to all agents in the group, including the tool executor and group chat manager.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tool_execution` | The tool execution agent.<br/><br/>**Type:** ConversableAgent |
+| `agents` | List of all agents in the conversation.<br/><br/>**Type:** list['ConversableAgent'] |
+| `manager` | GroupChatManager instance.<br/><br/>**Type:** [GroupChatManager](/docs/api-reference/autogen/GroupChatManager) |
+| `context_variables` | Context variables to assign to all agents.<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) |
+
+<br />

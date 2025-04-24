@@ -1,0 +1,131 @@
+---
+sidebarTitle: RandomAgentTarget
+title: autogen.agentchat.group.targets.transition_target.RandomAgentTarget
+---
+<h2 id="autogen.agentchat.group.targets.transition_target.RandomAgentTarget" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">RandomAgentTarget</span>
+</h2>
+
+```python
+RandomAgentTarget(agents: list['ConversableAgent'], **data: Any)
+```
+
+    Target that represents a random selection from a list of agents.<br/>Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agents` | **Type:** list['ConversableAgent'] |
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### agent_names
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### nominated_name
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### can_resolve_for_speaker_selection
+
+```python
+can_resolve_for_speaker_selection(self) -> bool
+```
+
+    Check if the target can resolve for speaker selection.
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create_wrapper_agent
+
+```python
+create_wrapper_agent(
+    self,
+    parent_agent: ConversableAgent,
+    index: int
+) -> ConversableAgent
+```
+
+    Create a wrapper agent for the target if needed.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `parent_agent` | **Type:** ConversableAgent |
+| `index` | **Type:** int |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### display_name
+
+```python
+display_name(self) -> str
+```
+
+    Get the display name for the target.
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### needs_agent_wrapper
+
+```python
+needs_agent_wrapper(self) -> bool
+```
+
+    Check if the target needs to be wrapped in an agent.
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### normalized_name
+
+```python
+normalized_name(self) -> str
+```
+
+    Get a normalized name for the target that has no spaces, used for function calling
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### resolve
+
+```python
+resolve(
+    self,
+    groupchat: GroupChat,
+    current_agent: ConversableAgent,
+    user_agent: ForwardRef('ConversableAgent') | None
+) -> SpeakerSelectionResult
+```
+
+    Resolve to the actual agent object from the groupchat, choosing a random agent (except the current one)
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `groupchat` | **Type:** GroupChat |
+| `current_agent` | **Type:** ConversableAgent |
+| `user_agent` | **Type:** ForwardRef('ConversableAgent') \| None |
+
+<br />

@@ -1,0 +1,78 @@
+---
+sidebarTitle: SummaryTaskAvailableCondition
+title: autogen.agents.experimental.document_agent.document_conditions.SummaryTaskAvailableCondition
+---
+<h2 id="autogen.agents.experimental.document_agent.document_conditions.SummaryTaskAvailableCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">SummaryTaskAvailableCondition</span>
+</h2>
+
+```python
+SummaryTaskAvailableCondition(**data: Any)
+```
+
+    Available condition for determining if a summary task should be performed.<br/>This condition checks if: <br/>1. There are no documents left to ingest
+    2. There are no queries left to run
+    3. The completed task count is truthy
+    
+    If all conditions are met, the agent is ready for a summary task.<br/>Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### completed_var
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### documents_var
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### queries_var
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### is_available
+
+```python
+is_available(
+    self,
+    agent: ConversableAgent,
+    messages: list[dict[str, Any]]
+) -> bool
+```
+
+    Check if all task conditions are met.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent with context variables<br/><br/>**Type:** ConversableAgent |
+| `messages` | The conversation history (not used)<br/><br/>**Type:** list[dict[str, typing.Any]] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | True if all conditions are met (ready for summary), False otherwise |
+
+<br />

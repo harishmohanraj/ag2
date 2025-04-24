@@ -1,0 +1,41 @@
+---
+sidebarTitle: determine_next_agent
+title: autogen.agentchat.group.group_utils.determine_next_agent
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### determine_next_agent
+
+```python
+determine_next_agent(
+    last_speaker: ConversableAgent,
+    groupchat: GroupChat,
+    initial_agent: ConversableAgent,
+    use_initial_agent: bool,
+    tool_executor: GroupToolExecutor,
+    group_agent_names: list[str],
+    user_agent: ForwardRef('ConversableAgent') | None,
+    group_after_work: TransitionTarget
+) -> Agent | str | None
+```
+
+    Determine the next agent in the conversation.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `last_speaker` | The last agent to speak.<br/><br/>**Type:** ConversableAgent |
+| `groupchat` | GroupChat instance.<br/><br/>**Type:** [GroupChat](/docs/api-reference/autogen/GroupChat) |
+| `initial_agent` | The initial agent in the conversation.<br/><br/>**Type:** ConversableAgent |
+| `use_initial_agent` | Whether to use the initial agent straight away.<br/><br/>**Type:** bool |
+| `tool_executor` | The tool execution agent.<br/><br/>**Type:** [GroupToolExecutor](/docs/api-reference/autogen/agentchat/group/group_tool_executor/GroupToolExecutor) |
+| `group_agent_names` | List of agent names.<br/><br/>**Type:** list[str] |
+| `user_agent` | Optional user proxy agent.<br/><br/>**Type:** ForwardRef('ConversableAgent') \| None |
+| `group_after_work` | Group-level Transition option when an agent doesn't select the next agent.<br/><br/>**Type:** [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [Agent](/docs/api-reference/autogen/Agent) \| str \| None | Optional[Union[Agent, str]]: The next agent or speaker selection method. |
+
+<br />

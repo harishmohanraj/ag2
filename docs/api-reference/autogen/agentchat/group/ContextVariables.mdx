@@ -1,0 +1,240 @@
+---
+sidebarTitle: ContextVariables
+title: autogen.agentchat.group.ContextVariables
+---
+<h2 id="autogen.agentchat.group.ContextVariables" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">ContextVariables</span>
+</h2>
+
+```python
+ContextVariables(data: dict[str, Any] | None = None, **kwargs: Any)
+```
+
+    Stores and manages context variables for agentic workflows.<br/>Utilises a dictionary-like interface for setting, getting, and removing variables.<br/>Initialize with data dictionary as an optional positional parameter.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `data` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `**kwargs` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### data
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### from_dict
+
+```python
+from_dict(data: dict[str, Any]) -> ContextVariables
+```
+
+    Create a new ContextVariables instance from a dictionary.<br/>E.g.: <br/>my_context = \{"user_id": "12345", "settings": \{"theme": "dark"}}
+    context = ContextVariables.from_dict(my_context)
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `data` | Dictionary of key-value pairs<br/><br/>**Type:** dict[str, typing.Any] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) | New ContextVariables instance |
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### clear
+
+```python
+clear(self) -> None
+```
+
+    Clear all keys and values from the context.
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### contains
+
+```python
+contains(self, key: str) -> bool
+```
+
+    Check if a key exists in the context.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key to check<br/><br/>**Type:** str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | True if the key exists, False otherwise |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get
+
+```python
+get(
+    self,
+    key: str,
+    default: Any | None = None
+) -> Any | None
+```
+
+    Get a value from the context by key.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key to retrieve<br/><br/>**Type:** str |
+| `default` | The default value to return if key is not found<br/><br/>**Type:** Any \| None<br/><br/>**Default:** None |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Any \| None | The value associated with the key or default if not found |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### items
+
+```python
+items(self) -> Iterable[tuple[str, Any]]
+```
+
+    Get all key-value pairs in the context.<br/>Returns: <br/>    An iterable of all key-value pairs
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Iterable[tuple[str, Any]] | An iterable of all key-value pairs |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### keys
+
+```python
+keys(self) -> Iterable[str]
+```
+
+    Get all keys in the context.<br/>Returns: <br/>    An iterable of all keys
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Iterable[str] | An iterable of all keys |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### remove
+
+```python
+remove(self, key: str) -> bool
+```
+
+    Remove a key from the context.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key to remove<br/><br/>**Type:** str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | True if the key was removed, False if it didn't exist |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set
+
+```python
+set(
+    self,
+    key: str,
+    value: Any
+) -> None
+```
+
+    Set a value in the context by key.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `key` | The key to set<br/><br/>**Type:** str |
+| `value` | The value to store<br/><br/>**Type:** Any |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### to_dict
+
+```python
+to_dict(self) -> dict[str, Any]
+```
+
+    Convert context variables to a dictionary.<br/>Returns: <br/>    Dictionary representation of all context variables
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| dict[str, typing.Any] | Dictionary representation of all context variables |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### update
+
+```python
+update(self, other: dict[str, Any]) -> None
+```
+
+    Update context with key-value pairs from another dictionary.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `other` | Dictionary containing key-value pairs to add<br/><br/>**Type:** dict[str, typing.Any] |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### values
+
+```python
+values(self) -> Iterable[Any]
+```
+
+    Get all values in the context.<br/>Returns: <br/>    An iterable of all values
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Iterable[Any] | An iterable of all values |
+
+<br />

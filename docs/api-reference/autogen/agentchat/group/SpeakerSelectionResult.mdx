@@ -1,0 +1,64 @@
+---
+sidebarTitle: SpeakerSelectionResult
+title: autogen.agentchat.group.SpeakerSelectionResult
+---
+<h2 id="autogen.agentchat.group.SpeakerSelectionResult" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">SpeakerSelectionResult</span>
+</h2>
+
+```python
+SpeakerSelectionResult(**data: Any)
+```
+
+    Represents a speaker selection result that will be returned to GroupChat._prepare_and_select_agents to determine the next speaker.<br/>This class can return an Agent, a None to end the conversation, or a string for a speaker selection method.<br/>Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### agent_name
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### speaker_selection_method
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### terminate
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_speaker_selection_result
+
+```python
+get_speaker_selection_result(self, groupchat: GroupChat) -> Agent | str | None
+```
+
+    Get the speaker selection result. If None, the conversation will end.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `groupchat` | **Type:** GroupChat |
+
+<br />

@@ -1,0 +1,35 @@
+---
+sidebarTitle: create_group_transition
+title: autogen.agentchat.group.group_utils.create_group_transition
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### create_group_transition
+
+```python
+create_group_transition(
+    initial_agent: ConversableAgent,
+    tool_execution: GroupToolExecutor,
+    group_agent_names: list[str],
+    user_agent: ForwardRef('ConversableAgent') | None,
+    group_after_work: TransitionTarget
+) -> Callable[[ConversableAgent, GroupChat], Agent | str | None]
+```
+
+    Creates a transition function for group chat with enclosed state for the use_initial_agent.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `initial_agent` | The first agent to speak<br/><br/>**Type:** ConversableAgent |
+| `tool_execution` | The tool execution agent<br/><br/>**Type:** [GroupToolExecutor](/docs/api-reference/autogen/agentchat/group/group_tool_executor/GroupToolExecutor) |
+| `group_agent_names` | List of all agent names<br/><br/>**Type:** list[str] |
+| `user_agent` | Optional user proxy agent<br/><br/>**Type:** ForwardRef('ConversableAgent') \| None |
+| `group_after_work` | Group-level after work<br/><br/>**Type:** [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Callable[[ConversableAgent, [GroupChat](/docs/api-reference/autogen/GroupChat)], [Agent](/docs/api-reference/autogen/Agent) \| str \| None] | Callable[["ConversableAgent", GroupChat], Optional[Union[Agent, str]]]: The transition function |
+
+<br />

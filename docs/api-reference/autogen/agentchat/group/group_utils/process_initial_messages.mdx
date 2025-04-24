@@ -1,0 +1,33 @@
+---
+sidebarTitle: process_initial_messages
+title: autogen.agentchat.group.group_utils.process_initial_messages
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### process_initial_messages
+
+```python
+process_initial_messages(
+    messages: list[dict[str, Any]] | str,
+    user_agent: ForwardRef('ConversableAgent') | None,
+    agents: list['ConversableAgent'],
+    wrapped_agents: list['ConversableAgent']
+) -> tuple[list[dict[str, Any]], ConversableAgent | None, list[str], list[Agent]]
+```
+
+    Process initial messages, validating agent names against messages, and determining the last agent to speak.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `messages` | Initial messages to process.<br/><br/>**Type:** list[dict[str, typing.Any]] \| str |
+| `user_agent` | Optional user proxy agent passed in to a_/initiate_group_chat.<br/><br/>**Type:** ForwardRef('ConversableAgent') \| None |
+| `agents` | Agents in the group.<br/><br/>**Type:** list['ConversableAgent'] |
+| `wrapped_agents` | List of wrapped agents.<br/><br/>**Type:** list['ConversableAgent'] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| tuple[list[dict[str, typing.Any]], ConversableAgent \| None, list[str], list[[Agent](/docs/api-reference/autogen/Agent)]] | list[dict[str, Any]]: Processed message(s). Agent: Last agent to speak. list[str]: List of agent names. list[Agent]: List of temporary user proxy agents to add to GroupChat. |
+
+<br />

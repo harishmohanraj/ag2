@@ -1,0 +1,57 @@
+---
+sidebarTitle: ContextStr
+title: autogen.agentchat.group.ContextStr
+---
+<h2 id="autogen.agentchat.group.ContextStr" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">ContextStr</span>
+</h2>
+
+```python
+ContextStr(**data: Any)
+```
+
+    A string that requires context variable substitution.<br/>Use the format method to substitute context variables into the string.<br/>Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### template
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### format
+
+```python
+format(self, context_variables: ContextVariables) -> str | None
+```
+
+    Substitute context variables into the string.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context_variables` | The context variables to substitute into the string.<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| str \| None | Optional[str]: The formatted string with context variables substituted. |
+
+<br />

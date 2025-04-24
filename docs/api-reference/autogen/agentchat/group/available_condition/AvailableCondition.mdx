@@ -1,0 +1,56 @@
+---
+sidebarTitle: AvailableCondition
+title: autogen.agentchat.group.available_condition.AvailableCondition
+---
+<h2 id="autogen.agentchat.group.available_condition.AvailableCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">AvailableCondition</span>
+</h2>
+
+```python
+AvailableCondition(**data: Any)
+```
+
+    Protocol for determining if a condition is available to be evaluated.<br/>Create a new model by parsing and validating input data from keyword arguments.<br/>Raises [`ValidationError`][pydantic_core.ValidationError] if the input data cannot be
+    validated to form a valid model.<br/>`self` is explicitly positional-only to allow `self` as a field name.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### is_available
+
+```python
+is_available(
+    self,
+    agent: ConversableAgent,
+    messages: list[dict[str, Any]]
+) -> bool
+```
+
+    Determine if the condition should be considered for evaluation.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent evaluating the condition<br/><br/>**Type:** ConversableAgent |
+| `messages` | The conversation history<br/><br/>**Type:** list[dict[str, typing.Any]] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | True if the condition should be evaluated, False otherwise |
+
+<br />

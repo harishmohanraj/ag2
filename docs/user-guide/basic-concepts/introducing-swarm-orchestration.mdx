@@ -68,6 +68,9 @@ A core component to the swarm pattern is the concept of "AfterWork" - what happe
 - The AfterWork mechanism determines where control goes next: to another agent, back to a manager, to a human, or simply end
 - This creates dynamic, intelligent workflows that can adapt based on the results of each step
 
+
+
+
 ## Enhancing Our Financial Compliance System with Swarm
 
 Now that we understand the swarm pattern, let's see how it solves our challenge of adding specialized summary reporting to our financial compliance system.
@@ -211,15 +214,18 @@ flowchart TD
     - Regular transactions are automatically approved
     - Suspicious transactions are flagged for human review
 
+
 - **Human Review**: The human agent reviews flagged transactions
 
     - The human can approve or reject each transaction
     - This provides the crucial oversight required for compliance
 
+
 - **Handoff to Summary Agent**: After all transactions are processed, the swarm manager transitions control to the `summary_bot`
 
     - This transition happens automatically based on conversation context
     - The `summary_bot` has access to the full conversation history
+
 
 - **Report Generation**: The `summary_bot` creates a report summarizing all transactions in a markdown table
 
@@ -342,6 +348,7 @@ Please process the following transactions one at a time:
 
 Next speaker: finance_bot
 
+
 >>>>>>>> USING AUTO REPLY...
 finance_bot (to chat_manager):
 
@@ -369,6 +376,7 @@ approve
 
 Next speaker: finance_bot
 
+
 >>>>>>>> USING AUTO REPLY...
 finance_bot (to chat_manager):
 
@@ -383,6 +391,7 @@ You can type exit to finish.
 --------------------------------------------------------------------------------
 
 Next speaker: summary_bot
+
 
 >>>>>>>> USING AUTO REPLY...
 summary_bot (to chat_manager):
@@ -552,6 +561,7 @@ Here's the updated code that incorporates automatic termination:
             system_message=summary_system_message,
         )
 
+
     def is_termination_msg(x: dict[str, Any]) -> bool:
         content = x.get("content", "")
         return (content is not None) and "==== SUMMARY GENERATED ====" in content
@@ -611,6 +621,7 @@ Please process the following transactions one at a time:
 
 Next speaker: finance_bot
 
+
 >>>>>>>> USING AUTO REPLY...
 finance_bot (to chat_manager):
 
@@ -639,6 +650,7 @@ approve
 --------------------------------------------------------------------------------
 
 Next speaker: summary_bot
+
 
 >>>>>>>> USING AUTO REPLY...
 summary_bot (to chat_manager):
@@ -671,7 +683,3 @@ Notice that the conversation automatically ends after the summary is generated, 
 Our financial compliance system demonstrates the power of the swarm pattern, but we've only scratched the surface. In our next section, we'll explore how to enhance our system with specialized tools.
 
 One common requirement in financial systems is detecting duplicate payments and avoiding them. Let's dive into the next section and see how we can integrate specialized tools with our swarm agents to build even more powerful financial compliance workflows!
-
-<div className="edit-url-container">
-    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/website/docs/user-guide/basic-concepts/introducing-swarm-orchestration.mdx" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
-</div>

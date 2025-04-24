@@ -32,7 +32,7 @@ ContextExpression(expression: str)
 #### evaluate
 
 ```python
-evaluate(self, context_variables: dict[str, Any]) -> bool
+evaluate(self, context_variables: ContextVariables) -> bool
 ```
 
     Evaluate the expression using the provided context variables.<br/>
@@ -40,7 +40,7 @@ evaluate(self, context_variables: dict[str, Any]) -> bool
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `context_variables` | Dictionary of context variables to use for evaluation<br/><br/>**Type:** dict[str, typing.Any] |
+| `context_variables` | Dictionary of context variables to use for evaluation<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) |
 
 <b>Returns:</b>
 | Type | Description |

@@ -1,0 +1,62 @@
+---
+sidebarTitle: StringAvailableCondition
+title: autogen.agentchat.group.StringAvailableCondition
+---
+<h2 id="autogen.agentchat.group.StringAvailableCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">StringAvailableCondition</span>
+</h2>
+
+```python
+StringAvailableCondition(context_variable: str, **data: Any)
+```
+
+    String-based available condition.<br/>This condition checks if a named context variable exists and is truthy.<br/>Initialize with a context variable name as a positional parameter.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context_variable` | **Type:** str |
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### context_variable
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### is_available
+
+```python
+is_available(
+    self,
+    agent: ConversableAgent,
+    messages: list[dict[str, Any]]
+) -> bool
+```
+
+    Check if the named context variable is truthy.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent with context variables<br/><br/>**Type:** ConversableAgent |
+| `messages` | The conversation history (not used)<br/><br/>**Type:** list[dict[str, typing.Any]] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | True if the variable exists and is truthy, False otherwise |
+
+<br />

@@ -21,9 +21,10 @@ ConversableAgent(
     description: str | None = None,
     chat_messages: dict[Agent, list[dict[str, Any]]] | None = None,
     silent: bool | None = None,
-    context_variables: dict[str, Any] | None = None,
+    context_variables: ForwardRef('ContextVariables') | None = None,
     functions: list[Callable[..., Any]] | Callable[..., Any] = None,
-    update_agent_state_before_reply: list[Callable | UpdateSystemMessage] | Callable | UpdateSystemMessage | None = None
+    update_agent_state_before_reply: list[Callable | UpdateSystemMessage] | Callable | UpdateSystemMessage | None = None,
+    handoffs: Handoffs | None = None
 )
 ```
 
@@ -46,9 +47,10 @@ ConversableAgent(
 | `description` | **Type:** str \| None<br/><br/>**Default:** None |
 | `chat_messages` | **Type:** dict[[Agent](/docs/api-reference/autogen/Agent), list[dict[str, typing.Any]]] \| None<br/><br/>**Default:** None |
 | `silent` | **Type:** bool \| None<br/><br/>**Default:** None |
-| `context_variables` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `context_variables` | **Type:** ForwardRef('ContextVariables') \| None<br/><br/>**Default:** None |
 | `functions` | **Type:** list[typing.Callable[..., typing.Any]] \| Callable[..., Any]<br/><br/>**Default:** None |
 | `update_agent_state_before_reply` | **Type:** list[Callable \| [UpdateSystemMessage](/docs/api-reference/autogen/UpdateSystemMessage)] \| Callable \| [UpdateSystemMessage](/docs/api-reference/autogen/UpdateSystemMessage) \| None<br/><br/>**Default:** None |
+| `handoffs` | **Type:** [Handoffs](/docs/api-reference/autogen/agentchat/group/handoffs/Handoffs) \| None<br/><br/>**Default:** None |
 
 ### Class Attributes
 
@@ -826,32 +828,6 @@ get_chat_results(self, chat_index: int | None = None) -> list[ChatResult] 
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### get_context
-
-```python
-get_context(
-    self,
-    key: str,
-    default: Any = None
-) -> Any
-```
-
-    Get a context variable by key.<br/>
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `key` | The key to look up<br/><br/>**Type:** str |
-| `default` | Value to return if key doesn't exist<br/><br/>**Type:** Any<br/><br/>**Default:** None |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| Any | The value associated with the key, or default if not found |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### get_human_input
 
 ```python
@@ -978,32 +954,6 @@ max_consecutive_auto_reply(self, sender: Agent | None = None) -> int
 | Name | Description |
 |--|--|
 | `sender` | **Type:** [Agent](/docs/api-reference/autogen/Agent) \| None<br/><br/>**Default:** None |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### pop_context
-
-```python
-pop_context(
-    self,
-    key: str,
-    default: Any = None
-) -> Any
-```
-
-    Remove and return a context variable.<br/>
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `key` | The key to remove<br/><br/>**Type:** str |
-| `default` | Value to return if key doesn't exist<br/><br/>**Type:** Any<br/><br/>**Default:** None |
-
-<b>Returns:</b>
-| Type | Description |
-|--|--|
-| Any | The value that was removed, or default if key not found |
 
 <br />
 
@@ -1164,6 +1114,38 @@ register_function(
 |--|--|
 | `function_map` | a dictionary mapping function names to functions.<br/><br/>if function_map[name] is None, the function will be removed from the function_map.<br/><br/>**Type:** dict[str, typing.Callable[..., typing.Any]] |
 | `silent_override` | whether to print warnings when overriding functions.<br/><br/>**Type:** bool<br/><br/>**Default:** False |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_handoff
+
+```python
+register_handoff(self, condition: ForwardRef('OnContextCondition') | ForwardRef('OnCondition')) -> 
+```
+
+    Register a single handoff condition (OnContextCondition or OnCondition).<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `condition` | The condition to add (OnContextCondition, OnCondition)<br/><br/>**Type:** ForwardRef('OnContextCondition') \| ForwardRef('OnCondition') |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### register_handoffs
+
+```python
+register_handoffs(self, conditions: list[ForwardRef('OnContextCondition') | ForwardRef('OnCondition')]) -> 
+```
+
+    Register multiple handoff conditions (OnContextCondition or OnCondition).<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `conditions` | List of conditions to add<br/><br/>**Type:** list[ForwardRef('OnContextCondition') \| ForwardRef('OnCondition')] |
 
 <br />
 
@@ -1454,27 +1436,6 @@ sequential_run(self, chat_queue: list[dict[str, Any]]) -> list[RunResponseProt
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### set_context
-
-```python
-set_context(
-    self,
-    key: str,
-    value: Any
-) -> None
-```
-
-    Set a context variable.<br/>
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `key` | The key to set<br/><br/>**Type:** str |
-| `value` | The value to associate with the key<br/><br/>**Type:** Any |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### stop_reply_at_receive
 
 ```python
@@ -1503,22 +1464,6 @@ update_agent_state_before_reply(self, messages: list[dict[str, Any]]) -> None
 | Name | Description |
 |--|--|
 | `messages` | **Type:** list[dict[str, typing.Any]] |
-
-<br />
-
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
-#### update_context
-
-```python
-update_context(self, context_variables: dict[str, Any]) -> None
-```
-
-    Update multiple context variables at once.<br/>
-
-<b>Parameters:</b>
-| Name | Description |
-|--|--|
-| `context_variables` | Dictionary of variables to update/add<br/><br/>**Type:** dict[str, typing.Any] |
 
 <br />
 

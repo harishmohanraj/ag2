@@ -1,0 +1,97 @@
+---
+sidebarTitle: RandomPattern
+title: autogen.agentchat.group.patterns.random.RandomPattern
+---
+<h2 id="autogen.agentchat.group.patterns.random.RandomPattern" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">RandomPattern</span>
+</h2>
+
+```python
+RandomPattern(
+    initial_agent: ConversableAgent,
+    agents: list['ConversableAgent'],
+    user_agent: ForwardRef('ConversableAgent') | None = None,
+    group_manager_args: dict[str, Any] | None = None,
+    context_variables: ContextVariables | None = None,
+    group_after_work: TransitionTarget | None = None,
+    exclude_transit_message: bool = True,
+    summary_method: str | Callable[..., Any] | None = 'last_msg'
+)
+```
+
+    RandomPattern implements a random agent selection process.<br/>Initialize the pattern with the required components.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `initial_agent` | **Type:** ConversableAgent |
+| `agents` | **Type:** list['ConversableAgent'] |
+| `user_agent` | **Type:** ForwardRef('ConversableAgent') \| None<br/><br/>**Default:** None |
+| `group_manager_args` | **Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `context_variables` | **Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) \| None<br/><br/>**Default:** None |
+| `group_after_work` | **Type:** [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget) \| None<br/><br/>**Default:** None |
+| `exclude_transit_message` | **Type:** bool<br/><br/>**Default:** True |
+| `summary_method` | **Type:** str \| Callable[..., Any] \| None<br/><br/>**Default:** 'last_msg' |
+
+### Static Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### create_default
+
+```python
+create_default(
+    initial_agent: ConversableAgent,
+    agents: list['ConversableAgent'],
+    user_agent: ForwardRef('ConversableAgent') | None = None,
+    group_manager_args: dict[str, Any] | None = None,
+    context_variables: ContextVariables | None = None,
+    exclude_transit_message: bool = True,
+    summary_method: str | Callable[..., Any] | None = 'last_msg'
+) -> 
+```
+
+    Create a default pattern with minimal configuration.<br/>This replaces the need for a separate BasePattern class by providing
+    a factory method that creates a simple DefaultPattern instance.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `initial_agent` | The first agent to speak in the group chat.<br/><br/>**Type:** ConversableAgent |
+| `agents` | List of all agents participating in the chat.<br/><br/>**Type:** list['ConversableAgent'] |
+| `user_agent` | Optional user proxy agent.<br/><br/>**Type:** ForwardRef('ConversableAgent') \| None<br/><br/>**Default:** None |
+| `group_manager_args` | Optional arguments for the GroupChatManager.<br/><br/>**Type:** dict[str, typing.Any] \| None<br/><br/>**Default:** None |
+| `context_variables` | Initial context variables for the chat.<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) \| None<br/><br/>**Default:** None |
+| `exclude_transit_message` | Whether to exclude transit messages from the conversation.<br/><br/>**Type:** bool<br/><br/>**Default:** True |
+| `summary_method` | Method for summarizing the conversation.<br/><br/>**Type:** str \| Callable[..., Any] \| None<br/><br/>**Default:** 'last_msg' |
+
+<br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### prepare_group_chat
+
+```python
+prepare_group_chat(
+    self,
+    max_rounds: int,
+    messages: list[dict[str, Any]] | str
+) -> Tuple[list['ConversableAgent'], list['ConversableAgent'], ConversableAgent | None, ContextVariables, ConversableAgent, TransitionTarget, GroupToolExecutor, GroupChat, GroupChatManager, list[dict[str, Any]], Any, list[str], list[Any]]
+```
+
+    Prepare the group chat for organic agent selection.<br/>Ensures that: <br/>1. The group manager has a valid LLM config
+    2. All agents have appropriate descriptions for the group manager to use
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `max_rounds` | Maximum number of conversation rounds.<br/><br/>**Type:** int |
+| `messages` | Initial message(s) to start the conversation.<br/><br/>**Type:** list[dict[str, typing.Any]] \| str |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| Tuple[list['ConversableAgent'], list['ConversableAgent'], ConversableAgent \| None, [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables), ConversableAgent, [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget), GroupToolExecutor, GroupChat, GroupChatManager, list[dict[str, Any]], Any, list[str], list[Any]] | Tuple containing all necessary components for the group chat. |
+
+<br />

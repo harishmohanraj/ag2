@@ -1,0 +1,57 @@
+---
+sidebarTitle: ExpressionContextCondition
+title: autogen.agentchat.group.context_condition.ExpressionContextCondition
+---
+<h2 id="autogen.agentchat.group.context_condition.ExpressionContextCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">ExpressionContextCondition</span>
+</h2>
+
+```python
+ExpressionContextCondition(expression: ContextExpression, **data: Any)
+```
+
+    Complex expression-based context condition.<br/>This condition evaluates a ContextExpression against the context variables.<br/>Initialize with an expression as a positional parameter.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `expression` | **Type:** [ContextExpression](/docs/api-reference/autogen/ContextExpression) |
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### expression
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### evaluate
+
+```python
+evaluate(self, context_variables: ContextVariables) -> bool
+```
+
+    Evaluate the expression against the context variables.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `context_variables` | The context variables to evaluate against<br/><br/>**Type:** [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables) |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | Boolean result of the expression evaluation |
+
+<br />

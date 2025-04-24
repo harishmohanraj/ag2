@@ -1,0 +1,62 @@
+---
+sidebarTitle: StringLLMCondition
+title: autogen.agentchat.group.StringLLMCondition
+---
+<h2 id="autogen.agentchat.group.StringLLMCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">StringLLMCondition</span>
+</h2>
+
+```python
+StringLLMCondition(prompt: str, **data: Any)
+```
+
+    Simple string-based LLM condition.<br/>This condition provides a static string prompt to be evaluated by an LLM.<br/>Initialize with a prompt string as a positional parameter.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `prompt` | **Type:** str |
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### prompt
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### get_prompt
+
+```python
+get_prompt(
+    self,
+    agent: ConversableAgent,
+    messages: list[dict[str, Any]]
+) -> str
+```
+
+    Return the static prompt string.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agent` | The agent evaluating the condition (not used)<br/><br/>**Type:** ConversableAgent |
+| `messages` | The conversation history (not used)<br/><br/>**Type:** list[dict[str, typing.Any]] |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| str | The static prompt string |
+
+<br />

@@ -1,0 +1,21 @@
+---
+sidebarTitle: link_agents_to_group_manager
+title: autogen.agentchat.group.group_utils.link_agents_to_group_manager
+---
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>
+#### link_agents_to_group_manager
+
+```python
+link_agents_to_group_manager(agents: list[Agent], group_chat_manager: Agent) -> None
+```
+
+    Link all agents to the GroupChatManager so they can access the underlying GroupChat and other agents.<br/>This is primarily used so that agents can get to the tool executor to help set the next agent.<br/>Does not link the Tool Executor agent.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `agents` | **Type:** list[[Agent](/docs/api-reference/autogen/Agent)] |
+| `group_chat_manager` | **Type:** [Agent](/docs/api-reference/autogen/Agent) |
+
+<br />
