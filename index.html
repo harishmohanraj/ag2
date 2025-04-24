@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Redirecting to latest documentation</title>
+    <title>Redirecting</title>
+    <noscript>
+        <meta http-equiv="refresh" content="1; url=latest/" />
+    </noscript>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GN2KN2CE4"></script>
     <script>
-        // Get the current path and query parameters
-        const path = window.location.pathname;
-        const query = window.location.search;
-        
-        // First, handle GitHub Pages repo path if applicable
-        let basePath = '';
-        let pathToCheck = path;
-        
-        // If hosted on GitHub Pages with a repo name (not custom domain)
-        if (window.location.hostname.includes('github.io')) {
-            const pathParts = path.split('/');
-            if (pathParts.length > 1 && pathParts[1] !== '') {
-                basePath = '/' + pathParts[1];
-                pathToCheck = path.substring(basePath.length) || '/';
-            }
-        }
-        
-        // Check if the path is already versioned
-        // Look for /latest/ or version patterns like /0.9.1/ at the start of the path
-        const versionRegex = /^\/(latest|[\d]+\.[\d]+(\.[\d]+)?([-_][a-zA-Z0-9]+)?)\//;
-        const hasVersion = versionRegex.test(pathToCheck);
-        
-        // If no version in path, redirect to same path in latest
-        if (!hasVersion) {
-            const newPath = pathToCheck === '/' ? '/latest/' : '/latest' + pathToCheck;
-            window.location.href = basePath + newPath + query;
-        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2GN2KN2CE4');
     </script>
-    <meta http-equiv="refresh" content="0;url=./latest/">
+
+    <script>
+        window.onload = function () {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const existingReferrer = urlSearchParams.get('utm_referrer') || "";
+
+            // Use the referrer if valid, otherwise use the existingReferrer
+            const referrer = document.referrer;
+            const isReferrerValid = referrer && !referrer.includes("docs.ag2.ai");
+            const validReferrer = isReferrerValid ? referrer : existingReferrer;
+
+            if (validReferrer) {
+                urlSearchParams.set('utm_referrer', validReferrer);
+            }
+
+            // Update the search parameters with the new utm_referrer
+            const newGetParams = urlSearchParams.toString();
+
+            // Construct the redirect URL with the updated query parameters
+            const redirectURL = "latest/" + (newGetParams ? `?${newGetParams}` : "") + window.location.hash;
+
+            window.location.replace(redirectURL);
+        };
+    </script>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AG2" />
+    <meta property="og:description" content="A programming framework for agentic AI" />
+    <meta property="og:url" content="docs.ag2.ailatest/" />
+    <meta property="og:image" content="https://opengraph.githubassets.com/1671805243.560327/ag2ai/ag2" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AG2" />
+    <meta name="twitter:description" content="A programming framework for agentic AI" />
+    <meta name="twitter:image" content="https://opengraph.githubassets.com/1671805243.560327/ag2ai/ag2" />
 </head>
+
 <body>
-    <p>Redirecting to latest documentation...</p>
-    <p><a href="./latest/">Click here if you are not redirected automatically</a></p>
+    Redirecting to <a href="latest/">latest/</a>...  <!-- nosemgrep -->
 </body>
+
 </html>
