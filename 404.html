@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting to latest documentation</title>
+    <script>
+        // Get the current path and query parameters
+        const path = window.location.pathname;
+        const query = window.location.search;
+        
+        // First, handle GitHub Pages repo path if applicable
+        let basePath = '';
+        let pathToCheck = path;
+        
+        // If hosted on GitHub Pages with a repo name (not custom domain)
+        if (window.location.hostname.includes('github.io')) {
+            const pathParts = path.split('/');
+            if (pathParts.length > 1 && pathParts[1] !== '') {
+                basePath = '/' + pathParts[1];
+                pathToCheck = path.substring(basePath.length) || '/';
+            }
+        }
+        
+        // Check if the path is already versioned
+        // Look for /latest/ or version patterns like /0.9.1/ at the start of the path
+        const versionRegex = /^\/(latest|[\d]+\.[\d]+(\.[\d]+)?([-_][a-zA-Z0-9]+)?)\//;
+        const hasVersion = versionRegex.test(pathToCheck);
+        
+        // If no version in path, redirect to same path in latest
+        if (!hasVersion) {
+            const newPath = pathToCheck === '/' ? '/latest/' : '/latest' + pathToCheck;
+            window.location.href = basePath + newPath + query;
+        }
+    </script>
+    <meta http-equiv="refresh" content="0;url=./latest/">
+</head>
+<body>
+    <p>Redirecting to latest documentation...</p>
+    <p><a href="./latest/">Click here if you are not redirected automatically</a></p>
+</body>
+</html>
