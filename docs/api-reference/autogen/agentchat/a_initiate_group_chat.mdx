@@ -14,13 +14,18 @@ a_initiate_group_chat(
 ) -> tuple[ChatResult, ContextVariables, 'Agent']
 ```
 
-    Async version of initiate_group_chat.
+    Initialize and run a group chat using a pattern for configuration, asynchronously.<br/>
 
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `pattern` | **Type:** Pattern |
-| `messages` | **Type:** list[dict[str, typing.Any]] \| str |
-| `max_rounds` | **Type:** int<br/><br/>**Default:** 20 |
+| `pattern` | Pattern object that encapsulates the chat configuration.<br/><br/>**Type:** Pattern |
+| `messages` | Initial message(s).<br/><br/>**Type:** list[dict[str, typing.Any]] \| str |
+| `max_rounds` | Maximum number of conversation rounds.<br/><br/>**Type:** int<br/><br/>**Default:** 20 |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| tuple[[ChatResult](/docs/api-reference/autogen/ChatResult), [ContextVariables](/docs/api-reference/autogen/agentchat/group/context_variables/ContextVariables), 'Agent'] | ChatResult: Conversations chat history. ContextVariables: Updated Context variables. "ConversableAgent": Last speaker. |
 
 <br />

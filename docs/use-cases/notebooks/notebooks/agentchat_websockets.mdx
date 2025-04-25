@@ -87,7 +87,7 @@ pip install -U ag2[openai,websockets] fastapi uvicorn
 > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
-For more information, please refer to the [installation guide](https://docs.ag2.ai/docs/user-guide/basic-concepts/installing-ag2).
+For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
 </Info>
 </div>
 
@@ -95,7 +95,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 ## Set your API Endpoint
 
 The
-[`config_list_from_json`](https://docs.ag2.ai/docs/api-reference/autogen/config_list_from_json#config-list-from-json)
+[`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
 
@@ -119,7 +119,7 @@ config_list = autogen.config_list_from_json(
 
 <div class="tip">
 <Tip>
-Learn more about configuring LLMs for agents [here](https://docs.ag2.ai/docs/user-guide/basic-concepts/llm-configuration/llm-configuration).
+Learn more about configuring LLMs for agents [here](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/llm-configuration/llm-configuration).
 </Tip>
 </div>
 
@@ -139,7 +139,7 @@ AG2 framework with websockets.
 
 Upon a client’s connection to the websocket server, the server
 automatically initiates a new instance of the
-[`IOWebsockets`](https://docs.ag2.ai/docs/api-reference/autogen/io/IOWebsockets#iowebsockets)
+[`IOWebsockets`](https://docs.ag2.ai/latest/docs/api-reference/autogen/io/IOWebsockets/#autogen.io.IOWebsockets)
 class. This instance is crucial for managing the data flow between the
 server and the client. The `on_connect` function leverages this instance
 to set up the communication protocol, define interaction rules, and

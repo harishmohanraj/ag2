@@ -10,7 +10,8 @@ title: autogen.agentchat.group.group_utils.create_group_manager
 create_group_manager(
     groupchat: GroupChat,
     group_manager_args: dict[str, Any] | None,
-    agents: list['ConversableAgent']
+    agents: list['ConversableAgent'],
+    group_after_work: TransitionTarget
 ) -> GroupChatManager
 ```
 
@@ -21,7 +22,8 @@ create_group_manager(
 |--|--|
 | `groupchat` | The groupchat.<br/><br/>**Type:** [GroupChat](/docs/api-reference/autogen/GroupChat) |
 | `group_manager_args` | Group manager arguments to create the GroupChatManager.<br/><br/>**Type:** dict[str, typing.Any] \| None |
-| `agents` | List of agents in the group.<br/><br/>**Type:** list['ConversableAgent'] |
+| `agents` | List of agents in the group to check handoffs and after work.<br/><br/>**Type:** list['ConversableAgent'] |
+| `group_after_work` | Group-level after work to check.<br/><br/>**Type:** [TransitionTarget](/docs/api-reference/autogen/agentchat/group/targets/transition_target/TransitionTarget) |
 
 <b>Returns:</b>
 | Type | Description |

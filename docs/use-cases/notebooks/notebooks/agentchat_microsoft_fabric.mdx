@@ -117,7 +117,7 @@ import autogen
 http_client = get_openai_httpx_sync_client()  # http_client is needed for openai>1
 http_client.__deepcopy__ = types.MethodType(
     lambda self, memo: self, http_client
-)  # https://docs.ag2.ai/docs/user-guide/advanced-concepts/llm-configuration-deep-dive/#adding-http-client-in-llm_config-for-proxy\n",
+)  # https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/llm-configuration-deep-dive/#adding-http-client-in-llm_config-for-proxy\n",
 
 # Set temperature, timeout and other LLM configurations
 llm_config = autogen.LLMConfig(
@@ -170,7 +170,7 @@ import autogen
 http_client = get_openai_httpx_sync_client()  # http_client is needed for openai>1
 http_client.__deepcopy__ = types.MethodType(
     lambda self, memo: self, http_client
-)  # https://docs.ag2.ai/docs/user-guide/advanced-concepts/llm-configuration-deep-dive/#adding-http-client-in-llm_config-for-proxy
+)  # https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/llm-configuration-deep-dive/#adding-http-client-in-llm_config-for-proxy
 
 
 # Set temperature, timeout and other LLM configurations
@@ -232,8 +232,8 @@ How to use `AssistantAgent` and `RetrieveUserProxyAgent` to do Retrieval
 Augmented Generation (RAG) for QA and Code Generation.
 
 Check out this
-[blog](https://docs.ag2.ai/docs/blog/2023/10/18/RetrieveChat) for more
-details.
+[blog](https://docs.ag2.ai/latest/docs/blog/2023/10/18/RetrieveChat) for
+more details.
 
 ```python
 import tempfile
@@ -452,8 +452,8 @@ fig.show()
 How to use `MultimodalConversableAgent` to chat with images.
 
 Check out this
-[blog](https://docs.ag2.ai/docs/blog/2023/11/06/LMM-Agent) for more
-details.
+[blog](https://docs.ag2.ai/latest/docs/blog/2023/11/06/LMM-Agent) for
+more details.
 
 We’ll ask a question about below
 image:![image-alt-text](https://th.bing.com/th/id/R.422068ce8af4e15b0634fe2540adea7a?rik=y4OcXBE%2fqutDOw&pid=ImgRaw&r=0)
