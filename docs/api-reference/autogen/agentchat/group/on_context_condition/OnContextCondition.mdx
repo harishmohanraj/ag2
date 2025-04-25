@@ -1,0 +1,84 @@
+---
+sidebarTitle: OnContextCondition
+title: autogen.agentchat.group.on_context_condition.OnContextCondition
+---
+<h2 id="autogen.agentchat.group.on_context_condition.OnContextCondition" class="doc doc-heading">
+    <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>
+    <span class="doc doc-object-name doc-class-name">OnContextCondition</span>
+</h2>
+
+```python
+OnContextCondition(**data: Any)
+```
+
+    Defines a condition for transitioning to another agent or nested chats using context variables and the ContextExpression class.<br/>This is for context variable-based condition evaluation (does not use the agent's LLM).<br/>These are evaluated before the OnCondition and after work conditions.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `**data` | **Type:** Any |
+
+### Class Attributes
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### available
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### condition
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### model_config
+<br />
+
+    <br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>
+#### target
+<br />
+
+    <br />
+
+### Instance Methods
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### has_target_type
+
+```python
+has_target_type(self, target_type: type) -> bool
+```
+
+    Check if the target type matches the specified type.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `target_type` | The target type to check against.<br/><br/>Should be a subclass of TransitionTarget.<br/><br/>**Type:** type |
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | bool: True if the target type matches, False otherwise |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### target_requires_wrapping
+
+```python
+target_requires_wrapping(self) -> bool
+```
+
+    Check if the target requires wrapping in an agent.<br/>Returns: <br/>    bool: True if the target requires wrapping, False otherwise
+
+<b>Returns:</b>
+| Type | Description |
+|--|--|
+| bool | bool: True if the target requires wrapping, False otherwise |
+
+<br />

@@ -65,7 +65,7 @@ add(self, condition: OnContextCondition | OnCondition) -> Handoffs
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `condition` | The condition to add (OnContextCondition or OnCondition)<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition) |
+| `condition` | The condition to add (OnContextCondition or OnCondition)<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition) |
 
 <b>Returns:</b>
 | Type | Description |
@@ -86,7 +86,7 @@ add_context_condition(self, condition: OnContextCondition) -> Handoffs
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `condition` | The OnContextCondition to add<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/OnContextCondition) |
+| `condition` | The OnContextCondition to add<br/><br/>**Type:** [OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition) |
 
 <b>Returns:</b>
 | Type | Description |
@@ -107,7 +107,7 @@ add_context_conditions(self, conditions: list[OnContextCondition]) -> Handoffs
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `conditions` | List of OnContextConditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] |
+| `conditions` | List of OnContextConditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition)] |
 
 <b>Returns:</b>
 | Type | Description |
@@ -170,7 +170,7 @@ add_many(self, conditions: list[OnContextCondition | OnCondition]) -> Handoff
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `conditions` | List of conditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition)] |
+| `conditions` | List of conditions to add<br/><br/>**Type:** list[[OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition) \| [OnCondition](/docs/api-reference/autogen/OnCondition)] |
 
 <b>Returns:</b>
 | Type | Description |
@@ -212,7 +212,7 @@ get_context_conditions_by_target_type(self, target_type: type) -> list[OnContex
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] | List of conditions of the specified type, or None if none exist |
+| list[[OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition)] | List of conditions of the specified type, or None if none exist |
 
 <br />
 
@@ -228,7 +228,7 @@ get_context_conditions_requiring_wrapping(self) -> list[OnContextCondition]
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| list[[OnContextCondition](/docs/api-reference/autogen/OnContextCondition)] | List of context conditions that require wrapping |
+| list[[OnContextCondition](/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition)] | List of context conditions that require wrapping |
 
 <br />
 

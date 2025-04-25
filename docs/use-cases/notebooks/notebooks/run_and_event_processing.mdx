@@ -206,7 +206,8 @@ assert response.last_speaker in ["teacher_agent", "planner_agent", "reviewer_age
 ## Swarm chat run
 
 ```python
-from autogen import AfterWorkOption, run_swarm
+from autogen import run_swarm
+from autogen.agentchat.contrib.swarm_agent import AfterWorkOption
 
 # 1. Create our agents
 planner_message = """You are a classroom lesson planner.
@@ -496,7 +497,8 @@ assert await response.last_speaker in ["teacher_agent", "planner_agent", "review
 ## Swarm chat
 
 ```python
-from autogen import AfterWorkOption, a_run_swarm
+from autogen import a_run_swarm
+from autogen.agentchat.contrib.swarm_agent import AfterWorkOption
 
 # 1. Create our agents
 planner_message = """You are a classroom lesson planner.
@@ -641,13 +643,93 @@ responses = await user.a_sequential_run([
 ])
 
 for response in responses:
-    await response.process()
+    async for event in response.events:
+        print(event)
+        if event.type == "input_request":
+            await event.content.respond("exit")
 
     assert len(await response.messages) > 0, "Messages should not be empty"
     assert await response.last_speaker in ["Financial_assistant", "Researcher", "writer", "User"], (
         "Last speaker should be one of the agents"
     )
     assert await response.summary is not None, "Summary should not be None"
+```
+
+## Group chat
+
+```python
+from autogen.agentchat.group.patterns.auto import AutoPattern
+
+with llm_config:
+    triage_agent = ConversableAgent(
+        name="triage_agent",
+        system_message="""You are a triage agent. For each user query,
+        identify whether it is a technical issue or a general question. Route
+        technical issues to the tech agent and general questions to the general agent.
+        Do not provide suggestions or answers, only route the query.""",
+    )
+
+    tech_agent = ConversableAgent(
+        name="tech_agent",
+        system_message="""You solve technical problems like software bugs
+        and hardware issues.""",
+    )
+
+    general_agent = ConversableAgent(
+        name="general_agent", system_message="You handle general, non-technical support questions."
+    )
+
+user = ConversableAgent(name="user", human_input_mode="ALWAYS")
+
+pattern = AutoPattern(
+    initial_agent=triage_agent,
+    agents=[triage_agent, tech_agent, general_agent],
+    user_agent=user,
+    group_manager_args={"llm_config": llm_config},
+)
+```
+
+
+```python
+# Run the chat
+
+from autogen.agentchat import run_group_chat
+from autogen.io.run_response import Cost
+
+response = run_group_chat(
+    pattern=pattern, messages="My laptop keeps shutting down randomly. Can you help?", max_rounds=15
+)
+
+for event in response.events:
+    print(event)
+    if event.type == "input_request":
+        event.content.respond("exit")
+
+assert response.summary is not None, "Summary should not be None"
+assert len(response.messages) > 0, "Messages should not be empty"
+assert response.last_speaker in ["tech_agent", "general_agent", "triage_agent"]
+assert isinstance(response.cost, Cost)
+```
+
+
+```python
+# Run the chat
+
+from autogen.agentchat import a_run_group_chat
+
+response = await a_run_group_chat(
+    pattern=pattern, messages="My laptop keeps shutting down randomly. Can you help?", max_rounds=15
+)
+
+async for event in response.events:
+    print(event)
+    if event.type == "input_request":
+        await event.content.respond("exit")
+
+assert await response.summary is not None, "Summary should not be None"
+assert len(await response.messages) > 0, "Messages should not be empty"
+assert await response.last_speaker in ["tech_agent", "general_agent", "triage_agent"]
+assert isinstance(await response.cost, Cost)
 ```
 
 <div className="edit-url-container">

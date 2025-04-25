@@ -19,7 +19,7 @@ IOConsole()
 #### get_default
 
 ```python
-get_default() -> IOStream
+get_default() -> IOStreamProtocol | AsyncIOStreamProtocol
 ```
 
     Get the default input/output stream.<br/>Returns: <br/>    IOStream: The default input/output stream.
@@ -27,7 +27,7 @@ get_default() -> IOStream
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| [IOStream](/docs/api-reference/autogen/io/IOStream) | IOStream: The default input/output stream. |
+| [IOStreamProtocol](/docs/api-reference/autogen/io/IOStreamProtocol) \| [AsyncIOStreamProtocol](/docs/api-reference/autogen/io/AsyncIOStreamProtocol) | IOStream: The default input/output stream. |
 
 <br />
 
@@ -35,7 +35,7 @@ get_default() -> IOStream
 #### get_global_default
 
 ```python
-get_global_default() -> IOStream
+get_global_default() -> IOStreamProtocol | AsyncIOStreamProtocol
 ```
 
     Get the default input/output stream.<br/>Returns: <br/>    IOStream: The default input/output stream.
@@ -43,7 +43,7 @@ get_global_default() -> IOStream
 <b>Returns:</b>
 | Type | Description |
 |--|--|
-| [IOStream](/docs/api-reference/autogen/io/IOStream) | IOStream: The default input/output stream. |
+| [IOStreamProtocol](/docs/api-reference/autogen/io/IOStreamProtocol) \| [AsyncIOStreamProtocol](/docs/api-reference/autogen/io/AsyncIOStreamProtocol) | IOStream: The default input/output stream. |
 
 <br />
 
@@ -51,7 +51,7 @@ get_global_default() -> IOStream
 #### set_default
 
 ```python
-set_default(stream: ForwardRef('IOStream') | None) -> Iterator[None]
+set_default(stream: IOStreamProtocol | AsyncIOStreamProtocol | None) -> Iterator[None]
 ```
 
     Set the default input/output stream.<br/>
@@ -59,7 +59,7 @@ set_default(stream: ForwardRef('IOStream') | None) -> Iterator[None]
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `stream` | The input/output stream to set as the default.<br/><br/>**Type:** ForwardRef('IOStream') \| None |
+| `stream` | The input/output stream to set as the default.<br/><br/>**Type:** [IOStreamProtocol](/docs/api-reference/autogen/io/IOStreamProtocol) \| [AsyncIOStreamProtocol](/docs/api-reference/autogen/io/AsyncIOStreamProtocol) \| None |
 
 <br />
 
@@ -67,7 +67,7 @@ set_default(stream: ForwardRef('IOStream') | None) -> Iterator[None]
 #### set_global_default
 
 ```python
-set_global_default(stream: IOStream) -> None
+set_global_default(stream: IOStreamProtocol | AsyncIOStreamProtocol) -> None
 ```
 
     Set the default input/output stream.<br/>
@@ -75,7 +75,7 @@ set_global_default(stream: IOStream) -> None
 <b>Parameters:</b>
 | Name | Description |
 |--|--|
-| `stream` | The input/output stream to set as the default.<br/><br/>**Type:** IOStream |
+| `stream` | The input/output stream to set as the default.<br/><br/>**Type:** [IOStreamProtocol](/docs/api-reference/autogen/io/IOStreamProtocol) \| [AsyncIOStreamProtocol](/docs/api-reference/autogen/io/AsyncIOStreamProtocol) |
 
 <br />
 
