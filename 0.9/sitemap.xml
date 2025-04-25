@@ -309,6 +309,14 @@
          <lastmod>2025-04-25</lastmod>
     </url>
     <url>
+         <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/a_run_group_chat/</loc>
+         <lastmod>2025-04-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/run_group_chat/</loc>
+         <lastmod>2025-04-25</lastmod>
+    </url>
+    <url>
          <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/chat/a_initiate_chats/</loc>
          <lastmod>2025-04-25</lastmod>
     </url>
@@ -366,6 +374,10 @@
     </url>
     <url>
          <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/contrib/rag/RAGQueryEngine/</loc>
+         <lastmod>2025-04-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/contrib/retrieve_user_proxy_agent/RetrieveUserProxyAgent/</loc>
          <lastmod>2025-04-25</lastmod>
     </url>
     <url>
@@ -441,6 +453,10 @@
          <lastmod>2025-04-25</lastmod>
     </url>
     <url>
+         <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/group/on_context_condition/OnContextCondition/</loc>
+         <lastmod>2025-04-25</lastmod>
+    </url>
+    <url>
          <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/group/patterns/auto/AutoPattern/</loc>
          <lastmod>2025-04-25</lastmod>
     </url>
@@ -466,6 +482,10 @@
     </url>
     <url>
          <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/group/speaker_selection_result/SpeakerSelectionResult/</loc>
+         <lastmod>2025-04-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.ag2.ai/latest/docs/api-reference/autogen/agentchat/group/targets/group_manager_target/GroupManagerTarget/</loc>
          <lastmod>2025-04-25</lastmod>
     </url>
     <url>
