@@ -51,12 +51,14 @@ build secure workflows. Let’s dive in!
 
 To install `AG2`, simply run the following command:
 
+
 ```bash
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen
@@ -64,12 +66,12 @@ pip install -U ag2[openai]
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen
+> pip install -U ag2
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 ### Imports
 
@@ -83,6 +85,7 @@ components for dependency injection:
 -   `Depends`: a function used to declare and inject dependencies,
     either from a context (like `BaseContext`) or a function, ensuring
     sensitive data is provided securely without direct exposure.
+
 
 ```python
 import os
@@ -101,6 +104,7 @@ We start by defining a `BaseContext` class for accounts. This will act
 as the base structure for dependency injection. By using this approach,
 sensitive information like usernames and passwords is never exposed to
 the LLM.
+
 
 ```python
 class Account(BaseContext, BaseModel):
@@ -123,6 +127,7 @@ account_ballace_dict = {
 To ensure that the provided account is valid and retrieve its balance,
 we create two helper functions.
 
+
 ```python
 def _verify_account(account: Account):
     if (account.username, account.password) not in account_ballace_dict:
@@ -144,6 +149,7 @@ Configure the agents for the interaction.
     human interaction (set to `NEVER`).
 -   `AssistantAgent` represents the AI agent, configured with the LLM
     settings.
+
 
 ```python
 config_list = [{"api_type": "openai", "model": "gpt-4o-mini", "api_key": os.environ["OPENAI_API_KEY"]}]
@@ -168,6 +174,7 @@ the function. This `account` parameter will not be visible to the LLM.
 **Note:** You can also use `account: Account = Depends(bob_account)` as
 an alternative syntax.
 
+
 ```python
 @user_proxy.register_for_execution()
 @assistant.register_for_llm(description="Get the balance of the account")
@@ -181,6 +188,7 @@ def get_balance_1(
 ```
 
 Finally, we initiate a chat to retrieve the balance.
+
 
 ```python
 user_proxy.initiate_chat(assistant, message="Get the user's account balance", max_turns=2)
@@ -201,6 +209,7 @@ Configure the agents for the interaction.
     human interaction (set to `NEVER`).
 -   `AssistantAgent` represents the AI agent, configured with the LLM
     settings.
+
 
 ```python
 config_list = [{"api_type": "openai", "model": "gpt-4o-mini", "api_key": os.environ["OPENAI_API_KEY"]}]
@@ -224,6 +233,7 @@ into the function, and still ensures that sensitive information is
 managed securely.
 
 Here’s how you can set it up:
+
 
 ```python
 def get_username() -> str:
@@ -251,6 +261,7 @@ def get_balance_2(
 
 As before, initiate a chat to test the function.
 
+
 ```python
 user_proxy.initiate_chat(assistant, message="Get users balance", max_turns=2)
 ```
@@ -266,6 +277,7 @@ credentials. We don’t want or need the LLM to be aware of these
 credentials.
 
 ### Mock third party systems
+
 
 ```python
 # Mock third party system functions
@@ -283,6 +295,7 @@ def my_ticketing_system_availability(username: str, password: str, concert: str)
 ```
 
 ### Create Agents
+
 
 ```python
 weather_agent = ConversableAgent(
@@ -307,6 +320,7 @@ user_proxy = UserProxyAgent(
 
 ### Create BaseContext class for credentials
 
+
 ```python
 # We create a class based on BaseContext
 class ThirdPartyCredentials(BaseContext, BaseModel):
@@ -315,6 +329,7 @@ class ThirdPartyCredentials(BaseContext, BaseModel):
 ```
 
 ### Create Credentials and Functions with Dependency Injection
+
 
 ```python
 # Weather API
@@ -347,6 +362,7 @@ def tickets_available(
 ```
 
 ### Create Group Chat and run
+
 
 ```python
 groupchat = GroupChat(agents=[user_proxy, weather_agent, ticket_agent], messages=[], max_round=5)

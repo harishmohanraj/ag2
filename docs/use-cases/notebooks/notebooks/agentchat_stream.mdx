@@ -30,6 +30,7 @@ suggestions.
 AG2 requires `Python>=3.9`. To run this notebook example, please
 install:
 
+
 ```bash
 pip install autogen[openai]
 ```
@@ -46,6 +47,7 @@ The
 function loads a list of configurations from an environment variable or
 a json file.
 
+
 ```python
 import asyncio
 
@@ -61,6 +63,7 @@ a json file named “OAI_CONFIG_LIST”. It filters the configs by models
 names are kept in the list based on the filter condition.
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -97,6 +100,7 @@ we use an assistant agent to provide investment suggestions based on the
 data continually.
 
 First, we use the following code to simulate the data stream process.
+
 
 ```python
 def get_market_news(ind, ind_upper):
@@ -167,6 +171,7 @@ Then, we construct agents. An assistant agent is created to answer the
 question using LLM. A UserProxyAgent is created to ask questions, and
 add the new data in the conversation when they are available.
 
+
 ```python
 # create an AssistantAgent instance named "assistant"
 assistant = autogen.AssistantAgent(
@@ -209,6 +214,7 @@ user_proxy.register_reply(autogen.AssistantAgent, add_data_reply, position=2, co
 
 We invoke the `a_initiate_chat()` method of the user proxy agent to
 start the conversation.
+
 
 ```python
 await user_proxy.a_initiate_chat(

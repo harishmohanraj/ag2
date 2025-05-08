@@ -33,7 +33,7 @@ quadratic optimization problems.
 Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
-pip install pyautogen[openai] eventlet gurobipy
+pip install ag2[openai] eventlet gurobipy
 ```
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -108,6 +108,7 @@ applications of the concepts discussed.
 
 The retrieved code is then displayed, showing both the beginning and the
 end of the source code to give a glimpse of its structure and content.
+
 
 ```python
 def replace(src_code: str, old_code: str, new_code: str) -> str:
@@ -251,6 +252,7 @@ problems.
 Each agent is associated with a corresponding system message. Those
 system messages are adopted directly from
 [OptiGuide](https://github.com/microsoft/OptiGuide).
+
 
 ````python
 # %% System Messages
@@ -426,6 +428,7 @@ to get from the nested chat with a Callable. - `max_turns` determines
 how many turns of conversation to have between the concerned agent
 pairs.
 
+
 ```python
 def writer_init_message(recipient, messages, sender, config):
     if recipient.success:
@@ -510,6 +513,7 @@ optiguide_commander.register_nested_chats(writer_chat_queue, trigger="user")
 
 ### Let the agents talk
 
+
 ```python
 chat_res = user.initiate_chat(
     optiguide_commander, message="What if we prohibit shipping from supplier 1 to roastery 2?"
@@ -517,6 +521,7 @@ chat_res = user.initiate_chat(
 ```
 
 ### Get Final Results from the Returned ChatResult Object
+
 
 ```python
 print(chat_res.summary)

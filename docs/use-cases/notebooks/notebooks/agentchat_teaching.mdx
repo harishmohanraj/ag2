@@ -78,6 +78,7 @@ We create an assistant agent to solve tasks with coding and language
 skills. We create a user proxy agent to describe tasks and execute the
 code suggested by the assistant agent.
 
+
 ```python
 # create an AssistantAgent instance named "assistant"
 assistant = autogen.AssistantAgent(
@@ -99,6 +100,7 @@ user_proxy = autogen.UserProxyAgent(
 ```
 
 ### Step-by-step Requests
+
 
 ```python
 task1 = """
@@ -136,6 +138,7 @@ do?
 
 A followup request can be made to create a reusable recipe.
 
+
 ```python
 task4 = """Reflect on the sequence and create a recipe containing all the steps
 necessary and name for it. Suggest well-documented, generalized python function(s)
@@ -151,6 +154,7 @@ user_proxy.initiate_chat(assistant, message=task4, clear_history=False)
 The user can apply the same recipe to similar tasks in future.
 
 ### Example Application
+
 
 ````python
 # create an AssistantAgent instance named "assistant"

@@ -41,20 +41,21 @@ Unstructured-IO is a dependency for this notebook to parse the PDF. Please insta
 - Install Tesseract https://tesseract-ocr.github.io/tessdoc/Installation.html
 - `pip install -U ag2[openai,neo4j], unstructured==0.16.11, pi-heif==0.21.0, unstructured_inference==0.8.1, unstructured.pytesseract==0.3.13, pytesseract==0.3.13`
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen[openai,neo4j]
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen[openai,neo4j]
+> pip install -U ag2[openai,neo4j]
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 </Info>
 </div>
 
 
 ### Set Configuration and OpenAI API Key
+
 
 ```python
 import os
@@ -77,7 +78,7 @@ and time consuming, please skip if you don’t need to generate the full
 data set. The **estimated cost is from \$10 to \$15 to parse the pdf
 file and build the knowledge graph with entire parsed output**.
 
-For the notebook, we use a common finanical document, [Nvidia 2024
+For the notebook, we use a common financial document, [Nvidia 2024
 10-K](https://investor.nvidia.com/financial-info/sec-filings/sec-filings-details/default.aspx?FilingId=17293267)
 as an example ([file download
 link](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/1cbe8fe7-e08a-46e3-8dcc-b429fc06c1a4.pdf)).
@@ -86,6 +87,7 @@ We use Unstructured-IO to parse the PDF, the table and image from the
 PDF are extracted out as .jpg files.
 
 All parsed output are saved in a JSON file.
+
 
 ```python
 from unstructured.partition.pdf import partition_pdf
@@ -107,6 +109,7 @@ elements_to_json(elements=file_elements, filename="parsed_elements.json", encodi
 ```
 
 #### Create sample dataset
+
 
 ```python
 import json
@@ -142,6 +145,7 @@ with open("proessed_elements.json", "w", encoding="utf-8") as file:
 
 **If you want to skip the parsing of the PDF file, you can start here.**
 
+
 ```python
 # This is needed to allow nested asyncio calls for Neo4j in Jupyter
 import nest_asyncio
@@ -168,6 +172,7 @@ notebook.
 **This does not change the fact that the native RAG agent solution
 failed to provide the correct answer.**
 
+
 ```python
 input_path = "./agentchat_pdf_rag/sample_elements.json"
 input_documents = [
@@ -191,6 +196,7 @@ query_engine.init_db(input_doc=input_documents)
 
 ### Connect to knowledge graph if it is built
 
+
 ```python
 query_engine = Neo4jGraphQueryEngine(
     username="neo4j",
@@ -210,6 +216,7 @@ the agent failed to get the right information (5,282 instead of 4,430).
 
 Our best guess is that RAG agent fails to understand the table structure
 from text.
+
 
 ```python
 rag_agent = ConversableAgent(
@@ -243,6 +250,7 @@ It breaks the RAG into 3 mains steps, 1. it finds the parsed image of
 the corresponding table. 2. it converts the image to table in structured
 Markdown format. 3. With the table in Markdown, the workflow answer the
 question with the correct data.
+
 
 ```python
 llm_config = {

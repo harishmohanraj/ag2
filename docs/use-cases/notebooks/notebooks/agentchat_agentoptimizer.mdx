@@ -56,6 +56,7 @@ at the Pennsylvania State University - [Jieyu
 Zhang](https://jieyuz2.github.io), Ph.D. student at the University of
 Washington
 
+
 ```python
 import copy
 import json
@@ -78,6 +79,7 @@ This agent is a customized MathUserProxy inherits from its [parent
 class](https://github.com/ag2ai/ag2/blob/main/autogen/agentchat/contrib/math_user_proxy_agent.py).
 
 It supports using both function_call and python to solve math problems.
+
 
 ````python
 def is_termination_msg_mathchat(message):
@@ -278,6 +280,7 @@ splits of [Craft](https://github.com/lifan-yuan/CRAFT). Please specific
 your own path to the dataset. Here we sample the first 10 algebra
 problems as examples.
 
+
 ```python
 test_data, train_data = [], []
 with open("MATH/dataset/algebra.jsonl", encoding="utf-8") as f:
@@ -295,6 +298,7 @@ Constructing MathUserProxyAgent and AssistantAgent used in solving these
 problems. Here, we use gpt-4-1106-preview to construct the
 AssistantAgent.
 
+
 ```python
 llm_config = autogen.LLMConfig(
     config_list=[
@@ -308,11 +312,12 @@ llm_config = autogen.LLMConfig(
     ]
 )
 
-assistant = autogen.AssistantAgent(
-    name="assistant",
-    system_message="You are a helpful assistant.",
-    llm_config=llm_config,
-)
+with llm_config:
+    assistant = autogen.AssistantAgent(
+        name="assistant",
+        system_message="You are a helpful assistant.",
+    )
+
 user_proxy = MathUserProxyAgent(
     name="mathproxyagent",
     human_input_mode="NEVER",
@@ -327,6 +332,7 @@ process.
 
 In this case, the AssistantAgent and MathUserProxyAgent don’t have any
 function calls but solely solve problems with Python.
+
 
 ```python
 sum = 0
@@ -346,10 +352,13 @@ register_for_executor at each iteration, which are subsequently utilized
 to update the assistant and user_proxy agents, respectively. Here we
 optimize these two agents for ten epochs.
 
+
 ```python
 EPOCH = 10
+
 optimizer_model = "gpt-4-1106-preview"
 optimizer = AgentOptimizer(max_actions_per_step=3, llm_config=llm_config, optimizer_model=optimizer_model)
+
 for i in range(EPOCH):
     for index, query in enumerate(train_data):
         is_correct = user_proxy.initiate_chat(assistant, answer=query["answer"], problem=query["question"])
@@ -369,6 +378,7 @@ the AgentOptimizers after 10 optimization iterations as shown below.
 
 We then show the final performances with/without the agent optimization
 process. We observe the agents after optimization are obviously better.
+
 
 ```python
 sum = 0

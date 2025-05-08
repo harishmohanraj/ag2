@@ -34,6 +34,7 @@ highlights being:
 -   Swarm orchestration utilising context variables
 
 
+
 <div class="note">
 <Note>
 This notebook has been updated as swarms can now accommodate any ConversableAgent.
@@ -50,15 +51,15 @@ FalkorDB's GraphRAG-SDK is a dependency for this notebook, which can be installe
 pip install -U ag2[openai,graph-rag-falkor-db]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen[openai,graph-rag-falkor-db]
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen[openai,graph-rag-falkor-db]
+> pip install -U ag2[openai,graph-rag-falkor-db]
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -69,6 +70,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 ### Pydantic
 
 Please ensure you have Pydantic version 2+ installed.
+
 
 ```bash
 pip install --upgrade pydantic
@@ -135,6 +137,7 @@ Creating a specific ontology that matches with the types of queries
 makes for a more optimal database and is more cost efficient when
 populating the knowledge graph.
 
+
 ```python
 from autogen.agentchat.contrib.graph_rag.document import Document, DocumentType
 
@@ -152,6 +155,7 @@ input_documents = [Document(doctype=DocumentType.TEXT, path_or_url=input_path) f
 Entities: Country, City, Attraction, Restaurant
 
 Relationships: City in Country, Attraction in City, Restaurant in City
+
 
 ```python
 from graphrag_sdk import Attribute, AttributeType, Entity, Ontology, Relation
@@ -281,6 +285,7 @@ trip_data_ontology.add_relation(
 Remember: Change your host, port, and preferred OpenAI model if needed
 (gpt-4o-mini and better is recommended).
 
+
 ```python
 from graphrag_sdk.models.openai import OpenAiGenerativeModel
 
@@ -334,6 +339,7 @@ Pydantic model.
 
 The itinerary is structured as: Itinerary has Day(s) has Event(s)
 
+
 ```python
 class Event(BaseModel):
     type: str  # Attraction, Restaurant, Travel
@@ -353,6 +359,7 @@ class Itinerary(BaseModel):
 ### Google Maps Platform
 
 The functions necessary to query the Directions API to get travel times.
+
 
 ```python
 def _fetch_travel_time(origin: str, destination: str) -> dict:
@@ -436,6 +443,7 @@ def update_itinerary_with_travel_times(context_variables: dict) -> SwarmResult:
 Our swarm agents will have access to a couple of context variables in
 relation to the itinerary.
 
+
 ```python
 trip_context = {
     "itinerary_confirmed": False,
@@ -454,6 +462,7 @@ to our Structured Output agent.
 
 Another for the Structured Output Agent to save the structured itinerary
 and transfer to the Route Timing agent.
+
 
 ```python
 def mark_itinerary_as_complete(final_itinerary: str, context_variables: Dict[str, Any]) -> SwarmResult:
@@ -488,6 +497,7 @@ def create_structured_itinerary(context_variables: Dict[str, Any], structured_it
 
 Our Swarm agents and a UserProxyAgent (human) which the swarm will
 interact with.
+
 
 ```python
 # Planner agent, interacting with the customer and GraphRag agent, to create an itinerary
@@ -546,6 +556,7 @@ that govern the swarm orchestration through hand offs and After works.
 For more details on the swarm orchestration, [see the
 documentation](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/swarm/deprecation).
 
+
 ```python
 register_hand_off(
     agent=planner_agent,
@@ -574,6 +585,7 @@ register_hand_off(agent=route_timing_agent, hand_to=[AfterWork(AfterWorkOption.T
 
 Let’s get an itinerary for a couple of days in Rome.
 
+
 ```python
 # Start the conversation
 
@@ -589,6 +601,7 @@ chat_result, context_variables, last_agent = initiate_swarm_chat(
 ```
 
 ### Bonus itinerary output
+
 
 ```python
 def print_itinerary(itinerary_data):

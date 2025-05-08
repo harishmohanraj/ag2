@@ -84,6 +84,7 @@ and ensuring that the response is suitable as a standalone message.
 We begin by constructing the inner-monologue agents. These are the
 agents that do that real work.
 
+
 ```python
 assistant = autogen.AssistantAgent(
     "inner-assistant",
@@ -121,6 +122,7 @@ manager = autogen.GroupChatManager(
 
 We now wrap the inner group-chat with the SocietyOfMind Agent, and
 create a UserProxy to talk to it.
+
 
 ```python
 from autogen.agentchat.contrib.society_of_mind_agent import SocietyOfMindAgent

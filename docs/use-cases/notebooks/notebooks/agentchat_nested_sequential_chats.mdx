@@ -30,6 +30,7 @@ agent.
 <Info>
 Install `autogen`:
 
+
 ```bash
 pip install autogen
 ```
@@ -38,6 +39,7 @@ For more information, please refer to the [installation
 guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
 </Info>
 </div>
+
 
 ```python
 import autogen
@@ -57,6 +59,7 @@ Learn more about the various ways to configure LLM endpoints
 
 Suppose we want the agents to complete the following sequence of tasks:
 
+
 ```python
 tasks = [
     """On which days in 2024 was Microsoft Stock higher than $400? Comment on the stock performance.""",
@@ -74,6 +77,7 @@ agents that can serve as an inner monologue.
 Below, we construct a group chat manager which manages an
 `inner_assistant` agent and an `inner_code_interpreter` agent. Later we
 will use this group chat inside another agent.
+
 
 ```python
 inner_assistant = autogen.AssistantAgent(
@@ -116,6 +120,7 @@ manager = autogen.GroupChatManager(
 
 Now we will construct a number of individual agents that will assume
 role of outer and inner agents.
+
 
 ```python
 assistant_1 = autogen.AssistantAgent(
@@ -215,6 +220,7 @@ nested chat. You can either select from existing options including
 what to get from the nested chat with a Callable. - `max_turns`
 determines how many turns of conversation to have between the concerned
 agent pairs.
+
 
 ```python
 def writing_message(recipient, messages, sender, config):

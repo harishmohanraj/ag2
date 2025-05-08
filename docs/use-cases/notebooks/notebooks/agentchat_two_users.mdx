@@ -34,6 +34,7 @@ execute the code written by `AssistantAgent`. We create multiple
 AG2 requires `Python>=3.9`. To run this notebook example, please
 install:
 
+
 ```bash
 pip install autogen[openai]
 ```
@@ -57,6 +58,7 @@ same name. It filters the configs by models (you can filter by other
 keys as well).
 
 The json looks like the following:
+
 
 ```json
 [
@@ -86,6 +88,7 @@ to this [User
 Guide](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/llm-configuration-deep-dive)
 for full code examples of the different methods.
 
+
 ```python
 import autogen
 
@@ -104,6 +107,7 @@ agents and return a summary of the result. We construct an assistant
 agent named “assistant_for_expert” and a user proxy agent named
 “expert”. We specify `human_input_mode` as “ALWAYS” in the user proxy
 agent, which will always ask for feedback from the expert user.
+
 
 ```python
 def ask_expert(message):
@@ -142,6 +146,7 @@ to use the created `ask_expert` function.
 For simplicity, the `ask_expert` function is defined to run locally. For
 real applications, the function should run remotely to interact with an
 expert user.
+
 
 ```python
 assistant_for_student = autogen.AssistantAgent(
@@ -192,6 +197,7 @@ prompted to provide feedback after the assistant agent sends a
 finish if you don’t provide any feedback (by pressing Enter directly).
 Before the “TERMINATE” signal, the student proxy agent will try to
 execute the code suggested by the assistant agent on behalf of the user.
+
 
 ```python
 # the assistant receives a message from the student, which contains the task description

@@ -54,6 +54,7 @@ standalone sections below, which can be run independently.
 AG2 requires `Python>=3.9`. To run this notebook example, please install
 the \[teachable\] option.
 
+
 ```bash
 pip install "autogen[teachable]"
 ```
@@ -70,6 +71,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 import logging
@@ -102,6 +104,7 @@ a json file named “OAI_CONFIG_LIST”. It filters the configs by models
 shown above, only the gpt-4 models are considered.
 
 The config list may look like the following:
+
 
 ```python
 config_list = [
@@ -150,6 +153,7 @@ calling**.
 
 This example leverages OSS Insight (Open Source Software Insight) for
 advanced GitHub data analysis.
+
 
 ```python
 logger = logging.getLogger(__name__)
@@ -204,6 +208,7 @@ def get_ossinsight(question):
 
 ### Create the OpenAI Assistant with function calling as a tool
 
+
 ```python
 assistant_id = os.environ.get("ASSISTANT_ID", None)
 config_list = config_list_from_json("OAI_CONFIG_LIST")
@@ -237,6 +242,7 @@ oss_analyst.register_function(
 
 ### Give the assistant a task involving function calls
 
+
 ```python
 user_proxy = UserProxyAgent(
     name="user_proxy",
@@ -257,6 +263,7 @@ user_proxy.initiate_chat(oss_analyst, message="Top 10 developers with the most f
 We can make any `ConversableAgent` teachable by adding a `Teachability`
 object to it.
 
+
 ```python
 teachability = Teachability(reset_db=True, llm_config={"config_list": config_list})
 teachability.add_to_agent(oss_analyst)
@@ -266,6 +273,7 @@ teachability.add_to_agent(oss_analyst)
 
 This time let’s teach the assistant a more specific way of formatting
 lists.
+
 
 ```python
 user_proxy.initiate_chat(
@@ -278,6 +286,7 @@ Finally, let’s clear the chat history to see whether the assistant can
 remember to use our preferred formatting in a new chat without having to
 be told again.
 
+
 ```python
 user_proxy.initiate_chat(oss_analyst, message="List the top 10 developers with the most followers.", clear_history=True)
 ```
@@ -287,6 +296,7 @@ user_proxy.initiate_chat(oss_analyst, message="List the top 10 developers with t
 All OpenAI Assistants can be created, viewed and deleted manually
 through OpenAI’s [website](https://platform.openai.com/assistants). They
 can also be deleted through the `GPTAssistantAgent` instance.
+
 
 ```python
 oss_analyst.delete_assistant()
@@ -302,6 +312,7 @@ which demonstrates an assistant accomplishing a task by **writing code
 and executing it** in a sandbox.
 
 ### Create the OpenAI Assistant with code interpreter as a tool
+
 
 ```python
 # Initiate an agent equipped with code interpreter
@@ -328,6 +339,7 @@ user_proxy = UserProxyAgent(
 
 ### Give the assistant a task involving code execution
 
+
 ```python
 user_proxy.initiate_chat(
     coder_assistant, message="If $725x + 727y = 1500$ and $729x+ 731y = 1508$, what is the value of $x - y$ ?"
@@ -339,6 +351,7 @@ user_proxy.initiate_chat(
 We can make any `ConversableAgent` teachable by adding a `Teachability`
 object to it.
 
+
 ```python
 teachability = Teachability(reset_db=True, llm_config={"config_list": config_list})
 teachability.add_to_agent(coder_assistant)
@@ -347,6 +360,7 @@ teachability.add_to_agent(coder_assistant)
 ### Test the teachable assistant
 
 This time let’s teach the assistant to show its work.
+
 
 ```python
 user_proxy.initiate_chat(
@@ -357,6 +371,7 @@ user_proxy.initiate_chat(
 
 Finally, let’s clear the chat history to see whether the assistant can
 remember to show its work in a new chat without having to be told again.
+
 
 ```python
 user_proxy.initiate_chat(
@@ -371,6 +386,7 @@ user_proxy.initiate_chat(
 All OpenAI Assistants can be created, viewed and deleted manually
 through OpenAI’s [website](https://platform.openai.com/assistants). They
 can also be deleted through the `GPTAssistantAgent` instance.
+
 
 ```python
 coder_assistant.delete_assistant()
@@ -393,6 +409,7 @@ file to your OpenAI API account. This can be done manually through the
 [website](https://platform.openai.com/assistants). Then find the
 uploaded File ID on the [Files page](https://platform.openai.com/files),
 and paste that ID into the `file_ids` list in the code below.
+
 
 ```python
 logger = logging.getLogger(__name__)
@@ -425,6 +442,7 @@ user_proxy = UserProxyAgent(
 When prompted, type “Does the file contain any bugs?”. On the next
 prompt, type “exit” to end the chat.
 
+
 ```python
 user_proxy.initiate_chat(rag_assistant, message="What is the name of the class of agents in the file I gave you?")
 ```
@@ -434,6 +452,7 @@ user_proxy.initiate_chat(rag_assistant, message="What is the name of the class o
 We can make any `ConversableAgent` teachable by adding a `Teachability`
 object to it.
 
+
 ```python
 teachability = Teachability(reset_db=True, llm_config={"config_list": config_list})
 teachability.add_to_agent(rag_assistant)
@@ -442,6 +461,7 @@ teachability.add_to_agent(rag_assistant)
 ### Test the teachable assistant
 
 This time let’s teach the assistant to report its confidence.
+
 
 ```python
 user_proxy.initiate_chat(
@@ -454,6 +474,7 @@ Finally, let’s clear the chat history to see whether the assistant can
 remember to report its confidence in a new chat without having to be
 told again.
 
+
 ```python
 user_proxy.initiate_chat(
     rag_assistant, message="What is the name of the class of agents in the file I gave you?", clear_history=True
@@ -465,6 +486,7 @@ user_proxy.initiate_chat(
 All OpenAI Assistants can be created, viewed and deleted manually
 through OpenAI’s [website](https://platform.openai.com/assistants). They
 can also be deleted through the `GPTAssistantAgent` instance.
+
 
 ```python
 rag_assistant.delete_assistant()

@@ -39,12 +39,14 @@ steps:
 
 1.  Install AG2 with the `browser-use` extra:
 
+
     ```bash
     pip install -U ag2[openai,browser-use]
     ```
 
-    > **Note:** If you have been using `autogen` or `pyautogen`, all you
-    > need to do is upgrade it using:
+    > **Note:** If you have been using `autogen` or `ag2`, all you need
+    > to do is upgrade it using:
+    >
     >
     > ```bash
     > pip install -U autogen[openai,browser-use]
@@ -52,14 +54,15 @@ steps:
     >
     > or
     >
+    >
     > ```bash
-    > pip install -U pyautogen[openai,browser-use]
+    > pip install -U ag2[openai,browser-use]
     > ```
     >
-    > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-    > package.
+    > as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 2.  Set up Playwright:
+
 
     ```bash
     # Installs Playwright and browsers for all OS
@@ -71,6 +74,7 @@ steps:
 You’re all set! Now you can start using browsing features in AG2.
 
 ## Imports
+
 
 ```python
 import os
@@ -96,6 +100,7 @@ Configure the agents for the interaction.
 >
 > We had great experience with `OpenAI`, `Anthropic`, and `Gemini`.
 > However, `DeepSeek` and `Ollama` haven’t performed as well.
+
 
 ```python
 config_list = [
@@ -130,6 +135,7 @@ interactions with the websites. By default, setting `headless=True`
 would run the browser in the background without a GUI, useful for
 automated tasks where visibility is not necessary.
 
+
 ```python
 browser_use_tool = BrowserUseTool(
     llm_config=llm_config,
@@ -147,6 +153,7 @@ browser_use_tool.register_for_llm(assistant)
 For running the code in Jupyter, use `nest_asyncio` to allow nested
 event loops.
 
+
 ```bash
 pip install nest_asyncio
 ```
@@ -163,6 +170,7 @@ perform a web browsing task, such as searching for “AG2” on Reddit,
 clicking the first post, and extracting the first comment. The assistant
 then executes the task using the `BrowserUseTool` and returns the
 extracted content to the user.
+
 
 ```python
 result = user_proxy.initiate_chat(

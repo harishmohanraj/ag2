@@ -8,7 +8,7 @@ title: autogen.io.run_response.RunResponse
 </h2>
 
 ```python
-RunResponse(iostream: ThreadIOStream)
+RunResponse(iostream: ThreadIOStream, agents: list[Agent])
 ```
 
     
@@ -17,6 +17,7 @@ RunResponse(iostream: ThreadIOStream)
 | Name | Description |
 |--|--|
 | `iostream` | **Type:** [ThreadIOStream](/docs/api-reference/autogen/io/thread_io_stream/ThreadIOStream) |
+| `agents` | **Type:** list[[Agent](/docs/api-reference/autogen/Agent)] |
 
 ### Instance Attributes
 
@@ -83,5 +84,21 @@ process(self, processor: EventProcessorProtocol | None = None) -> None
 | Name | Description |
 |--|--|
 | `processor` | **Type:** [EventProcessorProtocol](/docs/api-reference/autogen/io/EventProcessorProtocol) \| None<br/><br/>**Default:** None |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_ui_tools
+
+```python
+set_ui_tools(self, tools: list[Tool]) -> None
+```
+
+    Set the UI tools for the agents.
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tools` | **Type:** list[[Tool](/docs/api-reference/autogen/tools/Tool)] |
 
 <br />

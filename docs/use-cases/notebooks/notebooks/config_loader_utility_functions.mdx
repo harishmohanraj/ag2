@@ -69,6 +69,7 @@ may be useful depending on the situation.
 
 Used to generate configurations for API calls.
 
+
 ```python
 import autogen
 
@@ -96,6 +97,7 @@ Azure OpenAI API base in: - Environment variable:
 `AZURE_OPENAI_API_BASE` - or Local file: `base_aoai.txt` (Supports
 multiple bases, one per line)
 
+
 ```python
 config_list = autogen.config_list_openai_aoai(
     key_file_path=".",
@@ -119,6 +121,7 @@ Alternatively, save configurations in a local JSON file named
 file on your local repository.
 
 Your JSON structure should look something like this:
+
 
 ```json
 # OAI_CONFIG_LIST file example
@@ -165,6 +168,7 @@ model name refers to the OpenAI Studio deployment name.
 Steps: - Similar to method 1, store API keys and bases either in
 environment variables or `.txt` files.
 
+
 ```python
 config_list = autogen.config_list_from_models(
     key_file_path=".",
@@ -192,6 +196,7 @@ use for each model.
 If not provided, it defaults to using `OPENAI_API_KEY` for `gpt-4` and
 `OPENAI_API_KEY` for `gpt-3.5-turbo`.
 
+
 ```python
     # default key map
     model_api_key_map = {
@@ -201,6 +206,7 @@ If not provided, it defaults to using `OPENAI_API_KEY` for `gpt-4` and
 ```
 
 Here is an example `.env` file:
+
 
 ```bash
 OPENAI_API_KEY=sk-*********************
@@ -267,6 +273,7 @@ replacing the string value with a dictionary expanding on the
 configurations. See the example below showing the example of using
 `gpt-4` on `openai` by default, and using `gpt-3.5-turbo` with
 additional configurations for `aoai`.
+
 
 ```python
 config_list = autogen.config_list_from_dotenv(

@@ -35,9 +35,9 @@ instructions align with the function call descriptions.
 
 <div class="info Requirements">
 <Info>
-Install `pyautogen`:
+Install `ag2`:
 ```bash
-pip install pyautogen
+pip install ag2
 ```
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -74,6 +74,7 @@ and execute them. With the new “function_call” feature, we define
 functions and specify the description of the function in the OpenAI
 config for the `AssistantAgent`. Then we register the functions in
 `UserProxyAgent`.
+
 
 ```python
 coder = autogen.AssistantAgent(
@@ -127,6 +128,7 @@ returns a coroutine object but doesn’t execute the function. With
 `await`, the async function is executed and the current function is
 paused until the awaited function returns a result.
 
+
 ```python
 with Cache.disk() as cache:
     await user_proxy.a_initiate_chat(
@@ -140,6 +142,7 @@ with Cache.disk() as cache:
 
 Sync and async can be used in topologies beyond two agents. Below, we
 show this feature for a group chat.
+
 
 ```python
 markdownagent = autogen.AssistantAgent(
@@ -169,6 +172,7 @@ manager = autogen.GroupChatManager(
 
 Finally, we initialize the chat that would use the functions defined
 above:
+
 
 ```python
 message = """

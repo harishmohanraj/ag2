@@ -34,6 +34,7 @@ searches within the AG2 framework. Follow these steps to integrate
 
 3.  **Set Environment Variable:**
 
+
     ```bash
     export TAVILY_API_KEY="your_api_key_here"
     ```
@@ -45,12 +46,14 @@ steps:
 
 Install AG2 with `openai` extra since we use openai in our examples:
 
+
 ```bash
 pip install -U "ag2[openai]"
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U "autogen[openai]"
@@ -58,12 +61,12 @@ pip install -U "ag2[openai]"
 >
 > or
 >
+>
 > ```bash
-> pip install -U "pyautogen[openai]"
+> pip install -U "ag2[openai]"
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 You’re all set! Now you can start using Tavily AI Search with AG2.
 
@@ -73,6 +76,7 @@ The `TavilySearchTool` enables agents to perform real time AI Powered
 web search.
 
 ### Imports
+
 
 ```python
 import os
@@ -85,6 +89,7 @@ from autogen.tools.experimental import TavilySearchTool
 
 Configure an assistant agent and user proxy to be used for LLM
 recommendation and execution respectively.
+
 
 ```python
 os.environ["AUTOGEN_USE_DOCKER"] = "False"
@@ -103,6 +108,7 @@ user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER")
 
 ### Tool Setup
 
+
 ```python
 tavily_search_tool = TavilySearchTool(tavily_api_key=os.getenv("TAVILY_API_KEY"))
 
@@ -115,6 +121,7 @@ tavily_search_tool.register_for_execution(user_proxy)
 
 With the setup complete, you can now use the assistant to fetch live web
 search results.
+
 
 ```python
 response = user_proxy.initiate_chat(

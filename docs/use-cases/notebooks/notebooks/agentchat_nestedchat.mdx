@@ -28,16 +28,18 @@ nested chat.
 
 <div class="info Requirements">
 <Info>
-Install `pyautogen`:
+Install `ag2`:
+
 
 ```bash
-pip install pyautogen[openai]
+pip install ag2[openai]
 ```
 
 For more information, please refer to the [installation
 guide](../../../../../docs/user-guide/basic-concepts/installing-ag2).
 </Info>
 </div>
+
 
 ```python
 from typing import Annotated
@@ -58,6 +60,7 @@ Learn more about the various ways to configure LLM endpoints
 ### Example Task
 
 Suppose we want the agents to complete the following sequence of tasks:
+
 
 ```python
 task = """Write a concise but engaging blogpost about Navida."""
@@ -82,6 +85,7 @@ writer’s message.
 
 Define the agents, including the outer agents writer and user_proxy, and
 the inner agent critic.
+
 
 ```python
 writer = autogen.AssistantAgent(
@@ -119,6 +123,7 @@ critic = autogen.AssistantAgent(
 
 ### Step 2: Orchestrate Nested Chats to Solve Tasks
 
+
 ```python
 def reflection_message(recipient, messages, sender, config):
     print("Reflecting...", "yellow")
@@ -152,6 +157,7 @@ passed to the user_proxy, which will then be passed to the writer as
 feedback.
 
 ![](nested_chat_2.png)
+
 
 ```python
 critic_executor = autogen.UserProxyAgent(

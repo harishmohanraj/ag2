@@ -34,7 +34,7 @@ to each other until the task is done.
 <Info>
 Install the following packages before running the code below:
 ```bash
-pip install pyautogen[openai] matplotlib yfinance
+pip install ag2[openai] matplotlib yfinance
 ```
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -48,12 +48,11 @@ from IPython.display import Image, display
 import autogen
 from autogen.coding import LocalCommandLineCodeExecutor
 
-config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={"tags": ["gpt-4"]},  # comment out to get all
-)
+filter_dict = {"tags": ["gpt-4"]}
+llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", cache_seed=41, temperature=0).where(**filter_dict)
+
 # When using a single openai endpoint, you can use the following:
-# config_list = [{"model": "gpt-4", "api_key": os.getenv("OPENAI_API_KEY")}]
+# llm_config = autogen.LLMConfig(api_type="openai", model="gpt-4", api_key=os.environ.get("OPENAI_API_KEY"), cache_seed=41, temperature=0)
 ```
 
 ## Example Task: Check Stock Price Change
@@ -69,16 +68,11 @@ replying when the limit defined by `max_consecutive_auto_reply` is
 reached, or when `is_termination_msg()` returns true for the received
 message.
 
+
 ```python
 # create an AssistantAgent named "assistant"
-assistant = autogen.AssistantAgent(
-    name="assistant",
-    llm_config={
-        "cache_seed": 41,  # seed for caching and reproducibility
-        "config_list": config_list,  # a list of OpenAI API configurations
-        "temperature": 0,  # temperature for sampling
-    },  # configuration for autogen's enhanced inference API which is compatible with OpenAI API
-)
+with llm_config:
+    assistant = autogen.AssistantAgent(name="assistant")
 
 # create a UserProxyAgent instance named "user_proxy"
 user_proxy = autogen.UserProxyAgent(
@@ -125,6 +119,7 @@ includes the following attributes:
     the chat. (Note that since we are setting `human_input_mode` to
     `NEVER` in this notebook, this list is always empty.)
 
+
 ```python
 print("Chat history:", chat_res.chat_history)
 
@@ -133,6 +128,7 @@ print("Cost info:", chat_res.cost)
 ```
 
 ## Example Task: Plot Chart
+
 
 ```python
 # followup of the previous question
@@ -144,6 +140,7 @@ user_proxy.send(
 
 Let’s display the generated figure.
 
+
 ```python
 try:
     image = Image(filename="coding/stock_price_ytd.png")
@@ -154,6 +151,7 @@ except FileNotFoundError:
 
 Let’s display the raw data collected and saved from previous chat as
 well.
+
 
 ```python
 # Path to your CSV file
@@ -182,6 +180,7 @@ as provided in `initiate_chat`. In the user defined message function
 `my_message_generator`, we are reading data from the file specified by
 this filename.
 
+
 ```python
 def my_message_generator(sender, recipient, context):
     # your CSV file
@@ -205,6 +204,7 @@ chat_res = user_proxy.initiate_chat(
 ```
 
 Let’s check the summary of the chat
+
 
 ```python
 print(chat_res.summary)
@@ -237,6 +237,7 @@ trajectories, or will we see a shift in the market dynamics? Only time
 will tell.
 
 Let’s check how much the above chat cost
+
 
 ```python
 print(chat_res.cost)

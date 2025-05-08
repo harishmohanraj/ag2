@@ -16,9 +16,6 @@ title: (Legacy) Implement Swarm-style orchestration with GroupChat
 
 
 
-export const quartoRawHtml =
-[`<!-- stateflow-swarm-example.png -->`,`<figure>`,`</figure>`];
-
 
 <div class="tip">
 <Tip>
@@ -64,6 +61,7 @@ The
 function loads a list of configurations from an environment variable or
 a json file.
 
+
 ```python
 import autogen
 
@@ -86,6 +84,7 @@ llm_config = {
 ## Prompts
 
 The prompts remain unchanged from the original example.
+
 
 ```python
 # baggage/policies.py
@@ -184,6 +183,7 @@ def triage_instructions(context_variables):
 
 ## Define Agents and register functions
 
+
 ```python
 from autogen import Agent, AssistantAgent, UserProxyAgent
 
@@ -231,6 +231,7 @@ lost_baggage = AssistantAgent(
 > LLM-based agent, where the schema is automatically generated. See more
 > details in this
 > [doc](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/introducing-tools)
+
 
 ```python
 @flight_change.register_for_llm(description="valid to change flight")
@@ -346,17 +347,14 @@ user = UserProxyAgent(
 
 ## Understand and define the workflow
 
-<div dangerouslySetInnerHTML={{ __html: quartoRawHtml[0] }} />
-
 We define a customized agent transition function to decide which agent
 to call based on the user input. See the overall architecture of the
 example in the image below:
 
-<div dangerouslySetInnerHTML={{ __html: quartoRawHtml[1] }} />
-
-<img src="https://media.githubusercontent.com/media/ag2ai/ag2/main/notebook/stateflow-swarm-example.png"  width="700"
-         alt="stateflow-swarm-example"> </img>
-<div dangerouslySetInnerHTML={{ __html: quartoRawHtml[2] }} />
+<img 
+    src="https://media.githubusercontent.com/media/ag2ai/ag2/main/notebook/stateflow-swarm-example.png"  
+    width="700" 
+    alt="stateflow-swarm-example"> </img>
 
 A human user is trying to contact an airline custom service. Given a
 request, we will also call `triage_agent` to determine whether it is
@@ -372,6 +370,7 @@ the control to another agent.
 
 Based on this workflow, we define a `state_transition` function to route
 the requests to the corresponding agent.
+
 
 ```python
 def state_transition(last_speaker, groupchat):
@@ -421,6 +420,7 @@ Here is a sequence of messages entered in this example:
 3.  `I want flight credits`
 4.  `No` (No further questions)
 5.  `exit` (End the conversation)
+
 
 ```python
 def state_transition(last_speaker, groupchat) -> Agent:

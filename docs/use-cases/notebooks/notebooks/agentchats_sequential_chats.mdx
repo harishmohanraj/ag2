@@ -22,16 +22,18 @@ chats.
 
 <div class="info Requirements">
 <Info>
-Install `pyautogen`:
+Install `ag2`:
+
 
 ```bash
-pip install pyautogen[openai]
+pip install ag2[openai]
 ```
 
 For more information, please refer to the [installation
 guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
 </Info>
 </div>
+
 
 ```python
 import autogen
@@ -53,6 +55,7 @@ Learn more about the various ways to configure LLM endpoints
 Below are three example tasks, with each task being a string of text
 describing the request. The completion of later tasks requires or
 benefits from the results of previous tasks.
+
 
 ```python
 financial_tasks = [
@@ -77,6 +80,7 @@ as inputs. Each dictionary preserves the following fields:
     the last message from the chat history as the summary, and
     `reflection_with_llm`, which uses an LLM call to reflect on the chat
     history and summarize a takeaway;
+
 
 ```python
 financial_assistant = autogen.AssistantAgent(
@@ -162,6 +166,7 @@ includes the following attributes:
     the chat. (Note that since we are setting `human_input_mode` to
     `NEVER` in this notebook, this list is always empty.)
 
+
 ```python
 for i, chat_res in enumerate(chat_results):
     print(f"*****{i}th chat*******:")
@@ -180,6 +185,7 @@ for i, chat_res in enumerate(chat_results):
 In this example, say I have two tasks. One research task and a one
 writing task. The writing task needs data from research task. In this
 example, we direct read data from a file as part of the message.
+
 
 ```python
 research_task = """What are daily stock prices of NVDA and TESLA in the past month. Save the results in a .md file named 'stock_prices.md'."""

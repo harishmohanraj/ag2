@@ -36,11 +36,13 @@ calling for `GPTAssistantAgent`.
 AG2 requires Python 3.9 or newer. For this notebook, please install
 `autogen`:
 
+
 ```python
 %pip install autogen
 ```
 
 Import Dependencies
+
 
 ```python
 import requests
@@ -61,6 +63,7 @@ We need to create functions for our Agents to call.
 
 This function calls the Dad Joke API with a search term that the agent
 creates and returns a list of dad jokes.
+
 
 ```python
 def get_dad_jokes(search_term: str, page: int = 1, limit: int = 10) -> str:
@@ -97,6 +100,7 @@ print(jokes)
 
 This function allows the Agents to write to a txt file.
 
+
 ```python
 def write_to_txt(content: str, filename: str = "dad_jokes.txt"):
     """Writes a formatted string to a text file.
@@ -121,6 +125,7 @@ write_to_txt(content)
 In order to use the functions within our GPTAssistantAgents, we need to
 generate function schemas. This can be done by using
 `get_function_schema`
+
 
 ```python
 # Assistant API Tool Schema for get_dad_jokes
@@ -147,6 +152,7 @@ In this section we create and configure our Dad and Sad Joker Agents
 
 ### Set up the User Proxy
 
+
 ```python
 user_proxy = UserProxyAgent(
     name="user_proxy",
@@ -165,6 +171,7 @@ the function’s specification in our `llm_config`.
 We format the `tools` within our `llm_config` in the same format as
 provided in the [OpenAI Assistant tools
 docs](https://platform.openai.com/docs/assistants/tools/function-calling).
+
 
 ```python
 the_dad = GPTAssistantAgent(
@@ -189,6 +196,7 @@ the_dad = GPTAssistantAgent(
 Next, we register the `get_dad_jokes` function with the Dad
 `GPTAssistantAgent`
 
+
 ```python
 # Register get_dad_jokes with the_dad GPTAssistantAgent
 the_dad.register_function(
@@ -202,6 +210,7 @@ the_dad.register_function(
 
 We then create and configure the Sad Joker agent in a similar manner to
 the Dad agent above.
+
 
 ```python
 the_sad_joker = GPTAssistantAgent(
@@ -228,6 +237,7 @@ the_sad_joker = GPTAssistantAgent(
 Register the `write_to_txt` function with the Sad Joker
 `GPTAssistantAgent`
 
+
 ```python
 # Register get_dad_jokes with the_dad GPTAssistantAgent
 the_sad_joker.register_function(
@@ -241,12 +251,14 @@ the_sad_joker.register_function(
 
 Create the groupchat
 
+
 ```python
 groupchat = autogen.GroupChat(agents=[user_proxy, the_dad, the_sad_joker], messages=[], max_round=15)
 group_chat_manager = autogen.GroupChatManager(groupchat=groupchat, llm_config={"config_list": config_list})
 ```
 
 Start the Conversation
+
 
 ```python
 user_proxy.initiate_chat(group_chat_manager, message="Jokes about cats")

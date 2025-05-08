@@ -49,21 +49,24 @@ based on this experiment.
 AG2 requires `Python>=3.9`. To run this notebook example, please install
 with the \[blendsearch\] option:
 
+
 ```bash
-pip install "pyautogen[blendsearch]<0.2"
+pip install "ag2[blendsearch]<0.2"
 ```
 
 > Note: For code corresponding to version \<0.2, you can refer to [the
 > repository](https://github.com/ag2ai/ag2/tree/dd90756bdb05479cea035db718f6473ce3e1859f)
 
+
 ```python
-# %pip install "pyautogen[blendsearch]<0.2" datasets
+# %pip install "ag2[blendsearch]<0.2" datasets
 ```
 
 AG2 has provided an API for hyperparameter optimization of OpenAI
 ChatGPT models: `autogen.ChatCompletion.tune` and to make a request with
 the tuned config: `autogen.ChatCompletion.create`. First, we import
 autogen:
+
 
 ```python
 import datasets
@@ -92,11 +95,13 @@ corresponding environment variables or local txt files:
 It’s OK to have only the OpenAI API key, or only the Azure OpenAI API
 key + base.
 
+
 ```python
 config_list = autogen.config_list_openai_aoai()
 ```
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -125,6 +130,7 @@ We load the competition_math dataset. The dataset contains 201 “Level 2”
 Algebra examples. We use a random sample of 20 examples for tuning the
 generation hyperparameters and the remaining for evaluation.
 
+
 ```python
 seed = 41
 data = datasets.load_dataset("competition_math")
@@ -152,11 +158,13 @@ print(len(tune_data), len(test_data))
 
 Check a tuning example:
 
+
 ```python
 print(tune_data[1]["problem"])
 ```
 
 Here is one example of the canonical solution:
+
 
 ```python
 print(tune_data[1]["solution"])
@@ -175,6 +183,7 @@ collection of tasks.
 
 For (local) reproducibility and cost efficiency, we cache responses from
 OpenAI with a controllable seed.
+
 
 ```python
 autogen.ChatCompletion.set_cache(seed)
@@ -207,6 +216,7 @@ budgets.
 Users can specify tuning data, optimization metric, optimization mode,
 evaluation function, search spaces etc.. The default search space is:
 
+
 ```python
 default_search_space = {
     "model": tune.choice([
@@ -229,6 +239,7 @@ The default search space can be overridden by users’ input. For example,
 the following code specifies a fixed prompt template. The default search
 space will be used for hyperparameters that don’t appear in users’
 input.
+
 
 ```python
 prompts = [
@@ -259,6 +270,7 @@ config, analysis = autogen.ChatCompletion.tune(
 After the tuning, we can print out the config and the result found by
 AG2, which uses flaml for tuning.
 
+
 ```python
 print("optimized config", config)
 print("best result on tuning data", analysis.best_result)
@@ -267,6 +279,7 @@ print("best result on tuning data", analysis.best_result)
 ### Make a request with the tuned config
 
 We can apply the tuned config on the request for an example task:
+
 
 ```python
 response = autogen.ChatCompletion.create(context=tune_data[1], config_list=config_list, **config)
@@ -282,6 +295,7 @@ an entire dataset with the tuned config. The following code will take a
 while (30 mins to 1 hour) to evaluate all the test data instances if
 uncommented and run. It will cost roughly \$3.
 
+
 ```python
 # result = autogen.ChatCompletion.test(test_data, logging_level=logging.INFO, config_list=config_list, **config)
 # print("performance on test data with the tuned config:", result)
@@ -289,6 +303,7 @@ uncommented and run. It will cost roughly \$3.
 
 What about the default, untuned gpt-4 config (with the same prompt as
 the tuned config)? We can evaluate it and compare:
+
 
 ```python
 # the following code will cost roughly $2 if uncommented and run.
@@ -308,6 +323,7 @@ The default use of GPT-4 has a much lower accuracy. Note that the
 default config has a lower inference cost. What if we heuristically
 increase the number of responses n?
 
+
 ```python
 # The following evaluation costs $3 and longer than one hour if you uncomment it and run it.
 
@@ -319,6 +335,7 @@ increase the number of responses n?
 The inference cost is doubled and matches the tuned config. But the
 success rate doesn’t improve much. What if we further increase the
 number of responses n to 5?
+
 
 ```python
 # The following evaluation costs $8 and longer than one hour if you uncomment it and run it.

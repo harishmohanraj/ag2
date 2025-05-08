@@ -37,6 +37,7 @@ example](https://github.com/openai/swarm/tree/main/examples/airline) in
 AG2.
 
 
+
 <div class="note">
 <Note>
 This notebook has been updated as swarms can now accommodate any ConversableAgent.
@@ -52,15 +53,15 @@ Install `ag2`:
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen
+> pip install -U ag2
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -74,6 +75,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 import autogen
@@ -98,6 +100,7 @@ llm_config = {
 
 The prompts and utility functions remain unchanged from the original
 example.
+
 
 ```python
 # baggage/policies.py
@@ -231,6 +234,7 @@ def non_flight_enquiry() -> str:
 
 ## Define Agents and register functions
 
+
 ```python
 from autogen import AfterWorkOption, ConversableAgent, OnCondition, initiate_swarm_chat, register_hand_off
 
@@ -283,6 +287,7 @@ Now we register the handoffs for the agents. Note that you don’t need to
 define the transfer functions and pass them in. Instead, you can
 directly register the handoffs using the `OnCondition` class.
 
+
 ```python
 # Register hand-offs
 register_hand_off(
@@ -326,6 +331,7 @@ To initialize the conversation, we pass `I want to cancel flight` to the
 but don’t provide one) 2. `1919` (The flight number) 3.
 `I want flight credits` 4. `No` (No further questions) 5. `exit` (End
 the conversation)
+
 
 ```python
 from autogen import UserProxyAgent

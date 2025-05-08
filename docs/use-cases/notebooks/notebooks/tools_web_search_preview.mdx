@@ -1,0 +1,138 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/tools_web_search_preview.ipynb
+description: Web Search Preview
+source_notebook: /notebook/tools_web_search_preview.ipynb
+tags:
+- tools
+- search
+- responses api
+title: "Using OpenAI\u2019s Web Search Tool with AG2"
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/tools_web_search_preview.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/tools_web_search_preview.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+OpenAI’s latest GPT models—such as `gpt-4.1` and `gpt-4o-suffix` support
+a powerful, built-in
+[`web_search_preview`](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses)
+tool that enables real-time web access.
+
+In this guide, you’ll learn how to integrate and use
+`web_search_preview` within the AG2 framework.
+
+## Installation
+
+Install AG2 with the `openai` extra.
+
+
+```bash
+pip install -U ag2[openai]
+```
+
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
+>
+> ```bash
+> pip install -U autogen[openai]
+> ```
+>
+> or
+>
+>
+> ```bash
+> pip install -U ag2[openai]
+> ```
+>
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
+
+You’re all set! Now you can start using `web_search_preview` with AG2.
+
+## Imports
+
+
+```python
+from typing import Literal
+
+from pydantic import BaseModel
+
+from autogen import AssistantAgent, LLMConfig
+from autogen.tools.experimental.web_search_preview import WebSearchPreviewTool
+```
+
+## Using WebSearchPreviewTool
+
+Now let’s create a `WebSearchPreviewTool` that will search the web and
+return the OpenAPI specification for a desired API (e.g., GitHub,
+WhatsApp, etc.).
+
+The tool is configured to: - Search for a raw OpenAPI specification file
+in JSON or YAML format. - Return a structured response that matches the
+`OpenAPISpec` class, which includes: - The source page where the spec
+was found. - A direct URL to the OpenAPI file. - A relevance score
+(1–5).
+
+This makes it easy to retrieve usable API definitions for further
+automated processing or integration.
+
+
+```python
+llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST")
+
+agent = AssistantAgent(
+    name="assistant",
+    llm_config=llm_config,
+)
+
+
+class OpenAPISpec(BaseModel):
+    source_url: str
+    openapi_spec_url: str
+    result_score: Literal[1, 2, 3, 4, 5]
+
+
+tool = WebSearchPreviewTool(
+    llm_config=llm_config,
+    instructions="""Find a url with opeanapi specification for the wanted api. The specification must be in JSON or YAML format.
+I need a link to raw file (because I will use it in curl command).
+
+Output should be just:
+
+Source: <url> (where te openapi specification was found)
+OpenAPI Specification URL: <url>
+
+
+- make sure that the url which you found is not returning 4xx error, otherwise you will be penalized!
+- do not give up easily, try to find the url in different ways
+- do not use markdown [url](<url>) format""",
+    text_format=OpenAPISpec,
+)
+tool.register_for_llm(agent)
+```
+
+## Start Searching
+
+This loop demonstrates how to automatically search for OpenAPI
+specifications for a list of popular APIs. For each API name, the
+assistant runs a web search using the configured `WebSearchPreviewTool`
+
+
+```python
+apis = ["github", "whatsapp", "trello", "giphy", "pokemon"]
+for api in apis:
+    response = agent.run(
+        message=f"Let's find a url with openapi specification for {api}.",
+        tools=agent.tools,
+        user_input=False,
+        max_turns=3,
+    )
+    response.process()
+    print("-" * 40)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/tools_web_search_preview.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

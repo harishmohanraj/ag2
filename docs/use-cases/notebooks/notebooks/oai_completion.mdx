@@ -44,15 +44,17 @@ released by OpenAI for synthesizing programs from docstrings.
 AG2 requires `Python>=3.9`. To run this notebook example, please install
 with the \[blendsearch\] option:
 
+
 ```bash
-pip install "pyautogen[openai,blendsearch]<0.2"
+pip install "ag2[openai,blendsearch]<0.2"
 ```
 
 > Note: For code corresponding to version \<0.2, you can refer to [the
 > repository](https://github.com/ag2ai/ag2/tree/dd90756bdb05479cea035db718f6473ce3e1859f)
 
+
 ```python
-# %pip install "pyautogen[blendsearch]~=0.1.0" datasets
+# %pip install "ag2[blendsearch]~=0.1.0" datasets
 ```
 
 ## Set your API Endpoint
@@ -83,6 +85,7 @@ It’s OK to have only the OpenAI API key, or only the Azure OpenAI API
 key + base. If you open this notebook in colab, you can upload your
 files by clicking the file icon on the left panel and then choosing
 “upload file” icon.
+
 
 ```python
 from functools import partial
@@ -159,6 +162,7 @@ string for eliciting the code generation (renamed into “definition”),
 “test” is the Python code for unit test for the example, and
 “entry_point” is the function name to be tested.
 
+
 ```python
 seed = 41
 data = datasets.load_dataset("openai_humaneval")["test"].shuffle(seed=seed)
@@ -183,12 +187,14 @@ test_data = [
 
 Check a tuning example:
 
+
 ```python
 print(tune_data[1]["definition"])
 ```
 
 Here is one example of the unit test code for verifying the correctness
 of the generated code:
+
 
 ```python
 print(tune_data[1]["test"])
@@ -202,6 +208,7 @@ generate multiple candidates, and then select one from them. If the
 final selected response can pass a unit test, we consider the task as
 successfully solved. Then we can define the mean success rate of a
 collection of tasks.
+
 
 ```python
 eval_with_generated_assertions = partial(
@@ -224,6 +231,7 @@ config: `autogen.Completion.create`.
 
 For (local) reproducibility and cost efficiency, we cache responses from
 OpenAI with a controllable seed.
+
 
 ```python
 autogen.Completion.set_cache(seed)
@@ -256,6 +264,7 @@ budgets.
 Users can specify tuning data, optimization metric, optimization mode,
 evaluation function, search spaces, etc. The default search space is:
 
+
 ```python
 from flaml import tune
 
@@ -286,6 +295,7 @@ hyperparameters that don’t appear in users’ input. If you don’t have
 access to gpt-4 or would like to modify the choice of models, you can
 provide a different search space for the model.
 
+
 ```python
 config, analysis = autogen.Completion.tune(
     data=tune_data,  # the data for tuning
@@ -314,6 +324,7 @@ config, analysis = autogen.Completion.tune(
 After the tuning, we can print out the config and the result found by
 autogen:
 
+
 ```python
 print("optimized config", config)
 print("best result on tuning data", analysis.best_result)
@@ -322,6 +333,7 @@ print("best result on tuning data", analysis.best_result)
 ### Request with the tuned config
 
 We can apply the tuned config on the request for an example task:
+
 
 ```python
 response = autogen.Completion.create(context=tune_data[1], config_list=endpoint_list, **config)
@@ -335,6 +347,7 @@ You can use `autogen.Completion.test` to evaluate the performance of an
 entire dataset with the tuned config. The following code will take a
 while to evaluate all the 144 test data instances. The cost is about \$6
 if you uncomment it and run it.
+
 
 ```python
 # result = autogen.Completion.test(test_data, config_list=endpoint_list, **config)

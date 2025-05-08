@@ -38,10 +38,11 @@ post](https://docs.ag2.ai/latest/docs/blog/2023/11/20/AgentEval)
 ## Requirements
 
 AG2 requires `Python>=3.9`. To run this notebook example, please install
-pyautogen, Docker, and OpenAI:
+ag2, Docker, and OpenAI:
+
 
 ```python
-%pip install "pyautogen>=0.2.3" docker
+%pip install "ag2>=0.2.3" docker
 %pip install scipy
 %pip install matplotlib
 ```
@@ -60,6 +61,7 @@ You can set the value of config_list in any way you prefer. Please refer
 to this [User
 Guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/llm-configuration/)
 for full code examples of the different methods.
+
 
 ```python
 import json
@@ -85,6 +87,7 @@ To run the critic, we need a couple of math problem examples. One of
 them failed to solve the problem successfully, given in
 `agenteval-in-out/response_failed.txt`, and the other one was solved
 successfully, i.e., `agenteval-in-out/response_successful.txt`.
+
 
 ```python
 def remove_ground_truth(test_case):
@@ -116,6 +119,7 @@ criteria = generate_criteria(task=task, llm_config={"config_list": config_list},
 
 Now, we print the designed criteria for assessing math problems.
 
+
 ```python
 current_task_name = "_".join(task.name.split()).lower()
 cr_file = open(f"../test/test_files/agenteval-in-out/{current_task_name}_criteria.json", "w")  # noqa: SIM115
@@ -133,6 +137,7 @@ designed criteria and its accepted values. This will be done through
 `quantify_criteria` from agent_eval. Again, you can use your own defined
 criteria in `criteria_file`.
 
+
 ```python
 criteria_file = f"../test/test_files/agenteval-in-out/{current_task_name}_criteria.json"
 criteria = open(criteria_file).read()  # noqa: SIM115
@@ -143,6 +148,7 @@ criteria = Criterion.parse_json_str(criteria)
 
 Here, we run the quantifier on a single math problem test case,
 `sample_test_case.json`, for demonstration.
+
 
 ```python
 test_case = open("../test/test_files/agenteval-in-out/samples/sample_test_case.json").read()  # noqa: SIM115
@@ -167,6 +173,7 @@ which will be downloaded from
 In case you want to replicate the results described in the blog post,
 you can download all the logs for math problems using the following
 [link](https://github.com/julianakiseleva/autogen/tree/3ac137d52a20a013a39b48d0fea8a8b720116c66/model-logs/math-problems/agentchat).
+
 
 ```python
 # You can set your own log path - we also limited the number of samples to avoid additional costs.
@@ -212,6 +219,7 @@ with open("../test/test_files/agenteval-in-out/evaluated_problems.json", "w") as
 Here you can find an example of how to visualize the obtained result in
 the histogram form (similar to the one in the blog post).
 
+
 ```python
 # computing average and 95% interval for failed and successful cases on all criteria
 
@@ -252,6 +260,7 @@ for criterion in criteria:
 
 The final plot would be saved in
 `../test/test_files/agenteval-in-out/estimated_performance.png`
+
 
 ```python
 # Create a bar plot with error bars for the average values of "s" and "f" for each criterion

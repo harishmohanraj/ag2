@@ -48,6 +48,7 @@ The
 method loads a list of configurations from an environment variable or a
 json file.
 
+
 ```python
 import autogen
 from autogen.agentchat import AssistantAgent
@@ -67,6 +68,7 @@ Learn more about configuring LLMs for agents [here](https://docs.ag2.ai/latest/d
 
 
 ## Define GPTAssistantAgent and GroupChat
+
 
 ```python
 # Define user proxy agent
@@ -101,6 +103,7 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 ## Initiate Group Chat
 
 Now all is set, we can initiate group chat.
+
 
 ```python
 user_proxy.initiate_chat(

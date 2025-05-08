@@ -28,6 +28,7 @@ If you want the *original* console output experience, you can use the
 
 ## Two agent chat
 
+
 ```python
 # Chat between two comedian agents
 
@@ -81,6 +82,7 @@ assert isinstance(response.cost, Cost)
 
 ## With console processor
 
+
 ```python
 # Chat between two comedian agents
 
@@ -121,6 +123,7 @@ assert len(response.messages) > 0, "Messages should not be empty"
 
 It creates a user proxy agent automatically.
 
+
 ```python
 # 1. Create our LLM agent
 with llm_config:
@@ -145,6 +148,7 @@ assert response.last_speaker == "helpful_agent", "Last speaker should be an agen
 ```
 
 ## Group chat run
+
 
 ```python
 # Group chat amongst agents to create a 4th grade lesson plan
@@ -204,6 +208,7 @@ assert response.last_speaker in ["teacher_agent", "planner_agent", "reviewer_age
 ```
 
 ## Swarm chat run
+
 
 ```python
 from autogen import run_swarm
@@ -269,6 +274,7 @@ assert response.last_speaker in ["teacher_agent", "planner_agent", "reviewer_age
 ```
 
 ## Sequential run
+
 
 ```python
 from autogen.agentchat.user_proxy_agent import UserProxyAgent
@@ -347,6 +353,7 @@ for response in responses:
 
 ## Two agent chat
 
+
 ```python
 # Chat between two comedian agents
 
@@ -394,6 +401,7 @@ print(f"{await response.messages=}")
 
 ## With console processor
 
+
 ```python
 # Chat between two comedian agents
 
@@ -440,6 +448,7 @@ assert len(await response.messages) > 0, "Messages should not be empty"
 ```
 
 ## Group chat
+
 
 ```python
 # Group chat amongst agents to create a 4th grade lesson plan
@@ -495,6 +504,7 @@ assert await response.last_speaker in ["teacher_agent", "planner_agent", "review
 ```
 
 ## Swarm chat
+
 
 ```python
 from autogen import a_run_swarm
@@ -557,6 +567,7 @@ assert await response.last_speaker in ["teacher_agent", "planner_agent", "review
 
 ## Single agent run
 
+
 ```python
 # 1. Create our LLM agent
 with llm_config:
@@ -581,6 +592,7 @@ assert await response.last_speaker == "helpful_agent", "Last speaker should be a
 ```
 
 ## Sequential run
+
 
 ```python
 financial_tasks = [
@@ -656,6 +668,7 @@ for response in responses:
 ```
 
 ## Group chat
+
 
 ```python
 from autogen.agentchat.group.patterns.auto import AutoPattern

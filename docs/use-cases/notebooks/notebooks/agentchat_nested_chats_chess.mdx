@@ -46,6 +46,7 @@ agent sends a message to the other player agent about the move made.
 
 First you need to install the `autogen` and `chess` packages to use AG2.
 
+
 ```python
 ! pip install -qqq autogen chess
 ```
@@ -53,6 +54,7 @@ First you need to install the `autogen` and `chess` packages to use AG2.
 ## Setting up LLMs
 
 Now you can set up the models you want to use.
+
 
 ```python
 import os
@@ -75,6 +77,7 @@ player_black_config_list = [
 ## Creating tools
 
 Write functions for getting legal moves and making a move.
+
 
 ```python
 from typing import Annotated
@@ -120,6 +123,7 @@ Let’s create the agents. We have three different agents: -
 `player_white` is the agent that plays white. - `player_black` is the
 agent that plays black. - `board_proxy` is the agent that moves the
 pieces on the board.
+
 
 ```python
 from autogen import ConversableAgent, register_function
@@ -167,6 +171,7 @@ Register tools for the agents. See [tutorial chapter on tool
 use](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/introducing-tools/)
 for more information.
 
+
 ```python
 register_function(
     make_move,
@@ -204,6 +209,7 @@ register_function(
 Now the agents have their tools ready. You can inspect the
 auto-generated tool schema for each agent.
 
+
 ```python
 player_black.llm_config["tools"]
 ```
@@ -229,6 +235,7 @@ alt="Conversational Chess" />
 See [nested chats tutorial
 chapter](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/nested-chat)
 for more information.
+
 
 ```python
 player_white.register_nested_chats(
@@ -263,6 +270,7 @@ player_black.register_nested_chats(
 ## Playing the game
 
 Start the chess game.
+
 
 ```python
 # Clear the board.

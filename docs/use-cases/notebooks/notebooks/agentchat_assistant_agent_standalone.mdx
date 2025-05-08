@@ -34,6 +34,7 @@ requires **Python 3.11 or higher**.
 
 Install `ag2` and `playwright`:
 
+
 ```bash
 pip install -U ag2[browser-use]
 # Installs Playwright and browsers for all OS
@@ -42,8 +43,9 @@ playwright install
 playwright install-deps
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen[openai,browser-use]
@@ -51,14 +53,15 @@ playwright install-deps
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen[browser-use]
+> pip install -U ag2[browser-use]
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 </Info>
 </div>
+
 
 ```python
 import autogen
@@ -80,6 +83,7 @@ The
 method loads a list of configurations from an environment variable or a
 JSON file.
 
+
 ```python
 llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", temperature=0.8, timeout=600).where(
     tags=["gpt-4o-mini"]
@@ -96,10 +100,12 @@ hot topic of the day
 We will set the browser configuration to not run headless, this will
 open the browser as a window so you can see it in action.
 
-```python
-x_assistant = AssistantAgent(name="x_assistant", llm_config=llm_config)
 
-arxiv_researcher = AssistantAgent(name="arxiv", llm_config=llm_config)
+```python
+with llm_config:
+    x_assistant = AssistantAgent(name="x_assistant")
+
+    arxiv_researcher = AssistantAgent(name="arxiv")
 
 browser_use_tool = BrowserUseTool(
     llm_config=llm_config,
@@ -114,6 +120,7 @@ Let’s run our x_assistant to discover the hot topic of the day.
 To be able to do this we give our assistant the capability to browse the
 web using a `BrowserUseTool` Tool.
 
+
 ```python
 hot_topic_res = x_assistant.run(
     "Find out today's hot topic and an influencer who is talking about it on X using a web search",
@@ -127,6 +134,7 @@ print(hot_topic_res.summary)
 After discovering the hot topic, let’s run the discovery of papers that
 align with the topic
 
+
 ```python
 paper_abstract = arxiv_researcher.run(
     "Get the abstract of a relevant paper based on:\n" + hot_topic_res.summary,
@@ -137,6 +145,7 @@ print(paper_abstract.summary)
 ```
 
 Now, let’s create an X post using our x_assistant
+
 
 ```python
 # Scenario 1. This task requires x_assistant's past state
@@ -150,6 +159,7 @@ print(run_result.summary)
 ```
 
 Finally, let’s ask our x_assistant who should we follow on X
+
 
 ```python
 # Scenario 2. Doing another task that does not require history or past state

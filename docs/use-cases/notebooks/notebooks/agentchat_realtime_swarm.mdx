@@ -35,6 +35,7 @@ example](https://github.com/openai/swarm/tree/main/examples/airline) in
 AG2 using the RealtimeAgent for enhanced interaction.
 
 
+
 <div class="note">
 <Note>
 This notebook has been updated as swarms can now accommodate any ConversableAgent.
@@ -79,6 +80,7 @@ The
 method loads a list of configurations from an environment variable or a
 json file.
 
+
 ```python
 import autogen
 
@@ -116,6 +118,7 @@ assert realtime_llm_config.config_list, (
 
 The prompts and utility functions remain unchanged from the original
 example.
+
 
 ```python
 # baggage/policies.py
@@ -249,6 +252,7 @@ def non_flight_enquiry() -> str:
 
 ## Define Agents and register functions
 
+
 ```python
 from autogen import ConversableAgent, OnCondition, register_hand_off
 
@@ -301,6 +305,7 @@ Now we register the handoffs for the agents. Note that you don’t need to
 define the transfer functions and pass them in. Instead, you can
 directly register the handoffs using the `OnCondition` class.
 
+
 ```python
 # Register hand-offs
 register_hand_off(
@@ -332,6 +337,7 @@ uvicorn uses its own event loop. nest_asyncio will allow uvicorn to run
 in Jupyter.
 
 Please install nest_asyncio by running the following cell.
+
 
 ```python
 !pip install nest_asyncio
@@ -382,6 +388,7 @@ Here’s what happens when you run the code:
 
 Once the server is running, you can connect a Twilio phone call to the
 AI assistant and test the RealtimeAgent’s capabilities!
+
 
 ```python
 from contextlib import asynccontextmanager

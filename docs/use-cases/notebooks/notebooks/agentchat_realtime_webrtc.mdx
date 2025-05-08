@@ -68,6 +68,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 After installing the necessary requirements, we can import the necessary
 dependencies for the example
 
+
 ```python
 import os
 from logging import getLogger
@@ -103,6 +104,7 @@ and other keys may result internal server error (500) on OpenAI server.
 For more details see:
 https://community.openai.com/t/realtime-api-create-sessions-results-in-500-internal-server-error/1060964/5
 
+
 ```python
 realtime_llm_config = autogen.LLMConfig.from_json(
     path="OAI_CONFIG_LIST",
@@ -129,6 +131,7 @@ uvicorn uses its own event loop. nest_asyncio will allow uvicorn to run
 in Jupyter.
 
 Please install nest_asyncio by running the following cell.
+
 
 ```python
 !pip install nest_asyncio
@@ -158,6 +161,7 @@ real-time agent interactions.
 
 This sets up a basic FastAPI server and provides a simple health-check
 endpoint to confirm that the server is operational.
+
 
 ```python
 from contextlib import asynccontextmanager
@@ -195,6 +199,7 @@ async def index_page():
 
 This code sets up static file handling, template rendering, and a
 dedicated endpoint to deliver the chat interface.
+
 
 ```python
 notebook_path = os.getcwd()
@@ -237,6 +242,7 @@ async def start_chat(request: Request):
 6.  **Run the Agent**: Start the `realtime_agent` to handle interactions
     in real time.
 
+
 ```python
 @app.websocket("/session")
 async def handle_media_stream(websocket: WebSocket):
@@ -263,6 +269,7 @@ async def handle_media_stream(websocket: WebSocket):
 ```
 
 ### Run the app using uvicorn
+
 
 ```python
 uvicorn.run(app, host="0.0.0.0", port=PORT)

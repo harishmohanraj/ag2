@@ -43,6 +43,7 @@ directly pass the feedback to `AssistantAgent`.
 AG2 requires `Python>=3.9`. To run this notebook example, please install
 autogen and docker:
 
+
 ```bash
 pip install autogen[openai] docker
 ```
@@ -58,6 +59,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 import autogen
@@ -84,6 +86,7 @@ a json file named “OAI_CONFIG_LIST”. It filters the configs by models
 names are kept in the list based on the filter condition.
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -120,6 +123,7 @@ We construct the assistant agent and the user proxy agent. We specify
 ask for human feedback when it receives a “TERMINATE” signal from the
 assistant agent.
 
+
 ```python
 # create an AssistantAgent instance named "assistant"
 assistant = autogen.AssistantAgent(
@@ -152,6 +156,7 @@ Enter directly), the conversation will finish. Before the “TERMINATE”
 signal, the user proxy agent will try to execute the code suggested by
 the assistant agent on behalf of the user.
 
+
 ```python
 # the assistant receives a message from the user, which contains the task description
 user_proxy.initiate_chat(
@@ -163,6 +168,7 @@ Who should read this paper: https://arxiv.org/abs/2308.08155
 ```
 
 ## Example Task: Chat about Stock Market
+
 
 ```python
 user_proxy.initiate_chat(

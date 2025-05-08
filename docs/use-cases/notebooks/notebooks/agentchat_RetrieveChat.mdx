@@ -72,6 +72,7 @@ The
 function loads a list of configurations from an environment variable or
 a json file.
 
+
 ```python
 import json
 
@@ -108,6 +109,7 @@ given in the user message. Later we will use the
 `RetrieveUserProxyAgent.message_generator` to combine the instructions
 and a retrieval augmented generation task for an initial prompt to be
 sent to the LLM assistant.
+
 
 ```python
 print("Accepted file formats for `docs_path`:")
@@ -163,6 +165,7 @@ classification task and I want to train the model in 30 seconds. Use
 spark to parallel the training. Force cancel jobs if time limit is
 reached.
 
+
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.
 assistant.reset()
@@ -186,6 +189,7 @@ generation.
 
 Problem: Who is the author of FLAML?
 
+
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.
 assistant.reset()
@@ -203,6 +207,7 @@ feedbacks.
 
 Problem: how to build a time series forecasting model for stock price
 using FLAML?
+
 
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.
@@ -222,6 +227,7 @@ Use RetrieveChat to answer a question and ask for human-in-loop
 feedbacks.
 
 Problem: Is there a function named `tune_automl` in FLAML?
+
 
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.
@@ -249,6 +255,7 @@ RetrieveChat to answer them. For this particular example, we will be
 using the `gpt-3.5-turbo` model, and we will demonstrate RetrieveChat’s
 feature of automatically updating context in case the documents
 retrieved do not contain sufficient information.
+
 
 ```python
 config_list[0]["model"] = "gpt-35-turbo"  # change model to gpt-35-turbo
@@ -335,6 +342,7 @@ feature of automatically updating context in case the documents
 retrieved do not contain sufficient information. Moreover, we’ll
 demonstrate how to use customized prompt and few-shot learning to
 address tasks that are not pre-defined in RetrieveChat.
+
 
 ```python
 PROMPT_MULTIHOP = """You're a retrieve augmented chatbot. You answer user's questions based on your own knowledge and the context provided by the user. You must think step-by-step.

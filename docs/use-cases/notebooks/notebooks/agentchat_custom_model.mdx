@@ -28,7 +28,7 @@ default prompts of the Agent’s**
 Some extra dependencies are needed for this notebook, which can be installed via pip:
 
 ```bash
-pip install pyautogen[openai] torch transformers sentencepiece
+pip install ag2[openai] torch transformers sentencepiece
 ```
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -55,6 +55,7 @@ The response protocol has some minimum requirements, but can be extended
 to include any additional information that is needed. Message retrieval
 therefore can be customized, but needs to return a list of strings or a
 list of `ModelClientResponseProtocol.Choice.Message` objects.
+
 
 ```python
 class ModelClient(Protocol):
@@ -117,6 +118,7 @@ Open-Orca](https://huggingface.co/Open-Orca/Mistral-7B-OpenOrca)
 For the response object, python’s `SimpleNamespace` is used to create a
 simple object that can be used to store the response data, but any
 object that follows the `ClientResponseProtocol` can be used.
+
 
 ```python
 # custom client with custom model loader
@@ -210,6 +212,7 @@ keys as well).
 
 The json looks like the following:
 
+
 ```json
 [
     {
@@ -246,6 +249,7 @@ in the same configuration list.
 It is important to add the `model_client_cls` field and set it to a
 string that corresponds to the class name: `"CustomModelClient"`.
 
+
 ```json
 {
     "model": "Open-Orca/Mistral-7B-OpenOrca",
@@ -271,6 +275,7 @@ config_list_custom = autogen.config_list_from_json(
 Construct a simple conversation between a User proxy and an Assistant
 agent
 
+
 ```python
 assistant = AssistantAgent("assistant", llm_config={"config_list": config_list_custom})
 user_proxy = UserProxyAgent(
@@ -283,6 +288,7 @@ user_proxy = UserProxyAgent(
 ```
 
 ## Register the custom client class to the assistant agent
+
 
 ```python
 assistant.register_model_client(model_client_cls=CustomModelClient)
@@ -298,6 +304,7 @@ user_proxy.initiate_chat(assistant, message="Write python code to print Hello Wo
 If you want to have more control over when the model gets loaded, you
 can load the model yourself and pass it as an argument to the
 CustomClient during registration
+
 
 ```python
 # custom client with custom model loader
@@ -331,6 +338,7 @@ tokenizer.pad_token_id = tokenizer.eos_token_id
 ```
 
 ## Add the config of the new custom model
+
 
 ```json
 {

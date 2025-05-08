@@ -45,6 +45,7 @@ You may want to install AG2 with options to different LLMs. Here we
 install AG2 with all the supported LLMs. By default, AG2 is installed
 with OpenAI support.
 
+
 ```bash
 pip install autogen[openai,gemini,anthropic,mistral,together]
 ```
@@ -54,6 +55,7 @@ pip install autogen[openai,gemini,anthropic,mistral,together]
 First, create a `OAI_CONFIG_LIST` file to specify the api keys for the
 LLMs you want to use. Generally, you just need to specify the `model`,
 `api_key` and `api_type` from the provider.
+
 
 ```python
 [
@@ -118,6 +120,7 @@ call the client `create` to get the response.
 Below, we define a helper function `model_call_example_function` to
 implement the above steps.
 
+
 ```python
 import autogen
 from autogen import OpenAIWrapper
@@ -172,6 +175,7 @@ groupchat.
 We mock a debate scenario where each LLM agent is a debater, either in
 affirmative or negative side. We use a round-robin strategy to let each
 debater from different teams to speak in turn.
+
 
 ```python
 def get_llm_config(model_name):

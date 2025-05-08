@@ -51,6 +51,7 @@ Note: in json files, the price should be a list of two floats.
 
 Example Usage:
 
+
 ```python
 {
     "model": "gpt-3.5-turbo-xxxx",
@@ -75,8 +76,9 @@ accurate. You can use the token count to calculate the cost yourself.
 
 AG2 requires `Python>=3.9`:
 
+
 ```bash
-pip install "pyautogen"
+pip install "ag2"
 ```
 
 ## Set your API Endpoint
@@ -85,6 +87,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 import autogen
@@ -104,6 +107,7 @@ a json file named “OAI_CONFIG_LIST”. It filters the configs by tags (you
 can filter by other keys as well).
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -130,6 +134,7 @@ for full code examples of the different methods.
 
 ## OpenAIWrapper with cost estimation
 
+
 ```python
 client = OpenAIWrapper(config_list=config_list)
 messages = [
@@ -140,6 +145,7 @@ print(response.cost)
 ```
 
 ## OpenAIWrapper with custom token price
+
 
 ```python
 # Adding price to the config_list
@@ -162,6 +168,7 @@ print("Price:", response.cost)
 When creating a instance of OpenAIWrapper, cost of all completions from
 the same instance is recorded. You can call `print_usage_summary()` to
 checkout your usage summary. To clear up, use `clear_usage_summary()`.
+
 
 ```python
 client = OpenAIWrapper(config_list=config_list)
@@ -220,6 +227,7 @@ client.print_usage_summary()
 -   `Agent.reset()` will reset the usage summary.
 -   `autogen.gather_usage_summary` will gather the usage summary for a
     list of agents.
+
 
 ```python
 assistant = AssistantAgent(

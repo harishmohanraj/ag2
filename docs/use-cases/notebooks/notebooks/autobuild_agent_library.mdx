@@ -29,6 +29,7 @@ task.
 AutoBuild require `autogen[autobuild]`, which can be installed by the
 following command:
 
+
 ```python
 %pip install autogen[openai,autobuild]
 ```
@@ -37,6 +38,7 @@ following command:
 
 We need to specify a `config_path`, `default_llm_config` that include
 backbone LLM configurations.
+
 
 ```python
 import json
@@ -69,6 +71,7 @@ but informative.
 
 First, we define a prompt template for description and system_message
 generation and a list of agents’ name:
+
 
 ```python
 AGENT_SYS_MSG_PROMPT = """According to the following position name, write a high quality instruction for the position following a given example. You should only return the instruction.
@@ -115,6 +118,7 @@ position_list = [
 Then we can prompt a `gpt-4` model to generate each agent’s system
 message as well as the description:
 
+
 ```python
 build_manager = autogen.OpenAIWrapper(config_list=config_list)
 sys_msg_list = []
@@ -154,11 +158,13 @@ for pos in position_list:
 
 The generated profile will have the following format:
 
+
 ```python
 sys_msg_list
 ```
 
 We can save the generated agents’ information into a json file.
+
 
 ```python
 json.dump(sys_msg_list, open("./agent_library_example.json", "w"), indent=4)  # noqa: SIM115
@@ -175,6 +181,7 @@ We also need to specify a `library_path_or_json`, which can be a path of
 library or a JSON string with agents’ configs. Here, we use the
 previously saved path as the library path.
 
+
 ```python
 library_path_or_json = "./agent_library_example.json"
 building_task = "Find a paper on arxiv by programming, and analyze its application in some domain. For example, find a recent paper about gpt-4 on arxiv and find its potential applications in software."
@@ -183,6 +190,7 @@ building_task = "Find a paper on arxiv by programming, and analyze its applicati
 Then, we can call the `build_from_library` from the AgentBuilder to
 generate a list of agents from the library and let them complete the
 user’s `execution_task` in a group chat.
+
 
 ```python
 new_builder = AgentBuilder(
@@ -205,6 +213,7 @@ as an embedding extractor, and AgentBuilder will select agents with
 profiles that are the most similar to the building task from the library
 by comparing their embedding similarity. This will reduce the use of
 LLMs but may have less accuracy.
+
 
 ```python
 new_builder = AgentBuilder(

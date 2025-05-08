@@ -18,8 +18,9 @@ Requires: OpenAI V1.
 
 ### Before everything starts, install AutoGen with the `lmm` option
 
+
 ```bash
-pip install "pyautogen[lmm]>=0.2.3"
+pip install "ag2[lmm]>=0.2.3"
 ```
 
 
@@ -62,6 +63,7 @@ gpt4_llm_config = LLMConfig.from_json(path=config_path, cache_seed=42).where(
 
 The `llm_config_dalle` should be something like:
 
+
 ```python
 LLMConfig(
     config_list=[
@@ -73,6 +75,7 @@ LLMConfig(
 ## Helper Functions
 
 We first create a wrapper for DALLE call, make the
+
 
 ```python
 def dalle_call(client: OpenAI, model: str, prompt: str, size: str, quality: str, n: int) -> str:
@@ -122,6 +125,7 @@ def dalle_call(client: OpenAI, model: str, prompt: str, size: str, quality: str,
 Here is a helper function to extract image from a DALLE agent. We will
 show the DALLE agent later.
 
+
 ```python
 def extract_img(agent: Agent) -> PIL.Image:
     """Extracts an image from the last message of an agent and converts it to a PIL image.
@@ -156,6 +160,7 @@ def extract_img(agent: Agent) -> PIL.Image:
 ```
 
 ## The DALLE Agent
+
 
 ```python
 class DALLEAgent(ConversableAgent):
@@ -209,6 +214,7 @@ class DALLEAgent(ConversableAgent):
 
 ## Simple Example: Call directly from User
 
+
 ```python
 dalle = DALLEAgent(name="Dalle", llm_config=llm_config_dalle)
 
@@ -233,6 +239,7 @@ plt.show()
 ```
 
 ## Example With Critics: Iterate several times to improve
+
 
 ```python
 class DalleCreator(AssistantAgent):

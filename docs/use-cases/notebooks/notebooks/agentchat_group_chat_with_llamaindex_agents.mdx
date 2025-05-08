@@ -24,11 +24,13 @@ They can be integrated in Autogen in easy ways
 
 ## Requirements
 
+
 ```python
-%pip install pyautogen[openai] llama-index llama-index-tools-wikipedia llama-index-readers-wikipedia wikipedia
+%pip install ag2[openai] llama-index llama-index-tools-wikipedia llama-index-readers-wikipedia wikipedia
 ```
 
 ## Set your API Endpoint
+
 
 ```python
 import os
@@ -43,6 +45,7 @@ llm_config = autogen.LLMConfig.from_json(path="OAI_CONFIG_LIST", temperature=0).
 ```
 
 ## Set Llamaindex
+
 
 ```python
 from llama_index.core import Settings
@@ -79,6 +82,7 @@ location_specialist = ReActAgent.from_tools(tools=[wikipedia_tool], llm=llm, max
 In this example, we will create a Llamaindex agent to answer questions
 fecting data from wikipedia and a user proxy agent.
 
+
 ```python
 from autogen.agentchat.contrib.llamaindex_conversable_agent import LLamaIndexConversableAgent
 
@@ -97,6 +101,7 @@ user_proxy = autogen.UserProxyAgent(
 ```
 
 Next, let’s set up our group chat.
+
 
 ```python
 groupchat = autogen.GroupChat(

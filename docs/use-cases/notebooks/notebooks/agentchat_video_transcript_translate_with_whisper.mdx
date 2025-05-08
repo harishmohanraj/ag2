@@ -42,6 +42,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 It is recommended to store your OpenAI API key in the environment
 variable. For example, store it in `OPENAI_API_KEY`.
 
+
 ```python
 import os
 
@@ -70,6 +71,7 @@ originally in English and translated into Chinese. ‘FFmpeg’ does not
 support online files. To run the code on the example video, you need to
 download the example video locally. You can change `your_file_path` to
 your local video file path.
+
 
 ```python
 from typing import Annotated, Any, List
@@ -201,6 +203,7 @@ def recognize_transcript_from_video(filepath: Annotated[str, "path of the video 
 ```
 
 Now, start the chat:
+
 
 ```python
 user_proxy.initiate_chat(

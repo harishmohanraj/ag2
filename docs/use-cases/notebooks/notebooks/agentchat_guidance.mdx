@@ -20,6 +20,7 @@ responses from AG2 agents. In particular, this notebook focuses on
 creating agents that always output a valid code block or valid json
 object.
 
+
 ```python
 import re
 
@@ -34,6 +35,7 @@ gpt = models.OpenAI("gpt-4", api_key=llm_config.get("api_key"))
 
 The example below uses guidance to create a `guidance_coder` agent that
 only responds with valid code blocks.
+
 
 ````python
 def is_valid_code_block(code) -> bool:
@@ -100,6 +102,7 @@ user_proxy.initiate_chat(guidance_agent, message="Plot and save a chart of nvidi
 
 The example below uses Guidance to enable a `guidance_labeler` agent
 that only responds with a valid JSON that labels a given comment/joke.
+
 
 ```python
 class Response(BaseModel):

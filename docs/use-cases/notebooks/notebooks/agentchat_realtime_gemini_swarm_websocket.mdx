@@ -81,6 +81,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 
 ## Import the dependencies
 
+
 ```python
 import os
 from logging import getLogger
@@ -102,6 +103,7 @@ The
 [`LLMConfig.from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/llm_config/LLMConfig)
 method loads a list of configurations from an environment variable or a
 json file.
+
 
 ```python
 llm_config = autogen.LLMConfig.from_json(
@@ -140,6 +142,7 @@ assert realtime_llm_config.config_list, (
 
 The prompts and utility functions remain unchanged from the original
 example.
+
 
 ```python
 # baggage/policies.py
@@ -273,6 +276,7 @@ def non_flight_enquiry() -> str:
 
 ## Define Agents and register functions
 
+
 ```python
 from autogen import ConversableAgent, OnCondition, register_hand_off
 
@@ -325,6 +329,7 @@ Now we register the handoffs for the agents. Note that you don’t need to
 define the transfer functions and pass them in. Instead, you can
 directly register the handoffs using the `ON_CONDITION` class.
 
+
 ```python
 # Register hand-offs
 register_hand_off(
@@ -357,6 +362,7 @@ in Jupyter.
 
 Please install nest_asyncio by running the following cell.
 
+
 ```python
 !pip install nest_asyncio
 ```
@@ -380,6 +386,7 @@ nest_asyncio.apply()
 
 This sets up a basic FastAPI server and provides a simple health-check
 endpoint to confirm that the server is operational.
+
 
 ```python
 from contextlib import asynccontextmanager
@@ -417,6 +424,7 @@ async def index_page():
 
 This code sets up static file handling, template rendering, and a
 dedicated endpoint to deliver the chat interface.
+
 
 ```python
 notebook_path = os.getcwd()
@@ -462,6 +470,7 @@ async def start_chat(request: Request):
 7.  **Run the Agent**: Start the `realtime_agent` to handle interactions
     in real time.
 
+
 ```python
 from autogen.agentchat.realtime.experimental import register_swarm
 
@@ -491,6 +500,7 @@ async def handle_media_stream(websocket: WebSocket):
 ```
 
 ### Run the app using uvicorn
+
 
 ```python
 uvicorn.run(app, host="0.0.0.0", port=PORT)

@@ -38,6 +38,7 @@ model list
 AutoBuild require `autogen[autobuild]`, which can be installed by the
 following command:
 
+
 ```python
 %pip install autogen[openai,autobuild]
 ```
@@ -49,6 +50,7 @@ of LLM you want to use in this task. This config can be a path of json
 file or a name of environment variable. A `default_llm_config` is also
 required for initialize the specific config of LLMs like seed,
 temperature, etc…
+
 
 ```python
 import autogen
@@ -81,6 +83,7 @@ you can specify the `builder_model` and `agent_model` to other OpenAI
 model to match your task. You can also specify an open-source LLM
 supporting by vLLM and FastChat, see blog for more details.
 
+
 ```python
 builder = AgentBuilder(
     config_file_or_env=config_file_or_env, builder_model=["gpt-4-turbo"], agent_model=["gpt-4-turbo"]
@@ -91,6 +94,7 @@ builder = AgentBuilder(
 
 Specify a building task with a general description. Building task will
 help build manager (a LLM) decide what agents should be built.
+
 
 ```python
 building_task = "Generate some agents that can find papers on arxiv by programming and analyzing them in specific domains related to computer science and medical science."
@@ -103,12 +107,14 @@ complete the group chat agents generation. If you think coding is
 necessary in your task, you can use `coding=True` to add a user proxy
 (an automatic code interpreter) into the agent list, like:
 
+
 ```python
 builder.build(building_task, default_llm_config, coding=True)
 ```
 
 If `coding` is not specified, AgentBuilder will determine on its own
 whether the user proxy should be added or not according to the task.
+
 
 ```python
 agent_list, agent_configs = builder.build(building_task, llm_config)
@@ -118,6 +124,7 @@ agent_list, agent_configs = builder.build(building_task, llm_config)
 
 Let agents generated in `build()` to complete the task collaboratively
 in a group chat.
+
 
 ```python
 start_task(
@@ -136,6 +143,7 @@ process will also shut down the endpoint server. If necessary, you can
 use `recycle_endpoint=False` to retain the previous open-source LLMs’
 endpoint server.
 
+
 ```python
 builder.clear_all_agents(recycle_endpoint=True)
 ```
@@ -144,6 +152,7 @@ builder.clear_all_agents(recycle_endpoint=True)
 
 You can save all necessary information of the built group chat agents.
 Here is a case for those agents generated in the above task:
+
 
 ```json
 {
@@ -197,6 +206,7 @@ These information will be saved in JSON format. You can provide a
 specific filename, otherwise, AgentBuilder will save config to the
 current path with a generated filename ‘save_config_TASK_MD5.json’.
 
+
 ```python
 saved_path = builder.save()
 ```
@@ -204,6 +214,7 @@ saved_path = builder.save()
 After that, you can load the saved config and skip the building process.
 AgentBuilder will create agents with those information without prompting
 the builder manager.
+
 
 ```python
 new_builder = AgentBuilder(config_file_or_env=config_file_or_env)

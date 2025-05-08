@@ -34,11 +34,13 @@ the complications related to it.
 
 ## Requirements
 
+
 ```python
-! pip install pyautogen
+! pip install ag2
 ```
 
 ## Set your API Endpoint
+
 
 ```python
 import os
@@ -54,6 +56,7 @@ In this example, we will improve a simple FastAPI application using only
 dedicated function calls. Let’s create an Engineer agent that will think
 out and execute code changes, and a user proxy Admin agent, through
 which we will guide our Engineer.
+
 
 ```python
 llm_config = autogen.LLMConfig(
@@ -83,6 +86,7 @@ entire process easier.
 
 Next, let’s set up our group chat.
 
+
 ```python
 groupchat = autogen.GroupChat(
     agents=[engineer, user_proxy],
@@ -99,6 +103,7 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 Let’s go to core of the thing. Prepare functions that provide Engineer
 with functionality to modify existing code, create new code files, check
 filesystem and files.
+
 
 ```python
 from typing import Annotated
@@ -162,6 +167,7 @@ CD Project Red, a famous Polish gamedev company. Create a folder called
 ‘backend_dir’ and place a ‘main.py’ file here with the following
 content:
 
+
 ```python
 # backend_dir/main.py
 
@@ -179,6 +185,7 @@ async def calculate_daily_spread():
 ```
 
 Install needed libraries. We can run our API using:
+
 
 ```bash
 uvicorn main:app --reload
@@ -207,6 +214,7 @@ something wrong. If errors occur, provide him with the error log and ask
 him to check out the file to refresh his knowledge about it before
 actually introducing changes.
 
+
 ```python
 chat_result = user_proxy.initiate_chat(
     manager,
@@ -219,6 +227,7 @@ You will need to improve app in FastApi. For now, check out all the application 
 ## Result
 
 Finally, our agents modified a code so it looks like this:
+
 
 ```python
 # backend_dir/main.py
@@ -255,6 +264,7 @@ def calculate_daily_spread(ticker):
 
 You can check out work of application with Postman or curl and see the
 next output:
+
 
 ```json
 {

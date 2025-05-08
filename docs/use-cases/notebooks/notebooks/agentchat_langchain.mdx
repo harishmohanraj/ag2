@@ -36,15 +36,16 @@ descriptions.
 ## Requirements
 
 AG2 requires `Python>=3.9`. To run this notebook example, please install
-`pyautogen` and `Langchain`:
+`ag2` and `Langchain`:
+
 
 ```bash
-pip install pyautogen[openai] Langchain
+pip install ag2[openai] Langchain
 ```
 
 
 ```python
-%pip install "pyautogen>=0.2.3" Langchain
+%pip install "ag2>=0.2.3" Langchain
 ```
 
 ## Set your API Endpoint
@@ -74,6 +75,7 @@ The following code excludes Azure OpenAI endpoints from the config list
 because some endpoints don’t support functions yet. Remove the `exclude`
 argument if they do.
 
+
 ```python
 import math
 import os
@@ -101,6 +103,7 @@ a json file named “OAI_CONFIG_LIST”. It filters the configs by models
 names are kept in the list based on the filter condition.
 
 The config list looks like the following:
+
 
 ```python
 [
@@ -140,6 +143,7 @@ and execute them. With the new “function_call” feature, we define
 functions and specify the description of the function in the OpenAI
 config for the `AssistantAgent`. Then we register the functions in
 `UserProxyAgent`.
+
 
 ```python
 class CircumferenceToolInput(BaseModel):
@@ -243,6 +247,7 @@ user_proxy.initiate_chat(
 ```
 
 # A PySpark Example
+
 
 ```python
 %pip install pyspark

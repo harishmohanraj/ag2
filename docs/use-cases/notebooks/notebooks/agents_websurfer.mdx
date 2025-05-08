@@ -39,12 +39,14 @@ steps:
 
 1.  Install AG2 with the `browser-use` extra:
 
+
     ```bash
     pip install -U ag2[openai,browser-use]
     ```
 
-    > **Note:** If you have been using `autogen` or `pyautogen`, all you
-    > need to do is upgrade it using:
+    > **Note:** If you have been using `autogen` or `ag2`, all you need
+    > to do is upgrade it using:
+    >
     >
     > ```bash
     > pip install -U autogen[openai,browser-use]
@@ -52,14 +54,15 @@ steps:
     >
     > or
     >
+    >
     > ```bash
-    > pip install -U pyautogen[openai,browser-use]
+    > pip install -U ag2[openai,browser-use]
     > ```
     >
-    > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-    > package.
+    > as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 2.  Set up Playwright:
+
 
     ```bash
     # Installs Playwright and browsers for all OS
@@ -74,6 +77,7 @@ steps:
 You’re all set! Now you can start using browsing features in AG2.
 
 ### Imports
+
 
 ```python
 import os
@@ -95,6 +99,7 @@ nest_asyncio.apply()
 > We had great experience with `OpenAI`, `Anthropic`, and `Gemini`.
 > However, `DeepSeek` and `Ollama` haven’t performed as well.
 
+
 ```python
 config_list = [{"model": "gpt-4o-mini", "api_key": os.environ["OPENAI_API_KEY"]}]
 
@@ -112,6 +117,7 @@ The new `run` method simplifies the process by eliminating the need for
 manual `UserProxyAgent` creation.
 
 -   ✅ **Easier setup** – No need to manually register tools
+
 
 ```python
 # The `web_tool="browser_use"` tells the agent to use the `BrowserUseTool` to surf the web.
@@ -133,6 +139,7 @@ registering tools for execution.
 
 -   ⚠️ **More setup required**
 -   ⚠️ **Must manually register tools**
+
 
 ```python
 websurfer = WebSurferAgent(name="WebSurfer", llm_config=llm_config, web_tool="browser_use")
@@ -158,12 +165,14 @@ steps:
 
 1.  Install AG2 with the `crawl4ai` extra:
 
+
     ```bash
     pip install -U ag2[openai,crawl4ai]
     ```
 
-    > **Note:** If you have been using `autogen` or `pyautogen`, all you
-    > need to do is upgrade it using:
+    > **Note:** If you have been using `autogen` or `ag2`, all you need
+    > to do is upgrade it using:
+    >
     >
     > ```bash
     > pip install -U autogen[openai,crawl4ai]
@@ -171,14 +180,15 @@ steps:
     >
     > or
     >
+    >
     > ```bash
-    > pip install -U pyautogen[openai,crawl4ai]
+    > pip install -U ag2[openai,crawl4ai]
     > ```
     >
-    > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-    > package.
+    > as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 2.  Set up Playwright:
+
 
     ```bash
     # Installs Playwright and browsers for all OS
@@ -193,6 +203,7 @@ steps:
 You’re all set! Now you can start using browsing features in AG2.
 
 ### Imports
+
 
 ```python
 import os
@@ -215,6 +226,7 @@ nest_asyncio.apply()
 > `Ollama`. However, as of this writing, `DeepSeek` is encountering some
 > issues.
 
+
 ```python
 config_list = [{"model": "gpt-4o-mini", "api_key": os.environ["OPENAI_API_KEY"]}]
 
@@ -232,6 +244,7 @@ The new `run` method simplifies the process by eliminating the need for
 manual `UserProxyAgent` creation.
 
 -   ✅ **Easier setup** – No need to manually register tools
+
 
 ```python
 # `web_tool` parameter must be set to `crawl4ai` in order for the `Crawl4AITool` to be used.
@@ -253,6 +266,7 @@ registering tools for execution.
 
 -   ⚠️ **More setup required**
 -   ⚠️ **Must manually register tools**
+
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER")

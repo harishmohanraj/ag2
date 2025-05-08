@@ -35,6 +35,7 @@ You can create and add this ChromaDBQueryEngine to
 [DocAgent](https://docs.ag2.ai/latest/docs/user-guide/reference-agents/docagent)
 to use.
 
+
 ```python
 %pip install llama-index-vector-stores-chroma==0.4.1
 %pip install llama-index==0.12.16
@@ -47,6 +48,7 @@ This demonstration requires an `OPENAI_API_KEY` to be in your
 environment variables. See [our
 documentation](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/llm-configuration-deep-dive)
 for guidance.
+
 
 ```python
 import os
@@ -67,6 +69,7 @@ os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"]
 Refer to this
 [link](https://docs.trychroma.com/production/containers/docker) for
 running Chromadb in a Docker container.
+
 
 ```python
 from chromadb import HttpClient
@@ -93,6 +96,7 @@ chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 Then we can use the LlamaIndex `chroma_vector_store` to create our AG2
 `LLamaIndexQueryEngine` instance.
 
+
 ```python
 from llama_index.llms.openai import OpenAI
 
@@ -105,6 +109,7 @@ chroma_query_engine = LlamaIndexQueryEngine(
 ```
 
 Initialize the database with input docs and query it with the engine.
+
 
 ```python
 input_dir = (
@@ -132,6 +137,7 @@ print(answer)
 
 Great, we got the data we needed. Now, let’s add another document.
 
+
 ```python
 new_docs = [input_dir + "Toast_financial_report.md"]
 ```
@@ -143,6 +149,7 @@ chroma_query_engine.add_docs(new_doc_paths_or_urls=new_docs)
 
 And query again from the same database but this time for another
 corporate entity.
+
 
 ```python
 question = "How much money did Toast earn in 2024?"
@@ -160,6 +167,7 @@ for more details on how to set up Pinecone and PineconeVectorStore
 
 Please put your Pinecone API key in an environment variable called
 `PINECONE_API_KEY`.
+
 
 ```python
 from pinecone import Pinecone, ServerlessSpec
@@ -207,6 +215,7 @@ pinecone_query_engine.init_db(new_doc_paths_or_urls=input_docs)
 
 Query the Pinecone query engine
 
+
 ```python
 question = "How much money did Nvidia spend in research and development"
 answer = pinecone_query_engine.query(question)
@@ -215,12 +224,14 @@ print(answer)
 
 Add another document
 
+
 ```python
 new_docs = [input_dir + "Toast_financial_report.md"]
 pinecone_query_engine.add_docs(new_doc_paths_or_urls=new_docs)
 ```
 
 Query again
+
 
 ```python
 question = "How much money did Toast earn in 2024?"

@@ -50,7 +50,7 @@ free to use them as a base to build upon!
 
 AG2 must be installed on your Databricks cluster, and requires
 `Python>=3.9`. This example includes the `%pip` magic command to
-install: `%pip install pyautogen`, as well as other necessary libraries.
+install: `%pip install ag2`, as well as other necessary libraries.
 
 This code has been tested on: \* [Serverless
 Notebooks](https://docs.databricks.com/en/compute/serverless/index.html)
@@ -80,12 +80,14 @@ Foundation Model APIs
 
 tj@databricks.com (Github: tj-cycyota)
 
+
 ```python
-%pip install pyautogen==0.2.25 openai==1.21.2 typing_extensions==4.11.0 --upgrade
+%pip install ag2==0.2.25 openai==1.21.2 typing_extensions==4.11.0 --upgrade
 ```
 
 It is recommended to restart the Python kernel after installs -
 uncomment and run the below:
+
 
 ```python
 # dbutils.library.restartPython()
@@ -95,6 +97,7 @@ uncomment and run the below:
 
 See Autogen docs for more information on the use of `config_list`: [LLM
 Configuration](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/llm-configuration-deep-dive)
+
 
 ```python
 import os
@@ -133,6 +136,7 @@ question to an `AssistantAgent`. This is based on the tutorial demo
 After sending the question and seeing a response, you can type `exit` to
 end the chat or continue to converse.
 
+
 ```python
 import autogen
 
@@ -155,6 +159,7 @@ Databricks clusters. This is based off the demo
 
 First, set up a directory:
 
+
 ```python
 from pathlib import Path
 
@@ -175,6 +180,7 @@ execute locally on your cluster via the bot’s auto-reply.
 **Note**: with generative AI coding assistants, you should **always**
 manually read and review the code before executing it yourself, as LLM
 results are non-deterministic and may lead to unintended consequences.
+
 
 ```python
 from autogen import AssistantAgent, UserProxyAgent
@@ -199,6 +205,7 @@ chat_result = user_proxy_agent.initiate_chat(
 
 We can see the python file that was created in our working directory:
 
+
 ```python
 %sh ls coding
 ```
@@ -213,6 +220,7 @@ We can see the python file that was created in our working directory:
 We can also implement the [two-agent chat
 pattern](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/conversable-agent)
 using DBRX to “talk to itself” in a teacher/student exchange:
+
 
 ```python
 from autogen import ConversableAgent
@@ -248,6 +256,7 @@ demonstrates how to extend the default AG2 logging libraries.
 First, we will implement a Python `class` that extends the capabilities
 of `autogen.runtime_logging`
 [docs](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/agentchat_logging):
+
 
 ```python
 class DatabricksAutoGenLogger:
@@ -302,6 +311,7 @@ Let’s use the class above on our simplest example. Note the addition of
 logging `.start()` and `.stop()`, as well as try/except for error
 handling.
 
+
 ```python
 assistant = autogen.AssistantAgent(name="assistant", llm_config=llm_config)
 user_proxy = autogen.UserProxyAgent(name="user", code_execution_config=False)
@@ -331,6 +341,7 @@ but the above approach provides a simple mechanism to log chats from the
 
 Let’s now persist these results to a Delta table in [Unity
 Catalog](https://docs.databricks.com/en/data-governance/unity-catalog/index.html):
+
 
 ```python
 from pyspark.sql import SparkSession

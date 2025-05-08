@@ -24,12 +24,14 @@ specific tasks.
 
 ## Installation
 
+
 ```bash
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen[openai]
@@ -37,14 +39,15 @@ pip install -U ag2[openai]
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen[openai]
+> pip install -U ag2[openai]
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 ## Imports
+
 
 ```python
 import random
@@ -65,6 +68,7 @@ The `GroupChat` will contain three agents: - `sales_agent` - Responsible
 for selling tickets. - `cancellation_agent` - Handles ticket
 cancellations. - `user_proxy` - Acts as an intermediary between the user
 and other agents.
+
 
 ```python
 llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST").where(model=["gpt-4o-mini"])
@@ -94,6 +98,7 @@ We will define two tools: - `buy_airplane_ticket`: Suggested by
 `sales_agent` and executed by `user_proxy` after user verification. -
 `cancel_airplane_ticket`: Suggested by `cancellation_agent` and executed
 by `user_proxy` after user verification.
+
 
 ```python
 def buy_airplane_ticket(from_location: str, to_location: str, date: str) -> str:
@@ -127,6 +132,7 @@ register_function(
 ## Creating and Initiating the Group Chat
 
 Now, let’s create and start the `GroupChat` with the three agents.
+
 
 ```python
 groupchat = GroupChat(

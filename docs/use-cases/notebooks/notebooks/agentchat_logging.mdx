@@ -24,6 +24,7 @@ In general, users can initiate logging by calling
 `autogen.runtime_logging.start()` and stop logging by calling
 `autogen.runtime_logging.stop()`
 
+
 ```python
 import json
 
@@ -59,6 +60,7 @@ autogen.runtime_logging.stop()
 `logs.db` should be generated, by default it’s using SQLite database.
 You can view the data with GUI tool like `sqlitebrowser`, using SQLite
 command line shell or using python script:
+
 
 ```python
 def get_log(dbname="logs.db", table="chat_completions"):
@@ -100,6 +102,7 @@ log_data_df
 
 One use case of logging data is to compute the cost of a session.
 
+
 ```python
 # Sum totoal tokens for all sessions
 total_tokens = log_data_df["total_tokens"].sum()
@@ -128,6 +131,7 @@ By default, the log type is set to `sqlite` as shown above, but we
 introduced a new parameter for the `autogen.runtime_logging.start()`
 
 the `logger_type = "file"` will start to log data in the File mode.
+
 
 ```python
 import pandas as pd

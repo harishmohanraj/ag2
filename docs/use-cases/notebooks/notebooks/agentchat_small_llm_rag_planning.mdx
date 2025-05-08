@@ -72,6 +72,7 @@ impactful results even on resource-constrained systems.
 Ensure the autogen python package is installed, along with a few
 LangChain libraries for retrieval.
 
+
 ```python
 ! pip install -U ag2[openai] ag2[ollama] langchain_community langchain-milvus langchain_huggingface
 ```
@@ -85,6 +86,7 @@ which can be found on [Hugging
 Face](https://huggingface.co/ibm-granite). You can also substitute any
 embeddings model of your choice.
 
+
 ```python
 from langchain_huggingface import HuggingFaceEmbeddings
 
@@ -94,6 +96,7 @@ embeddings_model = HuggingFaceEmbeddings(model_name="ibm-granite/granite-embeddi
 ## Establish the vector database
 
 In this example, we are using Milvus as our vector database.
+
 
 ```python
 import tempfile
@@ -118,6 +121,7 @@ In the following code, you provide a list of folders and document
 extensions that you would like to ingest into your vector database for
 future retrieval. Be sure to personalize the identified directories and
 file extensions.
+
 
 ```python
 from pathlib import Path
@@ -161,6 +165,7 @@ texts = text_splitter.split_documents(documents)
 Finally, after chunking the documents, load them into the vector
 database.
 
+
 ```python
 vector_db.add_documents(texts)
 ```
@@ -170,6 +175,7 @@ vector_db.add_documents(texts)
 The following are the prompts for the agents that we will define later.
 Try running with these prompts initially, and update them later if
 needed for your use case.
+
 
 ````python
 PLANNER_MESSAGE = """You are a task planner. You will be given some information your job is to think step by step and enumerate the steps to complete a performance assessment of a given user, using the provided context to guide you.
@@ -279,6 +285,7 @@ SEARCH_TERM_ASSISTANT_PROMPT = """You are an expert at creating precise, complet
 If you are running inferencing locally and do not have Ollama setup
 already, use the following commands to do so.
 
+
 ```python
 ! pip install ollama
 ! ollama serve
@@ -291,6 +298,7 @@ example we are using the Granite 3.1 dense model at 8b parameters. It is
 capable enough to perform well in this flow but small enough to run on a
 beefy personal machine.
 
+
 ```python
 ! ollama pull granite3.1-dense:8b
 ```
@@ -298,6 +306,7 @@ beefy personal machine.
 ## Configuration Variables
 
 Customize the following LLM configuration variables as needed
+
 
 ```python
 # Ollama URL
@@ -319,6 +328,7 @@ max_plan_steps = 6
 ## AG2 Agent Setup
 
 Initializes the LLM config and all of the agents of the workflow.
+
 
 ```python
 from autogen import ConversableAgent, LLMConfig, coding
@@ -400,6 +410,7 @@ user_proxy = ConversableAgent(
 The following function is registered as a tool for searching the
 previously created vector database for relevant documents.
 
+
 ```python
 from typing import Annotated
 
@@ -437,6 +448,7 @@ a quick and easy demonstration, the implementation below uses the
 officially supported by Google. If you require the web search tool
 beyond a PoC, you should use the official library and APIs of your
 favorite search provider, or a multi-engine service such as Tavily.
+
 
 ```python
 ! pip install googlesearch-python
@@ -503,6 +515,7 @@ When the initial plan is formed, the LLM should output the plan in JSON
 format. The following parses the response from the planner and returns
 the response as a dictionary.
 
+
 ````python
 import json
 from typing import Any
@@ -548,6 +561,7 @@ Here is the meat of the agentic workflow. They key point here is that
 extract maximum performance a set of agents that are called in sequence,
 and the data passed between them is curated and trimmed, rather than
 passing around the full chat history.
+
 
 ```python
 #########################
@@ -650,6 +664,7 @@ def run_agentic_workflow(user_message: str) -> str:
 
 Below is an example query. You can replace it with your own query based
 upon the types of information you have loaded into the vector database.
+
 
 ```python
 answer = run_agentic_workflow(

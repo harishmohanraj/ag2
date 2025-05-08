@@ -61,6 +61,7 @@ The
 function loads a list of configurations from an environment variable or
 a json file.
 
+
 ```python
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
@@ -103,6 +104,7 @@ instructions and a retrieval augmented generation task for an initial
 prompt to be sent to the LLM assistant.
 
 ### You can find the list of all the embedding models supported by Qdrant [here](https://qdrant.github.io/fastembed/examples/Supported_Models/). 
+
 
 ```python
 # 1. create an AssistantAgent instance named "assistant"
@@ -155,6 +157,7 @@ feedbacks.
 
 Problem: Is there a function named `tune_automl` in FLAML?
 
+
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.
 assistant.reset()
@@ -171,6 +174,7 @@ Use RetrieveChat to answer a question that is not related to code
 generation.
 
 Problem: Who is the author of FLAML?
+
 
 ```python
 # reset the assistant. Always reset the assistant before starting a new conversation.

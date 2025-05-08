@@ -28,6 +28,7 @@ This notebook contains the following information and examples:
 
 ### Before everything starts, install AG2 with the `lmm` option
 
+
 ```bash
 pip install "autogen[lmm]>=0.3.0"
 ```
@@ -62,6 +63,7 @@ directly, which will host the model for you.
     `export REPLICATE_API_TOKEN=<paste-your-token-here>`
 4.  You need to enter your credit card information for Replicate 🥲
 
+
 ```python
 # pip install replicate
 # import os
@@ -90,12 +92,14 @@ Please follow the LLaVA GitHub
 
 #### Download the package
 
+
 ```bash
 git clone https://github.com/haotian-liu/LLaVA.git
 cd LLaVA
 ```
 
 #### Install the inference package
+
 
 ```bash
 conda create -n llava python=3.10 -y
@@ -106,6 +110,7 @@ pip install -e .
 
 Some helpful packages and dependencies:
 
+
 ```bash
 conda install -c nvidia cuda-toolkit
 ```
@@ -114,12 +119,14 @@ conda install -c nvidia cuda-toolkit
 
 In one terminal, start the controller first:
 
+
 ```bash
 python -m llava.serve.controller --host 0.0.0.0 --port 10000
 ```
 
 Then, in another terminal, start the worker, which will load the model
 to the GPU:
+
 
 ````bash
 python -m llava.serve.model_worker --host 0.0.0.0 --controller http://localhost:10000 --port 40000 --worker http://localhost:40000 --model-path liuhaotian/llava-v1.5-13b
@@ -145,6 +152,7 @@ if LLAVA_MODE == "local":
 We cal test the `llava_call` function with the following AG2 image.
 ![](../../../../../assets/img/autogen_agentchat.png)
 
+
 ```python
 rst = llava_call(
     "Describe this AG2 framework <img /static/img/autogen_agentchat.png> with bullet points.",
@@ -166,6 +174,7 @@ Within the user proxy agent, we can decide to activate the human input
 mode or not (for here, we use human_input_mode=“NEVER” for conciseness).
 This allows you to interact with LLaVA in a multi-round dialogue,
 enabling you to provide feedback as the conversation unfolds.
+
 
 ```python
 image_agent = LLaVAAgent(
@@ -198,6 +207,7 @@ Now, input another image, and ask a followup question.
 
 ![](https://th.bing.com/th/id/OIP.29Mi2kJmcHHyQVGe_0NG7QHaEo?pid=ImgDet&rs=1)
 
+
 ```python
 # Ask the question with an image
 user_proxy.send(
@@ -219,6 +229,7 @@ agents: commander, coder, and critics.
 -   Coder: writes code for visualization.
 -   Critics: LLaVA-based agent that provides comments and feedback on
     the generated image.
+
 
 ```python
 class FigureCreator(AssistantAgent):

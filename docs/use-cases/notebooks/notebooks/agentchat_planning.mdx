@@ -38,6 +38,7 @@ message.
 AG2 requires `Python>=3.9`. To run this notebook example, please install
 autogen and docker:
 
+
 ```bash
 pip install autogen docker
 ```
@@ -60,6 +61,7 @@ same name. It filters the configs by filter_dict.
 It’s OK to have only the OpenAI API key, or only the Azure OpenAI API
 key + base.
 
+
 ```python
 import autogen
 
@@ -72,6 +74,7 @@ config_list = autogen.config_list_from_json(
 ```
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -109,6 +112,7 @@ for the planner named “planner_user”. We specify `human_input_mode` as
 feedback. We define `ask_planner` function to send a message to the
 planner and return the suggestion from the planner.
 
+
 ```python
 planner = autogen.AssistantAgent(
     name="planner",
@@ -138,6 +142,7 @@ ask for feedback when it receives a “TERMINATE” signal from the
 assistant agent. We set the `functions` in `AssistantAgent` and
 `function_map` in `UserProxyAgent` to use the created `ask_planner`
 function.
+
 
 ```python
 # create an AssistantAgent instance named "assistant"
@@ -190,6 +195,7 @@ the end of the message. If you don’t provide any feedback (by pressing
 Enter directly), the conversation will finish. Before the “TERMINATE”
 signal, the user proxy agent will try to execute the code suggested by
 the assistant agent on behalf of the user.
+
 
 ```python
 # the assistant receives a message from the user, which contains the task description

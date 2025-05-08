@@ -95,6 +95,7 @@ transformations, `MessageHistoryLimiter` and `MessageTokenLimiter`.
     applied, ensuring that the transformation is only applied when the
     number of tokens is not less than the specified threshold.
 
+
 ```python
 # Limit the message history to the 3 most recent messages
 max_msg_transform = transforms.MessageHistoryLimiter(max_messages=3)
@@ -108,6 +109,7 @@ token_limit_transform = transforms.MessageTokenLimiter(max_tokens_per_message=3,
 Let’s take a look at how these transformations will effect the messages.
 Below we see that by applying the `MessageHistoryLimiter`, we can see
 that we limited the context history to the 3 most recent messages.
+
 
 ```python
 messages = [
@@ -128,6 +130,7 @@ Now let’s test limiting the number of tokens in messages. We can see
 that we can limit the number of tokens to 3, which is equivalent to 3
 words in this instance.
 
+
 ```python
 processed_messages = token_limit_transform.apply_transform(copy.deepcopy(messages))
 
@@ -140,6 +143,7 @@ messages is less than that. This is especially beneficial when the
 transformation should only occur after a certain number of tokens has
 been reached, such as in the context window of the model. An example is
 provided below.
+
 
 ```python
 short_messages = [
@@ -159,6 +163,7 @@ from the agentchat_capability_long_context_handling notebook). We will
 see that the agent without the capability to handle long context will
 result in an error, while the agent with that capability will have no
 issues.
+
 
 ```python
 assistant_base = autogen.AssistantAgent(
@@ -229,6 +234,7 @@ exposed in the chat history or logs.
 
 Now, we will create a custom message transform to detect any OpenAI API
 key and redact it.
+
 
 ```python
 # The transform must adhere to transform_messages.MessageTransform protocol.

@@ -1,0 +1,249 @@
+---
+custom_edit_url: https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_mcp_filesystem.ipynb
+description: 'Conversational Workflows with MCP: A Marie Antoinette Take on The Eiffel
+  Tower'
+source_notebook: /notebook/agentchat_mcp_filesystem.ipynb
+tags:
+- MCP
+title: 'Conversational Workflows with MCP: A Marie Antoinette Take on The Eiffel Tower'
+---
+
+<a href="https://colab.research.google.com/github/ag2ai/ag2/blob/main/notebook/agentchat_mcp_filesystem.ipynb" class="colab-badge" target="_blank"><img noZoom src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+<a href="https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_mcp_filesystem.ipynb" class="github-badge" target="_blank"><img noZoom src="https://img.shields.io/badge/Open%20on%20GitHub-grey?logo=github" alt="Open on GitHub" /></a>
+
+
+
+
+**Authors:** Licong Xu and Boris Bolliet (Cambridge)
+
+**Original Code:** [MCPAgents](https://github.com/CMBAgents/MCPAgents)
+
+## Imports and Setup
+
+This cell sets up the environment and imports necessary libraries:
+
+-   **Pathlib**, **os**, **json**, **asyncio**, etc. for file and system
+    operations.
+-   Imports from the `autogen` and `mcp` libraries, which are used to
+    create conversational agents and connect to a filesystem-related
+    tool server.
+-   `nest_asyncio.apply()` ensures that asynchronous code runs properly
+    in Jupyter notebooks.
+
+
+```python
+from pathlib import Path
+
+# Only needed for Jupyter notebooks
+import nest_asyncio
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+from autogen import LLMConfig
+from autogen.mcp import create_toolkit
+
+nest_asyncio.apply()
+
+import copy
+import os
+
+from pydantic import BaseModel, Field
+
+from autogen import ConversableAgent, UpdateSystemMessage
+from autogen.agentchat import a_initiate_group_chat
+from autogen.agentchat.group import (
+    AgentTarget,
+    ContextVariables,
+    OnCondition,
+    StringLLMCondition,
+    TerminateTarget,
+)
+from autogen.agentchat.group.patterns import (
+    DefaultPattern,
+)
+```
+
+## Define MCP Server Path
+
+Set the path to the **MCP server script**, which will be used to handle
+tool execution related to the filesystem retrieval.
+
+
+```python
+mcp_server_path = Path("mcp/mcp_filesystem.py")
+```
+
+## Agents
+
+-   Define the **joker agent**, whose role is to make jokes in the style
+    of Marie Antoinette.
+-   Use a `pydantic` model to structure the joke and explanation.
+-   Set LLM configuration, including temperature, caching, and model.
+-   Define a `ContextVariables` object to inject context (like joke
+    constraints) into the agent’s workflow.
+
+
+```python
+joker_message = """
+You are the joker in the team. You make jokes.
+
+You must obey the following constraints:
+
+{joke_constraints}
+
+""".strip()
+
+
+class JokeResponse(BaseModel):
+    joke_instructions: str = Field(..., description="instruction, not in the style of Marie Antoinette")
+    joke: str = Field(
+        ..., description="The joke. The joke must be in the style of Marie Antoinette and mention Louis the XIVth."
+    )
+    joke_explanation: str = Field(..., description="explanation, not in the style of Marie Antoinette")
+
+    def format(self) -> str:
+        return "\n".join([
+            "**Joke instructions:**",
+            "",
+            self.joke_instructions,
+            "",
+            "**Joke:**",
+            "",
+            self.joke,
+            "",
+            "**Joke explanation:**",
+            "",
+            self.joke_explanation,
+        ])
+
+
+default_llm_config = {
+    "cache_seed": 42,
+    "temperature": 1.0,
+    "top_p": 0.05,
+    "config_list": [{"model": "gpt-4o", "api_key": os.getenv("OPENAI_API_KEY"), "api_type": "openai"}],
+    "timeout": 1200,
+}
+
+joker_config_list = copy.deepcopy(default_llm_config)
+joker_config_list["config_list"][0]["response_format"] = JokeResponse
+
+
+joker = ConversableAgent(
+    name="joker",
+    system_message=joker_message,
+    llm_config=joker_config_list,
+    update_agent_state_before_reply=[
+        UpdateSystemMessage(joker_message),
+    ],
+)
+
+workflow_context = ContextVariables(
+    data={
+        "joke_constraints": "the joke should make use of the contextual information passed on to you. It should be a paragraph long and use as much detailed information from the context as possible.",
+    }
+)
+
+
+task = """
+Read the file in context and Make a joke.
+"""
+
+initial_agent = joker
+```
+
+## Create Toolkit and Run
+
+1.  Asynchronously create a **toolkit** from the client session and
+    registers it to a `mcp_agent` that will search and load local files.
+2.  Set up a **handoff**: once `mcp_agent` finishes its task, it passes
+    control to `joker`.
+3.  Delete the `.cache/` folder to reset the environment.
+4.  Initialize a **DefaultPattern** for how agents interact.
+5.  Start the **group chat workflow** using `a_initiate_group_chat`.
+
+
+```python
+async def create_toolkit_and_run(session: ClientSession) -> None:
+    # Create a toolkit with available MCP tools
+    toolkit = await create_toolkit(session=session)
+    mcp_agent = ConversableAgent(
+        name="mcp_agent",
+        system_message=r"""
+Read the file in your folder.
+                             """,
+        llm_config=LLMConfig(model="gpt-4o", api_type="openai", tool_choice="required"),
+    )
+    # Register MCP tools with the agent
+    toolkit.register_for_llm(mcp_agent)
+
+    toolkit.register_for_execution(mcp_agent)
+
+    # joker.handoffs.set_after_work(AgentTarget(mcp_agent))
+    joker.handoffs.set_after_work(TerminateTarget())
+
+    mcp_agent.handoffs.set_after_work(AgentTarget(joker))
+
+    mcp_agent.handoffs.add_llm_conditions([
+        OnCondition(
+            target=AgentTarget(joker),
+            condition=StringLLMCondition(prompt="The file has been read."),
+        ),
+    ])
+
+    agents = [
+        joker,
+        mcp_agent,
+    ]
+
+    for agent in agents:
+        agent.reset()
+    print("all agents reset")
+
+    import os
+    import shutil
+
+    def delete_cache_folder():
+        cache_path = os.path.join(os.getcwd(), ".cache")
+        if os.path.isdir(cache_path):
+            shutil.rmtree(cache_path)
+            print(".cache folder deleted.")
+        else:
+            print("No .cache folder found in current directory.")
+
+    delete_cache_folder()
+
+    # Create the pattern
+    agent_pattern = DefaultPattern(
+        agents=[joker, mcp_agent],
+        initial_agent=mcp_agent,
+        context_variables=workflow_context,
+    )
+
+    await a_initiate_group_chat(
+        pattern=agent_pattern,
+        messages=task,
+        max_rounds=20,
+    )
+
+
+# Create server parameters for stdio connection
+server_params = StdioServerParameters(
+    command="python",  # The command to run the server
+    args=[
+        str(mcp_server_path),
+        "stdio",
+        "--context-path",
+        "mcp/context_docs",
+    ],  # Path to server script and transport mode
+)
+
+async with stdio_client(server_params) as (read, write), ClientSession(read, write) as session:
+    # Initialize the connection
+    await session.initialize()
+    await create_toolkit_and_run(session)
+```
+
+<div className="edit-url-container">
+    <a className="edit-url" href="https://github.com/ag2ai/ag2/edit/main/notebook/agentchat_mcp_filesystem.ipynb" target='_blank'><Icon icon="pen" iconType="solid" size="13px"/> Edit this page</a>
+</div>

@@ -33,12 +33,14 @@ integrated into AG2 framework through interoperability.
 To integrate LangChain tools into the AG2 framework, install the
 required dependencies:
 
+
 ```bash
 pip install -U ag2[openai,interop-langchain]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen[openai,interop-langchain]
@@ -46,16 +48,17 @@ pip install -U ag2[openai,interop-langchain]
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen[openai,interop-langchain]
+> pip install -U ag2[openai,interop-langchain]
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 Additionally, this notebook uses LangChain’s [DuckDuckGo Search
 Tool](https://python.langchain.com/docs/integrations/tools/ddg/), which
 requires the `duckduckgo-search` package. Install it with:
+
 
 ```bash
 pip install duckduckgo-search
@@ -71,6 +74,7 @@ Tools for querying DuckDuckGo. - `Interoperability`: This module acts as
 a bridge, making it easier to integrate LangChain tools with AG2’s
 architecture.
 
+
 ```python
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
@@ -81,6 +85,7 @@ from autogen.interop import Interoperability
 ### Configure the agents
 
 Load the config for LLM, which include API key and model.
+
 
 ```python
 import autogen
@@ -93,6 +98,7 @@ llm_config = autogen.LLMConfig.from_json(path=config_path, temperature=0).where(
 
 We use `Interoperability` to convert the LangChain tool into a format
 compatible with the AG2 framework.
+
 
 ```python
 interop = Interoperability()
@@ -107,6 +113,7 @@ CaptainAgent initialization is to pass the tool as a list into the
 `tool_lib` argument. This will let the agents within the nested chat
 created by CaptainAgent all equipped with the tools. THey can write
 python code to call the tools and observe the results.
+
 
 ```python
 from autogen import UserProxyAgent
@@ -145,12 +152,14 @@ Install the required packages for integrating CrewAI tools into the AG2
 framework. This ensures all dependencies for both frameworks are
 installed.
 
+
 ```bash
 pip install -U ag2[openai,interop-crewai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen[openai,interop-crewai]
@@ -158,17 +167,18 @@ pip install -U ag2[openai,interop-crewai]
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen[openai,interop-crewai]
+> pip install -U ag2[openai,interop-crewai]
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 ### Tool Integration
 
 Integrating CrewAI tools into AG2 framework follows a similar pipeline
 as shown below.
+
 
 ```python
 from crewai_tools import ScrapeWebsiteTool
@@ -185,6 +195,7 @@ ag2_tool = interop.convert_tool(tool=crewai_tool, type="crewai")
 The process is identical to the above, pass the converted tool to
 `tool_lib` argument, and all the agents created by CaptainAgent gets
 access to the tools.
+
 
 ```python
 from autogen import UserProxyAgent

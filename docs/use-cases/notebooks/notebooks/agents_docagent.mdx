@@ -32,6 +32,7 @@ steps:
 
 Install AG2 with the `rag` extra:
 
+
 ```bash
 pip install -U ag2[openai,rag]
 ```
@@ -93,6 +94,7 @@ doing both at the same time.
 
 ## Code example
 
+
 ```python
 import os
 
@@ -121,6 +123,7 @@ llm_config = {
 
 ### Ingesting local documents and answering questions
 
+
 ```python
 # Create a document agent and ask them to ingest the document and answer the question
 document_agent = DocAgent(llm_config=llm_config, collection_name="toast_report")
@@ -132,6 +135,7 @@ run_response.process()
 ```
 
 ### \[With Citations Support\] Ingesting local documents and answering questions
+
 
 ```python
 from autogen.agents.experimental.document_agent.chroma_query_engine import VectorChromaCitationQueryEngine
@@ -148,6 +152,7 @@ run_response.process()
 ```
 
 ### Fetching a webpage and answering questions
+
 
 ```python
 # Create a document agent and ask them to summarize a web page article
@@ -174,6 +179,7 @@ documents. So we keep them separate and give them a unique
 `collection_name` which, in turn, will create individual data stores
 (See more on [Chroma
 collections](https://cookbook.chromadb.dev/core/collections/)).
+
 
 ```python
 # Ensure the OPENAI_API_KEY is set in the environment

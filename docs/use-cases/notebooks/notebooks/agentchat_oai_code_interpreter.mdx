@@ -46,6 +46,7 @@ The
 function loads a list of configurations from an environment variable or
 a json file.
 
+
 ```python
 import io
 
@@ -86,6 +87,7 @@ results from the sandbox environment and act accordingly.
 In this example, we demonstrate how to use code interpreter to solve
 math problems.
 
+
 ```python
 # Initiate an agent equipped with code interpreter
 gpt_assistant = GPTAssistantAgent(
@@ -121,6 +123,7 @@ gpt_assistant.delete_assistant()
 Code Interpreter can outputs files, such as generating image diagrams.
 In this example, we demonstrate how to draw figures and download it.
 
+
 ```python
 gpt_assistant = GPTAssistantAgent(
     name="CoderAssistant",
@@ -144,6 +147,7 @@ user_proxy.initiate_chat(
 ```
 
 Now we have the file id. We can download and display it.
+
 
 ```python
 api_response = gpt_assistant.openai_client.files.with_raw_response.retrieve_content(

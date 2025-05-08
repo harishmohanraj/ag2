@@ -33,12 +33,14 @@ these steps:
 Install AG2 with `"wikipedia` and `openai` since we use OpenAI’s LLMs in
 our example:
 
+
 ```bash
 pip install -U "ag2[wikipedia, openai]"
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U "autogen[wikipedia, openai]"
@@ -46,12 +48,12 @@ pip install -U "ag2[wikipedia, openai]"
 >
 > or
 >
+>
 > ```bash
-> pip install -U "pyautogen[wikipedia, openai]"
+> pip install -U "ag2[wikipedia, openai]"
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 You’re all set! Now you can start using Wikipedia Search with AG2.
 
@@ -60,6 +62,7 @@ You’re all set! Now you can start using Wikipedia Search with AG2.
 The `WikipediaQueryRunTool` enables agents to perform Wikipedia search.
 
 ### Imports
+
 
 ```python
 from autogen import AssistantAgent, LLMConfig, UserProxyAgent
@@ -70,6 +73,7 @@ from autogen.tools.experimental import WikipediaPageLoadTool, WikipediaQueryRunT
 
 Configure an assistant agent and user proxy to be used for LLM
 recommendation and execution respectively.
+
 
 ```python
 config_list = LLMConfig(api_type="openai", model="gpt-4o-mini")
@@ -84,6 +88,7 @@ user_proxy = UserProxyAgent(name="user_proxy", human_input_mode="NEVER", code_ex
 
 ### Query Tool Setup
 
+
 ```python
 wikipedia_query_tool = WikipediaQueryRunTool()
 
@@ -97,6 +102,7 @@ wikipedia_query_tool.register_for_execution(user_proxy)
 With the setup complete, you can now use the assistant to search
 Wikipedia.
 
+
 ```python
 response = user_proxy.initiate_chat(
     recipient=assistant,
@@ -106,6 +112,7 @@ response = user_proxy.initiate_chat(
 ```
 
 ## Page Load Tool Setup
+
 
 ```python
 # Start by removing the Query tool so we ensure our agent uses the Page Load tool

@@ -31,12 +31,14 @@ these steps:
 Install AG2 with `"wikipedia` and `openai` since we use OpenAI’s LLMs in
 our example:
 
+
 ```bash
 pip install -U "ag2[wikipedia, openai]"
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U "autogen[wikipedia, openai]"
@@ -44,12 +46,12 @@ pip install -U "ag2[wikipedia, openai]"
 >
 > or
 >
+>
 > ```bash
-> pip install -U "pyautogen[wikipedia, openai]"
+> pip install -U "ag2[wikipedia, openai]"
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 You’re all set! Now you can start using Wikipedia Search with AG2.
 
@@ -64,6 +66,7 @@ going.
 
 ### Imports
 
+
 ```python
 from autogen import LLMConfig
 from autogen.agents.experimental import WikipediaAgent
@@ -73,6 +76,7 @@ from autogen.agents.experimental import WikipediaAgent
 
 Configure `WikipediaAgent` and run it. Using the agent’s `run` command
 will automatically
+
 
 ```python
 # LLM configuration
@@ -89,6 +93,7 @@ wiki_agent = WikipediaAgent(name="wiki-agent", llm_config=config_list)
 ### Start the Conversation
 
 With the setup complete, you can now use the conversation.
+
 
 ```python
 response = wiki_agent.run(

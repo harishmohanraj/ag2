@@ -24,6 +24,7 @@ text-to-sql benchmark called
 [Spider](https://yale-lily.github.io/spider). The environment provides a
 gym-like interface and can be used as follows.
 
+
 ```python
 # %pip install spider-env
 import json
@@ -60,6 +61,7 @@ Using AG2, a SQL agent can be implemented with a ConversableAgent. The
 gym environment executes the generated SQL query and the agent can take
 execution results as feedback to improve its generation in multiple
 rounds of conversations.
+
 
 ```python
 os.environ["AUTOGEN_USE_DOCKER"] = "False"
@@ -106,6 +108,7 @@ def execute_sql(
 
 The agent can then take as input the schema and the text question, and
 generate the SQL query.
+
 
 ```python
 message = f"""Below is the schema for a SQL database:

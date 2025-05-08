@@ -21,11 +21,13 @@ data from a website and format the output.
 
 First we need to install the Apify SDK and the AG2 library.
 
+
 ```python
 ! pip install -qqq autogen apify-client
 ```
 
 Setting up the LLM configuration and the Apify API key is also required.
+
 
 ```python
 import os
@@ -40,6 +42,7 @@ apify_api_key = os.getenv("APIFY_API_KEY")
 Let’s define the tool for scraping data from the website using Apify
 actor. Read more about tool use in this [tutorial
 chapter](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/introducing-tools/).
+
 
 ```python
 from typing import Annotated
@@ -109,6 +112,7 @@ def scrape_page(url: Annotated[str, "The URL of the web page to scrape"]) -> Ann
 
 Create the agents and register the tool.
 
+
 ```python
 from autogen import ConversableAgent, register_function
 
@@ -146,6 +150,7 @@ formatting of the output into a desired format. The summary method is
 called after the conversation is completed given the complete history of
 the conversation.
 
+
 ```python
 chat_result = user_proxy_agent.initiate_chat(
     scraper_agent,
@@ -178,6 +183,7 @@ chat_result = user_proxy_agent.initiate_chat(
 ```
 
 The output is stored in the summary.
+
 
 ```python
 print(chat_result.summary)

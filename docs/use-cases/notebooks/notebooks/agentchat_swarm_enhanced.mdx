@@ -41,15 +41,15 @@ Install `ag2`:
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen
+> pip install -U ag2
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -74,6 +74,7 @@ Key aspects of this swarm are:
 2.  Handoffs are conditional, only being available when they are
     relevant
 3.  A nested chat handles the order retrieval and summarisation
+
 
 ```python
 # IMPORTS
@@ -104,6 +105,7 @@ The
 method loads a list of configurations from an environment variable or a
 json file.
 
+
 ```python
 # Load configuration from an OAI_CONFIG_LIST file
 # and filter it to OpenAI's GPT-4o
@@ -117,6 +119,7 @@ llm_config = LLMConfig.from_json(
 ```
 
 ### Context
+
 
 ```python
 # Context used for controlling the workflow and injecting information
@@ -134,6 +137,7 @@ workflow_context = {
 ```
 
 ### Databases
+
 
 ```python
 # Mock Databases
@@ -184,6 +188,7 @@ ORDER_DATABASE = {
 ```
 
 ### Agent’s Functions
+
 
 ```python
 # ORDER FUNCTIONS
@@ -257,6 +262,7 @@ def login_customer_by_username(username: str, context_variables: dict) -> SwarmR
 ```
 
 ### Agents
+
 
 ```python
 # AGENTS
@@ -335,6 +341,7 @@ order_mgmt_agent = ConversableAgent(
 
 ### Nested Chats
 
+
 ```python
 # NESTED CHAT - Delivery Status using a two-step chat queue:
 # The first step retrieves the order details with the order_retrieval_agent
@@ -383,6 +390,7 @@ chat_queue = [nested_chat_one, nested_chat_two]
 ```
 
 ### Handoffs (OnCondition, OnContextCondition, and AfterWork)
+
 
 ```python
 # HANDOFFS
@@ -457,6 +465,7 @@ register_hand_off(
 ```
 
 ### Let’s go!
+
 
 ```python
 # Start the chat with the Triage Agent

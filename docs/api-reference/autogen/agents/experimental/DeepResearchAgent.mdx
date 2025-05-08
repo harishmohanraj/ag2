@@ -1286,6 +1286,22 @@ sequential_run(self, chat_queue: list[dict[str, Any]]) -> list[RunResponseProt
 <br />
 
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### set_ui_tools
+
+```python
+set_ui_tools(self, tools: list[Tool]) -> None
+```
+
+    Set the UI tools for the agent.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tools` | a list of tools to be set.<br/><br/>**Type:** list[[Tool](/docs/api-reference/autogen/tools/Tool)] |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
 #### stop_reply_at_receive
 
 ```python
@@ -1298,6 +1314,22 @@ stop_reply_at_receive(self, sender: Agent | None = None) ->
 | Name | Description |
 |--|--|
 | `sender` | **Type:** [Agent](/docs/api-reference/autogen/Agent) \| None<br/><br/>**Default:** None |
+
+<br />
+
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>
+#### unset_ui_tools
+
+```python
+unset_ui_tools(self, tools: list[Tool]) -> None
+```
+
+    Unset the UI tools for the agent.<br/>
+
+<b>Parameters:</b>
+| Name | Description |
+|--|--|
+| `tools` | a list of tools to be unset.<br/><br/>**Type:** list[[Tool](/docs/api-reference/autogen/tools/Tool)] |
 
 <br />
 

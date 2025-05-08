@@ -43,15 +43,15 @@ Install `ag2`:
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen
+> pip install -U ag2
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -76,6 +76,7 @@ Here is an example of a configuration using the `gpt-4o-mini` model that
 will use a `MathReasoning` response format. To use it, paste it into
 your `OAI_CONFIG_LIST` file and set the `api_key` to your OpenAI API
 key.
+
 
 ```json
 [
@@ -165,6 +166,7 @@ above.
 The `response_format` is added to the LLM configuration and then this
 configuration is applied to the agent.
 
+
 ```python
 user_proxy = autogen.UserProxyAgent(
     name="User_proxy",
@@ -183,6 +185,7 @@ assistant = autogen.AssistantAgent(
 Let’s now start the chat and prompt the assistant to solve a simple
 equation. The assistant agent should return a response solving the
 equation using a step-by-step `MathReasoning` model.
+
 
 ```python
 summary = user_proxy.initiate_chat(

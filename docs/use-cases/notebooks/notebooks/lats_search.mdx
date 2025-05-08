@@ -36,6 +36,7 @@ It has four main phases consisting of six steps:
 
 <img src="https://i.postimg.cc/NjQScLTv/image.png" alt="lats" />
 
+
 ```python
 import json
 import logging
@@ -47,11 +48,13 @@ from autogen import AssistantAgent, ConversableAgent, UserProxyAgent
 
 # Configure logging
 
+
 ```python
 logging.basicConfig(level=logging.INFO)
 ```
 
 # Set environment variables
+
 
 ```python
 os.environ["AUTOGEN_USE_DOCKER"] = "0"  # Disable Docker usage globally for Autogen
@@ -68,6 +71,7 @@ Please ensure these packages are installed before running this script
 
 # Directly create the config_list with the API key
 
+
 ```python
 config_list = [{"model": "gpt-4o-mini", "api_key": "YOUR_API_KEY"}]
 ```
@@ -82,6 +86,7 @@ if not config_list:
 
 The reflection chain will score agent outputs based on the decision and
 the tool responses.
+
 
 ```python
 from pydantic import BaseModel, Field
@@ -116,6 +121,7 @@ and exploration (lowest visits). Starting from that node, it generates N
 tree. It stops searching either when it has generated a valid solution
 OR when it has reached the maximum number of rollouts (search tree
 depth).
+
 
 ```python
 import math
@@ -244,6 +250,7 @@ class Node:
 
 The main component is the tree, represented by the root node.
 
+
 ```python
 from typing_extensions import TypedDict
 
@@ -274,6 +281,7 @@ For our example, we will give the language agent a search engine.
 
 Define the UserProxyAgent with web search / tool-use capability
 
+
 ```python
 user_proxy = UserProxyAgent(
     name="user",
@@ -287,6 +295,7 @@ user_proxy = UserProxyAgent(
 ```
 
 Create a ConversableAgent without tools
+
 
 ```python
 assistant_agent = ConversableAgent(
@@ -302,6 +311,7 @@ assistant_agent = ConversableAgent(
 Self-reflection allows the agent to bootstrap, improving its future
 responses based on the outcome of previous ones. In agents this is more
 powerful since it can use external feedback to improve.
+
 
 ```python
 reflection_prompt = """
@@ -393,6 +403,7 @@ responds to the user input either with a tool invocation or a response.
 
 # Create Autogen agents
 
+
 ```python
 assistant = AssistantAgent(name="assistant", llm_config={"config_list": config_list}, code_execution_config=False)
 user = UserProxyAgent(
@@ -405,6 +416,7 @@ user = UserProxyAgent(
 
 # Define a function to create the initial prompt
 
+
 ```python
 def create_initial_prompt(input_text):
     return [
@@ -414,6 +426,7 @@ def create_initial_prompt(input_text):
 ```
 
 # Function to generate initial response
+
 
 ```python
 def generate_initial_response(state: TreeState) -> TreeState:
@@ -465,6 +478,7 @@ def generate_initial_response(state: TreeState) -> TreeState:
 
 # Example usage of the generate_initial_response function
 
+
 ```python
 initial_prompt = "Why is the sky blue?"
 initial_state = TreeState(input=initial_prompt, root=None)
@@ -481,6 +495,7 @@ We will package up the candidate generation and reflection in a single
 node of our graph. This is represented by the following function:
 
 # Define the function to generate the initial response
+
 
 ```python
 # Define the function to generate the initial response
@@ -550,6 +565,7 @@ candidates to check.
 This generates N candidate values for a single input to sample actions
 from the environment
 
+
 ```python
 def generate_candidates(messages: list, config: dict):
     n = config.get("N", 5)
@@ -590,6 +606,7 @@ We will package the candidate generation and reflection steps in the
 following “expand” node. We do all the operations as a batch process to
 speed up execution.
 
+
 ```python
 def expand(state: TreeState, config: Dict[str, Any]) -> dict:
     root = state["root"]
@@ -620,6 +637,7 @@ def expand(state: TreeState, config: Dict[str, Any]) -> dict:
 
 With those two nodes defined, we are ready to define the tree. After
 each agent step, we have the option of finishing.
+
 
 ```python
 from typing import Any, Dict, Literal
@@ -697,6 +715,7 @@ print(result)
 
 # Example usage of the LATS algorithm with Autogen
 
+
 ```python
 import logging
 
@@ -720,6 +739,7 @@ def run_lats_example(question):
 
 # List of example questions
 
+
 ```python
 questions = [
     "Explain how epigenetic modifications can influence gene expression across generations and the implications for evolution.",
@@ -730,6 +750,7 @@ questions = [
 ```
 
 # Run LATS algorithm for each question
+
 
 ```python
 for i, question in enumerate(questions, 1):

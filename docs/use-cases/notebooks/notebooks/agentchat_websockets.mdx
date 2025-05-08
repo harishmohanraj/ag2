@@ -76,15 +76,15 @@ Some extra dependencies are needed for this notebook, which can be installed via
 pip install -U ag2[openai,websockets] fastapi uvicorn
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen[openai,websockets]
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen[openai,websockets]
+> pip install -U ag2[openai,websockets]
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -98,6 +98,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 from datetime import datetime
@@ -145,6 +146,7 @@ server and the client. The `on_connect` function leverages this instance
 to set up the communication protocol, define interaction rules, and
 initiate any preliminary data exchanges or configurations required for
 the client-server interaction to proceed smoothly.
+
 
 ```python
 def on_connect(iostream: IOWebsockets) -> None:
@@ -261,6 +263,7 @@ incoming connections, process messages, and communicate responses back
 to the client, all critical functionalities for a robust websocket-based
 application.
 
+
 ```python
 with IOWebsockets.run_server_in_thread(on_connect=on_connect, port=8765) as uri:
     print(f" - test_setup() with websocket server running on {uri}.", flush=True)
@@ -332,6 +335,7 @@ send messages through the webpage, and the server processes these
 messages as per the logic defined in the on_connect function, showcasing
 the capabilities and responsiveness of the AG2 framework’s websocket
 handling in a user-friendly manner.
+
 
 ```python
 from contextlib import asynccontextmanager
@@ -481,6 +485,7 @@ and refine websocket communication logic before integrating it into
 larger frameworks or systems. The simplicity and accessibility of this
 testing setup make it an excellent starting point for developing a wide
 range of interactive web applications.
+
 
 ```python
 from http.server import HTTPServer, SimpleHTTPRequestHandler

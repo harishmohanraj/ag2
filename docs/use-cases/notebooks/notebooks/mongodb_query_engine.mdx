@@ -26,6 +26,7 @@ natural language queries against the indexed data.
 The `MongoDBQueryEngine` integrates cloud MongoDB Atlas vector storage
 with LlamaIndex for efficient document retrieval.
 
+
 ```python
 %pip install llama-index==0.12.16
 %pip install llama-index-vector-stores-mongodb==0.6.0
@@ -33,6 +34,7 @@ with LlamaIndex for efficient document retrieval.
 ```
 
 ### Set up Open AI key for query engine retrieval
+
 
 ```python
 import os
@@ -59,6 +61,7 @@ for more info.
 Some info that you need to get include: - MongoDB Connection String
 (URI)
 
+
 ```python
 from autogen.agentchat.contrib.rag.mongodb_query_engine import MongoDBQueryEngine
 
@@ -74,6 +77,7 @@ where all documents will be ingested. When creating the
 `MongoDBQueryEngine` you can specify a `collection_name` and
 `database_name` to ingest into.
 
+
 ```python
 print(query_engine.get_collection_name())
 ```
@@ -82,6 +86,7 @@ print(query_engine.get_collection_name())
 
 Let’s ingest a document and query it.  
 `init_db` will overwrite the existing collection with the same name.
+
 
 ```python
 input_dir = "../test/agents/experimental/document_agent/pdf_parsed/"  # Update to match your input directory
@@ -96,6 +101,7 @@ query_engine.init_db(new_doc_paths_or_urls=input_docs)
 If the given collection already has the document you need, you can use
 `connect_db` to avoid overwriting the existing collection.
 
+
 ```python
 query_engine.connect_db()
 ```
@@ -109,6 +115,7 @@ print(answer)
 
 Great, we got the data we needed. Now, let’s add another document.
 
+
 ```python
 new_docs = [input_dir + "Toast_financial_report.md"]
 query_engine.add_docs(new_doc_paths_or_urls=new_docs)
@@ -116,6 +123,7 @@ query_engine.add_docs(new_doc_paths_or_urls=new_docs)
 
 And query again from the same database but this time for another
 corporate entity.
+
 
 ```python
 question = "What is the trading symbol for Toast"

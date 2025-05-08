@@ -35,9 +35,9 @@ install:
 
 <div class="info Requirements">
 <Info>
-Install `pyautogen`:
+Install `ag2`:
 ```bash
-pip install pyautogen[openai]
+pip install ag2[openai]
 ```
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -47,7 +47,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 
 ```python
 %%capture --no-stderr
-# %pip install "pyautogen>=0.2.3"
+# %pip install "ag2>=0.2.3"
 ```
 
 ## Function Schema and Implementation
@@ -55,6 +55,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 This section provides the function schema definition and their
 implementation details. These functions are tailored to fetch and
 process data from GitHub, utilizing OSS Insight’s capabilities.
+
 
 ```python
 import logging
@@ -111,6 +112,7 @@ Here, we explore how to define an OpenAI Assistant Agent within the AG2.
 This includes setting up the agent to make use of the previously defined
 function calls for data retrieval and analysis.
 
+
 ```python
 assistant_id = os.environ.get("ASSISTANT_ID", None)
 llm_config = LLMConfig.from_json(path="OAI_CONFIG_LIST")
@@ -155,6 +157,7 @@ Learn more about configuring LLMs for agents [here](https://docs.ag2.ai/latest/d
 This part of the notebook demonstrates the practical application of the
 defined functions and the OpenAI Assistant Agent in fetching and
 interpreting GitHub Insight data.
+
 
 ```python
 user_proxy = UserProxyAgent(

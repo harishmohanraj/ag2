@@ -31,12 +31,14 @@ steps:
 Install AG2 with the `google-search` extra. Since our examples also use
 `openai` and `gemini`, install them as well:
 
+
 ```bash
 pip install -U ag2[openai,gemini,google-search]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you
-> need to do is upgrade it using:
+> **Note:** If you have been using `autogen` or `ag2`, all you need to
+> do is upgrade it using:
+>
 >
 > ```bash
 > pip install -U autogen[openai,gemini,google-search]
@@ -44,16 +46,17 @@ pip install -U ag2[openai,gemini,google-search]
 >
 > or
 >
+>
 > ```bash
-> pip install -U pyautogen[openai,gemini,google-search]
+> pip install -U ag2[openai,gemini,google-search]
 > ```
 >
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-> package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 You’re all set! Now you can start using Google Search with AG2.
 
 ## Imports
+
 
 ```python
 import os
@@ -70,6 +73,7 @@ configured to use Gemini GenAI for an enhanced search experience. This
 section covers agent configuration and tool initialization.
 
 ### Agent Configuration
+
 
 ```python
 config_list = autogen.config_list_from_json(
@@ -94,6 +98,7 @@ setting `use_internal_llm_tool_if_available` to `True`.
 > Search tool. If you need multiple tools, refer to the AG2
 > implementation section.
 
+
 ```python
 gs_tool = GoogleSearchTool(
     use_internal_llm_tool_if_available=True,
@@ -106,6 +111,7 @@ gs_tool.register_for_llm(assistant)
 
 With the setup complete, you can now use the assistant to fetch live web
 search results.
+
 
 ```python
 run_response = assistant.run(
@@ -144,6 +150,7 @@ other tools, follow this section to configure AG2’s implementation.
 
 ### Agent Configuration
 
+
 ```python
 config_list = autogen.config_list_from_json(
     env_or_file="OAI_CONFIG_LIST",
@@ -162,6 +169,7 @@ assistant = AssistantAgent(
 
 Create `GoogleSearchTool` with your `search_api_key` and
 `search_engine_id`.
+
 
 ```python
 search_api_key = os.getenv("GOOGLE_SEARCH_API_KEY")
@@ -182,6 +190,7 @@ gs_tool.register_for_llm(assistant)
 
 With the setup complete, you can now use the assistant to fetch live web
 search results.
+
 
 ```python
 run_response = assistant.run(

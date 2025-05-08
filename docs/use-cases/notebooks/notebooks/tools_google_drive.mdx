@@ -36,12 +36,14 @@ project. You can enable multiple APIs within a single project.
 3.  Install AG2 with the `google-api` extra. Since our examples also use
     `openai`, install it as well:
 
+
     ```bash
     pip install -U ag2[openai,google-api]
     ```
 
-    > **Note:** If you have been using `autogen` or `pyautogen`, all you
-    > need to do is upgrade it using:
+    > **Note:** If you have been using `autogen` or `ag2`, all you need
+    > to do is upgrade it using:
+    >
     >
     > ```bash
     > pip install -U autogen[openai,google-api]
@@ -49,16 +51,17 @@ project. You can enable multiple APIs within a single project.
     >
     > or
     >
+    >
     > ```bash
-    > pip install -U pyautogen[openai,google-api]
+    > pip install -U ag2[openai,google-api]
     > ```
     >
-    > as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI
-    > package.
+    > as `autogen`, and `ag2` are aliases for the same PyPI package.
 
 You’re all set! Now you can start using Google Drive with AG2.
 
 ## Imports
+
 
 ```python
 from typing import Annotated, Optional
@@ -87,6 +90,7 @@ resources.
 > **Note:** The first execution opens a Google Authentication page in
 > your browser.
 
+
 ```python
 client_secret_file = "../credentials.json"
 token_file = "../my_token.json"
@@ -101,6 +105,7 @@ credentials = provider.get_credentials()
 ```
 
 ## Agent Configuration
+
 
 ```python
 llm_config = LLMConfig.from_json(
@@ -122,6 +127,7 @@ folder.
 Once the tool map is registered with the agent using `register_for_llm`,
 the agent becomes capable of suggesting these tool calls.
 
+
 ```python
 google_drive_toolkit = GoogleDriveToolkit(
     credentials=credentials,
@@ -135,6 +141,7 @@ google_drive_toolkit.register_for_llm(assistant)
 
 With the setup complete, you can now use the assistant to list and
 download files from your Google Drive.
+
 
 ```python
 run_response = assistant.run(
@@ -159,6 +166,7 @@ For example: - **Add custom tools**: You can introduce new tools, like
 **Remove existing tools**: You can eliminate unnecessary tools, such as
 `list_drive_files_and_folders`, to streamline functionality and focus on
 relevant features.
+
 
 ```python
 class MyGoogleDriveToolkit(GoogleDriveToolkit):

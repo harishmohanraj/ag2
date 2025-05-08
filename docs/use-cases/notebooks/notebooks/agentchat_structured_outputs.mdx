@@ -32,15 +32,15 @@ Install `ag2`:
 pip install -U ag2[openai]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen
+> pip install -U ag2
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.  
+> as `autogen`, and `ag2` are aliases for the same PyPI package.  
 
 
 For more information, please refer to the [installation guide](https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/installing-ag2).
@@ -68,6 +68,7 @@ function loads a list of configurations from an environment variable or
 a json file. Structured Output is supported by OpenAI’s models from
 gpt-4-0613 and gpt-3.5-turbo-0613.
 
+
 ```python
 import autogen
 ```
@@ -90,6 +91,7 @@ the model to output an answer in a structured, step-by-step way.
 First we will define the math reasoning model. This model will
 indirectly force the LLM to solve the posed math problems iteratively
 through math reasoning steps.
+
 
 ```python
 from pydantic import BaseModel
@@ -118,6 +120,7 @@ above.
 The `response_format` is added to the LLM configuration and then this
 configuration is applied to the agent.
 
+
 ```python
 llm_config = autogen.LLMConfig.from_json(
     path="OAI_CONFIG_LIST",
@@ -144,6 +147,7 @@ Let’s now start the chat and prompt the assistant to solve a simple
 equation. The assistant agent should return a response solving the
 equation using a step-by-step `MathReasoning` model.
 
+
 ```python
 user_proxy.initiate_chat(assistant, message="how can I solve 8x + 7 = -23", max_turns=1, summary_method="last_msg")
 ```
@@ -163,6 +167,7 @@ This method will allow the underlying client to parse the return value
 from the LLM into a more human-readable format. If the `format` method
 is not defined, the client will default to returning the model’s JSON
 representation, as demonstrated in the previous example.
+
 
 ```python
 from pydantic import BaseModel
@@ -192,6 +197,7 @@ the actors and start the chat.
 Observe how the Math_solver agent now communicates using the format we
 have defined in our `MathReasoning.format` method.
 
+
 ```python
 for config in llm_config.config_list:
     config.response_format = MathReasoning
@@ -216,6 +222,7 @@ print(
 
 Normal function calling still works alongside structured output, so your
 agent can have a response format while still calling tools.
+
 
 ```python
 @user_proxy.register_for_execution()

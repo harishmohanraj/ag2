@@ -27,15 +27,15 @@ To install the LlamaIndex, Neo4j, and document processing dependencies, install 
 pip install -U ag2[openai,neo4j]
 ```
 
-> **Note:** If you have been using `autogen` or `pyautogen`, all you need to do is upgrade it using:  
+> **Note:** If you have been using `autogen` or `ag2`, all you need to do is upgrade it using:  
 > ```bash
 > pip install -U autogen[openai,neo4j]
 > ```
 > or  
 > ```bash
-> pip install -U pyautogen[openai,neo4j]
+> pip install -U ag2[openai,neo4j]
 > ```
-> as `pyautogen`, `autogen`, and `ag2` are aliases for the same PyPI package.
+> as `autogen`, and `ag2` are aliases for the same PyPI package.
 </Info>
 </div>
 
@@ -106,6 +106,7 @@ with Docker, you can refer to
 We initialise the database with a Word document, creating the Property
 graph in Neo4j.
 
+
 ```python
 # IMPORTS
 from llama_index.embeddings.openai import OpenAIEmbedding
@@ -127,6 +128,7 @@ dependencies for each extension. In this example, we need
 
 We start by creating a Neo4j property graph (knowledge graph) with a
 sample employee handbook of a fictional company called BUZZ
+
 
 ```python
 # load documents
@@ -160,6 +162,7 @@ query_engine.init_db(input_doc=input_documents)
 Instead of creating a new property graph, if you want to use an existing
 graph, you can connect to its database
 
+
 ```python
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
@@ -191,6 +194,7 @@ alt="neo4j_property_graph_1.png" />
 Notice that we intentionally moved the specific content of Equal
 Employment Opportunity Policy into a different document to add later
 
+
 ```python
 from autogen.agentchat.contrib.graph_rag.neo4j_graph_rag_capability import Neo4jGraphCapability
 
@@ -221,6 +225,7 @@ data.
 
 We set `strict=True` to tell the engine to only extracting allowed
 relationships from the data for each entity
+
 
 ```python
 from typing import Literal
@@ -255,6 +260,7 @@ schema = {
 
 ### Create the query engine and load the document
 
+
 ```python
 # Create Neo4jGraphQueryEngine
 query_engine = Neo4jGraphQueryEngine(
@@ -286,6 +292,7 @@ alt="neo4j_property_graph_2.png" />
 You should find the answers are much more detailed and accurate since
 our schema fits well
 
+
 ```python
 from autogen import ConversableAgent, UserProxyAgent
 from autogen.agentchat.contrib.graph_rag.neo4j_graph_rag_capability import Neo4jGraphCapability
@@ -308,6 +315,7 @@ user_proxy.initiate_chat(graph_rag_agent, message="Which company is the employer
 
 ### Incrementally add new documents to the existing knoweledge graph. 
 
+
 ```python
 input_path = "../test/agentchat/contrib/graph_rag/BUZZ_Equal-Employment-Opportunity-Policy-Detailed.docx"
 input_documents = [Document(doctype=DocumentType.TEXT, path_or_url=input_path)]
@@ -323,6 +331,7 @@ src="https://media.githubusercontent.com/media/ag2ai/ag2/refs/heads/main/noteboo
 alt="neo4j_property_graph_3.png" />
 
 ### Now let’s create a new GraphRag agent and some questions related to both documents
+
 
 ```python
 from autogen.agentchat.contrib.graph_rag.neo4j_graph_rag_capability import Neo4jGraphCapability

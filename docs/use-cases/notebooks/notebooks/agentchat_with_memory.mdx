@@ -50,6 +50,7 @@ For more information, please refer to the [installation guide](https://docs.ag2.
 
 Please get `MEM0_API_KEY` from [Mem0 Platform](https://app.mem0.ai/).
 
+
 ```python
 import os
 
@@ -66,6 +67,7 @@ os.environ["MEM0_API_KEY"] = "your_api_key"
 The conversational agent is set up using the ‘gpt-4o’ model and a mem0
 client. We’ll utilize the client’s methods for storing and accessing
 memories.
+
 
 ```python
 agent = ConversableAgent(
@@ -85,6 +87,7 @@ the assistant, structured as dictionaries with ‘role’ and ‘content’
 keys. The entire conversation is then stored in memory using the
 `memory.add()` method, associated with the identifier
 “customer_service_bot”.
+
 
 ```python
 conversation = [
@@ -128,6 +131,7 @@ We ask a question to the agent, utilizing mem0 to retrieve relevant
 memories. The agent then formulates a response based on both the
 question and the retrieved contextual information.
 
+
 ```python
 data = "I forgot the order number, can you quickly tell me?"
 
@@ -153,6 +157,7 @@ using GPT-4. It then retrieves relevant memories for a given question,
 combining them with the question into a prompt. This prompt can be used
 by either the manager or customer_bot to generate a contextually
 informed response.
+
 
 ```python
 manager = ConversableAgent(

@@ -34,15 +34,16 @@ instructions align with the function call descriptions.
 ## Requirements
 
 AG2 requires `Python>=3.9`. To run this notebook example, please install
-`pyautogen`:
+`ag2`:
+
 
 ```bash
-pip install pyautogen[openai]
+pip install ag2[openai]
 ```
 
 
 ```python
-# %pip install "pyautogen>=0.2.3"
+# %pip install "ag2>=0.2.3"
 ```
 
 ## Set your API Endpoint
@@ -51,6 +52,7 @@ The
 [`config_list_from_json`](https://docs.ag2.ai/latest/docs/api-reference/autogen/config_list_from_json/#autogen.config_list_from_json)
 function loads a list of configurations from an environment variable or
 a json file.
+
 
 ```python
 from typing import Annotated
@@ -72,6 +74,7 @@ can filter by other keys as well). Only the configs with matching tags
 are kept in the list based on the filter condition.
 
 The config list looks like the following:
+
 
 ```python
 config_list = [
@@ -114,6 +117,7 @@ and execute them. With the new “function_call” feature, we define
 functions and specify the description of the function in the OpenAI
 config for the `AssistantAgent`. Then we register the functions in
 `UserProxyAgent`.
+
 
 ```python
 chatbot = autogen.AssistantAgent(
@@ -168,6 +172,7 @@ autogen.agentchat.register_function(
 
 Finally, we initialize the chat that would use the functions defined
 above:
+
 
 ```python
 with Cache.disk() as cache:

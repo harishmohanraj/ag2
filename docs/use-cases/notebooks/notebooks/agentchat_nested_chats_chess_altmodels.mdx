@@ -46,11 +46,12 @@ throughout **in bold**.
 
 ## Installation
 
-First, you need to install the `pyautogen` and `chess` packages to use
-AG2. We’ll include Anthropic and Together.AI libraries.
+First, you need to install the `ag2` and `chess` packages to use AG2.
+We’ll include Anthropic and Together.AI libraries.
+
 
 ```python
-! pip install -qqq pyautogen[anthropic,together] chess
+! pip install -qqq ag2[anthropic,together] chess
 ```
 
 ## Setting up LLMs
@@ -58,6 +59,7 @@ AG2. We’ll include Anthropic and Together.AI libraries.
 We’ll use the Anthropic (`api_type` is `anthropic`) and Together.AI
 (`api_type` is `together`) client classes, with their respective models,
 which both support function calling.
+
 
 ```python
 import os
@@ -94,6 +96,7 @@ player_black_config_list = [
 
 We’ll setup game variables and the two functions for getting the
 available moves and then making a move.
+
 
 ```python
 # Initialize the board.
@@ -150,6 +153,7 @@ models play:
 -   Ensure **no spaces are in the agent names** so that their name is
     distinguishable in the conversation.
 
+
 ```python
 player_white = ConversableAgent(
     name="Player_White",
@@ -174,6 +178,7 @@ player_black = ConversableAgent(
 
 Now we create a proxy agent that will be used to move the pieces on the
 board.
+
 
 ```python
 # Check if the player has made a move, and reset the flag if move is made.
@@ -202,6 +207,7 @@ the LLM to choose from.
 
 We have tweaked the descriptions to provide **more guidance on when** to
 use it.
+
 
 ```python
 register_function(
@@ -240,6 +246,7 @@ register_function(
 Almost there, we now create nested chats between players and the board
 proxy agent to work out the available moves and make the move.
 
+
 ```python
 player_white.register_nested_chats(
     trigger=player_black,
@@ -273,6 +280,7 @@ player_black.register_nested_chats(
 ## Playing the game
 
 Now the game can begin!
+
 
 ```python
 # Clear the board.

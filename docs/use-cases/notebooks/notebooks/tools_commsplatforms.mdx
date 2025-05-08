@@ -37,6 +37,7 @@ your system message for your agent to the messaging style used for the
 platform.
 
 
+
 <div class="note">
 <Note>
 These tools are currently in our `experimental` namespace, indicating that we have tested the functionality but they have not been confirmed for use in production. Please use them with that in mind and we appreciate any feedback on them.
@@ -54,17 +55,20 @@ for that platform.
 To use the Discord tools install AG2 with the `commsagent-discord`
 extra:
 
+
 ```bash
 pip install -U ag2[openai,commsagent-discord]
 ```
 
 Similarly, for slack and telegram:
 
+
 ```bash
 pip install -U ag2[openai,commsagent-slack]
 ```
 
 and
+
 
 ```bash
 pip install -U ag2[openai,commsagent-telegram]
@@ -78,6 +82,7 @@ from these platforms.
 The examples in this notebook will use OpenAI’s `GPT-4o mini` model and
 the `OPENAI_API_TOKEN` will be retrieved from environment variables, we
 can use an LLM configuration as follows:
+
 
 ```python
 llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
@@ -125,6 +130,7 @@ Here are some references to help you establish those details:
 Let’s add the Discord Send and Retrieve tools to an agent and have them
 executed by another agent in a simple 2-agent chat.
 
+
 ```python
 # Tools are available in the autogen.tools namespace
 from autogen import ConversableAgent
@@ -134,6 +140,7 @@ llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.
+
 
 ```python
 # Our tool executor agent, which will run the tools once recommended by the discord_agent, no LLM required
@@ -151,6 +158,7 @@ discord_agent = ConversableAgent(
 
 Prepare our authentication, server/guild, channel details, then create
 our tools, and finally register them with the agents.
+
 
 ```python
 _bot_token = "MTMyOTI..."  # Discord bot token
@@ -178,6 +186,7 @@ We’ll limit it to 2 turns, allowing the Discord agent to receive the
 request, construct and recommend the send tool, and then the executor
 agent to execute the tool, sending the message to Discord.
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=discord_agent,
@@ -191,6 +200,7 @@ And here’s the message it sent:
 ![](https://media.githubusercontent.com/media/ag2ai/ag2/refs/heads/main/notebook/commsplatforms_discord_sentmsg.png)
 
 And the output:
+
 
 ```console
 executor_agent (to discord_agent):
@@ -232,6 +242,7 @@ The message about the highlights of Australia has been successfully sent to Disc
 Let’s now retrieve the last two messages from the channel, this will
 include the message we sent as well as a previous one.
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=discord_agent,
@@ -241,6 +252,7 @@ executor_agent.initiate_chat(
 ```
 
 Output:
+
 
 ```console
 executor_agent (to discord_agent):
@@ -343,6 +355,7 @@ executed by another agent in as simple 2-agent chat.
 This time, we’ll include a weather tool so that we can send a weather
 forecast.
 
+
 ```python
 # Tools are available in the autogen.tools namespace
 from autogen import ConversableAgent, register_function
@@ -352,6 +365,7 @@ llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.
+
 
 ```python
 # Our tool executor agent, which will run the tools once recommended by the slack_agent, no LLM required
@@ -368,6 +382,7 @@ slack_agent = ConversableAgent(
 
 Prepare our authentication and channel details, then create our tools,
 and finally register them with the agents.
+
 
 ```python
 _bot_token = "xoxo..."  # OAuth token
@@ -391,6 +406,7 @@ slack_retrieve_tool.register_for_execution(executor_agent)
 Here’s our weather tool and we’ll register it to the two agents, but
 this time using the `register_function` method to do it in one go.
 
+
 ```python
 # Weather function
 def get_weather():
@@ -413,6 +429,7 @@ request, recommend the weather tool, and go around the agents and then
 construct and recommend the send tool. The executor agent will execute
 each tool request.
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=slack_agent,
@@ -426,6 +443,7 @@ And here’s the message it sent:
 ![](https://media.githubusercontent.com/media/ag2ai/ag2/refs/heads/main/notebook/commsplatforms_slack_sentmsg.png)
 
 And the output:
+
 
 ```console
 executor_agent (to slack_agent):
@@ -490,6 +508,7 @@ I've sent the latest weather forecast to your Slack channel! Here's the message:
 Let’s now retrieve the last 5 messages to give a picture of the weather
 for the last week.
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=slack_agent,
@@ -499,6 +518,7 @@ executor_agent.initiate_chat(
 ```
 
 Output:
+
 
 ```console
 executor_agent (to slack_agent):
@@ -602,6 +622,7 @@ It takes a bit of time to get this sorted, but once you have your token
 and IDs, you’re ready to go!
 
 
+
 <div class="note">
 <Note>
 You may be prompted for Telegram verification during the AG2 chat session. This typically happens when you first run it and is not required during subsequent runs.
@@ -614,6 +635,7 @@ You may be prompted for Telegram verification during the AG2 chat session. This 
 Let’s add the Telegram Send and Retrieve tools to an agent and have them
 executed by another agent in as simple 2-agent chat.
 
+
 ```python
 # Tools are available in the autogen.tools namespace
 from autogen import ConversableAgent
@@ -623,6 +645,7 @@ llm_config = {"model": "gpt-4o-mini", "api_type": "openai"}
 ```
 
 Create our two agents.
+
 
 ```python
 # Our tool executor agent, which will run the tools once recommended by the telegram_agent, no LLM required
@@ -642,6 +665,7 @@ tools, and finally register them with the agents.
 
 For this send, we’ll send it to a group using the group’s ID in our
 `chat_id`.
+
 
 ```python
 # Authentication and target Chat ID (in this case a Group chat)
@@ -670,6 +694,7 @@ We’ll limit it to 2 turns, allowing the Telegram agent to receive the
 request, construct and recommend the send tool, and then the executor
 agent to execute the tool, sending the message to the Telegram group.
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=telegram_agent,
@@ -685,6 +710,7 @@ src="https://media.githubusercontent.com/media/ag2ai/ag2/refs/heads/main/noteboo
 alt="Telegram message" />
 
 And the output:
+
 
 ```console
 executor_agent (to telegram_agent):
@@ -731,6 +757,7 @@ If you need anything else, feel free to ask!
 
 Let’s now retrieve the last 10 messages and get their IDs
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=telegram_agent,
@@ -740,6 +767,7 @@ executor_agent.initiate_chat(
 ```
 
 Output with our messages and IDs (including our joke):
+
 
 ```console
 executor_agent (to telegram_agent):
@@ -822,6 +850,7 @@ Let me know if you need any more details or further assistance!
 And, finally, let’s get all messages after a given ID, in this case ID
 85. This should return 4 messages (IDs 90, 91, 92 ,98).
 
+
 ```python
 executor_agent.initiate_chat(
     recipient=telegram_agent,
@@ -831,6 +860,7 @@ executor_agent.initiate_chat(
 ```
 
 Output:
+
 
 ```console
 executor_agent (to telegram_agent):
